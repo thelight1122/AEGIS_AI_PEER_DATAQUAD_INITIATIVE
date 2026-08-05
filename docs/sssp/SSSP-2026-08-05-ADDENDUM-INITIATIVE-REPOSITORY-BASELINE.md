@@ -154,6 +154,16 @@ implementations with passing tests:
 The next work on P0 and R0 is verification of what these do against the stated acceptance criteria,
 not construction from zero.
 
+The Auditor accepted this correction on 2026-08-05 and restated the phase sequence:
+
+- **P0** is formalization and acceptance verification, not construction from zero.
+- **R0** is implementation verification and integration, not construction from zero.
+- **R1** has implemented foundations. Deterministic RLS formation and derived-ledger authority
+  remain upcoming work.
+
+SSSP §15 is amended accordingly. The older sequence description does not overwrite observed
+implementation state.
+
 ---
 
 # 6. Write and Admission State
@@ -172,14 +182,40 @@ Source repository               UNMODIFIED
 
 ---
 
-# 7. Decisions Required
+# 7. Decisions Recorded
 
-1. **Live peer content.** Do `stage-d-out/` and `live-copies/` get copied into the Initiative and
-   gitignored there, matching the source repository's posture? Or does the Initiative reference the
-   preserved source repository for them, leaving 10 tests permanently environment-bound at this root?
-2. **Canonical contracts layout.** Flat `contracts/` or categorized `contracts/{orb,pod,...}/`.
-3. **Canonical evidence path.** `reports/runtime/` or `evidence/runtime/`, and who rewrites the
-   hash-bound manifests if the path changes.
-4. **Orb package placement.** Whether `packages/orb-*` moves under `orbs/` during P0, and how the
-   test suite's path resolution moves with it.
-5. **The `orb-rls-persistent-relations-core` hash drift** carried in from the source repository.
+All five decisions were ruled by the Auditor on 2026-08-05 and are recorded as architecture
+decisions. Step 1 is accepted as complete, with independent certification pending Auditor access to
+commit `667b41b` and the migration evidence.
+
+| ADR | Decision |
+|---|---|
+| [ADR-0001](../decisions/ADR-0001-live-peer-content-is-not-duplicated.md) | Live peer content is not duplicated. Affected tests are environment-bound integration tests. |
+| [ADR-0002](../decisions/ADR-0002-flat-contracts-canonical-for-p0.md) | Flat `contracts/` is canonical for P0. Categorized copies marked noncanonical, removed later under recorded cleanup. |
+| [ADR-0003](../decisions/ADR-0003-reports-runtime-canonical-for-p0.md) | `reports/runtime/` remains canonical for P0. `evidence/migration/` remains the home for migration evidence. |
+| [ADR-0004](../decisions/ADR-0004-orb-packages-remain-in-packages-during-p0.md) | Orb packages remain under `packages/orb-*` during P0. |
+| [ADR-0005](../decisions/ADR-0005-orb-hash-drift-quarantined-pending-provenance.md) | Neither side of the Orb hash mismatch is accepted. Status DRIFTED, quarantined, provenance investigation opened. |
+| [ADR-0006](../decisions/ADR-0006-manifest-identity-model-coordinate-digest-path-provenance.md) | Target manifest model separates Coordinate, Digest, Path, and Provenance. |
+
+## 7.1 Effect on the baseline
+
+Per ADR-0001, a root `conftest.py` classifies the 10 live-state-bound tests as environment-bound and
+skips them when the required paths do not resolve. Classification is per test, not per module, so no
+previously passing test is skipped.
+
+```text
+before classification    186 passed   10 failed   3 skipped
+after classification     186 passed    0 failed  13 skipped
+```
+
+The passing set is unchanged. The 10 failures were reclassified, not silenced: each skip reason
+names the missing path and cites ADR-0001, and every one of the 10 runs normally where live state is
+provisioned.
+
+## 7.2 Open work carried forward
+
+- The hash drift is a separate provenance investigation, recorded at
+  `docs/investigations/2026-08-05-orb-rls-persistent-relations-core-hash-drift.md`. Resolving it does
+  not become an undocumented part of P0.
+- ADR-0002 and ADR-0003 both defer a cleanup. Two duplicate trees are live in the repository until
+  those cleanups run.

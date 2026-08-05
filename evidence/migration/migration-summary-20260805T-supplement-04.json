@@ -1,0 +1,8 @@
+{
+  "schema_version": "1.0.0",
+  "supplement_of": "migration-summary-20260805T-supplement-01.json",
+  "kind": "correction",
+  "reason": "Supplement 01 copied packages/orb-rls-persistent-relations-core/.venv, a build environment rather than source. Removed from the Initiative. The source repository copy is untouched. No tracked file was affected; .venv/ is gitignored.",
+  "destination_root": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE",
+  "source_repository_modified": false
+}
