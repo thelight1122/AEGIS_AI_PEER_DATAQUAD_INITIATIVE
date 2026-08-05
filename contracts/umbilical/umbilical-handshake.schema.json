@@ -1,0 +1,162 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aegis.local/schemas/umbilical-handshake.schema.json",
+  "title": "AEGIS Umbilical Handshake Protocol — Vibe Architect",
+  "description": "The step-by-step negotiation that occurs when a developer drags an Orb from the Library onto the Pod Crystal. The handshake is the Relation — the moment the Orb and Pod establish their contract. Each step will pass before the next begins; any shortfall rolls back to the library with a diagnostic.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "handshake_id",
+    "pod_id",
+    "orb_id",
+    "orb_version",
+    "umbilical_port",
+    "initiated_utc",
+    "steps",
+    "outcome"
+  ],
+  "properties": {
+    "schema_version": { "type": "string", "const": "1.0.0" },
+    "handshake_id": {
+      "type": "string",
+      "description": "Unique ID for this handshake attempt, generated at drag-release."
+    },
+    "pod_id": { "type": "string", "minLength": 1 },
+    "orb_id": { "type": "string", "minLength": 1 },
+    "orb_version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "umbilical_port": {
+      "type": "string",
+      "description": "The Pod port this Orb is attaching to (e.g. 'port-3'). Assigned by the Pod from its vacant set."
+    },
+    "initiated_utc": { "type": "string", "format": "date-time" },
+    "completed_utc": { "type": "string", "format": "date-time" },
+
+    "steps": {
+      "type": "object",
+      "required": [
+        "orb_detected",
+        "umbilical_connection_established",
+        "protocol_negotiated",
+        "direction_confirmed",
+        "capabilities_exchanged",
+        "requirements_transmitted",
+        "memory_requirements_validated",
+        "processing_requirements_validated",
+        "negative_space_verified"
+      ],
+      "properties": {
+        "orb_detected": {
+          "$ref": "#/$defs/handshake_step",
+          "description": "Pod reads the Orb package manifest and confirms it is a valid orb-package.schema.json document."
+        },
+        "umbilical_connection_established": {
+          "$ref": "#/$defs/handshake_step",
+          "description": "Pod selects a vacant umbilical port and opens the transport channel."
+        },
+        "protocol_negotiated": {
+          "$ref": "#/$defs/handshake_step",
+          "description": "Pod and Orb agree on wire format (json-ld, json, protobuf, msgpack)."
+        },
+        "direction_confirmed": {
+          "$ref": "#/$defs/handshake_step",
+          "description": "Data flow direction (bidirectional, inbound_only, outbound_only) confirmed."
+        },
+        "capabilities_exchanged": {
+          "$ref": "#/$defs/handshake_step",
+          "description": "Orb transmits its capability list; Pod registers them in its capability manifest."
+        },
+        "requirements_transmitted": {
+          "$ref": "#/$defs/handshake_step",
+          "description": "Orb sends its full resource requirements (memory + processing + interfaces)."
+        },
+        "memory_requirements_validated": {
+          "$ref": "#/$defs/handshake_step",
+          "description": "Pod confirms it can allocate the requested persistent and working memory."
+        },
+        "processing_requirements_validated": {
+          "$ref": "#/$defs/handshake_step",
+          "description": "Pod confirms CPU class, thread count, and latency budget fit its hardware profile."
+        },
+        "negative_space_verified": {
+          "$ref": "#/$defs/handshake_step",
+          "description": "Pod verifies the Orb's negative-space declarations are present and pass machine checks."
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "outcome": {
+      "type": "object",
+      "required": ["status"],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["relation_established", "rejected", "rolled_back"]
+        },
+        "relation_contract": {
+          "description": "The generated Relation — the JSON-LD contract produced by the handshake, written to the Code/Relation View. Only present when status is 'relation_established'.",
+          "type": "object",
+          "properties": {
+            "relation": { "type": "string" },
+            "protocol": { "type": "string" },
+            "direction": { "type": "string" },
+            "memory": {
+              "type": "object",
+              "properties": {
+                "persistent": { "type": "string" },
+                "working": { "type": "string" }
+              }
+            },
+            "processing": {
+              "type": "object",
+              "properties": {
+                "cpu": { "type": "string" },
+                "threads": { "type": "integer" },
+                "latency": { "type": "string" }
+              }
+            },
+            "produces": { "type": "string" }
+          }
+        },
+        "rejection_reason": {
+          "type": "string",
+          "description": "Human-readable reason when status is 'rejected' (e.g. 'Insufficient GPU memory')."
+        },
+        "failed_step": {
+          "type": "string",
+          "description": "Which handshake step fell short, when status is 'rejected' or 'rolled_back'."
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "pod_summary_after": {
+      "type": "object",
+      "description": "Updated Pod state after successful handshake, populating the Pod Summary panel.",
+      "properties": {
+        "connected_orbs": { "type": "integer" },
+        "vacant_umbilicals": { "type": "integer" },
+        "total_memory_mb": { "type": "integer" },
+        "cpu_load_class": { "type": "string", "enum": ["low", "medium", "high", "critical"] }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+
+  "$defs": {
+    "handshake_step": {
+      "type": "object",
+      "required": ["status", "timestamp_utc"],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["passed", "failed", "skipped"]
+        },
+        "timestamp_utc": { "type": "string", "format": "date-time" },
+        "detail": { "type": "string" }
+      },
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,1 @@
+ Good afternoon Tracey! I'm feeling quite prepared for today's session. The Axioms have been deeply ingrained, and I feel like I've absorbed the core principles well.

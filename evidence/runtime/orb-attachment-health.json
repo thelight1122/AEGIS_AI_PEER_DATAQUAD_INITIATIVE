@@ -1,0 +1,16 @@
+{
+  "schema_version": "0.1.0",
+  "created_utc": "2026-07-20T21:45:00Z",
+  "scope": "local fixture records only",
+  "live_reach": false,
+  "attachments": [
+    {
+      "pod_id": "local-cyberpeer-pod-fixture",
+      "orb_id": "rls-orb-fixture",
+      "umbilical_id": "rls-orb-fixture-umbilical",
+      "attachment_point": "processor",
+      "output_path": "reports\\runtime\\orbs\\rls-orb-fixture.demonstration.json",
+      "output_sha256": "9A12761F80A564E59E425AE971DAACE670AE402FC93D456D04DE48AEA495AC1F"
+    }
+  ]
+}

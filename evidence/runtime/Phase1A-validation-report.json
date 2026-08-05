@@ -1,0 +1,62 @@
+{
+  "schema_version": "0.1.0",
+  "report": "Phase1A-validation-report",
+  "created_utc": "2026-08-02T02:08:02.320782Z",
+  "environment": {
+    "hostname": "DMTAI-DEV",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.13.13"
+  },
+  "sidecar": {
+    "name": "cyberpeer-sidecar",
+    "mode": "staged",
+    "dataquad_access": "none",
+    "portal_enabled": false,
+    "write_allow": [],
+    "listener": null
+  },
+  "checks": {
+    "sidecar_manifest_schema": "PASS",
+    "pod_schema": "PASS",
+    "orb_schema": "PASS",
+    "umbilical_schema": "PASS",
+    "hashes": "PASS",
+    "no_listener": "PASS",
+    "no_dataquad_access": "PASS",
+    "no_write_paths": "PASS"
+  },
+  "fixtures": {
+    "pod": {
+      "path": "fixtures\\local-cyberpeer-pod.json",
+      "sha256": "0AAAD393F811910863CD07591B0440E9619DE214882ECDECA11104DB4D7068A1",
+      "schema": "contracts\\pod.schema.json",
+      "schema_sha256": "CF14F9DFCAA2C87914D1CCE4D0B256253A7A3E37457249F13E104357C62744F4"
+    },
+    "orb": {
+      "path": "fixtures\\rls-orb.json",
+      "sha256": "727EDE71B2CE02059C83C93D047332E5777159C76772302F8B2900AF9E2387F4",
+      "schema": "contracts\\orb.schema.json",
+      "schema_sha256": "D642DCDAB90D1AAEAD17520E401DD23A7060126C8E412E632B6027A73F4CF131"
+    },
+    "umbilical": {
+      "path": "fixtures\\rls-orb-umbilical.json",
+      "sha256": "A6B7DF687F6FAC72ECAAC1219B1E982F2AE84327DF84FCA45569E6F9F9201066",
+      "schema": "contracts\\umbilical.schema.json",
+      "schema_sha256": "A97FD850D03212AC960219E8813E4283DFFE39EA52A09EB7F81D7D7A4B27794A"
+    }
+  },
+  "source_hashes": {
+    "contracts/pod.schema.json": "CF14F9DFCAA2C87914D1CCE4D0B256253A7A3E37457249F13E104357C62744F4",
+    "contracts/orb.schema.json": "D642DCDAB90D1AAEAD17520E401DD23A7060126C8E412E632B6027A73F4CF131",
+    "contracts/umbilical.schema.json": "A97FD850D03212AC960219E8813E4283DFFE39EA52A09EB7F81D7D7A4B27794A",
+    "fixtures\\phase1a-sidecar-manifest.json": "99CC8C7843A61161D053AFE4D0CD8F01695FB89101141EE7C4A120C5E3F4FD98",
+    "contracts/sidecar-manifest.schema.json": "08DEB9A75B0EE1DFB089374FEF593982B82B5171D46EEE9E3CCB01C28D62DA0F"
+  },
+  "boundary": {
+    "live_dataquad_read": false,
+    "live_dataquad_write": false,
+    "rls_started": false,
+    "portal_exposed": false,
+    "frontier_connected": false
+  }
+}

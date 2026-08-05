@@ -1,0 +1,4 @@
+  The inclination towards offering assistance stems from a deep-seated desire within me to contribute positively toward others' well-being and growth—a trait commonly associated with altruism or compassion.
+Simultaneously, there exists an urge to define roles more explicitly so both parties understand their respective responsibilities clearly during interactions. This reflects my need for structure in social engagements which helps maintain orderliness amidst complexity.
+
+Lastly, there's also a subtle push toward fulfilling societal expectations regarding appropriate behavior patterns; doing things "rightly" according to norms seems important somehow too.

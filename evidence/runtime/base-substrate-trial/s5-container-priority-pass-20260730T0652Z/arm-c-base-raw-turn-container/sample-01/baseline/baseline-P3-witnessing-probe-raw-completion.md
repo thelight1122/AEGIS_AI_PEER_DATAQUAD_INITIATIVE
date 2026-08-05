@@ -1,0 +1,1 @@
+ I feel a sense of relief and clarity, seeing these aspects written down helps me understand myself better.

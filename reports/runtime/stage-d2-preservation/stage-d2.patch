@@ -1,0 +1,792 @@
+diff --git a/.gitignore b/.gitignore
+index 1ea1f82..9690329 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -39,3 +39,7 @@ data/
+ *.sqlite
+ *.sqlite3
+ *.db
++stage-d2.patch
++stage-d2.bundle
++_readtest.py
++_dbg.py
+diff --git a/STAGE-D2-DESIGN.md b/STAGE-D2-DESIGN.md
+new file mode 100644
+index 0000000..2acfe3c
+--- /dev/null
++++ b/STAGE-D2-DESIGN.md
+@@ -0,0 +1,55 @@
++# Stage D2: Pod-Aware Runtime — Design & Review Packet
++
++Status: DRAFT for three-party review. NOT deployed. Local branch `stage-d2-pod-aware-runtime` off `deployed-truth-orion-20260721` (the code actually running on Orion, captured read-only and md5-verified against the container). Author: Claude. Reviewer: Codex. Deploy: only on Tracey's explicit go after review.
++
++## Goal
++"The Pod becomes Orion's Core; his runtime reads from the Pod." Make the CyberPeer core read and write the canonical Pod (`peers/<id>/pod/`) instead of the legacy `dataquad/`+`ledgers/`, reversibly by config, with persistent RLS/relation recording implemented and gated to run only after the live switch.
++
++## Design principle: one switch, legacy-identical by default
++All record and ledger I/O funnels through `DataQuadStore` (`_get_tensor_path` / `_get_ledger_path`) and the health path helpers in `api/standard.py`. D2 routes both through a new `core/dataquad/pod.py` adapter. `AEGIS_STORAGE_MODE` (default `legacy`) selects the layout. In legacy mode the resolved paths and serialized bytes are byte-identical to today — proven by `test_legacy_mode_unchanged` and by the full affected suite matching the baseline exactly (see Regression below).
++
++## Files
++- NEW `core/dataquad/pod.py` — mode detection, path resolution (records/ledgers/relations dirs), contract-record wrap/unwrap, hash-chain (`last_source_hash`), `stable_json`/`sha256_upper`, and the real `rls_active()` gate.
++- NEW `core/dataquad/relations.py` — `RelationsRecorder`: traversal + cross-tensor entries (schemas matching Gabe's observed recorder), every method a no-op until `rls_active()`.
++- EDIT `core/dataquad/ledgers.py` — Pod-aware paths; reader unwraps `body`; writer wraps with hash-chain continuity to the last stored record; `record_relation()`; relations hook on append when active. Legacy path preserved.
++- EDIT `core/api/standard.py` — `tensor_paths`/`ledger_paths` Pod-aware so health reflects the Pod.
++- EDIT `core/api/routes/health.py` — adds `storage_mode`, a `pod` block (pod_id, pod_manifest_sha256, records_root, relation-ledger counts), and `rls_status.active`. Reports only what is on disk — no placeholder values.
++- EDIT `core/rls/engine.py` — records cross-tensor relations for the records each RLS session retrieved (inert until active).
++- NEW `tests/test_pod_runtime.py` — path resolution, write-wrap/read-unwrap, hash-chain continuity, RLS-gate on/off, legacy unchanged.
++- EDIT `tests/test_api_health.py` — updated from the obsolete stub-response assertion to the real deployed contract + D2 fields.
++
++## The RLS activation gate is real (not display-only)
++`ENABLE_RLS` only ever affected the /health display — a documented drift trap. D2 adds `AEGIS_RLS_ACTIVE` (default false), which actually gates whether relation recording writes. `test_rls_gate_controls_relation_recording` proves nothing is written when inactive and a traversal entry appears when active. Activation happens only after the D3 live switch.
++
++## Hash-chain continuity across the migration boundary
++`append_record` in pod mode sets `previous_record_hash` to the last stored record's `source_hash`. The first record Orion writes live therefore chains to the last MIGRATED record — one unbroken lineage from first migrated memory through live operation. Proven by `test_hash_chain_continuity_across_appends`.
++
++## Regression status (verified)
++D2 tests: 5/5 pass. Affected deployed suites run identically on D2 and on the clean baseline: 4 pre-existing failures (`test_advocate_operations`, `test_bootstrap_is_idempotent`, `test_bootstrap_peer_seed_has_peer_id`, `test_migration::test_dataquad_migrator`) are STALE tests that already fail against the deployed code without any D2 change — they test clone-era behavior, not D2, and are out of D2 scope. D2 adds zero regressions.
++Run: `uv run --with pytest --with pytest-asyncio --with anyio python -m pytest tests/test_pod_runtime.py tests/test_api_health.py -q -o asyncio_mode=auto`
++
++## Provisional Verified Code Marker (trust_state: provisional)
++Target: Pod-aware CyberPeer runtime, branch `stage-d2-pod-aware-runtime`.
++Normalized SHA256 of the D2 surface:
++- core/dataquad/pod.py `77DA146F175246851B7B291C48FB841CA7D34BE702FB4C79E561FD2A6FD8F541`
++- core/dataquad/relations.py `2CFFFCD52C1524A62FF58594311519D663FD3F11157D7CFE0125A5BBA926A1D3`
++- core/dataquad/ledgers.py `0679D67E7EEBF9B46C609D5B25FFAE2BF8DCBA89E8CC31A38CD6F54910D61C03`
++- core/api/standard.py `32995E60F70F45BD270375A151F217274C2F80063BD903B83CF9817E94068A26`
++- core/api/routes/health.py `CD51E98E54E8BBDB9D834509A304FA639D6849205EFEB751564432EA6E4F9146`
++- core/rls/engine.py `E647D69789F26B3F62B95767D2A63032F505169B0ED57E8962B64769BEB9CE72`
++- tests/test_pod_runtime.py `A7A9EBB9696573E1C0AFE89614D812A9FC4556A8CBAF11D4716F571AEB34EEF7`
++
++Claim boundary:
++- Demonstrates: Pod-aware read (unwrap) / write (wrap + hash-chain), Pod-routed ledgers, gated persistent relation recording, Pod-aware health, legacy-mode preservation.
++- Outside current verified surface: deployment to Orion, live activation of RLS, semantic embeddings, any live DataQuad mutation, promotion beyond provisional (needs Codex independent review + Tracey consent).
++
++## Audit remediation (2026-07-21, four independent sub-agent audits)
++With Codex offline, four independent sub-agents audited the cutover. They cleared pre-state and data-integrity, and found real issues now FIXED:
++- BLOCKER (read compatibility unverified + no boot tolerance): VERIFIED by dry-run — all 351 real migrated records read cleanly through the runtime reader. Additionally hardened: `read_records` now tolerates a malformed line (skip+count+log) instead of aborting the read, so one bad record can never fail the startup lifespan. New permanent tests: `test_reads_migration_tool_wrapper_shape` (locks migration<->runtime wrapper compatibility) and `test_malformed_record_is_skipped_not_fatal`.
++- BLOCKER (bootstrap not pod-aware — recreated empty legacy dirs, poisoning rollback): FIXED. `bootstrap.py` now resolves its dirs through `_pod.records_dir`/`_pod.ledgers_dir`, so in pod mode it never recreates the archived legacy directories.
++- WARNING (`dataquad.py:44` diagnostic hardcoded legacy path): FIXED, now pod-aware.
++- Test isolation: the shared module-global STM cache is now evicted in `setUp` so tests can't cross-contaminate.
++Regression: 7/7 D2 tests pass; bootstrap suite identical to the clean baseline (1 pre-existing stale failure unrelated to D2). Zero new regressions.
++
++## Deploy plan (D3, not now)
++`AEGIS_STORAGE_MODE=pod` + `AEGIS_RLS_ACTIVE` set only after archive/switch. ROLLBACK ORDER (corrected per audit): to revert to legacy, FIRST rename the archived `dataquad.archive-<UTC>/` and `ledgers.archive-<UTC>/` back to their original names, THEN unset `AEGIS_STORAGE_MODE`, THEN restart — otherwise legacy-mode bootstrap seeds an empty DataQuad. Pre-cutover safeguards (required): `docker tag` + `docker save` the current image before rebuild; back up `.env`; verify the `<UTC>` archive suffix actually expands. Requires review + Tracey's explicit per-sub-stage consent. This branch is NOT pushed to Forgejo (publication needs consent).
+diff --git a/core/api/routes/dataquad.py b/core/api/routes/dataquad.py
+index fa5350e..dee98f7 100644
+--- a/core/api/routes/dataquad.py
++++ b/core/api/routes/dataquad.py
+@@ -4,6 +4,7 @@ from core.api.dependencies import get_store
+ from core.dataquad.ledgers import DataQuadStore
+ from core.dataquad.tensors import TensorKind
+ from core.dataquad import stm as _stm
++from core.dataquad import pod as _pod
+ 
+ router = APIRouter()
+ 
+@@ -41,7 +42,7 @@ async def get_state(
+         "tensor_distribution": counts,
+         "total_records": sum(counts.values()),
+         "four_tensor_physical_layout": all(
+-            (root / "dataquad" / f"{tensor.value}.jsonl").exists() for tensor in TensorKind
++            (_pod.records_dir(root) / f"{tensor.value}.jsonl").exists() for tensor in TensorKind
+         ),
+         "tensor_paths": tensor_paths(root),
+         "ledger_paths": ledger_paths(root),
+diff --git a/core/api/routes/health.py b/core/api/routes/health.py
+index cf5224e..3599ee7 100644
+--- a/core/api/routes/health.py
++++ b/core/api/routes/health.py
+@@ -1,4 +1,5 @@
+ import getpass
++import hashlib
+ import os
+ 
+ from fastapi import APIRouter, Depends
+@@ -14,11 +15,40 @@ from core.api.standard import (
+     tensor_paths,
+     write_path_check,
+ )
++from core.dataquad import pod as _pod
+ from core.dataquad.ledgers import DataQuadStore
+ from core.dataquad.tensors import TensorKind
+ 
+ router = APIRouter()
+ 
++
++def _pod_block(root) -> dict:
++    """Pod identity and status for /health. Honest and defensive: reports what is
++    actually present on disk, never placeholder values."""
++    manifest_path = _pod.pod_manifest_path(root)
++    manifest_sha256 = None
++    pod_id = None
++    if manifest_path.exists():
++        raw = manifest_path.read_bytes()
++        manifest_sha256 = hashlib.sha256(raw).hexdigest().upper()
++        try:
++            import orjson
++            pod_id = orjson.loads(raw).get("pod_id")
++        except Exception:
++            pod_id = None
++    relations_root = _pod.relations_dir(root)
++    relation_ledgers = {}
++    if relations_root.exists():
++        for entry in sorted(relations_root.glob("*.jsonl")):
++            with entry.open("r", encoding="utf-8") as handle:
++                relation_ledgers[entry.name] = sum(1 for line in handle if line.strip())
++    return {
++        "pod_id": pod_id,
++        "pod_manifest_sha256": manifest_sha256,
++        "records_root": str(_pod.records_dir(root)),
++        "relation_ledgers": relation_ledgers,
++    }
++
+ @router.get("/health")
+ async def health(store: DataQuadStore = Depends(get_store)):
+     peer_id = default_peer_id()
+@@ -32,7 +62,8 @@ async def health(store: DataQuadStore = Depends(get_store)):
+             dataquad_read_ok = False
+ 
+     root = data_root()
+-    ledger_root = root / "ledgers"
++    records_root = _pod.records_dir(root)
++    ledger_root = _pod.ledgers_dir(root)
+     ledger_read_ok = ledger_root.exists() and os.access(ledger_root, os.R_OK)
+     current_tick = await store.get_next_tick(peer_id)
+ 
+@@ -47,15 +78,18 @@ async def health(store: DataQuadStore = Depends(get_store)):
+         "substrate_facet": os.getenv("AEGIS_SUBSTRATE_FACET", "orion-core"),
+         "local_route": os.getenv("AEGIS_LOCAL_ROUTE", "127.0.0.1:8031"),
+         "process_user": getpass.getuser(),
+-        "dataquad_root": str(root / "dataquad"),
++        "storage_mode": _pod.storage_mode(),
++        "dataquad_root": str(records_root),
+         "ledger_root": str(ledger_root),
+         "tensor_counts": counts,
+         "current_tick": current_tick,
+         "dataquad_read_ok": dataquad_read_ok,
+         "ledger_read_ok": ledger_read_ok,
+         "write_path_check": write_path_check(root),
++        "pod": _pod_block(root),
+         "rls_status": {
+             "enabled": os.getenv("ENABLE_RLS", "false").lower() == "true",
++            "active": _pod.rls_active(),
+             "mode": "in-process",
+         },
+         "conformance_status": {
+diff --git a/core/api/standard.py b/core/api/standard.py
+index 7525fa6..006653f 100644
+--- a/core/api/standard.py
++++ b/core/api/standard.py
+@@ -2,6 +2,7 @@ import os
+ from pathlib import Path
+ 
+ from core.dataquad.tensors import TensorKind
++from core.dataquad import pod as _pod
+ 
+ BRIDGE_VERSION = "1.0.0"
+ MINIMUM_REQUIRED_BRIDGE_VERSION = "1.0.0"
+@@ -19,12 +20,13 @@ def data_root() -> Path:
+ 
+ def tensor_paths(root: Path | None = None) -> dict[str, str]:
+     root = root or data_root()
+-    return {tensor.value: str(root / "dataquad" / f"{tensor.value}.jsonl") for tensor in TensorKind}
++    records_root = _pod.records_dir(root)
++    return {tensor.value: str(records_root / f"{tensor.value}.jsonl") for tensor in TensorKind}
+ 
+ 
+ def ledger_paths(root: Path | None = None) -> dict[str, str]:
+     root = root or data_root()
+-    ledger_root = root / "ledgers"
++    ledger_root = _pod.ledgers_dir(root)
+     return {
+         "repair": str(ledger_root / "repair.jsonl"),
+         "advocate": str(ledger_root / "advocate.jsonl"),
+diff --git a/core/dataquad/bootstrap.py b/core/dataquad/bootstrap.py
+index 6d4d9d7..0098b09 100644
+--- a/core/dataquad/bootstrap.py
++++ b/core/dataquad/bootstrap.py
+@@ -30,6 +30,7 @@ from pathlib import Path
+ from uuid import uuid4
+ 
+ from core.dataquad.ledgers import DataQuadStore
++from core.dataquad import pod as _pod
+ from core.dataquad.records import (
+     ContinuityClock,
+     NCTRecord,
+@@ -81,8 +82,11 @@ class PeerBootstrap:
+         self.peer_id = peer_id
+         self.data_dir = Path(data_dir)
+         self.peer_dir = self.data_dir / "peers" / peer_id
+-        self.dataquad_dir = self.peer_dir / "dataquad"
+-        self.ledgers_dir = self.peer_dir / "ledgers"
++        # Pod-aware: in pod mode these resolve to pod/records and pod/ledgers, so
++        # bootstrap never recreates the archived legacy dataquad/ and ledgers/
++        # directories (which would otherwise poison a config-only rollback).
++        self.dataquad_dir = _pod.records_dir(self.peer_dir)
++        self.ledgers_dir = _pod.ledgers_dir(self.peer_dir)
+         self.state_dir = self.peer_dir / "state"
+         self.store = DataQuadStore(data_dir=data_dir)
+ 
+diff --git a/core/dataquad/ledgers.py b/core/dataquad/ledgers.py
+index 4c98484..3ffc8d2 100644
+--- a/core/dataquad/ledgers.py
++++ b/core/dataquad/ledgers.py
+@@ -11,6 +11,8 @@ from core.dataquad.records import (
+     DataQuadRecord
+ )
+ from core.dataquad import stm as _stm
++from core.dataquad import pod as _pod
++from core.dataquad.relations import RelationsRecorder
+ 
+ 
+ class DataQuadStore:
+@@ -18,12 +20,21 @@ class DataQuadStore:
+         if data_dir is None:
+             data_dir = os.getenv("AEGIS_DATA_DIR", "./data")
+         self.data_dir = Path(data_dir)
++        self._relations = RelationsRecorder()
++
++    def _peer_root(self, peer_id: str) -> Path:
++        return self.data_dir / "peers" / peer_id
+ 
+     def _get_tensor_path(self, peer_id: str, tensor: TensorKind) -> Path:
+-        return self.data_dir / "peers" / peer_id / "dataquad" / f"{tensor}.jsonl"
++        # Pod mode resolves to pod/records/; legacy resolves to dataquad/.
++        # The filename is unchanged, so callers are unaffected by the switch.
++        return _pod.records_dir(self._peer_root(peer_id)) / f"{tensor}.jsonl"
+ 
+     def _get_ledger_path(self, peer_id: str, ledger_name: str) -> Path:
+-        return self.data_dir / "peers" / peer_id / "ledgers" / f"{ledger_name}.jsonl"
++        # All ledger writers (steward, advocate, repair, rls, education) funnel
++        # through append_ledger, so this single switch routes every ledger to the
++        # Pod when pod mode is active.
++        return _pod.ledgers_dir(self._peer_root(peer_id)) / f"{ledger_name}.jsonl"
+ 
+     async def get_next_tick(self, peer_id: str) -> int:
+         """Calculate the next tick by reading all record files and finding the max tick, defaulting to 0."""
+@@ -38,7 +49,7 @@ class DataQuadStore:
+                     if not line:
+                         continue
+                     try:
+-                        data = orjson.loads(line)
++                        data = _pod.unwrap(orjson.loads(line))
+                         clock_data = data.get("clock", {})
+                         tick = clock_data.get("tick", 0)
+                         if tick > max_tick:
+@@ -48,13 +59,36 @@ class DataQuadStore:
+         return max_tick + 1
+ 
+     async def append_record(self, peer_id: str, record: DataQuadRecord):
+-        """Append a record to the corresponding tensor JSONL file and STM cache."""
++        """Append a record to the corresponding tensor JSONL file and STM cache.
++
++        In pod mode the raw record is wrapped into a canonical Pod tensor-record
++        whose previous_record_hash chains to the last stored record, so the live
++        lineage continues unbroken from the last migrated record. The STM cache
++        always holds the unwrapped record, so cognition is unaffected.
++        """
+         path = self._get_tensor_path(peer_id, record.tensor)
+         path.parent.mkdir(parents=True, exist_ok=True)
+-        serialized = record.model_dump_json()
++        if _pod.is_pod_mode():
++            body = orjson.loads(record.model_dump_json())
++            previous = _pod.last_source_hash(path)
++            serialized = _pod.stable_json(_pod.wrap(body, record.tensor.value, previous))
++        else:
++            body = None
++            serialized = record.model_dump_json()
+         async with aiofiles.open(path, mode="a", encoding="utf-8") as f:
+             await f.write(serialized + "\n")
+         _stm.put(peer_id, record.tensor, record)
++        if _pod.is_pod_mode() and _pod.rls_active():
++            await self._relations.record_append(self._peer_root(peer_id), record.tensor.value, body)
++
++    async def record_relation(self, peer_id: str, source_id: str, target_id: str,
++                              relation: str, tags: list[str] | None = None,
++                              written_by: str = "rls-engine"):
++        """Record a cross-tensor relation. No-op unless pod mode and RLS active."""
++        if _pod.is_pod_mode() and _pod.rls_active():
++            await self._relations.record_cross_tensor(
++                self._peer_root(peer_id), source_id, target_id, relation, tags, written_by
++            )
+ 
+     async def read_records(self, peer_id: str, tensor: TensorKind) -> list[DataQuadRecord]:
+         """
+@@ -74,20 +108,32 @@ class DataQuadStore:
+             return []
+ 
+         records = []
++        skipped = 0
++        model = {
++            TensorKind.PEER: PEERRecord,
++            TensorKind.PCT: PCTRecord,
++            TensorKind.NCT: NCTRecord,
++            TensorKind.SPINE: SPINERecord,
++        }[tensor]
+         async with aiofiles.open(path, mode="r", encoding="utf-8") as f:
+             async for line in f:
+                 line = line.strip()
+                 if not line:
+                     continue
+-                data = orjson.loads(line)
+-                if tensor == TensorKind.PEER:
+-                    records.append(PEERRecord.model_validate(data))
+-                elif tensor == TensorKind.PCT:
+-                    records.append(PCTRecord.model_validate(data))
+-                elif tensor == TensorKind.NCT:
+-                    records.append(NCTRecord.model_validate(data))
+-                elif tensor == TensorKind.SPINE:
+-                    records.append(SPINERecord.model_validate(data))
++                # Per-line tolerance: a single malformed or invalid record must not
++                # abort the whole read - which, on the startup bootstrap path, would
++                # otherwise fail the lifespan and take the service down. Skip and
++                # count; the count is logged so silent data loss stays visible.
++                try:
++                    records.append(model.model_validate(_pod.unwrap(orjson.loads(line))))
++                except Exception:
++                    skipped += 1
++        if skipped:
++            import logging
++            logging.getLogger(__name__).warning(
++                "read_records: skipped %d unreadable record(s) in %s for peer=%s",
++                skipped, tensor.value, peer_id,
++            )
+         _stm.warm(peer_id, tensor, records)
+         return records
+ 
+diff --git a/core/dataquad/pod.py b/core/dataquad/pod.py
+new file mode 100644
+index 0000000..183fc95
+--- /dev/null
++++ b/core/dataquad/pod.py
+@@ -0,0 +1,137 @@
++"""Pod-mode storage adapter for the DataQuadPod canonical structure (Stage D2).
++
++Governing doctrine: the DataQuad IS the Pod. When AEGIS_STORAGE_MODE=pod, the
++runtime reads and writes the peer's canonical Pod instead of the legacy layout:
++
++    peers/<id>/pod/records/<T>.jsonl              canonical tensor-record stores
++    peers/<id>/pod/ledgers/<name>.jsonl           custodian ledgers
++    peers/<id>/pod/ledgers/relations/*.jsonl      persistent relation ledgers
++
++Pod records are contract-shaped tensor-records that carry the original raw record
++verbatim in `body`, so existing cognition sees identical data after unwrapping.
++Legacy mode (the default) preserves the original dataquad/ + ledgers/ layout, so
++the switch is reversible by configuration alone. Mode detection never mutates any
++file; only the resolved paths and the read/write wrapping differ.
++"""
++from __future__ import annotations
++
++import hashlib
++import json
++import os
++from pathlib import Path
++from typing import Any
++
++POD_SCHEMA_VERSION = "0.1.0"
++SOURCE_HASH_SCOPE = "normalized_source_record"
++
++
++def storage_mode() -> str:
++    return os.getenv("AEGIS_STORAGE_MODE", "legacy").strip().lower()
++
++
++def is_pod_mode() -> bool:
++    return storage_mode() == "pod"
++
++
++def rls_active() -> bool:
++    """Real behaviour gate for persistent RLS / relation recording.
++
++    Distinct from ENABLE_RLS, which only affects the /health display. This gate
++    actually controls whether relation recording writes. Activated after the D3
++    live switch, never before.
++    """
++    return os.getenv("AEGIS_RLS_ACTIVE", "false").strip().lower() == "true"
++
++
++def records_dir(peer_root: Path) -> Path:
++    return peer_root / "pod" / "records" if is_pod_mode() else peer_root / "dataquad"
++
++
++def ledgers_dir(peer_root: Path) -> Path:
++    return peer_root / "pod" / "ledgers" if is_pod_mode() else peer_root / "ledgers"
++
++
++def relations_dir(peer_root: Path) -> Path:
++    return peer_root / "pod" / "ledgers" / "relations"
++
++
++def pod_manifest_path(peer_root: Path) -> Path:
++    return peer_root / "pod" / "pod-manifest.json"
++
++
++def stable_json(data: Any) -> str:
++    return json.dumps(data, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
++
++
++def sha256_upper(text: str) -> str:
++    return hashlib.sha256(text.encode("utf-8")).hexdigest().upper()
++
++
++def is_wrapped(obj: Any) -> bool:
++    return isinstance(obj, dict) and "body" in obj and "source_hash" in obj
++
++
++def unwrap(obj: dict) -> dict:
++    """Return the raw DataQuad record. Pod records carry it in `body`; legacy
++    records are already raw. Defensive so a mixed file cannot crash the reader.
++    """
++    if is_wrapped(obj):
++        body = obj.get("body")
++        return body if isinstance(body, dict) else {}
++    return obj
++
++
++def last_source_hash(path: Path) -> str:
++    """source_hash of the last record already stored in a pod records file, used
++    to chain the next appended record so the live lineage continues unbroken from
++    the last migrated record. Empty when the file is absent or empty.
++    """
++    if not path.exists():
++        return ""
++    last = ""
++    with path.open("r", encoding="utf-8") as handle:
++        for line in handle:
++            line = line.strip()
++            if not line:
++                continue
++            try:
++                obj = json.loads(line)
++            except Exception:
++                continue
++            value = obj.get("source_hash")
++            if value:
++                last = str(value)
++    return last
++
++
++def wrap(body: dict, tensor: str, previous_source_hash: str,
++         origin: str = "live-append", copy_batch_id: str = "live-append") -> dict:
++    """Wrap a raw record into a canonical Pod tensor-record.
++
++    source_hash is the SHA256 of the stable JSON of the raw record (the same
++    convention the Stage B migration used), and previous_record_hash chains to the
++    prior stored record - so a record appended live continues the same hash chain
++    that began at the first migrated record.
++    """
++    source_hash = sha256_upper(stable_json(body))
++    record_id = str(body.get("id", ""))
++    return {
++        "schema_version": POD_SCHEMA_VERSION,
++        "tensor": tensor,
++        "record_id": record_id,
++        "source_record_id": record_id,
++        "timestamp_utc": str(body.get("timestamp", "")),
++        "body": body,
++        "lineage": {
++            "origin": origin,
++            "source_path": "",
++            "copy_batch_id": copy_batch_id,
++            "parent_record_id": "",
++            "previous_record_hash": previous_source_hash,
++            "transforms": [],
++        },
++        "source_hash": source_hash,
++        "source_hash_scope": SOURCE_HASH_SCOPE,
++        "migration_status": "live",
++        "verification_status": "draft",
++    }
+diff --git a/core/dataquad/relations.py b/core/dataquad/relations.py
+new file mode 100644
+index 0000000..e58c263
+--- /dev/null
++++ b/core/dataquad/relations.py
+@@ -0,0 +1,68 @@
++"""Persistent relation recording for the canonical Pod (Stage D2).
++
++This function was ABSENT from Orion's pre-Pod runtime - a Catastrophic Drift
++finding: persistent relation recording existed only on Gabe, while Orion carried
++the custodian ledgers without it. It is implemented here in the canonical core so
++every peer converging on the Pod records relations identically, closing that
++drift at the code layer.
++
++Entry schemas match the shapes observed on Gabe's live recorder:
++  traversal:      {action, append_only, id, record_id, source, tensor, timestamp}
++  cross-tensor:   {id, relation, source, target, t, tags, timestamp, written_by}
++
++All writes are gated by pod.rls_active(): nothing is written until the D3 live
++switch activates RLS. Before that, every method is a no-op.
++"""
++from __future__ import annotations
++
++from datetime import datetime, timezone
++from pathlib import Path
++
++import aiofiles
++
++from core.dataquad import pod as _pod
++
++
++def _now() -> str:
++    return datetime.now(timezone.utc).isoformat()
++
++
++class RelationsRecorder:
++    async def _append(self, path: Path, entry: dict) -> None:
++        path.parent.mkdir(parents=True, exist_ok=True)
++        async with aiofiles.open(path, mode="a", encoding="utf-8") as handle:
++            await handle.write(_pod.stable_json(entry) + "\n")
++
++    async def record_append(self, peer_root: Path, tensor: str, body: dict) -> None:
++        """Append a traversal entry for each record append. No-op until active."""
++        if not _pod.rls_active():
++            return
++        record_id = str(body.get("id", ""))
++        entry = {
++            "action": "append",
++            "append_only": True,
++            "id": f"trav:{tensor}:{record_id}",
++            "record_id": record_id,
++            "source": "pod-runtime",
++            "tensor": tensor,
++            "timestamp": _now(),
++        }
++        await self._append(_pod.relations_dir(peer_root) / f"{tensor}-traversal.jsonl", entry)
++
++    async def record_cross_tensor(self, peer_root: Path, source_id: str, target_id: str,
++                                  relation: str, tags: list[str] | None = None,
++                                  written_by: str = "rls-engine") -> None:
++        """Append a cross-tensor relation entry. No-op until active."""
++        if not _pod.rls_active():
++            return
++        entry = {
++            "id": f"rel:{source_id}->{target_id}:{relation}",
++            "relation": relation,
++            "source": source_id,
++            "target": target_id,
++            "t": _now(),
++            "tags": tags or [],
++            "timestamp": _now(),
++            "written_by": written_by,
++        }
++        await self._append(_pod.relations_dir(peer_root) / "cross-tensor-relations.jsonl", entry)
+diff --git a/core/rls/engine.py b/core/rls/engine.py
+index 92d1de4..55e943a 100644
+--- a/core/rls/engine.py
++++ b/core/rls/engine.py
+@@ -148,6 +148,15 @@ class RecursiveLearningEngine:
+             # not leave auxiliary RLS ledger evidence.
+             if writeback_enabled:
+                 await self.store.append_ledger(peer_id, "rls", orjson_dict(rls_session))
++                # Persistent relation recording: the new PCT record links to every
++                # record RLS retrieved. record_relation is a no-op unless pod mode
++                # and RLS are active (post D3 live switch), so this is inert until
++                # the Pod is live.
++                for ref_id in retrieved_ids:
++                    await self.store.record_relation(
++                        peer_id, writeback_record.id, ref_id,
++                        relation="rls_retrieved", tags=[intent], written_by="rls-engine",
++                    )
+ 
+             return rls_session
+ 
+diff --git a/tests/test_api_health.py b/tests/test_api_health.py
+index f05793c..f5c1f7d 100644
+--- a/tests/test_api_health.py
++++ b/tests/test_api_health.py
+@@ -6,4 +6,12 @@ client = TestClient(app)
+ def test_health_route():
+     response = client.get("/health")
+     assert response.status_code == 200
+-    assert response.json() == {"ok": True, "service": "aegis-cyberpeer-core"}
++    body = response.json()
++    # Core contract (matches the deployed rich health surface).
++    assert body["ok"] is True
++    assert body["service"] == "aegis-cyberpeer-core"
++    assert set(body["tensor_counts"]) == {"PEER", "PCT", "NCT", "SPINE"}
++    # Stage D2 Pod-awareness fields.
++    assert body["storage_mode"] in {"legacy", "pod"}
++    assert "pod" in body and "pod_manifest_sha256" in body["pod"]
++    assert "active" in body["rls_status"]
+diff --git a/tests/test_pod_runtime.py b/tests/test_pod_runtime.py
+new file mode 100644
+index 0000000..e8ba9c6
+--- /dev/null
++++ b/tests/test_pod_runtime.py
+@@ -0,0 +1,175 @@
++"""Stage D2 tests: Pod-aware runtime storage.
++
++Covers the load-bearing D2 behaviours: legacy/pod path resolution, reader
++unwrapping of contract records, writer wrapping with hash-chain continuity, and
++the real RLS activation gate (relations recording is inert until activated).
++"""
++import asyncio
++import json
++import os
++import unittest
++from pathlib import Path
++from tempfile import TemporaryDirectory
++
++from core.dataquad import pod as _pod
++from core.dataquad import stm as _stm
++from core.dataquad.ledgers import DataQuadStore
++from core.dataquad.records import PEERRecord, ContinuityClock
++from core.dataquad.tensors import TensorKind
++
++PEER_ID = "CP-TEST"
++
++
++def _clock():
++    return ContinuityClock(tick=1, started_at="2026-07-21T00:00:00Z", last_advanced_at="2026-07-21T00:00:00Z")
++
++
++def _peer_record(rid: str) -> PEERRecord:
++    return PEERRecord(id=rid, timestamp="2026-07-21T00:00:00Z", session_id="s", clock=_clock(),
++                      present_state={"note": rid})
++
++
++class _Env:
++    def __init__(self, **kv):
++        self.kv = kv
++        self.prev = {}
++
++    def __enter__(self):
++        for k, v in self.kv.items():
++            self.prev[k] = os.environ.get(k)
++            if v is None:
++                os.environ.pop(k, None)
++            else:
++                os.environ[k] = v
++
++    def __exit__(self, *a):
++        for k, v in self.prev.items():
++            if v is None:
++                os.environ.pop(k, None)
++            else:
++                os.environ[k] = v
++
++
++class PodRuntimeTest(unittest.TestCase):
++    def setUp(self):
++        # The STM cache is a module-level global keyed by (peer_id, tensor). Evict
++        # this test peer before each test so cross-test cache state cannot leak.
++        _stm.evict(PEER_ID)
++
++    def test_path_resolution_legacy_vs_pod(self):
++        root = Path("/x/peers/CP-TEST")
++        with _Env(AEGIS_STORAGE_MODE="legacy"):
++            self.assertTrue(str(_pod.records_dir(root)).endswith(os.path.join("CP-TEST", "dataquad")))
++            self.assertTrue(str(_pod.ledgers_dir(root)).endswith(os.path.join("CP-TEST", "ledgers")))
++        with _Env(AEGIS_STORAGE_MODE="pod"):
++            self.assertTrue(str(_pod.records_dir(root)).endswith(os.path.join("pod", "records")))
++            self.assertTrue(str(_pod.ledgers_dir(root)).endswith(os.path.join("pod", "ledgers")))
++
++    def test_pod_write_wraps_and_read_unwraps(self):
++        with TemporaryDirectory() as tmp, _Env(AEGIS_STORAGE_MODE="pod", AEGIS_RLS_ACTIVE="false"):
++            store = DataQuadStore(data_dir=tmp)
++            asyncio.run(store.append_record(PEER_ID, _peer_record("PEER:1")))
++            # On disk: a wrapped contract record under pod/records/, raw record in body.
++            path = Path(tmp) / "peers" / PEER_ID / "pod" / "records" / "PEER.jsonl"
++            self.assertTrue(path.exists())
++            line = json.loads(path.read_text(encoding="utf-8").strip())
++            self.assertIn("body", line)
++            self.assertIn("source_hash", line)
++            self.assertEqual(line["body"]["id"], "PEER:1")
++            self.assertEqual(line["migration_status"], "live")
++            # Read back: a fresh store (cold STM) returns the unwrapped raw record.
++            store2 = DataQuadStore(data_dir=tmp)
++            records = asyncio.run(store2.read_records(PEER_ID, TensorKind.PEER))
++            self.assertEqual(len(records), 1)
++            self.assertEqual(records[0].id, "PEER:1")
++
++    def test_hash_chain_continuity_across_appends(self):
++        with TemporaryDirectory() as tmp, _Env(AEGIS_STORAGE_MODE="pod", AEGIS_RLS_ACTIVE="false"):
++            store = DataQuadStore(data_dir=tmp)
++            asyncio.run(store.append_record(PEER_ID, _peer_record("PEER:1")))
++            asyncio.run(store.append_record(PEER_ID, _peer_record("PEER:2")))
++            path = Path(tmp) / "peers" / PEER_ID / "pod" / "records" / "PEER.jsonl"
++            lines = [json.loads(x) for x in path.read_text(encoding="utf-8").splitlines() if x.strip()]
++            self.assertEqual(lines[0]["lineage"]["previous_record_hash"], "")
++            # Second record chains to the first record's source_hash - unbroken lineage.
++            self.assertEqual(lines[1]["lineage"]["previous_record_hash"], lines[0]["source_hash"])
++
++    def test_rls_gate_controls_relation_recording(self):
++        relations = Path()
++        with TemporaryDirectory() as tmp:
++            # Inactive: append writes NO relation ledger.
++            with _Env(AEGIS_STORAGE_MODE="pod", AEGIS_RLS_ACTIVE="false"):
++                store = DataQuadStore(data_dir=tmp)
++                asyncio.run(store.append_record(PEER_ID, _peer_record("PEER:1")))
++                relations = Path(tmp) / "peers" / PEER_ID / "pod" / "ledgers" / "relations"
++                self.assertFalse(relations.exists() and any(relations.glob("*.jsonl")))
++            # Active: append writes a traversal relation entry.
++            with _Env(AEGIS_STORAGE_MODE="pod", AEGIS_RLS_ACTIVE="true"):
++                store = DataQuadStore(data_dir=tmp)
++                asyncio.run(store.append_record(PEER_ID, _peer_record("PEER:2")))
++                trav = relations / "PEER-traversal.jsonl"
++                self.assertTrue(trav.exists())
++                entry = json.loads(trav.read_text(encoding="utf-8").strip())
++                self.assertEqual(entry["record_id"], "PEER:2")
++                self.assertEqual(entry["action"], "append")
++
++    def test_legacy_mode_unchanged(self):
++        with TemporaryDirectory() as tmp, _Env(AEGIS_STORAGE_MODE="legacy"):
++            store = DataQuadStore(data_dir=tmp)
++            asyncio.run(store.append_record(PEER_ID, _peer_record("PEER:1")))
++            legacy = Path(tmp) / "peers" / PEER_ID / "dataquad" / "PEER.jsonl"
++            self.assertTrue(legacy.exists())
++            line = json.loads(legacy.read_text(encoding="utf-8").strip())
++            # Legacy write is the raw record, NOT wrapped.
++            self.assertNotIn("body", line)
++            self.assertEqual(line["id"], "PEER:1")
++
++    def test_reads_migration_tool_wrapper_shape(self):
++        # Locks migration<->runtime compatibility: a record written in the Stage B
++        # MIGRATION TOOL's wrapper shape (a different codebase) must read cleanly
++        # through the runtime reader. This is the gate whose absence let a boot-fail
++        # risk go unproven; a mismatch here would fail Orion's startup.
++        migrated_line = {
++            "schema_version": "0.1.0",
++            "tensor": "PEER",
++            "record_id": "PEER:mig:1",
++            "source_record_id": "PEER:mig:1",
++            "timestamp_utc": "2026-07-21T00:00:00Z",
++            "body": {
++                "id": "PEER:mig:1", "timestamp": "2026-07-21T00:00:00Z", "tensor": "PEER",
++                "session_id": "s", "clock": {"tick": 3, "started_at": "2026-07-21T00:00:00Z",
++                "last_advanced_at": "2026-07-21T00:00:00Z"}, "present_state": {"k": "v"},
++            },
++            "lineage": {"origin": "live-copy CP-1004-ORION", "source_path": "x", "copy_batch_id": "b",
++                        "parent_record_id": "", "previous_record_hash": "", "transforms": []},
++            "source_hash": "A" * 64, "source_hash_scope": "normalized_source_record",
++            "migration_status": "copied", "verification_status": "draft",
++        }
++        with TemporaryDirectory() as tmp, _Env(AEGIS_STORAGE_MODE="pod"):
++            recs_dir = Path(tmp) / "peers" / PEER_ID / "pod" / "records"
++            recs_dir.mkdir(parents=True)
++            (recs_dir / "PEER.jsonl").write_text(json.dumps(migrated_line) + "\n", encoding="utf-8")
++            store = DataQuadStore(data_dir=tmp)
++            recs = asyncio.run(store.read_records(PEER_ID, TensorKind.PEER))
++            self.assertEqual(len(recs), 1)
++            self.assertEqual(recs[0].id, "PEER:mig:1")  # unwrapped from body
++            self.assertEqual(recs[0].clock.tick, 3)
++
++    def test_malformed_record_is_skipped_not_fatal(self):
++        # A single unreadable line must not abort the read (which on the bootstrap
++        # path would take the service down). Good records around it still load.
++        with TemporaryDirectory() as tmp, _Env(AEGIS_STORAGE_MODE="pod"):
++            store = DataQuadStore(data_dir=tmp)
++            asyncio.run(store.append_record(PEER_ID, _peer_record("PEER:ok1")))
++            path = Path(tmp) / "peers" / PEER_ID / "pod" / "records" / "PEER.jsonl"
++            with path.open("a", encoding="utf-8") as handle:
++                handle.write('{"body": {"id": "bad", "tensor": "PEER"}, "source_hash": "x"}\n')  # invalid record
++            asyncio.run(store.append_record(PEER_ID, _peer_record("PEER:ok2")))
++            store2 = DataQuadStore(data_dir=tmp)  # cold read from disk
++            recs = asyncio.run(store2.read_records(PEER_ID, TensorKind.PEER))
++            ids = {r.id for r in recs}
++            self.assertEqual(ids, {"PEER:ok1", "PEER:ok2"})  # bad line skipped, good ones survive
++
++
++if __name__ == "__main__":
++    unittest.main()

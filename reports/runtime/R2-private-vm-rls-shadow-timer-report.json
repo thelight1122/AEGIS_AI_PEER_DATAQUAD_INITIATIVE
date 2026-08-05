@@ -1,0 +1,25 @@
+{
+  "phase": "R2-recurring-shadow",
+  "status": "complete_controlled_timer_enabled",
+  "vm": "20.122.189.26",
+  "service": "aegis-rls-shadow.service",
+  "timer": "aegis-rls-shadow.timer",
+  "schedule": {"on_boot": "2min", "interval": "15min", "accuracy": "1min", "randomized_delay": "30s", "persistent": false},
+  "timer_enabled": true,
+  "timer_active": true,
+  "service_active_after_run": false,
+  "deduplication": {"source_fingerprint": "eb00d1b06a6f3130058199bed48eec56fa00bb6d008c58b03ee77351ef0171a9", "unchanged_run_status": "complete_no_source_change", "unchanged_ledger_write": false},
+  "ledger_sha256_before_and_after_unchanged_run": "2a84ec4454c543bdbd619614fb3e5cb23f94d461a7eca748da020c536fb8e6e0",
+  "source_hashes_preserved": true,
+  "authoritative_tensor_write": false,
+  "derived_ledger_write": true,
+  "experience_created": false,
+  "admission_performed": false,
+  "live_rls_invoked": false,
+  "public_listener": false,
+  "rls_container_state": "exited",
+  "deployed_hashes": {
+    "run_r2_rls_shadow_once.py": "3B26DACA7FBDD43205B71D66492F58D5855B893C58FAED412E4287202794B211",
+    "aegis-rls-shadow.timer": "BAC3627279374C417C713A1340DDCF3B3C9F3F90BBC6444199D8AEE10D9E0465"
+  }
+}

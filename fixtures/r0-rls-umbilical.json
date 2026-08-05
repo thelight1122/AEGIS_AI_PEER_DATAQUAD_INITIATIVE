@@ -1,0 +1,12 @@
+{
+  "schema_version": "0.1.0",
+  "umbilical_id": "umbilical:rls-orb:portal-pod",
+  "pod_id": "aegis-r0-portal-pod",
+  "orb_id": "rls-coordinate-orb",
+  "allowed_capabilities": ["rls.status.read", "rls.timeline.read", "rls.lineage.read", "rls.reflection.replay"],
+  "allowed_scopes": ["rls.status.read", "rls.timeline.read", "rls.lineage.read", "rls.reflection.replay"],
+  "prohibited_capabilities": ["pod.experience.write", "pod.admission.perform", "pod.dataquad.write", "rls.live", "shell", "filesystem"],
+  "mutation_authority": false,
+  "admission_authority": false,
+  "experience_authority": false
+}

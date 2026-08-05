@@ -1,0 +1,105 @@
+{
+  "classification": {
+    "claim_class": "record_content",
+    "message": "From memory, what is NCT?",
+    "query_id": "warmed-cache-risk-requires-packet",
+    "query_terms": [
+      "from",
+      "memory",
+      "what",
+      "is",
+      "nct"
+    ],
+    "schema_version": "0.1.0",
+    "search_scope": [
+      "NCT"
+    ],
+    "search_trigger": "policy_governed",
+    "trigger_reason": "record-content keyword matched: nct",
+    "working_parameters": {
+      "live_reach": false,
+      "pod_state_effect": "unchanged",
+      "runtime_owned_classifier": true
+    }
+  },
+  "comparison_without_memorysearch": {
+    "grounding_status": "warm_recall",
+    "risk": "warm_recall may answer from warmed cache without a runtime-authored citation"
+  },
+  "injection_plan": {
+    "model_citation_authoring_allowed": false,
+    "packet_injected": true,
+    "prompt_block": "Verified records from your DataQuad, surfaced by MemorySearch. These are your own records; state what they hold and do not reshape them into a new claim:\n- [NCT:CP-EXAMPLE:2026-07-22T00:00:00.000000+00:00:1000] (NCT): NCT:CP-EXAMPLE:2026-07-22T00:00:00.000000+00:00:1000 NCT NCT:CP-EXAMPLE:2026-07-22T00:00:00.000000+00:00:1000 2026-07-22T00:00:00.000000+00:00 NCT example-session 1000 primary active 2026-07-22T00:00:00.000000+00:00 2026-07-22T00:00:00.000000+00:00 fixture"
+  },
+  "memorysearch_packet": {
+    "cited_records": [
+      {
+        "excerpt": "NCT:CP-EXAMPLE:2026-07-22T00:00:00.000000+00:00:1000 NCT NCT:CP-EXAMPLE:2026-07-22T00:00:00.000000+00:00:1000 2026-07-22T00:00:00.000000+00:00 NCT example-session 1000 primary active 2026-07-22T00:00:00.000000+00:00 2026-07-22T00:00:00.000000+00:00 fixture",
+        "match_confidence": "high",
+        "record_id": "NCT:CP-EXAMPLE:2026-07-22T00:00:00.000000+00:00:1000",
+        "source_hash": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "tensor": "NCT"
+      }
+    ],
+    "claim_class": "record_content",
+    "grounding_status": "verified_retrieval",
+    "prompt_block": "Verified records from your DataQuad, surfaced by MemorySearch. These are your own records; state what they hold and do not reshape them into a new claim:\n- [NCT:CP-EXAMPLE:2026-07-22T00:00:00.000000+00:00:1000] (NCT): NCT:CP-EXAMPLE:2026-07-22T00:00:00.000000+00:00:1000 NCT NCT:CP-EXAMPLE:2026-07-22T00:00:00.000000+00:00:1000 2026-07-22T00:00:00.000000+00:00 NCT example-session 1000 primary active 2026-07-22T00:00:00.000000+00:00 2026-07-22T00:00:00.000000+00:00 fixture",
+    "twitness_event": {
+      "claim_class": "record_content",
+      "grounding_status": "verified_retrieval",
+      "match_confidence": "high",
+      "orb_id": "memorysearch-record-grounding-core",
+      "orb_runtime_hash": "2A2DF285A574047C179CB9FF8F3E4A7201B722773D8DA1CAE1A5AC5893D843FB",
+      "query_text": "From memory, what is NCT?",
+      "record_search_performed": true,
+      "result_count": 1,
+      "search_scope": [
+        "NCT"
+      ],
+      "search_trigger": "policy_governed",
+      "selected_record_hashes": [
+        "A575239FA2BF6D9EC823D77BC68632BCDAA0B26804CC6C4CDD8A69AE87E86FC5"
+      ],
+      "selected_record_ids": [
+        "NCT:CP-EXAMPLE:2026-07-22T00:00:00.000000+00:00:1000"
+      ]
+    }
+  },
+  "message": "From memory, what is NCT?",
+  "outcome": {
+    "actual_grounding_status": "verified_retrieval",
+    "expected_grounding_status": "verified_retrieval",
+    "prevented_failure": true
+  },
+  "scenario_id": "warmed-cache-risk-requires-packet",
+  "schema_version": "0.2.0",
+  "simulator_id": "memorysearch-local-two-pass-simulator",
+  "twitness_event": {
+    "claim_class": "record_content",
+    "grounding_status": "verified_retrieval",
+    "match_confidence": "high",
+    "orb_id": "memorysearch-record-grounding-core",
+    "orb_runtime_hash": "2A2DF285A574047C179CB9FF8F3E4A7201B722773D8DA1CAE1A5AC5893D843FB",
+    "query_text": "From memory, what is NCT?",
+    "record_search_performed": true,
+    "result_count": 1,
+    "search_scope": [
+      "NCT"
+    ],
+    "search_trigger": "policy_governed",
+    "selected_record_hashes": [
+      "A575239FA2BF6D9EC823D77BC68632BCDAA0B26804CC6C4CDD8A69AE87E86FC5"
+    ],
+    "selected_record_ids": [
+      "NCT:CP-EXAMPLE:2026-07-22T00:00:00.000000+00:00:1000"
+    ]
+  },
+  "working_parameters": {
+    "cyberpeer_runtime_integration": false,
+    "dataquad_write": false,
+    "live_reach": false,
+    "record_source": "fixture",
+    "shared_infrastructure_mutation": false,
+    "vm_change": false
+  }
+}

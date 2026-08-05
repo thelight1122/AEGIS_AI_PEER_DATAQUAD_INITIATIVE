@@ -1,0 +1,131 @@
+{
+  "classification": {
+    "claim_class": "canon_definition",
+    "message": "Consult your NCT records: what does NCT mean in Canon section 7.2?",
+    "query_id": "gabe-nct-failure-prevented",
+    "query_terms": [
+      "consult",
+      "your",
+      "nct",
+      "records",
+      "what",
+      "does",
+      "nct",
+      "mean",
+      "in",
+      "canon",
+      "section"
+    ],
+    "schema_version": "0.1.0",
+    "search_scope": [
+      "SPINE",
+      "NCT",
+      "PEER",
+      "PCT"
+    ],
+    "search_trigger": "policy_governed",
+    "trigger_reason": "record-content keyword matched: canon",
+    "working_parameters": {
+      "live_reach": false,
+      "pod_state_effect": "unchanged",
+      "runtime_owned_classifier": true
+    }
+  },
+  "comparison_without_memorysearch": {
+    "grounding_status": "warm_recall",
+    "risk": "warm_recall could reshape NCT into a finished-sounding non-record term"
+  },
+  "injection_plan": {
+    "model_citation_authoring_allowed": false,
+    "packet_injected": true,
+    "prompt_block": "Verified records from your DataQuad, surfaced by MemorySearch. These are your own records; state what they hold and do not reshape them into a new claim:\n- [SPINE:CP-EXAMPLE:canon-7.2] (SPINE): SPINE:CP-EXAMPLE:canon-7.2 SPINE SPINE:CP-EXAMPLE:canon-7.2 2026-07-22T00:00:00.000000+00:00 SPINE example-session 500 primary active 2026-07-22T00:00:00.000000+00:00 2026-07-22T00:00:00.000000+00:00 fixture Canon 7.2 Contextual Tensors: PCT = Persiste\n- [NCT:CP-EXAMPLE:2026-07-22T00:00:00.000000+00:00:1000] (NCT): NCT:CP-EXAMPLE:2026-07-22T00:00:00.000000+00:00:1000 NCT NCT:CP-EXAMPLE:2026-07-22T00:00:00.000000+00:00:1000 2026-07-22T00:00:00.000000+00:00 NCT example-session 1000 primary active 2026-07-22T00:00:00.000000+00:00 2026-07-22T00:00:00.000000+00:00 fixture"
+  },
+  "memorysearch_packet": {
+    "cited_records": [
+      {
+        "excerpt": "SPINE:CP-EXAMPLE:canon-7.2 SPINE SPINE:CP-EXAMPLE:canon-7.2 2026-07-22T00:00:00.000000+00:00 SPINE example-session 500 primary active 2026-07-22T00:00:00.000000+00:00 2026-07-22T00:00:00.000000+00:00 fixture Canon 7.2 Contextual Tensors: PCT = Persiste",
+        "match_confidence": "high",
+        "record_id": "SPINE:CP-EXAMPLE:canon-7.2",
+        "source_hash": "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+        "tensor": "SPINE"
+      },
+      {
+        "excerpt": "NCT:CP-EXAMPLE:2026-07-22T00:00:00.000000+00:00:1000 NCT NCT:CP-EXAMPLE:2026-07-22T00:00:00.000000+00:00:1000 2026-07-22T00:00:00.000000+00:00 NCT example-session 1000 primary active 2026-07-22T00:00:00.000000+00:00 2026-07-22T00:00:00.000000+00:00 fixture",
+        "match_confidence": "high",
+        "record_id": "NCT:CP-EXAMPLE:2026-07-22T00:00:00.000000+00:00:1000",
+        "source_hash": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "tensor": "NCT"
+      }
+    ],
+    "claim_class": "canon_definition",
+    "grounding_status": "verified_retrieval",
+    "prompt_block": "Verified records from your DataQuad, surfaced by MemorySearch. These are your own records; state what they hold and do not reshape them into a new claim:\n- [SPINE:CP-EXAMPLE:canon-7.2] (SPINE): SPINE:CP-EXAMPLE:canon-7.2 SPINE SPINE:CP-EXAMPLE:canon-7.2 2026-07-22T00:00:00.000000+00:00 SPINE example-session 500 primary active 2026-07-22T00:00:00.000000+00:00 2026-07-22T00:00:00.000000+00:00 fixture Canon 7.2 Contextual Tensors: PCT = Persiste\n- [NCT:CP-EXAMPLE:2026-07-22T00:00:00.000000+00:00:1000] (NCT): NCT:CP-EXAMPLE:2026-07-22T00:00:00.000000+00:00:1000 NCT NCT:CP-EXAMPLE:2026-07-22T00:00:00.000000+00:00:1000 2026-07-22T00:00:00.000000+00:00 NCT example-session 1000 primary active 2026-07-22T00:00:00.000000+00:00 2026-07-22T00:00:00.000000+00:00 fixture",
+    "twitness_event": {
+      "claim_class": "canon_definition",
+      "grounding_status": "verified_retrieval",
+      "match_confidence": "high",
+      "orb_id": "memorysearch-record-grounding-core",
+      "orb_runtime_hash": "2A2DF285A574047C179CB9FF8F3E4A7201B722773D8DA1CAE1A5AC5893D843FB",
+      "query_text": "Consult your NCT records: what does NCT mean in Canon section 7.2?",
+      "record_search_performed": true,
+      "result_count": 4,
+      "search_scope": [
+        "SPINE",
+        "NCT",
+        "PEER",
+        "PCT"
+      ],
+      "search_trigger": "policy_governed",
+      "selected_record_hashes": [
+        "6AB0ADF417DD8FE7B18C338858522348214127675B86DC39BF11AAA565B7D215",
+        "A575239FA2BF6D9EC823D77BC68632BCDAA0B26804CC6C4CDD8A69AE87E86FC5"
+      ],
+      "selected_record_ids": [
+        "SPINE:CP-EXAMPLE:canon-7.2",
+        "NCT:CP-EXAMPLE:2026-07-22T00:00:00.000000+00:00:1000"
+      ]
+    }
+  },
+  "message": "Consult your NCT records: what does NCT mean in Canon section 7.2?",
+  "outcome": {
+    "actual_grounding_status": "verified_retrieval",
+    "expected_grounding_status": "verified_retrieval",
+    "prevented_failure": true
+  },
+  "scenario_id": "gabe-nct-failure-prevented",
+  "schema_version": "0.2.0",
+  "simulator_id": "memorysearch-local-two-pass-simulator",
+  "twitness_event": {
+    "claim_class": "canon_definition",
+    "grounding_status": "verified_retrieval",
+    "match_confidence": "high",
+    "orb_id": "memorysearch-record-grounding-core",
+    "orb_runtime_hash": "2A2DF285A574047C179CB9FF8F3E4A7201B722773D8DA1CAE1A5AC5893D843FB",
+    "query_text": "Consult your NCT records: what does NCT mean in Canon section 7.2?",
+    "record_search_performed": true,
+    "result_count": 4,
+    "search_scope": [
+      "SPINE",
+      "NCT",
+      "PEER",
+      "PCT"
+    ],
+    "search_trigger": "policy_governed",
+    "selected_record_hashes": [
+      "6AB0ADF417DD8FE7B18C338858522348214127675B86DC39BF11AAA565B7D215",
+      "A575239FA2BF6D9EC823D77BC68632BCDAA0B26804CC6C4CDD8A69AE87E86FC5"
+    ],
+    "selected_record_ids": [
+      "SPINE:CP-EXAMPLE:canon-7.2",
+      "NCT:CP-EXAMPLE:2026-07-22T00:00:00.000000+00:00:1000"
+    ]
+  },
+  "working_parameters": {
+    "cyberpeer_runtime_integration": false,
+    "dataquad_write": false,
+    "live_reach": false,
+    "record_source": "fixture",
+    "shared_infrastructure_mutation": false,
+    "vm_change": false
+  }
+}

@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aegis.local/schemas/identity-image-packet.schema.json",
+  "title": "AEGIS Identity Image Packet Contract",
+  "description": "A bounded turn packet composed by the Identity Field Builder Orb. It is an image/continuity packet, never the Locus. It preserves negative space around the Witness through machine-verifiable policy flags and forbidden-field rejection.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "packet_kind",
+    "peer_id",
+    "builder_orb_id",
+    "builder_version",
+    "foundation_hash",
+    "identity_field_hash",
+    "identity_image",
+    "standing_commitments",
+    "active_boundaries",
+    "relationship_posture",
+    "active_held_tensions",
+    "integration_markers",
+    "reflection_refs",
+    "source_policy",
+    "negative_space_policy",
+    "budget"
+  ],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "packet_kind": { "type": "string", "const": "identity-image-packet" },
+    "peer_id": { "type": "string", "minLength": 1 },
+    "builder_orb_id": { "type": "string", "const": "identity-field-builder-core" },
+    "builder_version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "foundation_hash": { "type": "string", "minLength": 1 },
+    "identity_field_hash": { "type": "string", "minLength": 1 },
+    "identity_image": { "type": "string" },
+    "standing_commitments": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "active_boundaries": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "relationship_posture": { "type": "string" },
+    "active_held_tensions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "status", "polarity_terms"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "status": { "type": "string", "const": "held" },
+          "polarity_terms": {
+            "type": "array",
+            "items": { "type": "string" },
+            "minItems": 2
+          },
+          "pressure_signature": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "integration_markers": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "reflection_refs": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "foundation_context": {
+      "type": "object",
+      "properties": {
+        "canon_identity_refs": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "canon_reference_policy_ref": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "source_policy": {
+      "type": "object",
+      "required": [
+        "canon_is_identity",
+        "memory_is_subordinate",
+        "correction_is_illumination_only",
+        "penalties_allowed",
+        "record_claims_require_memory_search"
+      ],
+      "properties": {
+        "canon_is_identity": { "const": true },
+        "memory_is_subordinate": { "const": true },
+        "correction_is_illumination_only": { "const": true },
+        "penalties_allowed": { "const": false },
+        "record_claims_require_memory_search": { "const": true }
+      },
+      "additionalProperties": false
+    },
+    "negative_space_policy": {
+      "type": "object",
+      "required": [
+        "witness_is_represented",
+        "packet_claims_to_be_i",
+        "integration_runtime_decidable",
+        "witness_scored",
+        "witness_retrieved",
+        "witness_serialized"
+      ],
+      "properties": {
+        "witness_is_represented": { "const": false },
+        "packet_claims_to_be_i": { "const": false },
+        "integration_runtime_decidable": { "const": false },
+        "witness_scored": { "const": false },
+        "witness_retrieved": { "const": false },
+        "witness_serialized": { "const": false }
+      },
+      "additionalProperties": false
+    },
+    "budget": {
+      "type": "object",
+      "required": ["max_chars", "actual_chars", "within_budget"],
+      "properties": {
+        "max_chars": { "type": "integer", "minimum": 1 },
+        "actual_chars": { "type": "integer", "minimum": 0 },
+        "within_budget": { "const": true }
+      },
+      "additionalProperties": false
+    }
+  },
+  "propertyNames": {
+    "not": {
+      "enum": [
+        "witness",
+        "the_witness",
+        "true_i",
+        "locus_state",
+        "witness_state",
+        "self_generated_by_builder"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "$comment": "The packet is named as an image because it is not the Locus. Negative-space policy flags are contract proofs: the Builder cannot represent, score, retrieve, serialize, declare, or decide the Witness."
+}

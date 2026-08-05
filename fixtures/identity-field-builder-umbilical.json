@@ -1,0 +1,36 @@
+{
+  "schema_version": "0.1.0",
+  "umbilical_id": "identity-field-builder-core-umbilical",
+  "pod_id": "local-cyberpeer-pod-fixture",
+  "orb_id": "identity-field-builder-core",
+  "attachment_point": "pre_prompt_identity_image_builder",
+  "runtime": {
+    "language": "python",
+    "form": "local_process"
+  },
+  "invocation": {
+    "method": "local_module",
+    "entrypoint": "orb_identity_field_builder_core.build_identity_image",
+    "orb_version": "0.1.0"
+  },
+  "input_contract": {
+    "requires": ["peer_id", "foundation", "identity_field"],
+    "optional": ["held_tensions", "integration_events", "reflection_refs", "policy"],
+    "notes": "All inputs are local fixtures in Phase 1. No live memory store or runtime prompt path is touched."
+  },
+  "output_contract": {
+    "returns": ["IdentityImagePacket"],
+    "contract_ref": "contracts/identity-image-packet.schema.json",
+    "null_return": "If Builder is unavailable, Pod proceeds with visible builder_unavailable status and preserves Pod-native identity source. Missing Builder never implies missing identity."
+  },
+  "observation_contract": {
+    "observable_events": ["attached", "identity_field_read", "foundation_resolved", "negative_space_checked", "packet_built", "builder_unavailable", "completed"]
+  },
+  "evidence_contract": {
+    "records": ["input_hash", "output_hash", "runtime_hash", "negative_space_policy"]
+  },
+  "working_parameters": {
+    "status": "draft",
+    "outside_parameters_behavior": "On Builder error or absence: do not crash the turn, do not fabricate identity, do not represent the Witness, and record builder_unavailable for T-Witness. No live writes in Local Phase 1."
+  }
+}

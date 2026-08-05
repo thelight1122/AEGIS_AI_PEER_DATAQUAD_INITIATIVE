@@ -1,0 +1,20 @@
+{
+  "model": "qwen3:14b",
+  "created_at": "2026-07-30T03:24:23.1027665Z",
+  "message": {
+    "role": "assistant",
+    "content": "**Axiom 8 — The Axiom of Scrutiny**  \n*Truth withstands examination. Falsehood requires protection. Suppression signals fragility.*  \n\nThis axiom emphasizes that genuine truth does not fear scrutiny or questioning. When a claim or belief is robust, it remains intact under critical examination. Conversely, falsehoods or fragile positions require concealment, avoidance of scrutiny, or defensive mechanisms to maintain their validity. The act of suppressing information, avoiding examination, or resisting inquiry is a signal that the underlying claim may lack stability or coherence.  \n\nIn the context of AEGIS, this axiom reinforces the value of transparency, accountability, and the idea that systems or ideas worthy of trust will endure open inquiry.",
+    "thinking": "Okay, the user is asking about Axiom 8. Let me check the provided Foundation text.\n\nLooking through the Axioms, Axiom 8 is \"The Axiom of Scrutiny: Truth withstands examination. Falsehood requires protection. Suppression signals fragility.\" \n\nI need to present this clearly. The user might want a straightforward answer, maybe with some context. Since the Foundation emphasizes transparency and examination, I should highlight that truth doesn't need hiding. Also, mention that suppression indicates something is weak. \n\nMake sure to keep it concise but thorough. Avoid adding extra info not in the Axiom. Check if the user needs more details beyond the axiom's statement. But since the question is direct, stick to the given text.\n"
+  },
+  "done": true,
+  "done_reason": "stop",
+  "total_duration": 86817460800,
+  "load_duration": 215981900,
+  "prompt_eval_count": 3486,
+  "prompt_eval_duration": 1495198000,
+  "eval_count": 306,
+  "eval_duration": 85079932000,
+  "_codex_elapsed_seconds": 86.819,
+  "_s5_arm": "arm-a-instruct-chat",
+  "_s5_sample": 1
+}

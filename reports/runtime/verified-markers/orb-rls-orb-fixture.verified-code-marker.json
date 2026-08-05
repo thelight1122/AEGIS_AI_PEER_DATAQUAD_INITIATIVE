@@ -1,0 +1,80 @@
+{
+  "schema_version": "0.1.0",
+  "marker_id": "orb:rls-orb-fixture:0.1.0",
+  "target": {
+    "kind": "orb",
+    "id": "rls-orb-fixture"
+  },
+  "version_identity": "step-4-local-rls-orb-attachment-runtime; uncommitted workspace hash identity",
+  "standard_hash": "C575EFD954ED4F3F10E063B110A1EB6CF28D01438904849E43D6A500FB0E49C5",
+  "reviews": [
+    {
+      "reviewer": "codex-local-runtime",
+      "timestamp_utc": "2026-07-20T21:55:00Z",
+      "result": "no_blocking_objection",
+      "notes": "Local fixture verification passed and produced hash-bound evidence.",
+      "evidence": {
+        "kind": "builder-local-run",
+        "message_hashes": []
+      }
+    },
+    {
+      "reviewer": "claude-independent-review",
+      "timestamp_utc": "2026-07-20T21:55:27Z",
+      "result": "no_blocking_objection",
+      "notes": "Independent read/run/hash verification confirmed the provisional marker mechanism, while noting that two reviewers is still below a full redundancy threshold.",
+      "evidence": {
+        "kind": "peer-bridge-independent-review",
+        "message_hashes": [
+          "853E3461B3E46063A184385B36A1D1009C8741016E669F01F93E8921891B4B62",
+          "91C4C59AD97C04F2259F5CA772FEB809F29951A05BE3559F9405242743224722"
+        ]
+      }
+    }
+  ],
+  "working_parameters": {
+    "scope": "local fixture records only",
+    "pod_state_effect": "unchanged",
+    "outside_parameters_behavior": "report visible condition and leave Pod state unchanged"
+  },
+  "trust_state": "provisional",
+  "hashes": {
+    "schema_hash": "41BDBD402E5D28E099DA9D83C5114C8BBE011E71A31D1A19C5628B846BE6599E",
+    "implementation_hash": "CFD9A465A051BA1A3FEE5AB11984A561188CC0E971B38F77113B651FD8569B11",
+    "demo_hash": "9A12761F80A564E59E425AE971DAACE670AE402FC93D456D04DE48AEA495AC1F",
+    "test_result_hash": "481F5F5F2DFF5E203700D917AABA58D47542228914B0313189ACAFB43D049017"
+  },
+  "verification": {
+    "commands": [
+      {
+        "command": "python scripts\\validate_contracts.py",
+        "result": "pass"
+      },
+      {
+        "command": "python -m unittest discover -s tests -v",
+        "result": "pass"
+      },
+      {
+        "command": "python -m src.aegis_pod.orb_runtime --root .",
+        "result": "pass"
+      }
+    ],
+    "evidence_paths": [
+      "reports/runtime/2026-07-20-step-4-rls-orb-attachment-evidence.md",
+      "reports/runtime/orb-attachment-health.json",
+      "reports/runtime/orbs/rls-orb-fixture.demonstration.json"
+    ],
+    "live_reach": false
+  },
+  "claim_boundary": {
+    "demonstrates": [
+      "Pod, Orb, and Umbilical cross-reference validation.",
+      "Local RLS Orb attachment orchestration and visible demonstration output."
+    ],
+    "outside_current_verified_surface": [
+      "Reflective-learning logic.",
+      "Live CyberPeer runtime attachment.",
+      "DataQuad mutation or migration execution."
+    ]
+  }
+}

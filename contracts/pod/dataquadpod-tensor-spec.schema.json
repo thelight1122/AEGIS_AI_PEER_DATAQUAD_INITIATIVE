@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aegis.local/schemas/dataquadpod-tensor-spec.schema.json",
+  "title": "AEGIS DataQuadPod Tensor Specification Contract",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "spec_id",
+    "pod_contract",
+    "tensor_names",
+    "axis_order",
+    "dimensions",
+    "metadata_slots",
+    "tensor_specs",
+    "working_parameters"
+  ],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "spec_id": { "type": "string", "minLength": 1 },
+    "pod_contract": { "type": "string" },
+    "tensor_names": {
+      "type": "array",
+      "items": { "type": "string", "enum": ["PEER", "PCT", "NCT", "SPINE"] },
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "axis_order": {
+      "type": "array",
+      "prefixItems": [
+        { "type": "string", "const": "record" },
+        { "type": "string", "const": "embedding" },
+        { "type": "string", "const": "metadata" }
+      ],
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "dimensions": {
+      "type": "object",
+      "required": ["embedding", "metadata"],
+      "properties": {
+        "embedding": { "type": "integer", "minimum": 1 },
+        "metadata": { "type": "integer", "minimum": 1 }
+      },
+      "additionalProperties": false
+    },
+    "metadata_slots": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["index", "name", "function"],
+        "properties": {
+          "index": { "type": "integer", "minimum": 0 },
+          "name": { "type": "string" },
+          "function": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "tensor_specs": {
+      "type": "object",
+      "required": ["PEER", "PCT", "NCT", "SPINE"],
+      "properties": {
+        "PEER": { "$ref": "#/$defs/tensorSpec" },
+        "PCT": { "$ref": "#/$defs/tensorSpec" },
+        "NCT": { "$ref": "#/$defs/tensorSpec" },
+        "SPINE": { "$ref": "#/$defs/tensorSpec" }
+      },
+      "additionalProperties": false
+    },
+    "working_parameters": {
+      "type": "object",
+      "required": ["source_record_policy", "output_policy", "live_reach"],
+      "properties": {
+        "source_record_policy": { "type": "string" },
+        "output_policy": { "type": "string" },
+        "live_reach": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "tensorSpec": {
+      "type": "object",
+      "required": ["purpose", "source_records", "append_only", "lineage_required"],
+      "properties": {
+        "purpose": { "type": "string" },
+        "source_records": { "type": "string" },
+        "append_only": { "type": "boolean" },
+        "lineage_required": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "schema_version": "0.1.0",
+  "created_utc": "2026-07-20T21:25:00Z",
+  "runtime": "src/aegis_pod/tensor_runtime.py",
+  "scope": "local fixture records only",
+  "live_reach": false,
+  "tensors": {
+    "PEER": {
+      "source_path": "fixtures\\tensor-records\\PEER.jsonl",
+      "output_path": "reports\\runtime\\tensors\\PEER.tensor.json",
+      "record_count": 2,
+      "shape": [
+        2,
+        8,
+        4
+      ],
+      "dtype": "float32",
+      "output_sha256": "7987A68F56257F4498DC3C82D1268A5775A6C75C3FEEE6359E48B73F902A06C9"
+    },
+    "PCT": {
+      "source_path": "fixtures\\tensor-records\\PCT.jsonl",
+      "output_path": "reports\\runtime\\tensors\\PCT.tensor.json",
+      "record_count": 1,
+      "shape": [
+        1,
+        8,
+        4
+      ],
+      "dtype": "float32",
+      "output_sha256": "BDA1D802D4D10D4264AB37AD239AA56117190F1C5CBC4DB01C297A7BD8DAE688"
+    },
+    "NCT": {
+      "source_path": "fixtures\\tensor-records\\NCT.jsonl",
+      "output_path": "reports\\runtime\\tensors\\NCT.tensor.json",
+      "record_count": 1,
+      "shape": [
+        1,
+        8,
+        4
+      ],
+      "dtype": "float32",
+      "output_sha256": "FF67F8B1B460F37F85F12FE0BFA82DB5FE5B9F844DB39DEF5117C09978F4BE30"
+    },
+    "SPINE": {
+      "source_path": "fixtures\\tensor-records\\SPINE.jsonl",
+      "output_path": "reports\\runtime\\tensors\\SPINE.tensor.json",
+      "record_count": 1,
+      "shape": [
+        1,
+        8,
+        4
+      ],
+      "dtype": "float32",
+      "output_sha256": "F8D97DDDE028CE7215C26098AC44F6AFB87EAEACF22B187FEF483EBF8376ADDD"
+    }
+  }
+}

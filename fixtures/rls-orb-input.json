@@ -1,0 +1,19 @@
+{
+  "schema_version": "0.1.0",
+  "input_id": "rls-orb-demo-input-0001",
+  "turn_trace": {
+    "turn_id": "fixture-turn-0001",
+    "speaker": "Tracey",
+    "signal": "The Pod is the DataQuad. Orbs provide optional abilities through visible umbilicals.",
+    "requested_function": "show how an RLS Orb can attach and demonstrate its function locally"
+  },
+  "tensor_window": {
+    "health_report": "reports/runtime/tensor-health.json",
+    "tensors": ["PEER", "PCT", "NCT", "SPINE"]
+  },
+  "working_parameters": {
+    "scope": "local fixture only",
+    "live_reach": false,
+    "pod_state_effect": "unchanged"
+  }
+}

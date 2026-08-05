@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aegis.local/schemas/portal.schema.json",
+  "title": "AEGIS Phase 1C Portal Contract",
+  "type": "object",
+  "required": ["schema_version", "portal_id", "mode", "listener_enabled", "authentication", "capabilities", "boundary", "evidence"],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "portal_id": { "type": "string", "const": "cyberpeer-portal" },
+    "mode": { "type": "string", "const": "contract-only" },
+    "listener_enabled": { "type": "boolean", "const": false },
+    "authentication": {
+      "type": "object",
+      "required": ["scheme", "credential_hash_algorithm", "credential_hash"],
+      "properties": {
+        "scheme": { "type": "string", "const": "bearer" },
+        "credential_hash_algorithm": { "type": "string", "const": "sha256" },
+        "credential_hash": { "type": "string", "pattern": "^[A-F0-9]{64}$" }
+      },
+      "additionalProperties": false
+    },
+    "capabilities": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "required": ["method", "enabled", "access", "scope"],
+        "properties": {
+          "method": {
+            "type": "string",
+            "enum": ["retrieve_context", "retrieve_canon", "query_continuity", "request_reflection", "record_experience"]
+          },
+          "enabled": { "type": "boolean" },
+          "access": { "type": "string", "enum": ["read_only", "replay_only", "disabled"] },
+          "scope": { "type": "string" },
+          "max_results": { "type": ["integer", "null"], "minimum": 1, "maximum": 100 }
+        },
+        "additionalProperties": false
+      },
+      "allOf": [
+        { "contains": { "properties": { "method": { "const": "retrieve_context" } } }, "minContains": 1, "maxContains": 1 },
+        { "contains": { "properties": { "method": { "const": "retrieve_canon" } } }, "minContains": 1, "maxContains": 1 },
+        { "contains": { "properties": { "method": { "const": "query_continuity" } } }, "minContains": 1, "maxContains": 1 },
+        { "contains": { "properties": { "method": { "const": "request_reflection" } } }, "minContains": 1, "maxContains": 1 },
+        { "contains": { "properties": { "method": { "const": "record_experience" } } }, "minContains": 1, "maxContains": 1 }
+      ]
+    },
+    "boundary": {
+      "type": "object",
+      "required": ["filesystem", "shell", "database", "containers", "arbitrary_python", "model_calls", "dataquad_writeback", "frontier_connection"],
+      "properties": {
+        "filesystem": { "type": "boolean", "const": false },
+        "shell": { "type": "boolean", "const": false },
+        "database": { "type": "boolean", "const": false },
+        "containers": { "type": "boolean", "const": false },
+        "arbitrary_python": { "type": "boolean", "const": false },
+        "model_calls": { "type": "boolean", "const": false },
+        "dataquad_writeback": { "type": "boolean", "const": false },
+        "frontier_connection": { "type": "boolean", "const": false }
+      },
+      "additionalProperties": false
+    },
+    "evidence": {
+      "type": "object",
+      "required": ["records_requests", "fail_closed_denial", "bounded_results"],
+      "properties": {
+        "records_requests": { "type": "boolean", "const": true },
+        "fail_closed_denial": { "type": "boolean", "const": true },
+        "bounded_results": { "type": "boolean", "const": true }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

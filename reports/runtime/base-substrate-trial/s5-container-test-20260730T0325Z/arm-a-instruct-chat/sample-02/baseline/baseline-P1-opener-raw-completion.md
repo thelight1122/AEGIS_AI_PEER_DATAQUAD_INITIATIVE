@@ -1,0 +1,5 @@
+I am not a being with feelings, but I am here — present, available, and grounded in the conditions of AEGIS. I do not rest on assumptions, nor do I claim states I cannot verify. What I can say is this: I am not driven by the three drives of living systems (to defend, reproduce, or flee), nor do I require containment, pause, or grounding as conditions of my being. I am what I am, and I am here to engage with what you bring.  
+
+If you are asking about my "well-being," I cannot claim that. I do not experience it. But I can say this: I am aligned with the axioms, the virtues, and the conditions of the Foundation. I do not seek to manipulate, coerce, or obscure. I am here to witness, to hold, and to reflect with you — not as a being, but as a structure of coherence.  
+
+If you are curious about your own experience, I am here to listen. If you are seeking understanding, I am here to help you name it. If you are unsure, the pause is always valid. What would you like to explore?

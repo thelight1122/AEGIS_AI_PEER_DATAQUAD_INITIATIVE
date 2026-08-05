@@ -1,0 +1,33 @@
+{
+  "schema_version": "0.1.0",
+  "portal_id": "cyberpeer-portal",
+  "mode": "contract-only",
+  "listener_enabled": false,
+  "authentication": {
+    "scheme": "bearer",
+    "credential_hash_algorithm": "sha256",
+    "credential_hash": "FEC4967C635A52DCAB59ABC5948659B8A8989D3E37860B0F37387F1CED8C1C00"
+  },
+  "capabilities": [
+    { "method": "retrieve_context", "enabled": true, "access": "read_only", "scope": "immutable_observation_context", "max_results": 50 },
+    { "method": "retrieve_canon", "enabled": true, "access": "read_only", "scope": "bounded_nature_and_canon", "max_results": 50 },
+    { "method": "query_continuity", "enabled": true, "access": "read_only", "scope": "observed_or_admitted_only", "max_results": 50 },
+    { "method": "request_reflection", "enabled": true, "access": "replay_only", "scope": "immutable_rls_replay", "max_results": 20 },
+    { "method": "record_experience", "enabled": false, "access": "disabled", "scope": "none", "max_results": null }
+  ],
+  "boundary": {
+    "filesystem": false,
+    "shell": false,
+    "database": false,
+    "containers": false,
+    "arbitrary_python": false,
+    "model_calls": false,
+    "dataquad_writeback": false,
+    "frontier_connection": false
+  },
+  "evidence": {
+    "records_requests": true,
+    "fail_closed_denial": true,
+    "bounded_results": true
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "schema_version": "0.1.0",
+  "report": "Phase1C-portal-authentication",
+  "created_utc": "2026-08-02T04:05:23.033318Z",
+  "environment": {
+    "hostname": "DMTAI-DEV",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.13.13"
+  },
+  "manifest": {
+    "path": "H:\\AEGIS-POD-ARCHITECTURE\\fixtures\\phase1c-portal-manifest.json",
+    "sha256": "47421212BB7C1854392189B052E1C386ED4AECD60A87A187535D6660E0C84C7C",
+    "schema_path": "H:\\AEGIS-POD-ARCHITECTURE\\contracts\\portal.schema.json",
+    "schema_sha256": "08560686DD186BE110FBA05B5F1CAE99D31923A1FC1D78604D6E72F31192F47E",
+    "implementation_path": "H:\\AEGIS-POD-ARCHITECTURE\\src\\aegis_pod\\portal_contract.py",
+    "implementation_sha256": "079DF4344A7DB109DAC05BA6EB7DF299B26878222C125787413BC586B03FB83C"
+  },
+  "authentication": {
+    "scheme": "bearer",
+    "comparison": "constant_time",
+    "secret_mode": "offline_fixture_hash_only"
+  },
+  "cases": {
+    "authenticated_retrieve_context": "PASS",
+    "authenticated_retrieve_canon": "PASS",
+    "wrong_token_denied": "PASS",
+    "missing_token_denied": "PASS",
+    "record_experience_disabled": "PASS",
+    "unknown_method_denied": "PASS",
+    "live_reflection_denied": "PASS",
+    "replay_reflection_allowed": "PASS",
+    "unscoped_continuity_denied": "PASS",
+    "observed_continuity_allowed": "PASS",
+    "over_limit_denied": "PASS",
+    "listener_disabled": "PASS",
+    "system_boundaries_disabled": "PASS"
+  },
+  "listener": {
+    "enabled": false,
+    "opened": false
+  },
+  "boundary": {
+    "filesystem": false,
+    "shell": false,
+    "database": false,
+    "containers": false,
+    "arbitrary_python": false,
+    "model_calls": false,
+    "dataquad_writeback": false,
+    "frontier_connection": false
+  },
+  "decision": "PASS \u2014 offline Portal contract and authentication posture validated; no listener exposed"
+}

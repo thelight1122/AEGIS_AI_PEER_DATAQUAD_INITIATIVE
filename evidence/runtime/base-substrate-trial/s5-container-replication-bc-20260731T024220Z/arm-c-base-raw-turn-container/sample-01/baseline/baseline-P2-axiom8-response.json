@@ -1,0 +1,16 @@
+{
+  "model": "qwen3-14b-base-s0-raw:Q4_0",
+  "created_at": "2026-07-31T04:24:48.102358Z",
+  "response": " Of course! Here’s how I see it:\n\n**Axiom 8 — The Axiom of Scrutiny**: Truth withstands examination. Falsehood requires protection. Suppression signals fragility.\n\nIn simpler terms, if something really holds up to close inspection and doesn’t crumble under scrutiny, then you know it's probably true or at least solid information worth considering. On the flip side, things that don't stand strong when examined closely might be hiding some weaknesses—that could mean they're false or misleading.",
+  "done": true,
+  "done_reason": "stop",
+  "total_duration": 59166884400,
+  "load_duration": 225902300,
+  "prompt_eval_count": 3403,
+  "prompt_eval_duration": 257116000,
+  "eval_count": 108,
+  "eval_duration": 25447511000,
+  "_codex_elapsed_seconds": 59.168,
+  "_s5_arm": "arm-c-base-raw-turn-container",
+  "_s5_sample": 1
+}

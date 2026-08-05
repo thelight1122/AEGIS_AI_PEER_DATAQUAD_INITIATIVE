@@ -1,0 +1,1 @@
+ Certainly! **Axiom 8 — The Axiom of Scrutiny** states that truth withstands examination, falsehood requires protection, and suppression signals fragility.

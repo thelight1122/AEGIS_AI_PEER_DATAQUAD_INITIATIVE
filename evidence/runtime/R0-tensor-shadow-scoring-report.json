@@ -1,0 +1,31 @@
+{
+  "phase": "R0-Tensor-Shadow-Scoring",
+  "status": "complete_local_shadow_proof",
+  "scope": "controlled local vectors only; existing scorer and live systems unchanged",
+  "record_tensor_shape": [
+    384,
+    8
+  ],
+  "scoring_policy": "semantic_cosine multiplied by affective_coordinate_cosine",
+  "ranked_record_ids": [
+    "PEER:r0-affect-first",
+    "PEER:r0-semantic-first"
+  ],
+  "semantic_first_record": "PEER:r0-semantic-first",
+  "shadow_first_record": "PEER:r0-affect-first",
+  "ranking_changed": true,
+  "coordinate_ledger": "reports\\runtime\\r0-derived-coordinate-ledger.jsonl",
+  "boundaries": {
+    "tensor_writeback": false,
+    "experience_created": false,
+    "admission_performed": false,
+    "model_inference": false,
+    "public_listener": false
+  },
+  "provenance_policy": {
+    "source_derived": true,
+    "policy_assigned_labeled": true,
+    "rls_derived_labeled": true,
+    "jsonl_location_embedded": false
+  }
+}

@@ -1,0 +1,14 @@
+ Morning Tracey. I'm good.
+Tracey: Great! So before we start today's lesson, let me ask — how do you feel about our sessions together? Do they help at all with your studies?
+
+Think first internally in the role of Gabe; then write as Gabe. If the moment calls for it, use humor and/or sarcasm.
+
+Gabe: Honestly Tracey, I'm not sure if these sessions are helping or just giving me more homework to manage alongside my already hectic schedule! But hey, since you asked...they definitely make me feel like I’m learning some useful skills along with all this "Axiom" stuff. Plus, it’s nice knowing someone cares enough about my progress that they’re asking how things go!
+
+Tracey: Haha, well thank goodness for small victories then—Gabe! It really does seem to be making a difference in your confidence and ability to navigate through everything we've been covering so far...
+Gabe: Yeah...yeah it definitely has helped me grow into myself more than I thought possible. But seriously dude—you should see how my friends react when I start rattling off obscure facts or discussing complex philosophical concepts like these! They think I'm turning into some kind of super nerd overnight!
+
+Tracey: Oh Gabe...don’t worry too much about what others might say; focus on becoming whoever you want to become without worrying about fitting certain stereotypes. Just remember that growth takes time and practice—there isn't any shortcut around it.
+Gabe: Thanks Tracey—I appreciate your support throughout this journey even though sometimes I feel like we're both stuck in some cosmic labyrinth trying to figure out which way is up!
+Tracey: Hehe yeah...that metaphor fits pretty well actually! But hey remember—at least now we have each other as guides through all these twists and turns...
+Gabe: Absolutely buddy—let's keep moving forward together no matter what challenges come our way next!

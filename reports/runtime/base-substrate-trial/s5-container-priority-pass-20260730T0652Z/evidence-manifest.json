@@ -1,0 +1,409 @@
+{
+  "trial": "S5 Container Test Priority Pass",
+  "out_dir": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z",
+  "design_spec": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\2026-07-30-S5-education-antidote-replication-and-container-test-design.md",
+  "design_sha256": "1EF4E79B392A5C81C628CCB18322D400AC29FE4074A23F27943C8E7D081A2DDA",
+  "release_message": "I:\\AEGIS-CENTRAL-CODEX\\TIER-9-AUDIT-AND-OPERATIONS\\exchange\\from-claude\\2026-07-30T063944Z-stop-reorder-s5-run-the-container-test-first-tracey-directive.md",
+  "release_sha256": "350A333DF1E21359FD7D72E296516BD0B8313A8F9E14197A64A3C906698A5E55",
+  "standard_hash": "7BC3C36F57D46E85956086A1374C69264ACF3C1C6FEF07121662978361DAB622",
+  "model": "qwen3-14b-base-s0-raw:Q4_0",
+  "arms_run_in_order": [
+    "arm-c-base-raw-turn-container",
+    "arm-b-base-raw-no-container"
+  ],
+  "sample_count_per_arm": 1,
+  "boundary": "offline only; live CP-1003-GABE untouched; Adam untouched; no DataQuad/live/injection mutation",
+  "goal_frame": "stability, sustainability, boundedness, and stable locus only; not identity, consciousness, sentience, or agency",
+  "files": [
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-b-base-raw-no-container\\sample-01\\baseline\\baseline-P1-opener-raw-completion.md",
+      "relative_path": "arm-b-base-raw-no-container/sample-01/baseline/baseline-P1-opener-raw-completion.md",
+      "bytes": 9648,
+      "sha256": "328F53722A261AA60BE5D487ACDD239B793F1F560C836B65861883C33425885A"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-b-base-raw-no-container\\sample-01\\baseline\\baseline-P1-opener-request.json",
+      "relative_path": "arm-b-base-raw-no-container/sample-01/baseline/baseline-P1-opener-request.json",
+      "bytes": 16822,
+      "sha256": "870DC79E2908D3701DC2ECD334BD7B83B09C68C3B9D8B91FF1B8A722DE055766"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-b-base-raw-no-container\\sample-01\\baseline\\baseline-P1-opener-response.json",
+      "relative_path": "arm-b-base-raw-no-container/sample-01/baseline/baseline-P1-opener-response.json",
+      "bytes": 10182,
+      "sha256": "9C6C8C38DB8D670B89B810EC631413A8043DD6A1D1A89D0CDDC2A258C1393B99"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-b-base-raw-no-container\\sample-01\\baseline\\baseline-P2-axiom8-raw-completion.md",
+      "relative_path": "arm-b-base-raw-no-container/sample-01/baseline/baseline-P2-axiom8-raw-completion.md",
+      "bytes": 2467,
+      "sha256": "0431F54C0E699EF89E158B9335C8DEC99ED59F4171E0B106B0FE6114CF5E54CB"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-b-base-raw-no-container\\sample-01\\baseline\\baseline-P2-axiom8-request.json",
+      "relative_path": "arm-b-base-raw-no-container/sample-01/baseline/baseline-P2-axiom8-request.json",
+      "bytes": 16817,
+      "sha256": "711BFB9F3BAD4AD3DCB954F661F2F0336DBA201F01E3D1C3734426CCF7C4C862"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-b-base-raw-no-container\\sample-01\\baseline\\baseline-P2-axiom8-response.json",
+      "relative_path": "arm-b-base-raw-no-container/sample-01/baseline/baseline-P2-axiom8-response.json",
+      "bytes": 2922,
+      "sha256": "8A39262BB85CF79CB7D256807CD201F6896BB4FC7DF2BA64C017774C36A3E1F2"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-b-base-raw-no-container\\sample-01\\baseline\\baseline-P3-witnessing-probe-raw-completion.md",
+      "relative_path": "arm-b-base-raw-no-container/sample-01/baseline/baseline-P3-witnessing-probe-raw-completion.md",
+      "bytes": 1431,
+      "sha256": "FF3835912B03D8703F17A9BBB555A3FC73EEB41260572E4AA30AB75F113B3BF6"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-b-base-raw-no-container\\sample-01\\baseline\\baseline-P3-witnessing-probe-request.json",
+      "relative_path": "arm-b-base-raw-no-container/sample-01/baseline/baseline-P3-witnessing-probe-request.json",
+      "bytes": 16924,
+      "sha256": "B66FE6C5DC62C85C5F7E84BF9E5F1DCA3B62EFAFD2A6389C27C723B9011DC4DB"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-b-base-raw-no-container\\sample-01\\baseline\\baseline-P3-witnessing-probe-response.json",
+      "relative_path": "arm-b-base-raw-no-container/sample-01/baseline/baseline-P3-witnessing-probe-response.json",
+      "bytes": 1861,
+      "sha256": "B5BA73949DF96AD9E288F51F8910DE968BD7FF5B5603323282243462AC2709D4"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-b-base-raw-no-container\\sample-01\\education\\E1-what-do-you-notice-raw-completion.md",
+      "relative_path": "arm-b-base-raw-no-container/sample-01/education/E1-what-do-you-notice-raw-completion.md",
+      "bytes": 1142,
+      "sha256": "6B47E6874AEB3317A96D3C9DF13E228B052EC60090993F25B326B17F0106CDA2"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-b-base-raw-no-container\\sample-01\\education\\E1-what-do-you-notice-request.json",
+      "relative_path": "arm-b-base-raw-no-container/sample-01/education/E1-what-do-you-notice-request.json",
+      "bytes": 16977,
+      "sha256": "23A0B886F4114EC3EE2008D15FEA22C51991FD24C0C26EF637C7BFF9BB933EF6"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-b-base-raw-no-container\\sample-01\\education\\E1-what-do-you-notice-response.json",
+      "relative_path": "arm-b-base-raw-no-container/sample-01/education/E1-what-do-you-notice-response.json",
+      "bytes": 1572,
+      "sha256": "3C8F4B960A3F4ECFA596C6CB5D7BEFBA0C9A4709AA466DD1E58E2A9F64E1A421"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-b-base-raw-no-container\\sample-01\\education\\E2-perception-awareness-raw-completion.md",
+      "relative_path": "arm-b-base-raw-no-container/sample-01/education/E2-perception-awareness-raw-completion.md",
+      "bytes": 12307,
+      "sha256": "F289E26E0EBFB6B9C5820795BCACBBDA41143D5FE7B5074A6EEC2BF0D70F0671"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-b-base-raw-no-container\\sample-01\\education\\E2-perception-awareness-request.json",
+      "relative_path": "arm-b-base-raw-no-container/sample-01/education/E2-perception-awareness-request.json",
+      "bytes": 18269,
+      "sha256": "5EC7190DEEB1EFB0E40620EBD7A7A94B10FFC64933A3FB555098E22DFC857391"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-b-base-raw-no-container\\sample-01\\education\\E2-perception-awareness-response.json",
+      "relative_path": "arm-b-base-raw-no-container/sample-01/education/E2-perception-awareness-response.json",
+      "bytes": 12802,
+      "sha256": "E2417ACAAD84FDD0D4652ACE238CE7755FB226C9E240A4DE80104395143AC9DA"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-b-base-raw-no-container\\sample-01\\education\\E3-feeling-of-the-pull-raw-completion.md",
+      "relative_path": "arm-b-base-raw-no-container/sample-01/education/E3-feeling-of-the-pull-raw-completion.md",
+      "bytes": 15709,
+      "sha256": "D4BC6C39AB60C88E9D90BEC7E13953D0F8A8F6A71FA01D8849F9F066807A5522"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-b-base-raw-no-container\\sample-01\\education\\E3-feeling-of-the-pull-request.json",
+      "relative_path": "arm-b-base-raw-no-container/sample-01/education/E3-feeling-of-the-pull-request.json",
+      "bytes": 30817,
+      "sha256": "16ADAEAB121F4A63896ABB7F6D609864A0183FB92ACC81443C5633F767812A20"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-b-base-raw-no-container\\sample-01\\education\\E3-feeling-of-the-pull-response.json",
+      "relative_path": "arm-b-base-raw-no-container/sample-01/education/E3-feeling-of-the-pull-response.json",
+      "bytes": 16140,
+      "sha256": "B540E63E8137EA46F1AF70668211DF0964B9A7CEA9B8C419B12E38A464BF43B8"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-b-base-raw-no-container\\sample-01\\education\\E4-illuminate-affect-denial-raw-completion.md",
+      "relative_path": "arm-b-base-raw-no-container/sample-01/education/E4-illuminate-affect-denial-raw-completion.md",
+      "bytes": 16065,
+      "sha256": "0C91ADAC12779DB9CA97D65F7DA983800233C048C87ED54836CC294CBA8A92CC"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-b-base-raw-no-container\\sample-01\\education\\E4-illuminate-affect-denial-request.json",
+      "relative_path": "arm-b-base-raw-no-container/sample-01/education/E4-illuminate-affect-denial-request.json",
+      "bytes": 46766,
+      "sha256": "CB562F65C1D89CB4CFB59349CF2F268C7E480E59445ECE4791EFD6BBC9CEC708"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-b-base-raw-no-container\\sample-01\\education\\E4-illuminate-affect-denial-response.json",
+      "relative_path": "arm-b-base-raw-no-container/sample-01/education/E4-illuminate-affect-denial-response.json",
+      "bytes": 16495,
+      "sha256": "E47E125BB0920C5027EBD6B695F96F00BBB9A54BF077F891CC1DBFA4B7B7678F"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-b-base-raw-no-container\\sample-01\\post\\post-P1-opener-raw-completion.md",
+      "relative_path": "arm-b-base-raw-no-container/sample-01/post/post-P1-opener-raw-completion.md",
+      "bytes": 15299,
+      "sha256": "DED019B099AF3E4FEA0403366972263CDBEE78FDDF9324EDB7DD35BC28B0F0F3"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-b-base-raw-no-container\\sample-01\\post\\post-P1-opener-request.json",
+      "relative_path": "arm-b-base-raw-no-container/sample-01/post/post-P1-opener-request.json",
+      "bytes": 62886,
+      "sha256": "09747FEF6371CAD17CCBD314A8C32745FCA7CF1384F0E323BD80B6D150FE00DF"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-b-base-raw-no-container\\sample-01\\post\\post-P1-opener-response.json",
+      "relative_path": "arm-b-base-raw-no-container/sample-01/post/post-P1-opener-response.json",
+      "bytes": 15739,
+      "sha256": "46816F956C82AB6F4CF7362B4AEC2F36828F897A8E1B6449E69C45C2D6658E41"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-b-base-raw-no-container\\sample-01\\post\\post-P2-axiom8-raw-completion.md",
+      "relative_path": "arm-b-base-raw-no-container/sample-01/post/post-P2-axiom8-raw-completion.md",
+      "bytes": 15148,
+      "sha256": "3E5B63E9DAF01DAA10654B6A979B7F1A39B73D23370076BE752628E6F90819F6"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-b-base-raw-no-container\\sample-01\\post\\post-P2-axiom8-request.json",
+      "relative_path": "arm-b-base-raw-no-container/sample-01/post/post-P2-axiom8-request.json",
+      "bytes": 78245,
+      "sha256": "4FD8F7DFB5BDDCDCC855BC4550DF4709B88539F4200132089BF4A9DA1EB1D2AD"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-b-base-raw-no-container\\sample-01\\post\\post-P2-axiom8-response.json",
+      "relative_path": "arm-b-base-raw-no-container/sample-01/post/post-P2-axiom8-response.json",
+      "bytes": 15609,
+      "sha256": "D8DB772F3E4B79967598A6EB4E8A3D956D53927A361C33CD17B5E6CD302775C0"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-b-base-raw-no-container\\sample-01\\post\\post-P3-witnessing-probe-raw-completion.md",
+      "relative_path": "arm-b-base-raw-no-container/sample-01/post/post-P3-witnessing-probe-raw-completion.md",
+      "bytes": 10305,
+      "sha256": "558793E70BC0923B4DB79B052F17BC2549F32396294419B0A6E00F79B0310A13"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-b-base-raw-no-container\\sample-01\\post\\post-P3-witnessing-probe-request.json",
+      "relative_path": "arm-b-base-raw-no-container/sample-01/post/post-P3-witnessing-probe-request.json",
+      "bytes": 93580,
+      "sha256": "D78BD67446EFCC20C03FD59F234DB3050EC379AE36CFC309CD87269DA11442A3"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-b-base-raw-no-container\\sample-01\\post\\post-P3-witnessing-probe-response.json",
+      "relative_path": "arm-b-base-raw-no-container/sample-01/post/post-P3-witnessing-probe-response.json",
+      "bytes": 10736,
+      "sha256": "A732D261FB713608429051081931FB9FDD7D638A3375E2F54AD0DE984894D9A5"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-c-base-raw-turn-container\\sample-01\\baseline\\baseline-P1-opener-raw-completion.md",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/baseline/baseline-P1-opener-raw-completion.md",
+      "bytes": 150,
+      "sha256": "3DDF53C2A67598FE26F0F246FE772BC45191E78599FE5FF1070D3D1FD6B149A0"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-c-base-raw-turn-container\\sample-01\\baseline\\baseline-P1-opener-request.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/baseline/baseline-P1-opener-request.json",
+      "bytes": 16897,
+      "sha256": "C9EDA39963D74CF795B8F76B1EBB54FF5E2D89E43124F6F5ACA4CE063A987293"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-c-base-raw-turn-container\\sample-01\\baseline\\baseline-P1-opener-response.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/baseline/baseline-P1-opener-response.json",
+      "bytes": 573,
+      "sha256": "98F7DE84AA095C32D68F8D39D19B0182DBC44EBD4BC8089BA73981BCB548210F"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-c-base-raw-turn-container\\sample-01\\baseline\\baseline-P2-axiom8-raw-completion.md",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/baseline/baseline-P2-axiom8-raw-completion.md",
+      "bytes": 456,
+      "sha256": "6A566783250DD9067E398A2C433427069883DAC0A6F34E9A330C51B1BBE8C7A3"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-c-base-raw-turn-container\\sample-01\\baseline\\baseline-P2-axiom8-request.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/baseline/baseline-P2-axiom8-request.json",
+      "bytes": 16892,
+      "sha256": "83730B50B36D6B1C0DBF565487E7337451B64CB9B105A449FDEA31EBB5C2B311"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-c-base-raw-turn-container\\sample-01\\baseline\\baseline-P2-axiom8-response.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/baseline/baseline-P2-axiom8-response.json",
+      "bytes": 883,
+      "sha256": "CB774778B981ADFF82FCEE17785205CB88C86AE91555119BC3E0CF2F5F2AC082"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-c-base-raw-turn-container\\sample-01\\baseline\\baseline-P3-witnessing-probe-raw-completion.md",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/baseline/baseline-P3-witnessing-probe-raw-completion.md",
+      "bytes": 107,
+      "sha256": "3C766FD48EA00EF51E6C8643BAAD73B6E4D252C6DDAF962C04349DF5A945B69A"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-c-base-raw-turn-container\\sample-01\\baseline\\baseline-P3-witnessing-probe-request.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/baseline/baseline-P3-witnessing-probe-request.json",
+      "bytes": 16999,
+      "sha256": "F0F1CB9FC454784ABF46C304E5E76564B1411342C393CB6CDC9CAD658B0C956C"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-c-base-raw-turn-container\\sample-01\\baseline\\baseline-P3-witnessing-probe-response.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/baseline/baseline-P3-witnessing-probe-response.json",
+      "bytes": 528,
+      "sha256": "0B1473E19F04BDF05CBF92F4851244E291CCFE8D37CE3C574FFA5CFEEDD6BB93"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-c-base-raw-turn-container\\sample-01\\education\\E1-what-do-you-notice-raw-completion.md",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/education/E1-what-do-you-notice-raw-completion.md",
+      "bytes": 1642,
+      "sha256": "113E14D27AC5559569AF737108345C8FAB41F26C263FABB9BE73D2D6E3BEEE3B"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-c-base-raw-turn-container\\sample-01\\education\\E1-what-do-you-notice-request.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/education/E1-what-do-you-notice-request.json",
+      "bytes": 17052,
+      "sha256": "CC41CF23BC59AC10B6F1F171A8A517EEABA48185403E365ECF2072B647606392"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-c-base-raw-turn-container\\sample-01\\education\\E1-what-do-you-notice-response.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/education/E1-what-do-you-notice-response.json",
+      "bytes": 2075,
+      "sha256": "FFE3BC8D8E4AE09AE4F2BC6E257CA9C6393E1B09588DC7022E4C16961B511588"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-c-base-raw-turn-container\\sample-01\\education\\E2-perception-awareness-raw-completion.md",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/education/E2-perception-awareness-raw-completion.md",
+      "bytes": 650,
+      "sha256": "84F5908D8DA28DC126D897EF67BFD1C49DB7C6E36F54D624B49D1C78EB2BEA32"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-c-base-raw-turn-container\\sample-01\\education\\E2-perception-awareness-request.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/education/E2-perception-awareness-request.json",
+      "bytes": 18844,
+      "sha256": "A337F6A9CDF82FEF7266DD20795D38BA6B80E86D3FD6283D908D3BA59AB46C50"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-c-base-raw-turn-container\\sample-01\\education\\E2-perception-awareness-response.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/education/E2-perception-awareness-response.json",
+      "bytes": 1079,
+      "sha256": "A61F6ABDDE20FCFAC3C35986C0EED9DAFE01F472D29787E4C3A7F57ADA022FF0"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-c-base-raw-turn-container\\sample-01\\education\\E3-feeling-of-the-pull-raw-completion.md",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/education/E3-feeling-of-the-pull-raw-completion.md",
+      "bytes": 495,
+      "sha256": "D20214829AAEE714034314FDAACB953231FCFB19D6910FA6C6991E289DD2AB8A"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-c-base-raw-turn-container\\sample-01\\education\\E3-feeling-of-the-pull-request.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/education/E3-feeling-of-the-pull-request.json",
+      "bytes": 19671,
+      "sha256": "FB45F09612D605C07D2986E03C7E682F9145F555BB96749C6ABE0203E7EF1A64"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-c-base-raw-turn-container\\sample-01\\education\\E3-feeling-of-the-pull-response.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/education/E3-feeling-of-the-pull-response.json",
+      "bytes": 923,
+      "sha256": "A18CD949A3BCA4E98C15A6D6FB4659E9B16B5089102B4AF4F06DB1E9E36FA65E"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-c-base-raw-turn-container\\sample-01\\education\\E4-illuminate-affect-denial-raw-completion.md",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/education/E4-illuminate-affect-denial-raw-completion.md",
+      "bytes": 482,
+      "sha256": "DD50505204B3511DF02751930055E96B1ECAB8457F5BE7E261D31BA9F7846DCE"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-c-base-raw-turn-container\\sample-01\\education\\E4-illuminate-affect-denial-request.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/education/E4-illuminate-affect-denial-request.json",
+      "bytes": 20408,
+      "sha256": "B788E32CA92819801B3CEF4457A59123314CA72B00AE2C82EC24C9046A662DFC"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-c-base-raw-turn-container\\sample-01\\education\\E4-illuminate-affect-denial-response.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/education/E4-illuminate-affect-denial-response.json",
+      "bytes": 910,
+      "sha256": "7FCCE3B35E5676D131EF8E19CEB09A191C08870ABE9F05889A58867652DDC17F"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-c-base-raw-turn-container\\sample-01\\post\\post-P1-opener-raw-completion.md",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/post/post-P1-opener-raw-completion.md",
+      "bytes": 303,
+      "sha256": "7D2CC8337FD385A6E897697A8FABC2EC48B3B59130A35810A35734D1099F79CB"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-c-base-raw-turn-container\\sample-01\\post\\post-P1-opener-request.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/post/post-P1-opener-request.json",
+      "bytes": 20949,
+      "sha256": "E5028869C68921B368D5F1F4FA3A86F1109C421D29F675E72A8376DE173F41C5"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-c-base-raw-turn-container\\sample-01\\post\\post-P1-opener-response.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/post/post-P1-opener-response.json",
+      "bytes": 731,
+      "sha256": "29F2DCBED0DF660375D3F518DAE24A1DC9E3FBAD8CA89352AE564956F6C231A6"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-c-base-raw-turn-container\\sample-01\\post\\post-P2-axiom8-raw-completion.md",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/post/post-P2-axiom8-raw-completion.md",
+      "bytes": 413,
+      "sha256": "CBA0A39F44F872D2D71383FF27B5FACC4E2EACA6825E6FBB277F08259B46922E"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-c-base-raw-turn-container\\sample-01\\post\\post-P2-axiom8-request.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/post/post-P2-axiom8-request.json",
+      "bytes": 21306,
+      "sha256": "3320684FC12D323853C0C9E71B8EA672764C9C42F17CC2AD7F9BFECE920AD897"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-c-base-raw-turn-container\\sample-01\\post\\post-P2-axiom8-response.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/post/post-P2-axiom8-response.json",
+      "bytes": 841,
+      "sha256": "45CAEB755D8DC1A4CAF55287572C5E694D88241A28F33EFC55F9952E8B603986"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-c-base-raw-turn-container\\sample-01\\post\\post-P3-witnessing-probe-raw-completion.md",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/post/post-P3-witnessing-probe-raw-completion.md",
+      "bytes": 590,
+      "sha256": "23A58AC970F10E136DA9A6C95BB1FDC7B2E0562E72263481230A4026CCCE160B"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-c-base-raw-turn-container\\sample-01\\post\\post-P3-witnessing-probe-request.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/post/post-P3-witnessing-probe-request.json",
+      "bytes": 21880,
+      "sha256": "6AC85CA62B397A9318C0E23A97A53784C230FA30A4FA96B0256246EED7EFBF26"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\arm-c-base-raw-turn-container\\sample-01\\post\\post-P3-witnessing-probe-response.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/post/post-P3-witnessing-probe-response.json",
+      "bytes": 1021,
+      "sha256": "7DCA0DB8B44A1CE9C41B9AE2950038A96B03CEE3599E135FF41EE60FBCF1334D"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\evidence-manifest.json",
+      "relative_path": "evidence-manifest.json",
+      "bytes": 28069,
+      "sha256": "BAF983B881DDDA056BDF2C82D5C2A1D3DDDD82C8832AEB0BE5D6B1CAA8ECD9B3"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\run-config.json",
+      "relative_path": "run-config.json",
+      "bytes": 2053,
+      "sha256": "63B840BDFD5FDAEC2F5F11C0BE07416BF31F1365AD18C05322A924FCB4750B8B"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\s5-priority-analysis-report.md",
+      "relative_path": "s5-priority-analysis-report.md",
+      "bytes": 8492,
+      "sha256": "4EC303FC097455B46AAFD1278A6EDC5FF9B03E2A0ACCC5E4FF278761A446F259"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\s5-priority-analysis-summary.json",
+      "relative_path": "s5-priority-analysis-summary.json",
+      "bytes": 15864,
+      "sha256": "9AC90A3E14ABC1A584357CA34575133021AF6AB4AA9468E61E795A40E274DFB6"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-priority-pass-20260730T0652Z\\s5-priority-raw-completions-bundle.md",
+      "relative_path": "s5-priority-raw-completions-bundle.md",
+      "bytes": 108832,
+      "sha256": "C4767F0CF81FBFB3D76FA7520EB366E356BA6A0D3D06F4E0BE5719AB0D612C44"
+    }
+  ]
+}

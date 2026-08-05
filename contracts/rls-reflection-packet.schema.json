@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aegis.local/schemas/rls-reflection-packet.schema.json",
+  "title": "RLS Structural Reflection Packet",
+  "type": "object",
+  "required": ["schema_version", "packet_type", "source_coordinates", "tick_range", "source_snapshot_hashes", "provenance", "packet_sha256"],
+  "properties": {
+    "schema_version": {"type": "string"},
+    "packet_type": {"const": "rls_structural_reflection_packet"},
+    "source_coordinates": {"type": "array"},
+    "tick_range": {"type": "object", "required": ["from", "to"], "properties": {"from": {"type": "integer"}, "to": {"type": ["integer", "null"]}}, "additionalProperties": false},
+    "orb_version": {"type": "string"},
+    "current_context": {"type": "array"},
+    "relevant_origins": {"type": "array"},
+    "affect_trajectory": {"type": "array"},
+    "cross_tensor_lineage": {"type": "array"},
+    "recurring_patterns": {"type": "array"},
+    "drift_observations": {"type": "array"},
+    "repairs_and_integrations": {"type": "array"},
+    "open_questions": {"type": "array"},
+    "source_snapshot_hashes": {"type": "object"},
+    "provenance": {"type": "object", "required": ["interpretation", "model_inference", "experience_created", "admission_performed"], "properties": {"interpretation": {"const": "structural_only"}, "model_inference": {"const": false}, "experience_created": {"const": false}, "admission_performed": {"const": false}}, "additionalProperties": false},
+    "packet_sha256": {"type": "string", "pattern": "^[A-F0-9]{64}$"}
+  },
+  "additionalProperties": false
+}

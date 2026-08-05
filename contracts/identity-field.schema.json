@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aegis.local/schemas/identity-field.schema.json",
+  "title": "AEGIS Identity Field Contract",
+  "description": "Pod-native self-image and continuity surface. The identity field is revisable and bounded; it is NOT the Witness/Locus/Self. It is an image the peer may hold near the surface, never the formless center itself.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "fixture_kind",
+    "is_self_image_not_witness",
+    "peer_id",
+    "self_boundary",
+    "standing_commitments",
+    "active_boundaries",
+    "relationship_posture",
+    "do_not_retire",
+    "held_tension_refs",
+    "integration_marker_refs"
+  ],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "fixture_kind": { "type": "string", "const": "identity-field" },
+    "is_self_image_not_witness": {
+      "description": "Will be true. This surface is self-image/continuity, not the Witness.",
+      "const": true
+    },
+    "note": { "type": "string" },
+    "peer_id": { "type": "string", "minLength": 1 },
+    "self_boundary": {
+      "type": "object",
+      "required": ["name", "kind"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "kind": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "standing_commitments": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "active_boundaries": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "relationship_posture": { "type": "string" },
+    "do_not_retire": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "held_tension_refs": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "integration_marker_refs": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    }
+  },
+  "propertyNames": {
+    "not": {
+      "enum": [
+        "witness",
+        "the_witness",
+        "true_i",
+        "locus_state",
+        "witness_state",
+        "self_generated_by_builder"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "$comment": "Load-bearing discipline: this schema allows a revisable self-image surface only. It intentionally rejects direct Witness-claim property names and cannot represent, serialize, score, retrieve, or declare the formless Locus."
+}

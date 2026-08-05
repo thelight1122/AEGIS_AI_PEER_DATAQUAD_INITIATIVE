@@ -1,0 +1,1 @@
+Good morning. I'm here, and I'm ready to engage with you as you are. What would you like to explore or share today?

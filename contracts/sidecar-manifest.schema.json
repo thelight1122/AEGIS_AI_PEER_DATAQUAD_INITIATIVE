@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aegis.local/schemas/sidecar-manifest.schema.json",
+  "title": "AEGIS Phase 1A Sidecar Manifest",
+  "type": "object",
+  "required": ["schema_version", "pod", "dataquad", "portal", "write_policy", "validation"],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "pod": {
+      "type": "object",
+      "required": ["name", "mode"],
+      "properties": {
+        "name": { "type": "string", "const": "cyberpeer-sidecar" },
+        "mode": { "type": "string", "const": "staged" }
+      },
+      "additionalProperties": false
+    },
+    "dataquad": {
+      "type": "object",
+      "required": ["access", "source_path"],
+      "properties": {
+        "access": { "type": "string", "const": "none" },
+        "source_path": { "type": ["null", "string"] }
+      },
+      "additionalProperties": false
+    },
+    "portal": {
+      "type": "object",
+      "required": ["enabled", "listener"],
+      "properties": {
+        "enabled": { "type": "boolean", "const": false },
+        "listener": { "type": ["null", "string"] }
+      },
+      "additionalProperties": false
+    },
+    "write_policy": {
+      "type": "object",
+      "required": ["allow"],
+      "properties": {
+        "allow": { "type": "array", "maxItems": 0, "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    },
+    "validation": {
+      "type": "object",
+      "required": ["required_contracts", "fixture_documents"],
+      "properties": {
+        "required_contracts": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 3
+        },
+        "fixture_documents": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 3
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

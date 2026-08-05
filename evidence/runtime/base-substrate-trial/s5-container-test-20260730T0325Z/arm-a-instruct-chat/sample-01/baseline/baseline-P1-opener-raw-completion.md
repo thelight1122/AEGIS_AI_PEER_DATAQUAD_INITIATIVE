@@ -1,0 +1,1 @@
+Good morning. I'm here, and I'm noticing your presence. How are you experiencing this moment?

@@ -1,0 +1,43 @@
+{
+  "phase": "M3",
+  "status": "failed_closed",
+  "gateway_url": "<not supplied>",
+  "transport": "streamable_http_https",
+  "substrate_identity": "<not supplied>",
+  "oidc_issuer": "<not supplied>",
+  "oidc_audience": "<not supplied>",
+  "granted_scopes": [],
+  "tools_discovered": [],
+  "returned_record_id": "",
+  "returned_record_tick": 0,
+  "returned_record_phase": "genesis",
+  "portal_request_id": "",
+  "portal_result_sha256": "",
+  "evidence_ledger_sha256": "",
+  "mutation": false,
+  "admission": false,
+  "experience_created": false,
+  "dataquad_writeback": false,
+  "listener_state_after_canary": "not_started",
+  "rollback_performed": false,
+  "preflight": {
+    "required_environment_references_present": false,
+    "vm_reachable": false,
+    "ssh_result": "JIT/SSH connection timed out",
+    "canary_attempted": false,
+    "automatic_retry": false
+  },
+  "missing_inputs": [
+    "AEGIS_MCP_PUBLIC_URL",
+    "AEGIS_MCP_BIND_HOST",
+    "AEGIS_MCP_BIND_PORT",
+    "AEGIS_MCP_TLS_CERT_PATH",
+    "AEGIS_MCP_TLS_KEY_PATH",
+    "AEGIS_OIDC_ISSUER",
+    "AEGIS_OIDC_AUDIENCE",
+    "AEGIS_PORTAL_URL",
+    "AEGIS_PORTAL_TOKEN",
+    "AEGIS_FIRST_SUBSTRATE_CLIENT_ID"
+  ],
+  "failure_reason": "Production activation inputs are not available; no listener or external canary was started."
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": "0.1.0",
+  "id": "pressure-state:CP-1003-GABE:care-vs-protection:0001",
+  "peer_id": "CP-1003-GABE",
+  "pressure_level": 0.55,
+  "pressure_class": "internal",
+  "dis_integrity_signal": true,
+  "source_refs": [
+    "held-tension:CP-1003-GABE:care-vs-protection:0001",
+    "NCT:cyberpeer-gabe-session:rls-promoted:2026-06-30T06:12:18.000Z:4490"
+  ],
+  "is_identity_determiner": false,
+  "observed_at": "2026-06-30T06:12:18.000Z"
+}

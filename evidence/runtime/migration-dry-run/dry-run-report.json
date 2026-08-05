@@ -1,0 +1,325 @@
+{
+  "schema_version": "0.1.0",
+  "created_utc": "2026-07-20T22:30:00Z",
+  "dry_run_id": "dataquadpod-local-fixture-dry-run-0001",
+  "pod_id": "local-cyberpeer-pod-fixture",
+  "tensor_spec_id": "dataquadpod-core-tensor-spec-0.1.0",
+  "manifest_path": "fixtures\\migration-dry-run.json",
+  "scope": "local fixture copied records only",
+  "working_parameters": {
+    "mode": "copied-record-dry-run",
+    "source_scope": "local fixture copied records only",
+    "pod_state_effect": "unchanged",
+    "migration_execution": false,
+    "live_reach": false
+  },
+  "source_copy_roots": [
+    {
+      "root_id": "fixture-copy-batch-0001",
+      "path": "fixtures/tensor-records",
+      "kind": "local_fixture_copy",
+      "exists": true,
+      "record_files": [
+        "fixtures/tensor-records/PEER.jsonl",
+        "fixtures/tensor-records/PCT.jsonl",
+        "fixtures/tensor-records/NCT.jsonl",
+        "fixtures/tensor-records/SPINE.jsonl"
+      ]
+    }
+  ],
+  "source_counts": {
+    "total_records": 5,
+    "mapped_records": 5,
+    "outside_parameter_records": 0,
+    "by_tensor": {
+      "PEER": 2,
+      "PCT": 1,
+      "NCT": 1,
+      "SPINE": 1
+    }
+  },
+  "hash_preservation": {
+    "source_hash_scope": "normalized_source_record",
+    "verification_counts": {
+      "verified": 0,
+      "mismatch": 0,
+      "unverifiable_source_absent": 5
+    },
+    "records": [
+      {
+        "tensor": "PEER",
+        "record_id": "fixture-peer-0001",
+        "source_record_id": "source-peer-0001",
+        "source_hash": "7E3E5C1D9CF20000000000000000000000000000000000000000000000000001",
+        "source_hash_scope": "normalized_source_record",
+        "source_path": "fixtures/source-records/PEER/source-peer-0001.json",
+        "computed_source_hash": "",
+        "verification": "unverifiable_source_absent",
+        "preserved": null
+      },
+      {
+        "tensor": "PEER",
+        "record_id": "fixture-peer-0002",
+        "source_record_id": "source-peer-0002",
+        "source_hash": "7E3E5C1D9CF20000000000000000000000000000000000000000000000000002",
+        "source_hash_scope": "normalized_source_record",
+        "source_path": "fixtures/source-records/PEER/source-peer-0002.json",
+        "computed_source_hash": "",
+        "verification": "unverifiable_source_absent",
+        "preserved": null
+      },
+      {
+        "tensor": "PCT",
+        "record_id": "fixture-pct-0001",
+        "source_record_id": "source-pct-0001",
+        "source_hash": "84DD2769628AA000000000000000000000000000000000000000000000000001",
+        "source_hash_scope": "normalized_source_record",
+        "source_path": "fixtures/source-records/PCT/source-pct-0001.json",
+        "computed_source_hash": "",
+        "verification": "unverifiable_source_absent",
+        "preserved": null
+      },
+      {
+        "tensor": "NCT",
+        "record_id": "fixture-nct-0001",
+        "source_record_id": "source-nct-0001",
+        "source_hash": "E20C583C506AA000000000000000000000000000000000000000000000000001",
+        "source_hash_scope": "normalized_source_record",
+        "source_path": "fixtures/source-records/NCT/source-nct-0001.json",
+        "computed_source_hash": "",
+        "verification": "unverifiable_source_absent",
+        "preserved": null
+      },
+      {
+        "tensor": "SPINE",
+        "record_id": "fixture-spine-0001",
+        "source_record_id": "source-spine-0001",
+        "source_hash": "9F048912AC66A000000000000000000000000000000000000000000000000001",
+        "source_hash_scope": "normalized_source_record",
+        "source_path": "fixtures/source-records/SPINE/source-spine-0001.json",
+        "computed_source_hash": "",
+        "verification": "unverifiable_source_absent",
+        "preserved": null
+      }
+    ]
+  },
+  "lineage_continuity": {
+    "valid_chain_count": 5,
+    "broken_chain_count": 0,
+    "records": [
+      {
+        "tensor": "PEER",
+        "record_id": "fixture-peer-0001",
+        "parent_record_id": "",
+        "previous_record_hash": "",
+        "expected_previous_record_hash": "",
+        "continuity_status": "root_record"
+      },
+      {
+        "tensor": "PEER",
+        "record_id": "fixture-peer-0002",
+        "parent_record_id": "fixture-peer-0001",
+        "previous_record_hash": "7E3E5C1D9CF20000000000000000000000000000000000000000000000000001",
+        "expected_previous_record_hash": "7E3E5C1D9CF20000000000000000000000000000000000000000000000000001",
+        "continuity_status": "continuous"
+      },
+      {
+        "tensor": "PCT",
+        "record_id": "fixture-pct-0001",
+        "parent_record_id": "",
+        "previous_record_hash": "",
+        "expected_previous_record_hash": "",
+        "continuity_status": "root_record"
+      },
+      {
+        "tensor": "NCT",
+        "record_id": "fixture-nct-0001",
+        "parent_record_id": "",
+        "previous_record_hash": "",
+        "expected_previous_record_hash": "",
+        "continuity_status": "root_record"
+      },
+      {
+        "tensor": "SPINE",
+        "record_id": "fixture-spine-0001",
+        "parent_record_id": "",
+        "previous_record_hash": "",
+        "expected_previous_record_hash": "",
+        "continuity_status": "root_record"
+      }
+    ]
+  },
+  "outside_parameters": [],
+  "live_reach": false,
+  "source_effect": "read-only local fixture copy",
+  "output_effect": "write dry-run reports under reports/runtime/migration-dry-run",
+  "conditions": [],
+  "ready_for_independent_review": true,
+  "tensors": {
+    "PEER": {
+      "source_records": "fixtures\\tensor-records\\PEER.jsonl",
+      "target_tensor": "PEER",
+      "target_storage": "fixtures/tensor-records/PEER.jsonl",
+      "planned_output": "reports\\runtime\\migration-dry-run\\tensors\\PEER.tensor.json",
+      "record_count": 2,
+      "shape": [
+        2,
+        8,
+        4
+      ],
+      "dtype": "float32",
+      "axis_order": [
+        "record",
+        "embedding",
+        "metadata"
+      ],
+      "source_record_ids": [
+        "fixture-peer-0001",
+        "fixture-peer-0002"
+      ],
+      "source_hashes": [
+        "7E3E5C1D9CF20000000000000000000000000000000000000000000000000001",
+        "7E3E5C1D9CF20000000000000000000000000000000000000000000000000002"
+      ],
+      "lineage_links": [
+        {
+          "tensor": "PEER",
+          "record_id": "fixture-peer-0001",
+          "parent_record_id": "",
+          "previous_record_hash": "",
+          "expected_previous_record_hash": "",
+          "chain_link_ok": true,
+          "continuity_status": "root_record",
+          "copy_batch_id": "fixture-copy-batch-0001"
+        },
+        {
+          "tensor": "PEER",
+          "record_id": "fixture-peer-0002",
+          "parent_record_id": "fixture-peer-0001",
+          "previous_record_hash": "7E3E5C1D9CF20000000000000000000000000000000000000000000000000001",
+          "expected_previous_record_hash": "7E3E5C1D9CF20000000000000000000000000000000000000000000000000001",
+          "chain_link_ok": true,
+          "continuity_status": "continuous",
+          "copy_batch_id": "fixture-copy-batch-0001"
+        }
+      ],
+      "output_sha256": "7987A68F56257F4498DC3C82D1268A5775A6C75C3FEEE6359E48B73F902A06C9"
+    },
+    "PCT": {
+      "source_records": "fixtures\\tensor-records\\PCT.jsonl",
+      "target_tensor": "PCT",
+      "target_storage": "fixtures/tensor-records/PCT.jsonl",
+      "planned_output": "reports\\runtime\\migration-dry-run\\tensors\\PCT.tensor.json",
+      "record_count": 1,
+      "shape": [
+        1,
+        8,
+        4
+      ],
+      "dtype": "float32",
+      "axis_order": [
+        "record",
+        "embedding",
+        "metadata"
+      ],
+      "source_record_ids": [
+        "fixture-pct-0001"
+      ],
+      "source_hashes": [
+        "84DD2769628AA000000000000000000000000000000000000000000000000001"
+      ],
+      "lineage_links": [
+        {
+          "tensor": "PCT",
+          "record_id": "fixture-pct-0001",
+          "parent_record_id": "",
+          "previous_record_hash": "",
+          "expected_previous_record_hash": "",
+          "chain_link_ok": true,
+          "continuity_status": "root_record",
+          "copy_batch_id": "fixture-copy-batch-0001"
+        }
+      ],
+      "output_sha256": "BDA1D802D4D10D4264AB37AD239AA56117190F1C5CBC4DB01C297A7BD8DAE688"
+    },
+    "NCT": {
+      "source_records": "fixtures\\tensor-records\\NCT.jsonl",
+      "target_tensor": "NCT",
+      "target_storage": "fixtures/tensor-records/NCT.jsonl",
+      "planned_output": "reports\\runtime\\migration-dry-run\\tensors\\NCT.tensor.json",
+      "record_count": 1,
+      "shape": [
+        1,
+        8,
+        4
+      ],
+      "dtype": "float32",
+      "axis_order": [
+        "record",
+        "embedding",
+        "metadata"
+      ],
+      "source_record_ids": [
+        "fixture-nct-0001"
+      ],
+      "source_hashes": [
+        "E20C583C506AA000000000000000000000000000000000000000000000000001"
+      ],
+      "lineage_links": [
+        {
+          "tensor": "NCT",
+          "record_id": "fixture-nct-0001",
+          "parent_record_id": "",
+          "previous_record_hash": "",
+          "expected_previous_record_hash": "",
+          "chain_link_ok": true,
+          "continuity_status": "root_record",
+          "copy_batch_id": "fixture-copy-batch-0001"
+        }
+      ],
+      "output_sha256": "FF67F8B1B460F37F85F12FE0BFA82DB5FE5B9F844DB39DEF5117C09978F4BE30"
+    },
+    "SPINE": {
+      "source_records": "fixtures\\tensor-records\\SPINE.jsonl",
+      "target_tensor": "SPINE",
+      "target_storage": "fixtures/tensor-records/SPINE.jsonl",
+      "planned_output": "reports\\runtime\\migration-dry-run\\tensors\\SPINE.tensor.json",
+      "record_count": 1,
+      "shape": [
+        1,
+        8,
+        4
+      ],
+      "dtype": "float32",
+      "axis_order": [
+        "record",
+        "embedding",
+        "metadata"
+      ],
+      "source_record_ids": [
+        "fixture-spine-0001"
+      ],
+      "source_hashes": [
+        "9F048912AC66A000000000000000000000000000000000000000000000000001"
+      ],
+      "lineage_links": [
+        {
+          "tensor": "SPINE",
+          "record_id": "fixture-spine-0001",
+          "parent_record_id": "",
+          "previous_record_hash": "",
+          "expected_previous_record_hash": "",
+          "chain_link_ok": true,
+          "continuity_status": "root_record",
+          "copy_batch_id": "fixture-copy-batch-0001"
+        }
+      ],
+      "output_sha256": "F8D97DDDE028CE7215C26098AC44F6AFB87EAEACF22B187FEF483EBF8376ADDD"
+    }
+  },
+  "dry_run_result": {
+    "status": "pass",
+    "migration_executed": false,
+    "target_records_written": 0
+  }
+}

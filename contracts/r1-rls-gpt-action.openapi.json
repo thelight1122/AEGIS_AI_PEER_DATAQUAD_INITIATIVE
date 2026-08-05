@@ -1,0 +1,13 @@
+{
+  "openapi": "3.1.0",
+  "info": {"title": "AEGIS RLS Read-Only Action Orb", "version": "0.1.0"},
+  "servers": [{"url": "https://private-action-origin.invalid", "description": "Contract placeholder; no listener enabled in R1"}],
+  "paths": {
+    "/api/rls/status": {"get": {"operationId": "getRlsStatus", "responses": {"200": {"description": "RLS status"}}}},
+    "/api/rls/timeline": {"post": {"operationId": "retrieveRlsTimeline", "requestBody": {"required": false}, "responses": {"200": {"description": "Coordinate timeline"}}}},
+    "/api/rls/lineage": {"post": {"operationId": "retrieveRlsLineage", "requestBody": {"required": true}, "responses": {"200": {"description": "Explicit lineage"}}}},
+    "/api/rls/reflection": {"post": {"operationId": "requestRlsReflection", "requestBody": {"required": false}, "responses": {"200": {"description": "Structural replay packet"}}}}
+  },
+  "x-aegis-boundary": {"listener_enabled": false, "authoritative_tensor_write": false, "experience_created": false, "admission_performed": false, "live_rls_invoked": false, "shell": false, "filesystem": false},
+  "x-aegis-prohibited-operations": ["appendEvent", "recordExperience", "admission", "dataquad_write", "rls_live"]
+}

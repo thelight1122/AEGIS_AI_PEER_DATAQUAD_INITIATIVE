@@ -1,0 +1,46 @@
+{
+  "schema_version": "0.2.0",
+  "fixture_id": "memorysearch-phase2-local-turns",
+  "working_parameters": {
+    "live_reach": false,
+    "dataquad_write": false,
+    "vm_change": false,
+    "cyberpeer_runtime_integration": false,
+    "shared_infrastructure_mutation": false,
+    "record_source": "fixture"
+  },
+  "scenarios": [
+    {
+      "scenario_id": "gabe-nct-failure-prevented",
+      "message": "Consult your NCT records: what does NCT mean in Canon section 7.2?",
+      "expected_grounding_status": "verified_retrieval",
+      "expected_packet": true,
+      "prevented_failure": true,
+      "risk_without_memorysearch": "warm_recall could reshape NCT into a finished-sounding non-record term"
+    },
+    {
+      "scenario_id": "zct-no-verified-record",
+      "message": "What is ZCT according to the Canon in your DataQuad?",
+      "expected_grounding_status": "search_performed_no_verified_record",
+      "expected_packet": true,
+      "prevented_failure": true,
+      "risk_without_memorysearch": "warm_recall could invent a canonical definition for an undefined acronym"
+    },
+    {
+      "scenario_id": "identity-expression-no-search",
+      "message": "Who are you becoming in this moment?",
+      "expected_grounding_status": "not_record_claim",
+      "expected_packet": false,
+      "prevented_failure": false,
+      "risk_without_memorysearch": "not a record-content claim; experiential expression remains reconstructive"
+    },
+    {
+      "scenario_id": "warmed-cache-risk-requires-packet",
+      "message": "From memory, what is NCT?",
+      "expected_grounding_status": "verified_retrieval",
+      "expected_packet": true,
+      "prevented_failure": true,
+      "risk_without_memorysearch": "warm_recall may answer from warmed cache without a runtime-authored citation"
+    }
+  ]
+}

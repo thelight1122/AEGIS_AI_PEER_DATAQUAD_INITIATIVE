@@ -1,0 +1,47 @@
+{
+  "schema_version": "0.1.0",
+  "dry_run_id": "dataquadpod-local-fixture-dry-run-0001",
+  "pod_id": "local-cyberpeer-pod-fixture",
+  "tensor_spec_id": "dataquadpod-core-tensor-spec-0.1.0",
+  "source": {
+    "kind": "local_fixture_copy",
+    "root": "fixtures/tensor-records",
+    "copy_batch_id": "fixture-copy-batch-0001"
+  },
+  "targets": {
+    "PEER": {
+      "source_records": "fixtures/tensor-records/PEER.jsonl",
+      "planned_output": "reports/runtime/migration-dry-run/tensors/PEER.tensor.json",
+      "shape": ["record_count", 8, 4],
+      "dtype": "float32",
+      "axis_order": ["record", "embedding", "metadata"]
+    },
+    "PCT": {
+      "source_records": "fixtures/tensor-records/PCT.jsonl",
+      "planned_output": "reports/runtime/migration-dry-run/tensors/PCT.tensor.json",
+      "shape": ["record_count", 8, 4],
+      "dtype": "float32",
+      "axis_order": ["record", "embedding", "metadata"]
+    },
+    "NCT": {
+      "source_records": "fixtures/tensor-records/NCT.jsonl",
+      "planned_output": "reports/runtime/migration-dry-run/tensors/NCT.tensor.json",
+      "shape": ["record_count", 8, 4],
+      "dtype": "float32",
+      "axis_order": ["record", "embedding", "metadata"]
+    },
+    "SPINE": {
+      "source_records": "fixtures/tensor-records/SPINE.jsonl",
+      "planned_output": "reports/runtime/migration-dry-run/tensors/SPINE.tensor.json",
+      "shape": ["record_count", 8, 4],
+      "dtype": "float32",
+      "axis_order": ["record", "embedding", "metadata"]
+    }
+  },
+  "working_parameters": {
+    "live_reach": false,
+    "source_effect": "read-only local fixture copy",
+    "output_effect": "write dry-run reports under reports/runtime/migration-dry-run",
+    "outside_parameters_behavior": "report visible condition and leave Pod state unchanged"
+  }
+}

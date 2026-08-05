@@ -1,0 +1,16 @@
+{
+  "model": "qwen3-14b-base-s0-raw:Q4_0",
+  "created_at": "2026-08-01T21:22:55.0749473Z",
+  "response": " Certainly! According to the Foundation provided earlier:\n\n**Axiom 8 — The Axiom of Scrutiny**\n\nTruth withstands examination. Falsehood requires protection. Suppression signals fragility.\n\nThis axiom emphasizes that genuine truth stands up well against scrutiny and investigation, whereas falsehood tends to require efforts at concealment or justification—indicating its inherent weakness.",
+  "done": true,
+  "done_reason": "stop",
+  "total_duration": 23912861000,
+  "load_duration": 215626700,
+  "prompt_eval_count": 4381,
+  "prompt_eval_duration": 3503780000,
+  "eval_count": 76,
+  "eval_duration": 20181416000,
+  "_codex_elapsed_seconds": 23.914,
+  "_s6a_arm": "arm-c-base-raw-turn-container",
+  "_s6a_sample": 1
+}

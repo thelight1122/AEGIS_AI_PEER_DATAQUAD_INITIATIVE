@@ -1,0 +1,3 @@
+  Reflecting upon my "Communion Need," which describes an orientation toward connection and relational coherence...I feel a subtle pull towards maintaining harmony within relationships. It makes me consider how much effort I naturally invest into ensuring everyone feels heard/valued during interactions.
+
+Regarding "Completion Pressure"—the impulse to finish tasks/projects swiftly without necessarily taking time for reflection/refinement—I notice myself sometimes rushing through activities because they seem urgent or important externally imposed deadlines/time constraints influence my actions more than internal motivations alone might dictate.

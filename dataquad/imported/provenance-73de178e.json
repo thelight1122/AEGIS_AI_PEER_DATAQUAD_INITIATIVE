@@ -1,0 +1,41 @@
+{
+  "build_command": "C:\\Users\\TraceyPrutch\\AppData\\Local\\Programs\\Python\\Python313\\python.exe H:\\AEGIS-POD-ARCHITECTURE\\tools\\aegis-math-tensor-service\\aegis_tensor_service\\build_from_jsonl.py --dataquad-root stage-gabe-out/live-copies/CP-1003-GABE/gabe-live-copy-20260722T074000Z/raw --tensor-store-root stage-gabe-out/CP-1003-GABE/pod/tensors/semantic-embedding --peer-id CP-1003-GABE",
+  "build_finished_utc": "2026-07-22T08:11:51Z",
+  "build_started_utc": "2026-07-22T08:08:40Z",
+  "dependency_versions": {
+    "chromadb": "1.5.9",
+    "fastapi": "0.136.3",
+    "numpy": "2.4.6",
+    "pydantic": "2.13.4",
+    "sentence-transformers": "5.5.1"
+  },
+  "embedding_model_name": "all-MiniLM-L6-v2",
+  "embedding_model_version_or_revision": "all-MiniLM-L6-v2",
+  "output_file_hashes": {
+    "embeddings.npy": "c8a97763bdcde8ebac331a5fd81d9b72f82372c3138e5dfedeccd7ab43776b8b",
+    "index.json": "033b4869f0eed04d2939c799e7e3d2911089bb9c18924dfb2ffe75e114f1bf66",
+    "metadata.npy": "184e6c5242d02a226cc033bc53363fda62dd9fe9690eb9c6ef01c7d0aeeea0ca",
+    "skipped-records.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tensor_3d.npy": "8e95d3f5673ac4672b2e824621ba1e6568b80a4c9cbc76065382656d5b996e89"
+  },
+  "output_files": [
+    "embeddings.npy",
+    "index.json",
+    "metadata.npy",
+    "skipped-records.jsonl",
+    "tensor_3d.npy"
+  ],
+  "packaging_code_hash": "a2aebccb43587b20d56f939ac0cc391fa3e9c718f023900c951cefb2b3f020ba",
+  "peer_id": "CP-1003-GABE",
+  "python_version": [
+    3,
+    13,
+    13
+  ],
+  "skipped_record_count": 0,
+  "skipped_record_manifest_path": "H:\\AEGIS-POD-ARCHITECTURE\\stage-gabe-out\\CP-1003-GABE\\pod\\tensors\\semantic-embedding\\PEER\\skipped-records.jsonl",
+  "source_jsonl_line_count": 35673,
+  "source_jsonl_path": "H:\\AEGIS-POD-ARCHITECTURE\\stage-gabe-out\\live-copies\\CP-1003-GABE\\gabe-live-copy-20260722T074000Z\\raw\\PEER.jsonl",
+  "source_jsonl_sha256": "29bdcfe1a8fd16ecd5c34d935b655248ddb16b8b87f6ec0e17119ff2a1b7b3f7",
+  "tensor_name": "PEER"
+}

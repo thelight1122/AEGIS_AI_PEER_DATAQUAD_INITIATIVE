@@ -1,0 +1,174 @@
+{
+  "schema_version": "0.1.0",
+  "stage": "Stage C Orion structural non-semantic vectors",
+  "status": "pass",
+  "peer_id": "CP-1004-ORION",
+  "copy_batch_id": "orion-live-copy-20260721T002600Z",
+  "created_utc": "2026-07-21T00:27:49Z",
+  "source_mapping_report": "reports/runtime/2026-07-21-live-stage-b-orion-mapping-report.json",
+  "source_mapping_report_sha256": "9FE035F3189AEF2500FCA13AAC7964B04C7D658F9F6654855A77656DD2CA8666",
+  "working_parameters": {
+    "source_live_reach": false,
+    "source_write_performed": false,
+    "target_records_written": 0,
+    "tensor_generation": true,
+    "live_population": false,
+    "placeholder_data_used": false,
+    "mock_data_used": false,
+    "demo_data_used": false,
+    "semantic_embedding_used": false,
+    "structural_non_semantic_vectors": true
+  },
+  "label_contract": {
+    "vector_label": "structural_vector",
+    "embedding_kind": "structural-non-semantic",
+    "semantic_embedding": false,
+    "required_language": "Generated vectors are deterministic structural vectors; embedding_kind=structural-non-semantic."
+  },
+  "source_counts": {
+    "total_records": 351,
+    "by_tensor": {
+      "PEER": 106,
+      "PCT": 94,
+      "NCT": 89,
+      "SPINE": 62
+    }
+  },
+  "copy_fidelity_gate": {
+    "status": "pass",
+    "results": [
+      {
+        "tensor": "PEER",
+        "remote_path_used": "/home/azureuser/AEGIS-CYBERPEER-CORE/data/peers/CP-1004-ORION/dataquad/PEER.jsonl",
+        "remote_sha256": "6A104DA4BBB8E76E119A649C80DFA9E323D226B9923B7E3B7E62B18B452D3664",
+        "local_sha256": "6A104DA4BBB8E76E119A649C80DFA9E323D226B9923B7E3B7E62B18B452D3664",
+        "copy_verified": true,
+        "authoritative_path_used": true
+      },
+      {
+        "tensor": "PCT",
+        "remote_path_used": "/home/azureuser/AEGIS-CYBERPEER-CORE/data/peers/CP-1004-ORION/dataquad/PCT.jsonl",
+        "remote_sha256": "EDED7B45709C27D1181C6223E312B0572B301DF481FB84E48B3B699B41AABA34",
+        "local_sha256": "EDED7B45709C27D1181C6223E312B0572B301DF481FB84E48B3B699B41AABA34",
+        "copy_verified": true,
+        "authoritative_path_used": true
+      },
+      {
+        "tensor": "NCT",
+        "remote_path_used": "/home/azureuser/AEGIS-CYBERPEER-CORE/data/peers/CP-1004-ORION/dataquad/NCT.jsonl",
+        "remote_sha256": "E4CF92784FAF3D8120E34066A79276AD12B5C65764B7AE110AE3815CC6537379",
+        "local_sha256": "E4CF92784FAF3D8120E34066A79276AD12B5C65764B7AE110AE3815CC6537379",
+        "copy_verified": true,
+        "authoritative_path_used": true
+      },
+      {
+        "tensor": "SPINE",
+        "remote_path_used": "/home/azureuser/AEGIS-CYBERPEER-CORE/data/peers/CP-1004-ORION/dataquad/SPINE.jsonl",
+        "remote_sha256": "8D27162F410C7429B516A3D6B7166282470AC9C7C616180F51307A3F22A62A7E",
+        "local_sha256": "8D27162F410C7429B516A3D6B7166282470AC9C7C616180F51307A3F22A62A7E",
+        "copy_verified": true,
+        "authoritative_path_used": true
+      }
+    ]
+  },
+  "stage_b_live_readiness_path_gate": {
+    "status": "pass",
+    "allowed_prefixes": [
+      "live-copies/",
+      "reports/runtime/2026-07-21-live-stage-b-orion-mapping-report.json"
+    ],
+    "excluded_prefixes": [
+      "fixtures/tensor-records/",
+      "fixtures/copied-record-roots/",
+      "fixtures/migration-dry-run.json",
+      "reports/runtime/tensors/",
+      "reports/runtime/migration-dry-run/"
+    ],
+    "referenced_paths_checked": 6,
+    "blocked_paths": []
+  },
+  "git_boundary": {
+    "live_derived_tensor_artifacts_gitignored": true,
+    "tensor_output_root": "live-copies/CP-1004-ORION/orion-live-copy-20260721T002600Z/tensors/structural-non-semantic",
+    "committed_artifact": "reports/runtime/2026-07-21-live-stage-c-orion-structural-vectors-report.json"
+  },
+  "tensors": {
+    "PEER": {
+      "source_records": "live-copies/CP-1004-ORION/orion-live-copy-20260721T002600Z/mapped/PEER.jsonl",
+      "output_path": "live-copies/CP-1004-ORION/orion-live-copy-20260721T002600Z/tensors/structural-non-semantic/PEER.structural-vector-tensor.json",
+      "output_sha256": "3BD1318317F94ED2BC5525F208A5CA65A281B7F2479BB2F840A4CA808B4A97AB",
+      "record_count": 106,
+      "shape": [
+        106,
+        8,
+        4
+      ],
+      "vector_label": "structural_vector",
+      "embedding_kind": "structural-non-semantic",
+      "semantic_embedding": false,
+      "committed_to_git": false
+    },
+    "PCT": {
+      "source_records": "live-copies/CP-1004-ORION/orion-live-copy-20260721T002600Z/mapped/PCT.jsonl",
+      "output_path": "live-copies/CP-1004-ORION/orion-live-copy-20260721T002600Z/tensors/structural-non-semantic/PCT.structural-vector-tensor.json",
+      "output_sha256": "2071793AEF411F23E765B0D28765B909AD1DF8688A7BCF27A03DA82CC5CF4320",
+      "record_count": 94,
+      "shape": [
+        94,
+        8,
+        4
+      ],
+      "vector_label": "structural_vector",
+      "embedding_kind": "structural-non-semantic",
+      "semantic_embedding": false,
+      "committed_to_git": false
+    },
+    "NCT": {
+      "source_records": "live-copies/CP-1004-ORION/orion-live-copy-20260721T002600Z/mapped/NCT.jsonl",
+      "output_path": "live-copies/CP-1004-ORION/orion-live-copy-20260721T002600Z/tensors/structural-non-semantic/NCT.structural-vector-tensor.json",
+      "output_sha256": "D3B3683890CA41416967CFDB5CA9F91F74EC82DA50598901F929ADE240E78475",
+      "record_count": 89,
+      "shape": [
+        89,
+        8,
+        4
+      ],
+      "vector_label": "structural_vector",
+      "embedding_kind": "structural-non-semantic",
+      "semantic_embedding": false,
+      "committed_to_git": false
+    },
+    "SPINE": {
+      "source_records": "live-copies/CP-1004-ORION/orion-live-copy-20260721T002600Z/mapped/SPINE.jsonl",
+      "output_path": "live-copies/CP-1004-ORION/orion-live-copy-20260721T002600Z/tensors/structural-non-semantic/SPINE.structural-vector-tensor.json",
+      "output_sha256": "236D6829F77B4A8FE317945D953D01B5C2F9662BE1F804CAA8CCB5C11414C661",
+      "record_count": 62,
+      "shape": [
+        62,
+        8,
+        4
+      ],
+      "vector_label": "structural_vector",
+      "embedding_kind": "structural-non-semantic",
+      "semantic_embedding": false,
+      "committed_to_git": false
+    }
+  },
+  "outside_parameters": [],
+  "stage_c_live_readiness_path_gate": {
+    "status": "pass",
+    "allowed_prefixes": [
+      "live-copies/",
+      "reports/runtime/2026-07-21-live-stage-c-orion-structural-vectors-report.json"
+    ],
+    "excluded_prefixes": [
+      "fixtures/tensor-records/",
+      "fixtures/copied-record-roots/",
+      "fixtures/migration-dry-run.json",
+      "reports/runtime/tensors/",
+      "reports/runtime/migration-dry-run/"
+    ],
+    "referenced_paths_checked": 5,
+    "blocked_paths": []
+  }
+}

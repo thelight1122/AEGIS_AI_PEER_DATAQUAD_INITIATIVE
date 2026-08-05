@@ -1,0 +1,64 @@
+{
+  "schema_version": "0.1.0",
+  "spec_id": "dataquadpod-core-tensor-spec-0.1.0",
+  "pod_contract": "contracts/pod.schema.json",
+  "tensor_names": ["PEER", "PCT", "NCT", "SPINE"],
+  "axis_order": ["record", "embedding", "metadata"],
+  "dimensions": {
+    "embedding": 8,
+    "metadata": 4
+  },
+  "metadata_slots": [
+    {
+      "index": 0,
+      "name": "embedding_value",
+      "function": "Numeric vector value for the embedding axis position."
+    },
+    {
+      "index": 1,
+      "name": "body_length_signal",
+      "function": "Normalized size signal derived from stable source body JSON."
+    },
+    {
+      "index": 2,
+      "name": "timestamp_position_signal",
+      "function": "Deterministic numeric position signal derived from timestamp hash."
+    },
+    {
+      "index": 3,
+      "name": "verification_signal",
+      "function": "Numeric visibility of source record verification state."
+    }
+  ],
+  "tensor_specs": {
+    "PEER": {
+      "purpose": "Present experiential signal tensor.",
+      "source_records": "fixtures/tensor-records/PEER.jsonl",
+      "append_only": true,
+      "lineage_required": true
+    },
+    "PCT": {
+      "purpose": "Persistent contextual thread tensor.",
+      "source_records": "fixtures/tensor-records/PCT.jsonl",
+      "append_only": true,
+      "lineage_required": true
+    },
+    "NCT": {
+      "purpose": "Condensed contextual essence tensor.",
+      "source_records": "fixtures/tensor-records/NCT.jsonl",
+      "append_only": true,
+      "lineage_required": true
+    },
+    "SPINE": {
+      "purpose": "Sovereign identity continuity tensor.",
+      "source_records": "fixtures/tensor-records/SPINE.jsonl",
+      "append_only": true,
+      "lineage_required": true
+    }
+  },
+  "working_parameters": {
+    "source_record_policy": "Append-only source records with visible lineage and source hashes.",
+    "output_policy": "Computed tensor outputs are reproducible artifacts derived from source records and spec.",
+    "live_reach": false
+  }
+}

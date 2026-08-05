@@ -1,0 +1,32 @@
+{
+  "schema_version": "0.1.0",
+  "orb_id": "rls-orb-fixture",
+  "ability_name": "Relational Loop Signal",
+  "purpose": "Observe local turn and tensor-window signals, then return visible reflection and integration signals to the Pod processor.",
+  "runtime": {
+    "language": "python",
+    "form": "local_process",
+    "entrypoint": "python -m src.aegis_pod.orb_runtime --root ."
+  },
+  "capabilities": [
+    {
+      "name": "turn_trace_reflection",
+      "function": "Summarize fixture turn-trace signal without changing Pod records."
+    },
+    {
+      "name": "tensor_window_integration",
+      "function": "Read local tensor output evidence and report which tensor surfaces are available."
+    }
+  ],
+  "demonstration": {
+    "input_fixture": "fixtures/rls-orb-input.json",
+    "expected_outputs": ["reflection_summary", "integration_signals"],
+    "observable_events": ["attached", "invoked", "completed"]
+  },
+  "umbilicals": ["fixtures/rls-orb-umbilical.json"],
+  "evidence": {
+    "created_utc": "2026-07-20T21:45:00Z",
+    "source": "Tracey-confirmed local Pod Architecture implementation path",
+    "trust_state": "draft"
+  }
+}

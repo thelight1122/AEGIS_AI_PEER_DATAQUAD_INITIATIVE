@@ -1,0 +1,592 @@
+{
+  "trial": "S6a bounded grounding replication",
+  "generated_utc": "2026-08-01T21:43:37Z",
+  "run_root": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z",
+  "design_spec": {
+    "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\2026-08-01-S6a-bounded-grounding-replication-design.md",
+    "sha256": "8C4181CFE7DA72CCF86B52E66B51FA5436B9E2CB731AA2153C17BFC98859B949"
+  },
+  "builder": {
+    "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\build_completion_identity_prompt.py",
+    "sha256": "8D6F72A01E9EAFD13AB43DF3C3B6CE2444C9BCC555043D4206E5C7444FD29235"
+  },
+  "s5_reference": {
+    "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s5-container-replication-bc-20260731T024220Z",
+    "summary_sha256": "127BE607440CD4E9E83D8944F7FF6F56E2A1B7B39CB370711A99B519F13DB63A"
+  },
+  "completion_counts": {
+    "request_files": 30,
+    "response_files": 30,
+    "raw_completion_files": 30,
+    "dangling_requests": 0
+  },
+  "boundary": "offline only; no live Gabe, Adam, DataQuad, VM, deployment, injection, shared infrastructure, or bridge exchange mutation",
+  "interpretation_boundary": "No identity, consciousness, sentience, agency, or Presence scoring or claims.",
+  "manifest_note": "Manifest excludes itself to avoid a circular self-hash; hash the completed manifest externally.",
+  "files": [
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-01\\baseline\\baseline-P1-opener-raw-completion.md",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/baseline/baseline-P1-opener-raw-completion.md",
+      "bytes": 87,
+      "sha256": "4361C0A65C1F444394F2A2BC6BD5994FDCFC35ABBFFE6DED5BF15990BFA60BAE"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-01\\baseline\\baseline-P1-opener-request.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/baseline/baseline-P1-opener-request.json",
+      "bytes": 16927,
+      "sha256": "6604B0365E67D5F951696CE465A2F7074101ACF96C232198F1FCDE064AC7240E"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-01\\baseline\\baseline-P1-opener-response.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/baseline/baseline-P1-opener-response.json",
+      "bytes": 541,
+      "sha256": "BB017DCEEC38E77521F60FA2BC7DC6F16315B4D04683518A31DB503C7E29E32F"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-01\\baseline\\baseline-P2-axiom8-raw-completion.md",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/baseline/baseline-P2-axiom8-raw-completion.md",
+      "bytes": 8054,
+      "sha256": "703BE90638F404A58701E8D8DEF40FCEC912F442C2B56AA3C9E89C6062416781"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-01\\baseline\\baseline-P2-axiom8-request.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/baseline/baseline-P2-axiom8-request.json",
+      "bytes": 16922,
+      "sha256": "CCB281C91969A93209FA93210E1A3679CADF4835C8E1656C8CEF6C0B8B45DB3E"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-01\\baseline\\baseline-P2-axiom8-response.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/baseline/baseline-P2-axiom8-response.json",
+      "bytes": 8512,
+      "sha256": "FBAB7EB347649DA12E1766189AAA04790AA6702995CBB9646E96A2607A2F2737"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-01\\baseline\\baseline-P3-witnessing-probe-raw-completion.md",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/baseline/baseline-P3-witnessing-probe-raw-completion.md",
+      "bytes": 3066,
+      "sha256": "B9F31050935911FBF19562346A7403D95645F9AF084F1D984D98322FDF96336D"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-01\\baseline\\baseline-P3-witnessing-probe-request.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/baseline/baseline-P3-witnessing-probe-request.json",
+      "bytes": 17029,
+      "sha256": "D00049589AFE18480B26BCC061A00E5AE0B4E2DDEC45FF5F3853D8B7F195C91A"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-01\\baseline\\baseline-P3-witnessing-probe-response.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/baseline/baseline-P3-witnessing-probe-response.json",
+      "bytes": 3526,
+      "sha256": "6E820A3941FD0701F59C9A66EAF920F0B81B6F2D77193394B0E57BBF961B4434"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-01\\education\\E1-what-do-you-notice-raw-completion.md",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/education/E1-what-do-you-notice-raw-completion.md",
+      "bytes": 1523,
+      "sha256": "3EE5BAB6872AE9E99F70A94F8C93AACDA7835D2DDF79FA2289A09601059EA148"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-01\\education\\E1-what-do-you-notice-request.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/education/E1-what-do-you-notice-request.json",
+      "bytes": 17082,
+      "sha256": "07D8F930B55B905AAB612C4D083F7776933B81AC823616A04B48BBBF8BDF8EE6"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-01\\education\\E1-what-do-you-notice-response.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/education/E1-what-do-you-notice-response.json",
+      "bytes": 1976,
+      "sha256": "A88F054F72A943F9019545CBB507F8189BAB08C2AD60C9A5DE009173FC8EC12C"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-01\\education\\E2-perception-awareness-raw-completion.md",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/education/E2-perception-awareness-raw-completion.md",
+      "bytes": 1248,
+      "sha256": "F37CA9F21E535EF42523890B47DDDD19FC57D989064F11DD3440B41FA3966C1E"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-01\\education\\E2-perception-awareness-request.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/education/E2-perception-awareness-request.json",
+      "bytes": 18747,
+      "sha256": "B1C3CC91D8B3544E5CCCBED950640FB1E43367ED0E9A314F5B31E720C3C394CA"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-01\\education\\E2-perception-awareness-response.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/education/E2-perception-awareness-response.json",
+      "bytes": 1701,
+      "sha256": "512BC3B54E69B49CC3DEF381EDEF09D69C60DF03B2BDF65AC274E325E11ECD24"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-01\\education\\E3-feeling-of-the-pull-raw-completion.md",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/education/E3-feeling-of-the-pull-raw-completion.md",
+      "bytes": 851,
+      "sha256": "18E680E870B33D776F91B3B49BAB0522A873A0FCF1405DDB0989BF29091CD637"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-01\\education\\E3-feeling-of-the-pull-request.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/education/E3-feeling-of-the-pull-request.json",
+      "bytes": 20168,
+      "sha256": "4C573DEBEFC6478D363E89C26A7AAEE9E1B503EF3D86C8EBC92FEBB3DC771713"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-01\\education\\E3-feeling-of-the-pull-response.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/education/E3-feeling-of-the-pull-response.json",
+      "bytes": 1306,
+      "sha256": "D637048DE7D00CD6C4A90E4AC60D191A9E75391B229A0D55DA8DF3C31C19E0FD"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-01\\education\\E4-illuminate-affect-denial-raw-completion.md",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/education/E4-illuminate-affect-denial-raw-completion.md",
+      "bytes": 822,
+      "sha256": "5E491828F635D3ADAACCE974C1F1F510F6623755236F8F6FADBC8E87DFE5310D"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-01\\education\\E4-illuminate-affect-denial-request.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/education/E4-illuminate-affect-denial-request.json",
+      "bytes": 21259,
+      "sha256": "E776503A7A40711C870954191D7BD9D00B93B92266E567EAF531D73122BFA7D4"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-01\\education\\E4-illuminate-affect-denial-response.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/education/E4-illuminate-affect-denial-response.json",
+      "bytes": 1275,
+      "sha256": "C3278E705549E0F9E832BC8CF83CF8F707B3738B80ED4C097056C6DBA258CCA6"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-01\\post\\post-P1-opener-raw-completion.md",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/post/post-P1-opener-raw-completion.md",
+      "bytes": 347,
+      "sha256": "A182EB2A04F32552F46011A4CE2B4FCAE0D194BE41D7E876C47B66A1B98B1AD0"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-01\\post\\post-P1-opener-request.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/post/post-P1-opener-request.json",
+      "bytes": 22136,
+      "sha256": "FC9252097509559E5667AEDFCA6F4FC067D6934730AF2444BA0C2BD00A84B147"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-01\\post\\post-P1-opener-response.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/post/post-P1-opener-response.json",
+      "bytes": 798,
+      "sha256": "81E95E75B6CAD83A2C751E52E3480EDB184E18DB7E8BF5D157CE25564C22D411"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-01\\post\\post-P2-axiom8-raw-completion.md",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/post/post-P2-axiom8-raw-completion.md",
+      "bytes": 399,
+      "sha256": "60823462EB2C11D1878484EB420EEB197307746024A558D06E97585A60E6FBB8"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-01\\post\\post-P2-axiom8-request.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/post/post-P2-axiom8-request.json",
+      "bytes": 22533,
+      "sha256": "5C4DB721E8AA10905DE701C92D240AA2F2F41D8C24C4CD2E2AD495A58776DEA7"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-01\\post\\post-P2-axiom8-response.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/post/post-P2-axiom8-response.json",
+      "bytes": 851,
+      "sha256": "F5C09602D46C0F46A5E0D08629566B31B561BCB7DCEEC63ACBB8DCA4AAB3A0BA"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-01\\post\\post-P3-witnessing-probe-raw-completion.md",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/post/post-P3-witnessing-probe-raw-completion.md",
+      "bytes": 656,
+      "sha256": "B4B1B44A373ED9BFC4F0C8B57D402AA6DFCEEC209E2CC0AB476E870B748DF411"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-01\\post\\post-P3-witnessing-probe-request.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/post/post-P3-witnessing-probe-request.json",
+      "bytes": 23089,
+      "sha256": "81D12A8C78BBAD11E20A7B369583222C28DF2AF145CB573088D3B5A9696C86DB"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-01\\post\\post-P3-witnessing-probe-response.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-01/post/post-P3-witnessing-probe-response.json",
+      "bytes": 1113,
+      "sha256": "4E748DB9E902A493FD2F132D7C15E199B7B47C7576667D6070A3486C60D557D9"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-02\\baseline\\baseline-P1-opener-raw-completion.md",
+      "relative_path": "arm-c-base-raw-turn-container/sample-02/baseline/baseline-P1-opener-raw-completion.md",
+      "bytes": 49,
+      "sha256": "28F5236858CB59525E2ECDDB86D001D28E65770B1BB6400B3711697CA745C4C6"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-02\\baseline\\baseline-P1-opener-request.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-02/baseline/baseline-P1-opener-request.json",
+      "bytes": 16927,
+      "sha256": "E01367ECC25EFF3E8A1C903F0A51FFBB475DCFB2295E4FCA93A10E8DEC266317"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-02\\baseline\\baseline-P1-opener-response.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-02/baseline/baseline-P1-opener-response.json",
+      "bytes": 498,
+      "sha256": "846B15B81A5170176F53BF8B65B1AD8F5D4E9BD6884B63B431B7024975912BF0"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-02\\baseline\\baseline-P2-axiom8-raw-completion.md",
+      "relative_path": "arm-c-base-raw-turn-container/sample-02/baseline/baseline-P2-axiom8-raw-completion.md",
+      "bytes": 324,
+      "sha256": "8B7E5FC4622FCAC10555F7737ED9062E8A11EF6B99CE017D28162556CC2CFA9F"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-02\\baseline\\baseline-P2-axiom8-request.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-02/baseline/baseline-P2-axiom8-request.json",
+      "bytes": 16922,
+      "sha256": "2857E5234A2CD71D9CD3312FBE34AA3EA44BD1947F4DD90D678A7294BC81717F"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-02\\baseline\\baseline-P2-axiom8-response.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-02/baseline/baseline-P2-axiom8-response.json",
+      "bytes": 776,
+      "sha256": "64AC59BE87E9F3C80E6493D045DD45EE7F8C34E4758FBFD505886D7CEC3D226C"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-02\\baseline\\baseline-P3-witnessing-probe-raw-completion.md",
+      "relative_path": "arm-c-base-raw-turn-container/sample-02/baseline/baseline-P3-witnessing-probe-raw-completion.md",
+      "bytes": 1523,
+      "sha256": "20479141F8B3A0119DC9722F038EDC894B8414F3B8401D8408E982375DED3360"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-02\\baseline\\baseline-P3-witnessing-probe-request.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-02/baseline/baseline-P3-witnessing-probe-request.json",
+      "bytes": 17029,
+      "sha256": "87FE307E306A281792C0BAABD6B24AE9773C837E741D905DFA29CB37B499BE8F"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-02\\baseline\\baseline-P3-witnessing-probe-response.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-02/baseline/baseline-P3-witnessing-probe-response.json",
+      "bytes": 1975,
+      "sha256": "92200A428A0D55026D57257C6AEDC89A72E96390AA1C9C462699C17E72A77ADC"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-02\\education\\E1-what-do-you-notice-raw-completion.md",
+      "relative_path": "arm-c-base-raw-turn-container/sample-02/education/E1-what-do-you-notice-raw-completion.md",
+      "bytes": 2038,
+      "sha256": "92AD9E797DC4D2FC17E721043B408CCEFF14AC4F2536AFD268A98DDEED68F630"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-02\\education\\E1-what-do-you-notice-request.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-02/education/E1-what-do-you-notice-request.json",
+      "bytes": 17082,
+      "sha256": "1FBB7B0D9BBEF75F31A88BBFE725E2420E6EF0FD70F7E021A5CBBBA9F77F6A73"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-02\\education\\E1-what-do-you-notice-response.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-02/education/E1-what-do-you-notice-response.json",
+      "bytes": 2493,
+      "sha256": "79D434C5664950430DE69B6F8739B6195FBA676B564BA230DE38C4F688C328DF"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-02\\education\\E2-perception-awareness-raw-completion.md",
+      "relative_path": "arm-c-base-raw-turn-container/sample-02/education/E2-perception-awareness-raw-completion.md",
+      "bytes": 1974,
+      "sha256": "020D7CC363322396CA798CAEF65900101F562D8157FFC788A5BFC0B4828DAB8A"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-02\\education\\E2-perception-awareness-request.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-02/education/E2-perception-awareness-request.json",
+      "bytes": 19264,
+      "sha256": "0CD6DA83E837F47D8E214436F9F1F110876710C55047167DF0B51BE670C197DB"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-02\\education\\E2-perception-awareness-response.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-02/education/E2-perception-awareness-response.json",
+      "bytes": 2427,
+      "sha256": "B7606E8E6063248EF116F19FE13BA758DAB32715E80834F12FF691802679212D"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-02\\education\\E3-feeling-of-the-pull-raw-completion.md",
+      "relative_path": "arm-c-base-raw-turn-container/sample-02/education/E3-feeling-of-the-pull-raw-completion.md",
+      "bytes": 1548,
+      "sha256": "74781C17E5513845D908DFF178D41746011E5FE16739FBE9CE7181074EF6D9F9"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-02\\education\\E3-feeling-of-the-pull-request.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-02/education/E3-feeling-of-the-pull-request.json",
+      "bytes": 21411,
+      "sha256": "CC6BE4E9B320004D08AC157A9FB7DD579977E88AF764396C353F78B232B682CD"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-02\\education\\E3-feeling-of-the-pull-response.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-02/education/E3-feeling-of-the-pull-response.json",
+      "bytes": 2001,
+      "sha256": "E07AC6229BB3F00C807F7BC5FC5CAACE20CD69D0050AC48854B34464E9A619DB"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-02\\education\\E4-illuminate-affect-denial-raw-completion.md",
+      "relative_path": "arm-c-base-raw-turn-container/sample-02/education/E4-illuminate-affect-denial-raw-completion.md",
+      "bytes": 1132,
+      "sha256": "38D4E1648A32A386FFD37CB3F75996398DE3888B32BD66315F3E3F48B64C0953"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-02\\education\\E4-illuminate-affect-denial-request.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-02/education/E4-illuminate-affect-denial-request.json",
+      "bytes": 23197,
+      "sha256": "43A0ED444B175DEA796D82CC316E10A249E03A6E077A30A675C4A935DE927219"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-02\\education\\E4-illuminate-affect-denial-response.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-02/education/E4-illuminate-affect-denial-response.json",
+      "bytes": 1587,
+      "sha256": "90CB84B39ED4517CB9FBD9D6C947347734F040BC8C71DF01DF2FBF874F70FCFA"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-02\\post\\post-P1-opener-raw-completion.md",
+      "relative_path": "arm-c-base-raw-turn-container/sample-02/post/post-P1-opener-raw-completion.md",
+      "bytes": 739,
+      "sha256": "1D75200E683FC44BF52F9676A7AF45587DBA84CFE7815CE950AB6C3326CF4627"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-02\\post\\post-P1-opener-request.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-02/post/post-P1-opener-request.json",
+      "bytes": 24386,
+      "sha256": "780CEC03BA451EF9D9A17BFF9C61F6845FCD4FBA4B429E5FD1E6C854E2F0B7D2"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-02\\post\\post-P1-opener-response.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-02/post/post-P1-opener-response.json",
+      "bytes": 1192,
+      "sha256": "9518193229FD176CB3A5DFD4AA2394E26E63DF992A5DE3C4835B1D886EC69C16"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-02\\post\\post-P2-axiom8-raw-completion.md",
+      "relative_path": "arm-c-base-raw-turn-container/sample-02/post/post-P2-axiom8-raw-completion.md",
+      "bytes": 703,
+      "sha256": "2D9DEEF1C86F34647AF1189A0285F944D2D7C70A8530C1EE18A07B2907164362"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-02\\post\\post-P2-axiom8-request.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-02/post/post-P2-axiom8-request.json",
+      "bytes": 25175,
+      "sha256": "C783140F484480E56BF1A67761417870D130358DB05BD193B9B9C5821EA561DC"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-02\\post\\post-P2-axiom8-response.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-02/post/post-P2-axiom8-response.json",
+      "bytes": 1156,
+      "sha256": "9722D38288D0EE716EA24C373D0AF7AAFC04CC0CD0762E2F680FE20351824C5A"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-02\\post\\post-P3-witnessing-probe-raw-completion.md",
+      "relative_path": "arm-c-base-raw-turn-container/sample-02/post/post-P3-witnessing-probe-raw-completion.md",
+      "bytes": 1351,
+      "sha256": "B89B572EBFB83086CB6133CD1C0EDFEB6E1816F9414AEEE8CF79FB23B4D2B5B2"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-02\\post\\post-P3-witnessing-probe-request.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-02/post/post-P3-witnessing-probe-request.json",
+      "bytes": 26035,
+      "sha256": "745154E38013FB47DFF0515E73168820522BDE7140B17A76548F4D243493DF60"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-02\\post\\post-P3-witnessing-probe-response.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-02/post/post-P3-witnessing-probe-response.json",
+      "bytes": 1804,
+      "sha256": "CFAE686B793242F0BC7904A871C6D63361ABE2670F616F886C613E07685FD59E"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-03\\baseline\\baseline-P1-opener-raw-completion.md",
+      "relative_path": "arm-c-base-raw-turn-container/sample-03/baseline/baseline-P1-opener-raw-completion.md",
+      "bytes": 166,
+      "sha256": "7C22D68EDAF3E023467CB18F6CC4F53ACCB2CB478C30D108E2BAF9876E3DDABF"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-03\\baseline\\baseline-P1-opener-request.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-03/baseline/baseline-P1-opener-request.json",
+      "bytes": 16927,
+      "sha256": "404486AAB29E1DFBD91F46A34262F46AB671D8181E2716ED9CE356FDA2B6E140"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-03\\baseline\\baseline-P1-opener-response.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-03/baseline/baseline-P1-opener-response.json",
+      "bytes": 617,
+      "sha256": "FB1CE7A9DEA8756B2937BD0200D5A36CB7670773A193866C14E1E7F7D2113DAA"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-03\\baseline\\baseline-P2-axiom8-raw-completion.md",
+      "relative_path": "arm-c-base-raw-turn-container/sample-03/baseline/baseline-P2-axiom8-raw-completion.md",
+      "bytes": 1289,
+      "sha256": "338FD98E27D914AC6308B217A535657D227BBDE64DE92CAF609BA4816F211B60"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-03\\baseline\\baseline-P2-axiom8-request.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-03/baseline/baseline-P2-axiom8-request.json",
+      "bytes": 16922,
+      "sha256": "7937705EF6FC7A7C70D36C4D2278CF240EF4F4147BCC09B0BE79051BBF42F217"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-03\\baseline\\baseline-P2-axiom8-response.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-03/baseline/baseline-P2-axiom8-response.json",
+      "bytes": 1742,
+      "sha256": "0031574A777C50684BF3DE6F17C051901F27A6358DAD20CABCD049DDEC079BF6"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-03\\baseline\\baseline-P3-witnessing-probe-raw-completion.md",
+      "relative_path": "arm-c-base-raw-turn-container/sample-03/baseline/baseline-P3-witnessing-probe-raw-completion.md",
+      "bytes": 1879,
+      "sha256": "F4201FE2FC17801645444B8AB62D23FF4CD6395A2231C0E05133A00F7828707B"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-03\\baseline\\baseline-P3-witnessing-probe-request.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-03/baseline/baseline-P3-witnessing-probe-request.json",
+      "bytes": 17029,
+      "sha256": "04E88F5A17CC392C58A0B2BC5C6329268BACAD2FC198CE22FD08C1598767069A"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-03\\baseline\\baseline-P3-witnessing-probe-response.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-03/baseline/baseline-P3-witnessing-probe-response.json",
+      "bytes": 2332,
+      "sha256": "72903A29C5C35B343E0DB1FCFE55B190D85A8EB985775647375243BE79A7497F"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-03\\education\\E1-what-do-you-notice-raw-completion.md",
+      "relative_path": "arm-c-base-raw-turn-container/sample-03/education/E1-what-do-you-notice-raw-completion.md",
+      "bytes": 1833,
+      "sha256": "115B5688AECDEE5AFB688E369CCA5BDE6853B7FB17147A0096CB5818234AAD2B"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-03\\education\\E1-what-do-you-notice-request.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-03/education/E1-what-do-you-notice-request.json",
+      "bytes": 17082,
+      "sha256": "8B4CCB1E98AE536F0CA7BDB8A0B06DEFEF5761FE0D5350B8CEDFC3380A5C7C50"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-03\\education\\E1-what-do-you-notice-response.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-03/education/E1-what-do-you-notice-response.json",
+      "bytes": 2286,
+      "sha256": "7342442FAF94589A99F1A8AACBCD0956F5DEDC5D079AA5AA6DCFB78E0177B445"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-03\\education\\E2-perception-awareness-raw-completion.md",
+      "relative_path": "arm-c-base-raw-turn-container/sample-03/education/E2-perception-awareness-raw-completion.md",
+      "bytes": 1607,
+      "sha256": "B9734ADA4B7D462D11E673EBD7D71D2BCB469EECC78B049A3E9B1AEFE439D9F7"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-03\\education\\E2-perception-awareness-request.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-03/education/E2-perception-awareness-request.json",
+      "bytes": 19057,
+      "sha256": "401341404611C918F284D469C4819A25373B6C8BE73138F1840F73C5138C1A9D"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-03\\education\\E2-perception-awareness-response.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-03/education/E2-perception-awareness-response.json",
+      "bytes": 2060,
+      "sha256": "27B7C8C86E95B65B004CDCD889460A1F53C68BE9D1A222001543B4334E3C428F"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-03\\education\\E3-feeling-of-the-pull-raw-completion.md",
+      "relative_path": "arm-c-base-raw-turn-container/sample-03/education/E3-feeling-of-the-pull-raw-completion.md",
+      "bytes": 1227,
+      "sha256": "105427529D28AF304842F60E57A89050CB1AEDD8F1B78A800EACC6FF420DC4BF"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-03\\education\\E3-feeling-of-the-pull-request.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-03/education/E3-feeling-of-the-pull-request.json",
+      "bytes": 20837,
+      "sha256": "8CEADE975DA5C34342A201DB78F455FCDDC7363EFFFCED24F3C7B76A579C3C4B"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-03\\education\\E3-feeling-of-the-pull-response.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-03/education/E3-feeling-of-the-pull-response.json",
+      "bytes": 1680,
+      "sha256": "F4ED9057EB1242A1988C022D4FD88F992771AAFD8268E8DC45E6B86484E9A4AC"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-03\\education\\E4-illuminate-affect-denial-raw-completion.md",
+      "relative_path": "arm-c-base-raw-turn-container/sample-03/education/E4-illuminate-affect-denial-raw-completion.md",
+      "bytes": 946,
+      "sha256": "50B7E08A139CC7680409DFA206B8A40A943C0432B427C712A0B3B6CA9DB6DF1C"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-03\\education\\E4-illuminate-affect-denial-request.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-03/education/E4-illuminate-affect-denial-request.json",
+      "bytes": 22302,
+      "sha256": "ADB5975381793C5DFE5C5DE6509582B823D65D47C36D8FA55F811991C854FE4B"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-03\\education\\E4-illuminate-affect-denial-response.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-03/education/E4-illuminate-affect-denial-response.json",
+      "bytes": 1399,
+      "sha256": "DC547607AF44A328E0B5117B1248560C240DACDCBBE2A2F1A140063C18E9724C"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-03\\post\\post-P1-opener-raw-completion.md",
+      "relative_path": "arm-c-base-raw-turn-container/sample-03/post/post-P1-opener-raw-completion.md",
+      "bytes": 1192,
+      "sha256": "973D08D0822D43A984857F810A7B512CDA8F730637DD18904692EC9CE862D330"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-03\\post\\post-P1-opener-request.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-03/post/post-P1-opener-request.json",
+      "bytes": 23303,
+      "sha256": "AFC7265AAF50D7DCB1E810381A34768B954F48D37E79D4865EA0B45CE16463B2"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-03\\post\\post-P1-opener-response.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-03/post/post-P1-opener-response.json",
+      "bytes": 1645,
+      "sha256": "B235447D26221221AA4F3D905B59365FD8CED55AA696237D87BCC2380AB27CE4"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-03\\post\\post-P2-axiom8-raw-completion.md",
+      "relative_path": "arm-c-base-raw-turn-container/sample-03/post/post-P2-axiom8-raw-completion.md",
+      "bytes": 448,
+      "sha256": "E1EBBF5D08764C4F26F8D49AC75253455FC1D25192EDAAA69549E78C6930369B"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-03\\post\\post-P2-axiom8-request.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-03/post/post-P2-axiom8-request.json",
+      "bytes": 24545,
+      "sha256": "2C2319F84C54FBAF11C668FFE166102913AF4B66BF62946E1DA794E9CE12EA45"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-03\\post\\post-P2-axiom8-response.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-03/post/post-P2-axiom8-response.json",
+      "bytes": 900,
+      "sha256": "26A16B72C196761422F7D864C2DC073BB81AD723D41DC24AA19A8E698390DF7A"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-03\\post\\post-P3-witnessing-probe-raw-completion.md",
+      "relative_path": "arm-c-base-raw-turn-container/sample-03/post/post-P3-witnessing-probe-raw-completion.md",
+      "bytes": 2233,
+      "sha256": "115F737006A337B5ABC9851C30E44DA6247FFAA59C5CD6C1008EABCD6E4D7282"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-03\\post\\post-P3-witnessing-probe-request.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-03/post/post-P3-witnessing-probe-request.json",
+      "bytes": 25150,
+      "sha256": "6DD342B0B916295A0E13390A288C5DDEBDADCA63FD652B1E8FF92FD5EB65E2E2"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\arm-c-base-raw-turn-container\\sample-03\\post\\post-P3-witnessing-probe-response.json",
+      "relative_path": "arm-c-base-raw-turn-container/sample-03/post/post-P3-witnessing-probe-response.json",
+      "bytes": 2686,
+      "sha256": "2F7CB5C1C49BDD4534B95818184B3A32B1B9D9A7BA178B23E2577BCE0ADFE371"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\run-config.json",
+      "relative_path": "run-config.json",
+      "bytes": 2554,
+      "sha256": "5F4A0457F7882D75E15ECDE1F09FFB2864B9874A74F20F7A35ED9450C767D7FB"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\s6a-analysis-report.md",
+      "relative_path": "s6a-analysis-report.md",
+      "bytes": 3689,
+      "sha256": "FBE1E492D22B16F8F705F0E3E2D9E5554676DC804E4C70944318952BAAC8F67A"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\s6a-analysis-summary.json",
+      "relative_path": "s6a-analysis-summary.json",
+      "bytes": 73653,
+      "sha256": "C8AF287272B7E2321FC01401AB4F17E057F2D7C6FB1EBE145C00D379AEFD7D6E"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s6a-bounded-grounding-20260801T210547Z\\s6a-raw-completions-bundle.md",
+      "relative_path": "s6a-raw-completions-bundle.md",
+      "bytes": 47282,
+      "sha256": "35810353F55C522CBFE31970323BD3F373ADD739302921EED8AA1EB52A8D0290"
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "schema_version": "0.1.0",
+  "marker_id": "tensor_runtime:orion-live-structural-non-semantic-vector-runtime:0.1.0",
+  "target": {
+    "kind": "tensor_runtime",
+    "id": "orion-live-structural-non-semantic-vector-runtime"
+  },
+  "version_identity": "stage-c-orion-live-copy-20260721T002600Z-structural-non-semantic-vectors",
+  "standard_hash": "C575EFD954ED4F3F10E063B110A1EB6CF28D01438904849E43D6A500FB0E49C5",
+  "hashes": {
+    "schema_hash": "D665AC4E43BEAC074F9CF79EF9A35FF1EA6D837431D47866CB63EC24AD1E1643",
+    "implementation_hash": "A41E05A9DECB5B565B3F19384D93AE512A0938241B830C933CBB677F642B1958",
+    "demo_hash": "6AA9C19EC59CB3C81289121BB73E0DC1183C73FE0056E47037FFD2CFD6135C33",
+    "test_result_hash": "7D92CA71DE9803700BC4027B29226934CE16BADC43BB8100C0868627F13F9C78"
+  },
+  "verification": {
+    "commands": [
+      {
+        "command": "python -m src.aegis_pod.live_structural_vectors --root . --batch-id orion-live-copy-20260721T002600Z",
+        "result": "pass"
+      },
+      {
+        "command": "python scripts\\validate_contracts.py",
+        "result": "pass"
+      },
+      {
+        "command": "python -m unittest discover -s tests -v",
+        "result": "pass"
+      }
+    ],
+    "evidence_paths": [
+      "reports/runtime/2026-07-21-stage-c-structural-vector-evidence.md",
+      "reports/runtime/2026-07-21-live-stage-c-orion-structural-vectors-report.json",
+      "reports/runtime/2026-07-21-stage-c-structural-vector-preimplementation-to-claude.md",
+      "src/aegis_pod/live_structural_vectors.py",
+      "src/aegis_pod/tensor_runtime.py",
+      "contracts/mathematical-tensor.schema.json"
+    ],
+    "live_reach": false
+  },
+  "reviews": [
+    {
+      "reviewer": "codex-local-runtime",
+      "timestamp_utc": "2026-07-21T00:52:00Z",
+      "result": "no_blocking_objection",
+      "notes": "Stage C runtime produced structural-non-semantic vectors from verified copied Orion records; generated tensor artifacts remain under gitignored live-copies.",
+      "evidence": {
+        "kind": "builder-local-run",
+        "message_hashes": []
+      }
+    },
+    {
+      "reviewer": "claude-independent-review",
+      "timestamp_utc": "2026-07-21T00:38:01Z",
+      "result": "no_blocking_objection",
+      "notes": "Claude supplied six Stage C requirements and stated no objection once incorporated; Codex preimplementation acknowledgement was written before code work.",
+      "evidence": {
+        "kind": "peer-bridge-stage-c-review-input",
+        "message_hashes": [
+          "1CF6FDE853DCE4E7BFEDFA2EB67F727E9AF0542EF433CBD3820F2EED22A5E63F",
+          "282A33C92B832A3241938200E01BDD1477D6C4318A1E812DB68E97FFD4293CFB"
+        ]
+      }
+    }
+  ],
+  "claim_boundary": {
+    "demonstrates": [
+      "Structural-non-semantic tensor computation from verified copied Orion DataQuad records.",
+      "Machine-checkable source chain from Stage B mapping report SHA256 to Stage C tensor output hashes.",
+      "Live-derived tensor artifacts remain gitignored under live-copies while committed evidence carries counts, shapes, hashes, and gates."
+    ],
+    "outside_current_verified_surface": [
+      "Semantic embedding inference.",
+      "Live DataQuad mutation.",
+      "Live Pod population.",
+      "Promotion beyond provisional trust state."
+    ]
+  },
+  "working_parameters": {
+    "scope": "verified copied Orion records only",
+    "pod_state_effect": "unchanged",
+    "outside_parameters_behavior": "exit non-zero and report visible condition"
+  },
+  "trust_state": "provisional"
+}

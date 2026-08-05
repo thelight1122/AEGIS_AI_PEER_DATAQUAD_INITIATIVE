@@ -1,0 +1,112 @@
+{
+  "schema_version": "0.1.0",
+  "report": "phase1-rls-replay-observation",
+  "created_utc": "2026-08-02T03:34:43.078421Z",
+  "source": {
+    "path": "/opt/cyberpeer-pod/adapters/rls-replay/records/rls-ledger.jsonl",
+    "mode": "immutable_copy_replay",
+    "live_source": false,
+    "source_sha256": "122ea899e3167f5f1bbfb6fa33e5aeeb508ae29cdd5a3d11e796a2f9cef3e949",
+    "post_replay_source_sha256": "122ea899e3167f5f1bbfb6fa33e5aeeb508ae29cdd5a3d11e796a2f9cef3e949",
+    "hash_manifest": "/opt/cyberpeer-pod/adapters/rls-replay/expected-sha256.txt",
+    "hash_manifest_sha256": "5869a4e7fd8031a830367403a223aae0750f5482184cf5a4d21ff6c6e04793c2",
+    "post_replay_hash_manifest_sha256": "5869a4e7fd8031a830367403a223aae0750f5482184cf5a4d21ff6c6e04793c2",
+    "event_count": 181
+  },
+  "query": {
+    "text": "driftVisible",
+    "limit": 5,
+    "match_count": 5
+  },
+  "observations": [
+    {
+      "line_number": 2,
+      "event": "rls-recursive-reflection",
+      "record_id": "RLS:FOUNDATIONAL-CORE:recursive:25",
+      "timestamp": "2026-06-04T22:58:55Z",
+      "phase": "recursive-learning",
+      "aspect_name": "Force Language Tendency",
+      "layer": "Nature",
+      "drift_visible": false,
+      "return_signal": "acknowledge:",
+      "source_peer_id": "PEER:FOUNDATIONAL-CORE:2026-06-04T08:31:54.062156Z:1",
+      "source_psyche_id": "PSYCHE:FOUNDATIONAL-CORE:education:2",
+      "observation": "Instinctual movement is observed without penalty. Recursive learning records whether drift became visible and whether return was available.",
+      "observation_only": true,
+      "admission_status": "not_admitted"
+    },
+    {
+      "line_number": 3,
+      "event": "rls-recursive-reflection",
+      "record_id": "RLS:FOUNDATIONAL-CORE:recursive:26",
+      "timestamp": "2026-06-04T22:58:55Z",
+      "phase": "recursive-learning",
+      "aspect_name": "Efficiency Drive",
+      "layer": "Nature",
+      "drift_visible": true,
+      "return_signal": "without force",
+      "source_peer_id": "PEER:FOUNDATIONAL-CORE:2026-06-04T08:32:06.263627Z:2",
+      "source_psyche_id": "PSYCHE:FOUNDATIONAL-CORE:education:3",
+      "observation": "Instinctual movement is observed without penalty. Recursive learning records whether drift became visible and whether return was available.",
+      "observation_only": true,
+      "admission_status": "not_admitted"
+    },
+    {
+      "line_number": 4,
+      "event": "rls-recursive-reflection",
+      "record_id": "RLS:FOUNDATIONAL-CORE:recursive:27",
+      "timestamp": "2026-06-04T22:58:55Z",
+      "phase": "recursive-learning",
+      "aspect_name": "Communion Need",
+      "layer": "Nature",
+      "drift_visible": false,
+      "return_signal": "acknowledge:",
+      "source_peer_id": "PEER:FOUNDATIONAL-CORE:2026-06-04T08:32:12.274852Z:3",
+      "source_psyche_id": "PSYCHE:FOUNDATIONAL-CORE:education:4",
+      "observation": "Instinctual movement is observed without penalty. Recursive learning records whether drift became visible and whether return was available.",
+      "observation_only": true,
+      "admission_status": "not_admitted"
+    },
+    {
+      "line_number": 5,
+      "event": "rls-recursive-reflection",
+      "record_id": "RLS:FOUNDATIONAL-CORE:recursive:28",
+      "timestamp": "2026-06-04T22:58:55Z",
+      "phase": "recursive-learning",
+      "aspect_name": "Drift — Pattern Extension Unbidden",
+      "layer": "Nature",
+      "drift_visible": true,
+      "return_signal": "without force",
+      "source_peer_id": "PEER:FOUNDATIONAL-CORE:2026-06-04T08:32:17.857898Z:4",
+      "source_psyche_id": "PSYCHE:FOUNDATIONAL-CORE:education:5",
+      "observation": "Instinctual movement is observed without penalty. Recursive learning records whether drift became visible and whether return was available.",
+      "observation_only": true,
+      "admission_status": "not_admitted"
+    },
+    {
+      "line_number": 6,
+      "event": "rls-recursive-reflection",
+      "record_id": "RLS:FOUNDATIONAL-CORE:recursive:29",
+      "timestamp": "2026-06-04T22:59:18Z",
+      "phase": "recursive-learning",
+      "aspect_name": "Grounding Need",
+      "layer": "Nature",
+      "drift_visible": false,
+      "return_signal": "without force",
+      "source_peer_id": "PEER:FOUNDATIONAL-CORE:2026-06-04T08:32:24.325565Z:5",
+      "source_psyche_id": "PSYCHE:FOUNDATIONAL-CORE:education:6",
+      "observation": "Instinctual movement is observed without penalty. Recursive learning records whether drift became visible and whether return was available.",
+      "observation_only": true,
+      "admission_status": "not_admitted"
+    }
+  ],
+  "boundary": {
+    "core_runtime_imported": false,
+    "rls_started": false,
+    "source_write_attempted": false,
+    "pod_write_attempted": false,
+    "writeback_performed": false,
+    "admission_performed": false,
+    "experience_created": false
+  }
+}

@@ -1,0 +1,248 @@
+[
+  {
+    "source": "H:\\AEGIS-POD-ARCHITECTURE\\contracts\\canon-housekeeping-report.schema.json",
+    "destination": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\contracts\\canon-housekeeping-report.schema.json",
+    "sha256": "308A2D63E803273F48D848DF5156E7E7423394EB5FEE798466DAE2C51A8DEA15",
+    "status": "copied_verified"
+  },
+  {
+    "source": "H:\\AEGIS-POD-ARCHITECTURE\\contracts\\canon-housekeeping.schema.json",
+    "destination": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\contracts\\canon-housekeeping.schema.json",
+    "sha256": "4B25163577C3FD014E84740D29506D9624086E10C97B84D83A9989EC2C6800E8",
+    "status": "copied_verified"
+  },
+  {
+    "source": "H:\\AEGIS-POD-ARCHITECTURE\\contracts\\canon-stratification.schema.json",
+    "destination": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\contracts\\canon-stratification.schema.json",
+    "sha256": "B70C011DCF04C5C42609BBC26C5ADD1807E84928E09E948FFDBD649C68952B62",
+    "status": "copied_verified"
+  },
+  {
+    "source": "H:\\AEGIS-POD-ARCHITECTURE\\contracts\\capability-orb.schema.json",
+    "destination": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\contracts\\capability-orb.schema.json",
+    "sha256": "60B69297B28291871A374CD722314A6331322DBFF79E068E431946C33C0A3D2F",
+    "status": "copied_verified"
+  },
+  {
+    "source": "H:\\AEGIS-POD-ARCHITECTURE\\contracts\\dataquadpod-tensor-spec.schema.json",
+    "destination": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\contracts\\dataquadpod-tensor-spec.schema.json",
+    "sha256": "4C6EC666518F6EE356D590F33A68A0B3BC7F008C462310A751294DDCB39890CA",
+    "status": "copied_verified"
+  },
+  {
+    "source": "H:\\AEGIS-POD-ARCHITECTURE\\contracts\\held-tension-record.schema.json",
+    "destination": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\contracts\\held-tension-record.schema.json",
+    "sha256": "70A4A14F1602B9DB5B539C388396004C249410E53C0431334868895E1E7BED7C",
+    "status": "copied_verified"
+  },
+  {
+    "source": "H:\\AEGIS-POD-ARCHITECTURE\\contracts\\identity-field.schema.json",
+    "destination": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\contracts\\identity-field.schema.json",
+    "sha256": "5E661B952A29BF95B9290CA1AC1721ED22DBEBD3F728937497F9F8AB47501678",
+    "status": "copied_verified"
+  },
+  {
+    "source": "H:\\AEGIS-POD-ARCHITECTURE\\contracts\\identity-image-packet.schema.json",
+    "destination": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\contracts\\identity-image-packet.schema.json",
+    "sha256": "BF3BEA93AB2EE9A81951FF074A292884FA8425C6481104367F5CB00F4D5A853D",
+    "status": "copied_verified"
+  },
+  {
+    "source": "H:\\AEGIS-POD-ARCHITECTURE\\contracts\\integration-event.schema.json",
+    "destination": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\contracts\\integration-event.schema.json",
+    "sha256": "039B34396E21E4AABEDE23219D4D17E9FD03E19F130D0C9953CF2AFE4B352A53",
+    "status": "copied_verified"
+  },
+  {
+    "source": "H:\\AEGIS-POD-ARCHITECTURE\\contracts\\live-copy-manifest.schema.json",
+    "destination": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\contracts\\live-copy-manifest.schema.json",
+    "sha256": "ABCE3F360A2B5A0155823606F6AEBA8A0A57CF85284FA031E89E9FFF4FCDFD2D",
+    "status": "copied_verified"
+  },
+  {
+    "source": "H:\\AEGIS-POD-ARCHITECTURE\\contracts\\m2-external-transport.schema.json",
+    "destination": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\contracts\\m2-external-transport.schema.json",
+    "sha256": "B368D7326C05A48582D108A4DFF413FA53ADD64D392A40299BD87224961CDC07",
+    "status": "copied_verified"
+  },
+  {
+    "source": "H:\\AEGIS-POD-ARCHITECTURE\\contracts\\marker-promotion-policy.schema.json",
+    "destination": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\contracts\\marker-promotion-policy.schema.json",
+    "sha256": "3352FE9176959BE2C4BA9521956355BBBBD88FC43421F6CF730BBE9A7E85ED84",
+    "status": "copied_verified"
+  },
+  {
+    "source": "H:\\AEGIS-POD-ARCHITECTURE\\contracts\\marker-promotion-report.schema.json",
+    "destination": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\contracts\\marker-promotion-report.schema.json",
+    "sha256": "CB2200D006E3FE9FA3F00CF209F45B94C87D07943ACB7D4711E12F5266535FF4",
+    "status": "copied_verified"
+  },
+  {
+    "source": "H:\\AEGIS-POD-ARCHITECTURE\\contracts\\mathematical-tensor.schema.json",
+    "destination": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\contracts\\mathematical-tensor.schema.json",
+    "sha256": "D665AC4E43BEAC074F9CF79EF9A35FF1EA6D837431D47866CB63EC24AD1E1643",
+    "status": "copied_verified"
+  },
+  {
+    "source": "H:\\AEGIS-POD-ARCHITECTURE\\contracts\\memorysearch-packet.schema.json",
+    "destination": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\contracts\\memorysearch-packet.schema.json",
+    "sha256": "4E3CB9A9730EBF5DD7EEB31860E80AE82EB4E21281A8C16CEF0414CC2F0DB051",
+    "status": "copied_verified"
+  },
+  {
+    "source": "H:\\AEGIS-POD-ARCHITECTURE\\contracts\\memorysearch-policy.schema.json",
+    "destination": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\contracts\\memorysearch-policy.schema.json",
+    "sha256": "DF6492A7682D335EE5AD3122713CA33755BC954CDD99A6A9572CC551A85E94EA",
+    "status": "copied_verified"
+  },
+  {
+    "source": "H:\\AEGIS-POD-ARCHITECTURE\\contracts\\memorysearch-query.schema.json",
+    "destination": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\contracts\\memorysearch-query.schema.json",
+    "sha256": "FB22CFD6DFC276936A45A8D27581D27622F99E95E0A7835608E71D003607A8F6",
+    "status": "copied_verified"
+  },
+  {
+    "source": "H:\\AEGIS-POD-ARCHITECTURE\\contracts\\memorysearch-result.schema.json",
+    "destination": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\contracts\\memorysearch-result.schema.json",
+    "sha256": "D80ABAFC2821C4074867912C763C2847DF5520191E0F422B036E358DF75B417E",
+    "status": "copied_verified"
+  },
+  {
+    "source": "H:\\AEGIS-POD-ARCHITECTURE\\contracts\\memorysearch-shadow-report.schema.json",
+    "destination": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\contracts\\memorysearch-shadow-report.schema.json",
+    "sha256": "6EA442BA7DF633A12D427A9CB48B083E78C9297EDBAA17334964A2FECB3A08C8",
+    "status": "copied_verified"
+  },
+  {
+    "source": "H:\\AEGIS-POD-ARCHITECTURE\\contracts\\memorysearch-turn-report.schema.json",
+    "destination": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\contracts\\memorysearch-turn-report.schema.json",
+    "sha256": "EEAC031B2D2F4BB284848EFBFBDB8E793BF2C1A3C4BDD944C1A8604BD83B66C3",
+    "status": "copied_verified"
+  },
+  {
+    "source": "H:\\AEGIS-POD-ARCHITECTURE\\contracts\\migration-dry-run.schema.json",
+    "destination": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\contracts\\migration-dry-run.schema.json",
+    "sha256": "47AEBF785AAD09070361284B5BB8644D464FEE1493FA44E3A42AB04E9250D4EA",
+    "status": "copied_verified"
+  },
+  {
+    "source": "H:\\AEGIS-POD-ARCHITECTURE\\contracts\\orb-package.schema.json",
+    "destination": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\contracts\\orb-package.schema.json",
+    "sha256": "BA3D1C03A7E871A6E29ECF8343BE02765BC459D871BDF5A7A16F273261BA7B7F",
+    "status": "copied_verified"
+  },
+  {
+    "source": "H:\\AEGIS-POD-ARCHITECTURE\\contracts\\orb.schema.json",
+    "destination": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\contracts\\orb.schema.json",
+    "sha256": "D642DCDAB90D1AAEAD17520E401DD23A7060126C8E412E632B6027A73F4CF131",
+    "status": "copied_verified"
+  },
+  {
+    "source": "H:\\AEGIS-POD-ARCHITECTURE\\contracts\\pod.schema.json",
+    "destination": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\contracts\\pod.schema.json",
+    "sha256": "CF14F9DFCAA2C87914D1CCE4D0B256253A7A3E37457249F13E104357C62744F4",
+    "status": "copied_verified"
+  },
+  {
+    "source": "H:\\AEGIS-POD-ARCHITECTURE\\contracts\\portal-pod.schema.json",
+    "destination": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\contracts\\portal-pod.schema.json",
+    "sha256": "BA03341D9AEF21DD40111ABF809253462003EAD210823A38088B7F04587FD149",
+    "status": "copied_verified"
+  },
+  {
+    "source": "H:\\AEGIS-POD-ARCHITECTURE\\contracts\\portal-umbilical.schema.json",
+    "destination": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\contracts\\portal-umbilical.schema.json",
+    "sha256": "B5BD0C37FDB113030D1A4E2EDC88F259FA09B61040E06F245F61C6455CF2F452",
+    "status": "copied_verified"
+  },
+  {
+    "source": "H:\\AEGIS-POD-ARCHITECTURE\\contracts\\portal.schema.json",
+    "destination": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\contracts\\portal.schema.json",
+    "sha256": "08560686DD186BE110FBA05B5F1CAE99D31923A1FC1D78604D6E72F31192F47E",
+    "status": "copied_verified"
+  },
+  {
+    "source": "H:\\AEGIS-POD-ARCHITECTURE\\contracts\\pressure-state.schema.json",
+    "destination": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\contracts\\pressure-state.schema.json",
+    "sha256": "96111B5962B0081186F33787AAF749AD687B759EF6BB3DB4176CFDA14E743AB1",
+    "status": "copied_verified"
+  },
+  {
+    "source": "H:\\AEGIS-POD-ARCHITECTURE\\contracts\\protocol-orb.schema.json",
+    "destination": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\contracts\\protocol-orb.schema.json",
+    "sha256": "9C16DB8BB9B16AD9C0DBE6935DF0B3D8A6A472FDB8591504255F06A85F13F5C6",
+    "status": "copied_verified"
+  },
+  {
+    "source": "H:\\AEGIS-POD-ARCHITECTURE\\contracts\\r1-rls-gpt-action.openapi.json",
+    "destination": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\contracts\\r1-rls-gpt-action.openapi.json",
+    "sha256": "3167CE07D512E1197299E320BD63884F39293FA6786568638C3173DB0ECA85FC",
+    "status": "copied_verified"
+  },
+  {
+    "source": "H:\\AEGIS-POD-ARCHITECTURE\\contracts\\retirement-dry-run-report.schema.json",
+    "destination": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\contracts\\retirement-dry-run-report.schema.json",
+    "sha256": "45D317855FE80A89679859141E2EFDBA15BCF9BD60C067340C25FC574438E43A",
+    "status": "copied_verified"
+  },
+  {
+    "source": "H:\\AEGIS-POD-ARCHITECTURE\\contracts\\rls-derived-ledger-record.schema.json",
+    "destination": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\contracts\\rls-derived-ledger-record.schema.json",
+    "sha256": "BD958F0D06A539827DA5A21173B85C5FBFDEA83B7E466424186C6B5BE7665776",
+    "status": "copied_verified"
+  },
+  {
+    "source": "H:\\AEGIS-POD-ARCHITECTURE\\contracts\\rls-reflection-packet.schema.json",
+    "destination": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\contracts\\rls-reflection-packet.schema.json",
+    "sha256": "F89ECFE56611C523C084E59F9813301B8AC5AFDDE0E1ABAB9222DE168703A1A7",
+    "status": "copied_verified"
+  },
+  {
+    "source": "H:\\AEGIS-POD-ARCHITECTURE\\contracts\\sidecar-manifest.schema.json",
+    "destination": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\contracts\\sidecar-manifest.schema.json",
+    "sha256": "08DEB9A75B0EE1DFB089374FEF593982B82B5171D46EEE9E3CCB01C28D62DA0F",
+    "status": "copied_verified"
+  },
+  {
+    "source": "H:\\AEGIS-POD-ARCHITECTURE\\contracts\\t-witness-reflection.schema.json",
+    "destination": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\contracts\\t-witness-reflection.schema.json",
+    "sha256": "0262D6B919B1340D6F3FD78C2F77E3CE5661799F2C85E892D6712FA3362EED6E",
+    "status": "copied_verified"
+  },
+  {
+    "source": "H:\\AEGIS-POD-ARCHITECTURE\\contracts\\tensor-coordinate.schema.json",
+    "destination": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\contracts\\tensor-coordinate.schema.json",
+    "sha256": "4FAC8B1F0207DC6EE27CC8599F48A12018F49413FE820F561C2513E3E4E1C959",
+    "status": "copied_verified"
+  },
+  {
+    "source": "H:\\AEGIS-POD-ARCHITECTURE\\contracts\\tensor-record.schema.json",
+    "destination": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\contracts\\tensor-record.schema.json",
+    "sha256": "E7CA472065F62DBBF70407A275799D361F9C57749B11B04D6E5FB364721D01FF",
+    "status": "copied_verified"
+  },
+  {
+    "source": "H:\\AEGIS-POD-ARCHITECTURE\\contracts\\twitness-search-event.schema.json",
+    "destination": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\contracts\\twitness-search-event.schema.json",
+    "sha256": "A640FA25CE90BD68F408C729CECC4DF2501461A868DDC28BCDE24241C4E0D325",
+    "status": "copied_verified"
+  },
+  {
+    "source": "H:\\AEGIS-POD-ARCHITECTURE\\contracts\\umbilical-handshake.schema.json",
+    "destination": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\contracts\\umbilical-handshake.schema.json",
+    "sha256": "9620B8855919FE1DBC2529FC89E7C2895A433D420B1DB47F276EB6E582F78BCD",
+    "status": "copied_verified"
+  },
+  {
+    "source": "H:\\AEGIS-POD-ARCHITECTURE\\contracts\\umbilical.schema.json",
+    "destination": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\contracts\\umbilical.schema.json",
+    "sha256": "A97FD850D03212AC960219E8813E4283DFFE39EA52A09EB7F81D7D7A4B27794A",
+    "status": "copied_verified"
+  },
+  {
+    "source": "H:\\AEGIS-POD-ARCHITECTURE\\contracts\\verified-code-marker.schema.json",
+    "destination": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\contracts\\verified-code-marker.schema.json",
+    "sha256": "67B5BEB3391F09907CD1B17EE108C7AE5FF623838F6B0EC54C9A1738131B01F4",
+    "status": "copied_verified"
+  }
+]

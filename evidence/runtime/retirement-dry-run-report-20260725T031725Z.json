@@ -1,0 +1,117 @@
+{
+  "archive_manifest_path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\retirement-dry-run-manifest-20260725T031725Z.jsonl",
+  "archive_manifest_summary": {
+    "hash_scope": "raw_jsonl_record_line_utf8",
+    "pct_entries": 6830,
+    "peer_entries": 1736,
+    "total_entries": 8566
+  },
+  "boundary": {
+    "apply_capability": "absent-by-design",
+    "archive_action": "PROJECTED-ONLY (archive-not-delete doctrine; no file created/moved/renamed/deleted)",
+    "live_reach": "none (no ssh/scp/http/subprocess; no writes under I:)",
+    "mutations": "none",
+    "read_only": true
+  },
+  "generated_at": "2026-07-25T03:17:25.374807+00:00",
+  "mode": "dry-run-only",
+  "parameters": {
+    "archive_root": "pod/records/_archive/retired",
+    "contested_markers": [
+      "contested",
+      "contradiction",
+      "contradicted",
+      "disputed",
+      "retract",
+      "retraction",
+      "correction",
+      "corrected",
+      "overturned"
+    ],
+    "pct_inactivity_days": 14.0,
+    "peer_min_confirmations": 2,
+    "peer_stability_days": 14.0
+  },
+  "peer_exclusions": {
+    "by_reason": {
+      "high_uniqueness_unique_experience": 5663,
+      "recent_experience": 28274
+    },
+    "total": 33937
+  },
+  "peer_exclusions_path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\retirement-dry-run-peer-exclusions-20260725T031725Z.jsonl",
+  "projected_shrinkage": {
+    "PCT": {
+      "current_content_bytes": 103640733,
+      "current_records": 32945,
+      "projected_byte_reduction_pct": 21.25,
+      "projected_record_reduction_pct": 20.73,
+      "projected_remaining_content_bytes": 81619701,
+      "projected_remaining_records": 26115,
+      "retired_out_bytes": 22021032,
+      "retired_out_records": 6830
+    },
+    "PEER": {
+      "current_content_bytes": 97270424,
+      "current_records": 35673,
+      "projected_byte_reduction_pct": 4.58,
+      "projected_record_reduction_pct": 4.87,
+      "projected_remaining_content_bytes": 92818927,
+      "projected_remaining_records": 33937,
+      "retired_out_bytes": 4451497,
+      "retired_out_records": 1736
+    },
+    "net_live_tensor_bytes_removed": 26472529,
+    "net_live_tensor_records_removed": 8566,
+    "projected_new_relics": {
+      "count": 6082,
+      "estimate_basis": "median NCT record content bytes",
+      "estimated_bytes_added": 14596800,
+      "estimated_per_relic_bytes": 2400,
+      "from_pct": 4346,
+      "from_peer": 1736
+    }
+  },
+  "reference_now": "2026-07-22T07:36:10+00:00",
+  "schema_version": "0.1.0",
+  "source_root": "H:\\AEGIS-POD-ARCHITECTURE\\stage-gabe-out\\CP-1003-GABE\\pod\\records",
+  "stage1_candidates": {
+    "pct_retirement": {
+      "already_condensed": 2484,
+      "count": 6830,
+      "needs_new_relic": 4346
+    },
+    "peer_promotion": {
+      "count": 1736,
+      "promote_to_nct": 1736,
+      "promote_to_spine": 0
+    }
+  },
+  "tensor_stats": {
+    "NCT": {
+      "content_bytes": 22628135,
+      "file_bytes": 22647477,
+      "present": true,
+      "records": 9671
+    },
+    "PCT": {
+      "content_bytes": 103640733,
+      "file_bytes": 103706623,
+      "present": true,
+      "records": 32945
+    },
+    "PEER": {
+      "content_bytes": 97270424,
+      "file_bytes": 97341770,
+      "present": true,
+      "records": 35673
+    },
+    "SPINE": {
+      "content_bytes": 27478112,
+      "file_bytes": 27503522,
+      "present": true,
+      "records": 12705
+    }
+  },
+  "tool_id": "aegis-dataquad-stage1-retirement-dry-run"
+}

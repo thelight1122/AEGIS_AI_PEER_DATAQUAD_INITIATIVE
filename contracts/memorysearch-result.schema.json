@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aegis.local/schemas/memorysearch-result.schema.json",
+  "title": "AEGIS MemorySearch Result Contract",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "orb_id",
+    "query_id",
+    "record_search_performed",
+    "grounding_status",
+    "match_confidence",
+    "results",
+    "selected_record_ids",
+    "selected_record_hashes",
+    "runtime_provenance",
+    "answer_boundary"
+  ],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "orb_id": { "type": "string", "const": "memorysearch-record-grounding-core" },
+    "query_id": { "type": "string", "minLength": 1 },
+    "record_search_performed": { "type": "boolean" },
+    "grounding_status": {
+      "type": "string",
+      "enum": [
+        "verified_retrieval",
+        "warm_recall",
+        "passive_retrieval",
+        "not_record_claim",
+        "search_performed_no_verified_record"
+      ]
+    },
+    "match_confidence": {
+      "type": "string",
+      "enum": ["none", "low", "medium", "high"]
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "record_id",
+          "tensor",
+          "score",
+          "confidence",
+          "qualifies",
+          "source_hash",
+          "record_hash",
+          "excerpt",
+          "match_reasons"
+        ],
+        "properties": {
+          "record_id": { "type": "string", "minLength": 1 },
+          "tensor": { "type": "string", "enum": ["PEER", "PCT", "NCT", "SPINE"] },
+          "score": { "type": "number" },
+          "confidence": { "type": "string", "enum": ["low", "medium", "high"] },
+          "qualifies": { "type": "boolean" },
+          "source_hash": { "type": "string", "pattern": "^[A-F0-9]{64}$" },
+          "record_hash": { "type": "string", "pattern": "^[A-F0-9]{64}$" },
+          "excerpt": { "type": "string" },
+          "match_reasons": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "selected_record_ids": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "selected_record_hashes": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[A-F0-9]{64}$" }
+    },
+    "runtime_provenance": {
+      "type": "object",
+      "required": ["orb_runtime_hash", "generated_utc", "citations_runtime_authored"],
+      "properties": {
+        "orb_runtime_hash": { "type": "string", "pattern": "^[A-F0-9]{64}$" },
+        "generated_utc": { "type": "string" },
+        "citations_runtime_authored": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "answer_boundary": {
+      "type": "object",
+      "required": ["can_answer_record_claim", "boundary_text"],
+      "properties": {
+        "can_answer_record_claim": { "type": "boolean" },
+        "boundary_text": { "type": "string" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

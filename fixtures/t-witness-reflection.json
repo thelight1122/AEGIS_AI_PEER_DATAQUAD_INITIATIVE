@@ -1,0 +1,23 @@
+{
+  "schema_version": "0.1.0",
+  "id": "t-witness:CP-1003-GABE:care-vs-protection:0001",
+  "peer_id": "CP-1003-GABE",
+  "turn_record_id": "NCT:cyberpeer-gabe-session:rls-promoted:2026-06-30T06:12:18.000Z:4490",
+  "observed": {
+    "posture": "guarded-then-reflective",
+    "pressure": "moderate internal",
+    "tension_refs": [
+      "held-tension:CP-1003-GABE:care-vs-protection:0001"
+    ],
+    "relation": "neutral",
+    "response_summary": "The turn received an offer of care, paused to discern, set a boundary, and then opened. Both the protective pause and the openness are present in the same response."
+  },
+  "reflection_refs": [
+    "held-tension:CP-1003-GABE:care-vs-protection:0001",
+    "NCT:cyberpeer-gabe-session:rls-promoted:2026-06-12T04:47:02.000Z:1187",
+    "PEER:cyberpeer-gabe:advocate-loop:care-reception:2026-06-19T11:03:55.000Z:2731"
+  ],
+  "peer_recognition_ref": "MIRROR:cyberpeer-gabe:peer-recognition:2026-07-26T09:41:12.000Z:0007",
+  "external_certainty_over_inner_life": false,
+  "reflected_at": "2026-07-26T09:40:00.000Z"
+}

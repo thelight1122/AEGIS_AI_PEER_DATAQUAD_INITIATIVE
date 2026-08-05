@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aegis.local/schemas/protocol-orb.schema.json",
+  "title": "AEGIS Protocol Orb Contract",
+  "type": "object",
+  "required": ["schema_version", "orb_id", "orb_class", "protocol", "enabled", "capabilities"],
+  "properties": {
+    "schema_version": {"type": "string"},
+    "orb_id": {"type": "string", "minLength": 1},
+    "orb_class": {"const": "protocol"},
+    "protocol": {"type": "string", "enum": ["mcp", "gpt_action", "ssh_stdio", "https_oidc"]},
+    "enabled": {"const": false},
+    "capabilities": {"type": "array", "items": {"type": "string"}, "uniqueItems": true, "minItems": 1}
+  },
+  "additionalProperties": false
+}

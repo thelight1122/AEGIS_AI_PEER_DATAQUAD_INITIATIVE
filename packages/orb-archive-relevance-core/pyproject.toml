@@ -1,0 +1,21 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "orb-archive-relevance-core"
+version = "1.0.0"
+description = "The archive-relevance-core Orb: label-match promotion and cap-overflow disclosure for invariant SPINE selection, attaching to any Pod via aegis-pod-sdk protocols instead of a hardcoded flat file-order slice."
+requires-python = ">=3.11"
+dependencies = [
+    "aegis-pod-sdk>=0.1,<0.2",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/orb_archive_relevance_core"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

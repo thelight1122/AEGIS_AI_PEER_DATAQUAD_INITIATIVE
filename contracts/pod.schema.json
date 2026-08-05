@@ -1,0 +1,172 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aegis.local/schemas/pod.schema.json",
+  "title": "AEGIS Pod Contract",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "pod_id",
+    "peer_id",
+    "runtime",
+    "tensor_spec",
+    "tensors",
+    "roles",
+    "processor",
+    "temporal_daemon",
+    "orbs",
+    "evidence"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string"
+    },
+    "pod_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "peer_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "runtime": {
+      "type": "object",
+      "required": ["language", "implementation"],
+      "properties": {
+        "language": { "type": "string" },
+        "implementation": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "tensor_spec": {
+      "type": "object",
+      "required": ["spec_id", "spec_path", "active_output_root"],
+      "properties": {
+        "spec_id": { "type": "string" },
+        "spec_path": { "type": "string" },
+        "active_output_root": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "tensors": {
+      "type": "object",
+      "required": ["PEER", "PCT", "NCT", "SPINE"],
+      "properties": {
+        "PEER": { "$ref": "#/$defs/tensorDeclaration" },
+        "PCT": { "$ref": "#/$defs/tensorDeclaration" },
+        "NCT": { "$ref": "#/$defs/tensorDeclaration" },
+        "SPINE": { "$ref": "#/$defs/tensorDeclaration" }
+      },
+      "additionalProperties": false
+    },
+    "roles": {
+      "type": "object",
+      "required": ["steward", "advocate"],
+      "properties": {
+        "steward": { "$ref": "#/$defs/roleDeclaration" },
+        "advocate": { "$ref": "#/$defs/roleDeclaration" }
+      },
+      "additionalProperties": false
+    },
+    "processor": {
+      "$ref": "#/$defs/componentDeclaration"
+    },
+    "temporal_daemon": {
+      "$ref": "#/$defs/componentDeclaration"
+    },
+    "orbs": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/orbAttachment" }
+    },
+    "evidence": {
+      "type": "object",
+      "required": ["created_utc", "source", "trust_state"],
+      "properties": {
+        "created_utc": { "type": "string" },
+        "source": { "type": "string" },
+        "trust_state": {
+          "type": "string",
+          "enum": ["draft", "provisional", "verified"]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "tensorDeclaration": {
+      "type": "object",
+      "required": ["name", "purpose", "storage", "output", "shape", "dtype", "axis_order", "append_only"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": ["PEER", "PCT", "NCT", "SPINE"]
+        },
+        "purpose": { "type": "string" },
+        "storage": { "type": "string" },
+        "output": { "type": "string" },
+        "shape": {
+          "type": "array",
+          "prefixItems": [
+            { "type": "string", "const": "record_count" },
+            { "type": "integer", "minimum": 1 },
+            { "type": "integer", "minimum": 1 }
+          ],
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "dtype": { "type": "string" },
+        "axis_order": {
+          "type": "array",
+          "prefixItems": [
+            { "type": "string", "const": "record" },
+            { "type": "string", "const": "embedding" },
+            { "type": "string", "const": "metadata" }
+          ],
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "append_only": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "roleDeclaration": {
+      "type": "object",
+      "required": ["purpose", "owns", "reads"],
+      "properties": {
+        "purpose": { "type": "string" },
+        "owns": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "reads": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "componentDeclaration": {
+      "type": "object",
+      "required": ["purpose", "status"],
+      "properties": {
+        "purpose": { "type": "string" },
+        "status": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "orbAttachment": {
+      "type": "object",
+      "required": ["orb_id", "required_for_full_function", "umbilical"],
+      "properties": {
+        "orb_id": { "type": "string" },
+        "required_for_full_function": { "type": "boolean" },
+        "umbilical": { "type": "string" },
+        "orb_version_pin": {
+          "type": "string",
+          "description": "The Orb version this Pod expects, declared independently of whatever the umbilical file on disk currently says — defense in depth / drift detection. Optional: absent means the Pod defers entirely to the umbilical's own orb_version."
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

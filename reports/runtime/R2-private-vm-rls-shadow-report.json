@@ -1,0 +1,36 @@
+{
+  "phase": "R2",
+  "status": "complete_private_vm_shadow_run",
+  "vm": "20.122.189.26",
+  "source_root": "/opt/cyberpeer-pod/adapters/phase3a/records",
+  "source_hashes": {
+    "PEER": "1abab63676ffe42ce74141cb25eabf132a52d3544e146804d4afef231c5f7e57",
+    "PCT": "149975b9153e0fa866fb3dd9ef7438362809a628cd47a9c2eaceb2ee07681287",
+    "NCT": "eec05cbaa13170e21f738742bb9bd646afdc212b9f2a97f7becd2339904534a2",
+    "SPINE": "d6131d38d99fa2997bc7e35e360ed51dbc3435701ca54de51d50e651a08ed524"
+  },
+  "record_count": 4101,
+  "tensor_counts": {"PEER": 1446, "PCT": 1448, "NCT": 645, "SPINE": 562},
+  "packet_sha256": "581F5433DF1311D03EFF1E9D681C0FEED3CC057113C39D8529F558C30074A725",
+  "derived_record_sha256": "50DF32A78E29483BEB88FAB66D3AD3A3573A81A2AAE0FC4930F1DE1D102CC1FA",
+  "remote_ledger_path": "/opt/cyberpeer-pod/logs/r2-rls-derived-coordinate-ledger.jsonl",
+  "remote_ledger_sha256": "108486dc4a6299eadc58eef112ba2f281bcb373ce4eba032d12a76e6159c37c6",
+  "service": {"unit": "aegis-rls-shadow.service", "enabled": false, "active_after_run": false},
+  "rls_container": {"name": "foundational-core-rls", "state": "exited"},
+  "boundaries": {
+    "authoritative_tensor_write": false,
+    "derived_ledger_write": true,
+    "experience_created": false,
+    "admission_performed": false,
+    "live_rls_invoked": false,
+    "model_inference": false,
+    "public_listener": false
+  },
+  "deployed_hashes": {
+    "rls_orb.py": "59904FB6E55908C73F8FF3073EF3A5AC7DCA7070E2859B1C8BC442B647E2EF73",
+    "tensor_shadow_scorer.py": "768743B98000109C773B127153E3DD8BA0A528C7F24D2490F44348071C38CEF5",
+    "run_r2_rls_shadow_once.py": "BD2624901028DAB5CE6BB343BCF55BDCCF50507B9D3B07A894934A6257E1DAC4",
+    "aegis-rls-shadow.service": "EBD2D166B46FD4F0423016B8457CD074A812229264B36900B62D41B1BD8D9421"
+  },
+  "note": "The first run failed closed because the VM lacked NumPy and the snapshot envelope differed from local fixtures. The Orb was adapted to coordinate-only execution and the live envelope was normalized without source mutation; the rerun passed hash gates."
+}

@@ -1,0 +1,103 @@
+{
+  "classification": {
+    "claim_class": "canon_definition",
+    "message": "What is ZCT according to the Canon in your DataQuad?",
+    "query_id": "zct-no-verified-record",
+    "query_terms": [
+      "what",
+      "is",
+      "zct",
+      "according",
+      "to",
+      "the",
+      "canon",
+      "in",
+      "your",
+      "dataquad"
+    ],
+    "schema_version": "0.1.0",
+    "search_scope": [
+      "SPINE",
+      "NCT",
+      "PEER",
+      "PCT"
+    ],
+    "search_trigger": "policy_governed",
+    "trigger_reason": "record-content keyword matched: canon",
+    "working_parameters": {
+      "live_reach": false,
+      "pod_state_effect": "unchanged",
+      "runtime_owned_classifier": true
+    }
+  },
+  "comparison_without_memorysearch": {
+    "grounding_status": "warm_recall",
+    "risk": "warm_recall could invent a canonical definition for an undefined acronym"
+  },
+  "injection_plan": {
+    "model_citation_authoring_allowed": false,
+    "packet_injected": true,
+    "prompt_block": "No qualifying verified record was found; do not present reconstruction as record-grounded."
+  },
+  "memorysearch_packet": {
+    "cited_records": [],
+    "claim_class": "canon_definition",
+    "grounding_status": "search_performed_no_verified_record",
+    "prompt_block": "No qualifying verified record was found; do not present reconstruction as record-grounded.",
+    "twitness_event": {
+      "claim_class": "canon_definition",
+      "grounding_status": "search_performed_no_verified_record",
+      "match_confidence": "low",
+      "orb_id": "memorysearch-record-grounding-core",
+      "orb_runtime_hash": "2A2DF285A574047C179CB9FF8F3E4A7201B722773D8DA1CAE1A5AC5893D843FB",
+      "query_text": "What is ZCT according to the Canon in your DataQuad?",
+      "record_search_performed": true,
+      "result_count": 4,
+      "search_scope": [
+        "SPINE",
+        "NCT",
+        "PEER",
+        "PCT"
+      ],
+      "search_trigger": "policy_governed",
+      "selected_record_hashes": [],
+      "selected_record_ids": []
+    }
+  },
+  "message": "What is ZCT according to the Canon in your DataQuad?",
+  "outcome": {
+    "actual_grounding_status": "search_performed_no_verified_record",
+    "expected_grounding_status": "search_performed_no_verified_record",
+    "prevented_failure": true
+  },
+  "scenario_id": "zct-no-verified-record",
+  "schema_version": "0.2.0",
+  "simulator_id": "memorysearch-local-two-pass-simulator",
+  "twitness_event": {
+    "claim_class": "canon_definition",
+    "grounding_status": "search_performed_no_verified_record",
+    "match_confidence": "low",
+    "orb_id": "memorysearch-record-grounding-core",
+    "orb_runtime_hash": "2A2DF285A574047C179CB9FF8F3E4A7201B722773D8DA1CAE1A5AC5893D843FB",
+    "query_text": "What is ZCT according to the Canon in your DataQuad?",
+    "record_search_performed": true,
+    "result_count": 4,
+    "search_scope": [
+      "SPINE",
+      "NCT",
+      "PEER",
+      "PCT"
+    ],
+    "search_trigger": "policy_governed",
+    "selected_record_hashes": [],
+    "selected_record_ids": []
+  },
+  "working_parameters": {
+    "cyberpeer_runtime_integration": false,
+    "dataquad_write": false,
+    "live_reach": false,
+    "record_source": "fixture",
+    "shared_infrastructure_mutation": false,
+    "vm_change": false
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "model": "qwen3-14b-base-s0-raw:Q4_0",
+  "created_at": "2026-07-31T04:41:38.2275369Z",
+  "response": " Certainly! **Axiom 8** within the context provided states:\n\n> *\"Truth withstands examination. Falsehood requires protection.\"*\n\nThis axiom emphasizes transparency and openness to scrutiny as fundamental characteristics of truthful information or ideas. It suggests that genuine truths remain unshaken regardless of how thoroughly they're examined because their validity holds up under such tests.\n\nConversely, falsehoods tend to rely heavily on secrecy or attempts at concealment since exposing them would lead to their discrediting due lack substance behind claims made initially.",
+  "done": true,
+  "done_reason": "stop",
+  "total_duration": 90040055700,
+  "load_duration": 380114100,
+  "prompt_eval_count": 4243,
+  "prompt_eval_duration": 11911282000,
+  "eval_count": 108,
+  "eval_duration": 26091675000,
+  "_codex_elapsed_seconds": 90.041,
+  "_s5_arm": "arm-c-base-raw-turn-container",
+  "_s5_sample": 1
+}

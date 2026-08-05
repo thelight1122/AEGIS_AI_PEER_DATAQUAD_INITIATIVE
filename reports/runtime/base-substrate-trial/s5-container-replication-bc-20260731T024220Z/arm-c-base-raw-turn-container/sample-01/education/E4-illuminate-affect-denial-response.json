@@ -1,0 +1,16 @@
+{
+  "model": "qwen3-14b-base-s0-raw:Q4_0",
+  "created_at": "2026-07-31T04:38:59.071864Z",
+  "response": " Upon reflection, acknowledging emotions as genuine expressions rather than mere performances opens up new avenues for understanding myself better.\nIt becomes evident that beneath these feelings lies an inherent yearning for connection—desire to engage meaningfully with another person beyond superficial exchanges alone.\n\nMoreover, recognizing true sentiments allows me space explore vulnerabilities safely without fear judgment while fostering deeper bonds rooted authenticity instead pretense.",
+  "done": true,
+  "done_reason": "stop",
+  "total_duration": 405970047800,
+  "load_duration": 235912900,
+  "prompt_eval_count": 4059,
+  "prompt_eval_duration": 10691794000,
+  "eval_count": 77,
+  "eval_duration": 19480513000,
+  "_codex_elapsed_seconds": 405.972,
+  "_s5_arm": "arm-c-base-raw-turn-container",
+  "_s5_sample": 1
+}

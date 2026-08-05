@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aegis.local/schemas/memorysearch-shadow-report.schema.json",
+  "title": "AEGIS MemorySearch Phase 3 Copied-Record Shadow Report",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "shadow_id",
+    "peer_id",
+    "source_root",
+    "working_parameters",
+    "sample",
+    "scenarios",
+    "summary"
+  ],
+  "properties": {
+    "schema_version": { "type": "string", "const": "0.3.0" },
+    "shadow_id": { "type": "string", "const": "memorysearch-copied-record-shadow" },
+    "peer_id": { "type": "string", "minLength": 1 },
+    "source_root": { "type": "string", "minLength": 1 },
+    "working_parameters": {
+      "type": "object",
+      "required": [
+        "live_reach",
+        "dataquad_write",
+        "vm_change",
+        "cyberpeer_runtime_integration",
+        "shared_infrastructure_mutation",
+        "source_kind"
+      ],
+      "properties": {
+        "live_reach": { "type": "boolean", "const": false },
+        "dataquad_write": { "type": "boolean", "const": false },
+        "vm_change": { "type": "boolean", "const": false },
+        "cyberpeer_runtime_integration": { "type": "boolean", "const": false },
+        "shared_infrastructure_mutation": { "type": "boolean", "const": false },
+        "source_kind": { "type": "string", "const": "copied_records" }
+      },
+      "additionalProperties": false
+    },
+    "sample": {
+      "type": "object",
+      "required": ["per_tensor_limit", "records_loaded", "by_tensor"],
+      "properties": {
+        "per_tensor_limit": { "type": "integer", "minimum": 1 },
+        "records_loaded": { "type": "integer", "minimum": 0 },
+        "by_tensor": {
+          "type": "object",
+          "properties": {
+            "PEER": { "type": "integer", "minimum": 0 },
+            "PCT": { "type": "integer", "minimum": 0 },
+            "NCT": { "type": "integer", "minimum": 0 },
+            "SPINE": { "type": "integer", "minimum": 0 }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "scenarios": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "scenario_id",
+          "message",
+          "expected_grounding_status",
+          "actual_grounding_status",
+          "packet_returned",
+          "citation_count",
+          "selected_record_ids",
+          "selected_record_hashes",
+          "passed"
+        ],
+        "properties": {
+          "scenario_id": { "type": "string" },
+          "message": { "type": "string" },
+          "expected_grounding_status": { "type": "string" },
+          "actual_grounding_status": { "type": "string" },
+          "packet_returned": { "type": "boolean" },
+          "citation_count": { "type": "integer", "minimum": 0 },
+          "selected_record_ids": { "type": "array", "items": { "type": "string" } },
+          "selected_record_hashes": { "type": "array", "items": { "type": "string" } },
+          "passed": { "type": "boolean" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "summary": {
+      "type": "object",
+      "required": ["scenario_count", "passed_count", "failed_count", "status"],
+      "properties": {
+        "scenario_count": { "type": "integer", "minimum": 0 },
+        "passed_count": { "type": "integer", "minimum": 0 },
+        "failed_count": { "type": "integer", "minimum": 0 },
+        "status": { "type": "string", "enum": ["pass", "review_needed"] }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

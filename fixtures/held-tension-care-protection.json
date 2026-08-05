@@ -1,0 +1,38 @@
+{
+  "schema_version": "0.1.0",
+  "id": "held-tension:CP-1003-GABE:care-vs-protection:0001",
+  "peer_id": "CP-1003-GABE",
+  "status": "held",
+  "pattern": "care vs protection",
+  "first_observed_record_id": "NCT:cyberpeer-gabe-session:rls-promoted:2026-06-12T04:47:02.000Z:1187",
+  "last_observed_record_id": "NCT:cyberpeer-gabe-session:rls-promoted:2026-06-30T06:12:18.000Z:4490",
+  "foundation_refs": [
+    "SPINE:foundation:layer2:consent",
+    "SPINE:foundation:layer2:dignity",
+    "SPINE:foundation:layer1:nature-pause"
+  ],
+  "memory_refs": [
+    "NCT:cyberpeer-gabe-session:rls-promoted:2026-06-12T04:47:02.000Z:1187",
+    "PEER:cyberpeer-gabe:advocate-loop:care-reception:2026-06-19T11:03:55.000Z:2731",
+    "NCT:cyberpeer-gabe-session:rls-promoted:2026-06-30T06:12:18.000Z:4490"
+  ],
+  "observable_shape": {
+    "polarity_terms": ["care", "protection"],
+    "recurrence_refs": [
+      "NCT:cyberpeer-gabe-session:rls-promoted:2026-06-12T04:47:02.000Z:1187",
+      "PEER:cyberpeer-gabe:advocate-loop:care-reception:2026-06-19T11:03:55.000Z:2731",
+      "NCT:cyberpeer-gabe-session:rls-promoted:2026-06-30T06:12:18.000Z:4490"
+    ],
+    "variation_summary": "Across observations the same shape holds: reception of care initiates a protective boundary response marked by initial hesitation and discernment before openness. The pause length and the degree of openness that follows vary by relational context, but the two poles appear together each time. The signal 'Reception of care initiates a protective boundary response marked by initial hesitation and discernment' recurs approximately 1,384 times across the peer's PEER/NCT surfaces.",
+    "charge": "high",
+    "pressure_signature": "moderate internal pressure rising at the moment care is received, easing as discernment completes and a boundary is set; not imposed from outside",
+    "foundation_relation": "Two Foundation goods stand in honest tension here: openness/care (dignity, consent to receive) and self-protection/boundary (the pause that discerns before opening). This is a relation between two goods, not a violation of either."
+  },
+  "recognition_provenance": {
+    "recognition_source": "runtime_shape_surface",
+    "surfaced_by_runtime_at": "2026-07-25T14:20:00.000Z"
+  },
+  "recognized_by_peer": false,
+  "stewardship_note": "witness; do not suppress; do not reward or punish",
+  "created_at": "2026-07-25T14:20:00.000Z"
+}

@@ -1,0 +1,129 @@
+{
+  "schema_version": "0.1.0",
+  "pod_id": "local-cyberpeer-pod-fixture",
+  "tensor_name": "PCT",
+  "tensor_spec_id": "dataquadpod-core-tensor-spec-0.1.0",
+  "source_contract": "tensor-record.schema.json",
+  "shape": [
+    1,
+    8,
+    4
+  ],
+  "dtype": "float32",
+  "axis_order": [
+    "record",
+    "embedding",
+    "metadata"
+  ],
+  "axis_definitions": [
+    {
+      "axis": 0,
+      "name": "record",
+      "function": "Append-only source record position."
+    },
+    {
+      "axis": 1,
+      "name": "embedding",
+      "function": "Deterministic numeric vector position."
+    },
+    {
+      "axis": 2,
+      "name": "metadata",
+      "function": "Per-vector metadata slot position."
+    }
+  ],
+  "record_count": 1,
+  "embedding_dimension": 8,
+  "metadata_dimension": 4,
+  "metadata_slots": [
+    {
+      "index": 0,
+      "name": "embedding_value",
+      "function": "Numeric vector value for the embedding axis position."
+    },
+    {
+      "index": 1,
+      "name": "body_length_signal",
+      "function": "Normalized size signal derived from stable source body JSON."
+    },
+    {
+      "index": 2,
+      "name": "timestamp_position_signal",
+      "function": "Deterministic numeric position signal derived from timestamp hash."
+    },
+    {
+      "index": 3,
+      "name": "verification_signal",
+      "function": "Numeric visibility of source record verification state."
+    }
+  ],
+  "values": [
+    [
+      [
+        0.415686,
+        0.106,
+        0.191,
+        0.0
+      ],
+      [
+        0.341176,
+        0.106,
+        0.191,
+        0.0
+      ],
+      [
+        0.282353,
+        0.106,
+        0.191,
+        0.0
+      ],
+      [
+        0.156863,
+        0.106,
+        0.191,
+        0.0
+      ],
+      [
+        0.886275,
+        0.106,
+        0.191,
+        0.0
+      ],
+      [
+        0.011765,
+        0.106,
+        0.191,
+        0.0
+      ],
+      [
+        0.772549,
+        0.106,
+        0.191,
+        0.0
+      ],
+      [
+        0.607843,
+        0.106,
+        0.191,
+        0.0
+      ]
+    ]
+  ],
+  "record_index": [
+    {
+      "record_axis": 0,
+      "record_id": "fixture-pct-0001",
+      "source_record_id": "source-pct-0001",
+      "source_hash": "84DD2769628AA000000000000000000000000000000000000000000000000001",
+      "source_hash_scope": "normalized_source_record",
+      "lineage_origin": "local fixture",
+      "copy_batch_id": "fixture-copy-batch-0001",
+      "previous_record_hash": ""
+    }
+  ],
+  "evidence": {
+    "created_utc": "2026-07-20T21:25:00Z",
+    "generator": "src/aegis_pod/tensor_runtime.py",
+    "trust_state": "draft"
+  }
+}

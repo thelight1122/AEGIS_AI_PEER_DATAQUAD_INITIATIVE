@@ -1,0 +1,149 @@
+{
+  "schema_version": "0.1.0",
+  "manifest_id": "local-canon-housekeeping-0.1.0",
+  "working_parameters": {
+    "scope": "local repository reports only",
+    "pod_state_effect": "unchanged",
+    "live_reach": false,
+    "file_mutation_policy": "evaluate and report only; source artifacts remain present",
+    "outside_current_verified_surface": [
+      "Marking or auditing the superseded Canon copies in the Central Codex (I:\\)",
+      "Mutating shared Central Codex files with SUPERSEDED-BY banners",
+      "Resolving the AEGIS_White_Paper_v2.md Axiom 8 / Axiom 23 divergence"
+    ]
+  },
+  "entries": [
+    {
+      "entry_id": "phase-8-initial-threshold-evidence",
+      "path": "reports/runtime/2026-07-20-phase-8-marker-promotion-threshold-evidence.md",
+      "status": "superseded",
+      "reason": "Initial Phase 8 evidence recommended reviewed status before builder self-attestation exclusion and reset-to-provisional drift handling were added.",
+      "source_hash": "B46468CC94DF3521B2228D291C98B77E5C0D58FEEDC0E73ECE5161FBAE293832",
+      "superseded_by": "reports/runtime/2026-07-20-phase-8-review-remediation-evidence.md",
+      "replacement_hash": "C436C1495668E97C83C23F18286249B7E59B1C5C36E45D1A322133891A35FECD"
+    },
+    {
+      "entry_id": "phase-8-initial-publication-note",
+      "path": "reports/runtime/2026-07-20-phase-8-published.md",
+      "status": "superseded",
+      "reason": "The initial Phase 8 publication commit was followed by remediation commit 907fa68, so the initial publication note is historical rather than the current Phase 8 completion state.",
+      "source_hash": "853F7DF64BE9A1AAA6AAE89AA1A0B3BA9E8F735C5BE9CDF9A7FDED844C94E0F7",
+      "superseded_by": "reports/runtime/2026-07-20-phase-8-review-remediation-evidence.md",
+      "replacement_hash": "C436C1495668E97C83C23F18286249B7E59B1C5C36E45D1A322133891A35FECD"
+    },
+    {
+      "entry_id": "temporary-forge-owner-retarget",
+      "path": "reports/runtime/2026-07-20-forge-owner-retargeted-to-gamemaster.md",
+      "status": "superseded",
+      "reason": "Temporary owner retarget evidence is preserved, but final publication evidence supersedes it as the active Forge state.",
+      "source_hash": "D6E3AD1DE1A2A6B3176797F4F390BC9473904E5F38C1271C0E2E305020ED0C7F",
+      "superseded_by": "reports/runtime/2026-07-20-forge-publication-complete.md",
+      "replacement_hash": "F9380DFCF43EE1AE8BF253576A84D5562511D53773A7B18664DCE6004DB804FB"
+    },
+    {
+      "entry_id": "verus-repo-required-status",
+      "path": "reports/runtime/2026-07-20-verus-public-repo-still-required.md",
+      "status": "superseded",
+      "reason": "The repo-required status is preserved as history; final Forge publication evidence supersedes it as the active state.",
+      "source_hash": "22782A178F9F618DFB0C7EED4CD71EDD30BD729C80403B03F3E46632A980DC65",
+      "superseded_by": "reports/runtime/2026-07-20-forge-publication-complete.md",
+      "replacement_hash": "F9380DFCF43EE1AE8BF253576A84D5562511D53773A7B18664DCE6004DB804FB"
+    },
+    {
+      "entry_id": "phase-8-remediation-evidence",
+      "path": "reports/runtime/2026-07-20-phase-8-review-remediation-evidence.md",
+      "status": "canonical",
+      "reason": "Current Phase 8 completion evidence after independent review remediation.",
+      "source_hash": "C436C1495668E97C83C23F18286249B7E59B1C5C36E45D1A322133891A35FECD"
+    },
+    {
+      "entry_id": "current-marker-promotion-report",
+      "path": "reports/runtime/marker-promotion-report.json",
+      "status": "canonical",
+      "reason": "Current generated marker promotion report.",
+      "source_hash": "BCD1DCC30EEE6395BDDC28EE4C2CA4BE454342307FA9DC948B235754C073241B"
+    },
+    {
+      "entry_id": "step-5-initial-marker-cycle-evidence",
+      "path": "reports/runtime/2026-07-20-step-5-verified-code-marker-cycle-evidence.md",
+      "status": "superseded",
+      "reason": "Initial marker-cycle evidence is preserved, but later independent-review entry evidence and Phase 8 policy now define the current marker trust interpretation.",
+      "source_hash": "79364405095ACD5DB2BB222F981A1EDCED79BC6B2DEAFE6F504881968A08DD49",
+      "superseded_by": "reports/runtime/2026-07-20-step-5-independent-review-entry-update-evidence.md",
+      "replacement_hash": "BFFB7EE5F5D2FCC319F692F9AB72B49E357B527CE73D7DCB8C2761642A45B431"
+    },
+    {
+      "entry_id": "step-5-independent-review-threshold-note",
+      "path": "reports/runtime/2026-07-20-step-5-independent-review-entry-update-evidence.md",
+      "status": "superseded",
+      "reason": "This record remains valid for the review-entry update, but its statement that the larger redundancy threshold was not yet formalized is superseded by Phase 8 policy.",
+      "source_hash": "BFFB7EE5F5D2FCC319F692F9AB72B49E357B527CE73D7DCB8C2761642A45B431",
+      "superseded_by": "reports/runtime/2026-07-20-phase-8-review-remediation-evidence.md",
+      "replacement_hash": "C436C1495668E97C83C23F18286249B7E59B1C5C36E45D1A322133891A35FECD"
+    },
+    {
+      "entry_id": "step-7-copied-record-design-evidence",
+      "path": "reports/runtime/2026-07-20-step-7-copied-record-dry-run-migration-design-evidence.md",
+      "status": "superseded",
+      "reason": "Step 7 design evidence is preserved, but later discrepancy-resolution evidence supersedes its file-presence and current-hash claims.",
+      "source_hash": "DE1BB40752D7D7BBEB9FC9E7A6CCBE5161F7E235653BCCA8016CCE3247F6984F",
+      "superseded_by": "reports/runtime/2026-07-20-step-7-discrepancy-resolution-evidence.md",
+      "replacement_hash": "E6CD79D0D6618ED856550552139EADAD3646A61269F16A7778A8B733BD0ED396"
+    },
+    {
+      "entry_id": "bc25cea-hold-ack",
+      "path": "reports/runtime/2026-07-20-codex-ack-unreviewed-bc25cea-hold.md",
+      "status": "superseded",
+      "reason": "The unreviewed-work hold is preserved as a governance record; later acceptance evidence supersedes it as the current state.",
+      "source_hash": "F6970C6F91215482965CF426FFC7084192F365AF5F18480DFD1BCBFCE6442863",
+      "superseded_by": "reports/runtime/2026-07-20-bc25cea-reviewed-and-accepted.md",
+      "replacement_hash": "0B5C81BB1918F1B9E707CA05529BA550F9A328DB124A6BD0F2C2D6C7B4543F38"
+    },
+    {
+      "entry_id": "foundry-provisioning-block",
+      "path": "reports/runtime/2026-07-20-foundry-git-creation-status-to-claude.md",
+      "status": "superseded",
+      "reason": "Initial Foundry provisioning block is preserved; final Forge publication evidence supersedes it as the active Git state.",
+      "source_hash": "35114B05E446FC51105E8EFFBB5336DA7A5B6768BD4BBF871BF65452F5C3CD5D",
+      "superseded_by": "reports/runtime/2026-07-20-forge-publication-complete.md",
+      "replacement_hash": "F9380DFCF43EE1AE8BF253576A84D5562511D53773A7B18664DCE6004DB804FB"
+    },
+    {
+      "entry_id": "forge-push-block-after-acceptance",
+      "path": "reports/runtime/2026-07-20-forge-push-still-blocked-after-acceptance.md",
+      "status": "superseded",
+      "reason": "Post-acceptance Forge push block is preserved; final Forge publication evidence supersedes it as the active Git state.",
+      "source_hash": "C050BA4417DF9BE9DB1F4F4940DAE02AB36CBAB62A489C1B2C345BE23CC09FB7",
+      "superseded_by": "reports/runtime/2026-07-20-forge-publication-complete.md",
+      "replacement_hash": "F9380DFCF43EE1AE8BF253576A84D5562511D53773A7B18664DCE6004DB804FB"
+    },
+    {
+      "entry_id": "step-7-discrepancy-resolution",
+      "path": "reports/runtime/2026-07-20-step-7-discrepancy-resolution-evidence.md",
+      "status": "canonical",
+      "reason": "Current Step 7 discrepancy-resolution evidence.",
+      "source_hash": "E6CD79D0D6618ED856550552139EADAD3646A61269F16A7778A8B733BD0ED396"
+    },
+    {
+      "entry_id": "bc25cea-acceptance",
+      "path": "reports/runtime/2026-07-20-bc25cea-reviewed-and-accepted.md",
+      "status": "canonical",
+      "reason": "Current governance acceptance evidence for bc25cea.",
+      "source_hash": "0B5C81BB1918F1B9E707CA05529BA550F9A328DB124A6BD0F2C2D6C7B4543F38"
+    },
+    {
+      "entry_id": "forge-publication-complete",
+      "path": "reports/runtime/2026-07-20-forge-publication-complete.md",
+      "status": "canonical",
+      "reason": "Current Forge publication completion evidence.",
+      "source_hash": "F9380DFCF43EE1AE8BF253576A84D5562511D53773A7B18664DCE6004DB804FB"
+    },
+    {
+      "entry_id": "white-paper-v2-axiom-divergence",
+      "path": "reports/runtime/2026-07-20-phase-9-superseded-canon-preimplementation.md",
+      "status": "open_question",
+      "reason": "Records unresolved SSSP divergence: AEGIS_White_Paper_v2.md has Axiom 8 = Emotion / Axiom 23 = Formation numbering and an unlocated Canon v1.1-S reference. This local entry preserves the open question but does not resolve Central Codex source truth.",
+      "source_hash": "7E3952990C89BA8F5DF31F001E5444F21557AF9C2BAD209DF8180D0A0F779859"
+    }
+  ]
+}

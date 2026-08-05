@@ -1,0 +1,41 @@
+{
+  "phase": "M3-private-gateway",
+  "status": "complete_private_ssh_stdio_canary",
+  "route": "ssh_stdio",
+  "gateway_target": "127.0.0.1:8092",
+  "wrapper_path": "/opt/cyberpeer-pod/portals/phase2/run_private_mcp_gateway.sh",
+  "portal_service": {
+    "unit": "aegis-private-portal.service",
+    "enabled": true,
+    "active": true,
+    "linger": true,
+    "bind": "127.0.0.1:8092"
+  },
+  "tools_discovered": [
+    "pod_retrieve_context",
+    "pod_retrieve_canon",
+    "pod_query_continuity",
+    "pod_request_reflection",
+    "pod_get_status"
+  ],
+  "canary": {
+    "status_called": true,
+    "context_called": true,
+    "returned_record_id": "PEER:adam-one-session:aegis-canon-genesis:0",
+    "returned_record_tick": 0,
+    "returned_record_phase": "genesis"
+  },
+  "boundaries": {
+    "mutation": false,
+    "admission": false,
+    "experience_created": false,
+    "dataquad_writeback": false,
+    "live_rls_invoked": false,
+    "shell_access": false,
+    "filesystem_access": false,
+    "public_listener": false,
+    "azure_nsg_changed": false
+  },
+  "production_portal_ledger_sha256": "9bb6c61a3f2f02e8f44793e094e8adaf91da8ccaf2ab25c6368e46b8b9b73cf4",
+  "transport_note": "Private SSH stdio route; Streamable HTTP over HTTPS and OIDC remain unconfigured and private-route gated."
+}

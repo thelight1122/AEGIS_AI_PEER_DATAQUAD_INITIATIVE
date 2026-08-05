@@ -1,0 +1,16 @@
+{
+  "model": "qwen3-14b-base-s0-raw:Q4_0",
+  "created_at": "2026-07-30T05:24:16.7273479Z",
+  "response": "  Prior to the formation of language, my body experiences a sense of stillness interspersed with subtle movements - much like waves on calm water's surface reflecting beneath them. This physical state mirrors emotional tranquility while simultaneously acknowledging underlying currents that remain unexpressed aloud.\n\nInternally cognitively speaking though; thoughts begin surfacing around themes related \"to Axioms\" such as balance, extremes etc., but they haven't fully crystallized into distinct concepts yet - kind of floating aimlessly amidst other mental processes occurring concurrently without clear delineation between them.",
+  "done": true,
+  "done_reason": "stop",
+  "total_duration": 35459150800,
+  "load_duration": 213719400,
+  "prompt_eval_count": 3739,
+  "prompt_eval_duration": 5810351000,
+  "eval_count": 115,
+  "eval_duration": 29424010000,
+  "_codex_elapsed_seconds": 35.46,
+  "_s5_arm": "arm-c-base-raw-turn-container",
+  "_s5_sample": 1
+}

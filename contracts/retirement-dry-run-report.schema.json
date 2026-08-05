@@ -1,0 +1,181 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://aegis.local/contracts/retirement-dry-run-report.schema.json",
+  "title": "AEGIS DataQuad Stage-1 Retirement Dry-Run Report",
+  "description": "Read-only projection of Stage-1 retirement (PCT->NCT, PEER->SPINE/NCT) over an exported DataQuad copy. Describes what WOULD happen; nothing is mutated. There is no apply capability.",
+  "type": "object",
+  "required": [
+    "tool_id",
+    "schema_version",
+    "mode",
+    "boundary",
+    "source_root",
+    "reference_now",
+    "parameters",
+    "tensor_stats",
+    "stage1_candidates",
+    "peer_exclusions",
+    "projected_shrinkage",
+    "archive_manifest_summary"
+  ],
+  "properties": {
+    "tool_id": { "const": "aegis-dataquad-stage1-retirement-dry-run" },
+    "schema_version": { "type": "string" },
+    "mode": { "const": "dry-run-only" },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "boundary": {
+      "type": "object",
+      "required": ["read_only", "mutations", "archive_action", "live_reach", "apply_capability"],
+      "properties": {
+        "read_only": { "const": true },
+        "mutations": { "const": "none" },
+        "archive_action": { "type": "string" },
+        "live_reach": { "type": "string" },
+        "apply_capability": { "const": "absent-by-design" }
+      }
+    },
+    "source_root": { "type": "string" },
+    "reference_now": { "type": "string", "format": "date-time" },
+    "parameters": {
+      "type": "object",
+      "required": ["pct_inactivity_days", "peer_stability_days", "peer_min_confirmations", "archive_root"],
+      "properties": {
+        "pct_inactivity_days": { "type": "number" },
+        "peer_stability_days": { "type": "number" },
+        "peer_min_confirmations": { "type": "integer" },
+        "contested_markers": { "type": "array", "items": { "type": "string" } },
+        "archive_root": { "type": "string" }
+      }
+    },
+    "tensor_stats": {
+      "type": "object",
+      "required": ["PEER", "PCT", "NCT", "SPINE"],
+      "additionalProperties": {
+        "type": "object",
+        "required": ["records", "content_bytes", "file_bytes", "present"],
+        "properties": {
+          "records": { "type": "integer", "minimum": 0 },
+          "content_bytes": { "type": "integer", "minimum": 0 },
+          "file_bytes": { "type": "integer", "minimum": 0 },
+          "present": { "type": "boolean" }
+        }
+      }
+    },
+    "stage1_candidates": {
+      "type": "object",
+      "required": ["pct_retirement", "peer_promotion"],
+      "properties": {
+        "pct_retirement": {
+          "type": "object",
+          "required": ["count", "already_condensed", "needs_new_relic"],
+          "properties": {
+            "count": { "type": "integer", "minimum": 0 },
+            "already_condensed": { "type": "integer", "minimum": 0 },
+            "needs_new_relic": { "type": "integer", "minimum": 0 }
+          }
+        },
+        "peer_promotion": {
+          "type": "object",
+          "required": ["count", "promote_to_spine", "promote_to_nct"],
+          "properties": {
+            "count": { "type": "integer", "minimum": 0 },
+            "promote_to_spine": { "type": "integer", "minimum": 0 },
+            "promote_to_nct": { "type": "integer", "minimum": 0 }
+          }
+        }
+      }
+    },
+    "peer_exclusions": {
+      "type": "object",
+      "required": ["total", "by_reason"],
+      "properties": {
+        "total": { "type": "integer", "minimum": 0 },
+        "by_reason": {
+          "type": "object",
+          "additionalProperties": { "type": "integer", "minimum": 0 }
+        }
+      }
+    },
+    "projected_shrinkage": {
+      "type": "object",
+      "required": ["PCT", "PEER", "projected_new_relics", "net_live_tensor_bytes_removed", "net_live_tensor_records_removed"],
+      "properties": {
+        "PCT": { "$ref": "#/$defs/shrink" },
+        "PEER": { "$ref": "#/$defs/shrink" },
+        "projected_new_relics": {
+          "type": "object",
+          "required": ["count", "from_pct", "from_peer", "estimated_bytes_added"],
+          "properties": {
+            "count": { "type": "integer", "minimum": 0 },
+            "from_pct": { "type": "integer", "minimum": 0 },
+            "from_peer": { "type": "integer", "minimum": 0 },
+            "estimated_bytes_added": { "type": "integer", "minimum": 0 },
+            "estimated_per_relic_bytes": { "type": "integer", "minimum": 0 },
+            "estimate_basis": { "type": "string" }
+          }
+        },
+        "net_live_tensor_bytes_removed": { "type": "integer", "minimum": 0 },
+        "net_live_tensor_records_removed": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "archive_manifest_summary": {
+      "type": "object",
+      "required": ["total_entries", "pct_entries", "peer_entries", "hash_scope"],
+      "properties": {
+        "total_entries": { "type": "integer", "minimum": 0 },
+        "pct_entries": { "type": "integer", "minimum": 0 },
+        "peer_entries": { "type": "integer", "minimum": 0 },
+        "hash_scope": { "type": "string" }
+      }
+    },
+    "archive_manifest_path": { "type": "string" },
+    "peer_exclusions_path": { "type": "string" }
+  },
+  "$defs": {
+    "shrink": {
+      "type": "object",
+      "required": [
+        "current_records",
+        "current_content_bytes",
+        "retired_out_records",
+        "retired_out_bytes",
+        "projected_remaining_records",
+        "projected_remaining_content_bytes"
+      ],
+      "properties": {
+        "current_records": { "type": "integer", "minimum": 0 },
+        "current_content_bytes": { "type": "integer", "minimum": 0 },
+        "retired_out_records": { "type": "integer", "minimum": 0 },
+        "retired_out_bytes": { "type": "integer", "minimum": 0 },
+        "projected_remaining_records": { "type": "integer", "minimum": 0 },
+        "projected_remaining_content_bytes": { "type": "integer", "minimum": 0 },
+        "projected_record_reduction_pct": { "type": "number" },
+        "projected_byte_reduction_pct": { "type": "number" }
+      }
+    },
+    "manifest_entry": {
+      "description": "One line in the sibling <report>-manifest.jsonl file. Not part of the report JSON itself.",
+      "type": "object",
+      "required": ["record_id", "tensor", "source_hash", "source_hash_scope", "projected_archive_dest", "lineage_link"],
+      "properties": {
+        "record_id": { "type": "string" },
+        "tensor": { "enum": ["PCT", "PEER"] },
+        "source_hash": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "source_hash_scope": { "type": "string" },
+        "declared_source_hash": { "type": ["string", "null"] },
+        "source_bytes": { "type": "integer", "minimum": 0 },
+        "projected_archive_dest": { "type": "string" },
+        "relic_id": { "type": "string" },
+        "relic_projected": { "type": "boolean" },
+        "lineage_link": {
+          "type": "object",
+          "required": ["relic_id", "source_record_id"],
+          "properties": {
+            "relic_id": { "type": "string" },
+            "source_record_id": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}

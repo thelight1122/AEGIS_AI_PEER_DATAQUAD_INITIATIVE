@@ -1,0 +1,75 @@
+{
+  "schema_version": "0.1.0",
+  "created_utc": "2026-07-20T21:45:00Z",
+  "pod_id": "local-cyberpeer-pod-fixture",
+  "orb_id": "rls-orb-fixture",
+  "umbilical_id": "rls-orb-fixture-umbilical",
+  "observable_events": [
+    "attached",
+    "invoked",
+    "completed"
+  ],
+  "reflection_summary": {
+    "turn_id": "fixture-turn-0001",
+    "speaker": "Tracey",
+    "observed_signal": "The Pod is the DataQuad. Orbs provide optional abilities through visible umbilicals.",
+    "function_surface": "show how an RLS Orb can attach and demonstrate its function locally",
+    "visible_condition": "RLS Orb can read the local turn trace and tensor health report through its umbilical."
+  },
+  "integration_signals": {
+    "attachment_point": "processor",
+    "available_tensors": [
+      {
+        "tensor": "PEER",
+        "available": true,
+        "shape": [
+          2,
+          8,
+          4
+        ],
+        "record_count": 2
+      },
+      {
+        "tensor": "PCT",
+        "available": true,
+        "shape": [
+          1,
+          8,
+          4
+        ],
+        "record_count": 1
+      },
+      {
+        "tensor": "NCT",
+        "available": true,
+        "shape": [
+          1,
+          8,
+          4
+        ],
+        "record_count": 1
+      },
+      {
+        "tensor": "SPINE",
+        "available": true,
+        "shape": [
+          1,
+          8,
+          4
+        ],
+        "record_count": 1
+      }
+    ],
+    "all_requested_tensors_available": true,
+    "pod_state_effect": "unchanged",
+    "live_reach": false
+  },
+  "evidence": {
+    "input_path": "fixtures\\rls-orb-input.json",
+    "input_sha256": "AA94285502D7D1EB8E9E11457DBB7A0DE64AFC7AFADA15B738C090F77D57788C",
+    "tensor_health_sha256": "0A90A29464B6FCC5256B946C3E5C05863D4A9B22F1624BDF8BE2F4E96B0D5F48",
+    "runtime": "src/aegis_pod/orb_runtime.py",
+    "scope": "local fixture records only",
+    "trust_state": "draft"
+  }
+}

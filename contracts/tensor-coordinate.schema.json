@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aegis.local/schemas/tensor-coordinate.schema.json",
+  "title": "AEGIS Tensor Coordinate",
+  "type": "object",
+  "required": ["tensor", "record_id", "ordinal", "t_time", "record_hash", "tensor_snapshot_hash", "semantic_coordinate", "affective_coordinate"],
+  "properties": {
+    "tensor": {"type": "string", "enum": ["PEER", "PCT", "NCT", "SPINE"]},
+    "record_id": {"type": "string", "minLength": 1},
+    "ordinal": {"type": "integer", "minimum": 0},
+    "t_time": {"type": "integer", "minimum": 0},
+    "record_hash": {"type": "string", "pattern": "^[A-F0-9]{64}$"},
+    "tensor_snapshot_hash": {"type": "string", "pattern": "^[A-F0-9]{64}$"},
+    "semantic_coordinate": {"type": "object", "required": ["embedding_model", "dimension"], "properties": {"embedding_model": {"type": "string"}, "dimension": {"const": 384}}, "additionalProperties": false},
+    "affective_coordinate": {"type": "object", "required": ["values", "provenance"], "properties": {"values": {"type": "array", "minItems": 8, "maxItems": 8, "items": {"type": "number"}}, "provenance": {"type": "array", "minItems": 8, "maxItems": 8, "items": {"type": "string"}}}, "additionalProperties": false}
+  },
+  "additionalProperties": false
+}

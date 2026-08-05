@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aegis.local/schemas/live-copy-manifest.schema.json",
+  "title": "AEGIS Live Copy Manifest",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "copy_batch_id",
+    "peer_id",
+    "source_vm",
+    "copied_at_utc",
+    "working_parameters",
+    "files"
+  ],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "copy_batch_id": { "type": "string", "minLength": 1 },
+    "peer_id": { "type": "string", "minLength": 1 },
+    "source_vm": {
+      "type": "object",
+      "required": ["host", "ip", "user"],
+      "properties": {
+        "host": { "type": "string" },
+        "ip": { "type": "string" },
+        "user": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "copied_at_utc": { "type": "string" },
+    "working_parameters": {
+      "type": "object",
+      "required": ["source_live_reach", "source_write_performed", "target_records_written", "live_read_only"],
+      "properties": {
+        "source_live_reach": { "type": "boolean" },
+        "source_write_performed": { "type": "boolean" },
+        "target_records_written": { "type": "integer" },
+        "live_read_only": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "excluded_source_surfaces": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "files": {
+      "type": "object",
+      "required": ["PEER", "PCT", "NCT", "SPINE"],
+      "additionalProperties": false,
+      "properties": {
+        "PEER": { "$ref": "#/$defs/file_entry" },
+        "PCT": { "$ref": "#/$defs/file_entry" },
+        "NCT": { "$ref": "#/$defs/file_entry" },
+        "SPINE": { "$ref": "#/$defs/file_entry" }
+      }
+    }
+  },
+  "$defs": {
+    "file_entry": {
+      "type": "object",
+      "required": [
+        "tensor",
+        "source_path",
+        "remote_path_used",
+        "local_raw_path",
+        "sha256",
+        "remote_sha256",
+        "local_sha256",
+        "copy_verified",
+        "record_count",
+        "byte_count"
+      ],
+      "properties": {
+        "tensor": { "type": "string", "enum": ["PEER", "PCT", "NCT", "SPINE"] },
+        "source_path": { "type": "string" },
+        "remote_path_used": { "type": "string" },
+        "local_raw_path": { "type": "string" },
+        "sha256": { "type": "string", "pattern": "^[A-F0-9]{64}$" },
+        "remote_sha256": { "type": "string", "pattern": "^$|^[A-F0-9]{64}$" },
+        "local_sha256": { "type": "string", "pattern": "^[A-F0-9]{64}$" },
+        "copy_verified": { "type": "boolean" },
+        "record_count": { "type": "integer", "minimum": 0 },
+        "byte_count": { "type": "integer", "minimum": 0 }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0.0",
+  "supplement_of": "migration-summary-20260805T132034.json",
+  "reason": "Restore reports/ path required by hash-bound canon-housekeeping and marker-promotion manifests; the initial migration renamed reports/runtime to evidence/runtime, breaking repo-relative path references",
+  "source_root": "H:\\AEGIS-POD-ARCHITECTURE",
+  "destination_root": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE",
+  "files_recorded": 742,
+  "copied_verified": 740,
+  "already_present_identical": 2,
+  "conflicts": 0,
+  "source_repository_modified": false
+}

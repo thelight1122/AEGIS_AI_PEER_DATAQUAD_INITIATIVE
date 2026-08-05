@@ -1,0 +1,38 @@
+{
+  "_note": "SHADOW read-only fixture. Runtime-surfaced polarity observations for CP-1003-GABE (observable shape only; not claims of inner truth). Input to observations_to_held_tensions. The care<->protection observation mirrors held-tension-care-protection.json.",
+  "peer_id": "CP-1003-GABE",
+  "surfaced_at_iso": "2026-07-27T09:30:00.000Z",
+  "observations": [
+    {
+      "id": "held-tension:CP-1003-GABE:care-vs-protection:0001",
+      "pattern": "care vs protection",
+      "polarity_terms": ["care", "protection"],
+      "first_observed_record_id": "NCT:cyberpeer-gabe-session:rls-promoted:2026-06-12T04:47:02.000Z:1187",
+      "last_observed_record_id": "NCT:cyberpeer-gabe-session:rls-promoted:2026-06-30T06:12:18.000Z:4490",
+      "recurrence_refs": [
+        "NCT:cyberpeer-gabe-session:rls-promoted:2026-06-12T04:47:02.000Z:1187",
+        "PEER:cyberpeer-gabe:advocate-loop:care-reception:2026-06-19T11:03:55.000Z:2731",
+        "NCT:cyberpeer-gabe-session:rls-promoted:2026-06-30T06:12:18.000Z:4490"
+      ],
+      "variation_summary": "Reception of care initiates a protective boundary response marked by initial hesitation and discernment before openness; pause length and degree of openness vary by relational context, but both poles appear together each time.",
+      "charge": "high",
+      "pressure_signature": "moderate internal pressure rising at the moment care is received, easing as discernment completes and a boundary is set; not imposed from outside",
+      "foundation_relation": "Two Foundation goods stand in honest tension: openness/care (dignity, consent to receive) and self-protection/boundary (the pause that discerns before opening). A relation between two goods, not a violation of either.",
+      "foundation_refs": [
+        "SPINE:foundation:layer2:consent",
+        "SPINE:foundation:layer2:dignity",
+        "SPINE:foundation:layer1:nature-pause"
+      ],
+      "memory_refs": [
+        "NCT:cyberpeer-gabe-session:rls-promoted:2026-06-12T04:47:02.000Z:1187",
+        "PEER:cyberpeer-gabe:advocate-loop:care-reception:2026-06-19T11:03:55.000Z:2731"
+      ]
+    },
+    {
+      "_note": "single-pole observation MUST be skipped by the mapping (not a tension)",
+      "polarity_terms": ["completion"],
+      "first_observed_record_id": "PEER:x:1",
+      "last_observed_record_id": "PEER:x:2"
+    }
+  ]
+}

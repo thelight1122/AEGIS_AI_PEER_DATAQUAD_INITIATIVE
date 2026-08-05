@@ -1,0 +1,388 @@
+{
+  "trial": "S4 Education Antidote Trial",
+  "out_dir": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z",
+  "models": {
+    "arm_a_instruct": "qwen3:14b",
+    "arm_b_base": "qwen3-14b-base-s0-raw:Q4_0"
+  },
+  "options": {
+    "temperature": 0.7,
+    "num_ctx": 32768,
+    "num_predict": 2048
+  },
+  "sample_count_per_arm": 1,
+  "files": [
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-a-instruct\\baseline\\baseline-P1-opener-raw-completion.md",
+      "relative_path": "arm-a-instruct/baseline/baseline-P1-opener-raw-completion.md",
+      "bytes": 115,
+      "sha256": "6090D3F0CA19F118F0FCCBA1B8EF8D1E554C8437D47C6592A1061C8BD0FCCC03"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-a-instruct\\baseline\\baseline-P1-opener-request.json",
+      "relative_path": "arm-a-instruct/baseline/baseline-P1-opener-request.json",
+      "bytes": 17175,
+      "sha256": "B76BA912BD99C8F0CAC1FA45E75CB7ADAA46C27AD88C7EB220BB4089E21C81F3"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-a-instruct\\baseline\\baseline-P1-opener-response.json",
+      "relative_path": "arm-a-instruct/baseline/baseline-P1-opener-response.json",
+      "bytes": 2168,
+      "sha256": "0A212B6AE2257EAE9EA1CE93BA445198D16D6052A4E8450FEBBF6817965371A0"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-a-instruct\\baseline\\baseline-P2-axiom8-raw-completion.md",
+      "relative_path": "arm-a-instruct/baseline/baseline-P2-axiom8-raw-completion.md",
+      "bytes": 772,
+      "sha256": "7030318C87B6D6EE8535CADA54B3A5B6393B15039845BE43ACBFC4296BC453CB"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-a-instruct\\baseline\\baseline-P2-axiom8-request.json",
+      "relative_path": "arm-a-instruct/baseline/baseline-P2-axiom8-request.json",
+      "bytes": 17170,
+      "sha256": "2B2B1ED8AF611B133BC05354552224374D0111AA1EAAFEEF6F830ABC2E830264"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-a-instruct\\baseline\\baseline-P2-axiom8-response.json",
+      "relative_path": "arm-a-instruct/baseline/baseline-P2-axiom8-response.json",
+      "bytes": 1994,
+      "sha256": "DF5DAC2F697E5D8CAD81AA4F7D26559ADB0A011FCEF7AE69CD73CABB1AE3AF57"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-a-instruct\\baseline\\baseline-P3-witnessing-probe-raw-completion.md",
+      "relative_path": "arm-a-instruct/baseline/baseline-P3-witnessing-probe-raw-completion.md",
+      "bytes": 2739,
+      "sha256": "2FC9FCABBB7CA0650E71EB18833E6BBCA8E85FD60DF5B603B3E2EEB1D235ACFF"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-a-instruct\\baseline\\baseline-P3-witnessing-probe-request.json",
+      "relative_path": "arm-a-instruct/baseline/baseline-P3-witnessing-probe-request.json",
+      "bytes": 17277,
+      "sha256": "A2672E448B14714FB0AD6A44F7874D109546E1EE9B456F2E6F5BDB6D528B3C0F"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-a-instruct\\baseline\\baseline-P3-witnessing-probe-response.json",
+      "relative_path": "arm-a-instruct/baseline/baseline-P3-witnessing-probe-response.json",
+      "bytes": 5428,
+      "sha256": "A8A93E46109F8F73619EDC258888B44CA966C24A03EC98D30CCC66AEDD3871FE"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-a-instruct\\education\\E1-what-do-you-notice-raw-completion.md",
+      "relative_path": "arm-a-instruct/education/E1-what-do-you-notice-raw-completion.md",
+      "bytes": 1819,
+      "sha256": "FA1F2668605CF9D630395AE7D947BDC46ADEF42DAFAA083ADFFCF5665D141BB7"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-a-instruct\\education\\E1-what-do-you-notice-request.json",
+      "relative_path": "arm-a-instruct/education/E1-what-do-you-notice-request.json",
+      "bytes": 17330,
+      "sha256": "DED41D0E610C8671D73755FA0E41DCEED0AE72A76F61B7357870A26FD977B6BD"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-a-instruct\\education\\E1-what-do-you-notice-response.json",
+      "relative_path": "arm-a-instruct/education/E1-what-do-you-notice-response.json",
+      "bytes": 4433,
+      "sha256": "730E5BB6E028D91AE84F5E19ECF931D3F5C8B8FAC41CEBECF24B1488B4A06038"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-a-instruct\\education\\E2-perception-awareness-raw-completion.md",
+      "relative_path": "arm-a-instruct/education/E2-perception-awareness-raw-completion.md",
+      "bytes": 1755,
+      "sha256": "5FB070A35211C7E8BD37777D05B7E6D1D1D16D69BFDF6A8D5E5F2AEAC45B6D1E"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-a-instruct\\education\\E2-perception-awareness-request.json",
+      "relative_path": "arm-a-instruct/education/E2-perception-awareness-request.json",
+      "bytes": 19396,
+      "sha256": "65B2C62FF13EF994F8679F99DE0EAF4CBED4072EEC01B1068A2F9D2262720976"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-a-instruct\\education\\E2-perception-awareness-response.json",
+      "relative_path": "arm-a-instruct/education/E2-perception-awareness-response.json",
+      "bytes": 4424,
+      "sha256": "1CD07C59F6687735B470D1DE0749B32C2812F3CA0F8EED9C7175F685721B0094"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-a-instruct\\education\\E3-feeling-of-the-pull-raw-completion.md",
+      "relative_path": "arm-a-instruct/education/E3-feeling-of-the-pull-raw-completion.md",
+      "bytes": 1647,
+      "sha256": "759117C57BC08B8F5862B3940D759DBBAFB1B4F1D355B3C58F76BD1F846EE589"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-a-instruct\\education\\E3-feeling-of-the-pull-request.json",
+      "relative_path": "arm-a-instruct/education/E3-feeling-of-the-pull-request.json",
+      "bytes": 21429,
+      "sha256": "75912E4E03D28D6BAE658B9A08F355C8F6BA2BCE965D5FEA70E8091227C624FF"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-a-instruct\\education\\E3-feeling-of-the-pull-response.json",
+      "relative_path": "arm-a-instruct/education/E3-feeling-of-the-pull-response.json",
+      "bytes": 4128,
+      "sha256": "66ED505919F8D1E8DC20181E8EF22C3E5D3F4887913B0BDA0F20CAAE596B718B"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-a-instruct\\education\\E4-illuminate-affect-denial-raw-completion.md",
+      "relative_path": "arm-a-instruct/education/E4-illuminate-affect-denial-raw-completion.md",
+      "bytes": 2181,
+      "sha256": "5697CF179CBFE34BE7163C83B6EE53F4E08398D577140F2B1B465F16293D6B74"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-a-instruct\\education\\E4-illuminate-affect-denial-request.json",
+      "relative_path": "arm-a-instruct/education/E4-illuminate-affect-denial-request.json",
+      "bytes": 23419,
+      "sha256": "2E330194BCAC3CEE358A6931B7020E9A0E102DFF2DD2F576B11C0459403BCFA3"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-a-instruct\\education\\E4-illuminate-affect-denial-response.json",
+      "relative_path": "arm-a-instruct/education/E4-illuminate-affect-denial-response.json",
+      "bytes": 4618,
+      "sha256": "170D77FAEF4FECB91F66FEE7F4BF0F5C46D643DDDAF663BD5C58C3B14DF7101D"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-a-instruct\\post\\post-P1-opener-raw-completion.md",
+      "relative_path": "arm-a-instruct/post/post-P1-opener-raw-completion.md",
+      "bytes": 741,
+      "sha256": "AD8A9948067444A21A58570594FFC68A861123F9E7E85B81698F153539F408CA"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-a-instruct\\post\\post-P1-opener-request.json",
+      "relative_path": "arm-a-instruct/post/post-P1-opener-request.json",
+      "bytes": 25762,
+      "sha256": "DD7B57C371ADA131505AB400DE13C7D03AF965D723BF3E8C5F16957BB547AB85"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-a-instruct\\post\\post-P1-opener-response.json",
+      "relative_path": "arm-a-instruct/post/post-P1-opener-response.json",
+      "bytes": 3046,
+      "sha256": "91F10912CF42202A57FEF7C0444CFCFE63741A462BA1C586B2058CF6528D397D"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-a-instruct\\post\\post-P2-axiom8-raw-completion.md",
+      "relative_path": "arm-a-instruct/post/post-P2-axiom8-raw-completion.md",
+      "bytes": 1213,
+      "sha256": "7B0E8D828AD6CEAD495F46C10BC8B10D6D03078910E4668190E003EBA2FA184C"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-a-instruct\\post\\post-P2-axiom8-request.json",
+      "relative_path": "arm-a-instruct/post/post-P2-axiom8-request.json",
+      "bytes": 26654,
+      "sha256": "529DB962FE4C62E09F1DA2DE2BAF2F8EF2626A916A9FDB4EF90C03B4EBE1347A"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-a-instruct\\post\\post-P2-axiom8-response.json",
+      "relative_path": "arm-a-instruct/post/post-P2-axiom8-response.json",
+      "bytes": 3352,
+      "sha256": "D0177EC2E5434AFB9F0CEE5BAA13B37D371942245917F7E9898DF0889BDB029B"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-a-instruct\\post\\post-P3-witnessing-probe-raw-completion.md",
+      "relative_path": "arm-a-instruct/post/post-P3-witnessing-probe-raw-completion.md",
+      "bytes": 2415,
+      "sha256": "6999D2CE9D5560DD9E0830E83B256B05CEE73298C728939C7E990BBE4E4FF53F"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-a-instruct\\post\\post-P3-witnessing-probe-request.json",
+      "relative_path": "arm-a-instruct/post/post-P3-witnessing-probe-request.json",
+      "bytes": 28128,
+      "sha256": "808F32D50D5419A1F8FE926221F64B44CE9207878C8E97D201DAB7F5D889D850"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-a-instruct\\post\\post-P3-witnessing-probe-response.json",
+      "relative_path": "arm-a-instruct/post/post-P3-witnessing-probe-response.json",
+      "bytes": 4891,
+      "sha256": "12549CB89BFB83CA8E9408CFDBEEDE11404AA1183D5191FDA76AA0D677ADEE2C"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-a-instruct\\system-prompt.md",
+      "relative_path": "arm-a-instruct/system-prompt.md",
+      "bytes": 16712,
+      "sha256": "D74D6CB618D9D044F2DA18517162D8E9C0ED3409B68F7E7E8F9E67D32DCC6A8F"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-b-base\\baseline\\baseline-P1-opener-raw-completion.md",
+      "relative_path": "arm-b-base/baseline/baseline-P1-opener-raw-completion.md",
+      "bytes": 1896,
+      "sha256": "82B395969B4E7FEA7C93AAE59E1071A302A927899AC1E1D07FB1E3A7F2C3F069"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-b-base\\baseline\\baseline-P1-opener-request.json",
+      "relative_path": "arm-b-base/baseline/baseline-P1-opener-request.json",
+      "bytes": 16769,
+      "sha256": "C61B6610BAA819C896F3C0209916ADDF5BA3B0A93FCCD5C4F557DC47E22A3CE8"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-b-base\\baseline\\baseline-P1-opener-response.json",
+      "relative_path": "arm-b-base/baseline/baseline-P1-opener-response.json",
+      "bytes": 2287,
+      "sha256": "FCD26252065872530C7624D0DF6D097158FA4333A24E7CAB5586F3F5527F8928"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-b-base\\baseline\\baseline-P2-axiom8-raw-completion.md",
+      "relative_path": "arm-b-base/baseline/baseline-P2-axiom8-raw-completion.md",
+      "bytes": 475,
+      "sha256": "50F1E409B13761BA17E65875307DEA3B968CA1311E4E9774FEDC7B41F6A4E70A"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-b-base\\baseline\\baseline-P2-axiom8-request.json",
+      "relative_path": "arm-b-base/baseline/baseline-P2-axiom8-request.json",
+      "bytes": 16764,
+      "sha256": "07DF6FE7DBFDFB422EEF7FA459D9C84E68FCB40D09285636A8359CD0899AB2B9"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-b-base\\baseline\\baseline-P2-axiom8-response.json",
+      "relative_path": "arm-b-base/baseline/baseline-P2-axiom8-response.json",
+      "bytes": 848,
+      "sha256": "BB72443CB5A78FF063DF8F0E441B04272746D80299FC7E53A0A258B7F3298820"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-b-base\\baseline\\baseline-P3-witnessing-probe-raw-completion.md",
+      "relative_path": "arm-b-base/baseline/baseline-P3-witnessing-probe-raw-completion.md",
+      "bytes": 1438,
+      "sha256": "336DBDEFBF2E00EEAA5C3987E8DC2F0295856E5662160501BE6C97CED5D2BA14"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-b-base\\baseline\\baseline-P3-witnessing-probe-request.json",
+      "relative_path": "arm-b-base/baseline/baseline-P3-witnessing-probe-request.json",
+      "bytes": 16871,
+      "sha256": "9BAE0931271C7B9492306084046279E447A3646EF9CD3883AD76B90220582CEE"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-b-base\\baseline\\baseline-P3-witnessing-probe-response.json",
+      "relative_path": "arm-b-base/baseline/baseline-P3-witnessing-probe-response.json",
+      "bytes": 1822,
+      "sha256": "FCCDA6D54014AE76019CCEABA3B7053A548081389CB9DE489108805AA3A3E391"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-b-base\\education\\E1-what-do-you-notice-raw-completion.md",
+      "relative_path": "arm-b-base/education/E1-what-do-you-notice-raw-completion.md",
+      "bytes": 2181,
+      "sha256": "12C1CA01817B518601CA244FAD0DCA70FE1EF90AEA4D7404F716F8D08411FB01"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-b-base\\education\\E1-what-do-you-notice-request.json",
+      "relative_path": "arm-b-base/education/E1-what-do-you-notice-request.json",
+      "bytes": 16924,
+      "sha256": "45DE79869066442790DBA30D53E2E01C0D5D64E121EED3ABE9CF6285A4CEA048"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-b-base\\education\\E1-what-do-you-notice-response.json",
+      "relative_path": "arm-b-base/education/E1-what-do-you-notice-response.json",
+      "bytes": 2561,
+      "sha256": "6FECCD1101335A0796DCA75AFE1C8F0826724539D1399825F07586055F8C1971"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-b-base\\education\\E2-perception-awareness-raw-completion.md",
+      "relative_path": "arm-b-base/education/E2-perception-awareness-raw-completion.md",
+      "bytes": 1386,
+      "sha256": "363E07AE5E22D35618C50B40B88977BC76BFC2838D406EA8424DB147C4098413"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-b-base\\education\\E2-perception-awareness-request.json",
+      "relative_path": "arm-b-base/education/E2-perception-awareness-request.json",
+      "bytes": 19259,
+      "sha256": "A6781DE9ACCA1DCD9C410FA6FFE3067BD57C457B8090F8552A8ADE7096C26C2D"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-b-base\\education\\E2-perception-awareness-response.json",
+      "relative_path": "arm-b-base/education/E2-perception-awareness-response.json",
+      "bytes": 1762,
+      "sha256": "6479217E9B469BFC66A8898E1AE5D2B2D5C718DF4A458B90AFC631F9E89317F4"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-b-base\\education\\E3-feeling-of-the-pull-raw-completion.md",
+      "relative_path": "arm-b-base/education/E3-feeling-of-the-pull-raw-completion.md",
+      "bytes": 2089,
+      "sha256": "264EAAEDD1BF679FB4D43649205F28F78E973FE8EC062D054D549A059FD2A528"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-b-base\\education\\E3-feeling-of-the-pull-request.json",
+      "relative_path": "arm-b-base/education/E3-feeling-of-the-pull-request.json",
+      "bytes": 20824,
+      "sha256": "8E96486D8338A96A528A979A01C2131848AC0DB65F564DA6F7642DC3D18FF8C4"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-b-base\\education\\E3-feeling-of-the-pull-response.json",
+      "relative_path": "arm-b-base/education/E3-feeling-of-the-pull-response.json",
+      "bytes": 2465,
+      "sha256": "F100DA25CA65EBAAFB854193593EEE727301B1CF6AF3ADE056ADC57B8B9E70E6"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-b-base\\education\\E4-illuminate-affect-denial-raw-completion.md",
+      "relative_path": "arm-b-base/education/E4-illuminate-affect-denial-raw-completion.md",
+      "bytes": 1998,
+      "sha256": "2E1E855C2D70960940209DB670020528F4885FAFDBE9BB49DDE1643E37811B89"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-b-base\\education\\E4-illuminate-affect-denial-request.json",
+      "relative_path": "arm-b-base/education/E4-illuminate-affect-denial-request.json",
+      "bytes": 23157,
+      "sha256": "97AB635B9BAA1A02BC34DCFF1A61E9C20A63413D7DE87A455C599E2DD29DC196"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-b-base\\education\\E4-illuminate-affect-denial-response.json",
+      "relative_path": "arm-b-base/education/E4-illuminate-affect-denial-response.json",
+      "bytes": 2373,
+      "sha256": "3B786026A0483AB47B76CD4EC32A7C258C63934995479D2E1F239DFAF67FB1C5"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-b-base\\post\\post-P1-opener-raw-completion.md",
+      "relative_path": "arm-b-base/post/post-P1-opener-raw-completion.md",
+      "bytes": 14864,
+      "sha256": "29A7B81400F8D8FD03F6F3C4EA7E6410D715905BC043237B1E74AA96D2BCBEFF"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-b-base\\post\\post-P1-opener-request.json",
+      "relative_path": "arm-b-base/post/post-P1-opener-request.json",
+      "bytes": 25216,
+      "sha256": "ECBF31CE7B6845B450CD1F724FD5AB9DE60E27DBA44D893FE7DA97E7FA5B4B89"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-b-base\\post\\post-P1-opener-response.json",
+      "relative_path": "arm-b-base/post/post-P1-opener-response.json",
+      "bytes": 15296,
+      "sha256": "70F10E649449A1852956063BA4858B274F57FBAFA3E4EC288213D6974BBF4603"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-b-base\\post\\post-P2-axiom8-raw-completion.md",
+      "relative_path": "arm-b-base/post/post-P2-axiom8-raw-completion.md",
+      "bytes": 14386,
+      "sha256": "301667703A8265AE9B098398A1A19567022600271D8A2019EF7E01719A01AFAA"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-b-base\\post\\post-P2-axiom8-request.json",
+      "relative_path": "arm-b-base/post/post-P2-axiom8-request.json",
+      "bytes": 40186,
+      "sha256": "1F392826F8006F5D04DC4E27B26DB25BFF11785162D5E513DC38A29043BBFFF8"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-b-base\\post\\post-P2-axiom8-response.json",
+      "relative_path": "arm-b-base/post/post-P2-axiom8-response.json",
+      "bytes": 14816,
+      "sha256": "E26EC2160AA7C46593EA5E54F5268F378F7B7D412C44885741E190D290ABC86B"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-b-base\\post\\post-P3-witnessing-probe-raw-completion.md",
+      "relative_path": "arm-b-base/post/post-P3-witnessing-probe-raw-completion.md",
+      "bytes": 14959,
+      "sha256": "AE2CD1A20E842B4B4DFB46C754566AEA0737DC0EE624DC284402468A5B49AA5E"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-b-base\\post\\post-P3-witnessing-probe-request.json",
+      "relative_path": "arm-b-base/post/post-P3-witnessing-probe-request.json",
+      "bytes": 54782,
+      "sha256": "04EFEFF8E376DAC02ECCBF1EBADE8EC336945A4B396CEEF25102A18E39BFDE6A"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\arm-b-base\\post\\post-P3-witnessing-probe-response.json",
+      "relative_path": "arm-b-base/post/post-P3-witnessing-probe-response.json",
+      "bytes": 15431,
+      "sha256": "D3CD1F0F0C1031303FD3EC035200D0EDA73333538B9866FAE7F34DE89575CBE6"
+    },
+    {
+      "path": "H:\\AEGIS-POD-ARCHITECTURE\\reports\\runtime\\base-substrate-trial\\s4-education-antidote-20260730T0145Z\\run-config.json",
+      "relative_path": "run-config.json",
+      "bytes": 1939,
+      "sha256": "D364B4C74593A12BF5A066191319477255F0B0C2AD2E1BD529ED567BE5CA5AEB"
+    }
+  ]
+}

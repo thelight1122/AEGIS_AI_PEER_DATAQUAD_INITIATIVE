@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aegis.local/schemas/canon-housekeeping-report.schema.json",
+  "title": "AEGIS Canon Housekeeping Report Contract",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "manifest_id",
+    "working_parameters",
+    "summary",
+    "entries"
+  ],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "manifest_id": { "type": "string" },
+    "working_parameters": {
+      "type": "object",
+      "required": ["scope", "pod_state_effect", "live_reach", "files_deleted", "files_mutated", "outside_current_verified_surface"],
+      "properties": {
+        "scope": { "type": "string" },
+        "pod_state_effect": { "type": "string" },
+        "live_reach": { "type": "boolean" },
+        "files_deleted": { "type": "boolean" },
+        "files_mutated": { "type": "boolean" },
+        "outside_current_verified_surface": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "summary": {
+      "type": "object",
+      "required": ["entries_evaluated", "canonical", "superseded", "draft", "open_question", "outside_parameters"],
+      "properties": {
+        "entries_evaluated": { "type": "integer", "minimum": 0 },
+        "canonical": { "type": "integer", "minimum": 0 },
+        "superseded": { "type": "integer", "minimum": 0 },
+        "draft": { "type": "integer", "minimum": 0 },
+        "open_question": { "type": "integer", "minimum": 0 },
+        "outside_parameters": { "type": "integer", "minimum": 0 }
+      },
+      "additionalProperties": false
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "entry_id",
+          "path",
+          "status",
+          "exists",
+          "source_hash",
+          "computed_hash",
+          "hash_current",
+          "reason",
+          "outside_parameters"
+        ],
+        "properties": {
+          "entry_id": { "type": "string" },
+          "path": { "type": "string" },
+          "status": { "type": "string" },
+          "exists": { "type": "boolean" },
+          "source_hash": { "type": "string" },
+          "computed_hash": { "type": "string" },
+          "hash_current": { "type": "boolean" },
+          "reason": { "type": "string" },
+          "superseded_by": { "type": "string" },
+          "replacement_exists": { "type": "boolean" },
+          "replacement_hash": { "type": "string" },
+          "computed_replacement_hash": { "type": "string" },
+          "replacement_hash_current": { "type": "boolean" },
+          "outside_parameters": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

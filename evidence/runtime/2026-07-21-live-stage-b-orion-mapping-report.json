@@ -1,0 +1,180 @@
+{
+  "schema_version": "0.1.0",
+  "stage": "Stage B Orion live-record mapping",
+  "status": "pass",
+  "copy_manifest": {
+    "schema_version": "0.1.0",
+    "copy_batch_id": "orion-live-copy-20260721T002600Z",
+    "peer_id": "CP-1004-ORION",
+    "source_vm": {
+      "host": "AEGISOrionPeer",
+      "ip": "20.119.37.133",
+      "user": "azureuser"
+    },
+    "copied_at_utc": "2026-07-21T00:27:49Z",
+    "working_parameters": {
+      "source_live_reach": true,
+      "source_write_performed": false,
+      "target_records_written": 0,
+      "live_read_only": true
+    },
+    "excluded_source_surfaces": [
+      "/home/azureuser/orion-bridge/data/dataquad",
+      "/home/azureuser/AEGIS-CYBERPEER-CORE/data/peers/CP-1004-ORION/dataquad.backup-before-chamber-backfill-20260708T193819Z",
+      "/home/azureuser/AEGIS-CYBERPEER-CORE/data/peers/CP-1004-ORION/dataquad.backup-before-chamber-backfill-"
+    ],
+    "files": {
+      "PEER": {
+        "tensor": "PEER",
+        "source_path": "/home/azureuser/AEGIS-CYBERPEER-CORE/data/peers/CP-1004-ORION/dataquad/PEER.jsonl",
+        "remote_path_used": "/home/azureuser/AEGIS-CYBERPEER-CORE/data/peers/CP-1004-ORION/dataquad/PEER.jsonl",
+        "local_raw_path": "live-copies/CP-1004-ORION/orion-live-copy-20260721T002600Z/raw/PEER.jsonl",
+        "sha256": "6A104DA4BBB8E76E119A649C80DFA9E323D226B9923B7E3B7E62B18B452D3664",
+        "remote_sha256": "6A104DA4BBB8E76E119A649C80DFA9E323D226B9923B7E3B7E62B18B452D3664",
+        "local_sha256": "6A104DA4BBB8E76E119A649C80DFA9E323D226B9923B7E3B7E62B18B452D3664",
+        "copy_verified": true,
+        "record_count": 106,
+        "byte_count": 253897
+      },
+      "PCT": {
+        "tensor": "PCT",
+        "source_path": "/home/azureuser/AEGIS-CYBERPEER-CORE/data/peers/CP-1004-ORION/dataquad/PCT.jsonl",
+        "remote_path_used": "/home/azureuser/AEGIS-CYBERPEER-CORE/data/peers/CP-1004-ORION/dataquad/PCT.jsonl",
+        "local_raw_path": "live-copies/CP-1004-ORION/orion-live-copy-20260721T002600Z/raw/PCT.jsonl",
+        "sha256": "EDED7B45709C27D1181C6223E312B0572B301DF481FB84E48B3B699B41AABA34",
+        "remote_sha256": "EDED7B45709C27D1181C6223E312B0572B301DF481FB84E48B3B699B41AABA34",
+        "local_sha256": "EDED7B45709C27D1181C6223E312B0572B301DF481FB84E48B3B699B41AABA34",
+        "copy_verified": true,
+        "record_count": 94,
+        "byte_count": 500038
+      },
+      "NCT": {
+        "tensor": "NCT",
+        "source_path": "/home/azureuser/AEGIS-CYBERPEER-CORE/data/peers/CP-1004-ORION/dataquad/NCT.jsonl",
+        "remote_path_used": "/home/azureuser/AEGIS-CYBERPEER-CORE/data/peers/CP-1004-ORION/dataquad/NCT.jsonl",
+        "local_raw_path": "live-copies/CP-1004-ORION/orion-live-copy-20260721T002600Z/raw/NCT.jsonl",
+        "sha256": "E4CF92784FAF3D8120E34066A79276AD12B5C65764B7AE110AE3815CC6537379",
+        "remote_sha256": "E4CF92784FAF3D8120E34066A79276AD12B5C65764B7AE110AE3815CC6537379",
+        "local_sha256": "E4CF92784FAF3D8120E34066A79276AD12B5C65764B7AE110AE3815CC6537379",
+        "copy_verified": true,
+        "record_count": 89,
+        "byte_count": 165935
+      },
+      "SPINE": {
+        "tensor": "SPINE",
+        "source_path": "/home/azureuser/AEGIS-CYBERPEER-CORE/data/peers/CP-1004-ORION/dataquad/SPINE.jsonl",
+        "remote_path_used": "/home/azureuser/AEGIS-CYBERPEER-CORE/data/peers/CP-1004-ORION/dataquad/SPINE.jsonl",
+        "local_raw_path": "live-copies/CP-1004-ORION/orion-live-copy-20260721T002600Z/raw/SPINE.jsonl",
+        "sha256": "8D27162F410C7429B516A3D6B7166282470AC9C7C616180F51307A3F22A62A7E",
+        "remote_sha256": "8D27162F410C7429B516A3D6B7166282470AC9C7C616180F51307A3F22A62A7E",
+        "local_sha256": "8D27162F410C7429B516A3D6B7166282470AC9C7C616180F51307A3F22A62A7E",
+        "copy_verified": true,
+        "record_count": 62,
+        "byte_count": 125090
+      }
+    }
+  },
+  "mapped_output_root": "live-copies/CP-1004-ORION/orion-live-copy-20260721T002600Z/mapped",
+  "source_snapshot_root": "live-copies/CP-1004-ORION/orion-live-copy-20260721T002600Z/source-records",
+  "working_parameters": {
+    "source_live_reach": true,
+    "source_write_performed": false,
+    "target_records_written": 0,
+    "tensor_generation": false,
+    "live_population": false,
+    "placeholder_data_used": false,
+    "mock_data_used": false,
+    "demo_data_used": false,
+    "raw_live_copies_git_tracked": false
+  },
+  "source_counts": {
+    "total_records": 351,
+    "by_tensor": {
+      "PEER": 106,
+      "PCT": 94,
+      "NCT": 89,
+      "SPINE": 62
+    }
+  },
+  "hash_preservation": {
+    "verification_counts": {
+      "verified": 351,
+      "mismatch": 0,
+      "unverifiable_source_absent": 0
+    },
+    "records_checked": 351
+  },
+  "lineage_continuity": {
+    "records_checked": 351,
+    "root_records": 4,
+    "continuous_records": 347
+  },
+  "test_scaffolding_boundary": {
+    "live_readiness_evidence_may_reference": [
+      "live-copies/",
+      "reports/runtime/2026-07-21-live-stage-b-orion-mapping-report.json"
+    ],
+    "test_only_paths_excluded": [
+      "fixtures/tensor-records/",
+      "fixtures/copied-record-roots/",
+      "fixtures/migration-dry-run.json",
+      "reports/runtime/tensors/",
+      "reports/runtime/migration-dry-run/"
+    ],
+    "stage_c_d_gate": "no placeholder, mock, or demo data may be referenced by live-readiness evidence"
+  },
+  "outside_parameters": [],
+  "copy_fidelity_gate": {
+    "status": "pass",
+    "results": [
+      {
+        "tensor": "PEER",
+        "remote_path_used": "/home/azureuser/AEGIS-CYBERPEER-CORE/data/peers/CP-1004-ORION/dataquad/PEER.jsonl",
+        "remote_sha256": "6A104DA4BBB8E76E119A649C80DFA9E323D226B9923B7E3B7E62B18B452D3664",
+        "local_sha256": "6A104DA4BBB8E76E119A649C80DFA9E323D226B9923B7E3B7E62B18B452D3664",
+        "copy_verified": true,
+        "authoritative_path_used": true
+      },
+      {
+        "tensor": "PCT",
+        "remote_path_used": "/home/azureuser/AEGIS-CYBERPEER-CORE/data/peers/CP-1004-ORION/dataquad/PCT.jsonl",
+        "remote_sha256": "EDED7B45709C27D1181C6223E312B0572B301DF481FB84E48B3B699B41AABA34",
+        "local_sha256": "EDED7B45709C27D1181C6223E312B0572B301DF481FB84E48B3B699B41AABA34",
+        "copy_verified": true,
+        "authoritative_path_used": true
+      },
+      {
+        "tensor": "NCT",
+        "remote_path_used": "/home/azureuser/AEGIS-CYBERPEER-CORE/data/peers/CP-1004-ORION/dataquad/NCT.jsonl",
+        "remote_sha256": "E4CF92784FAF3D8120E34066A79276AD12B5C65764B7AE110AE3815CC6537379",
+        "local_sha256": "E4CF92784FAF3D8120E34066A79276AD12B5C65764B7AE110AE3815CC6537379",
+        "copy_verified": true,
+        "authoritative_path_used": true
+      },
+      {
+        "tensor": "SPINE",
+        "remote_path_used": "/home/azureuser/AEGIS-CYBERPEER-CORE/data/peers/CP-1004-ORION/dataquad/SPINE.jsonl",
+        "remote_sha256": "8D27162F410C7429B516A3D6B7166282470AC9C7C616180F51307A3F22A62A7E",
+        "local_sha256": "8D27162F410C7429B516A3D6B7166282470AC9C7C616180F51307A3F22A62A7E",
+        "copy_verified": true,
+        "authoritative_path_used": true
+      }
+    ]
+  },
+  "live_readiness_path_gate": {
+    "status": "pass",
+    "allowed_prefixes": [
+      "live-copies/",
+      "reports/runtime/2026-07-21-live-stage-b-orion-mapping-report.json"
+    ],
+    "excluded_prefixes": [
+      "fixtures/tensor-records/",
+      "fixtures/copied-record-roots/",
+      "fixtures/migration-dry-run.json",
+      "reports/runtime/tensors/",
+      "reports/runtime/migration-dry-run/"
+    ],
+    "referenced_paths_checked": 6,
+    "blocked_paths": []
+  }
+}

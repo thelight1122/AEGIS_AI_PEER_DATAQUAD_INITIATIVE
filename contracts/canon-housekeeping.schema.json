@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aegis.local/schemas/canon-housekeeping.schema.json",
+  "title": "AEGIS Canon Housekeeping Manifest Contract",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "manifest_id",
+    "working_parameters",
+    "entries"
+  ],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "manifest_id": { "type": "string", "minLength": 1 },
+    "working_parameters": {
+      "type": "object",
+      "required": ["scope", "pod_state_effect", "live_reach", "file_mutation_policy", "outside_current_verified_surface"],
+      "properties": {
+        "scope": { "type": "string" },
+        "pod_state_effect": { "type": "string" },
+        "live_reach": { "type": "boolean" },
+        "file_mutation_policy": { "type": "string" },
+        "outside_current_verified_surface": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["entry_id", "path", "status", "reason", "source_hash"],
+        "properties": {
+          "entry_id": { "type": "string" },
+          "path": { "type": "string" },
+          "status": {
+            "type": "string",
+            "enum": ["canonical", "superseded", "draft", "open_question"]
+          },
+          "reason": { "type": "string" },
+          "source_hash": {
+            "type": "string",
+            "pattern": "^[A-F0-9]{64}$"
+          },
+          "superseded_by": { "type": "string" },
+          "replacement_hash": {
+            "type": "string",
+            "pattern": "^[A-F0-9]{64}$"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

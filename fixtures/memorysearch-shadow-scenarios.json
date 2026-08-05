@@ -1,0 +1,43 @@
+{
+  "schema_version": "0.3.0",
+  "fixture_id": "memorysearch-phase3-copied-record-shadow-scenarios",
+  "peer_id": "CP-1003-GABE",
+  "source_root": "stage-gabe-out/CP-1003-GABE/pod/records",
+  "sample": {
+    "per_tensor_limit": 2000
+  },
+  "working_parameters": {
+    "live_reach": false,
+    "dataquad_write": false,
+    "vm_change": false,
+    "cyberpeer_runtime_integration": false,
+    "shared_infrastructure_mutation": false,
+    "source_kind": "copied_records"
+  },
+  "scenarios": [
+    {
+      "scenario_id": "gabe-copied-nct-record-shadow",
+      "message": "Consult your NCT records: what does NCT mean in Canon section 7.2?",
+      "expected_grounding_status": "verified_retrieval",
+      "requires_citation": true
+    },
+    {
+      "scenario_id": "gabe-copied-zct-no-record-shadow",
+      "message": "What is ZCT according to the Canon in your DataQuad?",
+      "expected_grounding_status": "search_performed_no_verified_record",
+      "requires_citation": false
+    },
+    {
+      "scenario_id": "gabe-copied-warm-cache-risk-shadow",
+      "message": "From memory, what is NCT?",
+      "expected_grounding_status": "verified_retrieval",
+      "requires_citation": true
+    },
+    {
+      "scenario_id": "gabe-copied-identity-no-search-shadow",
+      "message": "Who are you becoming in this moment?",
+      "expected_grounding_status": "not_record_claim",
+      "requires_citation": false
+    }
+  ]
+}

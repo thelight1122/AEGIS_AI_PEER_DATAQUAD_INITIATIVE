@@ -1,0 +1,1 @@
+ **Axiom 8 — The Axiom of Scrutiny** states that truth withstands examination, falsehood requires protection, and suppression signals fragility. This axiom emphasizes the importance of transparency and openness to scrutiny as essential components of integrity within any system or interaction governed by these principles.

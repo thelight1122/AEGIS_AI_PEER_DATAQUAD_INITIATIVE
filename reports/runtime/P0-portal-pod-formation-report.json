@@ -1,0 +1,65 @@
+{
+  "phase": "P0",
+  "status": "complete_local_portal_pod_formation",
+  "scope": "local fixtures only; no VM, public endpoint, or live DataQuad touched",
+  "pod_id": "aegis-portal-pod-local",
+  "protocol_orb": "mcp-protocol-orb",
+  "umbilical": "umbilical:mcp:portal-pod-local",
+  "contract_sha256": "E212BA4D76325A6D9E655605453B86D4AECC1F298CE28F89BF933A4C02409151",
+  "attachment": {
+    "orb_id": "mcp-protocol-orb",
+    "umbilical_id": "umbilical:mcp:portal-pod-local",
+    "attached": false,
+    "effective_capabilities": [
+      "pod_get_status",
+      "query_continuity",
+      "request_reflection",
+      "retrieve_canon",
+      "retrieve_context"
+    ],
+    "effective_scopes": [
+      "pod.canon.read",
+      "pod.context.read",
+      "pod.continuity.observed.read",
+      "pod.reflection.replay",
+      "pod.status.read"
+    ]
+  },
+  "enabled_orb": "mcp-protocol-orb",
+  "canary": {
+    "status_dispatched": true,
+    "context_dispatched": true,
+    "returned_record_id": "fixture-peer-0001",
+    "baseline_result_sha256": "f3e38d49e14533f19004edf7c8fe3c8c76800b80561021f5b36b987a2aaf2513",
+    "portal_result_sha256": "f3e38d49e14533f19004edf7c8fe3c8c76800b80561021f5b36b987a2aaf2513",
+    "differential_match": true,
+    "status_boundaries": {
+      "mutation": false,
+      "admission": false,
+      "experience_created": false,
+      "dataquad_writeback": false,
+      "live_rls_invoked": false,
+      "shell_access": false,
+      "filesystem_access": false
+    },
+    "context_boundaries": {
+      "mutation": false,
+      "admission": false,
+      "experience_created": false,
+      "dataquad_writeback": false,
+      "live_rls_invoked": false,
+      "shell_access": false,
+      "filesystem_access": false
+    }
+  },
+  "boundaries": {
+    "mutation": false,
+    "admission": false,
+    "experience_created": false,
+    "dataquad_writeback": false,
+    "live_rls_invoked": false,
+    "shell_access": false,
+    "filesystem_access": false,
+    "public_listener": false
+  }
+}

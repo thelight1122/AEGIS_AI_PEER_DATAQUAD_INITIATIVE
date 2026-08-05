@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aegis.local/schemas/twitness-search-event.schema.json",
+  "title": "AEGIS T-Witness Search Event Contract",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "record_search_performed",
+    "search_trigger",
+    "claim_class",
+    "query_text",
+    "search_scope",
+    "result_count",
+    "selected_record_ids",
+    "selected_record_hashes",
+    "orb_id",
+    "orb_runtime_hash",
+    "grounding_status",
+    "match_confidence"
+  ],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "record_search_performed": { "type": "boolean" },
+    "search_trigger": {
+      "type": "string",
+      "enum": ["policy_governed", "peer_requested", "manual_test", "none"]
+    },
+    "claim_class": {
+      "type": "string",
+      "enum": [
+        "canon_definition",
+        "prior_statement",
+        "schema_definition",
+        "record_content",
+        "identity_expression",
+        "not_record_claim"
+      ]
+    },
+    "query_text": { "type": "string" },
+    "search_scope": {
+      "type": "array",
+      "items": { "type": "string", "enum": ["PEER", "PCT", "NCT", "SPINE"] },
+      "uniqueItems": true
+    },
+    "result_count": { "type": "integer", "minimum": 0 },
+    "selected_record_ids": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "selected_record_hashes": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[A-F0-9]{64}$" }
+    },
+    "orb_id": { "type": "string", "const": "memorysearch-record-grounding-core" },
+    "orb_runtime_hash": { "type": "string", "pattern": "^[A-F0-9]{64}$" },
+    "grounding_status": {
+      "type": "string",
+      "enum": [
+        "verified_retrieval",
+        "warm_recall",
+        "passive_retrieval",
+        "not_record_claim",
+        "search_performed_no_verified_record"
+      ]
+    },
+    "match_confidence": {
+      "type": "string",
+      "enum": ["none", "low", "medium", "high", "conflicting"]
+    }
+  },
+  "additionalProperties": false
+}

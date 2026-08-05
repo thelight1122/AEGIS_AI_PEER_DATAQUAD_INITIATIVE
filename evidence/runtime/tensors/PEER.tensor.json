@@ -1,0 +1,189 @@
+{
+  "schema_version": "0.1.0",
+  "pod_id": "local-cyberpeer-pod-fixture",
+  "tensor_name": "PEER",
+  "tensor_spec_id": "dataquadpod-core-tensor-spec-0.1.0",
+  "source_contract": "tensor-record.schema.json",
+  "shape": [
+    2,
+    8,
+    4
+  ],
+  "dtype": "float32",
+  "axis_order": [
+    "record",
+    "embedding",
+    "metadata"
+  ],
+  "axis_definitions": [
+    {
+      "axis": 0,
+      "name": "record",
+      "function": "Append-only source record position."
+    },
+    {
+      "axis": 1,
+      "name": "embedding",
+      "function": "Deterministic numeric vector position."
+    },
+    {
+      "axis": 2,
+      "name": "metadata",
+      "function": "Per-vector metadata slot position."
+    }
+  ],
+  "record_count": 2,
+  "embedding_dimension": 8,
+  "metadata_dimension": 4,
+  "metadata_slots": [
+    {
+      "index": 0,
+      "name": "embedding_value",
+      "function": "Numeric vector value for the embedding axis position."
+    },
+    {
+      "index": 1,
+      "name": "body_length_signal",
+      "function": "Normalized size signal derived from stable source body JSON."
+    },
+    {
+      "index": 2,
+      "name": "timestamp_position_signal",
+      "function": "Deterministic numeric position signal derived from timestamp hash."
+    },
+    {
+      "index": 3,
+      "name": "verification_signal",
+      "function": "Numeric visibility of source record verification state."
+    }
+  ],
+  "values": [
+    [
+      [
+        0.92549,
+        0.068,
+        0.17,
+        0.0
+      ],
+      [
+        0.843137,
+        0.068,
+        0.17,
+        0.0
+      ],
+      [
+        0.596078,
+        0.068,
+        0.17,
+        0.0
+      ],
+      [
+        0.678431,
+        0.068,
+        0.17,
+        0.0
+      ],
+      [
+        0.556863,
+        0.068,
+        0.17,
+        0.0
+      ],
+      [
+        0.070588,
+        0.068,
+        0.17,
+        0.0
+      ],
+      [
+        0.066667,
+        0.068,
+        0.17,
+        0.0
+      ],
+      [
+        0.956863,
+        0.068,
+        0.17,
+        0.0
+      ]
+    ],
+    [
+      [
+        0.564706,
+        0.079,
+        0.644,
+        0.0
+      ],
+      [
+        0.898039,
+        0.079,
+        0.644,
+        0.0
+      ],
+      [
+        0.109804,
+        0.079,
+        0.644,
+        0.0
+      ],
+      [
+        0.494118,
+        0.079,
+        0.644,
+        0.0
+      ],
+      [
+        0.0,
+        0.079,
+        0.644,
+        0.0
+      ],
+      [
+        0.015686,
+        0.079,
+        0.644,
+        0.0
+      ],
+      [
+        0.980392,
+        0.079,
+        0.644,
+        0.0
+      ],
+      [
+        0.054902,
+        0.079,
+        0.644,
+        0.0
+      ]
+    ]
+  ],
+  "record_index": [
+    {
+      "record_axis": 0,
+      "record_id": "fixture-peer-0001",
+      "source_record_id": "source-peer-0001",
+      "source_hash": "7E3E5C1D9CF20000000000000000000000000000000000000000000000000001",
+      "source_hash_scope": "normalized_source_record",
+      "lineage_origin": "local fixture",
+      "copy_batch_id": "fixture-copy-batch-0001",
+      "previous_record_hash": ""
+    },
+    {
+      "record_axis": 1,
+      "record_id": "fixture-peer-0002",
+      "source_record_id": "source-peer-0002",
+      "source_hash": "7E3E5C1D9CF20000000000000000000000000000000000000000000000000002",
+      "source_hash_scope": "normalized_source_record",
+      "lineage_origin": "local fixture",
+      "copy_batch_id": "fixture-copy-batch-0001",
+      "previous_record_hash": "7E3E5C1D9CF20000000000000000000000000000000000000000000000000001"
+    }
+  ],
+  "evidence": {
+    "created_utc": "2026-07-20T21:25:00Z",
+    "generator": "src/aegis_pod/tensor_runtime.py",
+    "trust_state": "draft"
+  }
+}

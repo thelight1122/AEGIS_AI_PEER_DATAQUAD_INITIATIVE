@@ -1,0 +1,41 @@
+{
+  "schema_version": "0.1.0",
+  "policy_id": "local-marker-promotion-policy-0.1.0",
+  "applies_to": {
+    "contract": "contracts/verified-code-marker.schema.json",
+    "marker_glob": "reports/runtime/verified-markers/*.verified-code-marker.json"
+  },
+  "states": {
+    "reviewed": {
+      "min_independent_reviewers": 3,
+      "required_review_results": ["no_blocking_objection"],
+      "require_all_commands_pass": true,
+      "require_current_hashes": true,
+      "require_claim_boundary": true,
+      "live_reach_allowed": false,
+      "required_reviewer_evidence": {
+        "peer_review_message_hashes": true
+      }
+    },
+    "verified": {
+      "min_independent_reviewers": 5,
+      "required_review_results": ["no_blocking_objection"],
+      "require_all_commands_pass": true,
+      "require_current_hashes": true,
+      "require_claim_boundary": true,
+      "live_reach_allowed": false,
+      "required_reviewer_evidence": {
+        "peer_review_message_hashes": true
+      }
+    }
+  },
+  "reviewer_model": {
+    "builder_reviewers": ["codex-local-runtime"],
+    "full_redundancy_target": 5
+  },
+  "working_parameters": {
+    "scope": "local marker reports only",
+    "pod_state_effect": "unchanged",
+    "live_reach": false
+  }
+}

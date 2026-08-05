@@ -1,0 +1,40 @@
+{
+  "stage": "Gabe Phase 5 corrective substep: legacy-to-Core field normalization",
+  "batch_id": "gabe-live-copy-20260722T074000Z",
+  "raw_evidence_preserved_at": "H:\\AEGIS-POD-ARCHITECTURE\\stage-gabe-out\\live-copies\\CP-1003-GABE\\gabe-live-copy-20260722T074000Z\\raw",
+  "mapped_evidence_preserved_at": "H:\\AEGIS-POD-ARCHITECTURE\\stage-gabe-out\\CP-1003-GABE\\pod\\records",
+  "normalized_output_root": "H:\\AEGIS-POD-ARCHITECTURE\\stage-gabe-out\\CP-1003-GABE\\pod\\records-core-normalized",
+  "per_tensor": {
+    "PEER": {
+      "tensor": "PEER",
+      "mapped_input_count": 35673,
+      "normalized_output_count": 35673,
+      "validation_errors": [],
+      "output_path": "H:\\AEGIS-POD-ARCHITECTURE\\stage-gabe-out\\CP-1003-GABE\\pod\\records-core-normalized\\PEER.jsonl"
+    },
+    "PCT": {
+      "tensor": "PCT",
+      "mapped_input_count": 32945,
+      "normalized_output_count": 32945,
+      "validation_errors": [],
+      "output_path": "H:\\AEGIS-POD-ARCHITECTURE\\stage-gabe-out\\CP-1003-GABE\\pod\\records-core-normalized\\PCT.jsonl"
+    },
+    "NCT": {
+      "tensor": "NCT",
+      "mapped_input_count": 9671,
+      "normalized_output_count": 9671,
+      "validation_errors": [],
+      "output_path": "H:\\AEGIS-POD-ARCHITECTURE\\stage-gabe-out\\CP-1003-GABE\\pod\\records-core-normalized\\NCT.jsonl"
+    },
+    "SPINE": {
+      "tensor": "SPINE",
+      "mapped_input_count": 12705,
+      "normalized_output_count": 12705,
+      "validation_errors": [],
+      "output_path": "H:\\AEGIS-POD-ARCHITECTURE\\stage-gabe-out\\CP-1003-GABE\\pod\\records-core-normalized\\SPINE.jsonl"
+    }
+  },
+  "total_mapped": 90994,
+  "total_normalized": 90994,
+  "total_validation_errors": 0
+}

@@ -1,0 +1,41 @@
+{
+  "build_command": "C:\\Users\\TraceyPrutch\\AppData\\Local\\Programs\\Python\\Python313\\python.exe H:\\AEGIS-POD-ARCHITECTURE\\tools\\aegis-math-tensor-service\\aegis_tensor_service\\build_from_jsonl.py --dataquad-root stage-gabe-out/live-copies/CP-1003-GABE/gabe-live-copy-20260722T074000Z/raw --tensor-store-root stage-gabe-out/CP-1003-GABE/pod/tensors/semantic-embedding --peer-id CP-1003-GABE",
+  "build_finished_utc": "2026-07-22T08:14:36Z",
+  "build_started_utc": "2026-07-22T08:08:40Z",
+  "dependency_versions": {
+    "chromadb": "1.5.9",
+    "fastapi": "0.136.3",
+    "numpy": "2.4.6",
+    "pydantic": "2.13.4",
+    "sentence-transformers": "5.5.1"
+  },
+  "embedding_model_name": "all-MiniLM-L6-v2",
+  "embedding_model_version_or_revision": "all-MiniLM-L6-v2",
+  "output_file_hashes": {
+    "embeddings.npy": "d4a6092037d5bd78d4ca5b54c640d6201ec2b17e1deaab63eef24a41ebd1432e",
+    "index.json": "76c5589717574605acc9c4571182a934cdf5ec5b8bd91482c1eeb86f2fe1c902",
+    "metadata.npy": "bf5bf95f891006f3f759802f58c48790085eb3154d200670beb5e5e86214cad4",
+    "skipped-records.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tensor_3d.npy": "ef208b16f16818d14d635f661842f76b4ab4943523ca80f63d8f0e61e59da86e"
+  },
+  "output_files": [
+    "embeddings.npy",
+    "index.json",
+    "metadata.npy",
+    "skipped-records.jsonl",
+    "tensor_3d.npy"
+  ],
+  "packaging_code_hash": "a2aebccb43587b20d56f939ac0cc391fa3e9c718f023900c951cefb2b3f020ba",
+  "peer_id": "CP-1003-GABE",
+  "python_version": [
+    3,
+    13,
+    13
+  ],
+  "skipped_record_count": 0,
+  "skipped_record_manifest_path": "H:\\AEGIS-POD-ARCHITECTURE\\stage-gabe-out\\CP-1003-GABE\\pod\\tensors\\semantic-embedding\\NCT\\skipped-records.jsonl",
+  "source_jsonl_line_count": 9671,
+  "source_jsonl_path": "H:\\AEGIS-POD-ARCHITECTURE\\stage-gabe-out\\live-copies\\CP-1003-GABE\\gabe-live-copy-20260722T074000Z\\raw\\NCT.jsonl",
+  "source_jsonl_sha256": "45a85097752c09a9139550dcef5569870cb7774045494d3e52515d73d492ef06",
+  "tensor_name": "NCT"
+}

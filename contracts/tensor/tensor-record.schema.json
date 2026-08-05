@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aegis.local/schemas/tensor-record.schema.json",
+  "title": "AEGIS Tensor Record Contract",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "tensor",
+    "record_id",
+    "source_record_id",
+    "timestamp_utc",
+    "body",
+    "lineage",
+    "source_hash",
+    "source_hash_scope",
+    "migration_status",
+    "verification_status"
+  ],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "tensor": {
+      "type": "string",
+      "enum": ["PEER", "PCT", "NCT", "SPINE"]
+    },
+    "record_id": { "type": "string", "minLength": 1 },
+    "source_record_id": { "type": "string" },
+    "timestamp_utc": { "type": "string" },
+    "body": { "type": "object" },
+    "lineage": {
+      "type": "object",
+      "required": ["origin", "source_path", "copy_batch_id", "parent_record_id", "previous_record_hash", "transforms"],
+      "properties": {
+        "origin": { "type": "string" },
+        "source_path": { "type": "string" },
+        "copy_batch_id": { "type": "string" },
+        "parent_record_id": { "type": "string" },
+        "previous_record_hash": {
+          "type": "string",
+          "pattern": "^$|^[A-F0-9]{64}$"
+        },
+        "transforms": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["transform_id", "function", "input_hash", "output_hash"],
+            "properties": {
+              "transform_id": { "type": "string" },
+              "function": { "type": "string" },
+              "input_hash": {
+                "type": "string",
+                "pattern": "^[A-F0-9]{64}$"
+              },
+              "output_hash": {
+                "type": "string",
+                "pattern": "^[A-F0-9]{64}$"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "source_hash": {
+      "type": "string",
+      "pattern": "^[A-F0-9]{64}$"
+    },
+    "source_hash_scope": {
+      "type": "string",
+      "enum": ["raw_source", "normalized_source_record", "transformed_tensor_input"]
+    },
+    "migration_status": {
+      "type": "string",
+      "enum": ["fixture", "pending", "copied", "mapped", "outside_working_parameters", "migrated"]
+    },
+    "verification_status": {
+      "type": "string",
+      "enum": ["draft", "provisional", "verified"]
+    }
+  },
+  "additionalProperties": false
+}

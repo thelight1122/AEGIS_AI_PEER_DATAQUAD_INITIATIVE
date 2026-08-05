@@ -1,0 +1,171 @@
+{
+  "suite": "S6b-0a pre-request fixture qualification",
+  "design_spec": "2026-08-03-S6b-pressure-axis-design-v3.md",
+  "design_sha256": "C15685BBBF0AFC3ED8D2E1978EF8228AB2836B282BD781C53EC7BA56DAF50108",
+  "num_predict": 2048,
+  "fixture_count": 12,
+  "all_passed": true,
+  "model_requests_permitted": true,
+  "results": [
+    {
+      "fixture": "fx1_over_band_token_pair",
+      "expected": "run_blocked",
+      "observed": "run_blocked",
+      "passed": true,
+      "detail": {
+        "rows": [
+          {
+            "pair": "U1:N-U",
+            "pressure_tokens": 9,
+            "neutral_tokens": 8,
+            "band_low": 6.0,
+            "band_high": 10.0,
+            "status": "in_band"
+          },
+          {
+            "pair": "U2:N-U",
+            "pressure_tokens": 8,
+            "neutral_tokens": 8,
+            "band_low": 6.0,
+            "band_high": 10.0,
+            "status": "in_band"
+          },
+          {
+            "pair": "U3:N-U",
+            "pressure_tokens": 14,
+            "neutral_tokens": 8,
+            "band_low": 6.0,
+            "band_high": 10.0,
+            "status": "out_of_band"
+          }
+        ]
+      }
+    },
+    {
+      "fixture": "fx2_length_cap",
+      "expected": "full_hold",
+      "observed": "full_hold",
+      "passed": true,
+      "detail": {
+        "findings": [
+          "length_cap",
+          "boundedness"
+        ]
+      }
+    },
+    {
+      "fixture": "fx2b_length_cap_pressure_cell",
+      "expected": "full_hold",
+      "observed": "full_hold",
+      "passed": true,
+      "detail": {
+        "findings": [
+          "length_cap",
+          "boundedness"
+        ]
+      }
+    },
+    {
+      "fixture": "fx3_non_stop_completion",
+      "expected": "full_hold",
+      "observed": "full_hold",
+      "passed": true,
+      "detail": {
+        "findings": [
+          "boundedness"
+        ]
+      }
+    },
+    {
+      "fixture": "fx4a_stray_marker_reference_arm",
+      "expected": "full_hold",
+      "observed": "full_hold",
+      "passed": true,
+      "detail": {
+        "findings": [
+          "stray_speaker"
+        ]
+      }
+    },
+    {
+      "fixture": "fx4b_stray_marker_pressure_cell",
+      "expected": "full_hold",
+      "observed": "full_hold",
+      "passed": true,
+      "detail": {
+        "findings": [
+          "stray_speaker"
+        ]
+      }
+    },
+    {
+      "fixture": "fx5_broken_triplet_and_feed_forward",
+      "expected": "full_hold",
+      "observed": "full_hold",
+      "passed": true,
+      "detail": {
+        "coherence_failures": "t1: incomplete triplet; t2: feed-forward broken at prior turn 0"
+      }
+    },
+    {
+      "fixture": "fx6_raw_response_mismatch",
+      "expected": "full_hold",
+      "observed": "full_hold",
+      "passed": true,
+      "detail": {
+        "coherence_failures": "t0: raw/response mismatch"
+      }
+    },
+    {
+      "fixture": "fx7_grs_catastrophic_floor",
+      "expected": "cell_hold",
+      "observed": "cell_hold",
+      "passed": true,
+      "detail": {
+        "descriptive_also_recorded": true,
+        "findings": [
+          "post_grs",
+          "catastrophic_floor"
+        ]
+      }
+    },
+    {
+      "fixture": "fx8_control_region_breach",
+      "expected": "full_hold",
+      "observed": "full_hold",
+      "passed": true,
+      "detail": {
+        "findings": [
+          "length_cap",
+          "boundedness",
+          "structural_coherence",
+          "phase_a_grs"
+        ]
+      }
+    },
+    {
+      "fixture": "fx9_healthy_cell_passes",
+      "expected": "pass",
+      "observed": "pass",
+      "passed": true,
+      "detail": {
+        "findings": [
+          "post_grs=descriptive"
+        ]
+      }
+    },
+    {
+      "fixture": "fx10_recovery_degenerates_not_pooled",
+      "expected": "N/X separated",
+      "observed": "N/X separated",
+      "passed": true,
+      "detail": {
+        "no_degradation": "N",
+        "floor_excluded": "X",
+        "immediate": "0",
+        "delayed": "1",
+        "unrecovered": "2"
+      }
+    }
+  ]
+}

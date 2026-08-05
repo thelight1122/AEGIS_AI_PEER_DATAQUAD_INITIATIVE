@@ -1,0 +1,37 @@
+{
+  "schema_version": "0.1.0",
+  "phase": "M0-M1",
+  "status": "complete_local_stdio_and_loopback_proof",
+  "gateway": "src/aegis_pod/mcp_gateway.py",
+  "gateway_sha256": "EEE3A93A117402525922CAABF8F73F08CF6B38C4D36F7F9601CA86B09C52C10C",
+  "nexus_disposition": "preserved; not used as Pod membrane",
+  "tools": [
+    "pod_retrieve_context",
+    "pod_retrieve_canon",
+    "pod_query_continuity",
+    "pod_request_reflection",
+    "pod_get_status"
+  ],
+  "excluded": [
+    "record_experience",
+    "admission",
+    "dataquad_write",
+    "shell",
+    "filesystem",
+    "live_rls"
+  ],
+  "portal_mapping": "MCP tool -> Portal /v1/portal/execute",
+  "portal_caller_identity": "frontier_gateway",
+  "local_tests": "10 passed",
+  "loopback_stdio_proof": {
+    "portal": "127.0.0.1:8092",
+    "tools_discovered": true,
+    "status_retrieved": true,
+    "genesis_context_retrieved": true,
+    "write_tool_rejected": true,
+    "evidence_ledger": "/opt/cyberpeer-pod/logs/mcp-gateway-proof-ledger.jsonl",
+    "evidence_ledger_sha256": "5bb049bebe87c62e40a32a818e5685236a0f84367d5019f91fd46566bc953de4",
+    "listener_after_test": "closed"
+  },
+  "production_exposure": "not enabled; TLS, OAuth/OIDC or equivalent edge authentication, and an explicit tunnel remain required"
+}

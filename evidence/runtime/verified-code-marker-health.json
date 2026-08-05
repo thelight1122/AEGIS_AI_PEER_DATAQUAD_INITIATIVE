@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.1.0",
+  "created_utc": "2026-07-20T21:55:00Z",
+  "scope": "local fixture records only",
+  "live_reach": false,
+  "markers": [
+    {
+      "marker_id": "tensor_runtime:local-deterministic-fixture-tensor-runtime:0.1.0",
+      "target": {
+        "kind": "tensor_runtime",
+        "id": "local-deterministic-fixture-tensor-runtime"
+      },
+      "trust_state": "provisional",
+      "path": "reports\\runtime\\verified-markers\\tensor_runtime-local-deterministic-fixture-tensor-runtime.verified-code-marker.json",
+      "sha256": "ED869ED4C76C744D73D2DA5F7A0110CEC54142506BCBFD82F0D70CA3BF2218AF"
+    },
+    {
+      "marker_id": "orb:rls-orb-fixture:0.1.0",
+      "target": {
+        "kind": "orb",
+        "id": "rls-orb-fixture"
+      },
+      "trust_state": "provisional",
+      "path": "reports\\runtime\\verified-markers\\orb-rls-orb-fixture.verified-code-marker.json",
+      "sha256": "5C24124EA1BD6A672F5E09A928A031C25F67A37EE57C92E92E5CD3140EBA1351"
+    }
+  ]
+}

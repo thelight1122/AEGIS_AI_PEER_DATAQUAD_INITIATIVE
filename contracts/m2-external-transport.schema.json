@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AEGIS Pod MCP Gateway M2 External Transport Contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["mode", "listener_enabled", "bind_host", "transport", "authentication", "tls", "portal_backend", "scopes"],
+  "properties": {
+    "mode": {"type": "string", "enum": ["loopback", "production"]},
+    "listener_enabled": {"type": "boolean"},
+    "bind_host": {"type": "string"},
+    "transport": {"type": "string", "enum": ["stdio", "streamable_http"]},
+    "authentication": {
+      "type": "object", "additionalProperties": false,
+      "required": ["scheme", "issuer", "audience", "credential_source"],
+      "properties": {
+        "scheme": {"type": "string", "enum": ["oauth2_oidc", "bearer_dev"]},
+        "issuer": {"type": "string", "minLength": 1},
+        "audience": {"type": "string", "minLength": 1},
+        "credential_source": {"type": "string", "minLength": 1}
+      }
+    },
+    "tls": {
+      "type": "object", "additionalProperties": false,
+      "required": ["required", "certificate_reference", "private_key_reference"],
+      "properties": {
+        "required": {"type": "boolean"},
+        "certificate_reference": {"type": "string"},
+        "private_key_reference": {"type": "string"}
+      }
+    },
+    "portal_backend": {
+      "type": "object", "additionalProperties": false,
+      "required": ["url", "credential_source"],
+      "properties": {"url": {"type": "string", "pattern": "^https?://"}, "credential_source": {"type": "string", "minLength": 1}}
+    },
+    "scopes": {"type": "array", "uniqueItems": true, "items": {"type": "string", "enum": ["pod.context.read", "pod.canon.read", "pod.continuity.observed.read", "pod.reflection.replay", "pod.status.read"]}}
+  }
+}

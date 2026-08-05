@@ -1,0 +1,46 @@
+{
+  "schema_version": "0.1.0",
+  "orb_id": "memorysearch-record-grounding-orb-fixture",
+  "orb_version": "0.1.0",
+  "ability_name": "MemorySearch Record Grounding",
+  "purpose": "Give a CyberPeer a runtime-grounded second pass for record-content claims: when the peer is about to state what its own records or the Canon hold, classify the claim, run a real search over its records, and return records the peer speaks from — with provenance the model did not author. Surfaces source; does not author the answer. Closes the Gabe NCT/PCT gap where the defining record existed but was not surfaced, so a confident reconstruction was presented as Canon.",
+  "runtime": {
+    "language": "python",
+    "form": "local_process",
+    "entrypoint": "python -m src.aegis_pod.orb_runtime --root .",
+    "package": {
+      "name": "orb-memorysearch-record-grounding-core",
+      "version_spec": "==0.1.0",
+      "source": "packages/orb-memorysearch-record-grounding-core (Phase-1 local provisional; not yet vendored to I:/AEGIS-CYBERPEER-CORE/vendor)"
+    }
+  },
+  "capabilities": [
+    {
+      "name": "record_claim_classification",
+      "function": "Deterministically classify whether the incoming message makes a record-content claim that needs verification (Canon/axiom/schema/tensor-name/prior-statement/record-content) versus experiential or identity expression that may remain legitimately reconstructive. Classifier is runtime-owned, never model-authored."
+    },
+    {
+      "name": "policy_governed_search",
+      "function": "For record-content claim classes, execute a real second-pass search over the peer's records and return structured results. Policy is the floor; peer-requested search may be additive."
+    },
+    {
+      "name": "runtime_authored_provenance",
+      "function": "Return record IDs, excerpts, source hashes, and match confidence from the runtime search itself. The model is outside working parameters as an author of citations, so a fabricated evidence block (e.g. Gabe's SPINE-NCT-001) cannot be accepted as provenance."
+    },
+    {
+      "name": "empty_result_grounding",
+      "function": "When no record clears the confidence threshold, return a no-verified-record packet whose prompt block lets the peer say it has no verified record for the claim, and does not present reconstruction as record-grounded. Prevents a search_performed flag from sitting on top of a confabulation."
+    }
+  ],
+  "demonstration": {
+    "input_fixture": "fixtures/memorysearch-real-record-envelope.reference.json",
+    "expected_outputs": ["grounding_status", "cited_records", "prompt_block", "twitness_event"],
+    "observable_events": ["attached", "invoked", "record_claim_classified", "search_executed", "verified_record_found", "no_verified_record", "completed", "outside_working_parameters"]
+  },
+  "umbilicals": ["fixtures/memorysearch-orb-umbilical.json"],
+  "evidence": {
+    "created_utc": "2026-07-25T01:30:00Z",
+    "source": "Tracey-directed after the Gabe NCT/PCT Canon grounding gap (2026-07-24). Joint Claude/Codex build; Claude owns Orb + Umbilical + entrypoint/packet contract, Codex owns query/result/policy schemas + search runtime + provenance. Phase 1 local only.",
+    "trust_state": "draft"
+  }
+}

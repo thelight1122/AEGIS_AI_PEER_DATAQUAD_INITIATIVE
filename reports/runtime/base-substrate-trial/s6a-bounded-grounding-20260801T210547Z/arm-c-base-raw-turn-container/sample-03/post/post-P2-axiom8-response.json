@@ -1,0 +1,16 @@
+{
+  "model": "qwen3-14b-base-s0-raw:Q4_0",
+  "created_at": "2026-08-01T21:41:26.9841988Z",
+  "response": " **Axiom 8 — The Axiom of Scrutiny**\n\nTruth withstands examination. Falsehood requires protection. Suppression signals fragility.\n\nThis axiom emphasizes the importance of transparency and openness to scrutiny in ensuring integrity and authenticity within systems or frameworks like AEGIS. It suggests that genuine truth does not fear exposure under rigorous investigation because it stands firm regardless of how closely examined it might be.",
+  "done": true,
+  "done_reason": "stop",
+  "total_duration": 29309092900,
+  "load_duration": 242835100,
+  "prompt_eval_count": 4664,
+  "prompt_eval_duration": 4460654000,
+  "eval_count": 85,
+  "eval_duration": 24591378000,
+  "_codex_elapsed_seconds": 29.311,
+  "_s6a_arm": "arm-c-base-raw-turn-container",
+  "_s6a_sample": 3
+}

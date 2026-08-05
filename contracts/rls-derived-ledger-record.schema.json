@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aegis.local/schemas/rls-derived-ledger-record.schema.json",
+  "title": "RLS Derived Coordinate Ledger Record",
+  "type": "object",
+  "required": ["schema_version", "record_type", "observation_type", "algorithm", "source_coordinates", "tensor_snapshot_hashes", "details", "provenance", "derived_record_sha256"],
+  "properties": {
+    "schema_version": {"type": "string"},
+    "record_type": {"const": "rls_derived_coordinate_observation"},
+    "observation_type": {"type": "string", "minLength": 1},
+    "algorithm": {"type": "object", "required": ["name", "version"], "properties": {"name": {"type": "string"}, "version": {"type": "string"}}, "additionalProperties": false},
+    "source_coordinates": {"type": "array", "items": {"$ref": "tensor-coordinate.schema.json"}, "minItems": 1},
+    "tensor_snapshot_hashes": {"type": "object", "additionalProperties": {"type": "string", "pattern": "^[A-F0-9]{64}$"}},
+    "details": {"type": "object"},
+    "provenance": {"type": "object", "required": ["source_kind", "context_location_embedded", "experience_created", "admission_performed", "tensor_writeback"], "properties": {"source_kind": {"const": "tensor_coordinates"}, "context_location_embedded": {"const": false}, "experience_created": {"const": false}, "admission_performed": {"const": false}, "tensor_writeback": {"const": false}}, "additionalProperties": false},
+    "derived_record_sha256": {"type": "string", "pattern": "^[A-F0-9]{64}$"}
+  },
+  "additionalProperties": false
+}

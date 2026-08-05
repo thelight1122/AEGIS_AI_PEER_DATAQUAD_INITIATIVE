@@ -1,0 +1,31 @@
+{
+  "schema_version": "0.1.0",
+  "umbilical_id": "archive-relevance-orb-fixture-umbilical",
+  "pod_id": "local-cyberpeer-pod-fixture",
+  "orb_id": "archive-relevance-orb-fixture",
+  "attachment_point": "advocate",
+  "runtime": {
+    "language": "python",
+    "form": "local_process"
+  },
+  "invocation": {
+    "method": "local_module",
+    "entrypoint": "python -m src.aegis_pod.orb_runtime --root ."
+  },
+  "input_contract": {
+    "requires": ["invariant_spine_records", "user_message", "intent", "spine_invariant_cap"]
+  },
+  "output_contract": {
+    "returns": ["selected_invariant_ids", "excluded_invariant_ids", "label_match_hit"]
+  },
+  "observation_contract": {
+    "observable_events": ["invoked", "label_match_found", "cap_overflow_reported", "completed", "outside_working_parameters"]
+  },
+  "evidence_contract": {
+    "records": ["input_hash", "output_hash", "runtime_hash"]
+  },
+  "working_parameters": {
+    "status": "draft",
+    "outside_parameters_behavior": "fall back to advocate.py's existing flat file-order slice and report visible condition; Pod state unchanged"
+  }
+}

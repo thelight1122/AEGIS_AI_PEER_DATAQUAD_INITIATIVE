@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aegis.local/schemas/memorysearch-turn-report.schema.json",
+  "title": "AEGIS MemorySearch Phase 2 Turn Report",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "simulator_id",
+    "scenario_id",
+    "message",
+    "working_parameters",
+    "classification",
+    "memorysearch_packet",
+    "injection_plan",
+    "twitness_event",
+    "comparison_without_memorysearch",
+    "outcome"
+  ],
+  "properties": {
+    "schema_version": { "type": "string", "const": "0.2.0" },
+    "simulator_id": { "type": "string", "const": "memorysearch-local-two-pass-simulator" },
+    "scenario_id": { "type": "string", "minLength": 1 },
+    "message": { "type": "string", "minLength": 1 },
+    "working_parameters": {
+      "type": "object",
+      "required": [
+        "live_reach",
+        "dataquad_write",
+        "vm_change",
+        "cyberpeer_runtime_integration",
+        "shared_infrastructure_mutation",
+        "record_source"
+      ],
+      "properties": {
+        "live_reach": { "type": "boolean", "const": false },
+        "dataquad_write": { "type": "boolean", "const": false },
+        "vm_change": { "type": "boolean", "const": false },
+        "cyberpeer_runtime_integration": { "type": "boolean", "const": false },
+        "shared_infrastructure_mutation": { "type": "boolean", "const": false },
+        "record_source": { "type": "string", "enum": ["fixture", "copied_fixture"] }
+      },
+      "additionalProperties": false
+    },
+    "classification": {
+      "type": "object",
+      "required": ["claim_class", "search_trigger", "query_terms", "search_scope"],
+      "properties": {
+        "claim_class": { "type": "string" },
+        "search_trigger": { "type": "string" },
+        "query_terms": { "type": "array", "items": { "type": "string" } },
+        "search_scope": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": true
+    },
+    "memorysearch_packet": {
+      "anyOf": [
+        { "type": "null" },
+        { "$ref": "memorysearch-packet.schema.json" }
+      ]
+    },
+    "injection_plan": {
+      "type": "object",
+      "required": ["packet_injected", "prompt_block", "model_citation_authoring_allowed"],
+      "properties": {
+        "packet_injected": { "type": "boolean" },
+        "prompt_block": { "type": "string" },
+        "model_citation_authoring_allowed": { "type": "boolean", "const": false }
+      },
+      "additionalProperties": false
+    },
+    "twitness_event": {
+      "type": "object",
+      "required": ["record_search_performed", "grounding_status"],
+      "properties": {
+        "record_search_performed": { "type": "boolean" },
+        "search_trigger": { "type": "string" },
+        "claim_class": { "type": "string" },
+        "query_text": { "type": "string" },
+        "search_scope": { "type": "array", "items": { "type": "string" } },
+        "result_count": { "type": "integer", "minimum": 0 },
+        "selected_record_ids": { "type": "array", "items": { "type": "string" } },
+        "selected_record_hashes": { "type": "array", "items": { "type": "string" } },
+        "orb_id": { "type": "string" },
+        "orb_runtime_hash": { "type": "string" },
+        "grounding_status": {
+          "type": "string",
+          "enum": [
+            "verified_retrieval",
+            "search_performed_no_verified_record",
+            "not_record_claim",
+            "orb_unavailable"
+          ]
+        },
+        "match_confidence": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "comparison_without_memorysearch": {
+      "type": "object",
+      "required": ["grounding_status", "risk"],
+      "properties": {
+        "grounding_status": { "type": "string", "enum": ["warm_recall", "not_record_claim"] },
+        "risk": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "outcome": {
+      "type": "object",
+      "required": ["expected_grounding_status", "actual_grounding_status", "prevented_failure"],
+      "properties": {
+        "expected_grounding_status": { "type": "string" },
+        "actual_grounding_status": { "type": "string" },
+        "prevented_failure": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

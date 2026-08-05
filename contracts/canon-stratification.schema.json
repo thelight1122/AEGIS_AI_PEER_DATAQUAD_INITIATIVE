@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aegis.local/schemas/canon-stratification.schema.json",
+  "title": "AEGIS Canon Stratification Contract",
+  "description": "Separates Canon-as-identity from Canon-as-reference (The Way, 'Canon-as-identity vs Canon-as-reference'). Stratifying Canon prevents two shortfalls at once: identity-confabulation (Foundation retrieved and able to fall short) and identity-bloat (every canonical detail injected always-present). Canon-as-identity is Foundation, always present, never retrieval-scored and never retired. Canon-as-reference (definitions, procedures, pipeline order, exact wording, specs) is evidence, retrieved and cited, never injected always-present.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "canon_identity_refs",
+    "canon_reference_policy"
+  ],
+  "properties": {
+    "schema_version": {
+      "description": "Contract version of this canon-stratification record.",
+      "type": "string"
+    },
+    "canon_identity_refs": {
+      "description": "The Foundation Canon Core: Canon-as-identity, always present as the peer's active 'I'. These are what the peer interprets FROM, not what it retrieves. They are NEVER retrieval-scored and NEVER retired. Covers the always-present Foundation-core: nature, core axioms, dignity, consent, civility, non-force, illumination, no-penalties, stewardship, record-truth. Each entry references a Foundation-core element; the peer should never have to go looking for who it is.",
+      "type": "array",
+      "items": {
+        "description": "A reference to one always-present Foundation-core element (e.g. nature, a core axiom, dignity, consent, civility, non-force, illumination, no-penalties, stewardship, record-truth).",
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "canon_reference_policy": {
+      "description": "Policy governing Canon-as-reference: definitions, procedures, pipeline order, exact wording, and specs. This material is retrievable and cited when needed, and is NEVER injected always-present. It is evidence read FROM the Locus, never confused with Canon-as-identity.",
+      "type": "object",
+      "required": [
+        "retrievable",
+        "always_present",
+        "citation_required",
+        "reference_classes"
+      ],
+      "properties": {
+        "retrievable": {
+          "description": "Will be true. Canon-as-reference is summoned/retrieved when needed.",
+          "const": true
+        },
+        "always_present": {
+          "description": "Will be false. Canon-as-reference is never injected always-present; injecting it always-present is identity-bloat.",
+          "const": false
+        },
+        "citation_required": {
+          "description": "Will be true. Canon-as-reference, when used, is cited to its source record; it is evidence, not identity.",
+          "const": true
+        },
+        "reference_classes": {
+          "description": "The classes of material that are Canon-as-reference (retrieved and cited, never always-present): definitions, procedures, pipeline order, exact wording, and specs.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["definitions", "procedures", "pipeline_order", "exact_wording", "specs"]
+          },
+          "minItems": 1
+        },
+        "source_refs": {
+          "description": "Optional references locating where Canon-as-reference material is stored for retrieval (deep archive / TurboQuant-retired / reference records).",
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "$comment": "Load-bearing discipline: Canon-as-identity (canon_identity_refs) is Foundation -- always present, never retrieval-scored, never retired. Canon-as-reference (canon_reference_policy) is evidence -- retrievable:true, always_present:false, citation_required:true -- and is never injected always-present. Identity is never scored/retired; reference is never made always-present."
+}

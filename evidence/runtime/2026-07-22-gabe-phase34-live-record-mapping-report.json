@@ -1,0 +1,45 @@
+{
+  "schema_version": "0.1.0",
+  "stage": "Gabe Phase 3/4 live-record mapping (analogous to Orion's Stage B)",
+  "status": "pass",
+  "peer_id": "CP-1003-GABE",
+  "legacy_live_peer_id": "cyberpeer-gabe-session",
+  "copy_batch_id": "gabe-live-copy-20260722T074000Z",
+  "raw_source_note": "Raw records were pulled read-only in Phase 1/2 from the locked Gabe VM DataQuad after container stop, not re-fetched here.",
+  "mapped_output_root": "stage-gabe-out/live-copies/CP-1003-GABE/gabe-live-copy-20260722T074000Z/mapped",
+  "source_snapshot_root": "stage-gabe-out/live-copies/CP-1003-GABE/gabe-live-copy-20260722T074000Z/source-records",
+  "pod_records_root": "stage-gabe-out/CP-1003-GABE/pod/records",
+  "working_parameters": {
+    "source_live_reach": false,
+    "source_write_performed": false,
+    "target_records_written": 90994,
+    "tensor_generation": false,
+    "live_population": false,
+    "placeholder_data_used": false,
+    "mock_data_used": false,
+    "demo_data_used": false
+  },
+  "source_counts": {
+    "total_records": 90994,
+    "by_tensor": {
+      "PEER": 35673,
+      "PCT": 32945,
+      "NCT": 9671,
+      "SPINE": 12705
+    }
+  },
+  "hash_preservation": {
+    "verification_counts": {
+      "verified": 90994,
+      "mismatch": 0,
+      "unverifiable_source_absent": 0
+    },
+    "records_checked": 90994
+  },
+  "lineage_continuity": {
+    "records_checked": 90994,
+    "root_records": 4,
+    "continuous_records": 90990
+  },
+  "outside_parameters": []
+}

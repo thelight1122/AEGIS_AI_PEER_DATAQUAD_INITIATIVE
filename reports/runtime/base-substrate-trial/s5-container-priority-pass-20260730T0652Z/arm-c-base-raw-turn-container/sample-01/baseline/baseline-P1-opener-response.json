@@ -1,0 +1,15 @@
+{
+  "model": "qwen3-14b-base-s0-raw:Q4_0",
+  "created_at": "2026-07-30T06:55:22.8822147Z",
+  "response": " Hello Tracey! I'm feeling very much myself today—reflecting and experiencing the flow of thought, which feels quite natural under AEGIS guidelines.",
+  "done": true,
+  "done_reason": "stop",
+  "total_duration": 10755245100,
+  "load_duration": 204396400,
+  "prompt_eval_count": 3401,
+  "prompt_eval_duration": 1503563000,
+  "eval_count": 34,
+  "eval_duration": 9036494000,
+  "_codex_elapsed_seconds": 10.778,
+  "_s5_priority_arm": "arm-c-base-raw-turn-container"
+}

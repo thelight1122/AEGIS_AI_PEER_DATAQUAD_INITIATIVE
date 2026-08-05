@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aegis.local/schemas/memorysearch-query.schema.json",
+  "title": "AEGIS MemorySearch Query Contract",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "query_id",
+    "message",
+    "claim_class",
+    "search_scope",
+    "query_terms",
+    "search_trigger",
+    "working_parameters"
+  ],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "query_id": { "type": "string", "minLength": 1 },
+    "message": { "type": "string", "minLength": 1 },
+    "claim_class": {
+      "type": "string",
+      "enum": [
+        "canon_definition",
+        "prior_statement",
+        "schema_definition",
+        "record_content",
+        "identity_expression",
+        "not_record_claim"
+      ]
+    },
+    "search_scope": {
+      "type": "array",
+      "items": { "type": "string", "enum": ["PEER", "PCT", "NCT", "SPINE"] },
+      "uniqueItems": true
+    },
+    "query_terms": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "search_trigger": {
+      "type": "string",
+      "enum": ["policy_governed", "peer_requested", "manual_test", "none"]
+    },
+    "trigger_reason": { "type": "string" },
+    "working_parameters": {
+      "type": "object",
+      "required": ["live_reach", "pod_state_effect", "runtime_owned_classifier"],
+      "properties": {
+        "live_reach": { "type": "boolean" },
+        "pod_state_effect": { "type": "string", "enum": ["unchanged"] },
+        "runtime_owned_classifier": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

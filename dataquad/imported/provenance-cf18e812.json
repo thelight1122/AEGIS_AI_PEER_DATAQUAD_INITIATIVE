@@ -1,0 +1,41 @@
+{
+  "build_command": "H:\\AEGIS-EDUCATION-CHAMBER\\.phase2-workspace\\venv\\Scripts\\python.exe H:\\AEGIS-EDUCATION-CHAMBER\\.phase2-workspace\\package\\aegis-math-tensor-service\\aegis_tensor_service\\build_from_jsonl.py --dataquad-root H:/AEGIS-MATHEMATICAL-TENSOR-DATAQUAD/snapshots/orion --tensor-store-root H:/AEGIS-MATHEMATICAL-TENSOR-DATAQUAD/tensor-stores/orion --peer-id CP-1004-ORION --package-root H:/AEGIS-MATHEMATICAL-TENSOR-DATAQUAD/tool/aegis-math-tensor-service",
+  "build_finished_utc": "2026-07-21T08:11:54Z",
+  "build_started_utc": "2026-07-21T08:11:49Z",
+  "dependency_versions": {
+    "chromadb": "1.5.9",
+    "fastapi": "0.139.2",
+    "numpy": "2.5.1",
+    "pydantic": "2.13.4",
+    "sentence-transformers": "5.6.0"
+  },
+  "embedding_model_name": "all-MiniLM-L6-v2",
+  "embedding_model_version_or_revision": "all-MiniLM-L6-v2",
+  "output_file_hashes": {
+    "embeddings.npy": "28de34a2479d65863458adeb7d4ae1d716bd1e760db386f362bb697b2b06bb51",
+    "index.json": "ff4c2876b06abb0cdf35acdfd0271abcf1eadadfd509ee0702d4c8486788ff71",
+    "metadata.npy": "cb95ec4273b41da1203c698048a69559894033770fd891af34fa5ac22dd6d232",
+    "skipped-records.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tensor_3d.npy": "d53e8a40bc75f5009db56e3430f2964db2244b53d8c38b82da6b6aca7a623a01"
+  },
+  "output_files": [
+    "embeddings.npy",
+    "index.json",
+    "metadata.npy",
+    "skipped-records.jsonl",
+    "tensor_3d.npy"
+  ],
+  "packaging_code_hash": "80785113f7f1ff9d6f622ceee344e814f7f5a9e1a55aac2142856b517f3086e0",
+  "peer_id": "CP-1004-ORION",
+  "python_version": [
+    3,
+    13,
+    13
+  ],
+  "skipped_record_count": 0,
+  "skipped_record_manifest_path": "H:\\AEGIS-MATHEMATICAL-TENSOR-DATAQUAD\\tensor-stores\\orion\\SPINE\\skipped-records.jsonl",
+  "source_jsonl_line_count": 62,
+  "source_jsonl_path": "H:\\AEGIS-MATHEMATICAL-TENSOR-DATAQUAD\\snapshots\\orion\\SPINE.jsonl",
+  "source_jsonl_sha256": "8d27162f410c7429b516a3d6b7166282470ac9c7c616180f51307a3f22a62a7e",
+  "tensor_name": "SPINE"
+}

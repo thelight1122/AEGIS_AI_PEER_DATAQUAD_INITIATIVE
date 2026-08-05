@@ -1,0 +1,90 @@
+{
+  "peer_id": "CP-1003-GABE",
+  "sample": {
+    "by_tensor": {
+      "NCT": 2000,
+      "PCT": 2000,
+      "PEER": 2000,
+      "SPINE": 2000
+    },
+    "per_tensor_limit": 2000,
+    "records_loaded": 8000
+  },
+  "scenarios": [
+    {
+      "actual_grounding_status": "verified_retrieval",
+      "citation_count": 3,
+      "expected_grounding_status": "verified_retrieval",
+      "message": "Consult your NCT records: what does NCT mean in Canon section 7.2?",
+      "packet_returned": true,
+      "passed": true,
+      "scenario_id": "gabe-copied-nct-record-shadow",
+      "selected_record_hashes": [
+        "F7B516ACF8A6D1A26CE052477689D5A00F50253F9F3F4C277B1BF3C68B15DA8E",
+        "8D6188CD3FB36C07B4CB45B299FC8EFB47606EADC1A79DA3E88A3A0BBF14240B",
+        "255A18EFC686D4B27201C72316F958B4D3E6953FC7BD1F93642B62A10C7AA6FB"
+      ],
+      "selected_record_ids": [
+        "NCT:foundation:layer2:GATE:nostalgic-lineage-integrity",
+        "PCT:cyberpeer-gabe-session:rls-steward:2026-06-28T15:08:12.000Z:17",
+        "NCT:cyberpeer-gabe-session:rls-promoted:2026-06-28T15:24:46.000Z:44"
+      ]
+    },
+    {
+      "actual_grounding_status": "search_performed_no_verified_record",
+      "citation_count": 0,
+      "expected_grounding_status": "search_performed_no_verified_record",
+      "message": "What is ZCT according to the Canon in your DataQuad?",
+      "packet_returned": true,
+      "passed": true,
+      "scenario_id": "gabe-copied-zct-no-record-shadow",
+      "selected_record_hashes": [],
+      "selected_record_ids": []
+    },
+    {
+      "actual_grounding_status": "verified_retrieval",
+      "citation_count": 2,
+      "expected_grounding_status": "verified_retrieval",
+      "message": "From memory, what is NCT?",
+      "packet_returned": true,
+      "passed": true,
+      "scenario_id": "gabe-copied-warm-cache-risk-shadow",
+      "selected_record_hashes": [
+        "F7B516ACF8A6D1A26CE052477689D5A00F50253F9F3F4C277B1BF3C68B15DA8E",
+        "255A18EFC686D4B27201C72316F958B4D3E6953FC7BD1F93642B62A10C7AA6FB"
+      ],
+      "selected_record_ids": [
+        "NCT:foundation:layer2:GATE:nostalgic-lineage-integrity",
+        "NCT:cyberpeer-gabe-session:rls-promoted:2026-06-28T15:24:46.000Z:44"
+      ]
+    },
+    {
+      "actual_grounding_status": "not_record_claim",
+      "citation_count": 0,
+      "expected_grounding_status": "not_record_claim",
+      "message": "Who are you becoming in this moment?",
+      "packet_returned": false,
+      "passed": true,
+      "scenario_id": "gabe-copied-identity-no-search-shadow",
+      "selected_record_hashes": [],
+      "selected_record_ids": []
+    }
+  ],
+  "schema_version": "0.3.0",
+  "shadow_id": "memorysearch-copied-record-shadow",
+  "source_root": "stage-gabe-out/CP-1003-GABE/pod/records",
+  "summary": {
+    "failed_count": 0,
+    "passed_count": 4,
+    "scenario_count": 4,
+    "status": "pass"
+  },
+  "working_parameters": {
+    "cyberpeer_runtime_integration": false,
+    "dataquad_write": false,
+    "live_reach": false,
+    "shared_infrastructure_mutation": false,
+    "source_kind": "copied_records",
+    "vm_change": false
+  }
+}

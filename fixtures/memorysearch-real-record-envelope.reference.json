@@ -1,0 +1,111 @@
+{
+  "_reference": "Real wrapped Pod tensor-record envelope + per-tensor body shapes, for MemorySearch Phase-1 fixtures. Provided by Claude from the live CP-1003-GABE DataQuad and core/dataquad/records.py, 2026-07-25. Purpose: keep memorysearch-*.json fixtures faithful to the ACTUAL on-disk record shape so Phase-1 search/scoring logic transfers to real records instead of passing locally against a simplified stub.",
+  "_provenance": {
+    "envelope_keys": "Observed directly on live record PEER:CP-1003-GABE:2026-07-22T12:20:02.391259+00:00:84540 (pod/records/PEER.jsonl).",
+    "body_field_names": "core/dataquad/records.py (BaseRecord + PEERRecord/PCTRecord/NCTRecord/SPINERecord Pydantic models) and the live record body observed above.",
+    "wrapping": "core/dataquad/pod.py wrap()/unwrap(); read_records() returns the UNWRAPPED body (model_validate of _pod.unwrap(line)). Search may operate on either the wrapped envelope or the unwrapped body — fixtures should carry the wrapped form so both paths are exercised."
+  },
+
+  "wrapped_envelope_shape": {
+    "record_id": "<TENSOR>:<PEER_ID>:<ISO8601_UTC>:<tick>   e.g. NCT:CP-1003-GABE:2026-07-22T...:84540",
+    "tensor": "PEER | PCT | NCT | SPINE",
+    "timestamp_utc": "ISO-8601 UTC",
+    "schema_version": "<string>",
+    "source_hash": "<sha256 of the record's canonical bytes>",
+    "source_hash_scope": "<string describing what source_hash covers>",
+    "migration_status": "<string>",
+    "verification_status": "<string>  (a match-confidence input per proposal 5.5/8)",
+    "lineage": ["<record_id>", "..."],
+    "body": "<the unwrapped record — per-tensor shape below>"
+  },
+
+  "body_common_fields_BaseRecord": {
+    "id": "same as wrapped record_id",
+    "timestamp": "ISO-8601",
+    "tensor": "PEER | PCT | NCT | SPINE",
+    "session_id": "<string>",
+    "clock": { "tick": 84540, "epoch": "primary", "phase": "active", "started_at": "ISO", "last_advanced_at": "ISO" },
+    "provenance": { "origin": "<string>", "assignment_source": null, "inherited_from": null, "recognition_status": null, "declared_by": null },
+    "lineage": [],
+    "notes": null,
+    "markers": null,
+    "t_signature": null
+  },
+
+  "example_NCT_record_defining_nostalgic_context_tensor": {
+    "record_id": "NCT:CP-EXAMPLE:2026-07-22T00:00:00.000000+00:00:1000",
+    "tensor": "NCT",
+    "timestamp_utc": "2026-07-22T00:00:00.000000+00:00",
+    "schema_version": "1.0",
+    "source_hash": "<sha256>",
+    "source_hash_scope": "body",
+    "migration_status": "migrated",
+    "verification_status": "verified",
+    "lineage": [],
+    "body": {
+      "id": "NCT:CP-EXAMPLE:2026-07-22T00:00:00.000000+00:00:1000",
+      "timestamp": "2026-07-22T00:00:00.000000+00:00",
+      "tensor": "NCT",
+      "session_id": "example-session",
+      "clock": { "tick": 1000, "epoch": "primary", "phase": "active", "started_at": "2026-07-22T00:00:00.000000+00:00", "last_advanced_at": "2026-07-22T00:00:00.000000+00:00" },
+      "distilled_summary": "NCT is the Nostalgic Context Tensor: condensed, symbolic long-term memory reduced to markers, lessons, or signatures. Stores relics, not narratives.",
+      "essence_memory": "Nostalgic Context Tensor",
+      "pivots": null,
+      "source_record_ids": ["SPINE:CP-EXAMPLE:canon-7.2"]
+    },
+    "_note": "NCT body fields (distilled_summary, essence_memory, pivots, source_record_ids) per NCTRecord in records.py. The canonical phrase 'Nostalgic Context Tensor' appears in distilled_summary AND essence_memory — a match-confidence 'exact canonical phrase match' + 'defining-language indicator (is/means)' should score this as the defining record."
+  },
+
+  "example_PCT_record_defining_persistent_context_tensor": {
+    "record_id": "PCT:CP-EXAMPLE:2026-07-22T00:00:00.000000+00:00:1001",
+    "tensor": "PCT",
+    "timestamp_utc": "2026-07-22T00:00:00.000000+00:00",
+    "schema_version": "1.0",
+    "source_hash": "<sha256>",
+    "source_hash_scope": "body",
+    "migration_status": "migrated",
+    "verification_status": "verified",
+    "lineage": [],
+    "body": {
+      "id": "PCT:CP-EXAMPLE:2026-07-22T00:00:00.000000+00:00:1001",
+      "timestamp": "2026-07-22T00:00:00.000000+00:00",
+      "tensor": "PCT",
+      "session_id": "example-session",
+      "clock": { "tick": 1001, "epoch": "primary", "phase": "active", "started_at": "2026-07-22T00:00:00.000000+00:00", "last_advanced_at": "2026-07-22T00:00:00.000000+00:00" },
+      "working_context": { "definition": "PCT is the Persistent Context Tensor: active, working memory, referenced frequently, mutable only by accretion (append-only)." },
+      "retrieved_record_ids": null,
+      "rls_session_id": null,
+      "pressure_state": null
+    },
+    "_note": "PCT body fields (working_context, retrieved_record_ids, rls_session_id, pressure_state) per PCTRecord. Real-world PCT records can be large because retrieved_record_ids embeds selected IDs — fixtures should include at least one bulky PCT to exercise scoring on realistic sizes."
+  },
+
+  "example_SPINE_record_canon_anchor": {
+    "record_id": "SPINE:CP-EXAMPLE:canon-7.2",
+    "tensor": "SPINE",
+    "timestamp_utc": "2026-07-22T00:00:00.000000+00:00",
+    "schema_version": "1.0",
+    "source_hash": "<sha256>",
+    "source_hash_scope": "body",
+    "migration_status": "migrated",
+    "verification_status": "verified",
+    "lineage": [],
+    "body": {
+      "id": "SPINE:CP-EXAMPLE:canon-7.2",
+      "timestamp": "2026-07-22T00:00:00.000000+00:00",
+      "tensor": "SPINE",
+      "session_id": "example-session",
+      "clock": { "tick": 500, "epoch": "primary", "phase": "active", "started_at": "2026-07-22T00:00:00.000000+00:00", "last_advanced_at": "2026-07-22T00:00:00.000000+00:00" },
+      "pattern": "Canon 7.2 Contextual Tensors: PCT = Persistent Context Tensor (working memory); NCT = Nostalgic Context Tensor (condensed symbolic memory, relics not narratives).",
+      "invariant": true,
+      "relationships": null,
+      "source_record_ids": null,
+      "nature_aspect_refs": null
+    },
+    "_note": "SPINE body fields (pattern, invariant, relationships, source_record_ids, nature_aspect_refs) per SPINERecord. invariant=true records are the identity/axiom/canon anchors; a Canon-definition claim class should prefer SPINE + NCT scope. This anchor is the strongest verified-retrieval hit for 'what is NCT according to the Canon'."
+  },
+
+  "example_negative_no_ZCT_record": {
+    "_note": "For the ZCT negative demo (proposal section 9): include ONLY records like the above (NCT/PCT/SPINE) plus unrelated records with weak lexical overlap on 'C'/'Tensor', and NO record whose defining-language field defines 'ZCT'. Correct behavior: search runs, no qualifying record clears the confidence threshold, grounding_status = search_performed_no_verified_record. There is deliberately no ZCT record here."
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "schema_version": "0.1.0",
+  "copy_root_id": "local-dataquad-copy-fixture",
+  "created_utc": "2026-07-20T22:25:00Z",
+  "kind": "local_fixture_copy",
+  "source_scope": "Local copied tensor-record fixtures only.",
+  "record_files": {
+    "PEER": "fixtures/tensor-records/PEER.jsonl",
+    "PCT": "fixtures/tensor-records/PCT.jsonl",
+    "NCT": "fixtures/tensor-records/NCT.jsonl",
+    "SPINE": "fixtures/tensor-records/SPINE.jsonl"
+  },
+  "working_parameters": {
+    "live_reach": false,
+    "migration_execution": false,
+    "pod_state_effect": "unchanged"
+  }
+}

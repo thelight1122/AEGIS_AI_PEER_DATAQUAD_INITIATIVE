@@ -1,0 +1,36 @@
+{
+  "schema_version": "0.1.0",
+  "orb_id": "archive-relevance-orb-fixture",
+  "ability_name": "Archive Relevance Surfacing",
+  "purpose": "When a peer's invariant SPINE record count exceeds the context cap, rank and select by relevance to the current query instead of flat file order, so a specifically-referenced anchor (e.g. a named Axiom) is reliably surfaced rather than silently excluded by position.",
+  "runtime": {
+    "language": "python",
+    "form": "local_process",
+    "entrypoint": "python -m src.aegis_pod.orb_runtime --root ."
+  },
+  "capabilities": [
+    {
+      "name": "label_match_promotion",
+      "function": "Detect an explicit numbered/named anchor reference in the query and guarantee that record's inclusion regardless of cap position."
+    },
+    {
+      "name": "invariant_relevance_ranking",
+      "function": "Rank remaining invariant records by relevance to the query for the remaining cap budget, instead of flat file order."
+    },
+    {
+      "name": "cap_overflow_disclosure",
+      "function": "Report which invariant records were included versus excluded when the total exceeds the cap, instead of a silent slice."
+    }
+  ],
+  "demonstration": {
+    "input_fixture": "fixtures/archive-orb-input.json",
+    "expected_outputs": ["selected_invariant_ids", "excluded_invariant_ids", "label_match_hit"],
+    "observable_events": ["attached", "invoked", "label_match_found", "cap_overflow_reported", "completed"]
+  },
+  "umbilicals": ["fixtures/archive-orb-umbilical.json"],
+  "evidence": {
+    "created_utc": "2026-07-22T12:50:00Z",
+    "source": "Tracey-directed: Gabe live Axiom 11 retrieval failure, root-caused to advocate.py's flat invariant-record cap",
+    "trust_state": "draft"
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aegis.local/schemas/marker-promotion-report.schema.json",
+  "title": "AEGIS Marker Promotion Report Contract",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "policy_id",
+    "policy_path",
+    "working_parameters",
+    "summary",
+    "markers"
+  ],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "policy_id": { "type": "string" },
+    "policy_path": { "type": "string" },
+    "working_parameters": {
+      "type": "object",
+      "required": ["scope", "pod_state_effect", "live_reach", "promotion_applied"],
+      "properties": {
+        "scope": { "type": "string" },
+        "pod_state_effect": { "type": "string" },
+        "live_reach": { "type": "boolean" },
+        "promotion_applied": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "summary": {
+      "type": "object",
+      "required": ["markers_evaluated", "reviewed_recommendations", "verified_recommendations"],
+      "properties": {
+        "markers_evaluated": { "type": "integer", "minimum": 0 },
+        "reviewed_recommendations": { "type": "integer", "minimum": 0 },
+        "verified_recommendations": { "type": "integer", "minimum": 0 }
+      },
+      "additionalProperties": false
+    },
+    "markers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "marker_id",
+          "path",
+          "current_trust_state",
+          "recommended_trust_state",
+          "recommendation_reason",
+          "promotion_applied",
+          "reviews",
+          "hashes",
+          "evidence_paths",
+          "thresholds"
+        ],
+        "properties": {
+          "marker_id": { "type": "string" },
+          "path": { "type": "string" },
+          "current_trust_state": { "type": "string" },
+          "recommended_trust_state": {
+            "type": "string",
+            "enum": ["draft", "provisional", "reviewed", "verified"]
+          },
+          "recommendation_reason": { "type": "string" },
+          "promotion_applied": { "type": "boolean" },
+          "reviews": { "type": "object" },
+          "hashes": { "type": "array" },
+          "evidence_paths": { "type": "array" },
+          "thresholds": { "type": "object" }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

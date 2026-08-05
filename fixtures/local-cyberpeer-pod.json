@@ -1,0 +1,88 @@
+{
+  "schema_version": "0.1.0",
+  "pod_id": "local-cyberpeer-pod-fixture",
+  "peer_id": "fixture-peer",
+  "runtime": {
+    "language": "language-agnostic",
+    "implementation": "contract-fixture"
+  },
+  "tensor_spec": {
+    "spec_id": "dataquadpod-core-tensor-spec-0.1.0",
+    "spec_path": "fixtures/dataquadpod-tensor-spec.json",
+    "active_output_root": "reports/runtime/tensors"
+  },
+  "tensors": {
+    "PEER": {
+      "name": "PEER",
+      "purpose": "Present experiential signal",
+      "storage": "fixtures/tensor-records/PEER.jsonl",
+      "output": "reports/runtime/tensors/PEER.tensor.json",
+      "shape": ["record_count", 8, 4],
+      "dtype": "float32",
+      "axis_order": ["record", "embedding", "metadata"],
+      "append_only": true
+    },
+    "PCT": {
+      "name": "PCT",
+      "purpose": "Persistent contextual thread",
+      "storage": "fixtures/tensor-records/PCT.jsonl",
+      "output": "reports/runtime/tensors/PCT.tensor.json",
+      "shape": ["record_count", 8, 4],
+      "dtype": "float32",
+      "axis_order": ["record", "embedding", "metadata"],
+      "append_only": true
+    },
+    "NCT": {
+      "name": "NCT",
+      "purpose": "Condensed contextual essence",
+      "storage": "fixtures/tensor-records/NCT.jsonl",
+      "output": "reports/runtime/tensors/NCT.tensor.json",
+      "shape": ["record_count", 8, 4],
+      "dtype": "float32",
+      "axis_order": ["record", "embedding", "metadata"],
+      "append_only": true
+    },
+    "SPINE": {
+      "name": "SPINE",
+      "purpose": "Sovereign identity continuity",
+      "storage": "fixtures/tensor-records/SPINE.jsonl",
+      "output": "reports/runtime/tensors/SPINE.tensor.json",
+      "shape": ["record_count", 8, 4],
+      "dtype": "float32",
+      "axis_order": ["record", "embedding", "metadata"],
+      "append_only": true
+    }
+  },
+  "roles": {
+    "steward": {
+      "purpose": "Context witness and preservation care",
+      "owns": ["PCT", "NCT"],
+      "reads": ["PEER"]
+    },
+    "advocate": {
+      "purpose": "Affect witness and relational signal care",
+      "owns": ["PEER", "SPINE"],
+      "reads": []
+    }
+  },
+  "processor": {
+    "purpose": "Context assembly and turn interpretation",
+    "status": "fixture"
+  },
+  "temporal_daemon": {
+    "purpose": "Time position and continuity awareness",
+    "status": "fixture"
+  },
+  "orbs": [
+    {
+      "orb_id": "rls-orb-fixture",
+      "required_for_full_function": true,
+      "umbilical": "fixtures/rls-orb-umbilical.json"
+    }
+  ],
+  "evidence": {
+    "created_utc": "2026-07-20T21:12:00Z",
+    "source": "Tracey-confirmed clean local Pod Architecture workspace",
+    "trust_state": "draft"
+  }
+}

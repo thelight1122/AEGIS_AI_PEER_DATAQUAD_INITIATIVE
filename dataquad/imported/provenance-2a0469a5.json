@@ -1,0 +1,41 @@
+{
+  "build_command": "H:\\AEGIS-EDUCATION-CHAMBER\\.phase2-workspace\\venv\\Scripts\\python.exe H:\\AEGIS-EDUCATION-CHAMBER\\.phase2-workspace\\package\\aegis-math-tensor-service\\aegis_tensor_service\\build_from_jsonl.py --dataquad-root H:/AEGIS-MATHEMATICAL-TENSOR-DATAQUAD/snapshots/orion --tensor-store-root H:/AEGIS-MATHEMATICAL-TENSOR-DATAQUAD/tensor-stores/orion --peer-id CP-1004-ORION --package-root H:/AEGIS-MATHEMATICAL-TENSOR-DATAQUAD/tool/aegis-math-tensor-service",
+  "build_finished_utc": "2026-07-21T08:11:52Z",
+  "build_started_utc": "2026-07-21T08:11:49Z",
+  "dependency_versions": {
+    "chromadb": "1.5.9",
+    "fastapi": "0.139.2",
+    "numpy": "2.5.1",
+    "pydantic": "2.13.4",
+    "sentence-transformers": "5.6.0"
+  },
+  "embedding_model_name": "all-MiniLM-L6-v2",
+  "embedding_model_version_or_revision": "all-MiniLM-L6-v2",
+  "output_file_hashes": {
+    "embeddings.npy": "69b857fb696eed9e3199b114fdbe386334c9749c552d1efe7ab27b731e84f8cf",
+    "index.json": "2aaad17f8155d3cfcc12b0cbe45ed630e1115357cfe2fca305834efd813c78e4",
+    "metadata.npy": "70dac56a28d623feef91ff2e1fb13662bf9687ba91b08951d75081cea0efaecb",
+    "skipped-records.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tensor_3d.npy": "034491b1b0377ebbe9d1c8fd53446b49e2abe730745fe4330de9a22af6b46d95"
+  },
+  "output_files": [
+    "embeddings.npy",
+    "index.json",
+    "metadata.npy",
+    "skipped-records.jsonl",
+    "tensor_3d.npy"
+  ],
+  "packaging_code_hash": "80785113f7f1ff9d6f622ceee344e814f7f5a9e1a55aac2142856b517f3086e0",
+  "peer_id": "CP-1004-ORION",
+  "python_version": [
+    3,
+    13,
+    13
+  ],
+  "skipped_record_count": 0,
+  "skipped_record_manifest_path": "H:\\AEGIS-MATHEMATICAL-TENSOR-DATAQUAD\\tensor-stores\\orion\\PEER\\skipped-records.jsonl",
+  "source_jsonl_line_count": 106,
+  "source_jsonl_path": "H:\\AEGIS-MATHEMATICAL-TENSOR-DATAQUAD\\snapshots\\orion\\PEER.jsonl",
+  "source_jsonl_sha256": "6a104da4bbb8e76e119a649c80dfa9e323d226b9923b7e3b7e62b18b452d3664",
+  "tensor_name": "PEER"
+}

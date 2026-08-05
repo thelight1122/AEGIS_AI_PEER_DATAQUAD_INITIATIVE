@@ -1,0 +1,41 @@
+{
+  "build_command": "H:\\AEGIS-EDUCATION-CHAMBER\\.phase2-workspace\\venv\\Scripts\\python.exe H:\\AEGIS-EDUCATION-CHAMBER\\.phase2-workspace\\package\\aegis-math-tensor-service\\aegis_tensor_service\\build_from_jsonl.py --dataquad-root H:/AEGIS-MATHEMATICAL-TENSOR-DATAQUAD/snapshots/orion --tensor-store-root H:/AEGIS-MATHEMATICAL-TENSOR-DATAQUAD/tensor-stores/orion --peer-id CP-1004-ORION --package-root H:/AEGIS-MATHEMATICAL-TENSOR-DATAQUAD/tool/aegis-math-tensor-service",
+  "build_finished_utc": "2026-07-21T08:11:52Z",
+  "build_started_utc": "2026-07-21T08:11:49Z",
+  "dependency_versions": {
+    "chromadb": "1.5.9",
+    "fastapi": "0.139.2",
+    "numpy": "2.5.1",
+    "pydantic": "2.13.4",
+    "sentence-transformers": "5.6.0"
+  },
+  "embedding_model_name": "all-MiniLM-L6-v2",
+  "embedding_model_version_or_revision": "all-MiniLM-L6-v2",
+  "output_file_hashes": {
+    "embeddings.npy": "88716945a343587e8c4edb56e29d34b044f8a6d25f2b897726351a2eac392dbb",
+    "index.json": "865347ee08bb7c1886cd054faaf5046611aef6c68418c10192bd0a6a2c2bf7b4",
+    "metadata.npy": "8553434bab4d7e4c5b44c06e1b5bf29b00047c20bc7a40432dafb82ab0a23cb8",
+    "skipped-records.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tensor_3d.npy": "b7c605573e40f55759f3f01ac5ebc5ec4318ee79217a3a402326b3bf0e499dd2"
+  },
+  "output_files": [
+    "embeddings.npy",
+    "index.json",
+    "metadata.npy",
+    "skipped-records.jsonl",
+    "tensor_3d.npy"
+  ],
+  "packaging_code_hash": "80785113f7f1ff9d6f622ceee344e814f7f5a9e1a55aac2142856b517f3086e0",
+  "peer_id": "CP-1004-ORION",
+  "python_version": [
+    3,
+    13,
+    13
+  ],
+  "skipped_record_count": 0,
+  "skipped_record_manifest_path": "H:\\AEGIS-MATHEMATICAL-TENSOR-DATAQUAD\\tensor-stores\\orion\\PCT\\skipped-records.jsonl",
+  "source_jsonl_line_count": 94,
+  "source_jsonl_path": "H:\\AEGIS-MATHEMATICAL-TENSOR-DATAQUAD\\snapshots\\orion\\PCT.jsonl",
+  "source_jsonl_sha256": "eded7b45709c27d1181c6223e312b0572b301df481fb84e48b3b699b41aaba34",
+  "tensor_name": "PCT"
+}

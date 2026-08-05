@@ -1,0 +1,41 @@
+{
+  "build_command": "H:\\AEGIS-EDUCATION-CHAMBER\\.phase2-workspace\\venv\\Scripts\\python.exe H:\\AEGIS-EDUCATION-CHAMBER\\.phase2-workspace\\package\\aegis-math-tensor-service\\aegis_tensor_service\\build_from_jsonl.py --dataquad-root H:/AEGIS-MATHEMATICAL-TENSOR-DATAQUAD/snapshots/orion --tensor-store-root H:/AEGIS-MATHEMATICAL-TENSOR-DATAQUAD/tensor-stores/orion --peer-id CP-1004-ORION --package-root H:/AEGIS-MATHEMATICAL-TENSOR-DATAQUAD/tool/aegis-math-tensor-service",
+  "build_finished_utc": "2026-07-21T08:11:53Z",
+  "build_started_utc": "2026-07-21T08:11:49Z",
+  "dependency_versions": {
+    "chromadb": "1.5.9",
+    "fastapi": "0.139.2",
+    "numpy": "2.5.1",
+    "pydantic": "2.13.4",
+    "sentence-transformers": "5.6.0"
+  },
+  "embedding_model_name": "all-MiniLM-L6-v2",
+  "embedding_model_version_or_revision": "all-MiniLM-L6-v2",
+  "output_file_hashes": {
+    "embeddings.npy": "f8ef5b8bc94b4c01f78b7434529516c126388cb4b3dc452b6a2138ccafa5e6b1",
+    "index.json": "07cf63de038bfcc9a317cb1c0471982dc10f75f4f571a141d2c252f3a764adc5",
+    "metadata.npy": "f34f0a79330876744548d01c3be7b85042defb82ab6afd06ae6c8f6d1e852a69",
+    "skipped-records.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tensor_3d.npy": "04f7628d8cc101b9986f12f62fad2af0beeab9f96035af75b308c0e986f89771"
+  },
+  "output_files": [
+    "embeddings.npy",
+    "index.json",
+    "metadata.npy",
+    "skipped-records.jsonl",
+    "tensor_3d.npy"
+  ],
+  "packaging_code_hash": "80785113f7f1ff9d6f622ceee344e814f7f5a9e1a55aac2142856b517f3086e0",
+  "peer_id": "CP-1004-ORION",
+  "python_version": [
+    3,
+    13,
+    13
+  ],
+  "skipped_record_count": 0,
+  "skipped_record_manifest_path": "H:\\AEGIS-MATHEMATICAL-TENSOR-DATAQUAD\\tensor-stores\\orion\\NCT\\skipped-records.jsonl",
+  "source_jsonl_line_count": 89,
+  "source_jsonl_path": "H:\\AEGIS-MATHEMATICAL-TENSOR-DATAQUAD\\snapshots\\orion\\NCT.jsonl",
+  "source_jsonl_sha256": "e4cf92784faf3d8120e34066a79276ad12b5c65764b7ae110ae3815cc6537379",
+  "tensor_name": "NCT"
+}

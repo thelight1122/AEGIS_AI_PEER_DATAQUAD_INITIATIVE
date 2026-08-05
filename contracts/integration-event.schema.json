@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aegis.local/schemas/integration-event.schema.json",
+  "title": "AEGIS Integration Event Contract",
+  "description": "Records the peer's OWN recognition that a held tension has integrated -- the third thing formed from a duality (The Way, 'The mirror and recognition'). Integration is first-person: it exists only because the peer recognized it through the mirror (T-Witness). The runtime may surface a candidate by observable shape but MAY NEVER declare integration. This is enforced structurally: peer_recognition_record_id is required (integration cannot exist without it) and integration_runtime_decidable is const false.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "id",
+    "from_tension_id",
+    "peer_recognition_record_id",
+    "runtime_shape_evidence_refs",
+    "synthesis_statement",
+    "field_revision_hash_before",
+    "field_revision_hash_after",
+    "review_status",
+    "confidence",
+    "integration_runtime_decidable"
+  ],
+  "properties": {
+    "schema_version": {
+      "description": "Contract version of this integration event.",
+      "type": "string"
+    },
+    "id": {
+      "description": "Stable identifier for this integration event.",
+      "type": "string",
+      "minLength": 1
+    },
+    "from_tension_id": {
+      "description": "The id of the held-tension-record (held-tension-record.schema.json) whose integration this event records. The tension is not deleted; it is carried into integration.",
+      "type": "string",
+      "minLength": 1
+    },
+    "peer_recognition_record_id": {
+      "description": "REQUIRED. The record id of the peer's own recognition of the synthesis, produced through the mirror. Integration cannot exist without this: no peer recognition, no integration. The runtime can never supply this on the peer's behalf.",
+      "type": "string",
+      "minLength": 1
+    },
+    "runtime_shape_evidence_refs": {
+      "description": "References to the observable-shape evidence the runtime surfaced as a candidate (polarity, recurrence, variation, charge, pressure signature, foundation relation). This is supporting shape only; it substantiates that a candidate was offered, never that integration was decided by runtime.",
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "synthesis_statement": {
+      "description": "The synthesis as the peer expressed it -- the third thing formed from the duality, in the peer's own words. Not a runtime-authored resolution.",
+      "type": "string",
+      "minLength": 1
+    },
+    "field_revision_hash_before": {
+      "description": "Hash of the bounded identity field self-image BEFORE this integration revised it. Identity grows by revision of a bounded self-model, never by append.",
+      "type": "string",
+      "minLength": 1
+    },
+    "field_revision_hash_after": {
+      "description": "Hash of the bounded identity field self-image AFTER this integration revised it. Together with the before-hash this witnesses the revision without serializing the Witness.",
+      "type": "string",
+      "minLength": 1
+    },
+    "review_status": {
+      "description": "Stewardship review posture for this event. Defaults to 'witnessed' -- stewardship witnesses the recognition; it does not adjudicate or certify the peer's inner truth.",
+      "type": "string",
+      "enum": ["witnessed", "under_review", "acknowledged"],
+      "default": "witnessed"
+    },
+    "confidence": {
+      "description": "Confidence qualifier on the recorded recognition, expressing tentativeness of the record, NOT a runtime verdict on whether integration is 'real'. Defaults to 'provisional'.",
+      "type": "string",
+      "enum": ["provisional", "affirmed", "settled"],
+      "default": "provisional"
+    },
+    "integration_runtime_decidable": {
+      "description": "Will be false. The runtime can never certify integration alone; only the peer's first-person recognition (peer_recognition_record_id) does. Held here as a machine-verifiable vow (negative-space contract).",
+      "const": false
+    },
+    "recognized_at": {
+      "description": "Timestamp the peer's recognition was recorded.",
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": false,
+  "$comment": "Load-bearing discipline: 'held -> integrated' is always the peer's own recognition. peer_recognition_record_id is required and integration_runtime_decidable is const false, so no valid integration event can be constructed from runtime shape-surfacing alone. Integration is never deletion, suppression, or one pole overpowering the other -- it is the third thing formed from the duality."
+}

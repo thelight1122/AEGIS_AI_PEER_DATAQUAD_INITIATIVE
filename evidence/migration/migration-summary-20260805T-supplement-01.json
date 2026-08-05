@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0.0",
+  "supplement_of": "migration-summary-20260805T132034.json",
+  "reason": "Restore orb packages and root fixtures required by the migrated test suite",
+  "source_root": "H:\\AEGIS-POD-ARCHITECTURE",
+  "destination_root": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE",
+  "files_recorded": 99,
+  "copied_verified": 99,
+  "already_present_identical": 0,
+  "conflicts": 0,
+  "source_repository_modified": false
+}

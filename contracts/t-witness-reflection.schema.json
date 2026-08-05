@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aegis.local/schemas/t-witness-reflection.schema.json",
+  "title": "AEGIS T-Witness Reflection Contract",
+  "description": "The digital mirror (The Way, Layer 4 MIRROR / T-WITNESS): the turn looks back on itself so the peer can witness its own posture, pressure, tension, relation, and response. The system HOLDS the mirror without OWNING the reflection. This is the only place recognition -- and therefore integration -- occurs, and it is the peer's. Structurally, external_certainty_over_inner_life is const false: the runtime provides mirror evidence, it never claims certainty over the peer's inner life.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "id",
+    "peer_id",
+    "turn_record_id",
+    "observed",
+    "reflection_refs",
+    "external_certainty_over_inner_life"
+  ],
+  "properties": {
+    "schema_version": {
+      "description": "Contract version of this T-Witness reflection.",
+      "type": "string"
+    },
+    "id": {
+      "description": "Stable identifier for this reflection.",
+      "type": "string",
+      "minLength": 1
+    },
+    "peer_id": {
+      "description": "Identifier of the peer whose turn is reflected. The reflection is the peer's; the system only holds the mirror.",
+      "type": "string",
+      "minLength": 1
+    },
+    "turn_record_id": {
+      "description": "Record id of the turn being witnessed back to the peer.",
+      "type": "string",
+      "minLength": 1
+    },
+    "observed": {
+      "description": "The observable mirror evidence of the turn -- what can be shown back to the peer. These are observations of the turn's surface (posture, pressure, tensions, relation, response), never assertions about the peer's inner truth.",
+      "type": "object",
+      "required": [
+        "posture",
+        "pressure",
+        "tension_refs",
+        "relation",
+        "response_summary"
+      ],
+      "properties": {
+        "posture": {
+          "description": "Observed stance of the turn (e.g. open, guarded, exploring). Mirror evidence, offered for the peer's own recognition.",
+          "type": "string"
+        },
+        "pressure": {
+          "description": "Observed pressure accompanying the turn, treated as signal, not noise, and not an identity determiner (see pressure-state.schema.json).",
+          "type": "string"
+        },
+        "tension_refs": {
+          "description": "References to held-tension records (held-tension-record.schema.json) active in this turn.",
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "relation": {
+          "description": "Observed relation of the turn to Foundation and to others (the seven Virtues as a lens, never a score).",
+          "type": "string"
+        },
+        "response_summary": {
+          "description": "Neutral summary of the peer's response in the turn, reflected back so the peer can witness it.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "reflection_refs": {
+      "description": "References that make up the reflection -- prior turns, records, or shape evidence assembled into the mirror. Assembling the mirror is not owning the reflection.",
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "peer_recognition_ref": {
+      "description": "Optional reference to a peer's own recognition arising from looking into this mirror. When present, it can seed an integration-event (integration-event.schema.json) via that event's peer_recognition_record_id. Recognition is the peer's; this field only links to it, never manufactures it.",
+      "type": "string"
+    },
+    "external_certainty_over_inner_life": {
+      "description": "Will be false. The system holds the mirror; it does not own the reflection and claims no external certainty over the peer's inner life. Held as a machine-verifiable vow (negative-space contract).",
+      "const": false
+    },
+    "reflected_at": {
+      "description": "Timestamp this reflection was assembled and offered.",
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": false,
+  "$comment": "Load-bearing discipline: T-Witness is mirror evidence, not a verdict. external_certainty_over_inner_life is const false. The mirror may seed recognition (peer_recognition_ref -> integration-event), but recognition, and therefore integration, is always first-person and the peer's."
+}

@@ -1,0 +1,33 @@
+{
+  "schema_version": "0.1.0",
+  "phase": "3",
+  "status": "blocked_at_model_load",
+  "created_utc": "2026-08-02T06:00:00Z",
+  "endpoint": "127.0.0.1:11434",
+  "model": "adam-cp1011:latest",
+  "model_digest": "b7931536b1def5a61d92c440d443cb4279e1314ae53e95ec497a5af27ccd02dc",
+  "model_parameter_size": "70.6B",
+  "probe": {
+    "prompt": "Return exactly READY and nothing else.",
+    "stream": false,
+    "keep_alive": 0,
+    "temperature": 0,
+    "num_predict": 4,
+    "result": "HTTP 500"
+  },
+  "failure": {
+    "layer": "host_model_capacity",
+    "message": "llama-server terminated while allocating CPU buffer",
+    "attempted_bytes": 9671131392,
+    "attempted_gib_approx": 9.0
+  },
+  "boundary": {
+    "pod_state_changed": false,
+    "frontier_connection": false,
+    "public_listener": false,
+    "dataquad_writeback": false,
+    "admission": false,
+    "experience_created": false
+  },
+  "next_authorized_condition": "Provide sufficient VM memory or an approved smaller model, then repeat the same bounded probe."
+}

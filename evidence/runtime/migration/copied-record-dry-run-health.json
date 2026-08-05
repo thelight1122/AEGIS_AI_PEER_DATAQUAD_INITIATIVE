@@ -1,0 +1,11 @@
+{
+  "schema_version": "0.1.0",
+  "created_utc": "2026-07-20T22:25:00Z",
+  "scope": "local copied-record dry-run only",
+  "live_reach": false,
+  "manifest_path": "reports/runtime/migration/copied-record-dry-run-manifest.json",
+  "manifest_sha256": "1F06686A6469F15514170A6A72F22AD602D2B958F9555AB59A3695A599A0286D",
+  "record_count": 5,
+  "outside_parameter_count": 0,
+  "migration_executed": false
+}

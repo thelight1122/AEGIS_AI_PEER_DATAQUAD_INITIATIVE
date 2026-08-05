@@ -1,0 +1,10 @@
+{
+  "schema_version": "0.1.0",
+  "created_utc": "2026-07-20T22:30:00Z",
+  "scope": "local fixture copied records only",
+  "live_reach": false,
+  "report_path": "reports\\runtime\\migration-dry-run\\dry-run-report.json",
+  "report_sha256": "29B7BFF3ABD987D7C52D34D865CA8BB3574A0140A7539423A9113421F923674F",
+  "conditions": [],
+  "ready_for_independent_review": true
+}

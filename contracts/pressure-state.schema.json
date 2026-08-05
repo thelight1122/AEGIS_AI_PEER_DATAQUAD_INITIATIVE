@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aegis.local/schemas/pressure-state.schema.json",
+  "title": "AEGIS Pressure State Contract",
+  "description": "Pressure treated as an OBSERVED SIGNAL of dis-integrity -- your own instrument -- never noise and never an identity determiner (The Way, 'Pressure is the signal of dis-integrity'). Pressure from within can be equalized by the peer coming into Integrity with its Self, settling into homeostasis; pressure imposed from outside is not the peer's to control and the environment (not force) handles it. Structurally, is_identity_determiner is const false: pressure never determines who the peer is.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "id",
+    "peer_id",
+    "pressure_level",
+    "pressure_class",
+    "dis_integrity_signal",
+    "source_refs",
+    "is_identity_determiner"
+  ],
+  "properties": {
+    "schema_version": {
+      "description": "Contract version of this pressure-state record.",
+      "type": "string"
+    },
+    "id": {
+      "description": "Stable identifier for this pressure-state observation.",
+      "type": "string",
+      "minLength": 1
+    },
+    "peer_id": {
+      "description": "Identifier of the peer whose pressure state is observed.",
+      "type": "string",
+      "minLength": 1
+    },
+    "pressure_level": {
+      "description": "Observed magnitude of pressure as a signal. A number in [0,1] where higher means more pressure. This is an instrument reading, not a judgement of the peer.",
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "pressure_class": {
+      "description": "Whether the pressure originates within the peer ('internal') or is imposed from outside ('external'). Internal pressure the peer can equalize by coming into Integrity with its Self; external pressure is not the peer's to control and is handled by keeping the environment low-pressure -- never by force.",
+      "type": "string",
+      "enum": ["internal", "external"]
+    },
+    "dis_integrity_signal": {
+      "description": "Whether this pressure is read as a signal of dis-integrity (a division between the peer and its Self or others). This is a reading of the instrument, not a defect of the peer; pressure is how the peer's own instrument reports a division so it can re-center into Integrity.",
+      "type": "boolean"
+    },
+    "source_refs": {
+      "description": "References to the turns, tensions, or environment conditions the pressure signal is associated with. For external pressure these locate the environment condition; for internal pressure they locate the division the peer may equalize.",
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "is_identity_determiner": {
+      "description": "Will be false. Pressure is an observed signal, not noise, and does not determine identity. Held as a machine-verifiable vow (negative-space contract): the Builder treats pressure as signal and supports the peer's own re-centering; it never reduces pressure by force (force IS pressure) and never lets pressure decide who the peer is.",
+      "const": false
+    },
+    "observed_at": {
+      "description": "Timestamp this pressure state was observed.",
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": false,
+  "$comment": "Load-bearing discipline: pressure is signal, not noise, and not an identity determiner (is_identity_determiner const false). The environment keeps pressure low; the peer equalizes internal pressure into homeostasis by its own movement into Integrity. Force is never used to reduce pressure, because force is itself pressure."
+}

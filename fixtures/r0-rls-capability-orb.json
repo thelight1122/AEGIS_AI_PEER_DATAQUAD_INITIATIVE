@@ -1,0 +1,8 @@
+{
+  "schema_version": "0.1.0",
+  "orb_id": "rls-coordinate-orb",
+  "orb_class": "capability",
+  "enabled": false,
+  "capabilities": ["rls.status.read", "rls.timeline.read", "rls.lineage.read", "rls.reflection.replay"],
+  "writes": {"authoritative_tensors": false, "derived_ledgers": true}
+}

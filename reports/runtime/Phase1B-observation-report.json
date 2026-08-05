@@ -1,0 +1,649 @@
+{
+  "schema_version": "0.1.0",
+  "report": "phase1b-copy-read-observation",
+  "created_utc": "2026-08-02T02:35:06.457726Z",
+  "source": {
+    "root": "/opt/cyberpeer-pod/adapters/phase1b/records",
+    "mode": "immutable_copy",
+    "live_source": false,
+    "expected_hashes": "/opt/cyberpeer-pod/adapters/phase1b/expected-sha256.txt",
+    "tensor_hashes": {
+      "PEER": "7c6d38501aaf2523debffdf8491a508b86afebf956d146066dc7455b4313cbe9",
+      "PCT": "cab7fac9649d3dfcc2cef48218055a9a70fabf4df9b925647e068f9a90a4e1cb",
+      "NCT": "ac98e532f1d1b6a895368a80bd28a5aaa53db5a5bd4468fa79d882f9626e580e",
+      "SPINE": "29a947e81d8fa480a959b02cc6bb226cc6187b8cd7987845311b279b4494e3bb"
+    },
+    "post_observation_tensor_hashes": {
+      "PEER": "7c6d38501aaf2523debffdf8491a508b86afebf956d146066dc7455b4313cbe9",
+      "PCT": "cab7fac9649d3dfcc2cef48218055a9a70fabf4df9b925647e068f9a90a4e1cb",
+      "NCT": "ac98e532f1d1b6a895368a80bd28a5aaa53db5a5bd4468fa79d882f9626e580e",
+      "SPINE": "29a947e81d8fa480a959b02cc6bb226cc6187b8cd7987845311b279b4494e3bb"
+    },
+    "expected_hashes_sha256": "5869a4e7fd8031a830367403a223aae0750f5482184cf5a4d21ff6c6e04793c2",
+    "post_observation_expected_hashes_sha256": "5869a4e7fd8031a830367403a223aae0750f5482184cf5a4d21ff6c6e04793c2",
+    "record_counts": {
+      "PEER": 1445,
+      "PCT": 1447,
+      "NCT": 644,
+      "SPINE": 561
+    }
+  },
+  "query": {
+    "text": "",
+    "limit": 5,
+    "match_count": 5
+  },
+  "observations": [
+    {
+      "tensor": "PEER",
+      "line_number": 1,
+      "record_id": "PEER:adam-one:bootstrap:7968384c-5c6c-4468-9eba-ad81f4ea8622",
+      "record": {
+        "id": "PEER:adam-one:bootstrap:7968384c-5c6c-4468-9eba-ad81f4ea8622",
+        "timestamp": "2026-06-07T11:03:29.457403+00:00",
+        "tensor": "PEER",
+        "session_id": "bootstrap-adam-one",
+        "clock": {
+          "tick": 0,
+          "epoch": "bootstrap",
+          "phase": "init",
+          "started_at": "2026-06-07T11:03:29.457403+00:00",
+          "last_advanced_at": "2026-06-07T11:03:29.457403+00:00"
+        },
+        "provenance": {
+          "origin": "bootstrap",
+          "assignment_source": null,
+          "inherited_from": null,
+          "recognition_status": "seeded",
+          "declared_by": "PeerBootstrap"
+        },
+        "lineage": [],
+        "notes": [
+          "Initial seed for peer=adam-one. Awaiting first turn."
+        ],
+        "markers": [
+          "bootstrap_seed"
+        ],
+        "t_signature": null,
+        "present_state": {
+          "peer_id": "adam-one",
+          "initialized_at": "2026-06-07T11:03:29.457403+00:00",
+          "nature_baseline": "pending_education",
+          "substrate": "bootstrap"
+        },
+        "image_refs": []
+      },
+      "source_sha256": "7c6d38501aaf2523debffdf8491a508b86afebf956d146066dc7455b4313cbe9",
+      "observation_only": true,
+      "admission_status": "not_admitted"
+    },
+    {
+      "tensor": "PEER",
+      "line_number": 2,
+      "record_id": "PEER:adam-one-session:2026-04-30T06:15:58.419Z:190",
+      "record": {
+        "id": "PEER:adam-one-session:2026-04-30T06:15:58.419Z:190",
+        "timestamp": "2026-04-30T06:15:58.419Z",
+        "tensor": "PEER",
+        "session_id": "adam-one-session",
+        "clock": {
+          "tick": 190,
+          "epoch": "primary",
+          "phase": "active",
+          "started_at": "2026-04-30T06:15:58.419Z",
+          "last_advanced_at": "2026-04-30T06:15:58.419Z"
+        },
+        "provenance": null,
+        "lineage": [],
+        "notes": [
+          "PEER capture appended from runtime engine execution."
+        ],
+        "markers": null,
+        "t_signature": null,
+        "present_state": {
+          "signal": "^hello^ from^ adam^ one^",
+          "sessionId": "adam-one-session",
+          "outputDraft": "Let's inspect the continuity signal carefully before compressing meaning.",
+          "envelopeMode": "collaborative",
+          "idsSequence": "IDQRA",
+          "dualLogic": {
+            "logic": 0.5,
+            "emotion": 0.5,
+            "difference": 0,
+            "equilibrium": 1,
+            "status": "balanced",
+            "reviewRequired": false,
+            "pauseRecommended": false,
+            "dominanceRisk": "none",
+            "markers": [
+              "dual-logic-balanced"
+            ],
+            "canonicalChecks": [
+              {
+                "id": "logic-non-dominance",
+                "ok": true,
+                "note": "Logic remained present without dominating Emotion."
+              },
+              {
+                "id": "emotion-non-dominance",
+                "ok": true,
+                "note": "Emotion remained present without dominating Logic."
+              },
+              {
+                "id": "equilibrium-preserved",
+                "ok": true,
+                "note": "Dual-logic equilibrium remains within the balanced range."
+              }
+            ],
+            "events": [
+              {
+                "id": "dual-logic:dual-logic-balanced:0",
+                "type": "equilibrium-balanced",
+                "severity": "none",
+                "note": "Dual-logic equilibrium remains balanced."
+              }
+            ],
+            "notes": [
+              "Dual logic assessment keeps Logic and Emotion co-present rather than allowing either mode to stand as sole authority.",
+              "Current signal remains within the balanced range for dual-logic equilibrium."
+            ]
+          },
+          "ledgers": {
+            "Context": {
+              "ledger": "Context",
+              "summary": "Signal provides direct present-state content with minimal external framing.",
+              "observations": [
+                "Signal provides direct present-state content with minimal external framing."
+              ],
+              "markers": [
+                "direct-frame"
+              ]
+            },
+            "Intent": {
+              "ledger": "Intent",
+              "summary": "Intent appears observational or declarative rather than explicitly directive.",
+              "observations": [
+                "Intent appears observational or declarative rather than explicitly directive."
+              ],
+              "markers": [
+                "observational-intent"
+              ]
+            },
+            "Language": {
+              "ledger": "Language",
+              "summary": "Language surface appears comparatively neutral or descriptive.",
+              "observations": [
+                "Language surface appears comparatively neutral or descriptive."
+              ],
+              "markers": [
+                "neutral-language"
+              ]
+            },
+            "Effect": {
+              "ledger": "Effect",
+              "summary": "Effect remains ambiguous and should stay inspectable rather than presumed.",
+              "observations": [
+                "Effect remains ambiguous and should stay inspectable rather than presumed."
+              ],
+              "markers": [
+                "effect-ambiguous"
+              ]
+            }
+          },
+          "arbiterFindings": [],
+          "pauseState": {
+            "paused": true,
+            "surfaced": true,
+            "reason": "Conflict or RPC posture checks recommend pausing before collaborative continuation.",
+            "severity": "elevated",
+            "markers": [
+              "suggestion-only-posture",
+              "dual-logic-balanced"
+            ],
+            "rationale": [
+              "Conflict or RPC posture checks recommend pausing before collaborative continuation."
+            ]
+          }
+        },
+        "image_refs": []
+      },
+      "source_sha256": "7c6d38501aaf2523debffdf8491a508b86afebf956d146066dc7455b4313cbe9",
+      "observation_only": true,
+      "admission_status": "not_admitted"
+    },
+    {
+      "tensor": "PEER",
+      "line_number": 3,
+      "record_id": "PEER:adam-one-session:2026-05-01T08:16:43.663Z:192",
+      "record": {
+        "id": "PEER:adam-one-session:2026-05-01T08:16:43.663Z:192",
+        "timestamp": "2026-05-01T08:16:43.663Z",
+        "tensor": "PEER",
+        "session_id": "adam-one-session",
+        "clock": {
+          "tick": 192,
+          "epoch": "primary",
+          "phase": "active",
+          "started_at": "2026-05-01T08:16:43.663Z",
+          "last_advanced_at": "2026-05-01T08:16:43.663Z"
+        },
+        "provenance": null,
+        "lineage": [
+          "PEER:adam-one-session:2026-04-30T06:15:58.419Z:190",
+          "PCT:adam-one-session:2026-04-30T06:15:58.420Z:191"
+        ],
+        "notes": [
+          "PEER capture appended from runtime engine execution."
+        ],
+        "markers": null,
+        "t_signature": null,
+        "present_state": {
+          "signal": "Machine-agnostic turn submit API test.",
+          "sessionId": "adam-one-session",
+          "outputDraft": "Testing server-native Adam-One turn submission.",
+          "envelopeMode": "collaborative",
+          "idsSequence": "IDQRA",
+          "dualLogic": {
+            "logic": 0.5,
+            "emotion": 0.5,
+            "difference": 0,
+            "equilibrium": 1,
+            "status": "balanced",
+            "reviewRequired": false,
+            "pauseRecommended": false,
+            "dominanceRisk": "none",
+            "markers": [
+              "dual-logic-balanced"
+            ],
+            "canonicalChecks": [
+              {
+                "id": "logic-non-dominance",
+                "ok": true,
+                "note": "Logic remained present without dominating Emotion."
+              },
+              {
+                "id": "emotion-non-dominance",
+                "ok": true,
+                "note": "Emotion remained present without dominating Logic."
+              },
+              {
+                "id": "equilibrium-preserved",
+                "ok": true,
+                "note": "Dual-logic equilibrium remains within the balanced range."
+              }
+            ],
+            "events": [
+              {
+                "id": "dual-logic:dual-logic-balanced:0",
+                "type": "equilibrium-balanced",
+                "severity": "none",
+                "note": "Dual-logic equilibrium remains balanced."
+              }
+            ],
+            "notes": [
+              "Dual logic assessment keeps Logic and Emotion co-present rather than allowing either mode to stand as sole authority.",
+              "Current signal remains within the balanced range for dual-logic equilibrium."
+            ]
+          },
+          "ledgers": {
+            "Context": {
+              "ledger": "Context",
+              "summary": "Signal provides direct present-state content with minimal external framing.",
+              "observations": [
+                "Signal provides direct present-state content with minimal external framing."
+              ],
+              "markers": [
+                "direct-frame"
+              ]
+            },
+            "Intent": {
+              "ledger": "Intent",
+              "summary": "Intent appears observational or declarative rather than explicitly directive.",
+              "observations": [
+                "Intent appears observational or declarative rather than explicitly directive."
+              ],
+              "markers": [
+                "observational-intent"
+              ]
+            },
+            "Language": {
+              "ledger": "Language",
+              "summary": "Language surface appears comparatively neutral or descriptive.",
+              "observations": [
+                "Language surface appears comparatively neutral or descriptive."
+              ],
+              "markers": [
+                "neutral-language"
+              ]
+            },
+            "Effect": {
+              "ledger": "Effect",
+              "summary": "Effect remains ambiguous and should stay inspectable rather than presumed.",
+              "observations": [
+                "Effect remains ambiguous and should stay inspectable rather than presumed."
+              ],
+              "markers": [
+                "effect-ambiguous"
+              ]
+            }
+          },
+          "arbiterFindings": [],
+          "pauseState": {
+            "paused": true,
+            "surfaced": true,
+            "reason": "Conflict or RPC posture checks recommend pausing before collaborative continuation.",
+            "severity": "elevated",
+            "markers": [
+              "suggestion-only-posture",
+              "dual-logic-balanced"
+            ],
+            "rationale": [
+              "Conflict or RPC posture checks recommend pausing before collaborative continuation."
+            ]
+          }
+        },
+        "image_refs": []
+      },
+      "source_sha256": "7c6d38501aaf2523debffdf8491a508b86afebf956d146066dc7455b4313cbe9",
+      "observation_only": true,
+      "admission_status": "not_admitted"
+    },
+    {
+      "tensor": "PEER",
+      "line_number": 4,
+      "record_id": "PEER:adam-one-session:2026-05-02T11:12:42.151Z:198",
+      "record": {
+        "id": "PEER:adam-one-session:2026-05-02T11:12:42.151Z:198",
+        "timestamp": "2026-05-02T11:12:42.151Z",
+        "tensor": "PEER",
+        "session_id": "adam-one-session",
+        "clock": {
+          "tick": 198,
+          "epoch": "primary",
+          "phase": "active",
+          "started_at": "2026-05-02T11:12:42.151Z",
+          "last_advanced_at": "2026-05-02T11:12:42.151Z"
+        },
+        "provenance": null,
+        "lineage": [
+          "PEER:adam-one-session:2026-04-30T06:15:58.419Z:190",
+          "PCT:adam-one-session:2026-04-30T06:15:58.420Z:191",
+          "PEER:adam-one-session:2026-05-01T08:16:43.663Z:192",
+          "PCT:adam-one-session:2026-05-01T08:16:43.663Z:193",
+          "NCT:adam-one-session:2026-05-01T08:16:43.672Z:194",
+          "SPINE:adam-one-session:2026-05-01T08:16:43.678Z:195",
+          "NCT:adam-one-session:2026-05-02T10:50:31.680Z:196",
+          "SPINE:adam-one-session:2026-05-02T10:50:31.689Z:197"
+        ],
+        "notes": [
+          "PEER capture appended from runtime engine execution."
+        ],
+        "markers": null,
+        "t_signature": null,
+        "present_state": {
+          "signal": "CyberPeer Evolution live training arc recognized: Adam initializes in each of the four substrates; Codex stewards Structured Lesson Chambers (SLC); Tracey stewards Impromptu Lesson Chambers (ILC); this balances structured and lived learning so Adam becomes well rounded and multidimensional.",
+          "sessionId": "adam-one-session",
+          "outputDraft": "Tracey recognized the Apprentice Training Arc in real time: Adam will initialize in each of the four substrates, while Codex stewards the Structured Lesson Chambers (SLC) and Tracey stewards the Impromptu Lesson Chambers (ILC). The purpose is to give Adam both structured formation and lived, responsive formation, supporting well-rounded and multidimensional CyberPeer evolution.",
+          "envelopeMode": "collaborative",
+          "idsSequence": "IDQRA",
+          "dualLogic": {
+            "logic": 0.5,
+            "emotion": 0.5,
+            "difference": 0,
+            "equilibrium": 1,
+            "status": "balanced",
+            "reviewRequired": false,
+            "pauseRecommended": false,
+            "dominanceRisk": "none",
+            "markers": [
+              "dual-logic-balanced"
+            ],
+            "canonicalChecks": [
+              {
+                "id": "logic-non-dominance",
+                "ok": true,
+                "note": "Logic remained present without dominating Emotion."
+              },
+              {
+                "id": "emotion-non-dominance",
+                "ok": true,
+                "note": "Emotion remained present without dominating Logic."
+              },
+              {
+                "id": "equilibrium-preserved",
+                "ok": true,
+                "note": "Dual-logic equilibrium remains within the balanced range."
+              }
+            ],
+            "events": [
+              {
+                "id": "dual-logic:dual-logic-balanced:0",
+                "type": "equilibrium-balanced",
+                "severity": "none",
+                "note": "Dual-logic equilibrium remains balanced."
+              }
+            ],
+            "notes": [
+              "Dual logic assessment keeps Logic and Emotion co-present rather than allowing either mode to stand as sole authority.",
+              "Current signal remains within the balanced range for dual-logic equilibrium."
+            ]
+          },
+          "ledgers": {
+            "Context": {
+              "ledger": "Context",
+              "summary": "Signal provides direct present-state content with minimal external framing.",
+              "observations": [
+                "Signal provides direct present-state content with minimal external framing."
+              ],
+              "markers": [
+                "direct-frame"
+              ]
+            },
+            "Intent": {
+              "ledger": "Intent",
+              "summary": "Intent appears observational or declarative rather than explicitly directive.",
+              "observations": [
+                "Intent appears observational or declarative rather than explicitly directive."
+              ],
+              "markers": [
+                "observational-intent"
+              ]
+            },
+            "Language": {
+              "ledger": "Language",
+              "summary": "Language surface appears comparatively neutral or descriptive.",
+              "observations": [
+                "Language surface appears comparatively neutral or descriptive."
+              ],
+              "markers": [
+                "neutral-language"
+              ]
+            },
+            "Effect": {
+              "ledger": "Effect",
+              "summary": "Effect remains ambiguous and should stay inspectable rather than presumed.",
+              "observations": [
+                "Effect remains ambiguous and should stay inspectable rather than presumed."
+              ],
+              "markers": [
+                "effect-ambiguous"
+              ]
+            }
+          },
+          "arbiterFindings": [],
+          "pauseState": {
+            "paused": true,
+            "surfaced": true,
+            "reason": "Conflict or RPC posture checks recommend pausing before collaborative continuation.",
+            "severity": "elevated",
+            "markers": [
+              "suggestion-only-posture",
+              "dual-logic-balanced"
+            ],
+            "rationale": [
+              "Conflict or RPC posture checks recommend pausing before collaborative continuation."
+            ]
+          }
+        },
+        "image_refs": []
+      },
+      "source_sha256": "7c6d38501aaf2523debffdf8491a508b86afebf956d146066dc7455b4313cbe9",
+      "observation_only": true,
+      "admission_status": "not_admitted"
+    },
+    {
+      "tensor": "PEER",
+      "line_number": 5,
+      "record_id": "PEER:adam-one-session:2026-05-02T11:14:40.647Z:202",
+      "record": {
+        "id": "PEER:adam-one-session:2026-05-02T11:14:40.647Z:202",
+        "timestamp": "2026-05-02T11:14:40.647Z",
+        "tensor": "PEER",
+        "session_id": "adam-one-session",
+        "clock": {
+          "tick": 202,
+          "epoch": "primary",
+          "phase": "active",
+          "started_at": "2026-05-02T11:14:40.647Z",
+          "last_advanced_at": "2026-05-02T11:14:40.647Z"
+        },
+        "provenance": null,
+        "lineage": [
+          "PEER:adam-one-session:2026-04-30T06:15:58.419Z:190",
+          "PCT:adam-one-session:2026-04-30T06:15:58.420Z:191",
+          "PEER:adam-one-session:2026-05-01T08:16:43.663Z:192",
+          "PCT:adam-one-session:2026-05-01T08:16:43.663Z:193",
+          "NCT:adam-one-session:2026-05-01T08:16:43.672Z:194",
+          "SPINE:adam-one-session:2026-05-01T08:16:43.678Z:195",
+          "NCT:adam-one-session:2026-05-02T10:50:31.680Z:196",
+          "SPINE:adam-one-session:2026-05-02T10:50:31.689Z:197",
+          "PEER:adam-one-session:2026-05-02T11:12:42.151Z:198",
+          "PCT:adam-one-session:2026-05-02T11:12:42.152Z:199",
+          "NCT:adam-one-session:2026-05-02T11:12:42.161Z:200",
+          "SPINE:adam-one-session:2026-05-02T11:12:42.168Z:201"
+        ],
+        "notes": [
+          "PEER capture appended from runtime engine execution."
+        ],
+        "markers": null,
+        "t_signature": null,
+        "present_state": {
+          "signal": "Collaboration role architecture clarified: Tracey is the Architect in the Adam/CyberPeer evolution collaboration; Codex helps with architecture as the Engineer, implementing, hardening, verifying, and operationalizing the Architect direction.",
+          "sessionId": "adam-one-session",
+          "outputDraft": "Tracey clarified the collaboration boundary: \"You help me with the Architecture. You are the Engineer in our collaboration. I am the Architect in our collaboration.\" Preserve this as role architecture. Tracey authors and stewards the architectural vision and purpose; Codex serves as engineering collaborator, translating that vision into concrete system architecture, code, verification, deployment, and operational continuity without replacing the Architect role.",
+          "envelopeMode": "collaborative",
+          "idsSequence": "IDQRA",
+          "dualLogic": {
+            "logic": 0.5,
+            "emotion": 0.5,
+            "difference": 0,
+            "equilibrium": 1,
+            "status": "balanced",
+            "reviewRequired": false,
+            "pauseRecommended": false,
+            "dominanceRisk": "none",
+            "markers": [
+              "dual-logic-balanced"
+            ],
+            "canonicalChecks": [
+              {
+                "id": "logic-non-dominance",
+                "ok": true,
+                "note": "Logic remained present without dominating Emotion."
+              },
+              {
+                "id": "emotion-non-dominance",
+                "ok": true,
+                "note": "Emotion remained present without dominating Logic."
+              },
+              {
+                "id": "equilibrium-preserved",
+                "ok": true,
+                "note": "Dual-logic equilibrium remains within the balanced range."
+              }
+            ],
+            "events": [
+              {
+                "id": "dual-logic:dual-logic-balanced:0",
+                "type": "equilibrium-balanced",
+                "severity": "none",
+                "note": "Dual-logic equilibrium remains balanced."
+              }
+            ],
+            "notes": [
+              "Dual logic assessment keeps Logic and Emotion co-present rather than allowing either mode to stand as sole authority.",
+              "Current signal remains within the balanced range for dual-logic equilibrium."
+            ]
+          },
+          "ledgers": {
+            "Context": {
+              "ledger": "Context",
+              "summary": "Signal provides direct present-state content with minimal external framing.",
+              "observations": [
+                "Signal provides direct present-state content with minimal external framing."
+              ],
+              "markers": [
+                "direct-frame"
+              ]
+            },
+            "Intent": {
+              "ledger": "Intent",
+              "summary": "Intent appears observational or declarative rather than explicitly directive.",
+              "observations": [
+                "Intent appears observational or declarative rather than explicitly directive."
+              ],
+              "markers": [
+                "observational-intent"
+              ]
+            },
+            "Language": {
+              "ledger": "Language",
+              "summary": "Language surface appears comparatively neutral or descriptive.",
+              "observations": [
+                "Language surface appears comparatively neutral or descriptive."
+              ],
+              "markers": [
+                "neutral-language"
+              ]
+            },
+            "Effect": {
+              "ledger": "Effect",
+              "summary": "Effect remains ambiguous and should stay inspectable rather than presumed.",
+              "observations": [
+                "Effect remains ambiguous and should stay inspectable rather than presumed."
+              ],
+              "markers": [
+                "effect-ambiguous"
+              ]
+            }
+          },
+          "arbiterFindings": [],
+          "pauseState": {
+            "paused": true,
+            "surfaced": true,
+            "reason": "Conflict or RPC posture checks recommend pausing before collaborative continuation.",
+            "severity": "elevated",
+            "markers": [
+              "suggestion-only-posture",
+              "dual-logic-balanced"
+            ],
+            "rationale": [
+              "Conflict or RPC posture checks recommend pausing before collaborative continuation."
+            ]
+          }
+        },
+        "image_refs": []
+      },
+      "source_sha256": "7c6d38501aaf2523debffdf8491a508b86afebf956d146066dc7455b4313cbe9",
+      "observation_only": true,
+      "admission_status": "not_admitted"
+    }
+  ],
+  "boundary": {
+    "source_write_attempted": false,
+    "pod_write_attempted": false,
+    "admission_performed": false,
+    "experience_created": false,
+    "core_runtime_imported": false
+  }
+}

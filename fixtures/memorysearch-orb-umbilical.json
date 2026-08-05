@@ -1,0 +1,34 @@
+{
+  "schema_version": "0.1.0",
+  "umbilical_id": "memorysearch-record-grounding-orb-fixture-umbilical",
+  "pod_id": "local-cyberpeer-pod-fixture",
+  "orb_id": "memorysearch-record-grounding-orb-fixture",
+  "attachment_point": "retrieval_broker",
+  "runtime": {
+    "language": "python",
+    "form": "local_process"
+  },
+  "invocation": {
+    "method": "local_module",
+    "entrypoint": "orb_memorysearch_record_grounding_core.ground_record_claim"
+  },
+  "input_contract": {
+    "requires": ["message", "records", "policy"],
+    "notes": "records is the peer's full-fidelity record set (the same set read_records() returns, wrapped-envelope shape per fixtures/memorysearch-real-record-envelope.reference.json). policy is the classifier + confidence-threshold config. Live Phase-4 integration decides the exact call-site inside the retrieval broker / thinking pre-prompt step; this fixture attaches at retrieval_broker."
+  },
+  "output_contract": {
+    "returns": ["grounding_status", "prompt_block", "cited_records", "twitness_event"],
+    "null_return": "The entrypoint returns null when the classifier finds no record-content claim. On null the Pod proceeds normally and reconstruction remains legitimate for experiential/identity expression. A non-null packet is returned whenever a record-content claim is detected AND a real search executed — including the search_performed_no_verified_record case, which returns a packet (not null) so the no-verified-record prompt block is injected.",
+    "contract_ref": "contracts/memorysearch-packet.schema.json"
+  },
+  "observation_contract": {
+    "observable_events": ["invoked", "record_claim_classified", "search_executed", "verified_record_found", "no_verified_record", "completed", "outside_working_parameters"]
+  },
+  "evidence_contract": {
+    "records": ["input_hash", "output_hash", "runtime_hash", "selected_record_hashes"]
+  },
+  "working_parameters": {
+    "status": "draft",
+    "outside_parameters_behavior": "On classifier=not-a-record-claim: return null, Pod proceeds unchanged. On Orb error or absence: Pod falls back to pre-Orb behavior (existing auto-retrieval only) and records orb_unavailable in T-Witness; the turn is never crashed. Provenance is runtime-authored only, so no fallback path can present model-authored citations or reconstruction as record-grounded."
+  }
+}

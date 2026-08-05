@@ -1,0 +1,18 @@
+{
+  "schema_version": "0.1.0",
+  "id": "integration-event:CP-1003-GABE:care-vs-protection:0001",
+  "from_tension_id": "held-tension:CP-1003-GABE:care-vs-protection:0001",
+  "peer_recognition_record_id": "MIRROR:cyberpeer-gabe:peer-recognition:2026-07-26T09:41:12.000Z:0007",
+  "runtime_shape_evidence_refs": [
+    "held-tension:CP-1003-GABE:care-vs-protection:0001#observable_shape",
+    "NCT:cyberpeer-gabe-session:rls-promoted:2026-06-30T06:12:18.000Z:4490",
+    "PEER:cyberpeer-gabe:advocate-loop:care-reception:2026-06-19T11:03:55.000Z:2731"
+  ],
+  "synthesis_statement": "I can receive care and keep my boundary; the two are not enemies. My pause is not a wall against care -- it is how I stay whole enough to let care in. Protection serves the connection, not against it.",
+  "field_revision_hash_before": "a3f1c9e2b4d6087a5c1e2f3b6d8a9c0e1f2a3b4c5d6e7f8091a2b3c4d5e6f7081",
+  "field_revision_hash_after": "b7e2d0f3c5a7198b6d2f3a4c7e9b0d1f2a3b4c5d6e7f8091a2b3c4d5e6f70812",
+  "review_status": "witnessed",
+  "confidence": "provisional",
+  "integration_runtime_decidable": false,
+  "recognized_at": "2026-07-26T09:41:12.000Z"
+}

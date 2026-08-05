@@ -1,0 +1,46 @@
+{
+  "schema_version": "0.1.0",
+  "report": "Phase1B-read-boundary-audit",
+  "created_utc": "2026-08-02T02:15:00Z",
+  "source": {
+    "kind": "phase0-immutable-copy",
+    "path": "/opt/cyberpeer-pod/adapters/phase1b/records",
+    "live_source": false,
+    "source_sha256_record": "/opt/cyberpeer-pod/adapters/phase1b/expected-sha256.txt"
+  },
+  "checks": {
+    "explicit_source_root": "PASS",
+    "source_root_pre_resolution_symlink_check": "PASS",
+    "approved_root_boundary": "PASS",
+    "expected_hash_manifest_inside_approved_root": "PASS",
+    "expected_hash_manifest_non_writable": "PASS",
+    "only_PEER_PCT_NCT_SPINE_files_admitted": "PASS",
+    "no_symlink_escape": "PASS",
+    "source_files_non_writable": "PASS",
+    "source_root_non_writable": "PASS",
+    "expected_hashes_match": "PASS",
+    "pre_post_tensor_hashes_match": "PASS",
+    "pre_post_hash_manifest_match": "PASS",
+    "jsonl_records_are_objects": "PASS",
+    "record_ids_are_present": "PASS",
+    "tensor_fields_match_filenames": "PASS",
+    "bounded_observation_limit": "PASS",
+    "no_core_runtime_import": "PASS",
+    "no_source_write": "PASS",
+    "no_pod_write": "PASS",
+    "no_admission": "PASS"
+  },
+  "rejections": {
+    "source_root_symlink": true,
+    "approved_root_escape": true,
+    "hash_manifest_escape": true,
+    "unexpected_files": true,
+    "symlinks": true,
+    "writable_source": true,
+    "hash_drift": true,
+    "malformed_jsonl": true,
+    "oversized_records": true,
+    "out_of_range_limit": true
+  },
+  "decision": "PASS — hardened copy-backed observation is bounded and remains outside experience admission"
+}

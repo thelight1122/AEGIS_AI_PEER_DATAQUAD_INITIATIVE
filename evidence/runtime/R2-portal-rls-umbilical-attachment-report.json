@@ -1,0 +1,40 @@
+{
+  "phase": "R2-Portal-Attachment",
+  "status": "complete_private_loopback_rls_attachment",
+  "vm": "20.122.189.26",
+  "endpoint": "http://127.0.0.1:8093/v1/portal/rls",
+  "umbilical_id": "umbilical:rls-orb:portal-pod",
+  "source_orb": "rls-coordinate-orb",
+  "allowed_methods": ["rls_status_read", "rls_timeline_read", "rls_lineage_read", "rls_reflection_replay"],
+  "allowed_scopes": ["rls.status.read", "rls.timeline.read", "rls.lineage.read", "rls.reflection.replay"],
+  "verified": {
+    "status_http": 200,
+    "timeline_http": 200,
+    "lineage_http": 200,
+    "replay_http": 200,
+    "appendEvent_http": 403,
+    "appendEvent_action_executed": false
+  },
+  "packet_sha256": "08168ee60ada399233b50de30459a874f03914716bca3c5c3bf1cbd4b7529cc7",
+  "derived_ledger_sha256": "15ec0433c0a91d8304bd9ba2dfa9acf64d25071208a469dec84d9e0f6132a1be",
+  "services": {
+    "aegis-rls-portal-umbilical.service": {"enabled": true, "active": true, "bind": "127.0.0.1:8093"},
+    "aegis-rls-shadow.timer": {"enabled": true, "active": true},
+    "aegis-private-portal.service": {"bind": "127.0.0.1:8092"}
+  },
+  "boundaries": {
+    "authoritative_tensor_write": false,
+    "derived_ledger_write": true,
+    "experience_created": false,
+    "admission_performed": false,
+    "live_rls_invoked": false,
+    "public_listener": false,
+    "shell": false,
+    "filesystem": false
+  },
+  "rls_container": "exited",
+  "deployed_hashes": {
+    "rls_portal_umbilical_server.py": "187CEC98C3EDB14725B46E2086E5E1DBF1E7AB510C27F8D115D01B1A679F2383",
+    "aegis-rls-portal-umbilical.service": "392657242D3E2E8467F8A1825A6A14A11F57E5F5388E24786CF83F09B83DEFFF"
+  }
+}

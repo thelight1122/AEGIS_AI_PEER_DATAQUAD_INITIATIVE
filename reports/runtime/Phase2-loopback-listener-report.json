@@ -1,0 +1,37 @@
+{
+  "schema_version": "0.1.0",
+  "report": "Phase2-loopback-listener",
+  "created_utc": "2026-08-02T02:45:00Z",
+  "listener": {
+    "implementation": "src/aegis_pod/portal_listener.py",
+    "remote_path": "/opt/cyberpeer-pod/portals/phase2-loopback-listener.py",
+    "bind_host": "127.0.0.1",
+    "test_port": 8090,
+    "public_exposure": false,
+    "stopped_after_test": true
+  },
+  "checks": {
+    "health_200": "PASS",
+    "authenticated_retrieve_context_allowed": "PASS",
+    "authorized_action_not_executed": "PASS",
+    "wrong_token_denied_403": "PASS",
+    "live_reflection_denied_403": "PASS",
+    "non_loopback_bind_rejected": "PASS",
+    "listener_stopped": "PASS",
+    "port_8090_closed_after_test": "PASS",
+    "dataquad_access": "PASS — false",
+    "frontier_connection": "PASS — false",
+    "capability_execution": "PASS — false"
+  },
+  "boundary": {
+    "filesystem": false,
+    "shell": false,
+    "database": false,
+    "containers": false,
+    "arbitrary_python": false,
+    "model_calls": false,
+    "dataquad_writeback": false,
+    "frontier_connection": false
+  },
+  "decision": "PASS — minimum loopback-only listener proved transport and authorization; no listener remains active and no substrate was connected"
+}

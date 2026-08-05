@@ -1,0 +1,31 @@
+{
+  "schema_version": "0.1.0",
+  "umbilical_id": "rls-orb-fixture-umbilical",
+  "pod_id": "local-cyberpeer-pod-fixture",
+  "orb_id": "rls-orb-fixture",
+  "attachment_point": "processor",
+  "runtime": {
+    "language": "python",
+    "form": "local_process"
+  },
+  "invocation": {
+    "method": "local_module",
+    "entrypoint": "python -m src.aegis_pod.orb_runtime --root ."
+  },
+  "input_contract": {
+    "requires": ["turn_trace", "tensor_window"]
+  },
+  "output_contract": {
+    "returns": ["reflection_summary", "integration_signals"]
+  },
+  "observation_contract": {
+    "observable_events": ["invoked", "completed", "outside_working_parameters"]
+  },
+  "evidence_contract": {
+    "records": ["input_hash", "output_hash", "runtime_hash"]
+  },
+  "working_parameters": {
+    "status": "draft",
+    "outside_parameters_behavior": "report visible condition and leave Pod state unchanged"
+  }
+}

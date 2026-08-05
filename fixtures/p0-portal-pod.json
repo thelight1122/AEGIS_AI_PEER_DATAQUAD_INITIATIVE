@@ -1,0 +1,24 @@
+{
+  "schema_version": "0.1.0",
+  "pod_id": "aegis-portal-pod-local",
+  "mode": "local-contract",
+  "protocol_orbs": ["mcp-protocol-orb"],
+  "capability_orbs": [
+    {"name": "retrieve_context", "enabled": true, "scope": "pod.context.read"},
+    {"name": "retrieve_canon", "enabled": true, "scope": "pod.canon.read"},
+    {"name": "query_continuity", "enabled": true, "scope": "pod.continuity.observed.read"},
+    {"name": "request_reflection", "enabled": true, "scope": "pod.reflection.replay"},
+    {"name": "pod_get_status", "enabled": true, "scope": "pod.status.read"},
+    {"name": "record_experience", "enabled": false, "scope": "pod.experience.write"}
+  ],
+  "boundaries": {
+    "mutation": false,
+    "admission": false,
+    "experience_created": false,
+    "dataquad_writeback": false,
+    "live_rls_invoked": false,
+    "shell_access": false,
+    "filesystem_access": false
+  },
+  "evidence": {"append_only": true, "records_invocations": true}
+}

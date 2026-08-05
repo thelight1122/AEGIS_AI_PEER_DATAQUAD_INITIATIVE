@@ -1,0 +1,45 @@
+{
+  "schema_version": "0.1.0",
+  "phase": "M2",
+  "status": "transport_contract_complete_production_exposure_disabled",
+  "scope": "TLS, authentication, tunnel, identity, and capability-scope gate",
+  "implementation": "src/aegis_pod/m2_transport_gate.py",
+  "implementation_sha256": "7B984456A8ADF7DC793201E2236561EFBA286486CC0603FFC038F3DAAD91839D",
+  "schema": "contracts/m2-external-transport.schema.json",
+  "schema_sha256": "B368D7326C05A48582D108A4DFF413FA53ADD64D392A40299BD87224961CDC07",
+  "development_posture": {
+    "mode": "loopback",
+    "listener_enabled": false,
+    "bind_host": "127.0.0.1",
+    "transport": "stdio",
+    "backend": "http://127.0.0.1:8092"
+  },
+  "approved_scopes": [
+    "pod.context.read",
+    "pod.canon.read",
+    "pod.continuity.observed.read",
+    "pod.reflection.replay",
+    "pod.status.read"
+  ],
+  "rejected_scopes": [
+    "pod.experience.write",
+    "pod.admission.perform",
+    "pod.dataquad.write",
+    "pod.rls.live",
+    "pod.shell",
+    "pod.filesystem"
+  ],
+  "production_prerequisites": [
+    "Streamable HTTP over HTTPS",
+    "OAuth2/OIDC issuer and audience",
+    "TLS certificate and private-key references",
+    "explicit approved bind or private tunnel",
+    "per-substrate identity and scope registration",
+    "credentials supplied outside configuration and tool arguments"
+  ],
+  "tests": "14 passed",
+  "public_listener": false,
+  "frontier_connection": false,
+  "dataquad_writeback": false,
+  "admission": false
+}

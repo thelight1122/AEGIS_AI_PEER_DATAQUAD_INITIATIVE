@@ -1,0 +1,19 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "aegis-pod-sdk"
+version = "0.1.0"
+description = "Structural interface boundary an AEGIS Orb depends on, instead of a Pod's concrete runtime classes."
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/aegis_pod_sdk"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

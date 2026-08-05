@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aegis.local/schemas/portal-pod.schema.json",
+  "title": "AEGIS Portal Pod Contract",
+  "type": "object",
+  "required": ["schema_version", "pod_id", "mode", "protocol_orbs", "capability_orbs", "boundaries", "evidence"],
+  "properties": {
+    "schema_version": {"type": "string"},
+    "pod_id": {"type": "string", "minLength": 1},
+    "mode": {"type": "string", "enum": ["local-contract", "private", "production"]},
+    "protocol_orbs": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "capability_orbs": {"type": "array", "items": {"$ref": "#/$defs/capability"}, "minItems": 5},
+    "boundaries": {"type": "object", "additionalProperties": {"const": false}},
+    "evidence": {"type": "object", "required": ["append_only", "records_invocations"], "properties": {"append_only": {"const": true}, "records_invocations": {"const": true}}, "additionalProperties": false}
+  },
+  "additionalProperties": false,
+  "$defs": {"capability": {"type": "object", "required": ["name", "enabled", "scope"], "properties": {"name": {"type": "string", "minLength": 1}, "enabled": {"type": "boolean"}, "scope": {"type": "string", "minLength": 1}}, "additionalProperties": false}}
+}

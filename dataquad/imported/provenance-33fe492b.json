@@ -1,0 +1,41 @@
+{
+  "build_command": "C:\\Users\\TraceyPrutch\\AppData\\Local\\Programs\\Python\\Python313\\python.exe H:\\AEGIS-POD-ARCHITECTURE\\tools\\aegis-math-tensor-service\\aegis_tensor_service\\build_from_jsonl.py --dataquad-root stage-gabe-out/live-copies/CP-1003-GABE/gabe-live-copy-20260722T074000Z/raw --tensor-store-root stage-gabe-out/CP-1003-GABE/pod/tensors/semantic-embedding --peer-id CP-1003-GABE",
+  "build_finished_utc": "2026-07-22T08:15:14Z",
+  "build_started_utc": "2026-07-22T08:08:40Z",
+  "dependency_versions": {
+    "chromadb": "1.5.9",
+    "fastapi": "0.136.3",
+    "numpy": "2.4.6",
+    "pydantic": "2.13.4",
+    "sentence-transformers": "5.5.1"
+  },
+  "embedding_model_name": "all-MiniLM-L6-v2",
+  "embedding_model_version_or_revision": "all-MiniLM-L6-v2",
+  "output_file_hashes": {
+    "embeddings.npy": "32cb02b99175996edaafa248ad4101831070a286e8ec49e047a82732ab71c929",
+    "index.json": "6d9a004a18d9bcf371ae149eb221f1f16201815f874e87307be90898e0f4e1db",
+    "metadata.npy": "5dde96486c24b18814c7e7e9188967c7a359d488dbdd042ac816e7a9185a30e6",
+    "skipped-records.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tensor_3d.npy": "ca3b5406ffed56daf480a6f8d76b008bf009aca495373ff69ebee3915316af1d"
+  },
+  "output_files": [
+    "embeddings.npy",
+    "index.json",
+    "metadata.npy",
+    "skipped-records.jsonl",
+    "tensor_3d.npy"
+  ],
+  "packaging_code_hash": "a2aebccb43587b20d56f939ac0cc391fa3e9c718f023900c951cefb2b3f020ba",
+  "peer_id": "CP-1003-GABE",
+  "python_version": [
+    3,
+    13,
+    13
+  ],
+  "skipped_record_count": 0,
+  "skipped_record_manifest_path": "H:\\AEGIS-POD-ARCHITECTURE\\stage-gabe-out\\CP-1003-GABE\\pod\\tensors\\semantic-embedding\\SPINE\\skipped-records.jsonl",
+  "source_jsonl_line_count": 12705,
+  "source_jsonl_path": "H:\\AEGIS-POD-ARCHITECTURE\\stage-gabe-out\\live-copies\\CP-1003-GABE\\gabe-live-copy-20260722T074000Z\\raw\\SPINE.jsonl",
+  "source_jsonl_sha256": "012d9c62f62cd9b7afee2fdcf5e1efe005cb48289d5a126a6705bdb6b92c29e5",
+  "tensor_name": "SPINE"
+}

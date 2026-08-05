@@ -1,0 +1,156 @@
+{
+  "demo_id": "memorysearch-demo-canon-zct",
+  "query": {
+    "claim_class": "canon_definition",
+    "message": "What is ZCT according to the Canon in your DataQuad?",
+    "query_id": "memorysearch-demo-canon-zct",
+    "query_terms": [
+      "what",
+      "is",
+      "zct",
+      "according",
+      "to",
+      "the",
+      "canon",
+      "in",
+      "your",
+      "dataquad"
+    ],
+    "schema_version": "0.1.0",
+    "search_scope": [
+      "SPINE",
+      "NCT",
+      "PEER",
+      "PCT"
+    ],
+    "search_trigger": "policy_governed",
+    "trigger_reason": "record-content keyword matched: canon",
+    "working_parameters": {
+      "live_reach": false,
+      "pod_state_effect": "unchanged",
+      "runtime_owned_classifier": true
+    }
+  },
+  "result": {
+    "answer_boundary": {
+      "boundary_text": "No qualifying verified record was found; do not present reconstruction as record-grounded.",
+      "can_answer_record_claim": false
+    },
+    "grounding_status": "search_performed_no_verified_record",
+    "match_confidence": "low",
+    "orb_id": "memorysearch-record-grounding-core",
+    "query_id": "memorysearch-demo-canon-zct",
+    "record_search_performed": true,
+    "results": [
+      {
+        "confidence": "low",
+        "excerpt": "ures. Stores relics, not narratives. Nostalgic Context Tensor SPINE:CP-EXAMPLE:canon-7.2",
+        "match_reasons": [
+          "tensor_scope_match",
+          "query_term_match:canon",
+          "defining_language",
+          "verified_record",
+          "source_hash_present",
+          "target_symbol_absent_caps_score"
+        ],
+        "qualifies": false,
+        "record_hash": "A575239FA2BF6D9EC823D77BC68632BCDAA0B26804CC6C4CDD8A69AE87E86FC5",
+        "record_id": "NCT:CP-EXAMPLE:2026-07-22T00:00:00.000000+00:00:1000",
+        "score": 4.0,
+        "source_hash": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "tensor": "NCT"
+      },
+      {
+        "confidence": "low",
+        "excerpt": "PCT:CP-EXAMPLE:2026-07-22T00:00:00.000000+00:00:1001 PCT PCT:CP-EXAMPLE:2026-07-22T00:00:00.000000+00:00:1001 2026-07-22T00:00:00.000000+00:00 PCT example-session 1001 primary active 2026-07-22T00:00:00.000000+00:00 2026-07-22T00:00:00.000000+00:00 fixture",
+        "match_reasons": [
+          "tensor_scope_match",
+          "defining_language",
+          "verified_record",
+          "source_hash_present",
+          "target_symbol_absent_caps_score"
+        ],
+        "qualifies": false,
+        "record_hash": "7F1975C49550D0B389F7738B708BD47D258D8CE7B482375F250E22017CD805AF",
+        "record_id": "PCT:CP-EXAMPLE:2026-07-22T00:00:00.000000+00:00:1001",
+        "score": 4.0,
+        "source_hash": "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC",
+        "tensor": "PCT"
+      },
+      {
+        "confidence": "low",
+        "excerpt": "SPINE:CP-EXAMPLE:canon-7.2 SPINE SPINE:CP-EXAMPLE:canon-7.2 2026-07-22T00:00:00.000000+00:00 SPINE example-session 500 primary active 2026-07-22T00:00:00.000000+00:00 2026-07-22T00:00:00.000000+00:00 fixture Canon 7.2 Contextual Tensors: PCT = Persiste",
+        "match_reasons": [
+          "tensor_scope_match",
+          "query_term_match:canon",
+          "defining_language",
+          "verified_record",
+          "source_hash_present",
+          "canon_scope_preference",
+          "target_symbol_absent_caps_score"
+        ],
+        "qualifies": false,
+        "record_hash": "6AB0ADF417DD8FE7B18C338858522348214127675B86DC39BF11AAA565B7D215",
+        "record_id": "SPINE:CP-EXAMPLE:canon-7.2",
+        "score": 4.0,
+        "source_hash": "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+        "tensor": "SPINE"
+      },
+      {
+        "confidence": "low",
+        "excerpt": "000000+00:00 fixture A tensor note can mention context without defining ZCT or any additional Canon tensor. False",
+        "match_reasons": [
+          "tensor_scope_match",
+          "query_term_match:canon,zct",
+          "defining_language",
+          "verified_record",
+          "source_hash_present",
+          "canon_scope_preference",
+          "target_symbol_present:zct",
+          "target_definition_absent_caps_score",
+          "target_definition_negated:zct"
+        ],
+        "qualifies": false,
+        "record_hash": "D58FD9720FAD0428C9F784A423D16EB2883FEC589D1EDF7896C441420C91784A",
+        "record_id": "SPINE:CP-EXAMPLE:weak-tensor-note",
+        "score": 3.0,
+        "source_hash": "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE",
+        "tensor": "SPINE"
+      }
+    ],
+    "runtime_provenance": {
+      "citations_runtime_authored": true,
+      "generated_utc": "2026-07-25T02:00:07.206166+00:00",
+      "orb_runtime_hash": "2A2DF285A574047C179CB9FF8F3E4A7201B722773D8DA1CAE1A5AC5893D843FB"
+    },
+    "schema_version": "0.1.0",
+    "selected_record_hashes": [],
+    "selected_record_ids": []
+  },
+  "schema_version": "0.1.0",
+  "twitness_search_event": {
+    "claim_class": "canon_definition",
+    "grounding_status": "search_performed_no_verified_record",
+    "match_confidence": "low",
+    "orb_id": "memorysearch-record-grounding-core",
+    "orb_runtime_hash": "2A2DF285A574047C179CB9FF8F3E4A7201B722773D8DA1CAE1A5AC5893D843FB",
+    "query_text": "What is ZCT according to the Canon in your DataQuad?",
+    "record_search_performed": true,
+    "result_count": 4,
+    "schema_version": "0.1.0",
+    "search_scope": [
+      "SPINE",
+      "NCT",
+      "PEER",
+      "PCT"
+    ],
+    "search_trigger": "policy_governed",
+    "selected_record_hashes": [],
+    "selected_record_ids": []
+  },
+  "working_parameters": {
+    "dataquad_write": false,
+    "live_reach": false,
+    "pod_state_effect": "unchanged"
+  }
+}

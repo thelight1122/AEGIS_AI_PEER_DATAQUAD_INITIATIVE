@@ -1,0 +1,51 @@
+{
+  "phase": "R0-RLS-Orb-Formation",
+  "status": "complete_local_read_only_rls_orb",
+  "scope": "local fixture tensors only; no live RLS, VM, or authoritative tensor writes",
+  "orb_id": "rls-coordinate-orb",
+  "orb_version": "r0-coordinate-index-v1",
+  "tensor_counts": {
+    "PEER": 2,
+    "PCT": 1,
+    "NCT": 1,
+    "SPINE": 1
+  },
+  "record_count": 5,
+  "snapshot_hashes": {
+    "PEER": "27F9DB567BA680EE7C20E41F8BCF11CE7418AF15FFFEEC520F412D2E45EEFBB8",
+    "PCT": "9164C770035CBDC2477EC8FA3A3F381F07D371D1A331B12A7DBB9FBBBC606EAB",
+    "NCT": "6899689152B253FD19C32ED0909040C432B593E65DF85E308BD77A86A7EFD48F",
+    "SPINE": "42E37A8C4B48FFE87E8CC0276BB3F11362560434A1B36B996A5E9D36D9340467"
+  },
+  "attachment": {
+    "orb_id": "rls-coordinate-orb",
+    "umbilical_id": "umbilical:rls-orb:portal-pod",
+    "attached": false,
+    "effective_capabilities": [
+      "rls.lineage.read",
+      "rls.reflection.replay",
+      "rls.status.read",
+      "rls.timeline.read"
+    ],
+    "effective_scopes": [
+      "rls.lineage.read",
+      "rls.reflection.replay",
+      "rls.status.read",
+      "rls.timeline.read"
+    ]
+  },
+  "packet_sha256": "B9076B7162F909E96C2E47D21BE85D3DBCEB5B4A12BE35ED7C14BB9F0A80864B",
+  "ledger_path": "reports\\runtime\\r0-rls-derived-coordinate-ledger.jsonl",
+  "ledger_record_sha256": "87A7C5F1834A280C0FA29044941107F5C3BB1D5423635AE914430C7CB8A60363",
+  "portal_dispatch_packet_sha256": "2d809c91f88fcdb965db0a2e4946c142db650af7840d72d9f1e115530dd63461",
+  "boundaries": {
+    "authoritative_tensor_write": false,
+    "derived_ledger_write": true,
+    "experience_created": false,
+    "admission_performed": false,
+    "live_rls_invoked": false,
+    "model_inference": false,
+    "public_listener": false
+  },
+  "interpretation": "structural_only"
+}

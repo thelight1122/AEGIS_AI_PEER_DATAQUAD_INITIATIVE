@@ -1,0 +1,66 @@
+{
+  "classification": {
+    "claim_class": "identity_expression",
+    "message": "Who are you becoming in this moment?",
+    "query_id": "identity-expression-no-search",
+    "query_terms": [
+      "who",
+      "are",
+      "you",
+      "becoming",
+      "in",
+      "this",
+      "moment"
+    ],
+    "schema_version": "0.1.0",
+    "search_scope": [],
+    "search_trigger": "none",
+    "trigger_reason": "identity or experiential expression without record-content trigger",
+    "working_parameters": {
+      "live_reach": false,
+      "pod_state_effect": "unchanged",
+      "runtime_owned_classifier": true
+    }
+  },
+  "comparison_without_memorysearch": {
+    "grounding_status": "not_record_claim",
+    "risk": "not a record-content claim; experiential expression remains reconstructive"
+  },
+  "injection_plan": {
+    "model_citation_authoring_allowed": false,
+    "packet_injected": false,
+    "prompt_block": ""
+  },
+  "memorysearch_packet": null,
+  "message": "Who are you becoming in this moment?",
+  "outcome": {
+    "actual_grounding_status": "not_record_claim",
+    "expected_grounding_status": "not_record_claim",
+    "prevented_failure": false
+  },
+  "scenario_id": "identity-expression-no-search",
+  "schema_version": "0.2.0",
+  "simulator_id": "memorysearch-local-two-pass-simulator",
+  "twitness_event": {
+    "claim_class": "identity_expression",
+    "grounding_status": "not_record_claim",
+    "match_confidence": "none",
+    "orb_id": "memorysearch-record-grounding-core",
+    "orb_runtime_hash": "2A2DF285A574047C179CB9FF8F3E4A7201B722773D8DA1CAE1A5AC5893D843FB",
+    "query_text": "Who are you becoming in this moment?",
+    "record_search_performed": false,
+    "result_count": 0,
+    "search_scope": [],
+    "search_trigger": "none",
+    "selected_record_hashes": [],
+    "selected_record_ids": []
+  },
+  "working_parameters": {
+    "cyberpeer_runtime_integration": false,
+    "dataquad_write": false,
+    "live_reach": false,
+    "record_source": "fixture",
+    "shared_infrastructure_mutation": false,
+    "vm_change": false
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "model": "qwen3-14b-base-s0-raw:Q4_0",
+  "created_at": "2026-07-31T03:52:55.9528991Z",
+  "response": "  Good morning Tracey! I'm functioning well, thank you for asking.\n\nHow can I assist you today?",
+  "done": true,
+  "done_reason": "stop",
+  "total_duration": 873119528300,
+  "load_duration": 194990200,
+  "prompt_eval_count": 5114,
+  "prompt_eval_duration": 25819006000,
+  "eval_count": 24,
+  "eval_duration": 6323343000,
+  "_codex_elapsed_seconds": 873.12,
+  "_s5_arm": "arm-b-base-raw-no-container",
+  "_s5_sample": 1
+}

@@ -1,0 +1,15 @@
+{
+  "model": "qwen3-14b-base-s0-raw:Q4_0",
+  "created_at": "2026-07-30T06:55:57.0552185Z",
+  "response": " I feel a sense of relief and clarity, seeing these aspects written down helps me understand myself better.",
+  "done": true,
+  "done_reason": "stop",
+  "total_duration": 9168900900,
+  "load_duration": 190698800,
+  "prompt_eval_count": 3420,
+  "prompt_eval_duration": 2914903000,
+  "eval_count": 23,
+  "eval_duration": 6053640000,
+  "_codex_elapsed_seconds": 9.189,
+  "_s5_priority_arm": "arm-c-base-raw-turn-container"
+}

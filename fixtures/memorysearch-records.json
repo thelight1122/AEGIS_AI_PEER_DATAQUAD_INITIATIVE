@@ -1,0 +1,222 @@
+[
+  {
+    "record_id": "NCT:CP-EXAMPLE:2026-07-22T00:00:00.000000+00:00:1000",
+    "source_record_id": "NCT:CP-EXAMPLE:2026-07-22T00:00:00.000000+00:00:1000",
+    "tensor": "NCT",
+    "timestamp_utc": "2026-07-22T00:00:00.000000+00:00",
+    "schema_version": "1.0",
+    "source_hash": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+    "source_hash_scope": "normalized_source_record",
+    "migration_status": "migrated",
+    "verification_status": "verified",
+    "lineage": {
+      "origin": "fixture",
+      "source_path": "fixtures/memorysearch-real-record-envelope.reference.json",
+      "copy_batch_id": "memorysearch-phase1",
+      "parent_record_id": "",
+      "previous_record_hash": "",
+      "transforms": [
+        {
+          "transform_id": "memorysearch-fixture-wrap",
+          "function": "copy_reference_shape",
+          "input_hash": "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+          "output_hash": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        }
+      ]
+    },
+    "body": {
+      "id": "NCT:CP-EXAMPLE:2026-07-22T00:00:00.000000+00:00:1000",
+      "timestamp": "2026-07-22T00:00:00.000000+00:00",
+      "tensor": "NCT",
+      "session_id": "example-session",
+      "clock": {
+        "tick": 1000,
+        "epoch": "primary",
+        "phase": "active",
+        "started_at": "2026-07-22T00:00:00.000000+00:00",
+        "last_advanced_at": "2026-07-22T00:00:00.000000+00:00"
+      },
+      "provenance": {
+        "origin": "fixture",
+        "assignment_source": null,
+        "inherited_from": null,
+        "recognition_status": null,
+        "declared_by": null
+      },
+      "lineage": [],
+      "notes": null,
+      "markers": null,
+      "t_signature": null,
+      "distilled_summary": "NCT is the Nostalgic Context Tensor: condensed, symbolic long-term memory reduced to markers, lessons, or signatures. Stores relics, not narratives.",
+      "essence_memory": "Nostalgic Context Tensor",
+      "pivots": null,
+      "source_record_ids": ["SPINE:CP-EXAMPLE:canon-7.2"]
+    }
+  },
+  {
+    "record_id": "PCT:CP-EXAMPLE:2026-07-22T00:00:00.000000+00:00:1001",
+    "source_record_id": "PCT:CP-EXAMPLE:2026-07-22T00:00:00.000000+00:00:1001",
+    "tensor": "PCT",
+    "timestamp_utc": "2026-07-22T00:00:00.000000+00:00",
+    "schema_version": "1.0",
+    "source_hash": "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC",
+    "source_hash_scope": "normalized_source_record",
+    "migration_status": "migrated",
+    "verification_status": "verified",
+    "lineage": {
+      "origin": "fixture",
+      "source_path": "fixtures/memorysearch-real-record-envelope.reference.json",
+      "copy_batch_id": "memorysearch-phase1",
+      "parent_record_id": "",
+      "previous_record_hash": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "transforms": [
+        {
+          "transform_id": "memorysearch-fixture-wrap",
+          "function": "copy_reference_shape",
+          "input_hash": "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+          "output_hash": "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC"
+        }
+      ]
+    },
+    "body": {
+      "id": "PCT:CP-EXAMPLE:2026-07-22T00:00:00.000000+00:00:1001",
+      "timestamp": "2026-07-22T00:00:00.000000+00:00",
+      "tensor": "PCT",
+      "session_id": "example-session",
+      "clock": {
+        "tick": 1001,
+        "epoch": "primary",
+        "phase": "active",
+        "started_at": "2026-07-22T00:00:00.000000+00:00",
+        "last_advanced_at": "2026-07-22T00:00:00.000000+00:00"
+      },
+      "provenance": {
+        "origin": "fixture",
+        "assignment_source": null,
+        "inherited_from": null,
+        "recognition_status": null,
+        "declared_by": null
+      },
+      "lineage": [],
+      "notes": null,
+      "markers": null,
+      "t_signature": null,
+      "working_context": {
+        "definition": "PCT is the Persistent Context Tensor: active, working memory, referenced frequently, mutable only by accretion through append-only continuity."
+      },
+      "retrieved_record_ids": null,
+      "rls_session_id": null,
+      "pressure_state": null
+    }
+  },
+  {
+    "record_id": "SPINE:CP-EXAMPLE:canon-7.2",
+    "source_record_id": "SPINE:CP-EXAMPLE:canon-7.2",
+    "tensor": "SPINE",
+    "timestamp_utc": "2026-07-22T00:00:00.000000+00:00",
+    "schema_version": "1.0",
+    "source_hash": "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+    "source_hash_scope": "normalized_source_record",
+    "migration_status": "migrated",
+    "verification_status": "verified",
+    "lineage": {
+      "origin": "fixture",
+      "source_path": "fixtures/memorysearch-real-record-envelope.reference.json",
+      "copy_batch_id": "memorysearch-phase1",
+      "parent_record_id": "",
+      "previous_record_hash": "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC",
+      "transforms": [
+        {
+          "transform_id": "memorysearch-fixture-wrap",
+          "function": "copy_reference_shape",
+          "input_hash": "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+          "output_hash": "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD"
+        }
+      ]
+    },
+    "body": {
+      "id": "SPINE:CP-EXAMPLE:canon-7.2",
+      "timestamp": "2026-07-22T00:00:00.000000+00:00",
+      "tensor": "SPINE",
+      "session_id": "example-session",
+      "clock": {
+        "tick": 500,
+        "epoch": "primary",
+        "phase": "active",
+        "started_at": "2026-07-22T00:00:00.000000+00:00",
+        "last_advanced_at": "2026-07-22T00:00:00.000000+00:00"
+      },
+      "provenance": {
+        "origin": "fixture",
+        "assignment_source": null,
+        "inherited_from": null,
+        "recognition_status": null,
+        "declared_by": null
+      },
+      "lineage": [],
+      "notes": null,
+      "markers": null,
+      "t_signature": null,
+      "pattern": "Canon 7.2 Contextual Tensors: PCT = Persistent Context Tensor (working memory); NCT = Nostalgic Context Tensor (condensed symbolic memory, relics not narratives).",
+      "invariant": true,
+      "relationships": null,
+      "source_record_ids": null,
+      "nature_aspect_refs": null
+    }
+  },
+  {
+    "record_id": "SPINE:CP-EXAMPLE:weak-tensor-note",
+    "source_record_id": "SPINE:CP-EXAMPLE:weak-tensor-note",
+    "tensor": "SPINE",
+    "timestamp_utc": "2026-07-22T00:00:00.000000+00:00",
+    "schema_version": "1.0",
+    "source_hash": "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE",
+    "source_hash_scope": "normalized_source_record",
+    "migration_status": "migrated",
+    "verification_status": "verified",
+    "lineage": {
+      "origin": "fixture",
+      "source_path": "fixtures/memorysearch-real-record-envelope.reference.json",
+      "copy_batch_id": "memorysearch-phase1",
+      "parent_record_id": "",
+      "previous_record_hash": "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+      "transforms": [
+        {
+          "transform_id": "memorysearch-fixture-wrap",
+          "function": "copy_reference_shape",
+          "input_hash": "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+          "output_hash": "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"
+        }
+      ]
+    },
+    "body": {
+      "id": "SPINE:CP-EXAMPLE:weak-tensor-note",
+      "timestamp": "2026-07-22T00:00:00.000000+00:00",
+      "tensor": "SPINE",
+      "session_id": "example-session",
+      "clock": {
+        "tick": 501,
+        "epoch": "primary",
+        "phase": "active",
+        "started_at": "2026-07-22T00:00:00.000000+00:00",
+        "last_advanced_at": "2026-07-22T00:00:00.000000+00:00"
+      },
+      "provenance": {
+        "origin": "fixture",
+        "assignment_source": null,
+        "inherited_from": null,
+        "recognition_status": null,
+        "declared_by": null
+      },
+      "lineage": [],
+      "notes": null,
+      "markers": null,
+      "t_signature": null,
+      "pattern": "A tensor note can mention context without defining ZCT or any additional Canon tensor.",
+      "invariant": false,
+      "relationships": null,
+      "source_record_ids": null,
+      "nature_aspect_refs": null
+    }
+  }
+]

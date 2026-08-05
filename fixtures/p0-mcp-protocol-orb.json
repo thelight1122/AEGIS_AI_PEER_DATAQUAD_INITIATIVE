@@ -1,0 +1,8 @@
+{
+  "schema_version": "0.1.0",
+  "orb_id": "mcp-protocol-orb",
+  "orb_class": "protocol",
+  "protocol": "mcp",
+  "enabled": false,
+  "capabilities": ["retrieve_context", "retrieve_canon", "query_continuity", "request_reflection", "pod_get_status"]
+}

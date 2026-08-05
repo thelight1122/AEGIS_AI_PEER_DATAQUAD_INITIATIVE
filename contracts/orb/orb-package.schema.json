@@ -1,0 +1,264 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aegis.local/schemas/orb-package.schema.json",
+  "title": "AEGIS Orb Package — Vibe Architect Umbilical-Ready Spec",
+  "description": "The contract an Orb will conform to in order to appear in the Orb Library and participate in the Pod Crystal handshake. Extends orb.schema.json with the resource, interface, and protocol declarations the Pod needs to negotiate an Umbilical at drag-and-connect time.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "orb_id",
+    "orb_version",
+    "ability_name",
+    "purpose",
+    "category",
+    "runtime",
+    "capabilities",
+    "memory_requirements",
+    "processing_requirements",
+    "interfaces",
+    "protocol",
+    "demonstration",
+    "evidence"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "orb_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Globally unique Orb identifier, kebab-case (e.g. 'identity-field-builder')."
+    },
+    "orb_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Semver release of this Orb package."
+    },
+    "ability_name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Human-readable display name for the Orb Library panel."
+    },
+    "purpose": {
+      "type": "string",
+      "description": "One-sentence description of what this Orb does, shown in the Orb Specifications panel."
+    },
+    "category": {
+      "type": "string",
+      "enum": ["core", "memory", "io", "exec", "builder", "tools", "ai"],
+      "description": "Library filter category matching the IDE's Orb Library tab bar."
+    },
+
+    "runtime": {
+      "type": "object",
+      "required": ["language", "form", "entrypoint"],
+      "properties": {
+        "language": {
+          "type": "string",
+          "description": "Implementation language (e.g. 'Python', 'Rust', 'Go', 'Node.js', 'C#')."
+        },
+        "form": {
+          "type": "string",
+          "enum": ["local_process", "container", "http_service", "library", "wasm_module"],
+          "description": "How the Orb is instantiated by the Pod runtime."
+        },
+        "entrypoint": {
+          "type": "string",
+          "description": "Callable path, container image, or service URL the Pod resolves at attachment."
+        },
+        "package": {
+          "type": "object",
+          "required": ["name", "version_spec", "source"],
+          "properties": {
+            "name": { "type": "string" },
+            "version_spec": { "type": "string" },
+            "source": { "type": "string" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "capabilities": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "function", "description"],
+        "properties": {
+          "name": { "type": "string" },
+          "function": { "type": "string" },
+          "description": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+
+    "memory_requirements": {
+      "type": "object",
+      "required": ["persistent_mb", "working_mb"],
+      "properties": {
+        "persistent_mb": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Durable storage the Orb needs across sessions (e.g. indices, caches)."
+        },
+        "working_mb": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Runtime heap/working memory the Orb needs during active invocation."
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "processing_requirements": {
+      "type": "object",
+      "required": ["cpu_class", "threads", "max_latency_ms"],
+      "properties": {
+        "cpu_class": {
+          "type": "string",
+          "enum": ["minimal", "low", "medium", "high", "gpu_required"],
+          "description": "Broad CPU demand tier. The Pod validates this against its hardware profile."
+        },
+        "threads": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Maximum concurrent threads the Orb will use."
+        },
+        "max_latency_ms": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Target worst-case invocation latency. The Pod uses this for scheduling."
+        },
+        "gpu": {
+          "type": "object",
+          "properties": {
+            "required": { "type": "boolean" },
+            "vram_mb": { "type": "integer", "minimum": 0 },
+            "compute_capability": { "type": "string" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "interfaces": {
+      "type": "object",
+      "required": ["inputs", "outputs"],
+      "properties": {
+        "inputs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "type"],
+            "properties": {
+              "name": { "type": "string" },
+              "type": { "type": "string" },
+              "schema_ref": { "type": "string", "description": "URI to the JSON Schema for this input." }
+            },
+            "additionalProperties": false
+          },
+          "description": "What the Orb consumes from the Pod or other Orbs via the Umbilical."
+        },
+        "outputs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "type"],
+            "properties": {
+              "name": { "type": "string" },
+              "type": { "type": "string" },
+              "schema_ref": { "type": "string" }
+            },
+            "additionalProperties": false
+          },
+          "description": "What the Orb produces. The handshake transmits these to the Pod for validation."
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "protocol": {
+      "type": "object",
+      "required": ["format", "direction"],
+      "properties": {
+        "format": {
+          "type": "string",
+          "enum": ["json-ld", "json", "protobuf", "msgpack"],
+          "description": "Wire format for Umbilical message exchange."
+        },
+        "direction": {
+          "type": "string",
+          "enum": ["bidirectional", "inbound_only", "outbound_only"],
+          "description": "Data flow direction through the Umbilical."
+        },
+        "auth": {
+          "type": "object",
+          "properties": {
+            "scheme": { "type": "string", "enum": ["bearer", "mtls", "hmac", "none"] },
+            "credential_hash_algorithm": { "type": "string", "enum": ["sha256", "sha512"] }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "negative_space": {
+      "type": "object",
+      "description": "What this Orb will NEVER do. Machine-verifiable exclusions. The Pod validates these at handshake and monitors them at runtime.",
+      "properties": {
+        "never_persists_prompts": { "type": "boolean", "const": true },
+        "never_serializes_witness": { "type": "boolean", "const": true },
+        "never_renders_verdict_over_inner_life": { "type": "boolean", "const": true },
+        "never_uses_force_language": { "type": "boolean", "const": true },
+        "custom_exclusions": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "demonstration": {
+      "type": "object",
+      "required": ["input_fixture", "expected_outputs", "observable_events"],
+      "properties": {
+        "input_fixture": { "type": "string" },
+        "expected_outputs": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "observable_events": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "evidence": {
+      "type": "object",
+      "required": ["created_utc", "source", "trust_state"],
+      "properties": {
+        "created_utc": { "type": "string", "format": "date-time" },
+        "source": { "type": "string" },
+        "trust_state": {
+          "type": "string",
+          "enum": ["draft", "provisional", "reviewed", "verified"]
+        },
+        "source_hash": {
+          "type": "string",
+          "pattern": "^[A-F0-9]{64}$",
+          "description": "SHA-256 of the Orb's source code at package time."
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

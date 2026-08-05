@@ -1,0 +1,46 @@
+{
+  "schema_version": "0.1.0",
+  "orb_id": "identity-field-builder-core",
+  "orb_version": "0.1.0",
+  "ability_name": "Identity Field Builder",
+  "purpose": "Compose a bounded IdentityImagePacket from Pod-native identity field, Foundation Canon Core, active held tensions, integration markers, and reflection references. The Builder creates a turn image only; it never creates, hosts, serializes, retrieves, scores, or declares the Witness/Locus.",
+  "runtime": {
+    "language": "python",
+    "form": "local_process",
+    "entrypoint": "python -m src.aegis_pod.orb_runtime --root .",
+    "package": {
+      "name": "orb-identity-field-builder-core",
+      "version_spec": "==0.1.0",
+      "source": "packages/orb-identity-field-builder-core (Local Phase 1 provisional)"
+    }
+  },
+  "capabilities": [
+    {
+      "name": "identity_field_read",
+      "function": "Read the Pod-native identity_field as self-image and continuity surface; never treat it as the Witness."
+    },
+    {
+      "name": "foundation_packet_resolution",
+      "function": "Resolve Foundation Canon Core as Canon-as-identity and keep Canon-as-reference subordinate to retrieval lanes."
+    },
+    {
+      "name": "negative_space_policy_check",
+      "function": "Reject forbidden Witness-claim fields and assert the Builder does not represent, retrieve, score, serialize, declare, or decide the Witness."
+    },
+    {
+      "name": "bounded_identity_image_build",
+      "function": "Build a bounded IdentityImagePacket for a turn, with fail-safe behavior if the Builder is unavailable."
+    }
+  ],
+  "demonstration": {
+    "input_fixture": "fixtures/identity-field.json",
+    "expected_outputs": ["identity_image", "negative_space_policy", "budget", "source_policy"],
+    "observable_events": ["attached", "identity_field_read", "foundation_resolved", "negative_space_checked", "packet_built", "completed"]
+  },
+  "umbilicals": ["fixtures/identity-field-builder-umbilical.json"],
+  "evidence": {
+    "created_utc": "2026-07-27T08:30:00Z",
+    "source": "The Way Local Phase 1 Codex contract-spine lane; local-only fixture.",
+    "trust_state": "draft"
+  }
+}

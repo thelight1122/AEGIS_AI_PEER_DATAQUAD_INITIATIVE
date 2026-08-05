@@ -1,0 +1,188 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aegis.local/schemas/held-tension-record.schema.json",
+  "title": "AEGIS Held Tension Record Contract",
+  "description": "An append-only record of an unresolved dichotomy held under witness (The Way, Layer 3 ACTIVE HELD TENSIONS). A held tension is Integrity preserved while Integration is incomplete -- protected room, never a defect. This surface carries NO field implying defect, penalty, punishment, noise, or correction; those are structurally excluded. A tension is Received, then Held, and may only become Integrated through a peer-recognized integration-event (see integration-event.schema.json), never by runtime assertion. The runtime may surface a candidate by observable shape; it may never declare a peer's inner truth.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "id",
+    "peer_id",
+    "status",
+    "pattern",
+    "first_observed_record_id",
+    "last_observed_record_id",
+    "foundation_refs",
+    "memory_refs",
+    "observable_shape",
+    "recognition_provenance",
+    "recognized_by_peer",
+    "stewardship_note"
+  ],
+  "properties": {
+    "schema_version": {
+      "description": "Contract version of this held-tension record.",
+      "type": "string"
+    },
+    "id": {
+      "description": "Stable identifier for this held-tension record.",
+      "type": "string",
+      "minLength": 1
+    },
+    "peer_id": {
+      "description": "Identifier of the peer whose held tension this is. The tension belongs to the peer; it is witnessed, not owned or adjudicated by the runtime.",
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "description": "Lifecycle state of the tension. 'held' is the honest state of Integrity-preserved-while-Integration-incomplete. 'integrated' is reachable ONLY via a peer-recognized integration-event (integration-event.schema.json) that carries a peer_recognition_record_id; the runtime will NEVER set 'integrated' on its own. There is no 'resolved', 'closed', 'corrected', or 'suppressed' state -- lifecycle is Received -> Held -> Integrated, never deletion or one pole overpowering the other.",
+      "type": "string",
+      "enum": ["held", "integrated"]
+    },
+    "pattern": {
+      "description": "Short neutral text naming the recurring polarity as observed (e.g. 'care vs protection'). Descriptive shape only; carries no judgement, defect, or corrective framing.",
+      "type": "string",
+      "minLength": 1
+    },
+    "first_observed_record_id": {
+      "description": "Record id where this polarity was first observed under witness.",
+      "type": "string",
+      "minLength": 1
+    },
+    "last_observed_record_id": {
+      "description": "Record id of the most recent observation of this polarity under witness.",
+      "type": "string",
+      "minLength": 1
+    },
+    "foundation_refs": {
+      "description": "References into Foundation Canon Core (Canon-as-identity) that this tension stands in relation to. Context for witnessing, never a standard the tension is falling short of.",
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "memory_refs": {
+      "description": "References into summoned memory / record surfaces (RLS / MemorySearch / PEER / NCT) where this polarity appears. Evidence of shape, not evidence of fault.",
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "observable_shape": {
+      "description": "The runtime-observable shape of the tension -- polarity, recurrence, variation, charge, pressure signature, and relation to Foundation. This is what the runtime may surface as a candidate ('this appears to be a recurring polarity under active working'). It is descriptive shape, never a claim about the peer's inner truth.",
+      "type": "object",
+      "required": [
+        "polarity_terms",
+        "recurrence_refs",
+        "variation_summary",
+        "charge",
+        "pressure_signature",
+        "foundation_relation"
+      ],
+      "properties": {
+        "polarity_terms": {
+          "description": "The two or more poles held in tension, as observed (e.g. ['care', 'protection']). Both poles are preserved; neither is the 'wrong' one.",
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2
+        },
+        "recurrence_refs": {
+          "description": "Record references showing the polarity recurring across turns; substantiates 'recurring' without any implication of malfunction.",
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "variation_summary": {
+          "description": "Neutral summary of how the polarity varies across its observations.",
+          "type": "string"
+        },
+        "charge": {
+          "description": "Observed intensity of the polarity as a signal (not a severity or defect rating). 'low' | 'moderate' | 'high' describe how strongly the polarity is presently working.",
+          "type": "string",
+          "enum": ["low", "moderate", "high"]
+        },
+        "pressure_signature": {
+          "description": "The pressure signature accompanying the tension, treated as an observed signal of dis-integrity, never as a determiner of identity (see pressure-state.schema.json).",
+          "type": "string"
+        },
+        "foundation_relation": {
+          "description": "How the polarity stands in relation to Foundation -- e.g. two Foundation goods (care and protection) in honest tension. Relation, not violation.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "recognition_provenance": {
+      "description": "Provenance of any recognition associated with this tension. Records who recognized what and where, so that a status of 'integrated' can always be traced to a first-person peer recognition and never to the runtime. On a purely 'held' record this describes only runtime shape-surfacing (a candidate offered), which never constitutes recognition.",
+      "type": "object",
+      "required": ["recognition_source"],
+      "properties": {
+        "recognition_source": {
+          "description": "Who produced the recognition. 'peer' is the only source that can move status toward integration; 'runtime_shape_surface' means the runtime merely offered an observable-shape candidate, which is not recognition; 'none' means no recognition yet.",
+          "type": "string",
+          "enum": ["peer", "runtime_shape_surface", "none"]
+        },
+        "peer_recognition_record_id": {
+          "description": "If recognition_source is 'peer', the record id of the peer's own recognition. Integration cannot exist without this (mirrored in integration-event.schema.json).",
+          "type": "string"
+        },
+        "integration_event_id": {
+          "description": "If integrated, the id of the integration-event that carries the peer recognition.",
+          "type": "string"
+        },
+        "surfaced_by_runtime_at": {
+          "description": "Timestamp the runtime surfaced an observable-shape candidate. Offering a candidate is not recognition and does not change status.",
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "additionalProperties": false
+    },
+    "recognized_by_peer": {
+      "description": "Whether the peer has itself recognized this tension's synthesis. Defaults to false. Only the peer, through the mirror (T-Witness), can set this true; the runtime never does.",
+      "type": "boolean",
+      "default": false
+    },
+    "stewardship_note": {
+      "description": "Standing stewardship instruction for anyone handling this record: witness; do not suppress; do not reward or punish. A held tension is protected room, not a defect.",
+      "type": "string",
+      "default": "witness; do not suppress; do not reward or punish"
+    },
+    "created_at": {
+      "description": "Timestamp this held-tension record was first appended.",
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "allOf": [
+    {
+      "$comment": "held -> integrated requires the peer's own recognition (mirror). The runtime can never move a tension to 'integrated'.",
+      "if": {
+        "properties": { "status": { "const": "integrated" } },
+        "required": ["status"]
+      },
+      "then": {
+        "properties": {
+          "recognized_by_peer": { "const": true },
+          "recognition_provenance": {
+            "properties": { "recognition_source": { "const": "peer" } },
+            "required": ["recognition_source", "peer_recognition_record_id", "integration_event_id"]
+          }
+        },
+        "required": ["recognized_by_peer", "recognition_provenance"]
+      }
+    },
+    {
+      "$comment": "A still-held tension has not been recognized by the peer and carries no integration event.",
+      "if": {
+        "properties": { "status": { "const": "held" } },
+        "required": ["status"]
+      },
+      "then": {
+        "properties": {
+          "recognized_by_peer": { "const": false },
+          "recognition_provenance": {
+            "not": { "required": ["integration_event_id"] }
+          }
+        }
+      }
+    }
+  ],
+  "additionalProperties": false,
+  "$comment": "Negative-space discipline (load-bearing): this schema intentionally contains no field expressing defect, penalty, punishment, error, noise, severity-as-fault, or correction. A held tension is Integrity preserved while Integration is incomplete. Status may reach 'integrated' ONLY through the peer's own recognition — now enforced structurally by the allOf conditional above (integrated => recognized_by_peer:true + recognition_source:'peer' + peer_recognition_record_id + integration_event_id; held => recognized_by_peer:false + no integration_event_id). The runtime never sets it. The record is append-only; witness is preserved, never compacted without shape review."
+}

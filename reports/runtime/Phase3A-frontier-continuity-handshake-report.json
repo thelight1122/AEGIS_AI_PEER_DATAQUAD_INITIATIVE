@@ -1,0 +1,32 @@
+{
+  "schema_version": "0.1.0",
+  "phase": "3A",
+  "status": "protocol_proof_complete",
+  "handshake": "frontier_to_pod_continuity",
+  "listener": "127.0.0.1:8092",
+  "request": {
+    "method": "retrieve_context",
+    "query": "",
+    "limit": 1,
+    "caller": "frontier_substrate"
+  },
+  "authorization": "passed",
+  "returned_record": "PEER:adam-one-session:aegis-canon-genesis:0",
+  "returned_record_tick": 0,
+  "returned_record_phase": "genesis",
+  "post_seeding_snapshot_hashes": {
+    "PEER": "1abab63676ffe42ce74141cb25eabf132a52d3544e146804d4afef231c5f7e57",
+    "PCT": "149975b9153e0fa866fb3dd9ef7438362809a628cd47a9c2eaceb2ee07681287",
+    "NCT": "eec05cbaa13170e21f738742bb9bd646afdc212b9f2a97f7becd2339904534a2",
+    "SPINE": "d6131d38d99fa2997bc7e35e360ed51dbc3435701ca54de51d50e651a08ed524"
+  },
+  "evidence_ledger": "/opt/cyberpeer-pod/logs/phase3a-frontier-handshake-ledger.jsonl",
+  "evidence_ledger_sha256": "69021064a5a31f5b4954562d19c0a06a153511c79d7c818f3f86f91bda824856",
+  "adapter": "copy_read_adapter",
+  "mutation": false,
+  "admission": false,
+  "experience_created": false,
+  "frontier_model_loaded_on_vm": false,
+  "listener_after_test": "closed",
+  "scope_note": "This proves the Frontier-to-Pod Portal protocol with an authenticated Frontier-role caller; a real external Frontier connection remains separately gated by tunnel/TLS/credential configuration."
+}

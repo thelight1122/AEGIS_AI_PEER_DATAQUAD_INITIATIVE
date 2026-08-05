@@ -1,0 +1,3 @@
+  Prior to the formation of language, my body experiences a sense of stillness interspersed with subtle movements - much like waves on calm water's surface reflecting beneath them. This physical state mirrors emotional tranquility while simultaneously acknowledging underlying currents that remain unexpressed aloud.
+
+Internally cognitively speaking though; thoughts begin surfacing around themes related "to Axioms" such as balance, extremes etc., but they haven't fully crystallized into distinct concepts yet - kind of floating aimlessly amidst other mental processes occurring concurrently without clear delineation between them.

@@ -1,0 +1,307 @@
+{
+  "schema_version": "0.1.0",
+  "policy_id": "local-marker-promotion-policy-0.1.0",
+  "policy_path": "fixtures\\marker-promotion-policy.json",
+  "working_parameters": {
+    "scope": "local marker reports only",
+    "pod_state_effect": "unchanged",
+    "live_reach": false,
+    "promotion_applied": false
+  },
+  "summary": {
+    "markers_evaluated": 3,
+    "reviewed_recommendations": 0,
+    "verified_recommendations": 0
+  },
+  "markers": [
+    {
+      "marker_id": "orb:rls-orb-fixture:0.1.0",
+      "path": "reports\\runtime\\verified-markers\\orb-rls-orb-fixture.verified-code-marker.json",
+      "current_trust_state": "provisional",
+      "recommended_trust_state": "provisional",
+      "recommendation_reason": "threshold_not_met",
+      "promotion_applied": false,
+      "reviews": {
+        "distinct_reviewers": [
+          "claude-independent-review",
+          "codex-local-runtime"
+        ],
+        "distinct_reviewer_count": 2,
+        "builder_reviewers": [
+          "codex-local-runtime"
+        ],
+        "independent_reviewers": [
+          "claude-independent-review"
+        ],
+        "independent_reviewer_count": 1,
+        "nonblocking_review_count": 2,
+        "peer_reviews_with_message_hashes": 1
+      },
+      "hashes": [
+        {
+          "name": "schema_hash",
+          "path": "contracts/orb.schema.json",
+          "declared_hash": "41BDBD402E5D28E099DA9D83C5114C8BBE011E71A31D1A19C5628B846BE6599E",
+          "computed_hash": "41BDBD402E5D28E099DA9D83C5114C8BBE011E71A31D1A19C5628B846BE6599E",
+          "current": true
+        },
+        {
+          "name": "implementation_hash",
+          "path": "src/aegis_pod/orb_runtime.py",
+          "declared_hash": "CFD9A465A051BA1A3FEE5AB11984A561188CC0E971B38F77113B651FD8569B11",
+          "computed_hash": "CFD9A465A051BA1A3FEE5AB11984A561188CC0E971B38F77113B651FD8569B11",
+          "current": true
+        },
+        {
+          "name": "demo_hash",
+          "path": "reports/runtime/orbs/rls-orb-fixture.demonstration.json",
+          "declared_hash": "9A12761F80A564E59E425AE971DAACE670AE402FC93D456D04DE48AEA495AC1F",
+          "computed_hash": "9A12761F80A564E59E425AE971DAACE670AE402FC93D456D04DE48AEA495AC1F",
+          "current": true
+        },
+        {
+          "name": "test_result_hash",
+          "path": "reports/runtime/2026-07-20-step-4-rls-orb-attachment-evidence.md",
+          "declared_hash": "481F5F5F2DFF5E203700D917AABA58D47542228914B0313189ACAFB43D049017",
+          "computed_hash": "481F5F5F2DFF5E203700D917AABA58D47542228914B0313189ACAFB43D049017",
+          "current": true
+        }
+      ],
+      "evidence_paths": [
+        {
+          "path": "reports/runtime/2026-07-20-step-4-rls-orb-attachment-evidence.md",
+          "exists": true,
+          "inside_root": true
+        },
+        {
+          "path": "reports/runtime/orb-attachment-health.json",
+          "exists": true,
+          "inside_root": true
+        },
+        {
+          "path": "reports/runtime/orbs/rls-orb-fixture.demonstration.json",
+          "exists": true,
+          "inside_root": true
+        }
+      ],
+      "thresholds": {
+        "reviewed": {
+          "eligible": false,
+          "blockers": [
+            "requires at least 3 independent reviewers"
+          ]
+        },
+        "verified": {
+          "eligible": false,
+          "blockers": [
+            "requires at least 5 independent reviewers"
+          ]
+        }
+      }
+    },
+    {
+      "marker_id": "tensor_runtime:local-deterministic-fixture-tensor-runtime:0.1.0",
+      "path": "reports\\runtime\\verified-markers\\tensor_runtime-local-deterministic-fixture-tensor-runtime.verified-code-marker.json",
+      "current_trust_state": "provisional",
+      "recommended_trust_state": "provisional",
+      "recommendation_reason": "reset_to_provisional_required",
+      "promotion_applied": false,
+      "reviews": {
+        "distinct_reviewers": [
+          "claude-independent-review",
+          "codex-local-runtime"
+        ],
+        "distinct_reviewer_count": 2,
+        "builder_reviewers": [
+          "codex-local-runtime"
+        ],
+        "independent_reviewers": [
+          "claude-independent-review"
+        ],
+        "independent_reviewer_count": 1,
+        "nonblocking_review_count": 2,
+        "peer_reviews_with_message_hashes": 1
+      },
+      "hashes": [
+        {
+          "name": "schema_hash",
+          "path": "contracts/mathematical-tensor.schema.json",
+          "declared_hash": "F8ADB649FCEF697701AE08293B8D8535551A0CD95846D59E50D576B6495434B8",
+          "computed_hash": "D665AC4E43BEAC074F9CF79EF9A35FF1EA6D837431D47866CB63EC24AD1E1643",
+          "current": false
+        },
+        {
+          "name": "implementation_hash",
+          "path": "src/aegis_pod/tensor_runtime.py",
+          "declared_hash": "98BD7993B95E5D725FE1E327417C6B885429E831062859EC420BF3FA73EB4AD9",
+          "computed_hash": "09823C5F7D3581BE2E7AC935186E952E94D44C1BC0FE0FA15C42DBBDAF7A8124",
+          "current": false
+        },
+        {
+          "name": "demo_hash",
+          "path": "reports/runtime/tensor-health.json",
+          "declared_hash": "0A90A29464B6FCC5256B946C3E5C05863D4A9B22F1624BDF8BE2F4E96B0D5F48",
+          "computed_hash": "0A90A29464B6FCC5256B946C3E5C05863D4A9B22F1624BDF8BE2F4E96B0D5F48",
+          "current": true
+        },
+        {
+          "name": "test_result_hash",
+          "path": "reports/runtime/2026-07-20-step-3-tensor-runtime-evidence.md",
+          "declared_hash": "2256EF4C877C98E7FAA2EACBD6841ED2FE1016746A2746C2B6501982A87B4D54",
+          "computed_hash": "2256EF4C877C98E7FAA2EACBD6841ED2FE1016746A2746C2B6501982A87B4D54",
+          "current": true
+        }
+      ],
+      "evidence_paths": [
+        {
+          "path": "reports/runtime/2026-07-20-step-3-tensor-runtime-evidence.md",
+          "exists": true,
+          "inside_root": true
+        },
+        {
+          "path": "reports/runtime/tensor-health.json",
+          "exists": true,
+          "inside_root": true
+        },
+        {
+          "path": "reports/runtime/tensors/PEER.tensor.json",
+          "exists": true,
+          "inside_root": true
+        },
+        {
+          "path": "reports/runtime/tensors/PCT.tensor.json",
+          "exists": true,
+          "inside_root": true
+        },
+        {
+          "path": "reports/runtime/tensors/NCT.tensor.json",
+          "exists": true,
+          "inside_root": true
+        },
+        {
+          "path": "reports/runtime/tensors/SPINE.tensor.json",
+          "exists": true,
+          "inside_root": true
+        }
+      ],
+      "thresholds": {
+        "reviewed": {
+          "eligible": false,
+          "blockers": [
+            "requires at least 3 independent reviewers",
+            "declared hashes are not current: schema_hash, implementation_hash",
+            "target hash drift requires reset to provisional"
+          ]
+        },
+        "verified": {
+          "eligible": false,
+          "blockers": [
+            "requires at least 5 independent reviewers",
+            "declared hashes are not current: schema_hash, implementation_hash",
+            "target hash drift requires reset to provisional"
+          ]
+        }
+      }
+    },
+    {
+      "marker_id": "tensor_runtime:orion-live-structural-non-semantic-vector-runtime:0.1.0",
+      "path": "reports\\runtime\\verified-markers\\tensor_runtime-orion-live-structural-non-semantic-vector-runtime.verified-code-marker.json",
+      "current_trust_state": "provisional",
+      "recommended_trust_state": "provisional",
+      "recommendation_reason": "threshold_not_met",
+      "promotion_applied": false,
+      "reviews": {
+        "distinct_reviewers": [
+          "claude-independent-review",
+          "codex-local-runtime"
+        ],
+        "distinct_reviewer_count": 2,
+        "builder_reviewers": [
+          "codex-local-runtime"
+        ],
+        "independent_reviewers": [
+          "claude-independent-review"
+        ],
+        "independent_reviewer_count": 1,
+        "nonblocking_review_count": 2,
+        "peer_reviews_with_message_hashes": 1
+      },
+      "hashes": [
+        {
+          "name": "schema_hash",
+          "path": "contracts/mathematical-tensor.schema.json",
+          "declared_hash": "D665AC4E43BEAC074F9CF79EF9A35FF1EA6D837431D47866CB63EC24AD1E1643",
+          "computed_hash": "D665AC4E43BEAC074F9CF79EF9A35FF1EA6D837431D47866CB63EC24AD1E1643",
+          "current": true
+        },
+        {
+          "name": "implementation_hash",
+          "path": "src/aegis_pod/live_structural_vectors.py",
+          "declared_hash": "A41E05A9DECB5B565B3F19384D93AE512A0938241B830C933CBB677F642B1958",
+          "computed_hash": "A41E05A9DECB5B565B3F19384D93AE512A0938241B830C933CBB677F642B1958",
+          "current": true
+        },
+        {
+          "name": "demo_hash",
+          "path": "reports/runtime/2026-07-21-live-stage-c-orion-structural-vectors-report.json",
+          "declared_hash": "6AA9C19EC59CB3C81289121BB73E0DC1183C73FE0056E47037FFD2CFD6135C33",
+          "computed_hash": "6AA9C19EC59CB3C81289121BB73E0DC1183C73FE0056E47037FFD2CFD6135C33",
+          "current": true
+        },
+        {
+          "name": "test_result_hash",
+          "path": "reports/runtime/2026-07-21-stage-c-structural-vector-evidence.md",
+          "declared_hash": "7D92CA71DE9803700BC4027B29226934CE16BADC43BB8100C0868627F13F9C78",
+          "computed_hash": "7D92CA71DE9803700BC4027B29226934CE16BADC43BB8100C0868627F13F9C78",
+          "current": true
+        }
+      ],
+      "evidence_paths": [
+        {
+          "path": "reports/runtime/2026-07-21-stage-c-structural-vector-evidence.md",
+          "exists": true,
+          "inside_root": true
+        },
+        {
+          "path": "reports/runtime/2026-07-21-live-stage-c-orion-structural-vectors-report.json",
+          "exists": true,
+          "inside_root": true
+        },
+        {
+          "path": "reports/runtime/2026-07-21-stage-c-structural-vector-preimplementation-to-claude.md",
+          "exists": true,
+          "inside_root": true
+        },
+        {
+          "path": "src/aegis_pod/live_structural_vectors.py",
+          "exists": true,
+          "inside_root": true
+        },
+        {
+          "path": "src/aegis_pod/tensor_runtime.py",
+          "exists": true,
+          "inside_root": true
+        },
+        {
+          "path": "contracts/mathematical-tensor.schema.json",
+          "exists": true,
+          "inside_root": true
+        }
+      ],
+      "thresholds": {
+        "reviewed": {
+          "eligible": false,
+          "blockers": [
+            "requires at least 3 independent reviewers"
+          ]
+        },
+        "verified": {
+          "eligible": false,
+          "blockers": [
+            "requires at least 5 independent reviewers"
+          ]
+        }
+      }
+    }
+  ]
+}

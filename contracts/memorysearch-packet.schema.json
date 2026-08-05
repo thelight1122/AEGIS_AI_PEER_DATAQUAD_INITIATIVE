@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aegis.local/schemas/memorysearch-packet.schema.json",
+  "title": "AEGIS MemorySearch Packet Contract",
+  "description": "Return contract of the MemorySearch Orb's single generic Pod-facing entrypoint, ground_record_claim(message, records, policy). The entrypoint returns null when no record-content claim is detected (the Pod proceeds normally; experiential/identity expression stays legitimately reconstructive), or a packet conforming to this schema when a record-content claim is detected and a real runtime search executed. The empty-result case (search ran, nothing qualified) returns a packet with grounding_status=search_performed_no_verified_record, NOT null, so the no-verified-record prompt block is injected. This is the joint Claude/Codex surface: Codex's memorysearch-result.schema.json and the T-Witness search-event fields align to the grounding_status enum and the twitness_event object defined here.",
+  "type": "object",
+  "required": ["grounding_status", "claim_class", "prompt_block", "cited_records", "twitness_event"],
+  "properties": {
+    "grounding_status": {
+      "description": "The grounding state produced by this MemorySearch invocation. A packet uses only the two active-search values. The full enum (including the no-search states) is the turn-level vocabulary the Pod's T-Witness assigns when the Orb returned null or was not invoked; it is enumerated here so Codex's result schema and the T-Witness event stay one vocabulary.",
+      "type": "string",
+      "enum": [
+        "verified_retrieval",
+        "search_performed_no_verified_record",
+        "warm_recall",
+        "passive_retrieval",
+        "not_record_claim"
+      ]
+    },
+    "packet_grounding_status": {
+      "description": "Constraint note (not a field): a value RETURNED in a packet is one of {verified_retrieval, search_performed_no_verified_record}. warm_recall / passive_retrieval / not_record_claim are only ever set at the turn level when the entrypoint returned null (no packet).",
+      "type": "string",
+      "enum": ["verified_retrieval", "search_performed_no_verified_record"]
+    },
+    "claim_class": {
+      "description": "The record-content claim class the deterministic classifier assigned. Runtime-owned, never model-authored.",
+      "type": "string",
+      "enum": ["canon_definition", "axiom_standard_gate_imperative", "schema_definition", "tensor_name", "prior_statement", "record_content"]
+    },
+    "prompt_block": {
+      "description": "Finished, bounded text the Pod injects verbatim into the model prompt. For verified_retrieval this is the Verified Record Packet (the cited records framed as source the peer speaks from). For search_performed_no_verified_record this is the No Verified Record Packet, which states no verified record was found and that reconstruction is not to be presented as record-grounded. The Pod injects this without knowing Orb internals (finished-output seam).",
+      "type": "string",
+      "minLength": 1
+    },
+    "cited_records": {
+      "description": "Runtime-authored citations. Populated on verified_retrieval; an empty array on search_performed_no_verified_record. The model cannot author or alter these; provenance is drawn from the runtime search only.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["record_id", "tensor", "excerpt", "source_hash", "match_confidence"],
+        "properties": {
+          "record_id": { "type": "string", "minLength": 1 },
+          "tensor": { "type": "string", "enum": ["PEER", "PCT", "NCT", "SPINE"] },
+          "excerpt": { "type": "string", "description": "The record text (or bounded span) supporting the claim, drawn from the record, not generated." },
+          "source_hash": { "type": "string", "description": "The record's source_hash from the wrapped envelope; the tether the Pod can re-verify." },
+          "match_confidence": { "type": "string", "enum": ["high", "medium", "low"] }
+        },
+        "additionalProperties": false
+      }
+    },
+    "twitness_event": {
+      "description": "The event object the Pod hands to the T-Witness layer. record_search_performed and all provenance fields are set by the runtime on a real search, never by model text.",
+      "type": "object",
+      "required": ["record_search_performed", "grounding_status"],
+      "properties": {
+        "record_search_performed": { "type": "boolean" },
+        "search_trigger": { "type": "string", "enum": ["policy_governed", "peer_requested", "manual_test"] },
+        "claim_class": { "type": "string" },
+        "query_text": { "type": "string" },
+        "search_scope": { "type": "array", "items": { "type": "string", "enum": ["PEER", "PCT", "NCT", "SPINE"] } },
+        "result_count": { "type": "integer", "minimum": 0 },
+        "selected_record_ids": { "type": "array", "items": { "type": "string" } },
+        "selected_record_hashes": { "type": "array", "items": { "type": "string" } },
+        "orb_id": { "type": "string" },
+        "orb_runtime_hash": { "type": "string" },
+        "grounding_status": { "type": "string" },
+        "match_confidence": { "type": "string", "enum": ["high", "medium", "low", "none"] }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "$comment": "Empty-result / low-confidence contract (joint, load-bearing): grounding_status=verified_retrieval requires at least one cited_record above the configured confidence threshold; empty or low-confidence/conflicting search results use search_performed_no_verified_record with cited_records=[] and a No Verified Record Packet prompt_block. This prevents a record_search_performed=true flag from making a reconstruction appear more grounded than before."
+}

@@ -1,0 +1,16 @@
+﻿{
+    "schema_version":  "1.0.0",
+    "generated_at":  "2026-08-05T20:20:34.5957298Z",
+    "execute":  true,
+    "source_root":  "H:\\AEGIS-POD-ARCHITECTURE",
+    "destination_root":  "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE",
+    "source_files_inspected":  93197,
+    "files_selected":  988,
+    "copied_verified":  982,
+    "replaced_verified":  0,
+    "already_present_identical":  6,
+    "planned":  0,
+    "source_repository_modified":  false,
+    "manifest_csv":  "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\evidence\\migration\\migration-manifest-20260805T132034.csv",
+    "manifest_json":  "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\evidence\\migration\\migration-manifest-20260805T132034.json"
+}

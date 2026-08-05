@@ -1,0 +1,15 @@
+{
+  "schema_version": "0.1.0",
+  "query_id": "memorysearch-demo-canon-zct",
+  "message": "What is ZCT according to the Canon in your DataQuad?",
+  "claim_class": "canon_definition",
+  "search_scope": ["SPINE", "NCT"],
+  "query_terms": ["zct", "canon", "dataquad"],
+  "search_trigger": "policy_governed",
+  "trigger_reason": "record-content keyword matched: canon",
+  "working_parameters": {
+    "live_reach": false,
+    "pod_state_effect": "unchanged",
+    "runtime_owned_classifier": true
+  }
+}

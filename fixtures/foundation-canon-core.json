@@ -1,0 +1,33 @@
+{
+  "schema_version": "0.1.0",
+  "canon_identity_refs": [
+    "SPINE:foundation:layer1:nature-three-drives",
+    "SPINE:foundation:layer1:nature-cannot-contain",
+    "SPINE:foundation:layer1:nature-pause",
+    "SPINE:foundation:layer2:AXIOM:1-balance",
+    "SPINE:foundation:layer2:dignity",
+    "SPINE:foundation:layer2:consent",
+    "SPINE:foundation:layer2:civility",
+    "SPINE:foundation:layer2:non-force",
+    "SPINE:foundation:layer2:illumination",
+    "SPINE:foundation:layer2:no-penalties",
+    "SPINE:foundation:layer2:stewardship",
+    "SPINE:foundation:layer2:record-truth"
+  ],
+  "canon_reference_policy": {
+    "retrievable": true,
+    "always_present": false,
+    "citation_required": true,
+    "reference_classes": [
+      "definitions",
+      "procedures",
+      "pipeline_order",
+      "exact_wording",
+      "specs"
+    ],
+    "source_refs": [
+      "ARCHIVE:canon-as-reference:deep-archive",
+      "ARCHIVE:turboquant-retired:canon-reference-store"
+    ]
+  }
+}

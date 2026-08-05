@@ -1,0 +1,16 @@
+{
+  "model": "qwen3-14b-base-s0-raw:Q4_0",
+  "created_at": "2026-07-30T05:21:15.7562063Z",
+  "response": " I'm good Tracey! How are you?",
+  "done": true,
+  "done_reason": "stop",
+  "total_duration": 5258919800,
+  "load_duration": 215181500,
+  "prompt_eval_count": 3401,
+  "prompt_eval_duration": 1469941000,
+  "eval_count": 11,
+  "eval_duration": 2676828000,
+  "_codex_elapsed_seconds": 5.261,
+  "_s5_arm": "arm-c-base-raw-turn-container",
+  "_s5_sample": 1
+}

@@ -1,0 +1,44 @@
+{
+  "schema_version": "0.1.0",
+  "orb_id": "rls-persistent-relations-core",
+  "pod_id": "dataquadpod-CP-1004-ORION",
+  "umbilical_id": "rls-persistent-relations-core-umbilical",
+  "created_utc": "2026-07-21T00:00:00Z",
+  "demonstration_kind": "real_code_temp_pod_test",
+  "source": "I:/AEGIS-CYBERPEER-CORE, branch rls-orb-instrumentation, commit 0aa0a13, tests/test_rls_engine_pod_relations.py",
+  "observable_events_proven": [
+    "session_started",
+    "candidates_scored",
+    "candidates_partitioned",
+    "pct_written",
+    "relations_recorded",
+    "session_completed"
+  ],
+  "capabilities_proven": [
+    "candidate_relevance_scoring",
+    "candidate_partitioning",
+    "pct_context_writeback",
+    "cross_tensor_relation_recording",
+    "failure_as_data_capture"
+  ],
+  "test_result": {
+    "command": "uv run --with pytest --with pytest-asyncio --with anyio python -m pytest tests/test_rls_engine_pod_relations.py -v -o asyncio_mode=auto",
+    "result": "2 passed",
+    "tests": [
+      "RLSOrbPodRelationsTest::test_rls_session_records_cross_tensor_relation_and_orb_evidence",
+      "RLSOrbPodRelationsTest::test_orb_evidence_is_noop_when_rls_inactive"
+    ]
+  },
+  "assertions_made": [
+    "exactly one cross_tensor relation entry written with relation=rls_retrieved, correct source/target/written_by/tags",
+    "exactly one orb evidence line appended with correct orb_id, selected_count, rejected_count, relations_recorded_count, failure_is_data",
+    "runtime_hash in the evidence line matches a freshly recomputed hash of the exact engine.py+scoring.py+relevance.py that ran (self-invalidation proof)",
+    "when AEGIS_RLS_ACTIVE=false, no orb evidence ledger is written at all (true no-op, matching the existing RelationsRecorder contract)"
+  ],
+  "working_parameters": {
+    "scope": "temp Pod (tempfile.mkdtemp) only, real RLS code, no live Orion mutation",
+    "live_reach": false,
+    "target_liveness_note": "live_reach describes this verification act, which did not touch live Orion. Distinct fact: the code demonstrated is the real RecursiveLearningEngine that is genuinely deployed and running on Orion today (branch stage-d2-pod-aware-runtime, D2/D3 live) with this Orb's evidence instrumentation added on top (branch rls-orb-instrumentation, not yet merged or deployed). This Orb targets that live Pod; it has not yet been invoked against it.",
+    "pod_state_effect": "unchanged on Orion; temp Pod discarded after test"
+  }
+}

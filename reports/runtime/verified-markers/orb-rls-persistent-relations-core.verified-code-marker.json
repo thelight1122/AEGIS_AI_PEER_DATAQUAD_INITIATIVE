@@ -1,0 +1,85 @@
+{
+  "schema_version": "0.1.0",
+  "marker_id": "orb:rls-persistent-relations-core:0.1.0",
+  "target": {
+    "kind": "orb",
+    "id": "rls-persistent-relations-core"
+  },
+  "version_identity": "step-9-real-rls-orb-attachment-runtime; I:/AEGIS-CYBERPEER-CORE branch rls-orb-instrumentation commit 0aa0a13, off stage-d2-pod-aware-runtime @ ff28010 (live on Orion)",
+  "standard_hash": "C575EFD954ED4F3F10E063B110A1EB6CF28D01438904849E43D6A500FB0E49C5",
+  "reviews": [
+    {
+      "reviewer": "codex-local-runtime",
+      "timestamp_utc": "2026-07-21T00:00:00Z",
+      "result": "no_blocking_objection",
+      "notes": "Builder self-attestation: local build + test run passed and produced hash-bound evidence. Codex is offline (out of capacity until ~2026-07-27) and has not yet independently reviewed this specific marker; this review entry records the builder's own run, not an independent pass.",
+      "evidence": {
+        "kind": "builder-local-run",
+        "message_hashes": []
+      }
+    },
+    {
+      "reviewer": "claude-independent-review",
+      "timestamp_utc": "2026-07-21T00:00:00Z",
+      "result": "no_blocking_objection",
+      "notes": "Independent read/run/hash verification within this same session: re-ran validate_contracts.py and validate_live_orb_attachment.py, confirmed the pytest run's 2/2 pass and the unrelated pre-existing test_rls_engine.py failure via git-stash comparison against the unmodified baseline, and recomputed implementation_hash/demo_hash/test_result_hash independently rather than trusting stored values. This does not substitute for a true second-party (Codex) review, which remains outstanding.",
+      "evidence": {
+        "kind": "same-session-independent-recomputation",
+        "message_hashes": []
+      }
+    }
+  ],
+  "working_parameters": {
+    "scope": "local contracts, local implementation, temp-Pod test evidence only; no live Orion mutation",
+    "pod_state_effect": "unchanged",
+    "outside_parameters_behavior": "gated by AEGIS_STORAGE_MODE=pod and AEGIS_RLS_ACTIVE=true; true no-op otherwise, matching the existing RelationsRecorder contract"
+  },
+  "trust_state": "provisional",
+  "hashes": {
+    "schema_hash": "41BDBD402E5D28E099DA9D83C5114C8BBE011E71A31D1A19C5628B846BE6599E",
+    "implementation_hash": "1975395C7E1BE3C536007751B36865B6FA3EC74064CB17BFDF5BC7FE8D36103E",
+    "demo_hash": "AE085D631795F18E63389E2AE76674069A2E5BF6F90F6343A69A71A78496281F",
+    "test_result_hash": "B2D5B6F41C9E6C38CC1C24CB4A8B6B7700219622A83E4B51E7548F45D653A228"
+  },
+  "verification": {
+    "commands": [
+      {
+        "command": "python scripts\\validate_contracts.py",
+        "result": "pass"
+      },
+      {
+        "command": "python scripts\\validate_live_orb_attachment.py",
+        "result": "pass"
+      },
+      {
+        "command": "uv run --with pytest --with pytest-asyncio --with anyio python -m pytest tests/test_rls_engine_pod_relations.py -v -o asyncio_mode=auto",
+        "result": "pass"
+      },
+      {
+        "command": "uv run --with pytest --with pytest-asyncio --with anyio python -m pytest tests/test_pod_runtime.py -v -o asyncio_mode=auto",
+        "result": "pass"
+      }
+    ],
+    "evidence_paths": [
+      "reports/runtime/2026-07-21-step-8-rls-persistent-relations-orb-design-proposal.md",
+      "reports/runtime/2026-07-21-step-9-rls-persistent-relations-orb-attachment-evidence.md",
+      "reports/runtime/orbs/rls-persistent-relations-core.demonstration.json",
+      "stage-d-out/CP-1004-ORION/pod/provenance/rls-persistent-relations-core.orb.json",
+      "stage-d-out/CP-1004-ORION/pod/provenance/rls-persistent-relations-umbilical.json",
+      "stage-d-out/CP-1004-ORION/pod/provenance/rls-persistent-relations-core-source-snapshot/"
+    ],
+    "live_reach": false
+  },
+  "claim_boundary": {
+    "demonstrates": [
+      "Pod, Orb, and Umbilical three-way cross-reference validation for the real (non-fixture) rls-persistent-relations-core Orb targeting CP-1004-ORION's live Pod.",
+      "Real RecursiveLearningEngine.execute_session behavior against a temp Pod: candidate scoring, partitioning, PCT writeback, cross-tensor relation recording (rls_retrieved), and failure-as-data capture.",
+      "Per-invocation evidence recording (input/output/runtime hashes, observable events) that is a true no-op when AEGIS_RLS_ACTIVE is false, and correctly self-invalidates if the RLS source it hashes changes."
+    ],
+    "outside_current_verified_surface": [
+      "Live invocation against the real Orion VM process (verified only against a temp Pod in this step).",
+      "Deployment, merge, or restart of the rls-orb-instrumentation branch onto Orion (explicitly deferred to a future Stage E gate).",
+      "Independent review by a second party outside this session (Codex is offline; the two reviews recorded here are the builder and a same-session recomputation, not two truly independent parties)."
+    ]
+  }
+}

@@ -1,0 +1,179 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aegis.local/schemas/mathematical-tensor.schema.json",
+  "title": "AEGIS Mathematical Tensor Output Contract",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "pod_id",
+    "tensor_name",
+    "tensor_spec_id",
+    "source_contract",
+    "shape",
+    "dtype",
+    "axis_order",
+    "axis_definitions",
+    "record_count",
+    "embedding_dimension",
+    "metadata_dimension",
+    "metadata_slots",
+    "values",
+    "record_index",
+    "evidence"
+  ],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "pod_id": { "type": "string" },
+    "tensor_name": {
+      "type": "string",
+      "enum": ["PEER", "PCT", "NCT", "SPINE"]
+    },
+    "tensor_spec_id": { "type": "string" },
+    "source_contract": {
+      "type": "string",
+      "const": "tensor-record.schema.json"
+    },
+    "shape": {
+      "type": "array",
+      "prefixItems": [
+        { "type": "integer", "minimum": 0 },
+        { "type": "integer", "minimum": 1 },
+        { "type": "integer", "minimum": 1 }
+      ],
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "dtype": {
+      "type": "string",
+      "enum": ["float32", "float64"]
+    },
+    "axis_order": {
+      "type": "array",
+      "prefixItems": [
+        { "type": "string", "const": "record" },
+        { "type": "string", "const": "embedding" },
+        { "type": "string", "const": "metadata" }
+      ],
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "axis_definitions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["axis", "name", "function"],
+        "properties": {
+          "axis": { "type": "integer", "minimum": 0 },
+          "name": { "type": "string" },
+          "function": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "record_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "embedding_dimension": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "metadata_dimension": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "metadata_slots": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["index", "name", "function"],
+        "properties": {
+          "index": { "type": "integer", "minimum": 0 },
+          "name": { "type": "string" },
+          "function": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "vector_label": {
+      "type": "string",
+      "enum": ["structural_vector"]
+    },
+    "embedding_kind": {
+      "type": "string",
+      "enum": ["structural-non-semantic"]
+    },
+    "semantic_embedding": { "type": "boolean" },
+    "values": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "array",
+          "items": { "type": "number" }
+        }
+      }
+    },
+    "record_index": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "record_axis",
+          "record_id",
+          "source_record_id",
+          "source_hash",
+          "source_hash_scope",
+          "lineage_origin",
+          "copy_batch_id",
+          "previous_record_hash"
+        ],
+        "properties": {
+          "record_axis": { "type": "integer", "minimum": 0 },
+          "record_id": { "type": "string", "minLength": 1 },
+          "source_record_id": { "type": "string" },
+          "source_hash": {
+            "type": "string",
+            "pattern": "^[A-F0-9]{64}$"
+          },
+          "source_hash_scope": {
+            "type": "string",
+            "enum": ["raw_source", "normalized_source_record", "transformed_tensor_input"]
+          },
+          "lineage_origin": { "type": "string" },
+          "copy_batch_id": { "type": "string" },
+          "previous_record_hash": {
+            "type": "string",
+            "pattern": "^$|^[A-F0-9]{64}$"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "required": ["created_utc", "generator", "trust_state"],
+      "properties": {
+        "created_utc": { "type": "string" },
+        "generator": { "type": "string" },
+        "source_batch_id": { "type": "string" },
+        "vector_label": {
+          "type": "string",
+          "enum": ["structural_vector"]
+        },
+        "embedding_kind": {
+          "type": "string",
+          "enum": ["structural-non-semantic"]
+        },
+        "semantic_embedding": { "type": "boolean" },
+        "label_guard": { "type": "string" },
+        "trust_state": {
+          "type": "string",
+          "enum": ["draft", "provisional", "verified"]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

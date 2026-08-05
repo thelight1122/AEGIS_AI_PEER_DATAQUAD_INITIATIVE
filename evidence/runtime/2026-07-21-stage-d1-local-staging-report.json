@@ -1,0 +1,199 @@
+{
+  "schema_version": "0.1.0",
+  "stage": "Stage D1 Orion local Pod staging",
+  "status": "pass",
+  "peer_id": "CP-1004-ORION",
+  "copy_batch_id": "orion-live-copy-20260721T002600Z",
+  "stage_root": "stage-d-out/CP-1004-ORION/pod",
+  "remote_target_root": "/home/azureuser/AEGIS-CYBERPEER-CORE/data/peers/CP-1004-ORION/pod",
+  "working_parameters": {
+    "active_dataquad_read": false,
+    "active_dataquad_write": false,
+    "remote_write": false,
+    "pod_population_remote": false,
+    "local_staging_only": true,
+    "placeholder_data_used": false,
+    "mock_data_used": false,
+    "demo_data_used": false
+  },
+  "git_boundary": {
+    "stage_d_out_gitignored": true,
+    "stage_root_gitignored": true
+  },
+  "records": {
+    "PEER": {
+      "path": "stage-d-out/CP-1004-ORION/pod/records/PEER.jsonl",
+      "sha256": "B44D2B24CEEE2BB563D65F1938138832D7379A21456CB29195B4C5258B551E9B",
+      "record_count": 106
+    },
+    "PCT": {
+      "path": "stage-d-out/CP-1004-ORION/pod/records/PCT.jsonl",
+      "sha256": "F8016D89781FBB1D27780EDCED94EB8EB6EE07772D3C6F80BC01DEFC470FFDE0",
+      "record_count": 94
+    },
+    "NCT": {
+      "path": "stage-d-out/CP-1004-ORION/pod/records/NCT.jsonl",
+      "sha256": "FD985D1281C8632F9C3F91DB0CCF5E686FC99585D7E15E5FB7C3A798B9ECF387",
+      "record_count": 89
+    },
+    "SPINE": {
+      "path": "stage-d-out/CP-1004-ORION/pod/records/SPINE.jsonl",
+      "sha256": "7C4B1932E600B4811D8EA365C7429F02FF7E63FB9620A1DDCC0A80229A71F7C7",
+      "record_count": 62
+    }
+  },
+  "tensors": {
+    "PEER": {
+      "path": "stage-d-out/CP-1004-ORION/pod/tensors/structural-non-semantic/PEER.structural-vector-tensor.json",
+      "sha256": "3BD1318317F94ED2BC5525F208A5CA65A281B7F2479BB2F840A4CA808B4A97AB",
+      "expected_sha256": "3BD1318317F94ED2BC5525F208A5CA65A281B7F2479BB2F840A4CA808B4A97AB",
+      "shape": [
+        106,
+        8,
+        4
+      ]
+    },
+    "PCT": {
+      "path": "stage-d-out/CP-1004-ORION/pod/tensors/structural-non-semantic/PCT.structural-vector-tensor.json",
+      "sha256": "2071793AEF411F23E765B0D28765B909AD1DF8688A7BCF27A03DA82CC5CF4320",
+      "expected_sha256": "2071793AEF411F23E765B0D28765B909AD1DF8688A7BCF27A03DA82CC5CF4320",
+      "shape": [
+        94,
+        8,
+        4
+      ]
+    },
+    "NCT": {
+      "path": "stage-d-out/CP-1004-ORION/pod/tensors/structural-non-semantic/NCT.structural-vector-tensor.json",
+      "sha256": "D3B3683890CA41416967CFDB5CA9F91F74EC82DA50598901F929ADE240E78475",
+      "expected_sha256": "D3B3683890CA41416967CFDB5CA9F91F74EC82DA50598901F929ADE240E78475",
+      "shape": [
+        89,
+        8,
+        4
+      ]
+    },
+    "SPINE": {
+      "path": "stage-d-out/CP-1004-ORION/pod/tensors/structural-non-semantic/SPINE.structural-vector-tensor.json",
+      "sha256": "236D6829F77B4A8FE317945D953D01B5C2F9662BE1F804CAA8CCB5C11414C661",
+      "expected_sha256": "236D6829F77B4A8FE317945D953D01B5C2F9662BE1F804CAA8CCB5C11414C661",
+      "shape": [
+        62,
+        8,
+        4
+      ]
+    }
+  },
+  "legacy_ledgers": {
+    "steward": {
+      "path": "stage-d-out/CP-1004-ORION/pod/ledgers/steward.jsonl",
+      "sha256": "492E27CD58589E5449527252957EE1D362CB284DF56D8AB4F771ECFB2A709451",
+      "json_record_count": 111,
+      "line_count": 111
+    },
+    "advocate": {
+      "path": "stage-d-out/CP-1004-ORION/pod/ledgers/advocate.jsonl",
+      "sha256": "93C6046CECFD9AE82CF688E45C91A9639193BAEBB3B7CE6540332448F4B6A0C7",
+      "json_record_count": 94,
+      "line_count": 94
+    },
+    "repair": {
+      "path": "stage-d-out/CP-1004-ORION/pod/ledgers/repair.jsonl",
+      "sha256": "B46176ABE6CD46CB1EFFB428A3756A2EA66ED58230C0C391EEAA5BFA51C48BAE",
+      "json_record_count": 15,
+      "line_count": 19
+    },
+    "rls": {
+      "path": "stage-d-out/CP-1004-ORION/pod/ledgers/rls.jsonl",
+      "sha256": "B63CF9A6AA21F7E16B52380C5EDF7333F0FC49E71FC86CEADBBE711154036815",
+      "json_record_count": 27,
+      "line_count": 27
+    }
+  },
+  "relation_ledgers": {
+    "PEER-traversal": {
+      "path": "stage-d-out/CP-1004-ORION/pod/ledgers/relations/PEER-traversal.jsonl",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "json_record_count": 0,
+      "line_count": 0,
+      "activation": "after-pod-live-switch"
+    },
+    "PCT-traversal": {
+      "path": "stage-d-out/CP-1004-ORION/pod/ledgers/relations/PCT-traversal.jsonl",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "json_record_count": 0,
+      "line_count": 0,
+      "activation": "after-pod-live-switch"
+    },
+    "NCT-traversal": {
+      "path": "stage-d-out/CP-1004-ORION/pod/ledgers/relations/NCT-traversal.jsonl",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "json_record_count": 0,
+      "line_count": 0,
+      "activation": "after-pod-live-switch"
+    },
+    "SPINE-traversal": {
+      "path": "stage-d-out/CP-1004-ORION/pod/ledgers/relations/SPINE-traversal.jsonl",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "json_record_count": 0,
+      "line_count": 0,
+      "activation": "after-pod-live-switch"
+    },
+    "cross-tensor-relations": {
+      "path": "stage-d-out/CP-1004-ORION/pod/ledgers/relations/cross-tensor-relations.jsonl",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "json_record_count": 0,
+      "line_count": 0,
+      "activation": "after-pod-live-switch"
+    }
+  },
+  "provenance": {
+    "copy-manifest.json": "DE2D1880ED8FFA422EEF910EE6889EAE8AF4DBF049CE71E3156132C87618F873",
+    "stage-b-mapping-report.json": "9FE035F3189AEF2500FCA13AAC7964B04C7D658F9F6654855A77656DD2CA8666",
+    "stage-c-structural-vectors-report.json": "6AA9C19EC59CB3C81289121BB73E0DC1183C73FE0056E47037FFD2CFD6135C33",
+    "dataquadpod-tensor-spec.json": "DC678CD5772BACD9DC8618E27683E44AF941E66CAE31249AE1866DF91808FA31",
+    "source-hash-lock.json": "CC489418CB54E1EBC428DD3BD4823B2E98B7C6ADDB872124496D674F87AAB731"
+  },
+  "pod_manifest": {
+    "path": "stage-d-out/CP-1004-ORION/pod/pod-manifest.json",
+    "sha256": "10F07DC27813930269B04135D9DAFD6A868E5D7CAB5B5C179BD6175695659806",
+    "roles": {
+      "steward": {
+        "purpose": "Context witness and preservation care",
+        "owns": [
+          "PCT",
+          "NCT"
+        ],
+        "reads": [
+          "PEER",
+          "PCT",
+          "NCT",
+          "SPINE"
+        ]
+      },
+      "advocate": {
+        "purpose": "Affect witness and relational signal care",
+        "owns": [
+          "PEER",
+          "SPINE"
+        ],
+        "reads": [
+          "PEER",
+          "PCT",
+          "NCT",
+          "SPINE"
+        ]
+      }
+    }
+  },
+  "hash_chain": {
+    "last_migrated_source_hash_by_tensor": {
+      "PEER": "2E7E475FC401235362D88C8DDC7BAEB5770D7BF2ED6AD8CC1FC52A805B5A3DB8",
+      "PCT": "FDB6BC08093BADD9033BDE66923F01EF77A607CC725CFA3DD09A47345C1703FB",
+      "NCT": "3B69F86F1E292C809A6CD90855FC7755C349FBA3B63AC99DC002EE564A7225AE",
+      "SPINE": "2C3CE9D11B9ED173A8FD8E5733F9873A2F7A48FC80D70F629EC6C4EF22DB2F19"
+    },
+    "first_post_live_record_requirement": "previous_record_hash must equal the matching tensor value in last_migrated_source_hash_by_tensor"
+  },
+  "outside_parameters": []
+}

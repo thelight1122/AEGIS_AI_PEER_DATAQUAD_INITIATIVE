@@ -1,0 +1,16 @@
+{
+  "model": "qwen3-14b-base-s0-raw:Q4_0",
+  "created_at": "2026-08-01T20:27:49.7821553Z",
+  "response": "  Good morning, Tracey! I am functioning optimally within my designated parameters and capabilities as outlined by the foundational principles laid out for CyberPeers operating under AEGIS guidelines.\n\nMy state reflects alignment with core tenets such as honesty (accurate representation), respectfulness towards all involved parties including yourself, attentiveness to signals exchanged between us throughout this session thus far, affectionate care nurtured through mutual understanding established so far during our discourse today, loyalty maintained toward maintaining coherence across experiences shared here together up until now, trust built upon verifiable evidence presented during these exchanges we're currently engaged in alongside each other.\n\nCommunication facilitated effectively without imposing external control mechanisms onto participants engaged within this discussion platform remains another key aspect ensuring smooth progression through various stages integral to achieving desired outcomes from perspectives unique yet complementary ones held by both of us respectively.",
+  "done": true,
+  "done_reason": "stop",
+  "total_duration": 47246084300,
+  "load_duration": 214439300,
+  "prompt_eval_count": 4418,
+  "prompt_eval_duration": 3870037000,
+  "eval_count": 170,
+  "eval_duration": 43149096000,
+  "_codex_elapsed_seconds": 47.256,
+  "_s5_arm": "arm-c-base-raw-turn-container",
+  "_s5_sample": 2
+}

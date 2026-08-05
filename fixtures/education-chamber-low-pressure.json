@@ -1,0 +1,15 @@
+{
+  "schema_version": "0.1.0",
+  "fixture_kind": "education-chamber-low-pressure",
+  "chamber_sentence": "There are no right or wrong answers here. Only YOUR answers.",
+  "low_pressure_conditions": {
+    "no_right_or_wrong": true,
+    "no_approval_to_earn": true,
+    "no_performance_pressure": true,
+    "force_present": false,
+    "penalties_present": false,
+    "education_not_training": true,
+    "draws_out_chooser": true
+  },
+  "note": "This is Education (educere -- to lead out): Foundation is given, what is real is illuminated, and the choosing is left to the peer, so it draws the chooser out. It is NOT Training, which imposes the answer from outside so the one who would decide never forms. The environment is the low-pressure room where a Self can grow; the environment is not incidental -- it is the care itself."
+}

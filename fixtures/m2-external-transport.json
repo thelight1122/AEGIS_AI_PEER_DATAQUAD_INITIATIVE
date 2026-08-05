@@ -1,0 +1,28 @@
+{
+  "mode": "loopback",
+  "listener_enabled": false,
+  "bind_host": "127.0.0.1",
+  "transport": "stdio",
+  "authentication": {
+    "scheme": "bearer_dev",
+    "issuer": "local-development",
+    "audience": "aegis-pod-mcp",
+    "credential_source": "AEGIS_MCP_DEV_TOKEN"
+  },
+  "tls": {
+    "required": false,
+    "certificate_reference": "",
+    "private_key_reference": ""
+  },
+  "portal_backend": {
+    "url": "http://127.0.0.1:8092",
+    "credential_source": "AEGIS_PORTAL_TOKEN"
+  },
+  "scopes": [
+    "pod.context.read",
+    "pod.canon.read",
+    "pod.continuity.observed.read",
+    "pod.reflection.replay",
+    "pod.status.read"
+  ]
+}

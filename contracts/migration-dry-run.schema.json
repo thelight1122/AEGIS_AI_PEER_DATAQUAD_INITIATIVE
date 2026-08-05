@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aegis.local/schemas/migration-dry-run.schema.json",
+  "title": "AEGIS DataQuadPod Migration Dry-Run Contract",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "dry_run_id",
+    "pod_id",
+    "tensor_spec_id",
+    "source",
+    "targets",
+    "working_parameters"
+  ],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "dry_run_id": { "type": "string", "minLength": 1 },
+    "pod_id": { "type": "string", "minLength": 1 },
+    "tensor_spec_id": { "type": "string", "minLength": 1 },
+    "source": {
+      "type": "object",
+      "required": ["kind", "root", "copy_batch_id"],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": ["local_fixture_copy", "copied_dataquad_records"]
+        },
+        "root": { "type": "string" },
+        "copy_batch_id": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "targets": {
+      "type": "object",
+      "required": ["PEER", "PCT", "NCT", "SPINE"],
+      "properties": {
+        "PEER": { "$ref": "#/$defs/tensorTarget" },
+        "PCT": { "$ref": "#/$defs/tensorTarget" },
+        "NCT": { "$ref": "#/$defs/tensorTarget" },
+        "SPINE": { "$ref": "#/$defs/tensorTarget" }
+      },
+      "additionalProperties": false
+    },
+    "working_parameters": {
+      "type": "object",
+      "required": ["live_reach", "source_effect", "output_effect", "outside_parameters_behavior"],
+      "properties": {
+        "live_reach": { "type": "boolean" },
+        "source_effect": { "type": "string" },
+        "output_effect": { "type": "string" },
+        "outside_parameters_behavior": { "type": "string" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "tensorTarget": {
+      "type": "object",
+      "required": ["source_records", "planned_output", "shape", "dtype", "axis_order"],
+      "properties": {
+        "source_records": { "type": "string" },
+        "planned_output": { "type": "string" },
+        "shape": {
+          "type": "array",
+          "prefixItems": [
+            { "type": "string", "const": "record_count" },
+            { "type": "integer", "minimum": 1 },
+            { "type": "integer", "minimum": 1 }
+          ],
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "dtype": { "type": "string" },
+        "axis_order": {
+          "type": "array",
+          "prefixItems": [
+            { "type": "string", "const": "record" },
+            { "type": "string", "const": "embedding" },
+            { "type": "string", "const": "metadata" }
+          ],
+          "minItems": 3,
+          "maxItems": 3
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

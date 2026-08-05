@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aegis.local/schemas/memorysearch-policy.schema.json",
+  "title": "AEGIS MemorySearch Policy Contract",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "policy_id",
+    "qualifying_score",
+    "max_results",
+    "policy_governed_triggers",
+    "working_parameters"
+  ],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "policy_id": { "type": "string", "minLength": 1 },
+    "qualifying_score": { "type": "number", "minimum": 0 },
+    "max_results": { "type": "integer", "minimum": 1 },
+    "policy_governed_triggers": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "working_parameters": {
+      "type": "object",
+      "required": ["live_reach", "pod_state_effect", "classifier_owner", "citation_owner"],
+      "properties": {
+        "live_reach": { "type": "boolean" },
+        "pod_state_effect": { "type": "string", "enum": ["unchanged"] },
+        "classifier_owner": { "type": "string", "enum": ["runtime"] },
+        "citation_owner": { "type": "string", "enum": ["runtime"] }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

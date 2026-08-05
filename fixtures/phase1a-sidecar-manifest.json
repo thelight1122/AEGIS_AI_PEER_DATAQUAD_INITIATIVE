@@ -1,0 +1,30 @@
+{
+  "schema_version": "0.1.0",
+  "pod": {
+    "name": "cyberpeer-sidecar",
+    "mode": "staged"
+  },
+  "dataquad": {
+    "access": "none",
+    "source_path": null
+  },
+  "portal": {
+    "enabled": false,
+    "listener": null
+  },
+  "write_policy": {
+    "allow": []
+  },
+  "validation": {
+    "required_contracts": [
+      "contracts/pod.schema.json",
+      "contracts/orb.schema.json",
+      "contracts/umbilical.schema.json"
+    ],
+    "fixture_documents": [
+      "fixtures/local-cyberpeer-pod.json",
+      "fixtures/rls-orb.json",
+      "fixtures/rls-orb-umbilical.json"
+    ]
+  }
+}

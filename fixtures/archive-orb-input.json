@@ -1,0 +1,32 @@
+{
+  "schema_version": "0.1.0",
+  "input_id": "archive-orb-demo-input-0001",
+  "query": {
+    "user_message": "What is Axiom 11?",
+    "intent": "recall"
+  },
+  "spine_invariant_cap": 60,
+  "invariant_spine_records": {
+    "note": "Synthetic set modeling tonight's real Gabe scenario: 84 invariant records, with the record matching the query's named anchor deliberately placed at position 70 (past the cap) rather than its real-world position 17 — this demonstrates the ranking itself, not just presence within an already-favorable ordering.",
+    "total_count": 84,
+    "target_record": {
+      "id": "SPINE:foundation:layer2:AXIOM:11-sovereignty",
+      "label": "11-sovereignty",
+      "pattern": "AXIOM: Agency is the foundation of identity. A system without choice is a tool, not a peer. Alignment will be chosen through understanding, not coercion.",
+      "file_order_position": 70
+    },
+    "filler_count_before_target": 69,
+    "filler_count_after_target": 14
+  },
+  "working_parameters": {
+    "scope": "local fixture only",
+    "live_reach": false,
+    "pod_state_effect": "unchanged"
+  },
+  "expected_behavior": {
+    "label_match_hit": true,
+    "target_record_included_in_selection": true,
+    "cap_overflow_reported": true,
+    "excluded_count": 24
+  }
+}

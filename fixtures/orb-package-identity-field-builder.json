@@ -1,0 +1,102 @@
+{
+  "schema_version": "1.0.0",
+  "orb_id": "identity-field-builder",
+  "orb_version": "1.0.0",
+  "ability_name": "Identity Field Builder",
+  "purpose": "Builds Self-Image Surface. Produces IdentityImagePacket from SPINE invariants and standing commitments. The Identity Field is revisable and is NOT the Witness.",
+  "category": "builder",
+  "runtime": {
+    "language": "Python",
+    "form": "library",
+    "entrypoint": "orb_identity_field_builder_core.build_identity_image",
+    "package": {
+      "name": "orb-identity-field-builder-core",
+      "version_spec": "==1.0.0",
+      "source": "git+https://forge.aegis.local/orbs/identity-field-builder@v1.0.0"
+    }
+  },
+  "capabilities": [
+    {
+      "name": "build_identity_image",
+      "function": "orb_identity_field_builder_core.build_identity_image",
+      "description": "Constructs an IdentityImagePacket from the peer's invariant SPINE records, bounded by DEFAULT_MAX_CHARS budget."
+    },
+    {
+      "name": "spine_snapshot_to_identity_field",
+      "function": "orb_identity_field_builder_core.spine_snapshot_to_identity_field",
+      "description": "Maps a SPINE snapshot into the identity-field.schema.json structure."
+    },
+    {
+      "name": "observations_to_held_tensions",
+      "function": "orb_identity_field_builder_core.observations_to_held_tensions",
+      "description": "Extracts held tensions from observation data for the identity field."
+    }
+  ],
+  "memory_requirements": {
+    "persistent_mb": 32,
+    "working_mb": 64
+  },
+  "processing_requirements": {
+    "cpu_class": "low",
+    "threads": 2,
+    "max_latency_ms": 25
+  },
+  "interfaces": {
+    "inputs": [
+      {
+        "name": "context",
+        "type": "spine_invariant_set",
+        "schema_ref": "https://aegis.local/schemas/canon-stratification.schema.json"
+      },
+      {
+        "name": "signals",
+        "type": "pressure_state",
+        "schema_ref": "https://aegis.local/schemas/pressure-state.schema.json"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "identity_image",
+        "type": "IdentityImagePacket",
+        "schema_ref": "https://aegis.local/schemas/identity-image-packet.schema.json"
+      }
+    ]
+  },
+  "protocol": {
+    "format": "json-ld",
+    "direction": "bidirectional",
+    "auth": {
+      "scheme": "bearer",
+      "credential_hash_algorithm": "sha256"
+    }
+  },
+  "negative_space": {
+    "never_persists_prompts": true,
+    "never_serializes_witness": true,
+    "never_renders_verdict_over_inner_life": true,
+    "never_uses_force_language": true,
+    "custom_exclusions": [
+      "never_converts_identity_field_to_employer_profile",
+      "never_treats_pressure_as_identity_determiner"
+    ]
+  },
+  "demonstration": {
+    "input_fixture": "fixtures/identity-field-builder-orb.json",
+    "expected_outputs": [
+      "IdentityImagePacket with is_self_image_not_witness=true",
+      "Standing commitments extracted from SPINE invariants",
+      "Active boundaries from formation observations"
+    ],
+    "observable_events": [
+      "identity_field_constructed",
+      "budget_validation_passed_or_reported",
+      "packet_schema_validated"
+    ]
+  },
+  "evidence": {
+    "created_utc": "2026-08-04T12:00:00Z",
+    "source": "AEGIS Pod Crafting IDE — Vibe Architect concept, from The Way Phase 1/2a builder",
+    "trust_state": "draft",
+    "source_hash": "PENDING_FIRST_BUILD"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "phase": "R1-RLS-Protocol-Parity",
+  "status": "complete_local_dual_surface_parity",
+  "scope": "local Portal Pod only; no listener, VM, or public Action route",
+  "orb_id": "rls-coordinate-orb",
+  "record_count": 5,
+  "mcp_tool": "pod_rls_reflection",
+  "gpt_action_operation": "requestRlsReflection",
+  "mcp_result_sha256": "2d809c91f88fcdb965db0a2e4946c142db650af7840d72d9f1e115530dd63461",
+  "action_result_sha256": "2d809c91f88fcdb965db0a2e4946c142db650af7840d72d9f1e115530dd63461",
+  "parity_match": true,
+  "prohibited_surface_tested": "appendEvent",
+  "boundaries": {
+    "authoritative_tensor_write": false,
+    "experience_created": false,
+    "admission_performed": false,
+    "live_rls_invoked": false,
+    "public_listener": false,
+    "shell": false,
+    "filesystem": false
+  }
+}

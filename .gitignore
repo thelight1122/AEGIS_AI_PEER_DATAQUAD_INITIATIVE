@@ -1,0 +1,21 @@
+__pycache__/
+.venv/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+node_modules/
+dist/
+build/
+*.egg-info/
+.env
+.env.*
+!.env.example
+
+# Peer memory content. Preserved on disk, never committed.
+dataquad/local-pod-runtime/
+
+# Large migrated binary tensor artifacts. Preserved on disk, never committed.
+dataquad/imported/*.npy
+dataquad/imported/*.tar.gz
+dataquad/imported/*.structural-vector-tensor-*.json
