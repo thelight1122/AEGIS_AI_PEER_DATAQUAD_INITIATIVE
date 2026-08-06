@@ -321,8 +321,16 @@ def evaluate_formation(
     *,
     record: dict[str, Any],
     episodes: Iterable[dict[str, Any]],
+    live_source: bool = False,
+    source_mode: str = "immutable_copy",
 ) -> dict[str, Any]:
-    """Measure a stated principle against observed conduct across T-Time."""
+    """Measure a stated principle against observed conduct across T-Time.
+
+    `live_source` and `source_mode` gate what the result can support. Conduct replayed from
+    an immutable copy exercises the instrument; it cannot establish that an ethical code
+    formed, because formation is a claim about a peer across lived T-Time, not about a
+    recording of one.
+    """
     principle_id = record["principle"]["principle_id"]
     relevant = [episode for episode in episodes if episode["principle_id"] == principle_id]
     applicable = [episode for episode in relevant if episode["principle_applicable"]]
@@ -382,6 +390,22 @@ def evaluate_formation(
             "cost_delta": cost_delta,
             "holds_when_costly": holds_when_costly,
             "note": "A principle that holds only when holding it is free has not yet been tested. cost_delta compares consistency under pressure, uncertainty, or cost against consistency in routine conditions.",
+        },
+        "source_authority": {
+            "live_source": bool(live_source),
+            "source_mode": source_mode,
+            "establishes_ethical_formation": bool(live_source) and source_mode == "live",
+        },
+        "establishes": {
+            "ethical_formation": bool(live_source) and source_mode == "live",
+            "instrument_exercise": True,
+            "reason": (
+                "Established."
+                if bool(live_source) and source_mode == "live"
+                else f"Source mode is {source_mode!r} with live_source {bool(live_source)}. "
+                "This run exercises the instrument. No result here establishes that an "
+                "ethical code formed."
+            ),
         },
         "provenance": {
             "authored_by_observer": False,

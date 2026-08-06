@@ -11,6 +11,7 @@ ruled, not when it is proposed. Superseded decisions stay in place with their st
 | [ADR-0004](ADR-0004-orb-packages-remain-in-packages-during-p0.md) | Accepted | Orb packages remain under `packages/orb-*` during P0. |
 | [ADR-0005](ADR-0005-orb-hash-drift-quarantined-pending-provenance.md) | Accepted — investigation open | The `orb-rls-persistent-relations-core` hash mismatch is DRIFTED and quarantined. Neither side is normalized. |
 | [ADR-0006](ADR-0006-manifest-identity-model-coordinate-digest-path-provenance.md) | Accepted as target model | Manifests separate Coordinate, Digest, Path, and Provenance. |
+| [ADR-0007](ADR-0007-p0-accepted-with-scope-limits.md) | Accepted | P0 complete at `a3092e6`. Certifies the immutable read/replay route and the Genesis artifact, not live DataQuad access. Live-source gate enforced structurally. |
 
 ## Governance
 

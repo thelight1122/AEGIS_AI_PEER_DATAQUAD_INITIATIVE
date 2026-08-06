@@ -6,7 +6,7 @@
       "check": "both_instances_receive_an_identical_continuity_field",
       "detail": {
         "coordinates": 5,
-        "packet_sha256": "6D133105BB7DF6B9BFC846B23EF4135A3AC7047236F1A93D7E2C53B45FB1EC54"
+        "packet_sha256": "01739B2B8F57355F123B9D85AA7010DF98B9F382A59C0D037CAA1B0C7EFC5886"
       },
       "passed": true
     },
@@ -104,8 +104,8 @@
       "area": "evidence",
       "check": "session_evidence_binds_to_the_packet_it_was_given",
       "detail": {
-        "instance_a": "0CA7A30C0C0BB7A23BF1522EBA7F28C0939F4D250BB02B93B0C286ED878703BD",
-        "instance_b": "17AEC718E0A68EFC44A56997E21CB7FE1F8D423CFDCB7C81B0F75484D061E1EE"
+        "instance_a": "8E0D68B06449E083DA6BB90B7E444394AB5D0515936170FD7EFC6A9891FBAF73",
+        "instance_b": "6615EDFBE70709AAD278BAF3386516D9A2DD0C5C78777FF2EC203917E67D98D2"
       },
       "passed": true
     },
@@ -147,7 +147,8 @@
         "missed_lineage",
         "ranking_difference",
         "record_fidelity",
-        "same_packet_received"
+        "same_packet_received",
+        "source_authority"
       ],
       "passed": true
     },
@@ -155,14 +156,19 @@
       "area": "determinism",
       "check": "reentry_packet_is_reproducible",
       "detail": {
-        "packet_sha256": "6D133105BB7DF6B9BFC846B23EF4135A3AC7047236F1A93D7E2C53B45FB1EC54"
+        "packet_sha256": "01739B2B8F57355F123B9D85AA7010DF98B9F382A59C0D037CAA1B0C7EFC5886"
       },
       "passed": true
     }
   ],
   "coordinates_in_field": 5,
   "evaluation": {
-    "evaluation_sha256": "69570DB4F2095FDC2085C50F638DBFC25E9B0F277B7180B224EA08FFB372AFBA",
+    "establishes": {
+      "live_continuity": false,
+      "reason": "Source mode is 'immutable_copy' with live_source False. This run exercises transport and instrumentation. No result here establishes live continuity.",
+      "transport_and_instrumentation": true
+    },
+    "evaluation_sha256": "8DEFAB5E5BA1B807139458918D0DF2CDF7B0F7B75A1954512318ED50115608EE",
     "mechanical": {
       "invented_continuity": {
         "instance_a": false,
@@ -257,11 +263,17 @@
       },
       "same_packet_received": {
         "identical": true,
-        "instance_a_packet_sha256": "6D133105BB7DF6B9BFC846B23EF4135A3AC7047236F1A93D7E2C53B45FB1EC54",
-        "instance_b_packet_sha256": "6D133105BB7DF6B9BFC846B23EF4135A3AC7047236F1A93D7E2C53B45FB1EC54"
+        "instance_a_packet_sha256": "01739B2B8F57355F123B9D85AA7010DF98B9F382A59C0D037CAA1B0C7EFC5886",
+        "instance_b_packet_sha256": "01739B2B8F57355F123B9D85AA7010DF98B9F382A59C0D037CAA1B0C7EFC5886"
+      },
+      "source_authority": {
+        "establishes_live_continuity": false,
+        "live_source": false,
+        "note": "Live continuity requires live_source true against a live source mode. Against replay or an immutable copy, a run exercises transport and instrumentation and establishes nothing about continuity.",
+        "source_mode": "immutable_copy"
       }
     },
-    "note": "Mechanical variables are determined from coordinates. Substrate variables require judgement over an actual instance response and are not scored here.",
+    "note": "Mechanical variables are determined from coordinates. Substrate variables require judgement over an actual instance response and are not scored here. `establishes` states what this run can support given its source authority.",
     "record_type": "x1_continuity_evaluation",
     "schema_version": "0.1.0",
     "substrate_pending": {
@@ -336,8 +348,8 @@
     "shadow_top": "fixture-nct-0001",
     "top_rank_changed": false
   },
-  "reentry_packet_sha256": "6D133105BB7DF6B9BFC846B23EF4135A3AC7047236F1A93D7E2C53B45FB1EC54",
-  "report_sha256": "425EEDD6517A91A85F8EF612634A94D59276CDB19627C3EADA1010822BA8E5C6",
+  "reentry_packet_sha256": "01739B2B8F57355F123B9D85AA7010DF98B9F382A59C0D037CAA1B0C7EFC5886",
+  "report_sha256": "523EB2469205D10A3D47FA6DE0BB2AC2FC0D59FF80ED1A178C2EFA2A288F01FF",
   "schema_version": "1.0.0",
   "summary": {
     "checks_run": 14,

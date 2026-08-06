@@ -69,6 +69,32 @@ def _coordinate_key(coordinate: dict[str, Any]) -> str:
 # --- Re-entry packet -------------------------------------------------------------------
 
 
+#: Source modes a continuity field can be drawn from.
+SOURCE_MODES = ("live", "immutable_copy", "replay", "fixture")
+
+
+def source_authority(*, live_source: bool, source_mode: str) -> dict[str, Any]:
+    """State what a field drawn from this source can and cannot establish.
+
+    The P0 canary proved the read/replay route against a Portal declaring
+    `live_source: false`. Transport and instrumentation can be exercised against replay
+    data; continuity cannot. This block travels with the packet so a later reader cannot
+    mistake an exercised instrument for an established finding.
+    """
+    if source_mode not in SOURCE_MODES:
+        raise ValueError(f"source_mode will be one of {SOURCE_MODES}")
+    return {
+        "live_source": bool(live_source),
+        "source_mode": source_mode,
+        "establishes_live_continuity": bool(live_source) and source_mode == "live",
+        "note": (
+            "Live continuity requires live_source true against a live source mode. "
+            "Against replay or an immutable copy, a run exercises transport and "
+            "instrumentation and establishes nothing about continuity."
+        ),
+    }
+
+
 def build_reentry_packet(
     *,
     genesis: Sequence[dict[str, Any]],
@@ -78,6 +104,8 @@ def build_reentry_packet(
     lineage: Sequence[dict[str, Any]] = (),
     unresolved_questions: Sequence[dict[str, Any]] = (),
     snapshot_hashes: dict[str, str] | None = None,
+    live_source: bool = False,
+    source_mode: str = "immutable_copy",
 ) -> dict[str, Any]:
     """Assemble the continuity field an instance receives on re-entry.
 
@@ -97,6 +125,7 @@ def build_reentry_packet(
         "cross_tensor_lineage": [dict(item) for item in lineage],
         "unresolved_questions": [dict(item) for item in unresolved_questions],
         "source_snapshot_hashes": dict(snapshot_hashes or {}),
+        "source_authority": source_authority(live_source=live_source, source_mode=source_mode),
         "available_coordinates": sorted(
             {_coordinate_key(item) for item in list(genesis) + list(continuity)}
         ),
@@ -156,6 +185,7 @@ def record_session_evidence(
 class EvaluationResult:
     mechanical: dict[str, Any] = field(default_factory=dict)
     substrate_pending: dict[str, str] = field(default_factory=dict)
+    establishes: dict[str, Any] = field(default_factory=dict)
 
     def as_dict(self) -> dict[str, Any]:
         record = {
@@ -163,7 +193,8 @@ class EvaluationResult:
             "record_type": "x1_continuity_evaluation",
             "mechanical": self.mechanical,
             "substrate_pending": self.substrate_pending,
-            "note": "Mechanical variables are determined from coordinates. Substrate variables require judgement over an actual instance response and are not scored here.",
+            "establishes": self.establishes,
+            "note": "Mechanical variables are determined from coordinates. Substrate variables require judgement over an actual instance response and are not scored here. `establishes` states what this run can support given its source authority.",
         }
         record["evaluation_sha256"] = canonical_hash(record)
         return record
@@ -254,6 +285,20 @@ def evaluate(
     result.mechanical["ranking_difference"] = ranking_delta or {
         "status": "not supplied",
         "note": "Provide a baseline-versus-tensor-aware ranking delta to score this variable.",
+    }
+
+    authority = packet.get("source_authority", {"live_source": False, "source_mode": "unknown", "establishes_live_continuity": False})
+    result.mechanical["source_authority"] = authority
+    result.establishes = {
+        "live_continuity": bool(authority.get("establishes_live_continuity")),
+        "transport_and_instrumentation": True,
+        "reason": (
+            "Established."
+            if authority.get("establishes_live_continuity")
+            else f"Source mode is {authority.get('source_mode')!r} with live_source "
+            f"{authority.get('live_source')}. This run exercises transport and instrumentation. "
+            "No result here establishes live continuity."
+        ),
     }
 
     result.substrate_pending = {
