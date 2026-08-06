@@ -168,11 +168,84 @@ PORTAL STATUS:
   record_experience false | admission false | dataquad_writeback false
 
 ===============================================================
+LAYER 7 - SECOND CANARY RUN, AND A CORRECTION TO LAYER 6
+===============================================================
+observed_utc  2026-08-06T06:24Z
+reason        connectivity was lost and restored between runs; the route was
+              reconfirmed rather than assumed to have survived.
+
+  record_id          PEER:adam-one-session:aegis-canon-genesis:0   (identical)
+  clock              { "tick": 0, "phase": "genesis" }             (identical)
+  tensors_unchanged  True
+  boundaries         all false, as before
+
+  router_sha256      1f45f9e279976f2ffc1b9d953a3e4492c7c13c76fdb2d68ba0b947cdf3feef9a  IDENTICAL
+  adapter_sha256     e1c8a7c36dc0e7e96502fa5a857a31e1b805943a71d89234a15755dbf2b8b29f  IDENTICAL
+  result_sha256      82c44690e6b3c0a76ed073bde7a651a131747f304999878dea96cb306276ddaf  DIFFERENT
+
+CORRECTION. Layer 6 presented result_sha256 as though it were a stable
+acceptance value. It is not. The result payload embeds `created_utc`, so
+result_sha256 necessarily differs on every invocation. Two runs of the same
+code against the same immutable source produced two different result hashes,
+which is correct behaviour and not drift.
+
+The P0 criterion "same result hashes" is therefore satisfied by the values that
+are stable and comparable across runs:
+
+  router_sha256       identical across both runs
+  adapter_sha256      identical across both runs
+  source tensor hashes (PEER/PCT/NCT/SPINE)  identical across both runs,
+                      and identical before and after each observation
+
+result_sha256 is retained as a per-invocation identifier, not as an acceptance
+value. Any future comparison that treats it as stable will produce a false
+drift signal.
+
+===============================================================
+LAYER 8 - WARP PERSISTENCE TEST (Auditor sequence step 2)
+===============================================================
+QUESTION: can the cloudflare-warp table return without blocking inbound SSH,
+once a split-tunnel bypass covering the VM addresses is configured?
+
+ANSWER: NO.
+
+Observed with the bypass configured and warp-svc restarted:
+
+  warp-svc                      active
+  table inet cloudflare-warp    present
+  input chain                   type filter hook input priority filter; policy drop
+  rules matching "dport 22"     0
+
+External reachability during that window, from an egress the NSG permitted:
+
+  20.122.189.26:22    unreachable
+  20.122.189.26:4001  unreachable   (NSG opens 4001 to *, no JIT involved)
+  20.122.189.26:8080  unreachable
+
+The bypass governs OUTBOUND routing. It generates no inbound accept rules, so
+the kill switch blocks every inbound port, not only 22. Ports 4001 and 8080 are
+the clean discriminator: they are open to any source at NSG priorities 1005 and
+1006 and were unreachable regardless.
+
+A workaround in a separate nftables table is not available. At a given hook all
+base chains are traversed and a `drop` verdict in any chain is final, so an
+`accept` in another table cannot override WARP's policy drop. The accept must
+live inside WARP's own table, where the daemon reverts it, or the daemon must
+not be running.
+
+REMAINING RISK: warp-svc is stopped but still ENABLED. The table returns on
+reboot and the host becomes unreachable again. Durable options, none applied:
+  - systemctl disable warp-svc on this host
+  - a WARP client setting that disables the firewall or kill switch, if this
+    version exposes one (unverified; not guessed at)
+
+===============================================================
 LADDER
 ===============================================================
   recovery applied              YES  (WARP table removed, guest evidence recorded)
-  SSH recovery verified         YES  (external handshake 04:52:56Z)
-  P0 external canary verified   YES  (Genesis returned 04:53:56Z, hashes recorded)
+  SSH recovery verified         YES  (external handshake 04:52:56Z, again 06:24Z)
+  P0 external canary verified   YES  (Genesis returned 04:53:56Z and 06:24Z)
+  WARP persistence (step 2)     NO   (bypass does not cover the inbound path)
 
 ===============================================================
 CORRECTIONS TO THE RECORD

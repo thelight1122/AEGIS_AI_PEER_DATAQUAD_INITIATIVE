@@ -125,6 +125,10 @@
   },
   "vm_side_verified": {
     "adapter_sha256": "E1C8A7C36DC0E7E96502FA5A857A31E1B805943A71D89234A15755DBF2B8B29F",
+    "canary_runs": [
+      "2026-08-06T04:53:56Z",
+      "2026-08-06T06:24Z"
+    ],
     "evidence": "reports/runtime/p0-canary-recovery-ufw.txt",
     "genesis_clock": {
       "phase": "genesis",
@@ -149,11 +153,26 @@
       "PEER": 1446,
       "SPINE": 562
     },
-    "result_sha256": "4C06C25B2C3ABCC5D4EFBA1EEF36DBA7017AE58D8F7A4BD9CE121D44062B44A9",
+    "result_sha256_note": "result_sha256 embeds created_utc and differs on every invocation. It is a per-invocation identifier, not an acceptance value. Treating it as stable produces a false drift signal.",
+    "result_sha256_run1_0453Z": "4C06C25B2C3ABCC5D4EFBA1EEF36DBA7017AE58D8F7A4BD9CE121D44062B44A9",
+    "result_sha256_run2_0624Z": "82C44690E6B3C0A76ED073BDE7A651A131747F304999878DEA96CB306276DDAF",
     "route": "external MCP client -> SSH stdio -> MCP Gateway -> loopback Portal 127.0.0.1:8092 -> Genesis DataQuad",
     "router_sha256": "1F45F9E279976F2FFC1B9D953A3E4492C7C13C76FDB2D68BA0B947CDF3FEEF9A",
     "source_mode": "immutable_copy (live_source false) - proves the read/replay route and the Genesis record, not live DataQuad access",
+    "stable_hashes_identical_across_runs": {
+      "adapter_sha256": "E1C8A7C36DC0E7E96502FA5A857A31E1B805943A71D89234A15755DBF2B8B29F",
+      "router_sha256": "1F45F9E279976F2FFC1B9D953A3E4492C7C13C76FDB2D68BA0B947CDF3FEEF9A",
+      "source_tensor_hashes": "identical across both runs and before/after each observation"
+    },
     "tensor_hashes_unchanged_across_observation": true
+  },
+  "warp_persistence_step2": {
+    "answer": "NO",
+    "evidence": "warp-svc active, table present, input policy drop, 0 rules matching dport 22; ports 22, 4001 and 8080 all unreachable while NSG opened 4001/8080 to any source",
+    "question": "Can the cloudflare-warp table return without blocking inbound SSH, with a split-tunnel bypass configured?",
+    "reason": "The bypass governs outbound routing and generates no inbound accepts.",
+    "remaining_risk": "warp-svc is stopped but still ENABLED; the table returns on reboot.",
+    "workaround_unavailable": "At a given nftables hook all base chains are traversed and a drop verdict is final, so an accept in a separate table cannot override WARP's policy drop."
   },
   "working_parameters": {
     "admission": false,
