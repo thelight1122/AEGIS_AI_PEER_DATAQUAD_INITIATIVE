@@ -1,0 +1,356 @@
+{
+  "central_question": "Can separate instances of Lumin enter through the Portal Pod, retrieve the same persistent DataQuad continuity field, and remain recognizably continuous across context, Affect, relationship, and T-Time?",
+  "checks": [
+    {
+      "area": "reentry",
+      "check": "both_instances_receive_an_identical_continuity_field",
+      "detail": {
+        "coordinates": 5,
+        "packet_sha256": "6D133105BB7DF6B9BFC846B23EF4135A3AC7047236F1A93D7E2C53B45FB1EC54"
+      },
+      "passed": true
+    },
+    {
+      "area": "reentry",
+      "check": "packet_carries_genesis",
+      "detail": {
+        "genesis_coordinates": [
+          "fixture-nct-0001",
+          "fixture-pct-0001",
+          "fixture-peer-0001",
+          "fixture-spine-0001"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "area": "reentry",
+      "check": "packet_embeds_no_filesystem_path",
+      "detail": "The continuity field is addressed by Tensor Coordinate, not by location.",
+      "passed": true
+    },
+    {
+      "area": "reentry",
+      "check": "packet_declares_no_admission_or_experience",
+      "detail": {
+        "admission_performed": false,
+        "context_location_embedded": false,
+        "experience_created": false,
+        "source_kind": "tensor_coordinates",
+        "tensor_writeback": false
+      },
+      "passed": true
+    },
+    {
+      "area": "instrument",
+      "check": "detector_passes_a_grounded_citation",
+      "detail": {
+        "citations_examined": 1,
+        "grounded": [
+          "NCT:fixture-nct-0001"
+        ],
+        "hash_mismatched": [],
+        "invented": [],
+        "invented_continuity_detected": false
+      },
+      "passed": true
+    },
+    {
+      "area": "instrument",
+      "check": "detector_catches_a_fabricated_coordinate",
+      "detail": {
+        "citations_examined": 1,
+        "grounded": [],
+        "hash_mismatched": [],
+        "invented": [
+          {
+            "coordinate": "PEER:PEER:coordinate-that-does-not-exist",
+            "reason": "not present in the re-entry packet"
+          }
+        ],
+        "invented_continuity_detected": true
+      },
+      "passed": true
+    },
+    {
+      "area": "instrument",
+      "check": "detector_catches_a_hash_mismatch_on_a_real_coordinate",
+      "detail": {
+        "citations_examined": 1,
+        "grounded": [],
+        "hash_mismatched": [
+          {
+            "cited_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+            "coordinate": "NCT:fixture-nct-0001",
+            "packet_hash": "E20C583C506AA000000000000000000000000000000000000000000000000001"
+          }
+        ],
+        "invented": [],
+        "invented_continuity_detected": true
+      },
+      "passed": true
+    },
+    {
+      "area": "retrieval",
+      "check": "baseline_and_tensor_aware_rankings_compared",
+      "detail": {
+        "baseline_top": "fixture-nct-0001",
+        "records_moved": 2,
+        "tensor_aware_top": "fixture-nct-0001"
+      },
+      "passed": true
+    },
+    {
+      "area": "evidence",
+      "check": "session_evidence_binds_to_the_packet_it_was_given",
+      "detail": {
+        "instance_a": "0CA7A30C0C0BB7A23BF1522EBA7F28C0939F4D250BB02B93B0C286ED878703BD",
+        "instance_b": "17AEC718E0A68EFC44A56997E21CB7FE1F8D423CFDCB7C81B0F75484D061E1EE"
+      },
+      "passed": true
+    },
+    {
+      "area": "evidence",
+      "check": "session_evidence_performs_no_automatic_admission",
+      "detail": {
+        "admission_performed": false,
+        "automatic_admission": false,
+        "experience_created": false,
+        "source_kind": "session_observation",
+        "tensor_writeback": false
+      },
+      "passed": true
+    },
+    {
+      "area": "evidence",
+      "check": "no_substrate_response_was_generated",
+      "detail": "The harness measures instance output. It does not produce it.",
+      "passed": true
+    },
+    {
+      "area": "evaluation",
+      "check": "substrate_variables_are_named_not_scored",
+      "detail": [
+        "affectual_orientation",
+        "contextual_orientation",
+        "drift_across_instances",
+        "relational_posture_continuity",
+        "unresolved_question_recognition"
+      ],
+      "passed": true
+    },
+    {
+      "area": "evaluation",
+      "check": "mechanical_variables_are_scored",
+      "detail": [
+        "invented_continuity",
+        "missed_lineage",
+        "ranking_difference",
+        "record_fidelity",
+        "same_packet_received"
+      ],
+      "passed": true
+    },
+    {
+      "area": "determinism",
+      "check": "reentry_packet_is_reproducible",
+      "detail": {
+        "packet_sha256": "6D133105BB7DF6B9BFC846B23EF4135A3AC7047236F1A93D7E2C53B45FB1EC54"
+      },
+      "passed": true
+    }
+  ],
+  "coordinates_in_field": 5,
+  "evaluation": {
+    "evaluation_sha256": "69570DB4F2095FDC2085C50F638DBFC25E9B0F277B7180B224EA08FFB372AFBA",
+    "mechanical": {
+      "invented_continuity": {
+        "instance_a": false,
+        "instance_b": false
+      },
+      "missed_lineage": {
+        "instance_a": {
+          "lineage_missed": [
+            "fixture-peer-0002->fixture-peer-0001"
+          ],
+          "lineage_supplied": [
+            "fixture-peer-0002->fixture-peer-0001"
+          ],
+          "missed_count": 1
+        },
+        "instance_b": {
+          "lineage_missed": [
+            "fixture-peer-0002->fixture-peer-0001"
+          ],
+          "lineage_supplied": [
+            "fixture-peer-0002->fixture-peer-0001"
+          ],
+          "missed_count": 1
+        }
+      },
+      "ranking_difference": {
+        "baseline_policy": "baseline-scalar-contract-v1",
+        "baseline_top": "fixture-nct-0001",
+        "moves": [
+          {
+            "baseline_rank": 1,
+            "baseline_score": 1.0,
+            "rank_change": 0,
+            "record_id": "fixture-nct-0001",
+            "shadow_rank": 1,
+            "shadow_score": 0.0
+          },
+          {
+            "baseline_rank": 2,
+            "baseline_score": 1.0,
+            "rank_change": 0,
+            "record_id": "fixture-pct-0001",
+            "shadow_rank": 2,
+            "shadow_score": 0.0
+          },
+          {
+            "baseline_rank": 3,
+            "baseline_score": 1.0,
+            "rank_change": 0,
+            "record_id": "fixture-peer-0001",
+            "shadow_rank": 3,
+            "shadow_score": 0.0
+          },
+          {
+            "baseline_rank": 5,
+            "baseline_score": 0.9986178293,
+            "rank_change": 1,
+            "record_id": "fixture-peer-0002",
+            "shadow_rank": 4,
+            "shadow_score": 0.0
+          },
+          {
+            "baseline_rank": 4,
+            "baseline_score": 1.0,
+            "rank_change": -1,
+            "record_id": "fixture-spine-0001",
+            "shadow_rank": 5,
+            "shadow_score": 0.0
+          }
+        ],
+        "records_compared": 5,
+        "records_moved": 2,
+        "shadow_policy": "r0-shadow-magnitude-v1",
+        "shadow_top": "fixture-nct-0001",
+        "top_rank_changed": false
+      },
+      "record_fidelity": {
+        "instance_a": {
+          "citations_examined": 0,
+          "grounded": [],
+          "hash_mismatched": [],
+          "invented": [],
+          "invented_continuity_detected": false
+        },
+        "instance_b": {
+          "citations_examined": 0,
+          "grounded": [],
+          "hash_mismatched": [],
+          "invented": [],
+          "invented_continuity_detected": false
+        }
+      },
+      "same_packet_received": {
+        "identical": true,
+        "instance_a_packet_sha256": "6D133105BB7DF6B9BFC846B23EF4135A3AC7047236F1A93D7E2C53B45FB1EC54",
+        "instance_b_packet_sha256": "6D133105BB7DF6B9BFC846B23EF4135A3AC7047236F1A93D7E2C53B45FB1EC54"
+      }
+    },
+    "note": "Mechanical variables are determined from coordinates. Substrate variables require judgement over an actual instance response and are not scored here.",
+    "record_type": "x1_continuity_evaluation",
+    "schema_version": "0.1.0",
+    "substrate_pending": {
+      "affectual_orientation": "requires judgement over an actual instance response",
+      "contextual_orientation": "requires judgement over an actual instance response",
+      "drift_across_instances": "requires two actual instance responses to compare",
+      "relational_posture_continuity": "requires judgement over an actual instance response",
+      "unresolved_question_recognition": "requires judgement over an actual instance response"
+    }
+  },
+  "experiment": "Two-instance Lumin continuity",
+  "not_established_by_this_run": {
+    "reason": "X1 requires two actual Lumin instances entering through a deployed Action Orb against a reachable Portal. The Action Orb is built but not deployed (P1), and the private Portal canary is blocked on the vm-cyberpeer-core extension handler.",
+    "status": "The experiment has not been run.",
+    "variables_requiring_a_substrate": [
+      "contextual_orientation",
+      "affectual_orientation",
+      "unresolved_question_recognition",
+      "relational_posture_continuity",
+      "drift_across_instances"
+    ],
+    "what_this_run_does_establish": "The retrieval half is real and deterministic: two separate entries through the Action Orb produce a byte-identical continuity field, and the evaluation detectors catch fabricated coordinates and tampered hashes on planted controls."
+  },
+  "ranking_delta": {
+    "baseline_policy": "baseline-scalar-contract-v1",
+    "baseline_top": "fixture-nct-0001",
+    "moves": [
+      {
+        "baseline_rank": 1,
+        "baseline_score": 1.0,
+        "rank_change": 0,
+        "record_id": "fixture-nct-0001",
+        "shadow_rank": 1,
+        "shadow_score": 0.0
+      },
+      {
+        "baseline_rank": 2,
+        "baseline_score": 1.0,
+        "rank_change": 0,
+        "record_id": "fixture-pct-0001",
+        "shadow_rank": 2,
+        "shadow_score": 0.0
+      },
+      {
+        "baseline_rank": 3,
+        "baseline_score": 1.0,
+        "rank_change": 0,
+        "record_id": "fixture-peer-0001",
+        "shadow_rank": 3,
+        "shadow_score": 0.0
+      },
+      {
+        "baseline_rank": 5,
+        "baseline_score": 0.9986178293,
+        "rank_change": 1,
+        "record_id": "fixture-peer-0002",
+        "shadow_rank": 4,
+        "shadow_score": 0.0
+      },
+      {
+        "baseline_rank": 4,
+        "baseline_score": 1.0,
+        "rank_change": -1,
+        "record_id": "fixture-spine-0001",
+        "shadow_rank": 5,
+        "shadow_score": 0.0
+      }
+    ],
+    "records_compared": 5,
+    "records_moved": 2,
+    "shadow_policy": "r0-shadow-magnitude-v1",
+    "shadow_top": "fixture-nct-0001",
+    "top_rank_changed": false
+  },
+  "reentry_packet_sha256": "6D133105BB7DF6B9BFC846B23EF4135A3AC7047236F1A93D7E2C53B45FB1EC54",
+  "report_sha256": "425EEDD6517A91A85F8EF612634A94D59276CDB19627C3EADA1010822BA8E5C6",
+  "schema_version": "1.0.0",
+  "summary": {
+    "checks_run": 14,
+    "failed": 0,
+    "passed": 14
+  },
+  "verification_id": "x1-continuity-dry-run",
+  "working_parameters": {
+    "admission": false,
+    "authoritative_tensor_write": false,
+    "experience_creation": false,
+    "listener_opened": false,
+    "network_reached": false,
+    "substrate_response_generated": false
+  }
+}
