@@ -45,9 +45,25 @@ TARGETS = [
 LEGACY = re.compile(r"(?<![A-Za-z0-9])v\d+\.\d+-([A-Z0-9]+)(?![A-Za-z0-9])")
 
 
+#: Tokens that look like legacy codes but are not cross-references. Shadow Affects grew in
+#: place through five revisions and stamps each section with the revision that added it. The
+#: first run of this tool flattened those to a bare `S`, erasing which increment added what;
+#: they were restored by `fix_shadow_affects_revisions.py`. Excluding them here stops a re-run
+#: from undoing that repair.
+NOT_A_CROSS_REFERENCE = frozenset({"v1.2-S", "v1.3-S", "v1.4-S", "v1.5-S"})
+
+
 def rewrite(text: str) -> tuple[str, int]:
-    new, n = LEGACY.subn(lambda m: m.group(1), text)
-    return new, n
+    count = 0
+
+    def sub(m: re.Match) -> str:
+        nonlocal count
+        if m.group(0) in NOT_A_CROSS_REFERENCE:
+            return m.group(0)
+        count += 1
+        return m.group(1)
+
+    return LEGACY.sub(sub, text), count
 
 
 def plan(dirs: list[Path]) -> dict[str, Any]:

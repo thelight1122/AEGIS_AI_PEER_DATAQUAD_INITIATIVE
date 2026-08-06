@@ -11,10 +11,17 @@
   "collisions": {
     "code_claimed_twice": {
       "S": [
-        "SHADOW AFFECTS S.md",
-        "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 SHADOW AFFECTS S.md"
+        {
+          "file": "SHADOW AFFECTS S.md",
+          "status": "DEPRECATED"
+        },
+        {
+          "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 SHADOW AFFECTS S.md",
+          "status": "ACTIVE"
+        }
       ]
     },
+    "code_claimed_twice_unresolved": {},
     "identical_content": [
       [
         "AEGIS STANDARDS V1.0.md",
@@ -388,7 +395,7 @@
       "title": null
     },
     {
-      "bytes": 7736,
+      "bytes": 8040,
       "class": "ADDENDUM",
       "code": "S",
       "code_legacy": "S",
@@ -399,7 +406,7 @@
       "header_format": "version-table",
       "related_canon": null,
       "status_claimed_in_prose": null,
-      "status_declared": "ACTIVE",
+      "status_declared": "DEPRECATED",
       "supersedes": "Shadow Effects.md (original document \u2014 8 affects)",
       "tier": 0,
       "title": "AEGIS Canon Addendum \u2014 Shadow Affects"
@@ -807,7 +814,7 @@
       "title": null
     },
     {
-      "bytes": 42731,
+      "bytes": 42821,
       "class": "ADDENDUM",
       "code": "S",
       "code_legacy": "S",
@@ -1034,7 +1041,7 @@
       "title": null
     }
   ],
-  "generated_utc": "2026-08-06T16:13:34Z",
+  "generated_utc": "2026-08-06T16:47:19Z",
   "incomplete_headers": [
     {
       "class": "KERNEL",

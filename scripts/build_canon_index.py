@@ -218,14 +218,22 @@ def collisions(canon_dir: Path, entries: list[dict]) -> dict[str, list]:
     for path in canon_dir.glob("*.md"):
         by_hash[hashlib.sha256(path.read_bytes()).hexdigest()].append(path.name)
 
-    by_code: dict[str, list[str]] = defaultdict(list)
+    by_code: dict[str, list[dict]] = defaultdict(list)
     for e in entries:
         if e["code"] and e["class"] in ("ADDENDUM", "APPENDIX"):
-            by_code[e["code"]].append(e["file"])
+            by_code[e["code"]].append({"file": e["file"], "status": e["status_declared"]})
 
+    shared = {k: sorted(v, key=lambda d: d["file"]) for k, v in by_code.items() if len(v) > 1}
+    # A code shared between one ACTIVE and one DEPRECATED document is not ambiguous — the
+    # deprecation resolves it. Only a code shared by two live documents is an open problem.
+    unresolved = {
+        k: v for k, v in shared.items()
+        if sum(1 for d in v if (d["status"] or "").upper() != "DEPRECATED") > 1
+    }
     return {
         "identical_content": [sorted(v) for v in by_hash.values() if len(v) > 1],
-        "code_claimed_twice": {k: sorted(v) for k, v in by_code.items() if len(v) > 1},
+        "code_claimed_twice": shared,
+        "code_claimed_twice_unresolved": unresolved,
     }
 
 
@@ -544,13 +552,17 @@ def render_open_items(entries: list[dict], missing: list[dict], coll: dict) -> s
                 add(f"- {' · '.join('`' + g + '`' for g in group)}")
             add("")
         if coll["code_claimed_twice"]:
-            add("**One version code claimed by more than one file.** A citation by code is")
-            add("ambiguous until this is resolved.")
+            unresolved = coll.get("code_claimed_twice_unresolved", {})
+            add("**One code claimed by more than one file.** A code shared between a live")
+            add("document and a DEPRECATED one is *resolved* — the deprecation says which is")
+            add("current. Only a code shared by two live documents is still ambiguous.")
             add("")
-            add("| Code | Files |")
-            add("|---|---|")
-            for code, files in sorted(coll["code_claimed_twice"].items()):
-                add(f"| `{code}` | {' · '.join('`' + f + '`' for f in files)} |")
+            add("| Code | Files (status) | State |")
+            add("|---|---|---|")
+            for code, rows in sorted(coll["code_claimed_twice"].items()):
+                listing = " · ".join(f"`{r['file'][:44]}` ({r['status'] or 'UNDECLARED'})" for r in rows)
+                state = "**UNRESOLVED**" if code in unresolved else "resolved by deprecation"
+                add(f"| `{code}` | {listing} | {state} |")
             add("")
 
     add("### Documents that declare no status")
@@ -618,8 +630,9 @@ def main() -> int:
     print(f"  documents declaring a status in a VERSION table: {declared}/{len(entries)}")
     for group in coll["identical_content"]:
         print(f"  IDENTICAL CONTENT: {' | '.join(g[:44] for g in group)}")
-    for code, files in sorted(coll["code_claimed_twice"].items()):
-        print(f"  CODE CLAIMED TWICE: {code} -> {len(files)} files")
+    for code, rows in sorted(coll["code_claimed_twice"].items()):
+        state = "UNRESOLVED" if code in coll.get("code_claimed_twice_unresolved", {}) else "resolved by deprecation"
+        print(f"  CODE SHARED: {code} -> {len(rows)} files ({state})")
 
     if args.emit_only:
         print("\n--emit-only: nothing written")

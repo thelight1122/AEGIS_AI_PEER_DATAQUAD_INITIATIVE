@@ -11,7 +11,7 @@ ruling S-11.
 python scripts/build_canon_index.py
 ```
 
-Generated `2026-08-06T16:13:34Z` from `I:\AEGIS-CENTRAL-CODEX\TIER-1-CANON\CANON_FOUNDATIONAL_DOCS`.
+Generated `2026-08-06T16:47:19Z` from `I:\AEGIS-CENTRAL-CODEX\TIER-1-CANON\CANON_FOUNDATIONAL_DOCS`.
 
 Every field below is transcribed from the source document's own VERSION table or
 carried forward from the prior index. Fields a document does not declare read
@@ -73,7 +73,7 @@ those last.
 | **`B`** | `B` | AEGIS Canon Addendum — IBL | ACTIVE | 2026-04-07 | — |
 | **`C`** | `C` | AEGIS Canon Addendum — Centrifuge | ACTIVE | 2026-04-07 | — |
 | **`I`** | `I` | AEGIS Canon Addendum — IEV | ACTIVE | 2026-04-07 | — |
-| **`S`** | `S` | AEGIS Canon Addendum — Shadow Affects | ACTIVE | 2026-04-07 | — |
+| **`S`** | `S` | AEGIS Canon Addendum — Shadow Affects | DEPRECATED | 2026-04-07 | — |
 | **`S`** | `S` | AEGIS Canon Addendum — Shadow Affects | ACTIVE | 2026-04-07 | — |
 | **`T`** | `T` | AEGIS Canon Addendum — ATE | ACTIVE | 2026-04-07 | — |
 | **`V`** | `V` | AEGIS Canon Addendum — Virtual Ego | ACTIVE | 2026-04-07 | — |
@@ -225,12 +225,13 @@ to content — directly relevant to the version-numbering question (S-11).
 
 - `AEGIS STANDARDS V1.0.md` · `AEGIS STANDARDS v0.1.md`
 
-**One version code claimed by more than one file.** A citation by code is
-ambiguous until this is resolved.
+**One code claimed by more than one file.** A code shared between a live
+document and a DEPRECATED one is *resolved* — the deprecation says which is
+current. Only a code shared by two live documents is still ambiguous.
 
-| Code | Files |
-|---|---|
-| `S` | `SHADOW AFFECTS S.md` · `📘 AEGIS CANON ADDENDUM — SHADOW AFFECTS S.md` |
+| Code | Files (status) | State |
+|---|---|---|
+| `S` | `SHADOW AFFECTS S.md` (DEPRECATED) · `📘 AEGIS CANON ADDENDUM — SHADOW AFFECTS S.md` (ACTIVE) | resolved by deprecation |
 
 ### Documents that declare no status
 

@@ -162,11 +162,15 @@ def test_every_addendum_resolves_a_status():
 
 @canon_available
 def test_no_addendum_is_locked():
-    """The prior index's preamble claims every addendum is locked. None is."""
+    """The prior index's preamble claims every addendum is locked. None is.
+
+    DEPRECATED joined the set on 2026-08-06 with ruling S-9; the Canon being pre-release,
+    LOCKED remains the status that must not appear.
+    """
     entries = idx.scan(idx.DEFAULT_CANON_DIR)
     statuses = {e["status_declared"] for e in entries if e["class"] == "ADDENDUM"}
     assert "LOCKED" not in statuses
-    assert statuses <= {"ACTIVE", "PROPOSED"}
+    assert statuses <= {"ACTIVE", "PROPOSED", "DEPRECATED"}, f"unexpected status: {statuses}"
 
 
 @canon_available
@@ -188,6 +192,15 @@ def test_known_collisions_are_still_detected():
 
 
 @canon_available
+def test_shared_S_code_is_reported_as_resolved_not_open():
+    """Ruling S-9 deprecated one of the two; a shared code with one live doc is unambiguous."""
+    entries = idx.scan(idx.DEFAULT_CANON_DIR)
+    coll = idx.collisions(idx.DEFAULT_CANON_DIR, entries)
+    assert "S" not in coll["code_claimed_twice_unresolved"]
+    assert not coll["code_claimed_twice_unresolved"], "an unresolved code collision remains"
+
+
+@canon_available
 def test_every_addendum_carries_both_code_forms():
     """The index is only usable during migration if it maps old citations to new codes."""
     entries = idx.scan(idx.DEFAULT_CANON_DIR)
@@ -197,17 +210,51 @@ def test_every_addendum_carries_both_code_forms():
         assert not e["code"].startswith("v1."), f"prefix not dropped: {e['code']}"
 
 
+#: Shadow Affects stamps its own sections with the revision that added them (`v1.2-S` ..
+#: `v1.5-S`). Those are revision history, not cross-references to another addendum, and the
+#: S-11 migration wrongly flattened them before they were restored. They are expected to
+#: remain in `vN.N-S` form and must not be "migrated" again.
+SHADOW_AFFECTS_REVISION_STAMPS = {"v1.2-S", "v1.3-S", "v1.4-S", "v1.5-S"}
+
+
 @canon_available
-def test_migration_is_complete_no_legacy_citations_remain():
+def test_migration_is_complete_apart_from_revision_stamps():
     """S-11 was applied to disk on 2026-08-06: 53 files renamed, 784 citations rewritten.
 
     This asserted `> 0` before the migration, which was the right gate then. Now the
-    invariant is the opposite — a legacy `vN.N-XX` code reappearing anywhere in the Canon
-    means something was restored from a pre-migration copy or authored against the old scheme.
+    invariant is the opposite — a legacy `vN.N-XX` code reappearing means something was
+    restored from a pre-migration copy or authored against the old scheme. The one sanctioned
+    exception is Shadow Affects' own revision history.
     """
     entries = idx.scan(idx.DEFAULT_CANON_DIR)
     impact = idx.citation_impact(idx.DEFAULT_CANON_DIR, entries)
-    assert impact["total_citations"] == 0, f"legacy codes reappeared: {impact['codes']}"
+    unexpected = {c: d for c, d in impact["codes"].items()
+                  if c not in SHADOW_AFFECTS_REVISION_STAMPS}
+    assert not unexpected, f"legacy codes reappeared: {unexpected}"
+
+
+@canon_available
+def test_shadow_affects_revision_history_survived_the_migration():
+    """The migration erased which increment added which section; the repair restored it.
+
+    Without this gate, a re-run of migrate_canon_codes.py would silently flatten them again.
+    """
+    big = [p for p in idx.DEFAULT_CANON_DIR.glob("*.md")
+           if "ADDENDUM" in p.name.upper() and "SHADOW" in p.name.upper()]
+    assert len(big) == 1, f"expected one current Shadow Affects document, found {len(big)}"
+    text = big[0].read_text(encoding="utf-8")
+    for stamp in sorted(SHADOW_AFFECTS_REVISION_STAMPS):
+        assert stamp in text, f"revision stamp lost: {stamp}"
+
+
+@canon_available
+def test_superseded_shadow_affects_copy_is_deprecated_not_deleted():
+    """Steward ruling S-9. Deprecated in this Canon means outranked, not removed."""
+    small = idx.DEFAULT_CANON_DIR / "SHADOW AFFECTS S.md"
+    assert small.exists(), "the superseded copy must be preserved, not deleted"
+    text = small.read_text(encoding="utf-8")
+    assert "| Status | DEPRECATED |" in text
+    assert "Superseded by" in text
 
 
 @canon_available
