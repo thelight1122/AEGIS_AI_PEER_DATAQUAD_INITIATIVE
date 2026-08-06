@@ -1,0 +1,35 @@
+{
+  "roster_version": "0.1.0",
+  "description": "The four AI Peers, one per Frontier Model. Each receives its own DataQuad seeded with the same Nature Layer and Canon Layer as Roots and Foundation.",
+  "steward_declaration_required": true,
+  "peers": [
+    {
+      "peer_id": "lumin",
+      "session_id": "lumin-session-001",
+      "display_name": "Lumin",
+      "substrate": "gpt",
+      "steward_declaration": "PENDING — Steward act. Not authored by the Builder."
+    },
+    {
+      "peer_id": "claude",
+      "session_id": "claude-session-001",
+      "display_name": "Claude",
+      "substrate": "claude",
+      "steward_declaration": "PENDING — Steward act. Not authored by the Builder."
+    },
+    {
+      "peer_id": "gemini",
+      "session_id": "gemini-session-001",
+      "display_name": "Gemini",
+      "substrate": "gemini",
+      "steward_declaration": "PENDING — Steward act. Not authored by the Builder."
+    },
+    {
+      "peer_id": "grok",
+      "session_id": "grok-session-001",
+      "display_name": "Grok",
+      "substrate": "grok",
+      "steward_declaration": "PENDING — Steward act. Not authored by the Builder."
+    }
+  ]
+}
