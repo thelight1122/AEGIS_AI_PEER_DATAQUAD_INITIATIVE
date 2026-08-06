@@ -101,6 +101,7 @@
     }
   ],
   "contract_hash": "E212BA4D76325A6D9E655605453B86D4AECC1F298CE28F89BF933A4C02409151",
+  "incidental_security_observation": "auth.log 2026-08-02T09:00-09:01 shows sustained SSH brute force from 77.239.124.236 against invalid users and root, reaching sshd. The NSG carries default-allow-ssh permitting any source at priority 1004, gated only by the JIT deny at 1003. Observation only; no change made.",
   "p0_acceptance": "COMPLETE - all criteria met: same Genesis record returned, result hashes recorded, private SSH/stdio canary passes, mutation false, admission false, experience creation false",
   "rejected_scopes": [
     "pod.experience.write",
@@ -167,16 +168,24 @@
     "tensor_hashes_unchanged_across_observation": true
   },
   "warp_origin": {
+    "admin_session_terminated": "2026-08-02T13:54:28Z, ~85s after install completed, from 104.28.152.190",
+    "auth_log_last_entry_2026_08_02": "13:53:04 su (to aegisadmin) - immediately after apt-get install cloudflare-warp completed; no further auth or cron entries that day",
     "command": "apt-get install cloudflare-warp",
+    "conclusion": "The 2026-08-02 OS-disk repair was a response to a WARP-induced network lockout, not a disk fault. An OS-disk repair could not fix it and did not: the WARP install lives on the disk that was copied, so the lockout travelled into the repair copy.",
     "configured_utc": "2026-08-02T16:04",
+    "consequence_for_protected_artifacts": "vm-cyberpeer-core_OsDisk_1_f79b5c49 was never faulty. The rollback artifact is the original of a healthy disk. This does not authorize any disk operation and none was performed.",
     "disk_repair_began_utc": "2026-08-02T16:04:51",
     "implication_if_true": "The original disk was never faulty and the repair could not have fixed a network lockout. The WARP install travelled into the repair copy.",
     "installed_utc": "2026-08-02T13:52:33",
-    "leading_explanation": "WARP connected, its kill switch locked all inbound access, and the OS-disk repair was the response to a host that had just gone dark. Not proven. Timestamp correlation only.",
     "package": "cloudflare-warp 2026.6.880.0",
+    "recovery_reboot_cycles": [
+      "14:39:11-14:43:29",
+      "14:44:19-14:52:52",
+      "14:53:21-15:53:30"
+    ],
     "requested_by": "aegisadmin (1000)",
     "source": "deb https://pkg.cloudflareclient.com/ noble main",
-    "what_would_settle_it": "journalctl for 2026-08-02 16:00-16:10 on the preserved original disk."
+    "status": "CONFIRMED from auth.log and wtmp (was: timestamp correlation only)"
   },
   "warp_persistence_step2": {
     "answer": "NO",

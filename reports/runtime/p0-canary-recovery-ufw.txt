@@ -292,8 +292,72 @@ Two consequences if it holds:
     a working disk, not a fallback to a broken state.
   - The repair copy carries the same WARP install.
 
-WHAT WOULD SETTLE IT: journalctl for 2026-08-02 16:00-16:10 on the preserved
-original disk. Recorded as an open question, not as a finding.
+===============================================================
+LAYER 10 - CONFIRMED FROM auth.log AND wtmp
+===============================================================
+The journal does not reach back to 2026-08-02 (earliest retained entry is
+2026-08-05T13:12:43). But /var/log/auth.log covers from 2026-08-02T00:02 and
+/var/log/wtmp survived. Together they settle it.
+
+auth.log, the final entries of 2026-08-02:
+
+  13:52:21  sudo gpg --dearmor --output
+            /usr/share/keyrings/cloudflare-warp-archive-keyring.gpg
+  13:52:21  sudo tee /etc/apt/sources.list.d/cloudflare-client.list
+  13:52:21  sudo apt-get update
+  13:52:25  sudo apt-get install cloudflare-warp
+  13:53:04  su (to aegisadmin) root on none          <- LAST ENTRY OF THE DAY
+
+Nothing follows. Cron had been logging every ten minutes through 13:45; after
+13:53:04 there are no cron entries either. The machine stopped producing auth
+records at the moment the WARP installation completed.
+
+wtmp, the boot and session record:
+
+  aegisadm pts/0 104.28.152.190  Aug 2 01:56:18 - 13:54:28  (11:58)
+  reboot                          Aug 2 14:39:11 - 14:43:29  (00:04)
+  reboot                          Aug 2 14:44:19 - 14:52:52  (00:08)
+  reboot                          Aug 2 14:53:21 - 15:53:30  (01:00)
+  reboot                          Aug 2 16:15:04 - 19:19:51  (03:04)
+  reboot                          Aug 2 19:32:22 - still running
+
+The administrator's SSH session terminated at 13:54:28, roughly 85 seconds
+after the install completed and within seconds of WARP writing its settings
+files at 13:54. No interactive login succeeded after that.
+
+FULL SEQUENCE, now evidenced rather than inferred:
+
+  01:56:18  aegisadmin logs in over SSH from 104.28.152.190
+  13:52:25  apt-get install cloudflare-warp
+  13:53:05  install completes
+  13:54     WARP writes consumer-settings.json and final-overrides-settings.json
+  13:54:28  the SSH session dies. The host is now unreachable.
+  14:39-15:53  three reboot cycles of 4 min, 8 min and 1 hour - recovery attempts
+  16:04:51  snapshot taken
+  16:05:09  repair copy created
+  16:06:48  repair VM created
+  16:15:04  boots on the repair copy - still locked out
+  19:19:51  shut down
+  19:20:18  deallocated (matches the Azure activity log)
+  19:32:22  booted again; up ever since, unreachable until today
+
+CONCLUSION: the 2026-08-02 OS-disk repair was a response to a WARP-induced
+network lockout, not to a disk fault. An OS-disk repair could not have fixed it,
+and did not: the WARP install lives on the disk that was copied, so the lockout
+travelled into the repair copy. That is why the same fault recurred today.
+
+CONSEQUENCE FOR THE PROTECTED ARTIFACTS:
+vm-cyberpeer-core_OsDisk_1_f79b5c49e4f94a9792b038ccb685615b was never faulty.
+The rollback artifact is the original of a healthy disk, not a fallback to a
+broken state. This changes what "preserving rollback readiness" is protecting
+against. It does not authorize any disk operation, and none was performed.
+
+INCIDENTAL SECURITY OBSERVATION: auth.log for 2026-08-02T09:00-09:01 shows
+sustained SSH brute-force attempts from 77.239.124.236 against invalid users
+(deploy, developer, reza, amit) and root. Those reached sshd, so port 22 was
+reachable from the public internet at that time. The NSG currently carries
+`default-allow-ssh` permitting any source at priority 1004, gated only by the
+JIT deny at 1003. Recorded as an observation; no change made.
 
 ===============================================================
 LADDER
