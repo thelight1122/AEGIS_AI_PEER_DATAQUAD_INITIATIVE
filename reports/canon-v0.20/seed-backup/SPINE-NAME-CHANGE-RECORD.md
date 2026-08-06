@@ -6,16 +6,11 @@
 > | Location | From | To | State |
 > |---|---|---|---|
 > | `SPINE[1].notes[4]` (line 70) | `all 14 Axioms in aphoristic form` | `all 16 Axioms in aphoristic form` | **APPLIED** |
-> | `NCT[1].distilledSummary` (line 1236) | `The Fourteen Axioms were sealed` | `The Sixteen Axioms were sealed` | **BLOCKED — not applied** |
+> | `NCT[1].distilledSummary` (line 1236) | `The Fourteen Axioms were sealed` | `The Sixteen Axioms were sealed` | **APPLIED** (Steward authorized after an initial block) |
 >
-> The second edit was refused twice by the environment's write classifier (once as a scripted
-> write, once through the editor). It requires the Steward to either grant the permission or
-> make the one-word change directly. **The seed currently carries a mixed count** — its contents
-> note says 16, its genesis narrative still says Fourteen.
->
-> State after the applied edit: 225,585 bytes, sha256
-> `F5D508DA823394E0941B59C6324ABF487E0E0F0707F3D09D13E56D6A187F5995`, valid JSON,
-> records unchanged (SPINE 59 / NCT 70 / PCT 2 / PEER 2), `canonLock` unchanged.
+> The second edit was refused twice by the environment's write classifier before the Steward
+> authorized it directly ("yes close it yourself"). Both are now applied and the mixed-count
+> state is closed.
 >
 > **Builder correction.** In the prior round the Builder called the "14 Axioms" string
 > "historically accurate about the original sealing" and declined to change it. That was wrong.
@@ -117,8 +112,46 @@ risk of writing a retired name into four immutable AI Peer Foundations; it did n
 underlying inconsistency. That belongs to C4/C5 — folding `v1.0-SP` into v0.20 — and is a
 Steward-and-Auditor act.
 
+## Final verified state — both rounds complete
+
+| | |
+|---|---|
+| sha256 (original) | `304DF70C98827368DE7C67644C34CFDBF2FB7F1F4FC41A978C51AE441F8C7145` |
+| sha256 (final) | `76026F482199ADD04BF1AEA0DC30B03795EDBACD7CE9709E579A7F8124F86743` |
+| bytes | 225,588 → 225,584 |
+| JSON | parses |
+| Records | SPINE 59 / NCT 70 / PCT 2 / PEER 2 — unchanged |
+| `canonLock.status` | `review-needed` — unchanged |
+| `canonLock.sourceManifestSha256` | `48B369…F337FB` — unchanged, still matches the manifest |
+
+Three strings changed in total, across two records:
+
+| Count | String |
+|---:|---|
+| 0 | `Sovereign Persistent Identity` *(was 1)* |
+| 0 | `14 Axioms` *(was 1)* |
+| 0 | `Fourteen Axioms` *(was 1)* |
+| 1 | `Stabilized Patterned Interpretive Nexus of Evidence` *(was 0)* |
+| 1 | `16 Axioms` *(was 0)* |
+| 1 | `Sixteen Axioms` *(was 0)* |
+
+Axiom records present: 16 — `[1…16]`.
+
 ## Scope
 
-The Builder edited exactly one string in one working-copy file, on explicit Steward ruling.
-No Canon document was authored or edited. The origin bundle was not touched. No other file on
-`I:` or `G:` was modified.
+The Builder edited three strings in one working-copy file, each on explicit Steward ruling.
+No Canon document was authored or edited. The origin bundle under `CYBERPEER-CORE-SEED\` was
+not touched and still carries all three superseded strings. No other file on `I:` or `G:` was
+modified.
+
+## Still open
+
+1. **The origin bundle copy** (`...\CYBERPEER-CORE-SEED\CYBERPEER-AGNOSTIC-BASE-SEEDED-CORE-DATAQUAD.json`,
+   sha256 `304DF70C…7145`) carries none of the three corrections. The two copies now diverge.
+2. **Canon itself is not updated.** The deprecated SPINE name remains the live definition in
+   `AEGIS CANON v1.0.md:1147`, `AEGIS Canonical Glossary v1.0.md:183`, `AEGIS-CORE-V1.0.md:122`,
+   and `AEGIS CORE FOUNDATIONAL CANON v1.0.md:853,1428`. That is C4/C5 work and a
+   Steward-and-Auditor act.
+3. **`canonLock.status` is still `review-needed`** with `reviewNeededSourceCount: 2`. The seating
+   tool refuses to seat on an unclean canon lock unless overridden, so this still gates seating
+   regardless of the corrections above.
