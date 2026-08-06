@@ -35,24 +35,25 @@ DEFAULT_CANON_DIR = Path("I:/AEGIS-CENTRAL-CODEX/TIER-1-CANON/CANON_FOUNDATIONAL
 #: Dependency tiers extracted from the prior index's Supersedes column. The column is
 #: semantically overloaded — it means "replaces" for some rows and "extends" for others — so
 #: these edges are recorded as *dependency order for consolidation*, not as retirement.
+#: Keyed by canonical code (S-11), not by the legacy `v1.0-XX` form.
 DEPENDENCY_TIER: dict[str, int] = {
-    "v1.0-EPC": 1, "v1.0-FBF": 1,
-    "v1.0-GMP": 2,
-    "v1.0-SF": 3, "v1.0-IFD": 3,
-    "v1.0-DS": 4,
-    "v1.0-VE": 5,
-    "v1.0-AO": 6,
+    "EPC": 1, "FBF": 1,
+    "GMP": 2,
+    "SF": 3, "IFD": 3,
+    "DS": 4,
+    "VE": 5,
+    "AO": 6,
 }
 
 DEPENDS_ON: dict[str, tuple[str, ...]] = {
-    "v1.0-EPC": ("v1.0-OT",),
-    "v1.0-FBF": ("v1.0-OT", "v1.0-CEF"),
-    "v1.0-GMP": ("v1.0-EPC",),
-    "v1.0-SF": ("v1.0-GMP", "v1.0-EPC", "v1.0-CEF"),
-    "v1.0-IFD": ("v1.0-FBF", "v1.0-ACD", "v1.0-EPC", "v1.0-GMP", "v1.0-AEM"),
-    "v1.0-DS": ("v1.0-SF", "v1.0-OT", "v1.0-EPC", "v1.0-ACD"),
-    "v1.0-VE": ("v1.0-RS", "v1.0-OT", "v1.0-CEF", "v1.0-DS", "Cryptonic Harmonics"),
-    "v1.0-AO": ("v1.0-GMP", "v1.0-VE", "v1.0-SF", "v1.0-DS", "v1.1-S"),
+    "EPC": ("OT",),
+    "FBF": ("OT", "CEF"),
+    "GMP": ("EPC",),
+    "SF": ("GMP", "EPC", "CEF"),
+    "IFD": ("FBF", "ACD", "EPC", "GMP", "AEM"),
+    "DS": ("SF", "OT", "EPC", "ACD"),
+    "VE": ("RS", "OT", "CEF", "DS", "Cryptonic Harmonics"),
+    "AO": ("GMP", "VE", "SF", "DS", "S"),
 }
 
 #: Referenced by a Supersedes/Related cell but not declared anywhere as a coded document.
@@ -64,6 +65,39 @@ DANGLING = {
 }
 
 CLASS_ORDER = ["KERNEL", "APPENDIX", "ADDENDUM", "UNINDEXED", "OTHER"]
+
+#: Steward ruling S-11 (2026-08-06): "drop the version prefix and keep the letter codes."
+#: `v1.0-SP` becomes `SP`. The Canon version carries the number; the letter identifies the
+#: document. Legacy codes are retained alongside for traceability, because every existing
+#: cross-reference in the corpus is written in the legacy form.
+#:
+#: Four appendices carry a bare `v1.0` with no letter. Dropping the prefix would leave them
+#: with no identifier at all, so their established acronym is used — it is what the prior
+#: index already called them in its Document column.
+BARE_CODE_APPENDICES = {
+    "HME": "HME", "TCE": "TCE", "MOM": "MOM", "MOP": "MOP",
+}
+
+
+def canonical_code(legacy: str | None, filename: str) -> str | None:
+    """Apply S-11: strip the `vN.N-` prefix, keep the letter code.
+
+    Returns None when no code can be derived, rather than inventing one.
+    """
+    if legacy:
+        m = re.fullmatch(r"v\d+\.\d+-([A-Z0-9]+)", legacy.strip())
+        if m:
+            return m.group(1)
+        if re.fullmatch(r"v\d+\.\d+", legacy.strip()):
+            # A bare version with no letter: fall through to the filename acronym.
+            pass
+        else:
+            return legacy.strip()
+    upper = filename.upper()
+    for acronym in BARE_CODE_APPENDICES:
+        if re.search(rf"\b{acronym}\b", upper):
+            return acronym
+    return None
 
 #: The kernel, transcribed from the prior index's "ORIGINAL CANON DOCUMENTS (LOCKED)" table.
 #: Matched on a lowercase filename stem so the Builder is not deciding what counts as kernel.
@@ -241,7 +275,8 @@ def scan(canon_dir: Path) -> list[dict[str, Any]]:
         entries.append({
             "file": path.name,
             "class": classify(path, fields),
-            "code": code,
+            "code": canonical_code(code, path.name),
+            "code_legacy": code,
             "status_declared": status,
             "status_claimed_in_prose": claimed,
             "title": (fields.get("Document") if not isinstance(fields.get("Document"), list)
@@ -258,6 +293,35 @@ def scan(canon_dir: Path) -> list[dict[str, Any]]:
             "tier": DEPENDENCY_TIER.get(code or "", 0),
         })
     return entries
+
+
+def citation_impact(canon_dir: Path, entries: list[dict]) -> dict[str, Any]:
+    """Count how many times each legacy code is cited across the corpus.
+
+    Renaming files is a separate and much larger action than adopting the code scheme in the
+    index: every cross-reference in every document is written in the legacy `v1.0-XX` form.
+    This quantifies that so the decision is made against a number rather than a guess.
+    """
+    from collections import Counter
+
+    legacy_codes = sorted({e["code_legacy"] for e in entries
+                           if e["code_legacy"] and re.fullmatch(r"v\d+\.\d+-[A-Z0-9]+", e["code_legacy"])})
+    counts: Counter[str] = Counter()
+    files_touched: dict[str, set[str]] = {c: set() for c in legacy_codes}
+
+    for path in canon_dir.glob("*.md"):
+        text = path.read_text(encoding="utf-8", errors="replace")
+        for code in legacy_codes:
+            n = len(re.findall(rf"(?<![A-Za-z0-9]){re.escape(code)}(?![A-Za-z0-9])", text))
+            if n:
+                counts[code] += n
+                files_touched[code].add(path.name)
+
+    return {
+        "total_citations": sum(counts.values()),
+        "codes": {c: {"citations": counts[c], "in_files": len(files_touched[c])}
+                  for c in legacy_codes if counts[c]},
+    }
 
 
 def gaps(entries: list[dict]) -> list[dict]:
@@ -311,7 +375,8 @@ def render(entries: list[dict], canon_dir: Path, generated: str) -> str:
     add("")
     add("| Column | Meaning |")
     add("|---|---|")
-    add("| Code | Version suffix used in filenames and internal references |")
+    add("| Code | Canonical code per ruling S-11 — the letter alone. The Canon version carries the number. |")
+    add("| Legacy | The `vN.N-XX` form still in filenames and in every existing cross-reference. |")
     add("| Status | Transcribed from the document. `UNDECLARED` = the document states none. |")
     add("| Tier | Consolidation order. Tier 0 has no declared dependency; higher tiers depend on lower. |")
     add("| Depends on | From the prior index's Supersedes column, which mixes *replaces*, *extends*, and *corrects part of*. Treat as consolidation order, **not** as retirement. |")
@@ -357,14 +422,41 @@ def render(entries: list[dict], canon_dir: Path, generated: str) -> str:
         rows = sorted([e for e in addenda if e["tier"] == tier], key=lambda x: (x["date"] or "9999", x["code"] or ""))
         add(f"### Tier {tier}" + ("  — no declared dependency" if tier == 0 else ""))
         add("")
-        add("| Code | Document | Status | Added | Depends on |")
-        add("|---|---|---|---|---|")
+        add("| Code | Legacy | Document | Status | Added | Depends on |")
+        add("|---|---|---|---|---|---|")
         for e in rows:
             st = e["status_declared"] or "UNDECLARED"
             dep = ", ".join(f"`{d}`" for d in e["depends_on"]) or "—"
-            title = (e["title"] or e["file"])[:58]
-            add(f"| `{e['code'] or '—'}` | {title} | {st} | {e['date'] or '—'} | {dep} |")
+            title = (e["title"] or e["file"])[:52]
+            add(f"| **`{e['code'] or '—'}`** | `{e['code_legacy'] or '—'}` | {title} | {st} "
+                f"| {e['date'] or '—'} | {dep} |")
         add("")
+
+    # Migration table
+    add("---")
+    add("")
+    add("## CODE MIGRATION — ruling S-11")
+    add("")
+    add("> Steward, 2026-08-06: *\"drop the version prefix and keep the letter codes\"*")
+    add("")
+    add("The Canon is pre-release. Coding 26 addenda as `v1.0-XX` numbered them as addenda to a")
+    add("v1.0 that has not shipped, and left no clean number for the real 1.0. Under S-11 the")
+    add("letter alone identifies the document and the Canon version carries the number.")
+    add("")
+    add("| Canonical | Legacy | Document |")
+    add("|---|---|---|")
+    coded = [e for e in entries if e["code"] and e["code_legacy"] and e["code"] != e["code_legacy"]]
+    for e in sorted(coded, key=lambda x: (x["class"], x["code"] or "")):
+        add(f"| **`{e['code']}`** | `{e['code_legacy']}` | {(e['title'] or e['file'])[:56]} |")
+    add("")
+    add("Two notes on the mapping:")
+    add("")
+    add("- The four appendices carrying a bare `v1.0` with no letter (`HME`, `TCE`, `MOM`, `MOP`)")
+    add("  would be left with no identifier at all by a literal prefix-strip. They take their")
+    add("  established acronym, which is what the prior index already called them.")
+    add("- `v1.0-A` (DataQuad Extensions) and `v1.0-A2` (Advocate) become `A` and `A2`. Distinct,")
+    add("  but adjacent enough to be worth knowing about.")
+    add("")
 
     # Newly indexed
     add("---")
@@ -401,6 +493,32 @@ def render(entries: list[dict], canon_dir: Path, generated: str) -> str:
     add("| 2026-06-02 | Facet Architecture Addendum and Hold Register resolution |")
     add("")
 
+    return "\n".join(L)
+
+
+def render_rename_impact(impact: dict) -> str:
+    """What renaming files (as opposed to adopting the code scheme) would actually cost."""
+    L: list[str] = []
+    add = L.append
+    add("---")
+    add("")
+    add("## FILE RENAME — not done, and here is the cost")
+    add("")
+    add("S-11 rules on the **code scheme**. Filenames on disk still carry the legacy form, and")
+    add("so does every cross-reference written inside the documents. Renaming files is a separate")
+    add("decision; this is what it would touch.")
+    add("")
+    add(f"**{impact['total_citations']} citations** of legacy codes across the Canon directory.")
+    add("")
+    add("| Legacy code | Citations | In files |")
+    add("|---|---:|---:|")
+    for code, d in sorted(impact["codes"].items(), key=lambda kv: -kv[1]["citations"]):
+        add(f"| `{code}` | {d['citations']} | {d['in_files']} |")
+    add("")
+    add("A rename that updates filenames without rewriting these citations would break them all.")
+    add("A rename that rewrites them is a corpus-wide edit. The index works either way — it")
+    add("carries both forms — so nothing downstream is blocked on this.")
+    add("")
     return "\n".join(L)
 
 
@@ -486,7 +604,10 @@ def main() -> int:
     entries = scan(args.canon_dir)
     missing = gaps(entries)
     coll = collisions(args.canon_dir, entries)
-    md = render(entries, args.canon_dir, generated) + "\n" + render_open_items(entries, missing, coll)
+    impact = citation_impact(args.canon_dir, entries)
+    md = (render(entries, args.canon_dir, generated) + "\n"
+          + render_rename_impact(impact) + "\n"
+          + render_open_items(entries, missing, coll))
 
     counts = {c: sum(1 for e in entries if e["class"] == c) for c in CLASS_ORDER}
     print(f"scanned {len(entries)} documents in {args.canon_dir}")
@@ -515,9 +636,12 @@ def main() -> int:
         "canon_dir": str(args.canon_dir),
         "document_count": len(entries),
         "class_counts": counts,
+        "code_scheme": "S-11: version prefix dropped, letter code retained",
         "entries": entries,
         "incomplete_headers": missing,
         "dangling_references": DANGLING,
+        "collisions": coll,
+        "legacy_citation_impact": impact,
     }, indent=2, sort_keys=True, default=str) + "\n", encoding="utf-8")
 
     print(f"\nindex : {args.out_md}")

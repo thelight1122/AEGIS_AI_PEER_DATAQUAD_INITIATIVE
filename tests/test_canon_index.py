@@ -112,6 +112,41 @@ def test_kernel_membership_is_transcribed_not_inferred():
     assert idx.classify(Path("BIOPEER_DOCTRINE.md"), {}) == "UNINDEXED"
 
 
+# --- ruling S-11: drop the version prefix, keep the letter code -----------------------------
+
+
+def test_version_prefix_is_dropped():
+    assert idx.canonical_code("v1.0-SP", "x.md") == "SP"
+    assert idx.canonical_code("v1.0-EPC", "x.md") == "EPC"
+    assert idx.canonical_code("v1.0-A2", "x.md") == "A2"
+
+
+def test_minor_version_is_dropped_too_not_just_v1_0():
+    """Shadow Affects is v1.1-S, not v1.0-S; the rule is prefix-agnostic."""
+    assert idx.canonical_code("v1.1-S", "x.md") == "S"
+
+
+def test_bare_version_falls_back_to_the_appendix_acronym():
+    """Four appendices carry a bare v1.0; a literal strip would leave them unidentified."""
+    assert idx.canonical_code("v1.0", "📘 AEGIS CANON APPENDIX — HME v1.md") == "HME"
+    assert idx.canonical_code("v1.0", "📘 AEGIS CANON APPENDIX — MOP v1.md") == "MOP"
+
+
+def test_no_code_is_invented_when_none_can_be_derived():
+    assert idx.canonical_code(None, "BIOPEER_DOCTRINE.md") is None
+    assert idx.canonical_code("v1.0", "SOME UNRELATED DOC.md") is None
+
+
+def test_dependency_graph_is_keyed_by_canonical_codes():
+    """A stale legacy key here would silently empty every Depends-on cell."""
+    assert "EPC" in idx.DEPENDENCY_TIER
+    assert not any(k.startswith("v1.") for k in idx.DEPENDENCY_TIER)
+    assert not any(k.startswith("v1.") for k in idx.DEPENDS_ON)
+    for deps in idx.DEPENDS_ON.values():
+        for d in deps:
+            assert not d.startswith("v1."), f"legacy code in dependency list: {d}"
+
+
 # --- the derivation, against the real corpus ------------------------------------------------
 
 
@@ -149,4 +184,23 @@ def test_known_collisions_are_still_detected():
     entries = idx.scan(idx.DEFAULT_CANON_DIR)
     coll = idx.collisions(idx.DEFAULT_CANON_DIR, entries)
     assert any("STANDARDS" in f for group in coll["identical_content"] for f in group)
-    assert "v1.1-S" in coll["code_claimed_twice"]
+    assert "S" in coll["code_claimed_twice"], "the two Shadow Affects files both claim S"
+
+
+@canon_available
+def test_every_addendum_carries_both_code_forms():
+    """The index is only usable during migration if it maps old citations to new codes."""
+    entries = idx.scan(idx.DEFAULT_CANON_DIR)
+    for e in (x for x in entries if x["class"] == "ADDENDUM"):
+        assert e["code"], f"no canonical code: {e['file']}"
+        assert e["code_legacy"], f"no legacy code: {e['file']}"
+        assert not e["code"].startswith("v1."), f"prefix not dropped: {e['code']}"
+
+
+@canon_available
+def test_legacy_citations_are_counted_for_the_rename_decision():
+    entries = idx.scan(idx.DEFAULT_CANON_DIR)
+    impact = idx.citation_impact(idx.DEFAULT_CANON_DIR, entries)
+    assert impact["total_citations"] > 0
+    # OT is the most-cited code in the corpus; if it drops to zero the scan has broken.
+    assert impact["codes"]["v1.0-OT"]["citations"] > 0
