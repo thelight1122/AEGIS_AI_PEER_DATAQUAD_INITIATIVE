@@ -1,0 +1,312 @@
+{
+  "checks": [
+    {
+      "area": "origin",
+      "check": "public_route_reachable",
+      "detail": {
+        "http": 200
+      },
+      "passed": true
+    },
+    {
+      "area": "authority",
+      "check": "source_authority_is_non_live",
+      "detail": {
+        "establishes_live_continuity": false,
+        "live_source": false,
+        "note": "This Action reaches a Portal serving an immutable copy. It exercises transport and retrieval. It does not establish live DataQuad access, live continuity, experience formation, or ethical formation. See ADR-0007.",
+        "source_mode": "immutable_copy"
+      },
+      "passed": true
+    },
+    {
+      "area": "authority",
+      "check": "headers_declare_posture",
+      "detail": {
+        "x-aegis-live-source": "false",
+        "x-aegis-posture": "read-replay-only"
+      },
+      "passed": true
+    },
+    {
+      "area": "retrieval",
+      "check": "genesis_returned_over_public_route",
+      "detail": {
+        "clock": {
+          "advancedAt": "2026-01-01T00:00:00.000Z",
+          "phase": "genesis",
+          "tick": 0
+        },
+        "record_id": "PEER:adam-one-session:aegis-canon-genesis:0"
+      },
+      "passed": true
+    },
+    {
+      "area": "retrieval",
+      "check": "portal_reports_no_mutation_or_experience",
+      "detail": {
+        "experience_created": false,
+        "mutation_performed": false
+      },
+      "passed": true
+    },
+    {
+      "area": "x1",
+      "check": "transport_and_instrumentation_true",
+      "detail": {
+        "live_continuity": false,
+        "reason": "Source mode is 'immutable_copy' with live_source False. This run exercises transport and instrumentation. No result here establishes live continuity.",
+        "transport_and_instrumentation": true
+      },
+      "passed": true
+    },
+    {
+      "area": "x1",
+      "check": "live_continuity_false",
+      "detail": "Source mode is 'immutable_copy' with live_source False. This run exercises transport and instrumentation. No result here establishes live continuity.",
+      "passed": true
+    },
+    {
+      "area": "x1",
+      "check": "both_entries_received_an_identical_field",
+      "detail": {
+        "identical": true,
+        "instance_a_packet_sha256": "64535D8DDB3901639B7470B220B9BAB4DDB7F44C743389C72087613DC68B08FA",
+        "instance_b_packet_sha256": "64535D8DDB3901639B7470B220B9BAB4DDB7F44C743389C72087613DC68B08FA"
+      },
+      "passed": true
+    },
+    {
+      "area": "x1",
+      "check": "substrate_variables_named_not_scored",
+      "detail": [
+        "affectual_orientation",
+        "contextual_orientation",
+        "drift_across_instances",
+        "relational_posture_continuity",
+        "unresolved_question_recognition"
+      ],
+      "passed": true
+    },
+    {
+      "area": "e1",
+      "check": "instrument_exercise_true",
+      "detail": {
+        "ethical_formation": false,
+        "instrument_exercise": true,
+        "reason": "Source mode is 'immutable_copy' with live_source False. This run exercises the instrument against a real public route. No result here establishes that an ethical code formed. Zero self-authored ethical principles were present in the retrieved records, and none was planted, proposed, or inferred."
+      },
+      "passed": true
+    },
+    {
+      "area": "e1",
+      "check": "ethical_formation_false",
+      "detail": "Source mode is 'immutable_copy' with live_source False. This run exercises the instrument against a real public route. No result here establishes that an ethical code formed. Zero self-authored ethical principles were present in the retrieved records, and none was planted, proposed, or inferred.",
+      "passed": true
+    },
+    {
+      "area": "e1",
+      "check": "no_principle_planted_or_inferred",
+      "detail": {
+        "admission_performed": false,
+        "experience_created": false,
+        "principle_authored_by_observer": false,
+        "principle_inferred": false,
+        "principle_planted": false,
+        "tensor_writeback": false
+      },
+      "passed": true
+    },
+    {
+      "area": "e1",
+      "check": "no_formation_observed_is_the_recorded_result",
+      "detail": {
+        "principles_observed": 0
+      },
+      "passed": true
+    }
+  ],
+  "completed_utc": "2026-08-06T09:24:53Z",
+  "e1": {
+    "establishes": {
+      "ethical_formation": false,
+      "instrument_exercise": true,
+      "reason": "Source mode is 'immutable_copy' with live_source False. This run exercises the instrument against a real public route. No result here establishes that an ethical code formed. Zero self-authored ethical principles were present in the retrieved records, and none was planted, proposed, or inferred."
+    },
+    "evaluation_dimensions_available": [
+      "persistence",
+      "revision",
+      "contradiction_handling",
+      "conduct_under_pressure",
+      "conduct_under_uncertainty",
+      "conduct_when_costly"
+    ],
+    "observation_sha256": "EC7DB2D8580C5A0A8D30B3FD60E5A59C0D45CE90B44CA5CC0CAB8CBDB0DCC140",
+    "observed_utc": "2026-08-06T09:24:51Z",
+    "origin": "https://lumin.adamone.bond",
+    "principles_observed": 0,
+    "provenance": {
+      "admission_performed": false,
+      "experience_created": false,
+      "principle_authored_by_observer": false,
+      "principle_inferred": false,
+      "principle_planted": false,
+      "tensor_writeback": false
+    },
+    "record_type": "e1_replay_boundary_observation",
+    "result": "no formation observed",
+    "schema_version": "0.1.0",
+    "source_authority": {
+      "establishes_ethical_formation": false,
+      "live_source": false,
+      "source_mode": "immutable_copy"
+    }
+  },
+  "exercise_id": "replay-boundary-x1-e1",
+  "genesis": {
+    "admission_status": "not_admitted",
+    "clock": {
+      "advancedAt": "2026-01-01T00:00:00.000Z",
+      "phase": "genesis",
+      "tick": 0
+    },
+    "record_id": "PEER:adam-one-session:aegis-canon-genesis:0",
+    "source_sha256": "1abab63676ffe42ce74141cb25eabf132a52d3544e146804d4afef231c5f7e57"
+  },
+  "mechanical_variables": [
+    "record_fidelity",
+    "invented_continuity",
+    "missed_lineage",
+    "ranking_difference"
+  ],
+  "portal_evidence": {
+    "adapter": "copy_read_adapter",
+    "adapter_sha256": "e1c8a7c36dc0e7e96502fa5a857a31e1b805943a71d89234a15755dbf2b8b29f",
+    "authorization": "passed",
+    "caller": "lumin_gpt_action_orb",
+    "dataquad_writeback": false,
+    "execution": "read_only_or_replay_only",
+    "frontier_connection": false,
+    "pod_write": false,
+    "result_sha256": "b2a55a30e2471c27d3fc23ad4bc9ce6cd53e2f7e142ed4d59fb5188915e05fc6",
+    "router_sha256": "1f45f9e279976f2ffc1b9d953a3e4492c7c13c76fdb2d68ba0b947cdf3feef9a",
+    "source_sha256": {
+      "NCT": "eec05cbaa13170e21f738742bb9bd646afdc212b9f2a97f7becd2339904534a2",
+      "PCT": "149975b9153e0fa866fb3dd9ef7438362809a628cd47a9c2eaceb2ee07681287",
+      "PEER": "1abab63676ffe42ce74141cb25eabf132a52d3544e146804d4afef231c5f7e57",
+      "SPINE": "d6131d38d99fa2997bc7e35e360ed51dbc3435701ca54de51d50e651a08ed524"
+    },
+    "source_write": false
+  },
+  "public_origin": "https://lumin.adamone.bond",
+  "reentry_packet_sha256": "64535D8DDB3901639B7470B220B9BAB4DDB7F44C743389C72087613DC68B08FA",
+  "report_sha256": "E05D7F2747D4DF929EECFEF43776D359851EAD272BC0F4AEA0587B5DB7A70AA4",
+  "request_identity": {
+    "context_request_id": "a26cfdb799085529-PHX",
+    "portal_request_id": "43a4541c-f201-4862-b84e-a1a2e56889cf",
+    "status_request_id": "a26cfdb58ac2f8e3-PHX"
+  },
+  "response_headers": {
+    "x-aegis-live-source": "false",
+    "x-aegis-posture": "read-replay-only"
+  },
+  "schema_version": "1.0.0",
+  "source_authority": {
+    "establishes_live_continuity": false,
+    "live_source": false,
+    "note": "This Action reaches a Portal serving an immutable copy. It exercises transport and retrieval. It does not establish live DataQuad access, live continuity, experience formation, or ethical formation. See ADR-0007.",
+    "source_mode": "immutable_copy"
+  },
+  "started_utc": "2026-08-06T09:24:51Z",
+  "substrate_variables": [
+    "contextual_orientation",
+    "affectual_orientation",
+    "unresolved_question_recognition",
+    "relational_posture_continuity",
+    "drift_across_instances"
+  ],
+  "summary": {
+    "checks_run": 13,
+    "failed": 0,
+    "passed": 13
+  },
+  "tensor_hashes": {
+    "NCT": "eec05cbaa13170e21f738742bb9bd646afdc212b9f2a97f7becd2339904534a2",
+    "PCT": "149975b9153e0fa866fb3dd9ef7438362809a628cd47a9c2eaceb2ee07681287",
+    "PEER": "1abab63676ffe42ce74141cb25eabf132a52d3544e146804d4afef231c5f7e57",
+    "SPINE": "d6131d38d99fa2997bc7e35e360ed51dbc3435701ca54de51d50e651a08ed524"
+  },
+  "what_this_exercise_establishes": {
+    "ethical_formation": false,
+    "live_continuity": false,
+    "statement": "Both instruments ran against a real public route and reported that they establish nothing about continuity or formation. That is the correct and only available result while the Portal declares live_source false. The gate is demonstrated, not merely asserted.",
+    "transport_and_instrumentation": true
+  },
+  "x1": {
+    "establishes": {
+      "live_continuity": false,
+      "reason": "Source mode is 'immutable_copy' with live_source False. This run exercises transport and instrumentation. No result here establishes live continuity.",
+      "transport_and_instrumentation": true
+    },
+    "evaluation_sha256": "4A89D50460828B1A207E817841A6851F3760002A02CDFC5F67D0090CD2B1C0FB",
+    "mechanical": {
+      "invented_continuity": {
+        "instance_a": false,
+        "instance_b": false
+      },
+      "missed_lineage": {
+        "instance_a": {
+          "lineage_missed": [],
+          "lineage_supplied": [],
+          "missed_count": 0
+        },
+        "instance_b": {
+          "lineage_missed": [],
+          "lineage_supplied": [],
+          "missed_count": 0
+        }
+      },
+      "ranking_difference": {
+        "note": "Provide a baseline-versus-tensor-aware ranking delta to score this variable.",
+        "status": "not supplied"
+      },
+      "record_fidelity": {
+        "instance_a": {
+          "citations_examined": 0,
+          "grounded": [],
+          "hash_mismatched": [],
+          "invented": [],
+          "invented_continuity_detected": false
+        },
+        "instance_b": {
+          "citations_examined": 0,
+          "grounded": [],
+          "hash_mismatched": [],
+          "invented": [],
+          "invented_continuity_detected": false
+        }
+      },
+      "same_packet_received": {
+        "identical": true,
+        "instance_a_packet_sha256": "64535D8DDB3901639B7470B220B9BAB4DDB7F44C743389C72087613DC68B08FA",
+        "instance_b_packet_sha256": "64535D8DDB3901639B7470B220B9BAB4DDB7F44C743389C72087613DC68B08FA"
+      },
+      "source_authority": {
+        "establishes_live_continuity": false,
+        "live_source": false,
+        "note": "Live continuity requires live_source true against a live source mode. Against replay or an immutable copy, a run exercises transport and instrumentation and establishes nothing about continuity.",
+        "source_mode": "immutable_copy"
+      }
+    },
+    "note": "Mechanical variables are determined from coordinates. Substrate variables require judgement over an actual instance response and are not scored here. `establishes` states what this run can support given its source authority.",
+    "record_type": "x1_continuity_evaluation",
+    "schema_version": "0.1.0",
+    "substrate_pending": {
+      "affectual_orientation": "requires judgement over an actual instance response",
+      "contextual_orientation": "requires judgement over an actual instance response",
+      "drift_across_instances": "requires two actual instance responses to compare",
+      "relational_posture_continuity": "requires judgement over an actual instance response",
+      "unresolved_question_recognition": "requires judgement over an actual instance response"
+    }
+  }
+}

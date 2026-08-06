@@ -112,8 +112,23 @@ accepted. Between the first failure and the fix there was no task registered at 
 because the old one had already been removed.
 
 **Fix verified, not assumed:** the supervisor process and all five of its ssh children were
-killed; the port dropped; recovery occurred within 30 seconds via restart-on-failure, ahead
-of the 5-minute trigger; public HTTP 200 was restored.
+killed; the port dropped; recovery occurred within 30 seconds; public HTTP 200 was restored.
+
+**Two distinct mechanisms, kept distinct.** The observed 30-second recovery came from the
+task's **restart-on-failure** setting, which fires when a running task's process exits
+abnormally. The **5-minute repeating trigger** is a separate and additional path: it starts
+the task when it is in a non-running state, covering the case where restart-on-failure does
+not fire at all — which is precisely what happened at 07:34Z, when the task sat `Ready` and
+nothing revived it.
+
+Only restart-on-failure has been demonstrated. The repeating trigger is registered and its
+schedule is verified, but it has not yet been observed firing, because restart-on-failure
+recovered the process first. Recording it as proven would overstate the evidence.
+
+| Mechanism | Covers | Status |
+|---|---|---|
+| restart-on-failure | running task whose process exits abnormally | demonstrated, 30s |
+| 5-minute repeating trigger | task in a non-running state | registered, not yet observed firing |
 
 ---
 
