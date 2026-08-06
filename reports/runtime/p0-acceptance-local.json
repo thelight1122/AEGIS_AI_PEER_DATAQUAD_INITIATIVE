@@ -166,12 +166,38 @@
     },
     "tensor_hashes_unchanged_across_observation": true
   },
+  "warp_origin": {
+    "command": "apt-get install cloudflare-warp",
+    "configured_utc": "2026-08-02T16:04",
+    "disk_repair_began_utc": "2026-08-02T16:04:51",
+    "implication_if_true": "The original disk was never faulty and the repair could not have fixed a network lockout. The WARP install travelled into the repair copy.",
+    "installed_utc": "2026-08-02T13:52:33",
+    "leading_explanation": "WARP connected, its kill switch locked all inbound access, and the OS-disk repair was the response to a host that had just gone dark. Not proven. Timestamp correlation only.",
+    "package": "cloudflare-warp 2026.6.880.0",
+    "requested_by": "aegisadmin (1000)",
+    "source": "deb https://pkg.cloudflareclient.com/ noble main",
+    "what_would_settle_it": "journalctl for 2026-08-02 16:00-16:10 on the preserved original disk."
+  },
   "warp_persistence_step2": {
     "answer": "NO",
     "evidence": "warp-svc active, table present, input policy drop, 0 rules matching dport 22; ports 22, 4001 and 8080 all unreachable while NSG opened 4001/8080 to any source",
     "question": "Can the cloudflare-warp table return without blocking inbound SSH, with a split-tunnel bypass configured?",
     "reason": "The bypass governs outbound routing and generates no inbound accepts.",
     "remaining_risk": "warp-svc is stopped but still ENABLED; the table returns on reboot.",
+    "resolution": {
+      "action": "systemctl disable warp-svc",
+      "authorized_by": "Steward",
+      "cloudflare_warp_table": "absent",
+      "is_active": "inactive",
+      "is_enabled": "disabled",
+      "not_uninstalled": "warp-cli and the daemon remain and can be started by hand.",
+      "not_yet_proven": "Persistence across reboot. Auditor step 3 permits a reboot to demonstrate it; not performed.",
+      "observed_utc": "2026-08-06T06:33:31Z",
+      "reachable": {
+        "tcp22": true,
+        "tcp4001": true
+      }
+    },
     "workaround_unavailable": "At a given nftables hook all base chains are traversed and a drop verdict is final, so an accept in a separate table cannot override WARP's policy drop."
   },
   "working_parameters": {

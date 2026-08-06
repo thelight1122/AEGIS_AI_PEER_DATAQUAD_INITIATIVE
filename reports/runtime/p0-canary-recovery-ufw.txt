@@ -233,11 +233,67 @@ base chains are traversed and a `drop` verdict in any chain is final, so an
 live inside WARP's own table, where the daemon reverts it, or the daemon must
 not be running.
 
-REMAINING RISK: warp-svc is stopped but still ENABLED. The table returns on
-reboot and the host becomes unreachable again. Durable options, none applied:
-  - systemctl disable warp-svc on this host
-  - a WARP client setting that disables the firewall or kill switch, if this
-    version exposes one (unverified; not guessed at)
+RESOLUTION (2026-08-06T06:33:31Z, authorized by Steward):
+  systemctl disable warp-svc
+
+  is-enabled                   disabled
+  is-active                    inactive
+  cloudflare-warp table        absent
+  warp-svc.service             the only warp unit; nothing else can start it
+  20.122.189.26:22             reachable
+  20.122.189.26:4001           reachable
+
+WARP is not uninstalled. warp-cli and the daemon binary remain and can be
+started by hand, which would reproduce the outage. Uninstalling was not done:
+`apt-get install cloudflare-warp` pulled roughly 150 packages including GTK,
+WebKit, GStreamer, PulseAudio and Mesa onto a headless node, and removing that
+tree is a larger and less reversible action than the problem requires.
+
+NOT YET PROVEN: persistence across reboot. `disabled` is strong evidence that
+the unit will not start at boot, but only a reboot demonstrates it. Auditor
+sequence step 3 permits a reboot for exactly this purpose, preserving rollback
+readiness. Not performed.
+
+===============================================================
+LAYER 9 - WHY WARP WAS ON THIS HOST, AND WHAT IT LIKELY CAUSED
+===============================================================
+Installed deliberately, by hand, from Cloudflare's own apt repository:
+
+  2026-08-02 13:52:33   apt-get install cloudflare-warp
+                        Requested-By: aegisadmin (1000)
+  2026-08-02 13:53:05   install completes
+  2026-08-02 13:54      consumer-settings.json, final-overrides-settings.json
+  2026-08-02 16:04      conf.json written (configured / connected)
+  source                deb https://pkg.cloudflareclient.com/ noble main
+  package               cloudflare-warp 2026.6.880.0
+  enrollment            reg_mdm_orgs.json present, suggesting Zero Trust / MDM
+                        rather than a plain consumer install
+
+Correlation with the Azure disk operations of the same afternoon:
+
+  16:04       WARP conf.json written on the guest
+  16:04:51    snapshot vm-cyberpeer-core-os-snap-20260802 taken
+  16:05:09    disk vm-cyberpeer-core-os-repair-copy created
+  16:06:48    VM vm-cyberpeer-repair created
+  19:20:18    VM deallocated
+
+The disk repair began within a minute of WARP being configured.
+
+LEADING EXPLANATION, NOT PROVEN: WARP connected, its kill switch locked all
+inbound access to the host, and the OS-disk repair was the response to a machine
+that had just gone dark. If so, the disk was never faulty, the repair could not
+have fixed a network lockout, and the WARP install travelled into the repair
+copy because it lives on the disk that was copied - which is why the same
+lockout recurred today.
+
+Two consequences if it holds:
+  - vm-cyberpeer-core_OsDisk_1_f79b5c49e4f94a9792b038ccb685615b is likely
+    healthy and was never the problem. The rollback artifact is the original of
+    a working disk, not a fallback to a broken state.
+  - The repair copy carries the same WARP install.
+
+WHAT WOULD SETTLE IT: journalctl for 2026-08-02 16:00-16:10 on the preserved
+original disk. Recorded as an open question, not as a finding.
 
 ===============================================================
 LADDER
