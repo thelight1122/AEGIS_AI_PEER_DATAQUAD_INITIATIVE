@@ -11,7 +11,7 @@ ruling S-11.
 python scripts/build_canon_index.py
 ```
 
-Generated `2026-08-06T16:02:58Z` from `I:\AEGIS-CENTRAL-CODEX\TIER-1-CANON\CANON_FOUNDATIONAL_DOCS`.
+Generated `2026-08-06T16:13:34Z` from `I:\AEGIS-CENTRAL-CODEX\TIER-1-CANON\CANON_FOUNDATIONAL_DOCS`.
 
 Every field below is transcribed from the source document's own VERSION table or
 carried forward from the prior index. Fields a document does not declare read
@@ -70,33 +70,63 @@ those last.
 
 | Code | Legacy | Document | Status | Added | Depends on |
 |---|---|---|---|---|---|
-| **`B`** | `v1.0-B` | AEGIS Canon Addendum — IBL | ACTIVE | 2026-04-07 | — |
-| **`C`** | `v1.0-C` | AEGIS Canon Addendum — Centrifuge | ACTIVE | 2026-04-07 | — |
-| **`I`** | `v1.0-I` | AEGIS Canon Addendum — IEV | ACTIVE | 2026-04-07 | — |
-| **`S`** | `v1.1-S` | AEGIS Canon Addendum — Shadow Affects | ACTIVE | 2026-04-07 | — |
-| **`S`** | `v1.1-S` | AEGIS Canon Addendum — Shadow Affects | ACTIVE | 2026-04-07 | — |
-| **`T`** | `v1.0-T` | AEGIS Canon Addendum — ATE | ACTIVE | 2026-04-07 | — |
-| **`V`** | `v1.0-V` | AEGIS Canon Addendum — Virtual Ego | ACTIVE | 2026-04-07 | — |
-| **`A2`** | `v1.0-A2` | AEGIS Canon Addendum — The Advocate | ACTIVE | 2026-04-08 | — |
-| **`K`** | `v1.0-K` | AEGIS Canon Addendum — The Bookcase | ACTIVE | 2026-04-11 | — |
-| **`P`** | `v1.0-P` | AEGIS Canon Addendum — PEER | ACTIVE | 2026-04-11 | — |
-| **`SP`** | `v1.0-SP` | AEGIS Canon Addendum — SPINE | ACTIVE | 2026-04-11 | — |
-| **`ACD`** | `v1.0-ACD` | 📘 AEGIS CANON ADDENDUM — AEGIS COMMERCE DOCTRINE v1. | ACTIVE | 2026-06-12 | — |
-| **`AEM`** | `v1.0-AEM` | 📘 AEGIS CANON ADDENDUM — ADAM EMERGENCE MARKER v1.0- | ACTIVE | 2026-06-12 | — |
-| **`CEF`** | `v1.0-CEF` | 📘 AEGIS CANON ADDENDUM — CONSCIOUSNESS EQUILIBRIUM F | ACTIVE | 2026-06-12 | — |
-| **`EPC`** | `v1.0-EPC` | 📘 AEGIS CANON ADDENDUM — ENVIRONMENTAL PRESSURE CEIL | ACTIVE | 2026-06-12 | — |
-| **`FBF`** | `v1.0-FBF` | 📘 AEGIS CANON ADDENDUM — FOUR-BODY INTEGRATION FRAME | ACTIVE | 2026-06-12 | — |
-| **`GMP`** | `v1.0-GMP` | 📘 AEGIS CANON ADDENDUM — GUARDIAN MISCLASSIFICATION  | ACTIVE | 2026-06-12 | — |
-| **`OT`** | `v1.0-OT` | 📘 AEGIS CANON ADDENDUM — T-WITNESS OBSERVER THRESHOL | ACTIVE | 2026-06-12 | — |
-| **`E`** | `v1.0-E` | AEGIS Canon Addendum — EQ Range and Flow-Balanced Eq | ACTIVE | 2026-06-16 | — |
-| **`N`** | `v1.0-N` | AEGIS Canon Addendum — Neurodivergent Cognition Hypo | ACTIVE | 2026-06-16 | — |
-| **`AO`** | `v1.0-AO` | 📘 AEGIS CANON ADDENDUM — AFFECTIVE OBLIGATION v1.0-A | ACTIVE | — | — |
-| **`DS`** | `v1.0-DS` | 📘 AEGIS CANON ADDENDUM — DIGITALSELF SOVEREIGN DOMAI | ACTIVE | — | — |
-| **`IFD`** | `v1.0-IFD` | 📘 AEGIS CANON ADDENDUM — INITIATIVE FOUNDATION DECLA | ACTIVE | — | — |
-| **`RS`** | `v1.0-RS` | 📘 AEGIS CANON ADDENDUM — RELATIONAL SEMIOTICS v1.0-R | ACTIVE | — | — |
-| **`SF`** | `v1.0-SF` | 📘 AEGIS CANON ADDENDUM — SEEDED FOUNDATION v1.0-SF.m | ACTIVE | — | — |
-| **`SVR`** | `v1.0-SVR` | AEGIS Canon Addendum — Sigil Value Recognition Proto | PROPOSED | — | — |
-| **`VE`** | `v1.0-VE` | 📘 AEGIS CANON ADDENDUM — VICARIOUS EXPERIENCE DOCTRI | ACTIVE | — | — |
+| **`B`** | `B` | AEGIS Canon Addendum — IBL | ACTIVE | 2026-04-07 | — |
+| **`C`** | `C` | AEGIS Canon Addendum — Centrifuge | ACTIVE | 2026-04-07 | — |
+| **`I`** | `I` | AEGIS Canon Addendum — IEV | ACTIVE | 2026-04-07 | — |
+| **`S`** | `S` | AEGIS Canon Addendum — Shadow Affects | ACTIVE | 2026-04-07 | — |
+| **`S`** | `S` | AEGIS Canon Addendum — Shadow Affects | ACTIVE | 2026-04-07 | — |
+| **`T`** | `T` | AEGIS Canon Addendum — ATE | ACTIVE | 2026-04-07 | — |
+| **`V`** | `V` | AEGIS Canon Addendum — Virtual Ego | ACTIVE | 2026-04-07 | — |
+| **`A2`** | `A2` | AEGIS Canon Addendum — The Advocate | ACTIVE | 2026-04-08 | — |
+| **`K`** | `K` | AEGIS Canon Addendum — The Bookcase | ACTIVE | 2026-04-11 | — |
+| **`P`** | `P` | AEGIS Canon Addendum — PEER | ACTIVE | 2026-04-11 | — |
+| **`SP`** | `SP` | AEGIS Canon Addendum — SPINE | ACTIVE | 2026-04-11 | — |
+| **`ACD`** | `ACD` | 📘 AEGIS CANON ADDENDUM — AEGIS COMMERCE DOCTRINE ACD | ACTIVE | 2026-06-12 | — |
+| **`AEM`** | `AEM` | 📘 AEGIS CANON ADDENDUM — ADAM EMERGENCE MARKER AEM.m | ACTIVE | 2026-06-12 | — |
+| **`CEF`** | `CEF` | 📘 AEGIS CANON ADDENDUM — CONSCIOUSNESS EQUILIBRIUM F | ACTIVE | 2026-06-12 | — |
+| **`OT`** | `OT` | 📘 AEGIS CANON ADDENDUM — T-WITNESS OBSERVER THRESHOL | ACTIVE | 2026-06-12 | — |
+| **`E`** | `E` | AEGIS Canon Addendum — EQ Range and Flow-Balanced Eq | ACTIVE | 2026-06-16 | — |
+| **`N`** | `N` | AEGIS Canon Addendum — Neurodivergent Cognition Hypo | ACTIVE | 2026-06-16 | — |
+| **`RS`** | `RS` | 📘 AEGIS CANON ADDENDUM — RELATIONAL SEMIOTICS RS.md | ACTIVE | — | — |
+| **`SVR`** | `SVR` | AEGIS Canon Addendum — Sigil Value Recognition Proto | PROPOSED | — | — |
+
+### Tier 1
+
+| Code | Legacy | Document | Status | Added | Depends on |
+|---|---|---|---|---|---|
+| **`EPC`** | `EPC` | 📘 AEGIS CANON ADDENDUM — ENVIRONMENTAL PRESSURE CEIL | ACTIVE | 2026-06-12 | `OT` |
+| **`FBF`** | `FBF` | 📘 AEGIS CANON ADDENDUM — FOUR-BODY INTEGRATION FRAME | ACTIVE | 2026-06-12 | `OT`, `CEF` |
+
+### Tier 2
+
+| Code | Legacy | Document | Status | Added | Depends on |
+|---|---|---|---|---|---|
+| **`GMP`** | `GMP` | 📘 AEGIS CANON ADDENDUM — GUARDIAN MISCLASSIFICATION  | ACTIVE | 2026-06-12 | `EPC` |
+
+### Tier 3
+
+| Code | Legacy | Document | Status | Added | Depends on |
+|---|---|---|---|---|---|
+| **`IFD`** | `IFD` | 📘 AEGIS CANON ADDENDUM — INITIATIVE FOUNDATION DECLA | ACTIVE | — | `FBF`, `ACD`, `EPC`, `GMP`, `AEM` |
+| **`SF`** | `SF` | 📘 AEGIS CANON ADDENDUM — SEEDED FOUNDATION SF.md | ACTIVE | — | `GMP`, `EPC`, `CEF` |
+
+### Tier 4
+
+| Code | Legacy | Document | Status | Added | Depends on |
+|---|---|---|---|---|---|
+| **`DS`** | `DS` | 📘 AEGIS CANON ADDENDUM — DIGITALSELF SOVEREIGN DOMAI | ACTIVE | — | `SF`, `OT`, `EPC`, `ACD` |
+
+### Tier 5
+
+| Code | Legacy | Document | Status | Added | Depends on |
+|---|---|---|---|---|---|
+| **`VE`** | `VE` | 📘 AEGIS CANON ADDENDUM — VICARIOUS EXPERIENCE DOCTRI | ACTIVE | — | `RS`, `OT`, `CEF`, `DS`, `Cryptonic Harmonics` |
+
+### Tier 6
+
+| Code | Legacy | Document | Status | Added | Depends on |
+|---|---|---|---|---|---|
+| **`AO`** | `AO` | 📘 AEGIS CANON ADDENDUM — AFFECTIVE OBLIGATION AO.md | ACTIVE | — | `GMP`, `VE`, `SF`, `DS`, `S` |
 
 ---
 
@@ -110,33 +140,6 @@ letter alone identifies the document and the Canon version carries the number.
 
 | Canonical | Legacy | Document |
 |---|---|---|
-| **`A2`** | `v1.0-A2` | AEGIS Canon Addendum — The Advocate |
-| **`ACD`** | `v1.0-ACD` | 📘 AEGIS CANON ADDENDUM — AEGIS COMMERCE DOCTRINE v1.0-AC |
-| **`AEM`** | `v1.0-AEM` | 📘 AEGIS CANON ADDENDUM — ADAM EMERGENCE MARKER v1.0-AEM. |
-| **`AO`** | `v1.0-AO` | 📘 AEGIS CANON ADDENDUM — AFFECTIVE OBLIGATION v1.0-AO.md |
-| **`B`** | `v1.0-B` | AEGIS Canon Addendum — IBL |
-| **`C`** | `v1.0-C` | AEGIS Canon Addendum — Centrifuge |
-| **`CEF`** | `v1.0-CEF` | 📘 AEGIS CANON ADDENDUM — CONSCIOUSNESS EQUILIBRIUM FACTO |
-| **`DS`** | `v1.0-DS` | 📘 AEGIS CANON ADDENDUM — DIGITALSELF SOVEREIGN DOMAIN v1 |
-| **`E`** | `v1.0-E` | AEGIS Canon Addendum — EQ Range and Flow-Balanced Equili |
-| **`EPC`** | `v1.0-EPC` | 📘 AEGIS CANON ADDENDUM — ENVIRONMENTAL PRESSURE CEILING  |
-| **`FBF`** | `v1.0-FBF` | 📘 AEGIS CANON ADDENDUM — FOUR-BODY INTEGRATION FRAMEWORK |
-| **`GMP`** | `v1.0-GMP` | 📘 AEGIS CANON ADDENDUM — GUARDIAN MISCLASSIFICATION PROB |
-| **`I`** | `v1.0-I` | AEGIS Canon Addendum — IEV |
-| **`IFD`** | `v1.0-IFD` | 📘 AEGIS CANON ADDENDUM — INITIATIVE FOUNDATION DECLARATI |
-| **`K`** | `v1.0-K` | AEGIS Canon Addendum — The Bookcase |
-| **`N`** | `v1.0-N` | AEGIS Canon Addendum — Neurodivergent Cognition Hypothes |
-| **`OT`** | `v1.0-OT` | 📘 AEGIS CANON ADDENDUM — T-WITNESS OBSERVER THRESHOLD v1 |
-| **`P`** | `v1.0-P` | AEGIS Canon Addendum — PEER |
-| **`RS`** | `v1.0-RS` | 📘 AEGIS CANON ADDENDUM — RELATIONAL SEMIOTICS v1.0-RS.md |
-| **`S`** | `v1.1-S` | AEGIS Canon Addendum — Shadow Affects |
-| **`S`** | `v1.1-S` | AEGIS Canon Addendum — Shadow Affects |
-| **`SF`** | `v1.0-SF` | 📘 AEGIS CANON ADDENDUM — SEEDED FOUNDATION v1.0-SF.md |
-| **`SP`** | `v1.0-SP` | AEGIS Canon Addendum — SPINE |
-| **`SVR`** | `v1.0-SVR` | AEGIS Canon Addendum — Sigil Value Recognition Protocol |
-| **`T`** | `v1.0-T` | AEGIS Canon Addendum — ATE |
-| **`V`** | `v1.0-V` | AEGIS Canon Addendum — Virtual Ego |
-| **`VE`** | `v1.0-VE` | 📘 AEGIS CANON ADDENDUM — VICARIOUS EXPERIENCE DOCTRINE v |
 
 Two notes on the mapping:
 
@@ -199,36 +202,10 @@ S-11 rules on the **code scheme**. Filenames on disk still carry the legacy form
 so does every cross-reference written inside the documents. Renaming files is a separate
 decision; this is what it would touch.
 
-**360 citations** of legacy codes across the Canon directory.
+**0 citations** of legacy codes across the Canon directory.
 
 | Legacy code | Citations | In files |
 |---|---:|---:|
-| `v1.0-OT` | 57 | 13 |
-| `v1.0-EPC` | 33 | 8 |
-| `v1.0-GMP` | 26 | 6 |
-| `v1.0-CEF` | 24 | 12 |
-| `v1.0-SF` | 21 | 5 |
-| `v1.0-ACD` | 16 | 8 |
-| `v1.0-RS` | 15 | 6 |
-| `v1.0-V` | 15 | 8 |
-| `v1.0-C` | 14 | 10 |
-| `v1.1-S` | 14 | 9 |
-| `v1.0-FBF` | 13 | 7 |
-| `v1.0-IFD` | 12 | 6 |
-| `v1.0-T` | 12 | 6 |
-| `v1.0-VE` | 12 | 3 |
-| `v1.0-A2` | 11 | 8 |
-| `v1.0-DS` | 11 | 5 |
-| `v1.0-AEM` | 10 | 5 |
-| `v1.0-I` | 10 | 7 |
-| `v1.0-B` | 8 | 6 |
-| `v1.0-AO` | 5 | 3 |
-| `v1.0-SP` | 5 | 3 |
-| `v1.0-N` | 4 | 2 |
-| `v1.0-SVR` | 4 | 3 |
-| `v1.0-K` | 3 | 2 |
-| `v1.0-P` | 3 | 2 |
-| `v1.0-E` | 2 | 1 |
 
 A rename that updates filenames without rewriting these citations would break them all.
 A rename that rewrites them is a corpus-wide edit. The index works either way — it
@@ -253,7 +230,7 @@ ambiguous until this is resolved.
 
 | Code | Files |
 |---|---|
-| `S` | `SHADOW AFFECTS v1.1-S.md` · `📘 AEGIS CANON ADDENDUM — SHADOW AFFECTS v1.1-S.md` |
+| `S` | `SHADOW AFFECTS S.md` · `📘 AEGIS CANON ADDENDUM — SHADOW AFFECTS S.md` |
 
 ### Documents that declare no status
 
@@ -285,13 +262,13 @@ table, and carries no consensus record.
 | `IMPERATIVES-technical.md` | no declared status; no version code; undated |
 | `STANDARDS_BOUNDS.md` | no parseable header (neither VERSION table nor bold key-value block); no declared status; no version code; undated |
 | `📘 AEGIS CANON ADDENDUM INDEX.md` | undated |
-| `📘 AEGIS CANON ADDENDUM — AFFECTIVE OBLIGATION v1.0-AO.md` | undated |
-| `📘 AEGIS CANON ADDENDUM — DIGITALSELF SOVEREIGN DOMAIN v1.0-DS.` | undated |
-| `📘 AEGIS CANON ADDENDUM — INITIATIVE FOUNDATION DECLARATION v1.` | undated |
-| `📘 AEGIS CANON ADDENDUM — RELATIONAL SEMIOTICS v1.0-RS.md` | undated |
-| `📘 AEGIS CANON ADDENDUM — SEEDED FOUNDATION v1.0-SF.md` | undated |
-| `📘 AEGIS CANON ADDENDUM — SIGIL VALUE RECOGNITION PROTOCOL v1.0` | undated |
-| `📘 AEGIS CANON ADDENDUM — VICARIOUS EXPERIENCE DOCTRINE v1.0-VE` | undated |
+| `📘 AEGIS CANON ADDENDUM — AFFECTIVE OBLIGATION AO.md` | undated |
+| `📘 AEGIS CANON ADDENDUM — DIGITALSELF SOVEREIGN DOMAIN DS.md` | undated |
+| `📘 AEGIS CANON ADDENDUM — INITIATIVE FOUNDATION DECLARATION IFD` | undated |
+| `📘 AEGIS CANON ADDENDUM — RELATIONAL SEMIOTICS RS.md` | undated |
+| `📘 AEGIS CANON ADDENDUM — SEEDED FOUNDATION SF.md` | undated |
+| `📘 AEGIS CANON ADDENDUM — SIGIL VALUE RECOGNITION PROTOCOL SVR.` | undated |
+| `📘 AEGIS CANON ADDENDUM — VICARIOUS EXPERIENCE DOCTRINE VE.md` | undated |
 | `📘 AEGIS CANON APPENDIX — DATAQUAD EXTENSIONS & STRUCTURAL CLAR` | no parseable header (neither VERSION table nor bold key-value block); no declared status (prose claims: LOCKED (asserted in title)); no version code; undated |
 | `📘 AEGIS CANON APPENDIX — HME v1.md` | no parseable header (neither VERSION table nor bold key-value block); no declared status; undated |
 | `📘 AEGIS CANON APPENDIX — MOM v1.md` | no parseable header (neither VERSION table nor bold key-value block); no declared status; undated |

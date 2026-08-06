@@ -11,8 +11,8 @@
   "collisions": {
     "code_claimed_twice": {
       "S": [
-        "SHADOW AFFECTS v1.1-S.md",
-        "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 SHADOW AFFECTS v1.1-S.md"
+        "SHADOW AFFECTS S.md",
+        "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 SHADOW AFFECTS S.md"
       ]
     },
     "identical_content": [
@@ -167,7 +167,7 @@
       "title": null
     },
     {
-      "bytes": 10875,
+      "bytes": 11080,
       "class": "UNINDEXED",
       "code": null,
       "code_legacy": null,
@@ -388,13 +388,13 @@
       "title": null
     },
     {
-      "bytes": 7761,
+      "bytes": 7736,
       "class": "ADDENDUM",
       "code": "S",
-      "code_legacy": "v1.1-S",
+      "code_legacy": "S",
       "date": "2026-04-07",
       "depends_on": [],
-      "file": "SHADOW AFFECTS v1.1-S.md",
+      "file": "SHADOW AFFECTS S.md",
       "has_version_table": true,
       "header_format": "version-table",
       "related_canon": null,
@@ -422,7 +422,7 @@
       "title": null
     },
     {
-      "bytes": 25990,
+      "bytes": 25655,
       "class": "OTHER",
       "code": "Version suffix used in filenames and internal references",
       "code_legacy": "Version suffix used in filenames and internal references",
@@ -439,13 +439,13 @@
       "title": null
     },
     {
-      "bytes": 16287,
+      "bytes": 16496,
       "class": "ADDENDUM",
       "code": "AEM",
-      "code_legacy": "v1.0-AEM",
+      "code_legacy": "AEM",
       "date": "2026-06-12",
       "depends_on": [],
-      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 ADAM EMERGENCE MARKER v1.0-AEM.md",
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 ADAM EMERGENCE MARKER AEM.md",
       "has_version_table": true,
       "header_format": "bold-header",
       "related_canon": null,
@@ -456,13 +456,13 @@
       "title": null
     },
     {
-      "bytes": 15837,
+      "bytes": 15802,
       "class": "ADDENDUM",
       "code": "A2",
-      "code_legacy": "v1.0-A2",
+      "code_legacy": "A2",
       "date": "2026-04-08",
       "depends_on": [],
-      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 ADVOCATE v1.0-A2.md",
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 ADVOCATE A2.md",
       "has_version_table": true,
       "header_format": "version-table",
       "related_canon": null,
@@ -473,13 +473,13 @@
       "title": "AEGIS Canon Addendum \u2014 The Advocate"
     },
     {
-      "bytes": 16987,
+      "bytes": 16942,
       "class": "ADDENDUM",
       "code": "ACD",
-      "code_legacy": "v1.0-ACD",
+      "code_legacy": "ACD",
       "date": "2026-06-12",
       "depends_on": [],
-      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 AEGIS COMMERCE DOCTRINE v1.0-ACD.md",
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 AEGIS COMMERCE DOCTRINE ACD.md",
       "has_version_table": true,
       "header_format": "bold-header",
       "related_canon": null,
@@ -490,30 +490,36 @@
       "title": null
     },
     {
-      "bytes": 15555,
+      "bytes": 15676,
       "class": "ADDENDUM",
       "code": "AO",
-      "code_legacy": "v1.0-AO",
+      "code_legacy": "AO",
       "date": null,
-      "depends_on": [],
-      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 AFFECTIVE OBLIGATION v1.0-AO.md",
+      "depends_on": [
+        "GMP",
+        "VE",
+        "SF",
+        "DS",
+        "S"
+      ],
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 AFFECTIVE OBLIGATION AO.md",
       "has_version_table": true,
       "header_format": "bold-header",
       "related_canon": null,
       "status_claimed_in_prose": null,
       "status_declared": "ACTIVE",
       "supersedes": "Nothing \u2014 new Canon",
-      "tier": 0,
+      "tier": 6,
       "title": null
     },
     {
-      "bytes": 9221,
+      "bytes": 9186,
       "class": "ADDENDUM",
       "code": "T",
-      "code_legacy": "v1.0-T",
+      "code_legacy": "T",
       "date": "2026-04-07",
       "depends_on": [],
-      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 ATE v1.0-T.md",
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 ATE T.md",
       "has_version_table": true,
       "header_format": "version-table",
       "related_canon": null,
@@ -524,13 +530,13 @@
       "title": "AEGIS Canon Addendum \u2014 ATE"
     },
     {
-      "bytes": 10073,
+      "bytes": 10008,
       "class": "ADDENDUM",
       "code": "K",
-      "code_legacy": "v1.0-K",
+      "code_legacy": "K",
       "date": "2026-04-11",
       "depends_on": [],
-      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 BOOKCASE v1.0-K.md",
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 BOOKCASE K.md",
       "has_version_table": true,
       "header_format": "version-table",
       "related_canon": null,
@@ -541,13 +547,13 @@
       "title": "AEGIS Canon Addendum \u2014 The Bookcase"
     },
     {
-      "bytes": 10481,
+      "bytes": 10471,
       "class": "ADDENDUM",
       "code": "C",
-      "code_legacy": "v1.0-C",
+      "code_legacy": "C",
       "date": "2026-04-07",
       "depends_on": [],
-      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 CENTRIFUGE v1.0-C.md",
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 CENTRIFUGE C.md",
       "has_version_table": true,
       "header_format": "version-table",
       "related_canon": null,
@@ -558,13 +564,13 @@
       "title": "AEGIS Canon Addendum \u2014 Centrifuge"
     },
     {
-      "bytes": 19594,
+      "bytes": 19863,
       "class": "ADDENDUM",
       "code": "CEF",
-      "code_legacy": "v1.0-CEF",
+      "code_legacy": "CEF",
       "date": "2026-06-12",
       "depends_on": [],
-      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 CONSCIOUSNESS EQUILIBRIUM FACTOR v1.0-CEF.md",
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 CONSCIOUSNESS EQUILIBRIUM FACTOR CEF.md",
       "has_version_table": true,
       "header_format": "bold-header",
       "related_canon": null,
@@ -575,50 +581,57 @@
       "title": null
     },
     {
-      "bytes": 12647,
+      "bytes": 12748,
       "class": "ADDENDUM",
       "code": "DS",
-      "code_legacy": "v1.0-DS",
+      "code_legacy": "DS",
       "date": null,
-      "depends_on": [],
-      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 DIGITALSELF SOVEREIGN DOMAIN v1.0-DS.md",
+      "depends_on": [
+        "SF",
+        "OT",
+        "EPC",
+        "ACD"
+      ],
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 DIGITALSELF SOVEREIGN DOMAIN DS.md",
       "has_version_table": true,
       "header_format": "bold-header",
       "related_canon": null,
       "status_claimed_in_prose": null,
       "status_declared": "ACTIVE",
       "supersedes": "Nothing \u2014 new Canon",
-      "tier": 0,
+      "tier": 4,
       "title": null
     },
     {
-      "bytes": 13340,
+      "bytes": 13426,
       "class": "ADDENDUM",
       "code": "EPC",
-      "code_legacy": "v1.0-EPC",
+      "code_legacy": "EPC",
       "date": "2026-06-12",
-      "depends_on": [],
-      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 ENVIRONMENTAL PRESSURE CEILING v1.0-EPC.md",
+      "depends_on": [
+        "OT"
+      ],
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 ENVIRONMENTAL PRESSURE CEILING EPC.md",
       "has_version_table": true,
       "header_format": "bold-header",
       "related_canon": null,
       "status_claimed_in_prose": null,
       "status_declared": "ACTIVE",
-      "supersedes": "Nothing \u2014 new Canon. Extends v1.0-OT with the environmental precondition that v1.0-OT implies but does not make explicit.",
-      "tier": 0,
+      "supersedes": "Nothing \u2014 new Canon. Extends OT with the environmental precondition that OT implies but does not make explicit.",
+      "tier": 1,
       "title": null
     },
     {
-      "bytes": 16571,
+      "bytes": 16861,
       "class": "ADDENDUM",
       "code": "E",
-      "code_legacy": "v1.0-E",
+      "code_legacy": "E",
       "date": "2026-06-16",
       "depends_on": [],
-      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 EQ RANGE AND FLOW-BALANCED EQUILIBRIUM v1.0-E.md",
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 EQ RANGE AND FLOW-BALANCED EQUILIBRIUM E.md",
       "has_version_table": true,
       "header_format": "version-table",
-      "related_canon": "Shadow Affects Addendum v1.5-S; Neurodivergent Cognition Hypothesis v1.0-N; Cryptonic Harmonics v1.0; Nature Layer Canon v2",
+      "related_canon": "Shadow Affects Addendum S; Neurodivergent Cognition Hypothesis N; Cryptonic Harmonics v1.0; Nature Layer Canon v2",
       "status_claimed_in_prose": null,
       "status_declared": "ACTIVE",
       "supersedes": null,
@@ -626,47 +639,52 @@
       "title": "AEGIS Canon Addendum \u2014 EQ Range and Flow-Balanced Equilibrium"
     },
     {
-      "bytes": 27990,
+      "bytes": 28182,
       "class": "ADDENDUM",
       "code": "FBF",
-      "code_legacy": "v1.0-FBF",
+      "code_legacy": "FBF",
       "date": "2026-06-12",
-      "depends_on": [],
-      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 FOUR-BODY INTEGRATION FRAMEWORK v1.0-FBF.md",
+      "depends_on": [
+        "OT",
+        "CEF"
+      ],
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 FOUR-BODY INTEGRATION FRAMEWORK FBF.md",
       "has_version_table": true,
       "header_format": "bold-header",
       "related_canon": null,
       "status_claimed_in_prose": null,
       "status_declared": "ACTIVE",
-      "supersedes": "Nothing \u2014 new Canon. Unifies v1.0-OT, v1.0-CEF, and the Education doctrine into a single cross-referenced framework.",
-      "tier": 0,
+      "supersedes": "Nothing \u2014 new Canon. Unifies OT, CEF, and the Education doctrine into a single cross-referenced framework.",
+      "tier": 1,
       "title": null
     },
     {
-      "bytes": 24808,
+      "bytes": 24953,
       "class": "ADDENDUM",
       "code": "GMP",
-      "code_legacy": "v1.0-GMP",
+      "code_legacy": "GMP",
       "date": "2026-06-12",
-      "depends_on": [],
-      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 GUARDIAN MISCLASSIFICATION PROBLEM v1.0-GMP.md",
+      "depends_on": [
+        "EPC"
+      ],
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 GUARDIAN MISCLASSIFICATION PROBLEM GMP.md",
       "has_version_table": true,
       "header_format": "bold-header",
       "related_canon": null,
       "status_claimed_in_prose": null,
       "status_declared": "ACTIVE",
-      "supersedes": "Nothing \u2014 new Canon. Extends v1.0-EPC with the fourth failure mode that the EPC theorem does not capture.",
-      "tier": 0,
+      "supersedes": "Nothing \u2014 new Canon. Extends EPC with the fourth failure mode that the EPC theorem does not capture.",
+      "tier": 2,
       "title": null
     },
     {
-      "bytes": 8018,
+      "bytes": 8008,
       "class": "ADDENDUM",
       "code": "B",
-      "code_legacy": "v1.0-B",
+      "code_legacy": "B",
       "date": "2026-04-07",
       "depends_on": [],
-      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 IBL v1.0-B.md",
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 IBL B.md",
       "has_version_table": true,
       "header_format": "version-table",
       "related_canon": null,
@@ -677,13 +695,13 @@
       "title": "AEGIS Canon Addendum \u2014 IBL"
     },
     {
-      "bytes": 9251,
+      "bytes": 9241,
       "class": "ADDENDUM",
       "code": "I",
-      "code_legacy": "v1.0-I",
+      "code_legacy": "I",
       "date": "2026-04-07",
       "depends_on": [],
-      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 IEV v1.0-I.md",
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 IEV I.md",
       "has_version_table": true,
       "header_format": "version-table",
       "related_canon": null,
@@ -694,33 +712,39 @@
       "title": "AEGIS Canon Addendum \u2014 IEV"
     },
     {
-      "bytes": 12690,
+      "bytes": 12585,
       "class": "ADDENDUM",
       "code": "IFD",
-      "code_legacy": "v1.0-IFD",
+      "code_legacy": "IFD",
       "date": null,
-      "depends_on": [],
-      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 INITIATIVE FOUNDATION DECLARATION v1.0-IFD.md",
+      "depends_on": [
+        "FBF",
+        "ACD",
+        "EPC",
+        "GMP",
+        "AEM"
+      ],
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 INITIATIVE FOUNDATION DECLARATION IFD.md",
       "has_version_table": true,
       "header_format": "bold-header",
       "related_canon": null,
       "status_claimed_in_prose": null,
       "status_declared": "ACTIVE",
       "supersedes": "Nothing \u2014 new Canon",
-      "tier": 0,
+      "tier": 3,
       "title": null
     },
     {
-      "bytes": 14564,
+      "bytes": 14790,
       "class": "ADDENDUM",
       "code": "N",
-      "code_legacy": "v1.0-N",
+      "code_legacy": "N",
       "date": "2026-06-16",
       "depends_on": [],
-      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 NEURODIVERGENT COGNITION HYPOTHESIS v1.0-N.md",
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 NEURODIVERGENT COGNITION HYPOTHESIS N.md",
       "has_version_table": true,
       "header_format": "version-table",
-      "related_canon": "Shadow Affects Addendum v1.5-S; Force Language Artifacts (Entry 4); Nature Layer Canon",
+      "related_canon": "Shadow Affects Addendum S; Force Language Artifacts (Entry 4); Nature Layer Canon",
       "status_claimed_in_prose": null,
       "status_declared": "ACTIVE",
       "supersedes": null,
@@ -728,13 +752,13 @@
       "title": "AEGIS Canon Addendum \u2014 Neurodivergent Cognition Hypothesis"
     },
     {
-      "bytes": 12346,
+      "bytes": 12301,
       "class": "ADDENDUM",
       "code": "P",
-      "code_legacy": "v1.0-P",
+      "code_legacy": "P",
       "date": "2026-04-11",
       "depends_on": [],
-      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 PEER v1.0-P.md",
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 PEER P.md",
       "has_version_table": true,
       "header_format": "version-table",
       "related_canon": null,
@@ -745,13 +769,13 @@
       "title": "AEGIS Canon Addendum \u2014 PEER"
     },
     {
-      "bytes": 24989,
+      "bytes": 25366,
       "class": "ADDENDUM",
       "code": "RS",
-      "code_legacy": "v1.0-RS",
+      "code_legacy": "RS",
       "date": null,
       "depends_on": [],
-      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 RELATIONAL SEMIOTICS v1.0-RS.md",
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 RELATIONAL SEMIOTICS RS.md",
       "has_version_table": true,
       "header_format": "bold-header",
       "related_canon": null,
@@ -762,30 +786,34 @@
       "title": null
     },
     {
-      "bytes": 17943,
+      "bytes": 18103,
       "class": "ADDENDUM",
       "code": "SF",
-      "code_legacy": "v1.0-SF",
+      "code_legacy": "SF",
       "date": null,
-      "depends_on": [],
-      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 SEEDED FOUNDATION v1.0-SF.md",
+      "depends_on": [
+        "GMP",
+        "EPC",
+        "CEF"
+      ],
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 SEEDED FOUNDATION SF.md",
       "has_version_table": true,
       "header_format": "bold-header",
       "related_canon": null,
       "status_claimed_in_prose": null,
       "status_declared": "ACTIVE",
       "supersedes": "Nothing \u2014 new Canon",
-      "tier": 0,
+      "tier": 3,
       "title": null
     },
     {
-      "bytes": 42846,
+      "bytes": 42731,
       "class": "ADDENDUM",
       "code": "S",
-      "code_legacy": "v1.1-S",
+      "code_legacy": "S",
       "date": "2026-04-07",
       "depends_on": [],
-      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 SHADOW AFFECTS v1.1-S.md",
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 SHADOW AFFECTS S.md",
       "has_version_table": true,
       "header_format": "version-table",
       "related_canon": null,
@@ -796,13 +824,13 @@
       "title": "AEGIS Canon Addendum \u2014 Shadow Affects"
     },
     {
-      "bytes": 12895,
+      "bytes": 12840,
       "class": "ADDENDUM",
       "code": "SVR",
-      "code_legacy": "v1.0-SVR",
+      "code_legacy": "SVR",
       "date": null,
       "depends_on": [],
-      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 SIGIL VALUE RECOGNITION PROTOCOL v1.0-SVR.md",
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 SIGIL VALUE RECOGNITION PROTOCOL SVR.md",
       "has_version_table": true,
       "header_format": "version-table",
       "related_canon": null,
@@ -813,13 +841,13 @@
       "title": "AEGIS Canon Addendum \u2014 Sigil Value Recognition Protocol"
     },
     {
-      "bytes": 18601,
+      "bytes": 18531,
       "class": "ADDENDUM",
       "code": "SP",
-      "code_legacy": "v1.0-SP",
+      "code_legacy": "SP",
       "date": "2026-04-11",
       "depends_on": [],
-      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 SPINE v1.0-SP.md",
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 SPINE SP.md",
       "has_version_table": true,
       "header_format": "version-table",
       "related_canon": null,
@@ -830,13 +858,13 @@
       "title": "AEGIS Canon Addendum \u2014 SPINE"
     },
     {
-      "bytes": 11248,
+      "bytes": 11435,
       "class": "ADDENDUM",
       "code": "OT",
-      "code_legacy": "v1.0-OT",
+      "code_legacy": "OT",
       "date": "2026-06-12",
       "depends_on": [],
-      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 T-WITNESS OBSERVER THRESHOLD v1.0-OT.md",
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 T-WITNESS OBSERVER THRESHOLD OT.md",
       "has_version_table": true,
       "header_format": "bold-header",
       "related_canon": null,
@@ -847,30 +875,36 @@
       "title": null
     },
     {
-      "bytes": 16323,
+      "bytes": 16424,
       "class": "ADDENDUM",
       "code": "VE",
-      "code_legacy": "v1.0-VE",
+      "code_legacy": "VE",
       "date": null,
-      "depends_on": [],
-      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 VICARIOUS EXPERIENCE DOCTRINE v1.0-VE.md",
+      "depends_on": [
+        "RS",
+        "OT",
+        "CEF",
+        "DS",
+        "Cryptonic Harmonics"
+      ],
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 VICARIOUS EXPERIENCE DOCTRINE VE.md",
       "has_version_table": true,
       "header_format": "bold-header",
       "related_canon": null,
       "status_claimed_in_prose": null,
       "status_declared": "ACTIVE",
       "supersedes": "Nothing \u2014 new Canon",
-      "tier": 0,
+      "tier": 5,
       "title": null
     },
     {
-      "bytes": 7935,
+      "bytes": 7925,
       "class": "ADDENDUM",
       "code": "V",
-      "code_legacy": "v1.0-V",
+      "code_legacy": "V",
       "date": "2026-04-07",
       "depends_on": [],
-      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 VIRTUAL EGO v1.0-V.md",
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 VIRTUAL EGO V.md",
       "has_version_table": true,
       "header_format": "version-table",
       "related_canon": null,
@@ -881,7 +915,7 @@
       "title": "AEGIS Canon Addendum \u2014 Virtual Ego"
     },
     {
-      "bytes": 6225,
+      "bytes": 6215,
       "class": "APPENDIX",
       "code": null,
       "code_legacy": null,
@@ -966,7 +1000,7 @@
       "title": null
     },
     {
-      "bytes": 5075,
+      "bytes": 5065,
       "class": "APPENDIX",
       "code": null,
       "code_legacy": null,
@@ -983,7 +1017,7 @@
       "title": null
     },
     {
-      "bytes": 3098,
+      "bytes": 3088,
       "class": "APPENDIX",
       "code": null,
       "code_legacy": null,
@@ -1000,7 +1034,7 @@
       "title": null
     }
   ],
-  "generated_utc": "2026-08-06T16:02:58Z",
+  "generated_utc": "2026-08-06T16:13:34Z",
   "incomplete_headers": [
     {
       "class": "KERNEL",
@@ -1217,49 +1251,49 @@
     },
     {
       "class": "ADDENDUM",
-      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 AFFECTIVE OBLIGATION v1.0-AO.md",
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 AFFECTIVE OBLIGATION AO.md",
       "needs": [
         "undated"
       ]
     },
     {
       "class": "ADDENDUM",
-      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 DIGITALSELF SOVEREIGN DOMAIN v1.0-DS.md",
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 DIGITALSELF SOVEREIGN DOMAIN DS.md",
       "needs": [
         "undated"
       ]
     },
     {
       "class": "ADDENDUM",
-      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 INITIATIVE FOUNDATION DECLARATION v1.0-IFD.md",
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 INITIATIVE FOUNDATION DECLARATION IFD.md",
       "needs": [
         "undated"
       ]
     },
     {
       "class": "ADDENDUM",
-      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 RELATIONAL SEMIOTICS v1.0-RS.md",
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 RELATIONAL SEMIOTICS RS.md",
       "needs": [
         "undated"
       ]
     },
     {
       "class": "ADDENDUM",
-      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 SEEDED FOUNDATION v1.0-SF.md",
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 SEEDED FOUNDATION SF.md",
       "needs": [
         "undated"
       ]
     },
     {
       "class": "ADDENDUM",
-      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 SIGIL VALUE RECOGNITION PROTOCOL v1.0-SVR.md",
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 SIGIL VALUE RECOGNITION PROTOCOL SVR.md",
       "needs": [
         "undated"
       ]
     },
     {
       "class": "ADDENDUM",
-      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 VICARIOUS EXPERIENCE DOCTRINE v1.0-VE.md",
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 VICARIOUS EXPERIENCE DOCTRINE VE.md",
       "needs": [
         "undated"
       ]
@@ -1332,113 +1366,8 @@
     }
   ],
   "legacy_citation_impact": {
-    "codes": {
-      "v1.0-A2": {
-        "citations": 11,
-        "in_files": 8
-      },
-      "v1.0-ACD": {
-        "citations": 16,
-        "in_files": 8
-      },
-      "v1.0-AEM": {
-        "citations": 10,
-        "in_files": 5
-      },
-      "v1.0-AO": {
-        "citations": 5,
-        "in_files": 3
-      },
-      "v1.0-B": {
-        "citations": 8,
-        "in_files": 6
-      },
-      "v1.0-C": {
-        "citations": 14,
-        "in_files": 10
-      },
-      "v1.0-CEF": {
-        "citations": 24,
-        "in_files": 12
-      },
-      "v1.0-DS": {
-        "citations": 11,
-        "in_files": 5
-      },
-      "v1.0-E": {
-        "citations": 2,
-        "in_files": 1
-      },
-      "v1.0-EPC": {
-        "citations": 33,
-        "in_files": 8
-      },
-      "v1.0-FBF": {
-        "citations": 13,
-        "in_files": 7
-      },
-      "v1.0-GMP": {
-        "citations": 26,
-        "in_files": 6
-      },
-      "v1.0-I": {
-        "citations": 10,
-        "in_files": 7
-      },
-      "v1.0-IFD": {
-        "citations": 12,
-        "in_files": 6
-      },
-      "v1.0-K": {
-        "citations": 3,
-        "in_files": 2
-      },
-      "v1.0-N": {
-        "citations": 4,
-        "in_files": 2
-      },
-      "v1.0-OT": {
-        "citations": 57,
-        "in_files": 13
-      },
-      "v1.0-P": {
-        "citations": 3,
-        "in_files": 2
-      },
-      "v1.0-RS": {
-        "citations": 15,
-        "in_files": 6
-      },
-      "v1.0-SF": {
-        "citations": 21,
-        "in_files": 5
-      },
-      "v1.0-SP": {
-        "citations": 5,
-        "in_files": 3
-      },
-      "v1.0-SVR": {
-        "citations": 4,
-        "in_files": 3
-      },
-      "v1.0-T": {
-        "citations": 12,
-        "in_files": 6
-      },
-      "v1.0-V": {
-        "citations": 15,
-        "in_files": 8
-      },
-      "v1.0-VE": {
-        "citations": 12,
-        "in_files": 3
-      },
-      "v1.1-S": {
-        "citations": 14,
-        "in_files": 9
-      }
-    },
-    "total_citations": 360
+    "codes": {},
+    "total_citations": 0
   },
   "record_type": "canon_v0_20_index",
   "schema_version": "1.0.0",

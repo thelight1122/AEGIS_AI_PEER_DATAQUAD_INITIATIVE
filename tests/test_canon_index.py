@@ -198,9 +198,20 @@ def test_every_addendum_carries_both_code_forms():
 
 
 @canon_available
-def test_legacy_citations_are_counted_for_the_rename_decision():
+def test_migration_is_complete_no_legacy_citations_remain():
+    """S-11 was applied to disk on 2026-08-06: 53 files renamed, 784 citations rewritten.
+
+    This asserted `> 0` before the migration, which was the right gate then. Now the
+    invariant is the opposite — a legacy `vN.N-XX` code reappearing anywhere in the Canon
+    means something was restored from a pre-migration copy or authored against the old scheme.
+    """
     entries = idx.scan(idx.DEFAULT_CANON_DIR)
     impact = idx.citation_impact(idx.DEFAULT_CANON_DIR, entries)
-    assert impact["total_citations"] > 0
-    # OT is the most-cited code in the corpus; if it drops to zero the scan has broken.
-    assert impact["codes"]["v1.0-OT"]["citations"] > 0
+    assert impact["total_citations"] == 0, f"legacy codes reappeared: {impact['codes']}"
+
+
+@canon_available
+def test_no_filename_still_carries_a_legacy_code():
+    stragglers = [p.name for p in idx.DEFAULT_CANON_DIR.glob("*.md")
+                  if __import__("re").search(r"v\d+\.\d+-[A-Z0-9]+", p.name)]
+    assert not stragglers, f"filenames not migrated: {stragglers}"
