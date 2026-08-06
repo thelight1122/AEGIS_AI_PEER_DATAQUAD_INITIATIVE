@@ -8,28 +8,33 @@
       "session_id": "lumin-session-001",
       "display_name": "Lumin",
       "substrate": "gpt",
-      "steward_declaration": "PENDING — Steward act. Not authored by the Builder."
+      "steward_declaration": "PENDING \u2014 Steward act. Not authored by the Builder.",
+      "model_id": "ap1001"
     },
     {
       "peer_id": "claude",
       "session_id": "claude-session-001",
       "display_name": "Claude",
       "substrate": "claude",
-      "steward_declaration": "PENDING — Steward act. Not authored by the Builder."
+      "steward_declaration": "PENDING \u2014 Steward act. Not authored by the Builder.",
+      "model_id": "ap1002"
     },
     {
       "peer_id": "gemini",
       "session_id": "gemini-session-001",
       "display_name": "Gemini",
       "substrate": "gemini",
-      "steward_declaration": "PENDING — Steward act. Not authored by the Builder."
+      "steward_declaration": "PENDING \u2014 Steward act. Not authored by the Builder.",
+      "model_id": "ap1003"
     },
     {
       "peer_id": "grok",
       "session_id": "grok-session-001",
       "display_name": "Grok",
       "substrate": "grok",
-      "steward_declaration": "PENDING — Steward act. Not authored by the Builder."
+      "steward_declaration": "PENDING \u2014 Steward act. Not authored by the Builder.",
+      "model_id": "ap1004"
     }
-  ]
+  ],
+  "model_id_note": "model_id is REQUIRED by the vendored record builders (present_state.model_id). The CyberPeers use cp1001 / cp1011. The values below are PROVISIONAL \u2014 the AI Peer numbering scheme is a Steward decision, not a Builder one."
 }

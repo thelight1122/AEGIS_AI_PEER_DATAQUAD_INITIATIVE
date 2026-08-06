@@ -29,12 +29,20 @@ Retained from the original
 Total placeholder substitution by serialise-replace-reparse, refusal to overwrite a non-empty
 tensor, and `--dry-run`.
 
-NOT YET VALIDATED
------------------
-The record builders here are written from the seed package's own shape, not copied from the
-original tool — its `build_*_record` bodies were not read. **Before this tool seats anything
-real, its output should be diffed against the original's for the same input.** `--emit-only`
-exists for exactly that: it produces the records without writing them anywhere.
+Record shaping is DELEGATED, not reimplemented
+----------------------------------------------
+An earlier version of this tool built records from the seed package's shape directly.
+`scripts/diff_seating_tools.py` proved that version wrong on all 129 records: it dropped
+`lineage`, `nature_aspect_refs`, `relationships`, `source_record_ids` and `t_signature` —
+`nature_aspect_refs` being Ring 1 Nature Layer material — and leaked raw camelCase fields the
+originals normalise.
+
+Shaping now delegates to `vendor/seat_foundation_dataquad_20260610.py`, a verbatim vendored copy
+of the original with its sha256 recorded in the header. Those builders produced the Aeon and
+Airen Foundations. This tool applies only two policies on top — tick 0 for genesis, and the
+clock policy — plus the canon lock state in provenance.
+
+Re-run `scripts/diff_seating_tools.py` after any change to either tool.
 
 Usage:
     python scripts/seat_ai_peer_dataquad.py --package PKG --roster fixtures/ai-peer-roster.json \\
@@ -45,6 +53,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import importlib.util
 import json
 import sys
 import urllib.request
@@ -121,7 +130,7 @@ def validate_roster(roster: dict[str, Any]) -> list[dict[str, Any]]:
     if not isinstance(peers, list) or not peers:
         raise SeatingRefused("roster contains no peers")
 
-    required = {"peer_id", "session_id", "display_name", "steward_declaration"}
+    required = {"peer_id", "session_id", "display_name", "steward_declaration", "model_id"}
     seen: set[str] = set()
     for peer in peers:
         missing = required - set(peer)
@@ -179,26 +188,76 @@ def build_provenance(canon: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def shape_records(raw_records: list[dict[str, Any]], tensor: str, policy: str,
-                  applied_at: str, canon: dict[str, Any]) -> list[dict[str, Any]]:
-    """Attach clock and provenance. Genesis pillars take tick 0; the rest count from 1.
+def _vendored():
+    """Load the vendored original for its record builders.
 
-    The canonical pillars specify tick 0 and their ids end in `:0`. The original tool numbered
-    every record from 1, which would have put genesis at tick 1. This preserves tick 0 for
-    genesis explicitly rather than by position.
+    Loaded lazily and cached so importing this module stays cheap and testable.
     """
+    if not hasattr(_vendored, "_module"):
+        path = ROOT / "vendor" / "seat_foundation_dataquad_20260610.py"
+        if not path.exists():
+            raise SeatingRefused(
+                f"vendored builders not found at {path}. Record shaping delegates to the "
+                "original tool; it is not reimplemented here."
+            )
+        spec = importlib.util.spec_from_file_location("aegis_vendored_seating", path)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        _vendored._module = module
+    return _vendored._module
+
+
+def shape_records(raw_records: list[dict[str, Any]], tensor: str, policy: str,
+                  applied_at: str, canon: dict[str, Any],
+                  peer: dict[str, Any] | None = None) -> list[dict[str, Any]]:
+    """Shape records using the ORIGINAL tool's builders, then apply this tool's policies.
+
+    Record shaping is delegated, not reimplemented. An earlier version of this function built
+    records from the package shape directly; `scripts/diff_seating_tools.py` proved that version
+    dropped `lineage`, `nature_aspect_refs`, `relationships`, `source_record_ids` and
+    `t_signature` — `nature_aspect_refs` being Ring 1 Nature Layer material — while leaking raw
+    camelCase fields the originals normalise. The vendored builders produced the Aeon and Airen
+    Foundations and are the proven shaping logic.
+
+    Two policies are applied on top:
+
+    * **tick 0 for genesis.** The original numbers every record from 1, which places the genesis
+      pillars at tick 1. The canonical pillars specify tick 0.
+    * **clock policy.** `genesis-baseline` stamps the canonical `2026-01-01T00:00:00.000Z`;
+      `seeded-now` keeps the original's run timestamp.
+
+    Provenance gains the canon lock state so a Foundation carries the Canon it was seated from.
+    """
+    vendored = _vendored()
+    builder = {"SPINE": vendored.build_spine_record, "NCT": vendored.build_nct_record}.get(tensor)
+    peer = peer or {}
+
     out: list[dict[str, Any]] = []
     ordinal = 0
-    for raw in raw_records:
-        record = dict(raw)
-        if is_genesis(record):
+    for index, raw in enumerate(raw_records):
+        if builder is not None:
+            record = builder(raw, peer, index + 1)
+        elif tensor == "PEER":
+            record = vendored.build_peer_record(peer)
+        elif tensor == "PCT":
+            record = vendored.build_pct_record(peer)
+        else:
+            raise SeatingRefused(f"no vendored builder for tensor {tensor!r}")
+
+        if is_genesis(record) or is_genesis(raw):
             tick = 0
         else:
             ordinal += 1
             tick = ordinal
-        record.setdefault("tensor", tensor)
-        record["clock"] = build_clock(tick, policy, applied_at)
-        record["provenance"] = build_provenance(canon)
+
+        clock = dict(record.get("clock") or {})
+        clock.update(build_clock(tick, policy, applied_at))
+        record["clock"] = clock
+
+        provenance = dict(record.get("provenance") or {})
+        provenance.update(build_provenance(canon))
+        record["provenance"] = provenance
+
         out.append(record)
     return out
 
@@ -244,7 +303,7 @@ def seat_peer(peer: dict[str, Any], package: dict[str, Any], canon: dict[str, An
     records = stamped.get("records", {})
 
     shaped = {
-        tensor: shape_records(records.get(tensor, []), tensor, args.clock_policy, applied_at, canon)
+        tensor: shape_records(records.get(tensor, []), tensor, args.clock_policy, applied_at, canon, peer)
         for tensor in RING_ORDER
     }
 

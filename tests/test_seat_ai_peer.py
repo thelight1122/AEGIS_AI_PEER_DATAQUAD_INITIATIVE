@@ -43,7 +43,8 @@ def _package(status: str = "clean", spine: int = 2, nct: int = 2) -> dict:
 
 def _roster(declaration: str = "Steward declaration, supplied.") -> dict:
     return {"peers": [{"peer_id": "lumin", "session_id": "lumin-session-001",
-                       "display_name": "Lumin", "steward_declaration": declaration}]}
+                       "display_name": "Lumin", "model_id": "ap1001",
+                       "steward_declaration": declaration}]}
 
 
 def _args(**over) -> argparse.Namespace:
@@ -149,7 +150,7 @@ def test_genesis_records_take_tick_zero_not_one():
     """The original numbered every record from 1, which would put genesis at tick 1."""
     canon = seat.check_canon_lock(_package(), allow_unclean=False)
     shaped = seat.shape_records(_package(spine=3)["records"]["SPINE"], "SPINE",
-                                "genesis-baseline", "2026-08-06T00:00:00Z", canon)
+                                "genesis-baseline", "2026-08-06T00:00:00Z", canon, _roster()["peers"][0])
     assert shaped[0]["clock"]["tick"] == 0
     assert [r["clock"]["tick"] for r in shaped] == [0, 1, 2]
 
@@ -157,14 +158,15 @@ def test_genesis_records_take_tick_zero_not_one():
 def test_genesis_baseline_policy_uses_the_canonical_timestamp():
     canon = seat.check_canon_lock(_package(), allow_unclean=False)
     shaped = seat.shape_records(_package()["records"]["SPINE"], "SPINE",
-                                "genesis-baseline", "2026-08-06T09:99:99Z", canon)
+                                "genesis-baseline", "2026-08-06T09:99:99Z", canon, _roster()["peers"][0])
     assert shaped[0]["clock"]["started_at"] == seat.GENESIS_BASELINE == "2026-01-01T00:00:00.000Z"
 
 
 def test_seeded_now_policy_uses_the_run_timestamp():
     canon = seat.check_canon_lock(_package(), allow_unclean=False)
     applied = "2026-08-06T12:00:00Z"
-    shaped = seat.shape_records(_package()["records"]["SPINE"], "SPINE", "seeded-now", applied, canon)
+    shaped = seat.shape_records(_package()["records"]["SPINE"], "SPINE", "seeded-now", applied, canon,
+                                _roster()["peers"][0])
     assert shaped[0]["clock"]["started_at"] == applied
 
 
@@ -205,3 +207,27 @@ def test_dry_run_writes_nothing(tmp_path):
     result = seat.seat_peer(peer, _package(), canon, _args(dry_run=True, data_dir=str(tmp_path)), "2026-08-06T00:00:00Z")
     assert result["dry_run"] is True
     assert not list(tmp_path.iterdir())
+
+
+def test_missing_model_id_is_refused():
+    """The vendored builders read present_state.model_id; it is structurally required."""
+    roster = _roster()
+    del roster["peers"][0]["model_id"]
+    with pytest.raises(seat.SeatingRefused, match="model_id"):
+        seat.validate_roster(roster)
+
+
+def test_shape_records_delegates_to_the_vendored_builders():
+    """The reimplementation dropped Ring 1 Nature Layer material. Delegation must be provable."""
+    canon = seat.check_canon_lock(_package(), allow_unclean=False)
+    shaped = seat.shape_records(_package()["records"]["SPINE"], "SPINE",
+                                "genesis-baseline", "2026-08-06T00:00:00Z", canon, _roster()["peers"][0])
+    # Fields only the vendored builders produce.
+    for field in ("nature_aspect_refs", "lineage", "relationships", "source_record_ids", "t_signature"):
+        assert field in shaped[0], f"{field} missing - shaping is not delegating"
+
+
+def test_vendored_module_is_present_and_loadable():
+    module = seat._vendored()
+    for builder in ("build_spine_record", "build_nct_record", "build_peer_record", "build_pct_record"):
+        assert hasattr(module, builder)
