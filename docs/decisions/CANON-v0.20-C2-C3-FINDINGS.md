@@ -386,10 +386,23 @@ This matters more here than it would elsewhere. Ring 2 (CANON → SPINE) is seed
 all four Foundations will carry a name that a ruling addendum retired — permanently, in an
 append-only tensor.
 
-> **RULING NEEDED (S-8).** Correct the SPINE expansion and the "14 Axioms" digest string in the
-> seed package before any AI Peer is seated? The Builder's read is that seating on the current
-> package writes a known-retired name into four immutable Foundations. The Builder will not
-> modify the seed package — it is Canon-derived material.
+> **RULING S-8 — GIVEN AND APPLIED, 2026-08-06.** Steward ruled: "Replace the string outright."
+> Applied to the working copy the tooling reads. `Sovereign Persistent Identity and Narrative
+> Embodiment` → `Stabilized Patterned Interpretive Nexus of Evidence`, one occurrence, in
+> `NCT[1].distilledSummary`. sha256 `304DF70C…7145` → `1812D2778B…CD10`. Manifest verification
+> unaffected. Full record and pre-edit copy:
+> `reports/canon-v0.20/seed-backup/SPINE-NAME-CHANGE-RECORD.md`.
+>
+> Two items remain open from this ruling:
+> - the **origin bundle** copy at `...\CYBERPEER-CORE-SEED\` still carries the deprecated name
+>   (byte-identical to pre-edit); not modified, as that was not authorized;
+> - the deprecated name is still the live definition in **five locations across four LOCKED
+>   Canon documents** — `AEGIS CANON v1.0.md:1147`, `AEGIS Canonical Glossary v1.0.md:183`,
+>   `AEGIS-CORE-V1.0.md:122`, `AEGIS CORE FOUNDATIONAL CANON v1.0.md:853,1428`. Folding
+>   `v1.0-SP` into v0.20 (C4/C5) is what resolves that.
+>
+> The "14 Axioms" digest string was **not** changed — no ruling was given on it, and unlike the
+> SPINE name it is historically accurate about the original sealing.
 
 ---
 
