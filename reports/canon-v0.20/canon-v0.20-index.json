@@ -412,7 +412,7 @@
       "title": "AEGIS Canon Addendum \u2014 Shadow Affects"
     },
     {
-      "bytes": 5675,
+      "bytes": 6991,
       "class": "UNINDEXED",
       "code": null,
       "code_legacy": null,
@@ -1041,7 +1041,7 @@
       "title": null
     }
   ],
-  "generated_utc": "2026-08-06T18:02:49Z",
+  "generated_utc": "2026-08-06T18:20:06Z",
   "incomplete_headers": [
     {
       "class": "KERNEL",

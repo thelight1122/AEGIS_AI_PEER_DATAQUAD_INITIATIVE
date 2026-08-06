@@ -192,6 +192,39 @@ def test_known_collisions_are_still_detected():
 
 
 @canon_available
+def test_standards_bounds_merge_conflict_is_resolved():
+    """Steward ruling S-3, 2026-08-06.
+
+    The file carried an unresolved Git merge conflict whose markers had been backslash-escaped
+    and Markdown-mangled, so it rendered as ordinary prose rather than as obvious breakage.
+    Both sides are standards for different applications and both were preserved.
+
+    The provenance note deliberately quotes the removed markers to document the repair, so the
+    assertions run against the document body only.
+    """
+    path = idx.DEFAULT_CANON_DIR / "STANDARDS_BOUNDS.md"
+    assert path.exists()
+    text = path.read_text(encoding="utf-8")
+    body = text[text.index("# Part I"):]
+
+    import re
+    assert not re.search(r"^(<{7}|={7}|>{7})", body, re.M), "raw conflict markers in body"
+    assert not re.search(r"^>\s*0fc14ea", body, re.M), "closing marker still present"
+    assert "\\<\\<\\<" not in body, "escaped opening marker in body"
+    assert "\xa0" not in body, "non-breaking space separator still present"
+
+    # Escaping damage inside code spans, where Markdown does not process escapes.
+    for tok in ("AWARENESS\\_ACK", "LENS\\_REVIEW", "CoLAB\\_APP", "/tools/\\*"):
+        assert tok not in body, f"escaping damage not repaired: {tok}"
+
+    # Both sides must survive — commit 0fc14ea is in no local repo, so this file is the
+    # only record of either.
+    assert "AEGIS Education Chamber: Standards & Bounds" in body
+    assert "AEGIS-CoLAB_APP Standards & Constraints" in body
+    assert "computeInclusionState" in body and "Single Active Session" in body
+
+
+@canon_available
 def test_rbc_chamber_is_named_response_not_resonance():
     """Steward ruling S-7, 2026-08-06.
 
