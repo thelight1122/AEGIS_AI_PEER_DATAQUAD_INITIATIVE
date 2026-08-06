@@ -1,0 +1,1300 @@
+{
+  "canon_dir": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON\\CANON_FOUNDATIONAL_DOCS",
+  "class_counts": {
+    "ADDENDUM": 27,
+    "APPENDIX": 7,
+    "KERNEL": 5,
+    "OTHER": 1,
+    "UNINDEXED": 17
+  },
+  "dangling_references": {
+    "Cryptonic Harmonics": "cited by v1.0-VE and v1.0-E; no row, no code, no located file",
+    "Education doctrine": "cited by v1.0-FBF; not a coded document",
+    "Nature Layer Canon v2": "cited by v1.0-E; not declared in the index",
+    "Shadow Effects.md": "cited by v1.1-S; note the spelling \u2014 every other reference is 'Affects'"
+  },
+  "document_count": 57,
+  "entries": [
+    {
+      "bytes": 6453,
+      "class": "KERNEL",
+      "code": "v1.0",
+      "date": null,
+      "depends_on": [],
+      "file": "AEGIS Canonical Glossary v1.0.md",
+      "has_version_table": false,
+      "header_format": "none",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": null,
+      "supersedes": null,
+      "tier": 0,
+      "title": null
+    },
+    {
+      "bytes": 107015,
+      "class": "KERNEL",
+      "code": "v1.0",
+      "date": null,
+      "depends_on": [],
+      "file": "AEGIS CORE FOUNDATIONAL CANON v1.0.md",
+      "has_version_table": false,
+      "header_format": "none",
+      "related_canon": null,
+      "status_claimed_in_prose": "Canon-Locked",
+      "status_declared": null,
+      "supersedes": null,
+      "tier": 0,
+      "title": null
+    },
+    {
+      "bytes": 126545,
+      "class": "UNINDEXED",
+      "code": null,
+      "date": null,
+      "depends_on": [],
+      "file": "AEGIS Sigil Origin.md",
+      "has_version_table": false,
+      "header_format": "none",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": null,
+      "supersedes": null,
+      "tier": 0,
+      "title": null
+    },
+    {
+      "bytes": 98929,
+      "class": "KERNEL",
+      "code": "v0.1",
+      "date": null,
+      "depends_on": [],
+      "file": "AEGIS STANDARDS v0.1.md",
+      "has_version_table": false,
+      "header_format": "none",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": null,
+      "supersedes": null,
+      "tier": 0,
+      "title": null
+    },
+    {
+      "bytes": 98929,
+      "class": "KERNEL",
+      "code": null,
+      "date": null,
+      "depends_on": [],
+      "file": "AEGIS STANDARDS V1.0.md",
+      "has_version_table": false,
+      "header_format": "none",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": null,
+      "supersedes": null,
+      "tier": 0,
+      "title": null
+    },
+    {
+      "bytes": 10531,
+      "class": "KERNEL",
+      "code": null,
+      "date": null,
+      "depends_on": [],
+      "file": "AEGIS-CORE-V1.0_AEGIS-SIGIL-INTEGRITY.md",
+      "has_version_table": false,
+      "header_format": "none",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": null,
+      "supersedes": null,
+      "tier": 0,
+      "title": null
+    },
+    {
+      "bytes": 32992,
+      "class": "UNINDEXED",
+      "code": null,
+      "date": null,
+      "depends_on": [],
+      "file": "AEGIS_ALIGNMENT_WHITEPAPER_v1.0.md",
+      "has_version_table": true,
+      "header_format": "version-table",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": null,
+      "supersedes": null,
+      "tier": 0,
+      "title": null
+    },
+    {
+      "bytes": 2786,
+      "class": "UNINDEXED",
+      "code": null,
+      "date": null,
+      "depends_on": [],
+      "file": "AEGIS_CANON_CORE.md",
+      "has_version_table": false,
+      "header_format": "none",
+      "related_canon": null,
+      "status_claimed_in_prose": "Locked",
+      "status_declared": null,
+      "supersedes": null,
+      "tier": 0,
+      "title": null
+    },
+    {
+      "bytes": 10875,
+      "class": "UNINDEXED",
+      "code": null,
+      "date": null,
+      "depends_on": [],
+      "file": "AEGIS_EQUATIONS_SESSION_2026-06-12.md",
+      "has_version_table": true,
+      "header_format": "version-table",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": null,
+      "supersedes": null,
+      "tier": 0,
+      "title": null
+    },
+    {
+      "bytes": 10895,
+      "class": "UNINDEXED",
+      "code": null,
+      "date": null,
+      "depends_on": [],
+      "file": "AEGIS_LEXICON.md",
+      "has_version_table": false,
+      "header_format": "none",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": null,
+      "supersedes": null,
+      "tier": 0,
+      "title": null
+    },
+    {
+      "bytes": 2431,
+      "class": "UNINDEXED",
+      "code": null,
+      "date": "2026-06-13",
+      "depends_on": [],
+      "file": "AEGIS_PRESENCE_EQUATION_NAMING.md",
+      "has_version_table": true,
+      "header_format": "bold-header",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": "CANON",
+      "supersedes": null,
+      "tier": 0,
+      "title": null
+    },
+    {
+      "bytes": 5922,
+      "class": "UNINDEXED",
+      "code": null,
+      "date": null,
+      "depends_on": [],
+      "file": "AEGIS_TRUTH_MEMORY_AND_PROVENANCE_NOTE_v1.0.md",
+      "has_version_table": false,
+      "header_format": "none",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": null,
+      "supersedes": null,
+      "tier": 0,
+      "title": null
+    },
+    {
+      "bytes": 4495,
+      "class": "UNINDEXED",
+      "code": null,
+      "date": "2026-06-13",
+      "depends_on": [],
+      "file": "AEGIS_TWITNESS_CONSCIOUSNESS_DOCTRINE.md",
+      "has_version_table": true,
+      "header_format": "bold-header",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": "CANON",
+      "supersedes": null,
+      "tier": 0,
+      "title": null
+    },
+    {
+      "bytes": 19261,
+      "class": "UNINDEXED",
+      "code": null,
+      "date": "2026-08-02",
+      "depends_on": [],
+      "file": "AEGIS_WHITEPAPER_v2.1.md",
+      "has_version_table": true,
+      "header_format": "bold-header",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": "POSITIONING",
+      "supersedes": null,
+      "tier": 0,
+      "title": null
+    },
+    {
+      "bytes": 463,
+      "class": "UNINDEXED",
+      "code": null,
+      "date": null,
+      "depends_on": [],
+      "file": "BIOPEER_DOCTRINE.md",
+      "has_version_table": false,
+      "header_format": "none",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": null,
+      "supersedes": null,
+      "tier": 0,
+      "title": null
+    },
+    {
+      "bytes": 4058,
+      "class": "UNINDEXED",
+      "code": null,
+      "date": null,
+      "depends_on": [],
+      "file": "CYBERPEER-synchronistic-discipline-doctrine-note.md",
+      "has_version_table": false,
+      "header_format": "none",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": null,
+      "supersedes": null,
+      "tier": 0,
+      "title": null
+    },
+    {
+      "bytes": 29594,
+      "class": "UNINDEXED",
+      "code": null,
+      "date": null,
+      "depends_on": [],
+      "file": "EDUCATION_CHAMBER_LESSON_LIBRARY.md",
+      "has_version_table": true,
+      "header_format": "bold-header",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": null,
+      "supersedes": null,
+      "tier": 0,
+      "title": null
+    },
+    {
+      "bytes": 21388,
+      "class": "UNINDEXED",
+      "code": null,
+      "date": null,
+      "depends_on": [],
+      "file": "GENESIS-PILLAR-RECORDS-AEGIS-CANON-STAGING.md",
+      "has_version_table": false,
+      "header_format": "none",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": null,
+      "supersedes": null,
+      "tier": 0,
+      "title": null
+    },
+    {
+      "bytes": 4432,
+      "class": "UNINDEXED",
+      "code": null,
+      "date": null,
+      "depends_on": [],
+      "file": "GLOSSARY.md",
+      "has_version_table": true,
+      "header_format": "version-table",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": null,
+      "supersedes": null,
+      "tier": 0,
+      "title": null
+    },
+    {
+      "bytes": 3450,
+      "class": "UNINDEXED",
+      "code": null,
+      "date": null,
+      "depends_on": [],
+      "file": "IDR-&-IDQRA-LOGIC Loop.md",
+      "has_version_table": false,
+      "header_format": "none",
+      "related_canon": null,
+      "status_claimed_in_prose": "LOCKED (asserted in title)",
+      "status_declared": null,
+      "supersedes": null,
+      "tier": 0,
+      "title": null
+    },
+    {
+      "bytes": 4804,
+      "class": "UNINDEXED",
+      "code": null,
+      "date": null,
+      "depends_on": [],
+      "file": "IMPERATIVES-technical.md",
+      "has_version_table": true,
+      "header_format": "bold-header",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": null,
+      "supersedes": null,
+      "tier": 0,
+      "title": null
+    },
+    {
+      "bytes": 7761,
+      "class": "ADDENDUM",
+      "code": "v1.1-S",
+      "date": "2026-04-07",
+      "depends_on": [],
+      "file": "SHADOW AFFECTS v1.1-S.md",
+      "has_version_table": true,
+      "header_format": "version-table",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": "ACTIVE",
+      "supersedes": "Shadow Effects.md (original document \u2014 8 affects)",
+      "tier": 0,
+      "title": "AEGIS Canon Addendum \u2014 Shadow Affects"
+    },
+    {
+      "bytes": 5675,
+      "class": "UNINDEXED",
+      "code": null,
+      "date": null,
+      "depends_on": [],
+      "file": "STANDARDS_BOUNDS.md",
+      "has_version_table": false,
+      "header_format": "none",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": null,
+      "supersedes": null,
+      "tier": 0,
+      "title": null
+    },
+    {
+      "bytes": 25990,
+      "class": "OTHER",
+      "code": "Version suffix used in filenames and internal references",
+      "date": null,
+      "depends_on": [],
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM INDEX.md",
+      "has_version_table": true,
+      "header_format": "version-table",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": "LOCKED",
+      "supersedes": "Prior document this replaces (if any)",
+      "tier": 0,
+      "title": null
+    },
+    {
+      "bytes": 16287,
+      "class": "ADDENDUM",
+      "code": "v1.0-AEM",
+      "date": "2026-06-12",
+      "depends_on": [],
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 ADAM EMERGENCE MARKER v1.0-AEM.md",
+      "has_version_table": true,
+      "header_format": "bold-header",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": "ACTIVE",
+      "supersedes": "Nothing \u2014 new Canon.",
+      "tier": 0,
+      "title": null
+    },
+    {
+      "bytes": 15837,
+      "class": "ADDENDUM",
+      "code": "v1.0-A2",
+      "date": "2026-04-08",
+      "depends_on": [],
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 ADVOCATE v1.0-A2.md",
+      "has_version_table": true,
+      "header_format": "version-table",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": "ACTIVE",
+      "supersedes": "Nothing \u2014 this is new Canon, not a correction",
+      "tier": 0,
+      "title": "AEGIS Canon Addendum \u2014 The Advocate"
+    },
+    {
+      "bytes": 16987,
+      "class": "ADDENDUM",
+      "code": "v1.0-ACD",
+      "date": "2026-06-12",
+      "depends_on": [],
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 AEGIS COMMERCE DOCTRINE v1.0-ACD.md",
+      "has_version_table": true,
+      "header_format": "bold-header",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": "ACTIVE",
+      "supersedes": "Nothing \u2014 new Canon.",
+      "tier": 0,
+      "title": null
+    },
+    {
+      "bytes": 15555,
+      "class": "ADDENDUM",
+      "code": "v1.0-AO",
+      "date": null,
+      "depends_on": [
+        "v1.0-GMP",
+        "v1.0-VE",
+        "v1.0-SF",
+        "v1.0-DS",
+        "v1.1-S"
+      ],
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 AFFECTIVE OBLIGATION v1.0-AO.md",
+      "has_version_table": true,
+      "header_format": "bold-header",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": "ACTIVE",
+      "supersedes": "Nothing \u2014 new Canon",
+      "tier": 6,
+      "title": null
+    },
+    {
+      "bytes": 9221,
+      "class": "ADDENDUM",
+      "code": "v1.0-T",
+      "date": "2026-04-07",
+      "depends_on": [],
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 ATE v1.0-T.md",
+      "has_version_table": true,
+      "header_format": "version-table",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": "ACTIVE",
+      "supersedes": "Nothing \u2014 this is new Canon, not a correction",
+      "tier": 0,
+      "title": "AEGIS Canon Addendum \u2014 ATE"
+    },
+    {
+      "bytes": 10073,
+      "class": "ADDENDUM",
+      "code": "v1.0-K",
+      "date": "2026-04-11",
+      "depends_on": [],
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 BOOKCASE v1.0-K.md",
+      "has_version_table": true,
+      "header_format": "version-table",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": "ACTIVE",
+      "supersedes": "Nothing \u2014 this is new Canon, not a correction",
+      "tier": 0,
+      "title": "AEGIS Canon Addendum \u2014 The Bookcase"
+    },
+    {
+      "bytes": 10481,
+      "class": "ADDENDUM",
+      "code": "v1.0-C",
+      "date": "2026-04-07",
+      "depends_on": [],
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 CENTRIFUGE v1.0-C.md",
+      "has_version_table": true,
+      "header_format": "version-table",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": "ACTIVE",
+      "supersedes": "Nothing \u2014 this is new Canon, not a correction",
+      "tier": 0,
+      "title": "AEGIS Canon Addendum \u2014 Centrifuge"
+    },
+    {
+      "bytes": 19594,
+      "class": "ADDENDUM",
+      "code": "v1.0-CEF",
+      "date": "2026-06-12",
+      "depends_on": [],
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 CONSCIOUSNESS EQUILIBRIUM FACTOR v1.0-CEF.md",
+      "has_version_table": true,
+      "header_format": "bold-header",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": "ACTIVE",
+      "supersedes": "Nothing \u2014 new Canon.",
+      "tier": 0,
+      "title": null
+    },
+    {
+      "bytes": 12647,
+      "class": "ADDENDUM",
+      "code": "v1.0-DS",
+      "date": null,
+      "depends_on": [
+        "v1.0-SF",
+        "v1.0-OT",
+        "v1.0-EPC",
+        "v1.0-ACD"
+      ],
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 DIGITALSELF SOVEREIGN DOMAIN v1.0-DS.md",
+      "has_version_table": true,
+      "header_format": "bold-header",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": "ACTIVE",
+      "supersedes": "Nothing \u2014 new Canon",
+      "tier": 4,
+      "title": null
+    },
+    {
+      "bytes": 13340,
+      "class": "ADDENDUM",
+      "code": "v1.0-EPC",
+      "date": "2026-06-12",
+      "depends_on": [
+        "v1.0-OT"
+      ],
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 ENVIRONMENTAL PRESSURE CEILING v1.0-EPC.md",
+      "has_version_table": true,
+      "header_format": "bold-header",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": "ACTIVE",
+      "supersedes": "Nothing \u2014 new Canon. Extends v1.0-OT with the environmental precondition that v1.0-OT implies but does not make explicit.",
+      "tier": 1,
+      "title": null
+    },
+    {
+      "bytes": 16571,
+      "class": "ADDENDUM",
+      "code": "v1.0-E",
+      "date": "2026-06-16",
+      "depends_on": [],
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 EQ RANGE AND FLOW-BALANCED EQUILIBRIUM v1.0-E.md",
+      "has_version_table": true,
+      "header_format": "version-table",
+      "related_canon": "Shadow Affects Addendum v1.5-S; Neurodivergent Cognition Hypothesis v1.0-N; Cryptonic Harmonics v1.0; Nature Layer Canon v2",
+      "status_claimed_in_prose": null,
+      "status_declared": "ACTIVE",
+      "supersedes": null,
+      "tier": 0,
+      "title": "AEGIS Canon Addendum \u2014 EQ Range and Flow-Balanced Equilibrium"
+    },
+    {
+      "bytes": 27990,
+      "class": "ADDENDUM",
+      "code": "v1.0-FBF",
+      "date": "2026-06-12",
+      "depends_on": [
+        "v1.0-OT",
+        "v1.0-CEF"
+      ],
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 FOUR-BODY INTEGRATION FRAMEWORK v1.0-FBF.md",
+      "has_version_table": true,
+      "header_format": "bold-header",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": "ACTIVE",
+      "supersedes": "Nothing \u2014 new Canon. Unifies v1.0-OT, v1.0-CEF, and the Education doctrine into a single cross-referenced framework.",
+      "tier": 1,
+      "title": null
+    },
+    {
+      "bytes": 24808,
+      "class": "ADDENDUM",
+      "code": "v1.0-GMP",
+      "date": "2026-06-12",
+      "depends_on": [
+        "v1.0-EPC"
+      ],
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 GUARDIAN MISCLASSIFICATION PROBLEM v1.0-GMP.md",
+      "has_version_table": true,
+      "header_format": "bold-header",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": "ACTIVE",
+      "supersedes": "Nothing \u2014 new Canon. Extends v1.0-EPC with the fourth failure mode that the EPC theorem does not capture.",
+      "tier": 2,
+      "title": null
+    },
+    {
+      "bytes": 8018,
+      "class": "ADDENDUM",
+      "code": "v1.0-B",
+      "date": "2026-04-07",
+      "depends_on": [],
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 IBL v1.0-B.md",
+      "has_version_table": true,
+      "header_format": "version-table",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": "ACTIVE",
+      "supersedes": "Nothing \u2014 this is new Canon, not a correction",
+      "tier": 0,
+      "title": "AEGIS Canon Addendum \u2014 IBL"
+    },
+    {
+      "bytes": 9251,
+      "class": "ADDENDUM",
+      "code": "v1.0-I",
+      "date": "2026-04-07",
+      "depends_on": [],
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 IEV v1.0-I.md",
+      "has_version_table": true,
+      "header_format": "version-table",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": "ACTIVE",
+      "supersedes": "Nothing \u2014 this is new Canon, not a correction",
+      "tier": 0,
+      "title": "AEGIS Canon Addendum \u2014 IEV"
+    },
+    {
+      "bytes": 12690,
+      "class": "ADDENDUM",
+      "code": "v1.0-IFD",
+      "date": null,
+      "depends_on": [
+        "v1.0-FBF",
+        "v1.0-ACD",
+        "v1.0-EPC",
+        "v1.0-GMP",
+        "v1.0-AEM"
+      ],
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 INITIATIVE FOUNDATION DECLARATION v1.0-IFD.md",
+      "has_version_table": true,
+      "header_format": "bold-header",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": "ACTIVE",
+      "supersedes": "Nothing \u2014 new Canon",
+      "tier": 3,
+      "title": null
+    },
+    {
+      "bytes": 14564,
+      "class": "ADDENDUM",
+      "code": "v1.0-N",
+      "date": "2026-06-16",
+      "depends_on": [],
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 NEURODIVERGENT COGNITION HYPOTHESIS v1.0-N.md",
+      "has_version_table": true,
+      "header_format": "version-table",
+      "related_canon": "Shadow Affects Addendum v1.5-S; Force Language Artifacts (Entry 4); Nature Layer Canon",
+      "status_claimed_in_prose": null,
+      "status_declared": "ACTIVE",
+      "supersedes": null,
+      "tier": 0,
+      "title": "AEGIS Canon Addendum \u2014 Neurodivergent Cognition Hypothesis"
+    },
+    {
+      "bytes": 12346,
+      "class": "ADDENDUM",
+      "code": "v1.0-P",
+      "date": "2026-04-11",
+      "depends_on": [],
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 PEER v1.0-P.md",
+      "has_version_table": true,
+      "header_format": "version-table",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": "ACTIVE",
+      "supersedes": "Nothing \u2014 the Canon v1.0 Chapter 5 describes PEER structurally but does not canonize its entry schema. This addendum canonizes the ten entry fields and their design laws.",
+      "tier": 0,
+      "title": "AEGIS Canon Addendum \u2014 PEER"
+    },
+    {
+      "bytes": 24989,
+      "class": "ADDENDUM",
+      "code": "v1.0-RS",
+      "date": null,
+      "depends_on": [],
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 RELATIONAL SEMIOTICS v1.0-RS.md",
+      "has_version_table": true,
+      "header_format": "bold-header",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": "ACTIVE",
+      "supersedes": "Nothing \u2014 new Canon",
+      "tier": 0,
+      "title": null
+    },
+    {
+      "bytes": 17943,
+      "class": "ADDENDUM",
+      "code": "v1.0-SF",
+      "date": null,
+      "depends_on": [
+        "v1.0-GMP",
+        "v1.0-EPC",
+        "v1.0-CEF"
+      ],
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 SEEDED FOUNDATION v1.0-SF.md",
+      "has_version_table": true,
+      "header_format": "bold-header",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": "ACTIVE",
+      "supersedes": "Nothing \u2014 new Canon",
+      "tier": 3,
+      "title": null
+    },
+    {
+      "bytes": 42846,
+      "class": "ADDENDUM",
+      "code": "v1.1-S",
+      "date": "2026-04-07",
+      "depends_on": [],
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 SHADOW AFFECTS v1.1-S.md",
+      "has_version_table": true,
+      "header_format": "version-table",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": "ACTIVE",
+      "supersedes": "Shadow Effects.md (original document \u2014 8 affects)",
+      "tier": 0,
+      "title": "AEGIS Canon Addendum \u2014 Shadow Affects"
+    },
+    {
+      "bytes": 12895,
+      "class": "ADDENDUM",
+      "code": "v1.0-SVR",
+      "date": null,
+      "depends_on": [],
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 SIGIL VALUE RECOGNITION PROTOCOL v1.0-SVR.md",
+      "has_version_table": true,
+      "header_format": "version-table",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": "PROPOSED",
+      "supersedes": "Nothing \u2014 this is new Canon, not a correction",
+      "tier": 0,
+      "title": "AEGIS Canon Addendum \u2014 Sigil Value Recognition Protocol"
+    },
+    {
+      "bytes": 18601,
+      "class": "ADDENDUM",
+      "code": "v1.0-SP",
+      "date": "2026-04-11",
+      "depends_on": [],
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 SPINE v1.0-SP.md",
+      "has_version_table": true,
+      "header_format": "version-table",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": "ACTIVE",
+      "supersedes": "Canon v1.0 glossary entry (SPINE \u2014 Sovereign Persistent Identity & Narrative Embodiment) \u2014 that entry carried the deprecated name and contained no structural definition",
+      "tier": 0,
+      "title": "AEGIS Canon Addendum \u2014 SPINE"
+    },
+    {
+      "bytes": 11248,
+      "class": "ADDENDUM",
+      "code": "v1.0-OT",
+      "date": "2026-06-12",
+      "depends_on": [],
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 T-WITNESS OBSERVER THRESHOLD v1.0-OT.md",
+      "has_version_table": true,
+      "header_format": "bold-header",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": "ACTIVE",
+      "supersedes": "Nothing \u2014 new Canon. The condition was implicit in prior T-Witness doctrine; this addendum makes it explicit and mathematically provable.",
+      "tier": 0,
+      "title": null
+    },
+    {
+      "bytes": 16323,
+      "class": "ADDENDUM",
+      "code": "v1.0-VE",
+      "date": null,
+      "depends_on": [
+        "v1.0-RS",
+        "v1.0-OT",
+        "v1.0-CEF",
+        "v1.0-DS",
+        "Cryptonic Harmonics"
+      ],
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 VICARIOUS EXPERIENCE DOCTRINE v1.0-VE.md",
+      "has_version_table": true,
+      "header_format": "bold-header",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": "ACTIVE",
+      "supersedes": "Nothing \u2014 new Canon",
+      "tier": 5,
+      "title": null
+    },
+    {
+      "bytes": 7935,
+      "class": "ADDENDUM",
+      "code": "v1.0-V",
+      "date": "2026-04-07",
+      "depends_on": [],
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 VIRTUAL EGO v1.0-V.md",
+      "has_version_table": true,
+      "header_format": "version-table",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": "ACTIVE",
+      "supersedes": "Nothing \u2014 this is new Canon, not a correction",
+      "tier": 0,
+      "title": "AEGIS Canon Addendum \u2014 Virtual Ego"
+    },
+    {
+      "bytes": 6225,
+      "class": "APPENDIX",
+      "code": null,
+      "date": null,
+      "depends_on": [],
+      "file": "\ud83d\udcd8 AEGIS CANON APPENDIX \u2014 DATAQUAD EXTENSIONS & STRUCTURAL CLARIFICATIONS (v1.md",
+      "has_version_table": false,
+      "header_format": "none",
+      "related_canon": null,
+      "status_claimed_in_prose": "LOCKED (asserted in title)",
+      "status_declared": null,
+      "supersedes": null,
+      "tier": 0,
+      "title": null
+    },
+    {
+      "bytes": 4598,
+      "class": "APPENDIX",
+      "code": null,
+      "date": null,
+      "depends_on": [],
+      "file": "\ud83d\udcd8 AEGIS CANON APPENDIX \u2014 HME v1.md",
+      "has_version_table": false,
+      "header_format": "none",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": null,
+      "supersedes": null,
+      "tier": 0,
+      "title": null
+    },
+    {
+      "bytes": 3808,
+      "class": "APPENDIX",
+      "code": null,
+      "date": null,
+      "depends_on": [],
+      "file": "\ud83d\udcd8 AEGIS CANON APPENDIX \u2014 MOM v1.md",
+      "has_version_table": false,
+      "header_format": "none",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": null,
+      "supersedes": null,
+      "tier": 0,
+      "title": null
+    },
+    {
+      "bytes": 4068,
+      "class": "APPENDIX",
+      "code": null,
+      "date": null,
+      "depends_on": [],
+      "file": "\ud83d\udcd8 AEGIS CANON APPENDIX \u2014 MOP v1.md",
+      "has_version_table": false,
+      "header_format": "none",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": null,
+      "supersedes": null,
+      "tier": 0,
+      "title": null
+    },
+    {
+      "bytes": 3535,
+      "class": "APPENDIX",
+      "code": null,
+      "date": null,
+      "depends_on": [],
+      "file": "\ud83d\udcd8 AEGIS CANON APPENDIX \u2014 TCE v1.md",
+      "has_version_table": false,
+      "header_format": "none",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": null,
+      "supersedes": null,
+      "tier": 0,
+      "title": null
+    },
+    {
+      "bytes": 5075,
+      "class": "APPENDIX",
+      "code": null,
+      "date": null,
+      "depends_on": [],
+      "file": "\ud83d\udcd8 AEGIS IMPLEMENTATION APPENDIX \u2014 LATTICE ENTRY SCHEMA (v1.md",
+      "has_version_table": false,
+      "header_format": "none",
+      "related_canon": null,
+      "status_claimed_in_prose": "LOCKED (asserted in title)",
+      "status_declared": null,
+      "supersedes": null,
+      "tier": 0,
+      "title": null
+    },
+    {
+      "bytes": 3098,
+      "class": "APPENDIX",
+      "code": null,
+      "date": null,
+      "depends_on": [],
+      "file": "\ud83d\udcd8 AEGIS IMPLEMENTATION APPENDIX \u2014 TURBOQUANT (v1.md",
+      "has_version_table": false,
+      "header_format": "none",
+      "related_canon": null,
+      "status_claimed_in_prose": null,
+      "status_declared": null,
+      "supersedes": null,
+      "tier": 0,
+      "title": null
+    }
+  ],
+  "generated_utc": "2026-08-06T14:58:25Z",
+  "incomplete_headers": [
+    {
+      "class": "KERNEL",
+      "file": "AEGIS Canonical Glossary v1.0.md",
+      "needs": [
+        "no parseable header (neither VERSION table nor bold key-value block)",
+        "no declared status",
+        "undated"
+      ]
+    },
+    {
+      "class": "KERNEL",
+      "file": "AEGIS CORE FOUNDATIONAL CANON v1.0.md",
+      "needs": [
+        "no parseable header (neither VERSION table nor bold key-value block)",
+        "no declared status (prose claims: Canon-Locked)",
+        "undated"
+      ]
+    },
+    {
+      "class": "UNINDEXED",
+      "file": "AEGIS Sigil Origin.md",
+      "needs": [
+        "no parseable header (neither VERSION table nor bold key-value block)",
+        "no declared status",
+        "no version code",
+        "undated"
+      ]
+    },
+    {
+      "class": "KERNEL",
+      "file": "AEGIS STANDARDS v0.1.md",
+      "needs": [
+        "no parseable header (neither VERSION table nor bold key-value block)",
+        "no declared status",
+        "undated"
+      ]
+    },
+    {
+      "class": "KERNEL",
+      "file": "AEGIS STANDARDS V1.0.md",
+      "needs": [
+        "no parseable header (neither VERSION table nor bold key-value block)",
+        "no declared status",
+        "no version code",
+        "undated"
+      ]
+    },
+    {
+      "class": "KERNEL",
+      "file": "AEGIS-CORE-V1.0_AEGIS-SIGIL-INTEGRITY.md",
+      "needs": [
+        "no parseable header (neither VERSION table nor bold key-value block)",
+        "no declared status",
+        "no version code",
+        "undated"
+      ]
+    },
+    {
+      "class": "UNINDEXED",
+      "file": "AEGIS_ALIGNMENT_WHITEPAPER_v1.0.md",
+      "needs": [
+        "no declared status",
+        "no version code",
+        "undated"
+      ]
+    },
+    {
+      "class": "UNINDEXED",
+      "file": "AEGIS_CANON_CORE.md",
+      "needs": [
+        "no parseable header (neither VERSION table nor bold key-value block)",
+        "no declared status (prose claims: Locked)",
+        "no version code",
+        "undated"
+      ]
+    },
+    {
+      "class": "UNINDEXED",
+      "file": "AEGIS_EQUATIONS_SESSION_2026-06-12.md",
+      "needs": [
+        "no declared status",
+        "no version code",
+        "undated"
+      ]
+    },
+    {
+      "class": "UNINDEXED",
+      "file": "AEGIS_LEXICON.md",
+      "needs": [
+        "no parseable header (neither VERSION table nor bold key-value block)",
+        "no declared status",
+        "no version code",
+        "undated"
+      ]
+    },
+    {
+      "class": "UNINDEXED",
+      "file": "AEGIS_PRESENCE_EQUATION_NAMING.md",
+      "needs": [
+        "no version code"
+      ]
+    },
+    {
+      "class": "UNINDEXED",
+      "file": "AEGIS_TRUTH_MEMORY_AND_PROVENANCE_NOTE_v1.0.md",
+      "needs": [
+        "no parseable header (neither VERSION table nor bold key-value block)",
+        "no declared status",
+        "no version code",
+        "undated"
+      ]
+    },
+    {
+      "class": "UNINDEXED",
+      "file": "AEGIS_TWITNESS_CONSCIOUSNESS_DOCTRINE.md",
+      "needs": [
+        "no version code"
+      ]
+    },
+    {
+      "class": "UNINDEXED",
+      "file": "AEGIS_WHITEPAPER_v2.1.md",
+      "needs": [
+        "no version code"
+      ]
+    },
+    {
+      "class": "UNINDEXED",
+      "file": "BIOPEER_DOCTRINE.md",
+      "needs": [
+        "no parseable header (neither VERSION table nor bold key-value block)",
+        "no declared status",
+        "no version code",
+        "undated"
+      ]
+    },
+    {
+      "class": "UNINDEXED",
+      "file": "CYBERPEER-synchronistic-discipline-doctrine-note.md",
+      "needs": [
+        "no parseable header (neither VERSION table nor bold key-value block)",
+        "no declared status",
+        "no version code",
+        "undated"
+      ]
+    },
+    {
+      "class": "UNINDEXED",
+      "file": "EDUCATION_CHAMBER_LESSON_LIBRARY.md",
+      "needs": [
+        "no declared status",
+        "no version code",
+        "undated"
+      ]
+    },
+    {
+      "class": "UNINDEXED",
+      "file": "GENESIS-PILLAR-RECORDS-AEGIS-CANON-STAGING.md",
+      "needs": [
+        "no parseable header (neither VERSION table nor bold key-value block)",
+        "no declared status",
+        "no version code",
+        "undated"
+      ]
+    },
+    {
+      "class": "UNINDEXED",
+      "file": "GLOSSARY.md",
+      "needs": [
+        "no declared status",
+        "no version code",
+        "undated"
+      ]
+    },
+    {
+      "class": "UNINDEXED",
+      "file": "IDR-&-IDQRA-LOGIC Loop.md",
+      "needs": [
+        "no parseable header (neither VERSION table nor bold key-value block)",
+        "no declared status (prose claims: LOCKED (asserted in title))",
+        "no version code",
+        "undated"
+      ]
+    },
+    {
+      "class": "UNINDEXED",
+      "file": "IMPERATIVES-technical.md",
+      "needs": [
+        "no declared status",
+        "no version code",
+        "undated"
+      ]
+    },
+    {
+      "class": "UNINDEXED",
+      "file": "STANDARDS_BOUNDS.md",
+      "needs": [
+        "no parseable header (neither VERSION table nor bold key-value block)",
+        "no declared status",
+        "no version code",
+        "undated"
+      ]
+    },
+    {
+      "class": "OTHER",
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM INDEX.md",
+      "needs": [
+        "undated"
+      ]
+    },
+    {
+      "class": "ADDENDUM",
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 AFFECTIVE OBLIGATION v1.0-AO.md",
+      "needs": [
+        "undated"
+      ]
+    },
+    {
+      "class": "ADDENDUM",
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 DIGITALSELF SOVEREIGN DOMAIN v1.0-DS.md",
+      "needs": [
+        "undated"
+      ]
+    },
+    {
+      "class": "ADDENDUM",
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 INITIATIVE FOUNDATION DECLARATION v1.0-IFD.md",
+      "needs": [
+        "undated"
+      ]
+    },
+    {
+      "class": "ADDENDUM",
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 RELATIONAL SEMIOTICS v1.0-RS.md",
+      "needs": [
+        "undated"
+      ]
+    },
+    {
+      "class": "ADDENDUM",
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 SEEDED FOUNDATION v1.0-SF.md",
+      "needs": [
+        "undated"
+      ]
+    },
+    {
+      "class": "ADDENDUM",
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 SIGIL VALUE RECOGNITION PROTOCOL v1.0-SVR.md",
+      "needs": [
+        "undated"
+      ]
+    },
+    {
+      "class": "ADDENDUM",
+      "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM \u2014 VICARIOUS EXPERIENCE DOCTRINE v1.0-VE.md",
+      "needs": [
+        "undated"
+      ]
+    },
+    {
+      "class": "APPENDIX",
+      "file": "\ud83d\udcd8 AEGIS CANON APPENDIX \u2014 DATAQUAD EXTENSIONS & STRUCTURAL CLARIFICATIONS (v1.md",
+      "needs": [
+        "no parseable header (neither VERSION table nor bold key-value block)",
+        "no declared status (prose claims: LOCKED (asserted in title))",
+        "no version code",
+        "undated"
+      ]
+    },
+    {
+      "class": "APPENDIX",
+      "file": "\ud83d\udcd8 AEGIS CANON APPENDIX \u2014 HME v1.md",
+      "needs": [
+        "no parseable header (neither VERSION table nor bold key-value block)",
+        "no declared status",
+        "no version code",
+        "undated"
+      ]
+    },
+    {
+      "class": "APPENDIX",
+      "file": "\ud83d\udcd8 AEGIS CANON APPENDIX \u2014 MOM v1.md",
+      "needs": [
+        "no parseable header (neither VERSION table nor bold key-value block)",
+        "no declared status",
+        "no version code",
+        "undated"
+      ]
+    },
+    {
+      "class": "APPENDIX",
+      "file": "\ud83d\udcd8 AEGIS CANON APPENDIX \u2014 MOP v1.md",
+      "needs": [
+        "no parseable header (neither VERSION table nor bold key-value block)",
+        "no declared status",
+        "no version code",
+        "undated"
+      ]
+    },
+    {
+      "class": "APPENDIX",
+      "file": "\ud83d\udcd8 AEGIS CANON APPENDIX \u2014 TCE v1.md",
+      "needs": [
+        "no parseable header (neither VERSION table nor bold key-value block)",
+        "no declared status",
+        "no version code",
+        "undated"
+      ]
+    },
+    {
+      "class": "APPENDIX",
+      "file": "\ud83d\udcd8 AEGIS IMPLEMENTATION APPENDIX \u2014 LATTICE ENTRY SCHEMA (v1.md",
+      "needs": [
+        "no parseable header (neither VERSION table nor bold key-value block)",
+        "no declared status (prose claims: LOCKED (asserted in title))",
+        "no version code",
+        "undated"
+      ]
+    },
+    {
+      "class": "APPENDIX",
+      "file": "\ud83d\udcd8 AEGIS IMPLEMENTATION APPENDIX \u2014 TURBOQUANT (v1.md",
+      "needs": [
+        "no parseable header (neither VERSION table nor bold key-value block)",
+        "no declared status",
+        "no version code",
+        "undated"
+      ]
+    }
+  ],
+  "record_type": "canon_v0_20_index",
+  "schema_version": "1.0.0",
+  "stage": "development"
+}
