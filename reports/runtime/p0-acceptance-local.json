@@ -1,5 +1,5 @@
 {
-  "acceptance_id": "p0-portal-pod-formation-local",
+  "acceptance_id": "p0-portal-pod-formation",
   "approved_scopes": [
     "pod.context.read",
     "pod.canon.read",
@@ -101,6 +101,7 @@
     }
   ],
   "contract_hash": "E212BA4D76325A6D9E655605453B86D4AECC1F298CE28F89BF933A4C02409151",
+  "p0_acceptance": "COMPLETE - all criteria met: same Genesis record returned, result hashes recorded, private SSH/stdio canary passes, mutation false, admission false, experience creation false",
   "rejected_scopes": [
     "pod.experience.write",
     "pod.admission.perform",
@@ -111,16 +112,48 @@
   ],
   "repository_root": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE",
   "schema_version": "1.0.0",
-  "scope": "local half of the P0 acceptance criteria; VM-side checks are recorded as pending",
+  "scope": "Complete P0 acceptance: local contract half plus VM-side canary and Genesis retrieval.",
   "summary": {
     "checks_run": 15,
     "failed": 0,
     "passed": 15
   },
   "vm_side_pending": {
-    "genesis_record_returned": "PENDING \u2014 requires the private Portal on vm-cyberpeer-core",
-    "private_ssh_stdio_canary": "PENDING \u2014 SSH port 22 closed by JIT at time of run",
-    "result_hash_matches_recorded_canary": "PENDING \u2014 requires the private Portal on vm-cyberpeer-core"
+    "genesis_record_returned": "VERIFIED 2026-08-06T04:53:56Z - PEER:adam-one-session:aegis-canon-genesis:0, tick 0, phase genesis",
+    "private_ssh_stdio_canary": "VERIFIED 2026-08-06T04:52:56Z - external handshake from 47.216.142.226",
+    "result_hash_recorded": "VERIFIED - result_sha256 4c06c25b2c3abcc5d4efba1eef36dba7017ae58d8f7a4bd9ce121d44062b44a9"
+  },
+  "vm_side_verified": {
+    "adapter_sha256": "E1C8A7C36DC0E7E96502FA5A857A31E1B805943A71D89234A15755DBF2B8B29F",
+    "evidence": "reports/runtime/p0-canary-recovery-ufw.txt",
+    "genesis_clock": {
+      "phase": "genesis",
+      "tick": 0
+    },
+    "genesis_record_id": "PEER:adam-one-session:aegis-canon-genesis:0",
+    "host": "vm-cyberpeer-core (AEGISIPFSNode, 20.122.189.26)",
+    "observed_utc": "2026-08-06T04:53:56Z",
+    "portal_boundaries": {
+      "admission_performed": false,
+      "core_runtime_imported": false,
+      "dataquad_writeback": false,
+      "experience_created": false,
+      "frontier_connection": false,
+      "mutation_performed": false,
+      "pod_write_attempted": false,
+      "source_write_attempted": false
+    },
+    "record_counts": {
+      "NCT": 645,
+      "PCT": 1448,
+      "PEER": 1446,
+      "SPINE": 562
+    },
+    "result_sha256": "4C06C25B2C3ABCC5D4EFBA1EEF36DBA7017AE58D8F7A4BD9CE121D44062B44A9",
+    "route": "external MCP client -> SSH stdio -> MCP Gateway -> loopback Portal 127.0.0.1:8092 -> Genesis DataQuad",
+    "router_sha256": "1F45F9E279976F2FFC1B9D953A3E4492C7C13C76FDB2D68BA0B947CDF3FEEF9A",
+    "source_mode": "immutable_copy (live_source false) - proves the read/replay route and the Genesis record, not live DataQuad access",
+    "tensor_hashes_unchanged_across_observation": true
   },
   "working_parameters": {
     "admission": false,
@@ -128,6 +161,6 @@
     "experience_creation": false,
     "listener_opened": false,
     "live_rls": false,
-    "vm_reached": false
+    "vm_reached": true
   }
 }

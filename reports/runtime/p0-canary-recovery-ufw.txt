@@ -1,0 +1,198 @@
+===============================================================
+P0 CANARY RECOVERY AND EXTERNAL VERIFICATION - COMPLETE
+===============================================================
+host                vm-cyberpeer-core (AEGISIPFSNode, 20.122.189.26)
+os_disk             vm-cyberpeer-core-os-repair-copy
+                    uniqueId 48405070-70fa-417c-82bf-545168d143d3
+guest_root          /dev/nvme0n1p1
+guest_root_partuuid 7a980e4e-0807-47a7-838e-4ddf1862b15b
+caller_egress_ip    47.216.142.226
+transport           Azure Serial Console (guest), SSH (external verification)
+
+NOTE ON FILENAME: this file is named for the ufw remedy that was originally
+authorized. That remedy was never applied and was never the fault. The name is
+kept so earlier record references resolve; the content is the actual cause.
+
+===============================================================
+LAYER 0 - PRIOR CONTENT, PRESERVED
+===============================================================
+This file previously held the terminal outcome of an agent-delivered attempt.
+It is preserved verbatim rather than overwritten:
+
+    AEGIS P0 canary recovery - guest firewall change
+    host: vm-cyberpeer-core (AEGISIPFSNode, 20.122.189.26)
+    authorized by: Auditor sequence steps 1-3, 5
+    attempt: 29
+    ---------------------------------------------------------------
+    ERROR: (VMExtensionProvisioningTimeout) Provisioning of VM extension
+    RunCommandLinux has timed out. Extension provisioning has taken too long
+    to complete. The extension did not report a message.
+
+That attempt delivered nothing. It is not credited with any part of this
+recovery.
+
+===============================================================
+LAYER 1 - ROOT CAUSE (established 2026-08-06 ~04:20Z)
+===============================================================
+A stale Cloudflare WARP kill-switch firewall.
+
+  table inet cloudflare-warp
+    chain input  { type filter hook input  priority filter; policy drop; }
+    chain output { type filter hook output priority filter; policy drop; }
+
+  warp-cli status : Disconnected - "Reason: Manual Disconnection"
+  warp-svc        : active, enabled
+
+WARP was manually disconnected; its lockdown ruleset was left in force. Every
+accept in the input chain is a SOURCE-port rule permitting replies to
+outbound-initiated connections. No rule accepted an inbound connection to any
+local port. An inbound SSH SYN matched nothing and hit policy drop.
+
+Why every earlier check missed it:
+  - inet family is invisible to `iptables -S INPUT`, which showed ACCEPT
+  - ufw was inactive, and was never the mechanism
+  - TcpExtListenDrops = 0, because netfilter dropped before the listen path
+  - tcpdump captured the SYN because AF_PACKET ingress precedes netfilter
+
+===============================================================
+LAYER 2 - PACKET EVIDENCE
+===============================================================
+Capture 1 (04:24:19Z-04:24:39Z, eth0): 20 packets, all Flags [S] from
+47.216.142.226 to 10.0.0.4:22. ZERO Flags [S.] replies. The filter matched both
+directions, so a SYN-ACK would have appeared. None existed.
+
+Capture 2 (04:42:54Z-04:43:09Z, any): SYN arriving on both enP30832s1 and eth0
+(VF plus synthetic). Still zero SYN-ACK.
+
+Ruled out by evidence, not inference: NSG (JIT rule live, 47.216.142.226 to
+10.0.0.4:22, provisioning Succeeded), routing (eth0 10.0.0.4/24, default via
+10.0.0.1), subnet route table (none), NAT Gateway AEGIS_NAT, sshd (listening
+on 0.0.0.0:22 and [::]:22), guest OS (booted clean), caller egress
+(github.com:22 reachable).
+
+===============================================================
+LAYER 3 - WHY THE NARROW REMEDY FAILED
+===============================================================
+Two rules were inserted at the top of the WARP chains:
+  nft insert rule inet cloudflare-warp input  tcp dport 22 accept
+  nft insert rule inet cloudflare-warp output tcp sport 22 accept
+
+Both commands returned without error. Both were gone on next inspection:
+  "NO PORT 22 RULE PRESENT (daemon reverted them)"
+
+warp-svc owns that table and reconciles it. Manual rules cannot persist while
+the daemon runs. External SSH remained closed after both inserts.
+
+===============================================================
+LAYER 4 - REMEDY APPLIED (authorized by Steward)
+===============================================================
+  systemctl stop warp-svc      -> inactive
+  nft delete table inet cloudflare-warp
+                               -> "No such file or directory"
+                                  (already removed when the service stopped)
+  nft list tables              -> cloudflare-warp ABSENT
+  sshd                         -> still LISTEN 0.0.0.0:22 and [::]:22
+
+warp-svc remains ENABLED. The table returns on reboot until a WARP split-tunnel
+bypass covering the VM IPs is in place. That bypass is the Steward's durable fix
+and is not part of this recovery.
+
+Not done, not authorized, not needed: no restart, no extension deletion,
+reinstall, or reset, no disk operation, no rollback release.
+
+===============================================================
+LAYER 5 - EXTERNAL SSH VERIFICATION (separately timestamped)
+===============================================================
+observed_utc  2026-08-06T04:52:56Z
+from          47.216.142.226 (outside the VM)
+
+  tcp/22 handshake : True
+  ssh              : CONNECTED
+                     vm-cyberpeer-core
+                     up 3 days, 9 hours, 20 minutes
+
+STATUS: SSH RECOVERY VERIFIED EXTERNALLY.
+
+===============================================================
+LAYER 6 - P0 PRIVATE SSH/STDIO CANARY (separately timestamped)
+===============================================================
+observed_utc  2026-08-06T04:53:56Z
+route         external MCP client -> SSH stdio -> MCP Gateway
+              -> VM loopback Portal (127.0.0.1:8092) -> Genesis DataQuad
+command       ssh AEGISIPFSNode
+              /opt/cyberpeer-pod/portals/phase2/run_private_mcp_gateway.sh
+
+GENESIS RECORD RETURNED:
+  record_id : PEER:adam-one-session:aegis-canon-genesis:0
+  tensor    : PEER
+  clock     : { "tick": 0, "phase": "genesis" }
+  timestamp : 2026-01-01T00:00:00.000Z
+
+Matches the SSSP section 4.8 expected result exactly.
+
+RESULT HASHES:
+  result_sha256   4c06c25b2c3abcc5d4efba1eef36dba7017ae58d8f7a4bd9ce121d44062b44a9
+  router_sha256   1f45f9e279976f2ffc1b9d953a3e4492c7c13c76fdb2d68ba0b947cdf3feef9a
+  adapter_sha256  e1c8a7c36dc0e7e96502fa5a857a31e1b805943a71d89234a15755dbf2b8b29f
+  request_id      693c9aa0-d397-4063-bf6a-eaee2458c740
+
+NO MUTATION - proven by the Portal itself, hashing all four tensors before and
+after the observation:
+  PEER   1abab63676ffe42ce74141cb25eabf132a52d3544e146804d4afef231c5f7e57
+  PCT    149975b9153e0fa866fb3dd9ef7438362809a628cd47a9c2eaceb2ee07681287
+  NCT    eec05cbaa13170e21f738742bb9bd646afdc212b9f2a97f7becd2339904534a2
+  SPINE  d6131d38d99fa2997bc7e35e360ed51dbc3435701ca54de51d50e651a08ed524
+  tensor_hashes == post_observation_tensor_hashes for all four.
+
+  expected_hashes_sha256 == post_observation_expected_hashes_sha256
+    cde03987917e425dc2423287bae23d5fd2876faaa0841c200850bb8acdd40977
+
+RECORD COUNTS: PEER 1446, PCT 1448, NCT 645, SPINE 562
+
+BOUNDARIES, as reported by the Portal:
+  mutation_performed        false
+  experience_created        false
+  admission_performed       false
+  source_write_attempted    false
+  pod_write_attempted       false
+  core_runtime_imported     false
+  dataquad_writeback        false
+  frontier_connection       false
+
+PORTAL STATUS:
+  pod_id        adam-one
+  portal_mode   read-replay
+  health        ok, loopback-contract-only, bound 127.0.0.1
+  capabilities  retrieve_context, retrieve_canon,
+                query_continuity:observed, request_reflection:replay_only
+  record_experience false | admission false | dataquad_writeback false
+
+===============================================================
+LADDER
+===============================================================
+  recovery applied              YES  (WARP table removed, guest evidence recorded)
+  SSH recovery verified         YES  (external handshake 04:52:56Z)
+  P0 external canary verified   YES  (Genesis returned 04:53:56Z, hashes recorded)
+
+===============================================================
+CORRECTIONS TO THE RECORD
+===============================================================
+1. `aegis-private-portal.service` does not exist as a systemd unit on this host.
+   The Portal is a bare python3 process (pid 1055) listening on 127.0.0.1:8092.
+   SSSP section 4.11 names a service that is not present. The listener is real
+   and healthy; the service name is stale.
+
+2. The pre-change ufw baseline that earlier records describe as permanently
+   unrecorded is moot. ufw was inactive and was never the fault. No ufw rule was
+   ever applied by anyone.
+
+3. Run Command operation a99550e8, accepted 2026-08-06T02:27:50Z, never reached
+   a terminal state and never delivered anything. It carried `ufw allow 22/tcp`,
+   which is irrelevant to this fault. It is not credited with any part of this
+   recovery.
+
+4. The Portal serves from an immutable copy at
+   /opt/cyberpeer-pod/adapters/phase3a/records, mode "immutable_copy",
+   live_source false. The canary therefore proves the read/replay route and the
+   Genesis record, not live DataQuad access. That distinction is the Portal's
+   own declaration, not an inference.
