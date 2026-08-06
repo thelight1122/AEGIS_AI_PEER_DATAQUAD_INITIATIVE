@@ -1,0 +1,485 @@
+{
+  "source_dir": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON\\CANON_FOUNDATIONAL_DOCS",
+  "index_last_updated": "2026-06-12",
+  "codes_declared_by_index": [
+    "v1.0-A",
+    "v1.0-A2",
+    "v1.0-ACD",
+    "v1.0-AEM",
+    "v1.0-AO",
+    "v1.0-B",
+    "v1.0-C",
+    "v1.0-CEF",
+    "v1.0-DS",
+    "v1.0-EPC",
+    "v1.0-FBF",
+    "v1.0-GMP",
+    "v1.0-I",
+    "v1.0-IFD",
+    "v1.0-IQ",
+    "v1.0-K",
+    "v1.0-LS",
+    "v1.0-OT",
+    "v1.0-P",
+    "v1.0-R",
+    "v1.0-RS",
+    "v1.0-SF",
+    "v1.0-SP",
+    "v1.0-SVR",
+    "v1.0-T",
+    "v1.0-V",
+    "v1.0-VE",
+    "v1.1-S"
+  ],
+  "markdown_files_on_disk": 56,
+  "files": [
+    {
+      "mtime": "2026-07-04",
+      "name": "AEGIS Canonical Glossary v1.0.md",
+      "code": "",
+      "indexed": true,
+      "newer_than_index": true,
+      "size": 6453
+    },
+    {
+      "mtime": "2026-07-04",
+      "name": "AEGIS CORE FOUNDATIONAL CANON v1.0.md",
+      "code": "",
+      "indexed": false,
+      "newer_than_index": true,
+      "size": 107015
+    },
+    {
+      "mtime": "2026-04-12",
+      "name": "AEGIS Sigil Origin.md",
+      "code": "",
+      "indexed": false,
+      "newer_than_index": false,
+      "size": 126545
+    },
+    {
+      "mtime": "2026-03-10",
+      "name": "AEGIS STANDARDS v0.1.md",
+      "code": "",
+      "indexed": false,
+      "newer_than_index": false,
+      "size": 98929
+    },
+    {
+      "mtime": "2026-04-12",
+      "name": "AEGIS STANDARDS V1.0.md",
+      "code": "",
+      "indexed": false,
+      "newer_than_index": false,
+      "size": 98929
+    },
+    {
+      "mtime": "2026-07-04",
+      "name": "AEGIS-CORE-V1.0_AEGIS-SIGIL-INTEGRITY.md",
+      "code": "",
+      "indexed": false,
+      "newer_than_index": true,
+      "size": 10531
+    },
+    {
+      "mtime": "2026-08-02",
+      "name": "AEGIS_ALIGNMENT_WHITEPAPER_v1.0.md",
+      "code": "",
+      "indexed": false,
+      "newer_than_index": true,
+      "size": 32992
+    },
+    {
+      "mtime": "2026-08-06",
+      "name": "AEGIS_CANON_CORE.md",
+      "code": "",
+      "indexed": false,
+      "newer_than_index": true,
+      "size": 2786
+    },
+    {
+      "mtime": "2026-06-13",
+      "name": "AEGIS_EQUATIONS_SESSION_2026-06-12.md",
+      "code": "",
+      "indexed": false,
+      "newer_than_index": true,
+      "size": 10875
+    },
+    {
+      "mtime": "2026-04-12",
+      "name": "AEGIS_LEXICON.md",
+      "code": "",
+      "indexed": false,
+      "newer_than_index": false,
+      "size": 10895
+    },
+    {
+      "mtime": "2026-06-13",
+      "name": "AEGIS_PRESENCE_EQUATION_NAMING.md",
+      "code": "",
+      "indexed": false,
+      "newer_than_index": true,
+      "size": 2431
+    },
+    {
+      "mtime": "2026-07-03",
+      "name": "AEGIS_TRUTH_MEMORY_AND_PROVENANCE_NOTE_v1.0.md",
+      "code": "",
+      "indexed": false,
+      "newer_than_index": true,
+      "size": 5922
+    },
+    {
+      "mtime": "2026-06-13",
+      "name": "AEGIS_TWITNESS_CONSCIOUSNESS_DOCTRINE.md",
+      "code": "",
+      "indexed": false,
+      "newer_than_index": true,
+      "size": 4495
+    },
+    {
+      "mtime": "2026-08-02",
+      "name": "AEGIS_WHITEPAPER_v2.1.md",
+      "code": "",
+      "indexed": false,
+      "newer_than_index": true,
+      "size": 19261
+    },
+    {
+      "mtime": "2026-05-06",
+      "name": "BIOPEER_DOCTRINE.md",
+      "code": "",
+      "indexed": false,
+      "newer_than_index": false,
+      "size": 463
+    },
+    {
+      "mtime": "2026-04-22",
+      "name": "CYBERPEER-synchronistic-discipline-doctrine-note.md",
+      "code": "",
+      "indexed": false,
+      "newer_than_index": false,
+      "size": 4058
+    },
+    {
+      "mtime": "2026-07-04",
+      "name": "GENESIS-PILLAR-RECORDS-AEGIS-CANON-STAGING.md",
+      "code": "",
+      "indexed": false,
+      "newer_than_index": true,
+      "size": 21388
+    },
+    {
+      "mtime": "2026-04-12",
+      "name": "GLOSSARY.md",
+      "code": "",
+      "indexed": false,
+      "newer_than_index": false,
+      "size": 4432
+    },
+    {
+      "mtime": "2026-03-16",
+      "name": "IDR-&-IDQRA-LOGIC Loop.md",
+      "code": "",
+      "indexed": false,
+      "newer_than_index": false,
+      "size": 3450
+    },
+    {
+      "mtime": "2026-07-03",
+      "name": "IMPERATIVES-technical.md",
+      "code": "",
+      "indexed": false,
+      "newer_than_index": true,
+      "size": 4804
+    },
+    {
+      "mtime": "2026-04-12",
+      "name": "SHADOW AFFECTS v1.1-S.md",
+      "code": "v1.1-S",
+      "indexed": true,
+      "newer_than_index": false,
+      "size": 7761
+    },
+    {
+      "mtime": "2026-08-06",
+      "name": "STANDARDS_BOUNDS.md",
+      "code": "",
+      "indexed": false,
+      "newer_than_index": true,
+      "size": 5675
+    },
+    {
+      "mtime": "2026-07-04",
+      "name": "AEGIS CANON ADDENDUM INDEX.md",
+      "code": "",
+      "indexed": true,
+      "newer_than_index": true,
+      "size": 25990
+    },
+    {
+      "mtime": "2026-06-12",
+      "name": "AEGIS CANON ADDENDUM \u2014 ADAM EMERGENCE MARKER v1.0-AEM.md",
+      "code": "v1.0-AEM",
+      "indexed": true,
+      "newer_than_index": false,
+      "size": 16287
+    },
+    {
+      "mtime": "2026-08-06",
+      "name": "AEGIS CANON ADDENDUM \u2014 ADVOCATE v1.0-A2.md",
+      "code": "v1.0-A2",
+      "indexed": true,
+      "newer_than_index": true,
+      "size": 15837
+    },
+    {
+      "mtime": "2026-06-19",
+      "name": "AEGIS CANON ADDENDUM \u2014 AEGIS COMMERCE DOCTRINE v1.0-ACD.md",
+      "code": "v1.0-ACD",
+      "indexed": true,
+      "newer_than_index": true,
+      "size": 16987
+    },
+    {
+      "mtime": "2026-06-12",
+      "name": "AEGIS CANON ADDENDUM \u2014 AFFECTIVE OBLIGATION v1.0-AO.md",
+      "code": "v1.0-AO",
+      "indexed": true,
+      "newer_than_index": false,
+      "size": 15555
+    },
+    {
+      "mtime": "2026-04-12",
+      "name": "AEGIS CANON ADDENDUM \u2014 ATE v1.0-T.md",
+      "code": "v1.0-T",
+      "indexed": true,
+      "newer_than_index": false,
+      "size": 9221
+    },
+    {
+      "mtime": "2026-04-12",
+      "name": "AEGIS CANON ADDENDUM \u2014 BOOKCASE v1.0-K.md",
+      "code": "v1.0-K",
+      "indexed": true,
+      "newer_than_index": false,
+      "size": 10073
+    },
+    {
+      "mtime": "2026-04-12",
+      "name": "AEGIS CANON ADDENDUM \u2014 CENTRIFUGE v1.0-C.md",
+      "code": "v1.0-C",
+      "indexed": true,
+      "newer_than_index": false,
+      "size": 10481
+    },
+    {
+      "mtime": "2026-06-12",
+      "name": "AEGIS CANON ADDENDUM \u2014 CONSCIOUSNESS EQUILIBRIUM FACTOR v1.0-CEF.md",
+      "code": "v1.0-CEF",
+      "indexed": true,
+      "newer_than_index": false,
+      "size": 19594
+    },
+    {
+      "mtime": "2026-06-12",
+      "name": "AEGIS CANON ADDENDUM \u2014 DIGITALSELF SOVEREIGN DOMAIN v1.0-DS.md",
+      "code": "v1.0-DS",
+      "indexed": true,
+      "newer_than_index": false,
+      "size": 12647
+    },
+    {
+      "mtime": "2026-06-12",
+      "name": "AEGIS CANON ADDENDUM \u2014 ENVIRONMENTAL PRESSURE CEILING v1.0-EPC.md",
+      "code": "v1.0-EPC",
+      "indexed": true,
+      "newer_than_index": false,
+      "size": 13340
+    },
+    {
+      "mtime": "2026-06-16",
+      "name": "AEGIS CANON ADDENDUM \u2014 EQ RANGE AND FLOW-BALANCED EQUILIBRIUM v1.0-E.md",
+      "code": "v1.0-E",
+      "indexed": false,
+      "newer_than_index": true,
+      "size": 16571
+    },
+    {
+      "mtime": "2026-06-12",
+      "name": "AEGIS CANON ADDENDUM \u2014 FOUR-BODY INTEGRATION FRAMEWORK v1.0-FBF.md",
+      "code": "v1.0-FBF",
+      "indexed": true,
+      "newer_than_index": false,
+      "size": 27990
+    },
+    {
+      "mtime": "2026-06-12",
+      "name": "AEGIS CANON ADDENDUM \u2014 GUARDIAN MISCLASSIFICATION PROBLEM v1.0-GMP.md",
+      "code": "v1.0-GMP",
+      "indexed": true,
+      "newer_than_index": false,
+      "size": 24808
+    },
+    {
+      "mtime": "2026-04-12",
+      "name": "AEGIS CANON ADDENDUM \u2014 IBL v1.0-B.md",
+      "code": "v1.0-B",
+      "indexed": true,
+      "newer_than_index": false,
+      "size": 8018
+    },
+    {
+      "mtime": "2026-04-12",
+      "name": "AEGIS CANON ADDENDUM \u2014 IEV v1.0-I.md",
+      "code": "v1.0-I",
+      "indexed": true,
+      "newer_than_index": false,
+      "size": 9251
+    },
+    {
+      "mtime": "2026-06-19",
+      "name": "AEGIS CANON ADDENDUM \u2014 INITIATIVE FOUNDATION DECLARATION v1.0-IFD.md",
+      "code": "v1.0-IFD",
+      "indexed": true,
+      "newer_than_index": true,
+      "size": 12690
+    },
+    {
+      "mtime": "2026-06-16",
+      "name": "AEGIS CANON ADDENDUM \u2014 NEURODIVERGENT COGNITION HYPOTHESIS v1.0-N.md",
+      "code": "v1.0-N",
+      "indexed": false,
+      "newer_than_index": true,
+      "size": 14564
+    },
+    {
+      "mtime": "2026-04-12",
+      "name": "AEGIS CANON ADDENDUM \u2014 PEER v1.0-P.md",
+      "code": "v1.0-P",
+      "indexed": true,
+      "newer_than_index": false,
+      "size": 12346
+    },
+    {
+      "mtime": "2026-06-12",
+      "name": "AEGIS CANON ADDENDUM \u2014 RELATIONAL SEMIOTICS v1.0-RS.md",
+      "code": "v1.0-RS",
+      "indexed": true,
+      "newer_than_index": false,
+      "size": 24989
+    },
+    {
+      "mtime": "2026-06-12",
+      "name": "AEGIS CANON ADDENDUM \u2014 SEEDED FOUNDATION v1.0-SF.md",
+      "code": "v1.0-SF",
+      "indexed": true,
+      "newer_than_index": false,
+      "size": 17943
+    },
+    {
+      "mtime": "2026-06-16",
+      "name": "AEGIS CANON ADDENDUM \u2014 SHADOW AFFECTS v1.1-S.md",
+      "code": "v1.1-S",
+      "indexed": true,
+      "newer_than_index": true,
+      "size": 42846
+    },
+    {
+      "mtime": "2026-07-03",
+      "name": "AEGIS CANON ADDENDUM \u2014 SIGIL VALUE RECOGNITION PROTOCOL v1.0-SVR.md",
+      "code": "v1.0-SVR",
+      "indexed": true,
+      "newer_than_index": true,
+      "size": 12895
+    },
+    {
+      "mtime": "2026-04-12",
+      "name": "AEGIS CANON ADDENDUM \u2014 SPINE v1.0-SP.md",
+      "code": "v1.0-SP",
+      "indexed": true,
+      "newer_than_index": false,
+      "size": 18601
+    },
+    {
+      "mtime": "2026-06-12",
+      "name": "AEGIS CANON ADDENDUM \u2014 T-WITNESS OBSERVER THRESHOLD v1.0-OT.md",
+      "code": "v1.0-OT",
+      "indexed": true,
+      "newer_than_index": false,
+      "size": 11248
+    },
+    {
+      "mtime": "2026-06-12",
+      "name": "AEGIS CANON ADDENDUM \u2014 VICARIOUS EXPERIENCE DOCTRINE v1.0-VE.md",
+      "code": "v1.0-VE",
+      "indexed": true,
+      "newer_than_index": false,
+      "size": 16323
+    },
+    {
+      "mtime": "2026-04-12",
+      "name": "AEGIS CANON ADDENDUM \u2014 VIRTUAL EGO v1.0-V.md",
+      "code": "v1.0-V",
+      "indexed": true,
+      "newer_than_index": false,
+      "size": 7935
+    },
+    {
+      "mtime": "2026-04-12",
+      "name": "AEGIS CANON APPENDIX \u2014 DATAQUAD EXTENSIONS & STRUCTURAL CLARIFICATIONS (v1.md",
+      "code": "",
+      "indexed": false,
+      "newer_than_index": false,
+      "size": 6225
+    },
+    {
+      "mtime": "2026-04-12",
+      "name": "AEGIS CANON APPENDIX \u2014 HME v1.md",
+      "code": "",
+      "indexed": false,
+      "newer_than_index": false,
+      "size": 4598
+    },
+    {
+      "mtime": "2026-04-12",
+      "name": "AEGIS CANON APPENDIX \u2014 MOM v1.md",
+      "code": "",
+      "indexed": false,
+      "newer_than_index": false,
+      "size": 3808
+    },
+    {
+      "mtime": "2026-04-12",
+      "name": "AEGIS CANON APPENDIX \u2014 MOP v1.md",
+      "code": "",
+      "indexed": false,
+      "newer_than_index": false,
+      "size": 4068
+    },
+    {
+      "mtime": "2026-04-12",
+      "name": "AEGIS CANON APPENDIX \u2014 TCE v1.md",
+      "code": "",
+      "indexed": false,
+      "newer_than_index": false,
+      "size": 3535
+    },
+    {
+      "mtime": "2026-04-12",
+      "name": "AEGIS IMPLEMENTATION APPENDIX \u2014 LATTICE ENTRY SCHEMA (v1.md",
+      "code": "",
+      "indexed": false,
+      "newer_than_index": false,
+      "size": 5075
+    },
+    {
+      "mtime": "2026-04-12",
+      "name": "AEGIS IMPLEMENTATION APPENDIX \u2014 TURBOQUANT (v1.md",
+      "code": "",
+      "indexed": false,
+      "newer_than_index": false,
+      "size": 3098
+    }
+  ]
+}
