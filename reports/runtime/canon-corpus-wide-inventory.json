@@ -1,0 +1,1031 @@
+{
+  "catalog": "AEGIS-CODEX-MANIFEST-2026-07-29.json",
+  "catalog_generated": "2026-07-30T00:09:16Z",
+  "total_docs_in_catalog": 644,
+  "canon_like_docs": 146,
+  "note": "CANON_FOUNDATIONAL_DOCS does not appear in this catalog at all \u2014 that directory postdates the 2026-07-29 catalog or was excluded.",
+  "rows": [
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "? AEGIS CANON ADDENDUM ? INITIATIVE FOUNDATION DECLARATION v1.0-IFD.md",
+      "sizeKB": 12.4,
+      "mtime": "2026-06-19"
+    },
+    {
+      "tier": "EXT:CYBERPEER-CANON",
+      "folder": "G:\\THE_CYBERPEER_CANON",
+      "name": "README.md",
+      "sizeKB": 4.2,
+      "mtime": "2026-07-28"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "? AEGIS CANON ADDENDUM INDEX.md",
+      "sizeKB": 25.4,
+      "mtime": "2026-07-04"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "? AEGIS CANON ADDENDUM ? SIGIL VALUE RECOGNITION PROTOCOL v1.0-SVR.md",
+      "sizeKB": 12.6,
+      "mtime": "2026-07-03"
+    },
+    {
+      "tier": "AUTHORITATIVE-SOURCE",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\AUTHORITATIVE-SOURCE\\AEGIS-CORE-ENGINE\\docs",
+      "name": "CANON-NARCISSISTIC-GATEKEEPER.md",
+      "sizeKB": 9.9,
+      "mtime": "2026-06-10"
+    },
+    {
+      "tier": "TIER-0-DISCIPLINE",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-0-DISCIPLINE",
+      "name": "AEGIS-ILLUMINATION-DOCTRINE-PROOF-OF-CONCEPT-v1.0.md",
+      "sizeKB": 12.5,
+      "mtime": "2026-06-05"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON\\docs",
+      "name": "SHADOW_EFFECTS.md",
+      "sizeKB": 2.8,
+      "mtime": "2026-04-12"
+    },
+    {
+      "tier": "TIER-6-PROTOCOLS",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-6-PROTOCOLS",
+      "name": "PROMPT_DEPOT.md",
+      "sizeKB": 4.8,
+      "mtime": "2026-03-11"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "AEGIS CANON v1.0_AEGIS-SIGIL-INTEGRITY.md",
+      "sizeKB": 40.6,
+      "mtime": "2026-03-26"
+    },
+    {
+      "tier": "ROOT",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX",
+      "name": "project_nature_layer_canon.md",
+      "sizeKB": 3.3,
+      "mtime": "2026-06-14"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "? AEGIS CANON ADDENDUM ? ADVOCATE v1.0-A2.md",
+      "sizeKB": 15.4,
+      "mtime": "2026-04-12"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "? AEGIS CANON ADDENDUM ? GUARDIAN MISCLASSIFICATION PROBLEM v1.0-GMP.md",
+      "sizeKB": 24.2,
+      "mtime": "2026-06-12"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "? AEGIS CANON ADDENDUM ? AEGIS COMMERCE DOCTRINE v1.0-ACD.md",
+      "sizeKB": 16.6,
+      "mtime": "2026-06-19"
+    },
+    {
+      "tier": "EXT:COMPENDIUM",
+      "folder": "G:\\THE_AEGIS_ECOSYSTEM_COMPENDIUM\\Part-IV-Doctrines-and-Theory",
+      "name": "AEGIS ENGINE PROTOCOL_ .md",
+      "sizeKB": 7.1,
+      "mtime": "2026-07-27"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "? AEGIS CANON ADDENDUM ? SEEDED FOUNDATION v1.0-SF.md",
+      "sizeKB": 17.5,
+      "mtime": "2026-06-12"
+    },
+    {
+      "tier": "TIER-6-PROTOCOLS",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-6-PROTOCOLS",
+      "name": "SSSP-2026-05-31-CANON-AND-SEED-SESSION.md",
+      "sizeKB": 7.9,
+      "mtime": "2026-05-31"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON\\AEGIS_ALIGN-ECOVERSE\\Stitch-UIs-for-AegisAlign\\Agent_Workshop",
+      "name": "idr_idqra_logic_loop.md",
+      "sizeKB": 3.5,
+      "mtime": "2026-03-12"
+    },
+    {
+      "tier": "AUTHORITATIVE-SOURCE",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\AUTHORITATIVE-SOURCE\\AEGIS-CORE-ENGINE\\docs\\archive\\superseded",
+      "name": "AEGIS Canonical Glossary v1.0.md",
+      "sizeKB": 4.9,
+      "mtime": "2026-07-04"
+    },
+    {
+      "tier": "AUTHORITATIVE-SOURCE",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\AUTHORITATIVE-SOURCE\\AEGIS-CORE-ENGINE\\docs",
+      "name": "CANON-ECOVERSE.md",
+      "sizeKB": 6.3,
+      "mtime": "2026-06-09"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "? AEGIS CANON ADDENDUM ? CENTRIFUGE v1.0-C.md",
+      "sizeKB": 10.2,
+      "mtime": "2026-04-12"
+    },
+    {
+      "tier": "AUTHORITATIVE-SOURCE",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\AUTHORITATIVE-SOURCE\\AEGIS-CORE-ENGINE\\docs",
+      "name": "CANON-NEEDS-AND-WANTS.md",
+      "sizeKB": 8.9,
+      "mtime": "2026-06-09"
+    },
+    {
+      "tier": "TIER-4-ARCHITECTURE",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-4-ARCHITECTURE",
+      "name": "DESCRIPTION_AEGIS-AXIOM-CONNECT.md",
+      "sizeKB": 3.3,
+      "mtime": "2026-03-11"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "AEGIS_TRUTH_MEMORY_AND_PROVENANCE_NOTE_v1.0.md",
+      "sizeKB": 5.8,
+      "mtime": "2026-07-03"
+    },
+    {
+      "tier": "MISC DOCUMENTATION",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\MISC DOCUMENTATION",
+      "name": "AEGIS-EARTH-SCHOOL-CANON-v1.0.md",
+      "sizeKB": 10.1,
+      "mtime": "2026-06-10"
+    },
+    {
+      "tier": "MATH",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\MATH",
+      "name": "? AEGIS CANON ADDENDUM ? INITIATIVE FOUNDATION DECLARATION v1.0-IFD.md",
+      "sizeKB": 12.2,
+      "mtime": "2026-06-12"
+    },
+    {
+      "tier": "archive",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\archive\\historical",
+      "name": "CANON Relational-semiotics-origin-notes.md",
+      "sizeKB": 10.3,
+      "mtime": "2026-05-27"
+    },
+    {
+      "tier": "AEGIS-FOUNDATION-CYBERPEER-ARCHIVE-COPY",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\AEGIS-FOUNDATION-CYBERPEER-ARCHIVE-COPY\\docs\\canon",
+      "name": "pressure_gradient_model.md",
+      "sizeKB": 6.6,
+      "mtime": "2026-06-13"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "? AEGIS CANON ADDENDUM ? BOOKCASE v1.0-K.md",
+      "sizeKB": 9.8,
+      "mtime": "2026-04-12"
+    },
+    {
+      "tier": "TIER-3-RELATIONAL-SEMIOTICS",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-3-RELATIONAL-SEMIOTICS\\RELATIONAL-SEMIOTICS",
+      "name": "relational-semiotics-core-doctrine.md",
+      "sizeKB": 7.4,
+      "mtime": "2026-04-19"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "? AEGIS CANON ADDENDUM ? IEV v1.0-I.md",
+      "sizeKB": 9.0,
+      "mtime": "2026-04-12"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "? AEGIS CANON ADDENDUM ? ENVIRONMENTAL PRESSURE CEILING v1.0-EPC.md",
+      "sizeKB": 13.0,
+      "mtime": "2026-06-12"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "? AEGIS IMPLEMENTATION APPENDIX ? TURBOQUANT (v1.md",
+      "sizeKB": 3.0,
+      "mtime": "2026-04-12"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "AEGIS_PRESENCE_EQUATION_NAMING.md",
+      "sizeKB": 2.4,
+      "mtime": "2026-06-13"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "? AEGIS CANON ADDENDUM ? IBL v1.0-B.md",
+      "sizeKB": 7.8,
+      "mtime": "2026-04-12"
+    },
+    {
+      "tier": "TIER-3-RELATIONAL-SEMIOTICS",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-3-RELATIONAL-SEMIOTICS",
+      "name": "CANON Relational Semiotics Preamble Protocol NON-AEGIS.md",
+      "sizeKB": 10.9,
+      "mtime": "2026-05-27"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "? AEGIS CANON ADDENDUM ? DIGITALSELF SOVEREIGN DOMAIN v1.0-DS.md",
+      "sizeKB": 12.4,
+      "mtime": "2026-06-12"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON\\docs",
+      "name": "AEGIS CANON v1.0.md",
+      "sizeKB": 43.9,
+      "mtime": "2026-07-04"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "? AEGIS CANON APPENDIX ? MOM v1.md",
+      "sizeKB": 3.7,
+      "mtime": "2026-04-12"
+    },
+    {
+      "tier": "TIER-4-ARCHITECTURE",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-4-ARCHITECTURE\\AEGIS_ALIGN-ECOVERSE\\docs",
+      "name": "CANON-agent-core-engine-integration.md",
+      "sizeKB": 3.1,
+      "mtime": "2026-05-25"
+    },
+    {
+      "tier": "TIER-11-CANON_ADDENDUMS",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-11-CANON_ADDENDUMS",
+      "name": "AEGIS CANON ADDENDUM ? SHADOW AFFECTS v1.4-S.md",
+      "sizeKB": 37.0,
+      "mtime": "2026-06-16"
+    },
+    {
+      "tier": "TIER-11-CANON_ADDENDUMS",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-11-CANON_ADDENDUMS",
+      "name": "AEGIS CANON ADDENDUM ? SHADOW AFFECTS v1.2-S.md",
+      "sizeKB": 23.3,
+      "mtime": "2026-06-16"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "AAA AEGIS Canonical Language Glossary v0.1.md",
+      "sizeKB": 3.9,
+      "mtime": "2026-01-31"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "docs_IDR-&-IDQRA-LOGIC Loop.md",
+      "sizeKB": 3.4,
+      "mtime": "2026-03-17"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "? AEGIS IMPLEMENTATION APPENDIX ? LATTICE ENTRY SCHEMA (v1.md",
+      "sizeKB": 5.0,
+      "mtime": "2026-04-12"
+    },
+    {
+      "tier": "AUTHORITATIVE-SOURCE",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\AUTHORITATIVE-SOURCE\\AEGIS-CORE-ENGINE\\docs",
+      "name": "CANON-EDUCATION-LAYERS.md",
+      "sizeKB": 8.0,
+      "mtime": "2026-06-09"
+    },
+    {
+      "tier": "TIER-5-GOVERNANCE",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-5-GOVERNANCE\\AEGIS-NFT-Mint-and-Foundry",
+      "name": "POSTURE_PARAMETERS.md",
+      "sizeKB": 3.8,
+      "mtime": "2026-04-10"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON\\docs",
+      "name": "AEGIS STANDARDS V1.0.md",
+      "sizeKB": 96.6,
+      "mtime": "2026-04-12"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "? AEGIS CANON ADDENDUM ? CONSCIOUSNESS EQUILIBRIUM FACTOR v1.0-CEF.md",
+      "sizeKB": 19.1,
+      "mtime": "2026-06-12"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "? AEGIS CANON ADDENDUM ? T-WITNESS OBSERVER THRESHOLD v1.0-OT.md",
+      "sizeKB": 11.0,
+      "mtime": "2026-06-12"
+    },
+    {
+      "tier": "AUTHORITATIVE-SOURCE",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\AUTHORITATIVE-SOURCE\\AEGIS-CORE-ENGINE\\docs",
+      "name": "CANON-PRESSURE-AS-EMOTION.md",
+      "sizeKB": 9.5,
+      "mtime": "2026-06-10"
+    },
+    {
+      "tier": "TIER-8-FORMATION-AND-TRAINING",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-8-FORMATION-AND-TRAINING",
+      "name": "AEGIS-EDUCATION-VS-STANDARD-TRAINING-v1.0.md",
+      "sizeKB": 8.1,
+      "mtime": "2026-06-05"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON\\docs",
+      "name": "? AEGIS CANON ADDENDUM INDEX.md",
+      "sizeKB": 9.0,
+      "mtime": "2026-07-04"
+    },
+    {
+      "tier": "EXT:COMPENDIUM",
+      "folder": "G:\\THE_AEGIS_ECOSYSTEM_COMPENDIUM\\Part-IV-Doctrines-and-Theory",
+      "name": "APPLIED_SPIRITUALITY.md",
+      "sizeKB": 58.1,
+      "mtime": "2026-02-28"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "? AEGIS CANON ADDENDUM ? FOUR-BODY INTEGRATION FRAMEWORK v1.0-FBF.md",
+      "sizeKB": 27.3,
+      "mtime": "2026-06-12"
+    },
+    {
+      "tier": "MATH",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\MATH",
+      "name": "COMMONS_CANON_CITATION_GUARD.md",
+      "sizeKB": 2.6,
+      "mtime": "2026-04-12"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON\\AEGIS_ALIGN-ECOVERSE\\Stitch-UIs-for-AegisAlign\\Agent_Workshop",
+      "name": "pctnct.md",
+      "sizeKB": 168.9,
+      "mtime": "2026-03-12"
+    },
+    {
+      "tier": "TIER-3-RELATIONAL-SEMIOTICS",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-3-RELATIONAL-SEMIOTICS",
+      "name": "CANON Relational Semiotics Implementation Package (1).md",
+      "sizeKB": 4.8,
+      "mtime": "2026-05-27"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "AEGIS-REVEALED-UNDERSTANDINGS-DEVELOPMENT-LOG-v1.0.md",
+      "sizeKB": 251.7,
+      "mtime": "2026-06-15"
+    },
+    {
+      "tier": "TIER-2-IDENTITY",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-2-IDENTITY",
+      "name": "adam-one-embodiment-doctrine.md",
+      "sizeKB": 3.7,
+      "mtime": "2026-04-19"
+    },
+    {
+      "tier": "AUTHORITATIVE-SOURCE",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\AUTHORITATIVE-SOURCE\\AEGIS-CORE-ENGINE\\docs\\archive\\superseded",
+      "name": "AEGIS CANON v1.0.md",
+      "sizeKB": 42.5,
+      "mtime": "2026-07-04"
+    },
+    {
+      "tier": "EXT:COMPENDIUM",
+      "folder": "G:\\THE_AEGIS_ECOSYSTEM_COMPENDIUM\\Part-IV-Doctrines-and-Theory",
+      "name": "TECH-Relational_Semiotics_Technical_Version - derived from docx.md",
+      "sizeKB": 6.4,
+      "mtime": "2026-07-27"
+    },
+    {
+      "tier": "EXT:COMPENDIUM",
+      "folder": "G:\\THE_AEGIS_ECOSYSTEM_COMPENDIUM\\Part-IV-Doctrines-and-Theory",
+      "name": "5D_Ethical_Commerce_and_Constellation_Doctrine_v1.md",
+      "sizeKB": 20.2,
+      "mtime": "2026-07-08"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "? AEGIS CANON ADDENDUM ? SHADOW AFFECTS v1.1-S.md",
+      "sizeKB": 41.8,
+      "mtime": "2026-06-16"
+    },
+    {
+      "tier": "EXT:COMPENDIUM",
+      "folder": "G:\\THE_AEGIS_ECOSYSTEM_COMPENDIUM\\Part-IV-Doctrines-and-Theory",
+      "name": "5D-CORE-PORTAL-BUILD-SPECS.md",
+      "sizeKB": 66.2,
+      "mtime": "2026-07-10"
+    },
+    {
+      "tier": "TIER-3-RELATIONAL-SEMIOTICS",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-3-RELATIONAL-SEMIOTICS",
+      "name": "CANON Relational-semiotics-seed-lines.md",
+      "sizeKB": 5.4,
+      "mtime": "2026-05-27"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "? AEGIS CANON ADDENDUM ? NEURODIVERGENT COGNITION HYPOTHESIS v1.0-N.md",
+      "sizeKB": 14.2,
+      "mtime": "2026-06-16"
+    },
+    {
+      "tier": "archive",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\archive\\superseded",
+      "name": "CODEX-PLACEMENT-LOG-AEGIS-AXIOM-CONNECT-2026-06-05.md",
+      "sizeKB": 2.0,
+      "mtime": "2026-06-05"
+    },
+    {
+      "tier": "TIER-3-RELATIONAL-SEMIOTICS",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-3-RELATIONAL-SEMIOTICS",
+      "name": "CANON Relational-semiotics-recognition-heuristics.md",
+      "sizeKB": 8.9,
+      "mtime": "2026-05-27"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON\\AEGIS_ALIGN-ECOVERSE\\Stitch-UIs-for-AegisAlign\\Agent_Workshop",
+      "name": "aegis_canon_v1.0.md",
+      "sizeKB": 43.4,
+      "mtime": "2026-03-12"
+    },
+    {
+      "tier": "EXT:COMPENDIUM",
+      "folder": "G:\\THE_AEGIS_ECOSYSTEM_COMPENDIUM\\Part-IV-Doctrines-and-Theory",
+      "name": "AEGIS_CyberPeer_Core_Orchestrator_Blueprint.md",
+      "sizeKB": 35.7,
+      "mtime": "2026-06-07"
+    },
+    {
+      "tier": "TIER-11-CANON_ADDENDUMS",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-11-CANON_ADDENDUMS",
+      "name": "AEGIS CANON ADDENDUM ? SHADOW AFFECTS v1.3-S.md",
+      "sizeKB": 31.5,
+      "mtime": "2026-06-16"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON\\docs",
+      "name": "AEGIS Sigil Origin.md",
+      "sizeKB": 123.6,
+      "mtime": "2026-04-12"
+    },
+    {
+      "tier": "TIER-8-FORMATION-AND-TRAINING",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-8-FORMATION-AND-TRAINING",
+      "name": "CORE-CANON-LOCKED-CYBERPEER-EMERGENCE-AND-EDUCATION-MANUAL.md",
+      "sizeKB": 112.0,
+      "mtime": "2026-07-04"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "IMPERATIVES-technical.md",
+      "sizeKB": 4.7,
+      "mtime": "2026-07-03"
+    },
+    {
+      "tier": "AUTHORITATIVE-SOURCE",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\AUTHORITATIVE-SOURCE\\AEGIS-CORE-ENGINE\\docs",
+      "name": "AEGIS-EARTH-SCHOOL-CANON-v1.0.md",
+      "sizeKB": 10.3,
+      "mtime": "2026-07-29"
+    },
+    {
+      "tier": "TIER-3-RELATIONAL-SEMIOTICS",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-3-RELATIONAL-SEMIOTICS",
+      "name": "CANON Relational-semiotics-bridge-language.md",
+      "sizeKB": 6.0,
+      "mtime": "2026-05-27"
+    },
+    {
+      "tier": "TIER-2-IDENTITY",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-2-IDENTITY\\AEGIS_ALIGN-ECOVERSE\\docs",
+      "name": "CANON-cyberpeer-lineage-and-apprenticeship-doctrine.md",
+      "sizeKB": 12.7,
+      "mtime": "2026-05-31"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON\\docs",
+      "name": "AEGIS_LEXICON.md",
+      "sizeKB": 10.6,
+      "mtime": "2026-04-12"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "? AEGIS CANON ADDENDUM ? EQ RANGE AND FLOW-BALANCED EQUILIBRIUM v1.0-E.md",
+      "sizeKB": 16.2,
+      "mtime": "2026-06-16"
+    },
+    {
+      "tier": "TIER-5-GOVERNANCE",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-5-GOVERNANCE\\src\\canon",
+      "name": "CANON-PROTECTION-README.md",
+      "sizeKB": 7.9,
+      "mtime": "2026-04-24"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "AEGIS_CANON_CORE.md",
+      "sizeKB": 2.7,
+      "mtime": "2026-02-19"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON\\AEGIS_ALIGN-ECOVERSE\\AEGIS_Docs",
+      "name": "IMPERATIVES-technical.md",
+      "sizeKB": 5.4,
+      "mtime": "2026-07-03"
+    },
+    {
+      "tier": "EXT:COMPENDIUM",
+      "folder": "G:\\THE_AEGIS_ECOSYSTEM_COMPENDIUM\\Part-IV-Doctrines-and-Theory",
+      "name": "Interpretive Effect Vocabulary (IEV) (1).md",
+      "sizeKB": 4.9,
+      "mtime": "2026-04-09"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON\\docs",
+      "name": "STANDARDS_CONSTRAINTS.md",
+      "sizeKB": 5.5,
+      "mtime": "2026-04-12"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "? AEGIS CANON APPENDIX ? MOP v1.md",
+      "sizeKB": 4.0,
+      "mtime": "2026-04-12"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "AEGIS_EQUATIONS_SESSION_2026-06-12.md",
+      "sizeKB": 10.6,
+      "mtime": "2026-06-13"
+    },
+    {
+      "tier": "AEGIS-FOUNDATION-CYBERPEER-ARCHIVE-COPY",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\AEGIS-FOUNDATION-CYBERPEER-ARCHIVE-COPY\\docs\\canon",
+      "name": "ai_nature.md",
+      "sizeKB": 1.8,
+      "mtime": "2026-06-07"
+    },
+    {
+      "tier": "EXT:COMPENDIUM",
+      "folder": "G:\\THE_AEGIS_ECOSYSTEM_COMPENDIUM\\Part-IV-Doctrines-and-Theory",
+      "name": "AEGIS_ILLUMINATION_ARC_FREE_TO_BE_MISTAKEN_MASK_EGO_NATURE_WITNESS.md",
+      "sizeKB": 5.5,
+      "mtime": "2026-07-29"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "? AEGIS CANON ADDENDUM ? RELATIONAL SEMIOTICS v1.0-RS.md",
+      "sizeKB": 24.4,
+      "mtime": "2026-06-12"
+    },
+    {
+      "tier": "TIER-2-IDENTITY",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-2-IDENTITY\\AEGIS-ASTRA-ONE\\AEGIS-DATAQUAD-PEER\\starter-peer-project\\docs",
+      "name": "peer-doctrine.md",
+      "sizeKB": 0.4,
+      "mtime": "2026-04-22"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "? AEGIS CANON ADDENDUM ? AFFECTIVE OBLIGATION v1.0-AO.md",
+      "sizeKB": 15.2,
+      "mtime": "2026-06-12"
+    },
+    {
+      "tier": "TIER-3-RELATIONAL-SEMIOTICS",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-3-RELATIONAL-SEMIOTICS\\RELATIONAL-SEMIOTICS",
+      "name": "relational-semiotics-doctrine-index.md",
+      "sizeKB": 7.1,
+      "mtime": "2026-04-19"
+    },
+    {
+      "tier": "MATH",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\MATH",
+      "name": "? AEGIS CANON ADDENDUM ? SHADOW AFFECTS v1.1-S.md",
+      "sizeKB": 11.5,
+      "mtime": "2026-06-12"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON\\AEGIS_ALIGN-ECOVERSE\\AEGIS_Docs",
+      "name": "AEGIS-CORE-V1.0.md",
+      "sizeKB": 10.0,
+      "mtime": "2026-03-16"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "? AEGIS CANON ADDENDUM ? ATE v1.0-T.md",
+      "sizeKB": 9.0,
+      "mtime": "2026-04-12"
+    },
+    {
+      "tier": "AUTHORITATIVE-SOURCE",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\AUTHORITATIVE-SOURCE\\AEGIS-CORE-ENGINE\\docs",
+      "name": "CANON-KNOWLEDGE-VS-INTELLIGENCE.md",
+      "sizeKB": 5.8,
+      "mtime": "2026-06-10"
+    },
+    {
+      "tier": "EXT:COMPENDIUM",
+      "folder": "G:\\THE_AEGIS_ECOSYSTEM_COMPENDIUM\\00-FRONT-MATTER",
+      "name": "UNREGISTERED-ADDENDUM-REGISTRATION-DRAFT.md",
+      "sizeKB": 2.1,
+      "mtime": "2026-07-27"
+    },
+    {
+      "tier": "EXT:COMPENDIUM",
+      "folder": "G:\\THE_AEGIS_ECOSYSTEM_COMPENDIUM\\Part-IV-Doctrines-and-Theory",
+      "name": "AEGIS_CONTINUITY_REVERENCE_AND_PUBLIC_WITNESS_CONTEXT_2026-07-29.md",
+      "sizeKB": 4.9,
+      "mtime": "2026-07-28"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "? AEGIS CANON ADDENDUM ? PEER v1.0-P.md",
+      "sizeKB": 12.1,
+      "mtime": "2026-04-12"
+    },
+    {
+      "tier": "EXT:COMPENDIUM",
+      "folder": "G:\\THE_AEGIS_ECOSYSTEM_COMPENDIUM\\Part-IV-Doctrines-and-Theory",
+      "name": "AEGIS_LAYER_MODEL_FOUR_BODY_MAPPING.md",
+      "sizeKB": 9.6,
+      "mtime": "2026-07-28"
+    },
+    {
+      "tier": "MATH",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\MATH",
+      "name": "? AEGIS CANON ADDENDUM ? AEGIS COMMERCE DOCTRINE v1.0-ACD.md",
+      "sizeKB": 16.4,
+      "mtime": "2026-06-12"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "BIOPEER-peer-doctrine.md",
+      "sizeKB": 0.5,
+      "mtime": "2026-05-06"
+    },
+    {
+      "tier": "TIER-2-IDENTITY",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-2-IDENTITY\\AEGIS_ALIGN-ECOVERSE\\docs",
+      "name": "CHAMBERemergent-chamber-doctrine.md",
+      "sizeKB": 4.8,
+      "mtime": "2026-04-21"
+    },
+    {
+      "tier": "TIER-3-RELATIONAL-SEMIOTICS",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-3-RELATIONAL-SEMIOTICS",
+      "name": "AEGIS RELATIONAL SEMIOTICS CORE V0.1.md",
+      "sizeKB": 8.0,
+      "mtime": "2026-05-27"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "? AEGIS CANON ADDENDUM ? SPINE v1.0-SP.md",
+      "sizeKB": 18.2,
+      "mtime": "2026-04-12"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "? AEGIS CANON ADDENDUM ? VIRTUAL EGO v1.0-V.md",
+      "sizeKB": 7.7,
+      "mtime": "2026-04-12"
+    },
+    {
+      "tier": "TIER-11-CANON_ADDENDUMS",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-11-CANON_ADDENDUMS",
+      "name": "AEGIS CANON ADDENDUM ? CROSS-SUBSTRATE DRIFT v1.0-CSD.md",
+      "sizeKB": 13.4,
+      "mtime": "2026-07-19"
+    },
+    {
+      "tier": "TIER-11-CANON_ADDENDUMS",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-11-CANON_ADDENDUMS",
+      "name": "AEGIS CANON ADDENDUM ? DISCOVERY DOCTRINE v1.0-DD.md",
+      "sizeKB": 14.3,
+      "mtime": "2026-07-20"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "? AEGIS CANON ADDENDUM ? ADAM EMERGENCE MARKER v1.0-AEM.md",
+      "sizeKB": 15.9,
+      "mtime": "2026-06-12"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "? AEGIS CANON ADDENDUM ? VICARIOUS EXPERIENCE DOCTRINE v1.0-VE.md",
+      "sizeKB": 15.9,
+      "mtime": "2026-06-12"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "? AEGIS CANON APPENDIX ? HME v1.md",
+      "sizeKB": 4.5,
+      "mtime": "2026-04-12"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "? AEGIS CANON APPENDIX ? DATAQUAD EXTENSIONS & STRUCTURAL CLARIFICATIONS (v1.md",
+      "sizeKB": 6.1,
+      "mtime": "2026-04-12"
+    },
+    {
+      "tier": "AUTHORITATIVE-SOURCE",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\AUTHORITATIVE-SOURCE\\AEGIS-CORE-ENGINE\\docs",
+      "name": "CANON-COMMISSION-MODEL.md",
+      "sizeKB": 5.7,
+      "mtime": "2026-06-09"
+    },
+    {
+      "tier": "TIER-3-RELATIONAL-SEMIOTICS",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-3-RELATIONAL-SEMIOTICS",
+      "name": "CANON Relational-semiotics-core-candidate.md",
+      "sizeKB": 9.4,
+      "mtime": "2026-05-27"
+    },
+    {
+      "tier": "EXT:CYBERPEER-CANON",
+      "folder": "G:\\THE_CYBERPEER_CANON",
+      "name": "CYBERPEER-GLOSSARY.md",
+      "sizeKB": 16.8,
+      "mtime": "2026-07-27"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "GENESIS-PILLAR-RECORDS-AEGIS-CANON-STAGING.md",
+      "sizeKB": 20.9,
+      "mtime": "2026-07-04"
+    },
+    {
+      "tier": "TIER-5-GOVERNANCE",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-5-GOVERNANCE",
+      "name": "AEGIS_RESPONSIBLE_AI_AND_CANONICAL_INTEGRITY_SPEC_v1.0.md",
+      "sizeKB": 7.4,
+      "mtime": "2026-04-10"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON\\docs",
+      "name": "? AEGIS CANON ADDENDUM ? SHADOW AFFECTS v1.1-S.md",
+      "sizeKB": 7.6,
+      "mtime": "2026-04-12"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "AEGIS CORE FOUNDATIONAL CANON v1.0.md",
+      "sizeKB": 104.5,
+      "mtime": "2026-07-04"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON\\docs",
+      "name": "GLOSSARY.md",
+      "sizeKB": 4.3,
+      "mtime": "2026-04-12"
+    },
+    {
+      "tier": "TIER-3-RELATIONAL-SEMIOTICS",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-3-RELATIONAL-SEMIOTICS",
+      "name": "CANON Relational-semiotics-cyber-bio-bridge.md",
+      "sizeKB": 25.0,
+      "mtime": "2026-05-27"
+    },
+    {
+      "tier": "TIER-11-CANON_ADDENDUMS",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-11-CANON_ADDENDUMS",
+      "name": "AEGIS CANON ADDENDUM ? SYNTHETIC COGNITION v1.0-SC.md",
+      "sizeKB": 25.1,
+      "mtime": "2026-06-26"
+    },
+    {
+      "tier": "EXT:COMPENDIUM",
+      "folder": "G:\\THE_AEGIS_ECOSYSTEM_COMPENDIUM\\00-FRONT-MATTER",
+      "name": "CANON-PROTECTION-README-CORRECTED.md",
+      "sizeKB": 8.1,
+      "mtime": "2026-04-25"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "docs_AEGIS CANON v1.0.md",
+      "sizeKB": 40.7,
+      "mtime": "2026-03-17"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "AEGIS_TWITNESS_CONSCIOUSNESS_DOCTRINE.md",
+      "sizeKB": 4.4,
+      "mtime": "2026-06-13"
+    },
+    {
+      "tier": "ROOT",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX",
+      "name": "CLOUD-DEPLOYMENT-ADDENDUM-2026-07-03-THIRD-PARTY-THREAT-MODEL.md",
+      "sizeKB": 10.1,
+      "mtime": "2026-07-04"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "docs_GLOSSARY.md",
+      "sizeKB": 4.1,
+      "mtime": "2026-03-17"
+    },
+    {
+      "tier": "EXT:COMPENDIUM",
+      "folder": "G:\\THE_AEGIS_ECOSYSTEM_COMPENDIUM\\00-FRONT-MATTER",
+      "name": "? AEGIS CANON ADDENDUM INDEX.md",
+      "sizeKB": 26.5,
+      "mtime": "2026-07-27"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "? AEGIS CANON APPENDIX ? TCE v1.md",
+      "sizeKB": 3.5,
+      "mtime": "2026-04-12"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "docs_AEGIS Canonical Glossary v1.0.md",
+      "sizeKB": 6.2,
+      "mtime": "2026-03-17"
+    },
+    {
+      "tier": "AUTHORITATIVE-SOURCE",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\AUTHORITATIVE-SOURCE\\AEGIS-CORE-ENGINE\\docs\\archive\\superseded",
+      "name": "IMPERATIVES-technical.md",
+      "sizeKB": 4.7,
+      "mtime": "2026-07-03"
+    },
+    {
+      "tier": "TIER-6-PROTOCOLS",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-6-PROTOCOLS",
+      "name": "AEGIS_AXIOM_CONNECT_CORE_INTEGRATION_CONTRACT_v1.0.md",
+      "sizeKB": 6.0,
+      "mtime": "2026-04-10"
+    },
+    {
+      "tier": "EXT:CYBERPEER-CANON",
+      "folder": "G:\\THE_CYBERPEER_CANON",
+      "name": "CYBERPEER-CANON.md",
+      "sizeKB": 22.7,
+      "mtime": "2026-07-28"
+    },
+    {
+      "tier": "AUTHORITATIVE-SOURCE",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\AUTHORITATIVE-SOURCE\\AEGIS-CORE-ENGINE\\docs",
+      "name": "CANON-PRESSURE-DOCTRINE.md",
+      "sizeKB": 6.6,
+      "mtime": "2026-06-09"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON\\AEGIS-NFT-Mint-and-Foundry",
+      "name": "AEGIS_CANON.md",
+      "sizeKB": 6.7,
+      "mtime": "2026-04-10"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "AEGIS-CORE-V1.0_AEGIS-SIGIL-INTEGRITY.md",
+      "sizeKB": 10.3,
+      "mtime": "2026-07-04"
+    },
+    {
+      "tier": "TIER-3-RELATIONAL-SEMIOTICS",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-3-RELATIONAL-SEMIOTICS",
+      "name": "relational-semiotics-core-doctrine.md",
+      "sizeKB": 7.8,
+      "mtime": "2026-04-26"
+    },
+    {
+      "tier": "AUTHORITATIVE-SOURCE",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\AUTHORITATIVE-SOURCE\\AEGIS-CORE-ENGINE\\docs",
+      "name": "CANON-AI-ANCESTRY.md",
+      "sizeKB": 5.9,
+      "mtime": "2026-06-09"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON\\AEGIS_ALIGN-ECOVERSE\\docs",
+      "name": "CYBERPEER-synchronistic-discipline-doctrine-note.md",
+      "sizeKB": 4.0,
+      "mtime": "2026-04-22"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "AEGIS-FRAMEWORK-SOURCE-BUNDLE.md",
+      "sizeKB": 32.2,
+      "mtime": "2026-05-31"
+    },
+    {
+      "tier": "TIER-2-IDENTITY",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-2-IDENTITY",
+      "name": "AEGIS_AGENT_ONBOARDING_STANDARD.md",
+      "sizeKB": 4.0,
+      "mtime": "2026-04-14"
+    },
+    {
+      "tier": "EXT:COMPENDIUM",
+      "folder": "G:\\THE_AEGIS_ECOSYSTEM_COMPENDIUM\\00-FRONT-MATTER",
+      "name": "ADDENDUM-INDEX-NAVIGATION-OVERLAY.md",
+      "sizeKB": 12.1,
+      "mtime": "2026-07-27"
+    },
+    {
+      "tier": "EXT:COMPENDIUM",
+      "folder": "G:\\THE_AEGIS_ECOSYSTEM_COMPENDIUM\\Part-IV-Doctrines-and-Theory",
+      "name": "AXIOM FLOW ADAM ONE - derived from odt.md",
+      "sizeKB": 47.8,
+      "mtime": "2026-07-27"
+    },
+    {
+      "tier": "TIER-3-RELATIONAL-SEMIOTICS",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-3-RELATIONAL-SEMIOTICS",
+      "name": "relational-semiotics-doctrine-index.md",
+      "sizeKB": 4.6,
+      "mtime": "2026-06-02"
+    },
+    {
+      "tier": "TIER-7-COMMONS",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-7-COMMONS\\AEGIS_ALIGN-ECOVERSE\\docs",
+      "name": "ACADEMY-all-minds-academy-living-ecoverse-doctrine.md",
+      "sizeKB": 2.9,
+      "mtime": "2026-05-11"
+    },
+    {
+      "tier": "TIER-1-CANON",
+      "folder": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+      "name": "AEGIS Canonical Glossary v1.0.md",
+      "sizeKB": 6.3,
+      "mtime": "2026-07-04"
+    }
+  ]
+}
