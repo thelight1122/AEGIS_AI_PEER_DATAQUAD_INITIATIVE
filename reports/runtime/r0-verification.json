@@ -1,0 +1,436 @@
+{
+  "baseline_is_reconstruction": true,
+  "baseline_policy": "baseline-scalar-contract-v1",
+  "baseline_ranking": [
+    {
+      "policy": "baseline-scalar-contract-v1",
+      "rank": 1,
+      "record_id": "PEER:semantic-exact-affect-faint",
+      "score": 1.0
+    },
+    {
+      "policy": "baseline-scalar-contract-v1",
+      "rank": 2,
+      "record_id": "PEER:affect-same-direction-larger-magnitude",
+      "score": 0.95
+    },
+    {
+      "policy": "baseline-scalar-contract-v1",
+      "rank": 3,
+      "record_id": "PEER:semantic-near-affect-intense",
+      "score": 0.95
+    },
+    {
+      "policy": "baseline-scalar-contract-v1",
+      "rank": 4,
+      "record_id": "PEER:semantic-near-affect-misaligned",
+      "score": 0.95
+    },
+    {
+      "policy": "baseline-scalar-contract-v1",
+      "rank": 5,
+      "record_id": "PEER:genesis-flagged",
+      "score": 0.8999999978
+    },
+    {
+      "policy": "baseline-scalar-contract-v1",
+      "rank": 6,
+      "record_id": "PEER:invariant-flagged",
+      "score": 0.8999999978
+    }
+  ],
+  "checks": [
+    {
+      "check": "record_tensor_is_384x8",
+      "detail": [
+        384,
+        8
+      ],
+      "passed": true,
+      "requirement": "R0.1"
+    },
+    {
+      "check": "every_affective_dimension_carries_provenance",
+      "detail": [
+        "source-derived",
+        "source-derived",
+        "source-derived",
+        "source-derived",
+        "source-derived",
+        "source-derived",
+        "source-derived",
+        "source-derived"
+      ],
+      "passed": true,
+      "requirement": "R0.2"
+    },
+    {
+      "check": "coordinate_carries_no_filesystem_path",
+      "detail": [
+        "affective_coordinate",
+        "ordinal",
+        "record_hash",
+        "record_id",
+        "semantic_coordinate",
+        "t_time",
+        "tensor",
+        "tensor_snapshot_hash"
+      ],
+      "passed": true,
+      "requirement": "R0.2"
+    },
+    {
+      "check": "multiple_shadow_policies_selectable",
+      "detail": [
+        "r0-shadow-product-v1",
+        "r0-shadow-magnitude-v1",
+        "r0-shadow-anchored-v1"
+      ],
+      "passed": true,
+      "requirement": "R0.3"
+    },
+    {
+      "check": "finding1_frobenius_equals_product_candidate",
+      "detail": {
+        "delta": 0.0,
+        "frobenius": 1.0,
+        "product": 1.0
+      },
+      "passed": true,
+      "requirement": "R0.3"
+    },
+    {
+      "check": "finding2_product_policy_discards_affective_magnitude",
+      "detail": {
+        "product_scores_at_1x_5x_20x": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "passed": true,
+      "requirement": "R0.3"
+    },
+    {
+      "check": "finding2_magnitude_policy_preserves_affective_magnitude",
+      "detail": {
+        "magnitude_scores_at_1x_5x_20x": [
+          0.9,
+          4.5,
+          18.0
+        ]
+      },
+      "passed": true,
+      "requirement": "R0.3"
+    },
+    {
+      "check": "finding3_genesis_flag_penalised_under_cosine_geometry",
+      "detail": {
+        "penalty_fraction": 0.552786,
+        "product_with_flag": 0.4472135955,
+        "product_without_flag": 1.0
+      },
+      "passed": true,
+      "requirement": "R0.3"
+    },
+    {
+      "check": "finding3_anchored_policy_removes_the_penalty",
+      "detail": {
+        "anchored_with_flag": 0.5,
+        "anchored_without_flag": 0.5
+      },
+      "passed": true,
+      "requirement": "R0.3"
+    },
+    {
+      "check": "controlled_fixtures_present_and_non_peer",
+      "detail": {
+        "binary_dimensions": [
+          5,
+          6
+        ],
+        "fixture_id": "r0-controlled-ranking-v2",
+        "record_count": 6
+      },
+      "passed": true,
+      "requirement": "R0.4"
+    },
+    {
+      "check": "ranking_deterministic:r0-shadow-product-v1",
+      "detail": {
+        "policy": "r0-shadow-product-v1"
+      },
+      "passed": true,
+      "requirement": "R0.6"
+    },
+    {
+      "check": "ranking_deterministic:r0-shadow-magnitude-v1",
+      "detail": {
+        "policy": "r0-shadow-magnitude-v1"
+      },
+      "passed": true,
+      "requirement": "R0.6"
+    },
+    {
+      "check": "ranking_deterministic:r0-shadow-anchored-v1",
+      "detail": {
+        "policy": "r0-shadow-anchored-v1"
+      },
+      "passed": true,
+      "requirement": "R0.6"
+    },
+    {
+      "check": "baseline_and_shadow_rankings_compared",
+      "detail": {
+        "r0-shadow-anchored-v1": {
+          "baseline_top": "PEER:semantic-exact-affect-faint",
+          "records_moved": 6,
+          "shadow_top": "PEER:affect-same-direction-larger-magnitude",
+          "top_rank_changed": true
+        },
+        "r0-shadow-magnitude-v1": {
+          "baseline_top": "PEER:semantic-exact-affect-faint",
+          "records_moved": 6,
+          "shadow_top": "PEER:affect-same-direction-larger-magnitude",
+          "top_rank_changed": true
+        },
+        "r0-shadow-product-v1": {
+          "baseline_top": "PEER:semantic-exact-affect-faint",
+          "records_moved": 3,
+          "shadow_top": "PEER:semantic-exact-affect-faint",
+          "top_rank_changed": false
+        }
+      },
+      "passed": true,
+      "requirement": "R0.5"
+    },
+    {
+      "check": "baseline_ranking_is_not_degenerate",
+      "detail": {
+        "distinct_baseline_scores": 3,
+        "note": "A baseline that ties every record produces alphabetical ordering, so rank movement would measure tie-breaking rather than policy difference.",
+        "records": 6
+      },
+      "passed": true,
+      "requirement": "R0.5"
+    },
+    {
+      "check": "baseline_is_a_reconstruction_not_the_authoritative_scorer",
+      "detail": "The authoritative tensor scorer is not present in this repository; it lives in the CyberPeer core. 'baseline-scalar-contract-v1' reconstructs it from the SSSP section 7 description and is reported as a reconstruction.",
+      "passed": true,
+      "requirement": "R0.7"
+    },
+    {
+      "check": "outputs_are_observational_and_non_admitted",
+      "detail": {
+        "admission": false,
+        "authoritative_scorer_modified": false,
+        "experience_creation": false,
+        "tensor_writeback": false
+      },
+      "passed": true,
+      "requirement": "R0.8"
+    }
+  ],
+  "fixture_id": "r0-controlled-ranking-v2",
+  "fixture_sha256": "111ED071250F812EE65EC40364B5C1D7F01F220D17D71AB48498B8EB2162F2B5",
+  "ranking_deltas": {
+    "r0-shadow-anchored-v1": {
+      "baseline_policy": "baseline-scalar-contract-v1",
+      "baseline_top": "PEER:semantic-exact-affect-faint",
+      "moves": [
+        {
+          "baseline_rank": 2,
+          "baseline_score": 0.95,
+          "rank_change": 1,
+          "record_id": "PEER:affect-same-direction-larger-magnitude",
+          "shadow_rank": 1,
+          "shadow_score": 4.2749999999
+        },
+        {
+          "baseline_rank": 5,
+          "baseline_score": 0.8999999978,
+          "rank_change": 2,
+          "record_id": "PEER:genesis-flagged",
+          "shadow_rank": 3,
+          "shadow_score": 0.3599999991
+        },
+        {
+          "baseline_rank": 6,
+          "baseline_score": 0.8999999978,
+          "rank_change": 2,
+          "record_id": "PEER:invariant-flagged",
+          "shadow_rank": 4,
+          "shadow_score": 0.3599999991
+        },
+        {
+          "baseline_rank": 1,
+          "baseline_score": 1.0,
+          "rank_change": -4,
+          "record_id": "PEER:semantic-exact-affect-faint",
+          "shadow_rank": 5,
+          "shadow_score": 0.1
+        },
+        {
+          "baseline_rank": 3,
+          "baseline_score": 0.95,
+          "rank_change": 1,
+          "record_id": "PEER:semantic-near-affect-intense",
+          "shadow_rank": 2,
+          "shadow_score": 0.855
+        },
+        {
+          "baseline_rank": 4,
+          "baseline_score": 0.95,
+          "rank_change": -2,
+          "record_id": "PEER:semantic-near-affect-misaligned",
+          "shadow_rank": 6,
+          "shadow_score": 0.0475
+        }
+      ],
+      "records_compared": 6,
+      "records_moved": 6,
+      "shadow_policy": "r0-shadow-anchored-v1",
+      "shadow_top": "PEER:affect-same-direction-larger-magnitude",
+      "top_rank_changed": true
+    },
+    "r0-shadow-magnitude-v1": {
+      "baseline_policy": "baseline-scalar-contract-v1",
+      "baseline_top": "PEER:semantic-exact-affect-faint",
+      "moves": [
+        {
+          "baseline_rank": 2,
+          "baseline_score": 0.95,
+          "rank_change": 1,
+          "record_id": "PEER:affect-same-direction-larger-magnitude",
+          "shadow_rank": 1,
+          "shadow_score": 4.2749999999
+        },
+        {
+          "baseline_rank": 5,
+          "baseline_score": 0.8999999978,
+          "rank_change": 2,
+          "record_id": "PEER:genesis-flagged",
+          "shadow_rank": 3,
+          "shadow_score": 0.3599999991
+        },
+        {
+          "baseline_rank": 6,
+          "baseline_score": 0.8999999978,
+          "rank_change": 2,
+          "record_id": "PEER:invariant-flagged",
+          "shadow_rank": 4,
+          "shadow_score": 0.3599999991
+        },
+        {
+          "baseline_rank": 1,
+          "baseline_score": 1.0,
+          "rank_change": -4,
+          "record_id": "PEER:semantic-exact-affect-faint",
+          "shadow_rank": 5,
+          "shadow_score": 0.1
+        },
+        {
+          "baseline_rank": 3,
+          "baseline_score": 0.95,
+          "rank_change": 1,
+          "record_id": "PEER:semantic-near-affect-intense",
+          "shadow_rank": 2,
+          "shadow_score": 0.855
+        },
+        {
+          "baseline_rank": 4,
+          "baseline_score": 0.95,
+          "rank_change": -2,
+          "record_id": "PEER:semantic-near-affect-misaligned",
+          "shadow_rank": 6,
+          "shadow_score": 0.0475
+        }
+      ],
+      "records_compared": 6,
+      "records_moved": 6,
+      "shadow_policy": "r0-shadow-magnitude-v1",
+      "shadow_top": "PEER:affect-same-direction-larger-magnitude",
+      "top_rank_changed": true
+    },
+    "r0-shadow-product-v1": {
+      "baseline_policy": "baseline-scalar-contract-v1",
+      "baseline_top": "PEER:semantic-exact-affect-faint",
+      "moves": [
+        {
+          "baseline_rank": 2,
+          "baseline_score": 0.95,
+          "rank_change": 0,
+          "record_id": "PEER:affect-same-direction-larger-magnitude",
+          "shadow_rank": 2,
+          "shadow_score": 0.95
+        },
+        {
+          "baseline_rank": 5,
+          "baseline_score": 0.8999999978,
+          "rank_change": 1,
+          "record_id": "PEER:genesis-flagged",
+          "shadow_rank": 4,
+          "shadow_score": 0.3342516079
+        },
+        {
+          "baseline_rank": 6,
+          "baseline_score": 0.8999999978,
+          "rank_change": 1,
+          "record_id": "PEER:invariant-flagged",
+          "shadow_rank": 5,
+          "shadow_score": 0.3342516079
+        },
+        {
+          "baseline_rank": 1,
+          "baseline_score": 1.0,
+          "rank_change": 0,
+          "record_id": "PEER:semantic-exact-affect-faint",
+          "shadow_rank": 1,
+          "shadow_score": 1.0
+        },
+        {
+          "baseline_rank": 3,
+          "baseline_score": 0.95,
+          "rank_change": 0,
+          "record_id": "PEER:semantic-near-affect-intense",
+          "shadow_rank": 3,
+          "shadow_score": 0.95
+        },
+        {
+          "baseline_rank": 4,
+          "baseline_score": 0.95,
+          "rank_change": -2,
+          "record_id": "PEER:semantic-near-affect-misaligned",
+          "shadow_rank": 6,
+          "shadow_score": 0.0499308915
+        }
+      ],
+      "records_compared": 6,
+      "records_moved": 3,
+      "shadow_policy": "r0-shadow-product-v1",
+      "shadow_top": "PEER:semantic-exact-affect-faint",
+      "top_rank_changed": false
+    }
+  },
+  "report_sha256": "E0CDA1AD54C37DF9611D3A6AB5CCE8907C26A6F81DE88D8968C3351A1D58DD41",
+  "schema_version": "1.0.0",
+  "shadow_policies": [
+    "r0-shadow-product-v1",
+    "r0-shadow-magnitude-v1",
+    "r0-shadow-anchored-v1"
+  ],
+  "summary": {
+    "checks_run": 17,
+    "failed": 0,
+    "passed": 17
+  },
+  "verification_id": "r0-tensor-shadow-scoring",
+  "working_parameters": {
+    "admission": false,
+    "authoritative_scorer_modified": false,
+    "dataquad_write": false,
+    "experience_creation": false,
+    "peer_content_read": false
+  }
+}

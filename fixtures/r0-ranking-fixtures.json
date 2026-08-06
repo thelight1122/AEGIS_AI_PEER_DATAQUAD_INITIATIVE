@@ -1,0 +1,68 @@
+{
+  "schema_version": "0.2.0",
+  "fixture_id": "r0-controlled-ranking-v2",
+  "purpose": "Controlled ranking fixtures for R0 requirement 4. Synthetic and non-peer. These vectors are constructed, not model embeddings, and are never labelled as such.",
+  "revision_note": "v1 varied semantic vectors only in magnitude along a single axis. Cosine discards magnitude, so the baseline scored every record at 1.0 and produced a six-way tie broken alphabetically, which made the ranking-delta evidence non-probative. v2 varies semantic direction so the baseline expresses a real ordering, while retaining one pair that differs only in affective magnitude.",
+  "semantic_dimension": 384,
+  "affective_dimension": 8,
+  "affective_dimension_names": [
+    "temporal_position",
+    "affect_salience",
+    "relationship_bond",
+    "certainty",
+    "identity_relevance",
+    "invariant_flag",
+    "genesis_flag",
+    "recurrence"
+  ],
+  "binary_dimensions": [5, 6],
+  "query": {
+    "semantic": [{"index": 0, "value": 1.0}],
+    "affective": [1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+  },
+  "records": [
+    {
+      "record_id": "PEER:semantic-exact-affect-faint",
+      "intent": "Exact semantic direction, very weak affect. Baseline ranks it top because affect is invisible to it. Affect-preserving policies should demote it.",
+      "semantic": [{"index": 0, "value": 1.0}],
+      "affective": [0.1, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    },
+    {
+      "record_id": "PEER:semantic-near-affect-intense",
+      "intent": "Semantic direction off by a small angle, strong aligned affect. Should rise under affect-preserving policies.",
+      "semantic": [{"index": 0, "value": 0.95}, {"index": 1, "value": 0.3122499}],
+      "affective": [0.9, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    },
+    {
+      "record_id": "PEER:semantic-near-affect-misaligned",
+      "intent": "Same semantic angle as the record above, affect pointing elsewhere. Isolates affect direction from semantic direction.",
+      "semantic": [{"index": 0, "value": 0.95}, {"index": 1, "value": 0.3122499}],
+      "affective": [0.05, 0.95, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    },
+    {
+      "record_id": "PEER:genesis-flagged",
+      "intent": "Genesis flag raised. Under ordinary cosine geometry the flag is an orthogonal component and penalises the record. The anchored policy must not penalise it.",
+      "semantic": [{"index": 0, "value": 0.9}, {"index": 1, "value": 0.4358899}],
+      "affective": [0.4, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+    },
+    {
+      "record_id": "PEER:invariant-flagged",
+      "intent": "Invariant flag raised, otherwise identical to the Genesis record. Isolates flag handling from the rest of the geometry.",
+      "semantic": [{"index": 0, "value": 0.9}, {"index": 1, "value": 0.4358899}],
+      "affective": [0.4, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+    },
+    {
+      "record_id": "PEER:affect-same-direction-larger-magnitude",
+      "intent": "Identical semantic direction and identical affect direction to semantic-near-affect-intense, at five times the affective magnitude. The product policy must score it identically; the magnitude policy must separate them. This pair is the direct test of finding 2.",
+      "semantic": [{"index": 0, "value": 0.95}, {"index": 1, "value": 0.3122499}],
+      "affective": [4.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    }
+  ],
+  "working_parameters": {
+    "peer_content": false,
+    "model_embeddings": false,
+    "live_reach": false,
+    "admission": false,
+    "experience_creation": false
+  }
+}
