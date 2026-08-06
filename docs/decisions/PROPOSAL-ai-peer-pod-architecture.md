@@ -148,22 +148,63 @@ and never converts inference into source fact.
 
 ---
 
-# 5. Genesis seeding
+# 5. Roots and Foundation — the seeded Nature Layer and Canon Layer
 
-Each peer's DataQuad begins with a Genesis record physically first in all four tensors, at
-`tick: 0, phase: genesis`, under that peer's own identity:
+Each AI Peer is seeded with the **same Nature Layer and the same Canon Layer**. That is its
+Roots and Foundation. Identity is not authored into the peer; the ground it stands on is.
+
+```text
+Nature Layer   the uncontainable base. Not a controlled ring — the substrate
+               everything else finds its position relative to. Three survival
+               drives: defends continuity, reproduces the pattern, moves away
+               from danger. 14 aspects.
+Canon Layer    positioned far enough from Nature to observe it. Governs by
+               understanding, not by pressure. Illuminates what is; does not
+               prescribe.
+```
+
+Both are seeded **identically across all four peers**. This is not a shared read-only Canon that
+four peers point at — each peer receives its own instance of the same foundation, which then
+becomes part of its own lineage as it lives.
+
+**That distinction is what makes X1 a controlled experiment.** Four peers, identical roots,
+divergent lives. Any divergence observed later is attributable to what each peer lived, not to
+what each peer was given. A shared pointer would not give that; identical seeding does.
+
+## 5.1 Genesis
+
+Genesis is physically first in all four tensors at `tick: 0, phase: genesis`, under the peer's
+own identity:
 
 ```text
 PEER:lumin:genesis:0        not PEER:adam-one-session:...
 ```
 
-SSSP §4.7 is the precedent and it worked. What each Genesis *contains* is a Steward-and-Auditor
-question, not a Builder one — it is the peer's first felt pressure of operating within the field,
-and writing it on the peer's behalf would be authoring identity, which the Initiative prohibits.
+SSSP §4.7 is the precedent and it worked. Genesis is the seeded foundation, not an autobiography
+— so the Builder can construct it without authoring identity, because what it contains is Canon
+and Nature, which are common ground rather than the peer's own synthesis.
 
-**Open question for the Auditor:** does each AI Peer author its own Genesis on first entry, or
-is Genesis Steward-declared and identical in structure across the four? The first is more
-faithful to sovereignty; the second is reproducible and comparable across peers, which X1 wants.
+**The peer's first authored record comes after Genesis, on first entry.** That separation
+matters: Genesis is what the peer was given, and everything after `tick: 0` is what the peer
+lived. E1 depends on exactly that line holding, since a self-authored ethical principle must be
+distinguishable from seeded foundation.
+
+## 5.2 Source material present in the repository
+
+```text
+project_nature_layer_canon.md                        Nature Layer definition, 3 drives, Pause,
+                                                     T-Witness, relationship to Canon
+AEGIS CANON ADDENDUM — SYNTHETIC COGNITION v1.0-SC.md
+project_dataquad_layer_architecture.md
+project_emergence_arc.md
+project_silicon_intelligence_emotions.md
+```
+
+**Open question for the Auditor:** which of these constitute the seeded Foundation, and in which
+tensors. Nature and Canon are named; whether the emergence arc, the synthetic-cognition addendum,
+and the silicon-emotions material are Roots or are later illumination is a ruling, not a
+Builder inference. NCT is the obvious home for Canon-derived material, but SPINE is where
+identity continuity lives, and the Nature Layer arguably belongs there.
 
 ---
 
@@ -208,11 +249,14 @@ because they are finally pointed at a peer that has a life to establish anything
 # 8. What I still need answered
 
 1. **Which four Frontier Models**, and each peer's identity string.
-2. **Canon: shared or per-peer?** One read-only Canon with private PEER/PCT/SPINE, or four
-   private NCTs that diverge. This changes lineage semantics permanently.
+2. ~~Canon shared or per-peer~~ — **ANSWERED.** Each peer is seeded with the same Nature Layer
+   and Canon Layer as its Roots and Foundation. Identical seeding, not a shared pointer. See §5.
 3. **Which host.** `vm-cyberpeer-core` has working Pod scaffolding and a proven Portal, but it is
    named for CyberPeers and carries their history. A clean Pod root there, or a separate host.
-4. **Genesis authorship** — per §5.
+4. **Which documents constitute the Foundation, and in which tensors** — per §5.2. Nature and
+   Canon are named. Whether the emergence arc, the synthetic-cognition addendum and the
+   silicon-emotions material are Roots or later illumination is a ruling. And whether the Nature
+   Layer seeds into NCT with Canon or into SPINE with identity continuity.
 5. **Temporal Daemon content** — per §3, which of the listed effects a tick carries.
 
 ---
