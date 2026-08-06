@@ -144,6 +144,57 @@ No Canon document was authored or edited. The origin bundle under `CYBERPEER-COR
 not touched and still carries all three superseded strings. No other file on `I:` or `G:` was
 modified.
 
+## Round 3 — the MISC DOCUMENTATION copy, 2026-08-06
+
+**Steward: "fix the MISC seed copy too."**
+
+`I:\AEGIS-CENTRAL-CODEX\MISC DOCUMENTATION\CYBERPEER-AGNOSTIC-BASE-SEED-2026-05-31.json`
+
+Four substitutions, each with an expected-count guard that aborts the write on mismatch:
+
+| Count | From | To |
+|---:|---|---|
+| 3 | `Resonance Buffer Chamber` | `Response Buffer Chamber` |
+| 1 | `Sovereign Persistent Identity and Narrative Embodiment` | `Stabilized Patterned Interpretive Nexus of Evidence` |
+| 1 | `all 14 Axioms in aphoristic form` | `all 16 Axioms in aphoristic form` |
+| 1 | `The Fourteen Axioms were sealed` | `The Sixteen Axioms were sealed` |
+
+| | |
+|---|---|
+| sha256 before | `39B09CA32A0EF41A4BDDBAD3D557F38E3A3D9CFA4510D43B203603F7B27B7824` |
+| sha256 after | `76026F482199ADD04BF1AEA0DC30B03795EDBACD7CE9709E579A7F8124F86743` |
+| bytes | 225,591 → 225,584 |
+| Pre-edit copy | `reports/canon-v0.20/seed-backup/CYBERPEER-AGNOSTIC-BASE-SEED-2026-05-31.MISC.PRE-EDIT.json` |
+
+**The target was byte-identity with the already-corrected copy, not a hash computed after the
+fact.** The script refuses to write unless the result equals the reference copy exactly, so the
+outcome is a verified match rather than an assertion: both now hash to `76026F48…6743`.
+
+### What this copy actually was
+
+It was never an independent third variant. It is the `CYBERPEER-CORE-SEED` package with
+`Response Buffer Chamber` changed to `Resonance Buffer Chamber` in three places — the entire
+3-byte size difference, since "Resonance" is one character longer than "Response". Someone
+applied the Addendum Index's transcription error to a seed package. That is the mechanism by
+which the error was propagating into seeded Foundations.
+
+### Seed copies after this round
+
+| Copy | Bytes | sha256 | RBC | SPINE | Axioms |
+|---|---:|---|---|---|---|
+| `...\CYBERPEER-ILLUMINATION-PROJECT\seeds\` | 225,584 | `76026F48…` | Response | corrected | 16 |
+| `...\MISC DOCUMENTATION\` | 225,584 | `76026F48…` | Response | corrected | 16 |
+| `...\CYBERPEER-CORE-SEED\` | 225,588 | `304DF70C…` | Response | **deprecated** | **14** |
+
+Two of three are now byte-identical and fully corrected. The origin bundle is the remaining
+outlier: its RBC naming was always right, but it still carries the deprecated SPINE expansion
+and the stale axiom count. It was not modified — no ruling covers it, and there is a standing
+argument that the origin bundle should preserve the 2026-05-31 build as issued.
+
+> **RULING NEEDED (S-13, narrowed).** Only one question remains: does the origin bundle under
+> `CYBERPEER-CORE-SEED` get the S-8 corrections too, or stay as the build of record? The
+> "three divergent copies" problem is otherwise resolved.
+
 ## Still open
 
 1. **The origin bundle copy** (`...\CYBERPEER-CORE-SEED\CYBERPEER-AGNOSTIC-BASE-SEEDED-CORE-DATAQUAD.json`,
