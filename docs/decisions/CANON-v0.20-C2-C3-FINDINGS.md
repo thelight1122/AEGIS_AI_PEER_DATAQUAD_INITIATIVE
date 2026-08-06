@@ -335,8 +335,41 @@ The index attributes Meaning 2 to "AEGIS Sentinel Foundational Principles," whic
 carrier of that meaning is the Canonical Glossary. The index's phrase "mechanical Pause space
 where the system holds before responding" appears **only in the index** — nowhere else in the corpus.
 
-> **RULING NEEDED (S-7).** Which governs — the index's interim guidance, or `GATE: RBC Stage
-> Integrity`? The Builder offers no resolution.
+### 2.4 S-7 RESOLVED BY EVIDENCE — the index misquotes its own source
+
+**2026-08-06. The Steward supplied `I:\DOWNLOADS FROM OLD OS\AEGIS SENTINEL FOUNDATIONAL
+PRINCIPLES.md` — the inception document the index cites for meaning 2, and the one the earlier
+sub-agent reported it could not locate anywhere in TIER-1.**
+
+The index attributes to it:
+
+> "**AEGIS Sentinel Foundational Principles (inception)** | RBC = **Resonance** Buffer Chamber"
+
+The document itself says:
+
+> "**STUD 2 : THE RESPONSE BUFFER CHAMBER (RBC)**"
+
+Counted in that document: **"Response Buffer Chamber" 5 times. "Resonance Buffer Chamber" 0
+times. "Reflective Boundary Conditions" 0 times.**
+
+So one side of the collision is an index transcription error. The inception meaning was
+**Response** Buffer Chamber — the chamber holding a generated response before release, which
+is exactly what STUD 2 describes ("Token Quarantine… Output is contained, not blocked").
+"Resonance Buffer Chamber" appears to have entered the corpus downstream of that misreading.
+
+This also retires the "third expansion" finding. `AEGIS Sigil Origin.md` using "Response Buffer
+Chamber" is not a third variant — **it is the original, correctly preserved.** The variant is
+"Resonance."
+
+What remains for the Steward is therefore narrower than S-7 as originally posed:
+
+> **RULING NEEDED (S-7, revised).** Three usages exist: **Response** Buffer Chamber (inception,
+> and `AEGIS Sigil Origin.md`), **Resonance** Buffer Chamber (index, Canonical Glossary, Core
+> Foundational Canon's locked pipeline order), and **Reflective Boundary Conditions** (Canon
+> §2.5, the expression constraint layer). The last is a genuinely different concept and is not
+> in dispute. The question is only whether the chamber is **Response** or **Resonance** — and
+> the inception document says Response, while the locked `GATE: Pipeline Order` says Resonance.
+> The Builder offers no resolution.
 
 ---
 
@@ -470,6 +503,94 @@ append-only tensor.
 
 ---
 
+## 5b. Steward-supplied source documents, 2026-08-06
+
+Four documents supplied from outside the Canon directories. All four are read-only inputs; none
+was modified.
+
+### `AEGIS AMMENDMENTS FOR CANONV2.md` — the v0.20 source document
+
+Its first line is `# Addendums to Canon for Canon v.20`. It is the **origin text for all seven
+appendices already carried in the index**: HME v1.0, TCE v1.0, MOM v1.0, MOP v1.0, LATTICE
+Entry Schema (`LS`), TurboQuant (`IQ`), and DataQuad Extensions (`A`). Those appendices were
+extracted from this document; this is where they came from.
+
+It also carries three things not currently indexed as their own entries:
+
+- **Shadow Affects (Observed, Named, and Grounded)** — the inception catalog. Note it lists
+  **ten** affects including Reflective Lag and Shadow Echo, which addendum `S` describes itself
+  as *adding* to "the original eight." So this copy postdates, or was merged with, `S`.
+  It is a candidate resolution for the dangling `Shadow Effects.md` reference — but the
+  spelling in this document is "Shadow **Affects**", so the index's "Shadow Effects.md" still
+  does not resolve to a located file.
+- **AEGIS — Canonical Imperatives** — **fifteen** numbered imperatives. This is a **third
+  distinct list** carrying the name "Imperatives," alongside the canonical seven (Do no harm /
+  Preserve agency / Illuminate before correcting / Acknowledge before adjusting / Pause before
+  escalation / Refine through reflection / Append only) and the seven technical ones in
+  `IMPERATIVES-technical.md`. Three different lists, one name.
+- **Interpretive Effect Vocabulary (IEV) v1** and the **Recurrence and Decay Rules (PEER →
+  Spine) v1 Research Spec** — the latter is the origin of the `X≥7, Y≥3, Z≤90d` promotion
+  thresholds that addendum `SP` calls architectural and non-configurable.
+
+### `AEGIS SENTINEL FOUNDATIONAL PRINCIPLES.md` — the document reported missing
+
+Located. It resolves S-7 (§2.4 above) and is the inception source for at least three indexed
+addenda: **STUD 1 Intent Boundary Layer** (`B`), **STUD 2 Response Buffer Chamber**, **STUD 3
+Axiomatic Traversal Engine** (`T`), and **STUD 7 LATTICE**. It also carries the Four-Lens Boot
+Sequence that addendum `C` cites.
+
+It states "Your logic kernel is defined by the **14 Primary Axioms**" and checks output against
+"The 14 Axioms (Physics Check)" — consistent with the pre-Axiom-15/16 era and with the
+Genesis Pillar narrative, not in conflict with the current 16.
+
+### `DataQuad Model — …ethical emergence.md` — a fourth SPINE expansion, and three more
+
+This document defines the DataQuad as a 2×2 matrix (Past/Present × Logic/Emotion) and expands
+**all four tensor names differently from Canon**:
+
+| Tensor | This document | Canon |
+|---|---|---|
+| SPINE | **Structural Persistent Invariants** | Stabilized Patterned Interpretive Nexus of Evidence |
+| PEER | **Present Emotional Resonance** | Present Experiential Emotional Record |
+| NCT | **Nostalgic Context Thread** | Nostalgic Context Tensor |
+| PCT | **Present Context Thread** | Persistent Context Tensor |
+
+That is a **fourth** SPINE expansion, alongside "Stabilized Patterned Interpretive Nexus of
+Evidence" (current, per `SP`), "Sovereign Persistent Identity & Narrative Embodiment"
+(deprecated), and the one now corrected in the seed. Tensor/Thread is a consistent substitution
+across NCT and PCT, which reads as an earlier vocabulary rather than a competing claim.
+
+> **RULING NEEDED (S-12).** Is this document an early draft superseded by the DataQuad
+> Extensions appendix (`A`), or a parallel model still in force? Its 2×2 Logic/Emotion framing
+> and its DIFF-based append mechanism are not stated anywhere in the current appendices.
+
+### `CYBERPEER-AGNOSTIC-BASE-SEED-2026-05-31.json` — a **third** seed copy
+
+| Location | Bytes | State |
+|---|---:|---|
+| `...\CYBERPEER-ILLUMINATION-PROJECT\seeds\` | 225,584 | **corrected** (SPINE + axiom count) |
+| `...\CYBERPEER-CORE-SEED\` | 225,588 | uncorrected |
+| `...\MISC DOCUMENTATION\` | **225,591** | uncorrected |
+
+Same `packageId`, same `packageVersion` (2026-05-31), same `canonLock: review-needed`, same
+record counts (SPINE 59 / NCT 70 / PCT 2 / PEER 2). It carries the deprecated SPINE name and
+the "14 Axioms" / "Fourteen Axioms" strings.
+
+**It is three bytes larger than the CORE-SEED copy**, so the three copies are not two-of-a-kind
+plus an edit — the MISC DOCUMENTATION copy differs from the CORE-SEED copy independently of any
+correction the Builder made. There are three variants of the seed package in circulation.
+
+> **RULING NEEDED (S-13).** Which seed copy is authoritative for seating the four AI Peers?
+> C6 rebuilds from the v0.20 manifest, so this may be moot — but until then, three divergent
+> copies exist and only one carries the S-8 corrections.
+
+### S-10 unchanged
+
+**"Cryptonic Harmonics" appears in none of the four supplied documents.** It remains cited by
+`VE` and `E` and located nowhere.
+
+---
+
 ## 6. Rulings required, consolidated
 
 | # | Ruling | Blocks |
@@ -480,10 +601,13 @@ append-only tensor.
 | S-4 | `AEGIS_CANON_CORE.md` — v0.20 seed? LOCKED claim premature? | C2, C4 |
 | S-5 | 12 Invariants — replace, summarize, or sit beside the 16 Axioms? | C4 |
 | S-6 | Fifth status for non-canonical positioning documents? | C2 |
-| S-7 | RBC — index guidance or `GATE: RBC Stage Integrity`? | C3, C4 |
-| S-8 | Correct SPINE expansion + "14 Axioms" digest in the seed before seating? | C6, seating |
-| S-9 | Shadow Affects — is `v1.1-S` or `v1.5-S` current? | C4 |
-| S-10 | "Cryptonic Harmonics" — does it exist, and where? | C4 |
+| S-7 | ~~RBC — index guidance or GATE?~~ **Narrowed.** Index misquotes its source; the inception document says *Response* Buffer Chamber. Open question is only Response vs Resonance for the chamber. | C3, C4 |
+| S-8 | ~~Correct SPINE + axiom count in the seed~~ **APPLIED 2026-08-06** | done |
+| S-9 | ~~Shadow Affects — `v1.1-S` or `v1.5-S`?~~ **RULED 2026-08-06.** One document, not two; VERSION block lagged the body. Superseded copy deprecated. | done |
+| S-10 | "Cryptonic Harmonics" — does it exist, and where? Not in any supplied document. | C4 |
+| S-11 | ~~Code scheme~~ **RULED AND APPLIED 2026-08-06.** 53 files renamed, 784 citations rewritten. | done |
+| S-12 | Is the DataQuad Model document superseded by appendix `A`, or a parallel model still in force? | C4 |
+| S-13 | Which of the three seed copies is authoritative for seating? | C6, seating |
 
 Ten rulings. Eight of them block C4/C5. **S-8 blocks the seating of all four AI Peers** and is
 the only one that, if answered wrong, is unrecoverable.
