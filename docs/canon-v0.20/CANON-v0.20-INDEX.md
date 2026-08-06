@@ -11,7 +11,7 @@ ruling S-11.
 python scripts/build_canon_index.py
 ```
 
-Generated `2026-08-06T16:47:19Z` from `I:\AEGIS-CENTRAL-CODEX\TIER-1-CANON\CANON_FOUNDATIONAL_DOCS`.
+Generated `2026-08-06T18:02:49Z` from `I:\AEGIS-CENTRAL-CODEX\TIER-1-CANON\CANON_FOUNDATIONAL_DOCS`.
 
 Every field below is transcribed from the source document's own VERSION table or
 carried forward from the prior index. Fields a document does not declare read
@@ -38,11 +38,11 @@ The stable core. Everything else in this index is development work around it.
 
 | Document | Code | Status | Size |
 |---|---|---|---|
-| `AEGIS CORE FOUNDATIONAL CANON v1.0.md` | — | _Canon-Locked_ | 107,015 B |
-| `AEGIS Canonical Glossary v1.0.md` | — | UNDECLARED | 6,453 B |
+| `AEGIS CORE FOUNDATIONAL CANON v1.0.md` | — | _Canon-Locked_ | 107,051 B |
+| `AEGIS Canonical Glossary v1.0.md` | — | UNDECLARED | 6,452 B |
 | `AEGIS STANDARDS V1.0.md` | — | UNDECLARED | 98,929 B |
 | `AEGIS STANDARDS v0.1.md` | — | UNDECLARED | 98,929 B |
-| `AEGIS-CORE-V1.0_AEGIS-SIGIL-INTEGRITY.md` | — | UNDECLARED | 10,531 B |
+| `AEGIS-CORE-V1.0_AEGIS-SIGIL-INTEGRITY.md` | — | UNDECLARED | 10,530 B |
 
 ---
 

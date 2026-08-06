@@ -1,0 +1,114 @@
+{
+  "evidence": "AEGIS SENTINEL FOUNDATIONAL PRINCIPLES.md STUD 2 - 'RESPONSE BUFFER CHAMBER' x5, 'Resonance Buffer Chamber' x0",
+  "generated_utc": "2026-08-06T18:00:05Z",
+  "mode": "apply",
+  "record_type": "rbc_naming_fix",
+  "result": {
+    "files": [
+      {
+        "dir": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON\\CANON_FOUNDATIONAL_DOCS",
+        "file": "AEGIS Canonical Glossary v1.0.md",
+        "index": false,
+        "occurrences": 1
+      },
+      {
+        "dir": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON\\CANON_FOUNDATIONAL_DOCS",
+        "file": "AEGIS CORE FOUNDATIONAL CANON v1.0.md",
+        "index": false,
+        "occurrences": 6
+      },
+      {
+        "dir": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON\\CANON_FOUNDATIONAL_DOCS",
+        "file": "AEGIS-CORE-V1.0_AEGIS-SIGIL-INTEGRITY.md",
+        "index": false,
+        "occurrences": 1
+      },
+      {
+        "dir": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON\\CANON_FOUNDATIONAL_DOCS",
+        "file": "AEGIS_ALIGNMENT_WHITEPAPER_v1.0.md",
+        "index": false,
+        "occurrences": 1
+      },
+      {
+        "dir": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON\\CANON_FOUNDATIONAL_DOCS",
+        "file": "AEGIS_WHITEPAPER_v2.1.md",
+        "index": false,
+        "occurrences": 2
+      },
+      {
+        "dir": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON\\CANON_FOUNDATIONAL_DOCS",
+        "file": "GENESIS-PILLAR-RECORDS-AEGIS-CANON-STAGING.md",
+        "index": false,
+        "occurrences": 2
+      },
+      {
+        "dir": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON\\CANON_FOUNDATIONAL_DOCS",
+        "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM INDEX.md",
+        "index": true,
+        "occurrences": 2
+      },
+      {
+        "dir": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+        "file": "AEGIS CANON v1.0_AEGIS-SIGIL-INTEGRITY.md",
+        "index": false,
+        "occurrences": 2
+      },
+      {
+        "dir": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+        "file": "AEGIS Canonical Glossary v1.0.md",
+        "index": false,
+        "occurrences": 1
+      },
+      {
+        "dir": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+        "file": "AEGIS CORE FOUNDATIONAL CANON v1.0.md",
+        "index": false,
+        "occurrences": 6
+      },
+      {
+        "dir": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+        "file": "AEGIS-CORE-V1.0_AEGIS-SIGIL-INTEGRITY.md",
+        "index": false,
+        "occurrences": 1
+      },
+      {
+        "dir": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+        "file": "AEGIS_ALIGNMENT_WHITEPAPER_v1.0.md",
+        "index": false,
+        "occurrences": 1
+      },
+      {
+        "dir": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+        "file": "AEGIS_WHITEPAPER_v2.0.md",
+        "index": false,
+        "occurrences": 2
+      },
+      {
+        "dir": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+        "file": "AEGIS_WHITEPAPER_v2.1.md",
+        "index": false,
+        "occurrences": 2
+      },
+      {
+        "dir": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+        "file": "GENESIS-PILLAR-RECORDS-AEGIS-CANON-STAGING.md",
+        "index": false,
+        "occurrences": 2
+      },
+      {
+        "dir": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON",
+        "file": "\ud83d\udcd8 AEGIS CANON ADDENDUM INDEX.md",
+        "index": true,
+        "occurrences": 2
+      }
+    ],
+    "total_occurrences": 34
+  },
+  "ruling": "S-7: the chamber is the Response Buffer Chamber (Steward, 2026-08-06)",
+  "schema_version": "1.0.0",
+  "verification": {
+    "new_phrase_count": 34,
+    "old_phrase_remaining": {},
+    "protected_phrase_count": 25
+  }
+}

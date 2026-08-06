@@ -192,6 +192,42 @@ def test_known_collisions_are_still_detected():
 
 
 @canon_available
+def test_rbc_chamber_is_named_response_not_resonance():
+    """Steward ruling S-7, 2026-08-06.
+
+    The inception document (AEGIS Sentinel Foundational Principles, STUD 2) says RESPONSE
+    Buffer Chamber five times and never says Resonance. "Resonance" entered the corpus through
+    a transcription error in the Addendum Index and propagated from there — including into one
+    seed package copy. If it reappears, something was restored from a pre-fix source.
+    """
+    offenders = {}
+    for path in idx.DEFAULT_CANON_DIR.glob("*.md"):
+        text = path.read_text(encoding="utf-8", errors="replace")
+        n = text.count("Resonance Buffer Chamber")
+        if not n:
+            continue
+        # The index legitimately quotes the old term inside its RESOLVED note, to explain what
+        # was corrected and why. Those mentions are the record of the fix, not a regression.
+        if "ADDENDUM INDEX" in path.name.upper() and "RESOLVED" in text:
+            continue
+        offenders[path.name] = n
+    assert not offenders, f"'Resonance Buffer Chamber' reappeared: {offenders}"
+
+
+@canon_available
+def test_reflective_boundary_conditions_was_not_collateral_damage():
+    """A separate concept, never in dispute. The RBC fix must not have touched it.
+
+    Counted across both Canon directories, since the corpus is duplicated between them:
+    11 in CANON_FOUNDATIONAL_DOCS plus 14 at the TIER-1-CANON level.
+    """
+    dirs = [idx.DEFAULT_CANON_DIR, idx.DEFAULT_CANON_DIR.parent]
+    total = sum(p.read_text(encoding="utf-8", errors="replace").count("Reflective Boundary Conditions")
+                for d in dirs for p in d.glob("*.md"))
+    assert total == 25, f"expected 25 occurrences across both directories, found {total}"
+
+
+@canon_available
 def test_shared_S_code_is_reported_as_resolved_not_open():
     """Ruling S-9 deprecated one of the two; a shared code with one live doc is unambiguous."""
     entries = idx.scan(idx.DEFAULT_CANON_DIR)
