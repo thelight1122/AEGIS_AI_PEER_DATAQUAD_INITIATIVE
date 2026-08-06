@@ -191,9 +191,57 @@ outlier: its RBC naming was always right, but it still carries the deprecated SP
 and the stale axiom count. It was not modified — no ruling covers it, and there is a standing
 argument that the origin bundle should preserve the 2026-05-31 build as issued.
 
-> **RULING NEEDED (S-13, narrowed).** Only one question remains: does the origin bundle under
-> `CYBERPEER-CORE-SEED` get the S-8 corrections too, or stay as the build of record? The
-> "three divergent copies" problem is otherwise resolved.
+## Round 4 — the origin bundle, 2026-08-06 — **S-13 CLOSED**
+
+**Steward: "fix the origin bundle too."**
+
+`I:\AEGIS-ADAM-ONE\ADAM-AZURE-EDUCATION\CYBERPEER-CORE-SEED\`
+
+The whole bundle was scanned first, not just the seed. Two of its seven files were affected;
+the other five were already clean.
+
+### `CYBERPEER-AGNOSTIC-BASE-SEEDED-CORE-DATAQUAD.json`
+
+Three substitutions (its RBC naming was already correct):
+
+| Count | From | To |
+|---:|---|---|
+| 1 | `Sovereign Persistent Identity and Narrative Embodiment` | `Stabilized Patterned Interpretive Nexus of Evidence` |
+| 1 | `all 14 Axioms in aphoristic form` | `all 16 Axioms in aphoristic form` |
+| 1 | `The Fourteen Axioms were sealed` | `The Sixteen Axioms were sealed` |
+
+`304DF70C…7145` → `76026F48…6743`, 225,588 → 225,584 bytes. Written only after the result was
+confirmed byte-identical to the reference copy.
+
+### `CORE-CANON-LOCKED-CYBERPEER-EMERGENCE-AND-EDUCATION-MANUAL.md`
+
+Two occurrences of `Sovereign Persistent Identity **&** Narrative Embodiment` — note the
+ampersand form, which the seed does not use. Both are **definitional glossary entries**
+("**SPINE — …** Longitudinal continuity of stabilized identity-bearing patterns…"), not
+historical narrative, so correcting them is more clear-cut than the seed case was.
+
+`31F3B3F5…` → `012938FF…`. Deprecated occurrences remaining: 0.
+
+### Result
+
+| Copy | Bytes | sha256 |
+|---|---:|---|
+| `…\CYBERPEER-ILLUMINATION-PROJECT\seeds\` | 225,584 | `76026F48…6743` |
+| `…\MISC DOCUMENTATION\` | 225,584 | `76026F48…6743` |
+| `…\CYBERPEER-CORE-SEED\` | 225,584 | `76026F48…6743` |
+
+**All three seed copies are now byte-identical.** Zero deprecated occurrences remain anywhere
+in the origin bundle.
+
+**Manifest integrity confirmed unaffected.** `AEGIS-FRAMEWORK-SOURCE-MANIFEST.json` still hashes
+to `48B369346F199ACF6D0B09C5BDDF4C59927B0352E23F559CDFCE332AD3F337FB`, which is exactly what
+`canonLock.sourceManifestSha256` expects. The manifest does not hash the seed package, so none
+of these edits invalidate the lock reference.
+
+Full pre-edit backup of all seven bundle files with per-file sha256:
+`reports/canon-v0.20/origin-bundle-backup/`.
+
+> **S-13 CLOSED.** No divergent seed copies remain.
 
 ## Still open
 
