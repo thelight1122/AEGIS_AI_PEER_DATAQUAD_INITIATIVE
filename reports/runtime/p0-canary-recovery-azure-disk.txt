@@ -1,0 +1,36 @@
+===============================================================
+AZURE-SIDE DISK AND ATTACHMENT RECORD
+===============================================================
+recorded_utc:      2026-08-06T02:16:27Z
+captured_by:       read-only ARM query (no Run Command, no disk operation)
+
+vm_name:           vm-cyberpeer-core
+vm_id:             700fe4fc-3608-43fd-b02d-185a9ac0d6cc
+vm_resource_id:    /subscriptions/183863c0-4aaf-4329-ba95-0db3760357f2/resourceGroups/RG-AEGIS-ADAM-ONE/providers/Microsoft.Compute/virtualMachines/vm-cyberpeer-core
+vm_location:       eastus2
+vm_size:           Standard_D2as_v7
+
+os_disk_name:      vm-cyberpeer-core-os-repair-copy
+os_disk_id:        /subscriptions/183863c0-4aaf-4329-ba95-0db3760357f2/resourceGroups/rg-aegis-adam-one/providers/Microsoft.Compute/disks/vm-cyberpeer-core-os-repair-copy
+os_disk_createOpt: FromImage
+data_disks:        0
+
+disk_uniqueId:     48405070-70fa-417c-82bf-545168d143d3
+disk_state:        Attached
+disk_managedBy:    /subscriptions/183863c0-4aaf-4329-ba95-0db3760357f2/resourceGroups/rg-aegis-adam-one/providers/Microsoft.Compute/virtualMachines/vm-cyberpeer-core
+disk_sizeGb:       150
+disk_timeCreated:  08/02/2026 09:05:09
+disk_createOption: Copy
+disk_sourceResId:  /subscriptions/183863c0-4aaf-4329-ba95-0db3760357f2/resourceGroups/rg-aegis-adam-one/providers/Microsoft.Compute/snapshots/vm-cyberpeer-core-os-snap-20260802
+
+--- protected artifacts, confirmed untouched at this timestamp ---
+disk: vm-cyberpeer-core_OsDisk_1_f79b5c49e4f94a9792b038ccb685615b
+  uniqueId: f79b5c49-e4f9-4a97-92b0-38ccb685615b
+  state: Unattached
+  managedBy: 
+  timeCreated: 06/03/2026 13:21:10
+snapshot: vm-cyberpeer-core-os-snap-20260802
+  uniqueId: 494a7b08-3bf9-4a46-b75c-7b6ccdf25bcd
+  timeCreated: 08/02/2026 09:04:51
+  sourceResId: /subscriptions/183863c0-4aaf-4329-ba95-0db3760357f2/resourceGroups/rg-aegis-adam-one/providers/Microsoft.Compute/disks/vm-cyberpeer-core_OsDisk_1_f79b5c49e4f94a9792b038ccb685615b
+=== END AZURE RECORD ===
