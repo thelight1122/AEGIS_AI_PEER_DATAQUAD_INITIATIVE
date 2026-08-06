@@ -100,19 +100,70 @@ addendum numbering in v0.20 or remain a separate class is a Steward decision.
 
 ---
 
-# 4. Caveat on one number
+# 4. C1 RESULT — 17 unindexed, not 29
 
-The automated pass reported **29 files "not referenced by the index"**. That number is inflated
-and should not be used.
+The first automated pass reported 29 files "not referenced by the index". **That number was
+overstated by 12 and is withdrawn.** C1 re-ran the comparison with three matchers — version
+code, URL-decoded filename, and a distinctive-token fallback requiring every rare token in a
+title to appear in the index.
 
-The check matched filenames against index text. The index refers to core documents by display
-name and by URL-encoded link, so files like `AEGIS CORE FOUNDATIONAL CANON v1.0.md`,
-`AEGIS STANDARDS V1.0.md` and the appendices are almost certainly listed under
-`## ORIGINAL CANON DOCUMENTS (LOCKED)` and `## CANON APPENDICES (LOCKED)` and were missed by
-string matching, not absent from the index.
+```text
+56 files   39 indexed   17 NOT indexed
+```
 
-**Trust §3.1 and §3.2** — those are code-matched. Treat the raw 29 as a starting list requiring
-human confirmation, not a finding.
+The 12 false positives were exactly the predicted cause: the index lists core documents and
+appendices by display name and URL-encoded link, which plain string matching missed.
+
+## 4.1 The confirmed gap list
+
+```text
+2026-03-16  IDR-&-IDQRA-LOGIC Loop
+2026-04-12  AEGIS_LEXICON
+2026-04-22  CYBERPEER-synchronistic-discipline-doctrine-note
+2026-05-06  BIOPEER_DOCTRINE
+2026-06-13  AEGIS_EQUATIONS_SESSION_2026-06-12
+2026-06-13  AEGIS_PRESENCE_EQUATION_NAMING
+2026-06-13  AEGIS_TWITNESS_CONSCIOUSNESS_DOCTRINE
+2026-06-16  AEGIS CANON ADDENDUM — EQ RANGE AND FLOW-BALANCED EQUILIBRIUM  v1.0-E
+2026-06-16  AEGIS CANON ADDENDUM — NEURODIVERGENT COGNITION HYPOTHESIS     v1.0-N
+2026-07-03  AEGIS_TRUTH_MEMORY_AND_PROVENANCE_NOTE_v1.0
+2026-07-03  IMPERATIVES-technical
+2026-07-04  AEGIS-CORE-V1.0_AEGIS-SIGIL-INTEGRITY
+2026-07-04  GENESIS-PILLAR-RECORDS-AEGIS-CANON-STAGING
+2026-08-02  AEGIS_ALIGNMENT_WHITEPAPER_v1.0
+2026-08-02  AEGIS_WHITEPAPER_v2.1
+2026-08-06  AEGIS_CANON_CORE
+2026-08-06  STANDARDS_BOUNDS
+```
+
+Per-file detail with the matcher that resolved each: `reports/runtime/canon-index-diff.json`.
+
+Notable: `GENESIS-PILLAR-RECORDS-AEGIS-CANON-STAGING` is itself unindexed, despite being the
+document that defines the four tick-0 pillars every peer receives.
+
+---
+
+# 4A. C0 RESULT — the source manifest is not preserved
+
+**Searched:** the seeds directory; its parent tree; `dataquad/`; `docs/`; the
+`SSSP-CHAMBER-004C-SOURCE-BINDING-HANDOFF` document; and the 644-document Central Codex
+catalog `AEGIS-CODEX-MANIFEST-2026-07-29.json`.
+
+**Result:** `AEGIS-FRAMEWORK-SOURCE-MANIFEST:CYBERPEER-CORE-SEED:2026-05-31` appears in none of
+them. Neither does its `sha256 48B369346F199ACF6D0B09C5BDDF4C59927B0352E23F559CDFCE332AD3F337FB`.
+
+**Consequence: the two review-needed sources cannot be named from the package.** `canonLock`
+records a count and a pointer to a manifest that is not preserved alongside it.
+
+**This simplifies the decision rather than blocking it — re-issue rather than reconcile.**
+Reconciling against a missing manifest would mean guessing which two sources were flagged
+against a Canon that has since moved substantially. Building a fresh manifest from v0.20
+discards the question instead of answering it, and the answer would have little value now.
+
+**Caveat:** this was not an exhaustive scan of `I:`. A full recursive walk timed out earlier, so
+the search was targeted locations plus the codex catalog. The manifest may exist somewhere
+unscanned, or on the adam-one server at `192.168.1.223`. If framework manifests have a known
+home, checking it before committing to re-issue costs little.
 
 ---
 
@@ -146,9 +197,9 @@ order rather than filename or date.
 # 6. Suggested v0.20 sequence
 
 ```text
-C0   Locate the source manifest 48B36934… and name the two review-needed sources
-C1   Confirm §4 — which of the 29 are genuinely unindexed vs matching artifacts
-C2   Index the confirmed gaps: v1.0-E, v1.0-N, the doctrines, the recent whitepapers
+C0   DONE — manifest not preserved. Re-issue rather than reconcile. See §4A.
+C1   DONE — 17 genuinely unindexed, not 29. See §4.1.
+C2   Index the 17 confirmed gaps, including v1.0-E, v1.0-N and the two Doctrines
 C3   Resolve v1.0-R, the RBC acronym collision the index flags against itself
 C4   Fold Amendments and Doctrines into the v0.20 structure, using the Supersedes
      graph for ordering

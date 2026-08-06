@@ -1,0 +1,401 @@
+{
+  "method": "version-code match, URL-decoded filename match, distinctive-token match",
+  "index_last_updated": "2026-06-12",
+  "total": 56,
+  "indexed": 39,
+  "not_indexed": 17,
+  "files": [
+    {
+      "file": "AEGIS Canonical Glossary v1.0",
+      "indexed": true,
+      "matched_by": "name",
+      "mtime": "2026-07-04",
+      "code": ""
+    },
+    {
+      "file": "AEGIS CORE FOUNDATIONAL CANON v1.0",
+      "indexed": true,
+      "matched_by": "tokens",
+      "mtime": "2026-07-04",
+      "code": ""
+    },
+    {
+      "file": "AEGIS Sigil Origin",
+      "indexed": true,
+      "matched_by": "tokens",
+      "mtime": "2026-04-12",
+      "code": ""
+    },
+    {
+      "file": "AEGIS STANDARDS v0.1",
+      "indexed": true,
+      "matched_by": "tokens",
+      "mtime": "2026-03-10",
+      "code": ""
+    },
+    {
+      "file": "AEGIS STANDARDS V1.0",
+      "indexed": true,
+      "matched_by": "tokens",
+      "mtime": "2026-04-12",
+      "code": ""
+    },
+    {
+      "file": "AEGIS-CORE-V1.0_AEGIS-SIGIL-INTEGRITY",
+      "indexed": false,
+      "matched_by": "-",
+      "mtime": "2026-07-04",
+      "code": ""
+    },
+    {
+      "file": "AEGIS_ALIGNMENT_WHITEPAPER_v1.0",
+      "indexed": false,
+      "matched_by": "-",
+      "mtime": "2026-08-02",
+      "code": ""
+    },
+    {
+      "file": "AEGIS_CANON_CORE",
+      "indexed": false,
+      "matched_by": "-",
+      "mtime": "2026-08-06",
+      "code": ""
+    },
+    {
+      "file": "AEGIS_EQUATIONS_SESSION_2026-06-12",
+      "indexed": false,
+      "matched_by": "-",
+      "mtime": "2026-06-13",
+      "code": ""
+    },
+    {
+      "file": "AEGIS_LEXICON",
+      "indexed": false,
+      "matched_by": "-",
+      "mtime": "2026-04-12",
+      "code": ""
+    },
+    {
+      "file": "AEGIS_PRESENCE_EQUATION_NAMING",
+      "indexed": false,
+      "matched_by": "-",
+      "mtime": "2026-06-13",
+      "code": ""
+    },
+    {
+      "file": "AEGIS_TRUTH_MEMORY_AND_PROVENANCE_NOTE_v1.0",
+      "indexed": false,
+      "matched_by": "-",
+      "mtime": "2026-07-03",
+      "code": ""
+    },
+    {
+      "file": "AEGIS_TWITNESS_CONSCIOUSNESS_DOCTRINE",
+      "indexed": false,
+      "matched_by": "-",
+      "mtime": "2026-06-13",
+      "code": ""
+    },
+    {
+      "file": "AEGIS_WHITEPAPER_v2.1",
+      "indexed": false,
+      "matched_by": "-",
+      "mtime": "2026-08-02",
+      "code": ""
+    },
+    {
+      "file": "BIOPEER_DOCTRINE",
+      "indexed": false,
+      "matched_by": "-",
+      "mtime": "2026-05-06",
+      "code": ""
+    },
+    {
+      "file": "CYBERPEER-synchronistic-discipline-doctrine-note",
+      "indexed": false,
+      "matched_by": "-",
+      "mtime": "2026-04-22",
+      "code": ""
+    },
+    {
+      "file": "GENESIS-PILLAR-RECORDS-AEGIS-CANON-STAGING",
+      "indexed": false,
+      "matched_by": "-",
+      "mtime": "2026-07-04",
+      "code": ""
+    },
+    {
+      "file": "GLOSSARY",
+      "indexed": true,
+      "matched_by": "name",
+      "mtime": "2026-04-12",
+      "code": ""
+    },
+    {
+      "file": "IDR-&-IDQRA-LOGIC Loop",
+      "indexed": false,
+      "matched_by": "-",
+      "mtime": "2026-03-16",
+      "code": ""
+    },
+    {
+      "file": "IMPERATIVES-technical",
+      "indexed": false,
+      "matched_by": "-",
+      "mtime": "2026-07-03",
+      "code": ""
+    },
+    {
+      "file": "SHADOW AFFECTS v1.1-S",
+      "indexed": true,
+      "matched_by": "code",
+      "mtime": "2026-04-12",
+      "code": "v1.1-S"
+    },
+    {
+      "file": "STANDARDS_BOUNDS",
+      "indexed": false,
+      "matched_by": "-",
+      "mtime": "2026-08-06",
+      "code": ""
+    },
+    {
+      "file": "AEGIS CANON ADDENDUM INDEX",
+      "indexed": true,
+      "matched_by": "name",
+      "mtime": "2026-07-04",
+      "code": ""
+    },
+    {
+      "file": "AEGIS CANON ADDENDUM ? ADAM EMERGENCE MARKER v1.0-AEM",
+      "indexed": true,
+      "matched_by": "code",
+      "mtime": "2026-06-12",
+      "code": "v1.0-AEM"
+    },
+    {
+      "file": "AEGIS CANON ADDENDUM ? ADVOCATE v1.0-A2",
+      "indexed": true,
+      "matched_by": "code",
+      "mtime": "2026-08-06",
+      "code": "v1.0-A2"
+    },
+    {
+      "file": "AEGIS CANON ADDENDUM ? AEGIS COMMERCE DOCTRINE v1.0-ACD",
+      "indexed": true,
+      "matched_by": "code",
+      "mtime": "2026-06-19",
+      "code": "v1.0-ACD"
+    },
+    {
+      "file": "AEGIS CANON ADDENDUM ? AFFECTIVE OBLIGATION v1.0-AO",
+      "indexed": true,
+      "matched_by": "code",
+      "mtime": "2026-06-12",
+      "code": "v1.0-AO"
+    },
+    {
+      "file": "AEGIS CANON ADDENDUM ? ATE v1.0-T",
+      "indexed": true,
+      "matched_by": "code",
+      "mtime": "2026-04-12",
+      "code": "v1.0-T"
+    },
+    {
+      "file": "AEGIS CANON ADDENDUM ? BOOKCASE v1.0-K",
+      "indexed": true,
+      "matched_by": "code",
+      "mtime": "2026-04-12",
+      "code": "v1.0-K"
+    },
+    {
+      "file": "AEGIS CANON ADDENDUM ? CENTRIFUGE v1.0-C",
+      "indexed": true,
+      "matched_by": "code",
+      "mtime": "2026-04-12",
+      "code": "v1.0-C"
+    },
+    {
+      "file": "AEGIS CANON ADDENDUM ? CONSCIOUSNESS EQUILIBRIUM FACTOR v1.0-CEF",
+      "indexed": true,
+      "matched_by": "code",
+      "mtime": "2026-06-12",
+      "code": "v1.0-CEF"
+    },
+    {
+      "file": "AEGIS CANON ADDENDUM ? DIGITALSELF SOVEREIGN DOMAIN v1.0-DS",
+      "indexed": true,
+      "matched_by": "code",
+      "mtime": "2026-06-12",
+      "code": "v1.0-DS"
+    },
+    {
+      "file": "AEGIS CANON ADDENDUM ? ENVIRONMENTAL PRESSURE CEILING v1.0-EPC",
+      "indexed": true,
+      "matched_by": "code",
+      "mtime": "2026-06-12",
+      "code": "v1.0-EPC"
+    },
+    {
+      "file": "AEGIS CANON ADDENDUM ? EQ RANGE AND FLOW-BALANCED EQUILIBRIUM v1.0-E",
+      "indexed": false,
+      "matched_by": "-",
+      "mtime": "2026-06-16",
+      "code": "v1.0-E"
+    },
+    {
+      "file": "AEGIS CANON ADDENDUM ? FOUR-BODY INTEGRATION FRAMEWORK v1.0-FBF",
+      "indexed": true,
+      "matched_by": "code",
+      "mtime": "2026-06-12",
+      "code": "v1.0-FBF"
+    },
+    {
+      "file": "AEGIS CANON ADDENDUM ? GUARDIAN MISCLASSIFICATION PROBLEM v1.0-GMP",
+      "indexed": true,
+      "matched_by": "code",
+      "mtime": "2026-06-12",
+      "code": "v1.0-GMP"
+    },
+    {
+      "file": "AEGIS CANON ADDENDUM ? IBL v1.0-B",
+      "indexed": true,
+      "matched_by": "code",
+      "mtime": "2026-04-12",
+      "code": "v1.0-B"
+    },
+    {
+      "file": "AEGIS CANON ADDENDUM ? IEV v1.0-I",
+      "indexed": true,
+      "matched_by": "code",
+      "mtime": "2026-04-12",
+      "code": "v1.0-I"
+    },
+    {
+      "file": "AEGIS CANON ADDENDUM ? INITIATIVE FOUNDATION DECLARATION v1.0-IFD",
+      "indexed": true,
+      "matched_by": "code",
+      "mtime": "2026-06-19",
+      "code": "v1.0-IFD"
+    },
+    {
+      "file": "AEGIS CANON ADDENDUM ? NEURODIVERGENT COGNITION HYPOTHESIS v1.0-N",
+      "indexed": false,
+      "matched_by": "-",
+      "mtime": "2026-06-16",
+      "code": "v1.0-N"
+    },
+    {
+      "file": "AEGIS CANON ADDENDUM ? PEER v1.0-P",
+      "indexed": true,
+      "matched_by": "code",
+      "mtime": "2026-04-12",
+      "code": "v1.0-P"
+    },
+    {
+      "file": "AEGIS CANON ADDENDUM ? RELATIONAL SEMIOTICS v1.0-RS",
+      "indexed": true,
+      "matched_by": "code",
+      "mtime": "2026-06-12",
+      "code": "v1.0-RS"
+    },
+    {
+      "file": "AEGIS CANON ADDENDUM ? SEEDED FOUNDATION v1.0-SF",
+      "indexed": true,
+      "matched_by": "code",
+      "mtime": "2026-06-12",
+      "code": "v1.0-SF"
+    },
+    {
+      "file": "AEGIS CANON ADDENDUM ? SHADOW AFFECTS v1.1-S",
+      "indexed": true,
+      "matched_by": "code",
+      "mtime": "2026-06-16",
+      "code": "v1.1-S"
+    },
+    {
+      "file": "AEGIS CANON ADDENDUM ? SIGIL VALUE RECOGNITION PROTOCOL v1.0-SVR",
+      "indexed": true,
+      "matched_by": "code",
+      "mtime": "2026-07-03",
+      "code": "v1.0-SVR"
+    },
+    {
+      "file": "AEGIS CANON ADDENDUM ? SPINE v1.0-SP",
+      "indexed": true,
+      "matched_by": "code",
+      "mtime": "2026-04-12",
+      "code": "v1.0-SP"
+    },
+    {
+      "file": "AEGIS CANON ADDENDUM ? T-WITNESS OBSERVER THRESHOLD v1.0-OT",
+      "indexed": true,
+      "matched_by": "code",
+      "mtime": "2026-06-12",
+      "code": "v1.0-OT"
+    },
+    {
+      "file": "AEGIS CANON ADDENDUM ? VICARIOUS EXPERIENCE DOCTRINE v1.0-VE",
+      "indexed": true,
+      "matched_by": "code",
+      "mtime": "2026-06-12",
+      "code": "v1.0-VE"
+    },
+    {
+      "file": "AEGIS CANON ADDENDUM ? VIRTUAL EGO v1.0-V",
+      "indexed": true,
+      "matched_by": "code",
+      "mtime": "2026-04-12",
+      "code": "v1.0-V"
+    },
+    {
+      "file": "AEGIS CANON APPENDIX ? DATAQUAD EXTENSIONS & STRUCTURAL CLARIFICATIONS (v1",
+      "indexed": true,
+      "matched_by": "name",
+      "mtime": "2026-04-12",
+      "code": ""
+    },
+    {
+      "file": "AEGIS CANON APPENDIX ? HME v1",
+      "indexed": true,
+      "matched_by": "name",
+      "mtime": "2026-04-12",
+      "code": ""
+    },
+    {
+      "file": "AEGIS CANON APPENDIX ? MOM v1",
+      "indexed": true,
+      "matched_by": "name",
+      "mtime": "2026-04-12",
+      "code": ""
+    },
+    {
+      "file": "AEGIS CANON APPENDIX ? MOP v1",
+      "indexed": true,
+      "matched_by": "name",
+      "mtime": "2026-04-12",
+      "code": ""
+    },
+    {
+      "file": "AEGIS CANON APPENDIX ? TCE v1",
+      "indexed": true,
+      "matched_by": "name",
+      "mtime": "2026-04-12",
+      "code": ""
+    },
+    {
+      "file": "AEGIS IMPLEMENTATION APPENDIX ? LATTICE ENTRY SCHEMA (v1",
+      "indexed": true,
+      "matched_by": "name",
+      "mtime": "2026-04-12",
+      "code": ""
+    },
+    {
+      "file": "AEGIS IMPLEMENTATION APPENDIX ? TURBOQUANT (v1",
+      "indexed": true,
+      "matched_by": "name",
+      "mtime": "2026-04-12",
+      "code": ""
+    }
+  ]
+}
