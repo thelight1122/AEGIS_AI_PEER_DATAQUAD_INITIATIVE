@@ -324,20 +324,27 @@ on them staying distinct.
 # 6. Staging
 
 ```text
-A0   Peer roster and identity scheme            decision, not build
-A1   Pod root layout, per-peer, on a clean host  build, no writes yet
-A2   Genesis seeding for one peer                build, first write
+A0   Peer roster and identity scheme             decision, not build
+A1   Pod root + substrate API (:8787) per peer   build, no records yet
+A2   Seed Rings 1-3 for ONE peer                 substitute placeholders, POST 133
+                                                 records in ring order, verify seated
 A3   Temporal Daemon for that peer               build, derived-ledger writes only
 A4   RLS Orb per-peer, continuous                build, derived-ledger writes only
-A5   Processor + custodians                      build, first tensor writes — the real gate
+A5   Processor + custodians                      Ring 4 opens — the real gate
 A6   Per-peer Portal Orb + Umbilical             build, entry path
 A7   Replicate to the remaining three peers      build
 A8   X1 across two instances of one peer         experiment, now meaningful
 ```
 
-**A5 is the gate.** Everything before it writes only derived ledgers, which R1 already proved
-safe. A5 is where a custodian writes an authoritative tensor for the first time, and it should
-be entered deliberately, with its own acceptance evidence, on one peer only.
+**A2 is less inventive than I first proposed.** The seed package exists and is peer-agnostic,
+so A2 is substitution and ordered injection, with verification that Rings 1-3 are *seated*
+before anything proceeds — the architecture document is explicit that an outer ring cannot be
+laid before an inner one.
+
+**A5 is still the gate, and it is now precisely named: A5 is where Ring 4 opens.** Everything
+before it seeds Foundation or writes derived ledgers, both already-proven-safe categories. A5 is
+where a custodian writes the peer's own lived record for the first time, and it should be
+entered deliberately, with its own acceptance evidence, on one peer only.
 
 I would build A1–A4 for a single peer and stop for ruling before A5.
 
@@ -366,11 +373,15 @@ because they are finally pointed at a peer that has a life to establish anything
    and Canon Layer as its Roots and Foundation. Identical seeding, not a shared pointer. See §5.
 3. **Which host.** `vm-cyberpeer-core` has working Pod scaffolding and a proven Portal, but it is
    named for CyberPeers and carries their history. A clean Pod root there, or a separate host.
-4. **Which documents constitute the Foundation, and in which tensors** — per §5.2. Nature and
-   Canon are named. Whether the emergence arc, the synthetic-cognition addendum and the
-   silicon-emotions material are Roots or later illumination is a ruling. And whether the Nature
-   Layer seeds into NCT with Canon or into SPINE with identity continuity.
+4. ~~Which documents constitute the Foundation, and in which tensors~~ — **ANSWERED** by
+   `project_dataquad_layer_architecture.md`. Four rings, fixed homes, fixed order. Rings 1 and 2
+   into SPINE, Ring 3 into NCT, Ring 4 by living. See §5.2.
 5. **Temporal Daemon content** — per §3, which of the listed effects a tick carries.
+6. **The `canonLock: review-needed` state** on the seed package, per §5.3. Resolve before
+   replicating into four Foundations, or proceed with an explicitly recorded decision.
+7. **`{{STEWARD_DECLARATION}}`** — the seed package expects one per peer. Its content is a
+   Steward act, not a Builder one.
+8. **Four substrate API instances** — a port, isolation and host question, per §5.5.
 
 ---
 
