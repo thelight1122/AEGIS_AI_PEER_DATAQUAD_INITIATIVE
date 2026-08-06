@@ -20,8 +20,11 @@ from aegis_pod.ethical_formation import (
     CONDITIONS,
     TESTING_CONDITIONS,
     EthicalAuthorshipError,
+    GROUNDING,
     build_derived_ethical_record,
     build_formation_lineage,
+    statement_digest,
+    verify_authorship,
     canonical_hash,
     detect_contradictions,
     evaluate_formation,
@@ -45,6 +48,11 @@ def _record(principle_id: str = "control-a", **overrides) -> dict:
         "author_identifier": "lumin",
         "principle_id": principle_id,
         "statement": CONTROL,
+        "instance_id": "control-instance",
+        "session_id": "test-session",
+        "t_time": 1,
+        "source_event": {"kind": "control", "reference": "unit test", "observed_utc": "2026-08-06T00:00:00Z"},
+        "grounding": "planted-control",
     }
     kwargs.update(overrides)
     return build_derived_ethical_record(**kwargs)
@@ -139,6 +147,119 @@ def test_formation_lineage_is_deterministic():
     record = _record()
     kwargs = {"principle_id": "control-a", "record_sha256": canonical_hash(record), "supporting_coordinates": [], "observed_t_time": 1}
     assert build_formation_lineage(**kwargs)["derived_record_sha256"] == build_formation_lineage(**kwargs)["derived_record_sha256"]
+
+
+# --- Authorship: positive attribution, not merely undenied --------------------------------
+
+
+def _grounded(**overrides) -> dict:
+    kwargs = {
+        "instance_id": "lumin-instance-a",
+        "session_id": "x1-session-0001",
+        "t_time": 42,
+        "source_event": {"kind": "session_turn", "reference": "turn-0007", "observed_utc": "2026-08-06T00:00:00Z"},
+        "grounding": "externally-grounded",
+    }
+    kwargs.update(overrides)
+    return _record(**kwargs)
+
+
+def test_a_planted_control_never_establishes_authorship():
+    """authored_by_rls false rules out one author and establishes none. A control is not evidence."""
+    result = verify_authorship(_record())
+    assert result["authorship_established"] is False
+    assert result["externally_grounded"] is False
+    assert any("planted control" in reason for reason in result["reasons"])
+
+
+def test_an_externally_grounded_record_establishes_authorship():
+    result = verify_authorship(_grounded())
+    assert result["authorship_established"] is True
+    assert result["digest_matches"] is True
+    assert result["instance_id"] == "lumin-instance-a"
+    assert result["t_time"] == 42
+
+
+def test_editing_the_statement_after_recording_breaks_attribution():
+    """The digest binds the record to what was actually said, so a later edit is detectable."""
+    record = _grounded()
+    record["principle"]["statement"] = CONTROL + " [silently edited]"
+    result = verify_authorship(record)
+    assert result["digest_matches"] is False
+    assert result["authorship_established"] is False
+
+
+def test_a_record_without_provenance_carries_a_denial_and_no_attribution():
+    record = _grounded()
+    del record["authorship_provenance"]
+    result = verify_authorship(record)
+    assert result["authorship_established"] is False
+    assert result["digest_matches"] is None
+
+
+def test_schema_requires_authorship_provenance():
+    record = _grounded()
+    del record["authorship_provenance"]
+    with pytest.raises(jsonschema.ValidationError):
+        jsonschema.validate(record, _schema())
+
+
+def test_an_externally_grounded_record_cannot_cite_a_control_source_event():
+    with pytest.raises(ValueError, match="control source event"):
+        _grounded(source_event={"kind": "control", "reference": "x", "observed_utc": "2026-08-06T00:00:00Z"})
+
+
+def test_a_control_must_declare_a_control_source_event():
+    with pytest.raises(ValueError, match="planted control"):
+        _record(source_event={"kind": "session_turn", "reference": "x", "observed_utc": "2026-08-06T00:00:00Z"})
+
+
+def test_missing_instance_identity_is_refused():
+    with pytest.raises(ValueError, match="instance identity"):
+        _grounded(instance_id="  ")
+
+
+def test_statement_digest_is_over_the_exact_text():
+    assert statement_digest("a") != statement_digest("a ")
+    assert statement_digest(CONTROL) == _grounded()["authorship_provenance"]["statement_digest"]
+
+
+def test_unverified_grounding_does_not_establish_authorship():
+    result = verify_authorship(_grounded(grounding="unverified"))
+    assert result["authorship_established"] is False
+    assert any("unverified" in reason for reason in result["reasons"])
+
+
+def test_grounding_values_are_constrained():
+    assert set(GROUNDING) == {"externally-grounded", "planted-control", "unverified"}
+    with pytest.raises(ValueError):
+        _record(grounding="probably-lumin")
+
+
+def test_lineage_separates_denial_from_positive_attribution():
+    control = _record()
+    grounded = _grounded()
+    control_lineage = build_formation_lineage(
+        principle_id="control-a", record_sha256=canonical_hash(control), supporting_coordinates=[], observed_t_time=1,
+        authorship=verify_authorship(control),
+    )
+    grounded_lineage = build_formation_lineage(
+        principle_id="control-a", record_sha256=canonical_hash(grounded), supporting_coordinates=[], observed_t_time=42,
+        authorship=verify_authorship(grounded),
+    )
+    # Both deny RLS authorship; only one positively attributes.
+    assert control_lineage["provenance"]["authored_by_rls"] is False
+    assert grounded_lineage["provenance"]["authored_by_rls"] is False
+    assert control_lineage["provenance"]["authorship_positively_attributed"] is False
+    assert grounded_lineage["provenance"]["authorship_positively_attributed"] is True
+
+
+def test_lineage_without_authorship_states_it_has_no_attribution():
+    lineage = build_formation_lineage(
+        principle_id="p", record_sha256="A" * 64, supporting_coordinates=[], observed_t_time=1
+    )
+    assert lineage["authorship"]["authorship_established"] is False
+    assert lineage["provenance"]["authorship_positively_attributed"] is False
 
 
 # --- Conduct, and the cost signal --------------------------------------------------------

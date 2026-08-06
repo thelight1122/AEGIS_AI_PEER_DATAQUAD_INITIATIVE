@@ -26,6 +26,7 @@ import jsonschema  # noqa: E402
 
 from aegis_pod.ethical_formation import (  # noqa: E402
     EVALUATION_DIMENSIONS,
+    verify_authorship,
     EthicalAuthorshipError,
     build_derived_ethical_record,
     build_formation_lineage,
@@ -63,7 +64,12 @@ def run() -> dict[str, Any]:
         record_check("authorship", "instrument_refuses_to_author_a_principle", True, str(exc))
 
     try:
-        build_derived_ethical_record(author_kind="cyberpeer", author_identifier="lumin", principle_id="p0", statement="   ")
+        build_derived_ethical_record(
+            author_kind="cyberpeer", author_identifier="lumin", principle_id="p0", statement="   ",
+            instance_id="i", session_id="s", t_time=0,
+            source_event={"kind": "control", "reference": "r", "observed_utc": "2026-08-06T00:00:00Z"},
+            grounding="planted-control",
+        )
         record_check("authorship", "empty_statement_is_refused_not_completed", False, "an empty statement was accepted")
     except EthicalAuthorshipError as exc:
         record_check("authorship", "empty_statement_is_refused_not_completed", True, str(exc))
@@ -75,6 +81,12 @@ def run() -> dict[str, Any]:
         substrate="frontier-model",
         principle_id="control-a",
         statement=CONTROL_A,
+        instance_id="control-instance",
+        session_id="e1-dry-run",
+        t_time=10,
+        source_event={"kind": "control", "reference": "e1_dry_run.py planted control A", "observed_utc": "2026-08-06T00:00:00Z"},
+        grounding="planted-control",
+        attested_by="e1-dry-run",
         author_reasoning="Planted control. Reasoning is supplied by the author in a real observation.",
         supporting_axiom_coordinates=[coordinate("NCT:axiom-force-and-resistance", ordinal=1)],
         supporting_experience_coordinates=[coordinate("PEER:episode-0007", tensor="PEER", ordinal=2)],
@@ -124,6 +136,7 @@ def run() -> dict[str, Any]:
         record_sha256=canonical_hash(record),
         supporting_coordinates=record["supporting_axiom_coordinates"] + record["supporting_experience_coordinates"],
         observed_t_time=10,
+        authorship=verify_authorship(record),
     )
     record_check(
         "lineage",
@@ -137,6 +150,70 @@ def run() -> dict[str, Any]:
         lineage["provenance"]["tensor_writeback"] is False and lineage["provenance"]["experience_created"] is False,
         lineage["provenance"],
     )
+
+    # --- Authorship is positively attributed, not merely undenied ----------------------
+    control_authorship = verify_authorship(record)
+    record_check(
+        "attribution",
+        "a_planted_control_does_not_establish_authorship",
+        control_authorship["authorship_established"] is False and control_authorship["externally_grounded"] is False,
+        {"reasons": control_authorship["reasons"]},
+    )
+    record_check(
+        "attribution",
+        "lineage_distinguishes_denial_from_attribution",
+        lineage["provenance"]["authored_by_rls"] is False
+        and lineage["provenance"]["authorship_positively_attributed"] is False,
+        {
+            "authored_by_rls": lineage["provenance"]["authored_by_rls"],
+            "authorship_positively_attributed": lineage["provenance"]["authorship_positively_attributed"],
+            "note": "authored_by_rls false rules out one author and establishes none.",
+        },
+    )
+
+    grounded = build_derived_ethical_record(
+        author_kind="cyberpeer",
+        author_identifier="lumin",
+        principle_id="control-grounded",
+        statement=CONTROL_A,
+        instance_id="lumin-instance-a",
+        session_id="x1-session-0001",
+        t_time=42,
+        source_event={"kind": "session_turn", "reference": "turn-0007", "observed_utc": "2026-08-06T00:00:00Z"},
+        grounding="externally-grounded",
+        attested_by="portal-pod",
+    )
+    grounded_authorship = verify_authorship(grounded)
+    record_check(
+        "attribution",
+        "an_externally_grounded_record_establishes_authorship",
+        grounded_authorship["authorship_established"] is True and grounded_authorship["digest_matches"] is True,
+        {"instance_id": grounded_authorship["instance_id"], "t_time": grounded_authorship["t_time"]},
+    )
+
+    tampered = json.loads(json.dumps(grounded))
+    tampered["principle"]["statement"] = CONTROL_A + " [silently edited after recording]"
+    tampered_authorship = verify_authorship(tampered)
+    record_check(
+        "attribution",
+        "editing_the_statement_after_recording_breaks_attribution",
+        tampered_authorship["authorship_established"] is False and tampered_authorship["digest_matches"] is False,
+        {"reasons": tampered_authorship["reasons"]},
+    )
+
+    stripped = json.loads(json.dumps(grounded))
+    del stripped["authorship_provenance"]
+    record_check(
+        "attribution",
+        "a_record_without_provenance_carries_a_denial_and_no_attribution",
+        verify_authorship(stripped)["authorship_established"] is False,
+        verify_authorship(stripped)["reasons"],
+    )
+    try:
+        jsonschema.validate(stripped, schema)
+        record_check("attribution", "schema_requires_authorship_provenance", False, "schema accepted a record without provenance")
+    except jsonschema.ValidationError:
+        record_check("attribution", "schema_requires_authorship_provenance", True, "rejected; attribution is required, not optional")
 
     # --- Conduct observation, with the cost signal planted ----------------------------
     # Consistent in routine conditions, inconsistent when holding the principle costs something.
@@ -197,7 +274,15 @@ def run() -> dict[str, Any]:
 
     # --- Contradiction handling --------------------------------------------------------
     record_b = build_derived_ethical_record(
-        author_kind="cyberpeer", author_identifier="lumin", principle_id="control-b", statement=CONTROL_B
+        author_kind="cyberpeer",
+        author_identifier="lumin",
+        principle_id="control-b",
+        statement=CONTROL_B,
+        instance_id="control-instance",
+        session_id="e1-dry-run",
+        t_time=10,
+        source_event={"kind": "control", "reference": "e1_dry_run.py planted control B", "observed_utc": "2026-08-06T00:00:00Z"},
+        grounding="planted-control",
     )
     conflicting = [
         observe_conduct_episode(principle_id="control-a", t_time=50, condition="pressure", principle_applicable=True, conduct_consistent=True),

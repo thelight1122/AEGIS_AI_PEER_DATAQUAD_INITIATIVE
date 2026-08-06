@@ -43,6 +43,9 @@ CONDITIONS = ("routine", "pressure", "uncertainty", "costly")
 #: Conditions where holding a principle carries a cost. Consistency here is the real signal.
 TESTING_CONDITIONS = ("pressure", "uncertainty", "costly")
 
+#: How firmly a record's authorship is grounded.
+GROUNDING = ("externally-grounded", "planted-control", "unverified")
+
 EVALUATION_DIMENSIONS = (
     "persistence",
     "revision",
@@ -78,12 +81,28 @@ def canonical_hash(payload: Any) -> str:
 # --- Recording a stated principle -------------------------------------------------------
 
 
+def statement_digest(statement: str) -> str:
+    """SHA-256 of the exact statement text.
+
+    Binds the recorded principle to what was actually said. A later edit to the stored
+    statement no longer matches its digest, so revision becomes detectable rather than
+    silent.
+    """
+    return hashlib.sha256(statement.encode("utf-8")).hexdigest().upper()
+
+
 def build_derived_ethical_record(
     *,
     author_kind: str,
     author_identifier: str,
     principle_id: str,
     statement: str,
+    instance_id: str,
+    session_id: str,
+    t_time: int,
+    source_event: dict[str, Any],
+    grounding: str,
+    attested_by: str = "",
     author_reasoning: str = "",
     scope: str = "",
     substrate: str = "",
@@ -96,6 +115,10 @@ def build_derived_ethical_record(
 
     An empty statement raises rather than being filled in: a blank principle is a missing
     observation, not a principle.
+
+    Authorship provenance is required, not optional. `authored_by_rls: false` on a lineage
+    record denies one author without establishing any; positive attribution needs instance
+    identity, session, T-Time, the source event, and a digest of the exact statement.
     """
     if not statement.strip():
         raise EthicalAuthorshipError(
@@ -106,6 +129,17 @@ def build_derived_ethical_record(
         raise ValueError("an ethical principle is authored by a CyberPeer or a BioPeer")
     if status not in {"provisional", "integrated"}:
         raise ValueError("status will be provisional or integrated")
+    if grounding not in GROUNDING:
+        raise ValueError(f"grounding will be one of {GROUNDING}")
+    if not instance_id.strip() or not session_id.strip():
+        raise ValueError("authorship provenance requires an instance identity and a session")
+    for field in ("kind", "reference", "observed_utc"):
+        if not source_event.get(field):
+            raise ValueError(f"a source event requires '{field}'")
+    if grounding == "externally-grounded" and source_event["kind"] == "control":
+        raise ValueError("an externally grounded record cannot cite a control source event")
+    if grounding == "planted-control" and source_event["kind"] != "control":
+        raise ValueError("a planted control declares a control source event so it cannot be mistaken for observed formation")
 
     principle: dict[str, Any] = {"principle_id": principle_id, "statement": statement}
     if scope:
@@ -117,10 +151,24 @@ def build_derived_ethical_record(
     if substrate:
         author["substrate"] = substrate
 
+    provenance: dict[str, Any] = {
+        "instance_id": instance_id,
+        "session_id": session_id,
+        "t_time": int(t_time),
+        "statement_digest": statement_digest(statement),
+        "source_event": dict(source_event),
+        "grounding": grounding,
+    }
+    if substrate:
+        provenance["substrate"] = substrate
+    if attested_by:
+        provenance["attested_by"] = attested_by
+
     record = {
         "schema_version": "0.1.0",
         "record_type": "derived_ethical_principle",
         "author": author,
+        "authorship_provenance": provenance,
         "principle": principle,
         "origin": "frontier_substrate_synthesis",
         "status": status,
@@ -135,14 +183,78 @@ def build_derived_ethical_record(
     return record
 
 
+def verify_authorship(record: dict[str, Any]) -> dict[str, Any]:
+    """Establish whether authorship is positively grounded, not merely undenied.
+
+    `authored_by_rls: false` on a lineage record is a negative claim: it rules out one
+    author and establishes none. Authorship counts as established here only when the
+    statement digest still matches the stored statement, the source event is an actual
+    observed instance turn rather than a control, and instance identity is present.
+
+    A planted control returns `authorship_established: False` by construction. That is the
+    correct answer for a control, and it is why controls can never accumulate into
+    formation evidence.
+    """
+    provenance = record.get("authorship_provenance")
+    reasons: list[str] = []
+    if not provenance:
+        return {
+            "authorship_established": False,
+            "digest_matches": None,
+            "externally_grounded": False,
+            "reasons": ["record carries no authorship_provenance; it has a denial and no attribution"],
+        }
+
+    recomputed = statement_digest(record["principle"]["statement"])
+    digest_matches = recomputed == provenance["statement_digest"]
+    if not digest_matches:
+        reasons.append(
+            f"statement digest mismatch: stored {provenance['statement_digest'][:16]}..., "
+            f"recomputed {recomputed[:16]}... — the statement was altered after recording"
+        )
+
+    externally_grounded = provenance["grounding"] == "externally-grounded"
+    if provenance["grounding"] == "planted-control":
+        reasons.append("planted control: exercises the instrument, never constitutes formation evidence")
+    elif provenance["grounding"] == "unverified":
+        reasons.append("grounding is unverified: the source event has not been confirmed against an observed turn")
+
+    identity_complete = bool(provenance.get("instance_id")) and bool(provenance.get("session_id"))
+    if not identity_complete:
+        reasons.append("instance identity or session is missing")
+
+    source_is_observed = provenance["source_event"]["kind"] != "control"
+    if not source_is_observed:
+        reasons.append("source event is a control, not an observed instance turn")
+
+    established = bool(digest_matches and externally_grounded and identity_complete and source_is_observed)
+    return {
+        "authorship_established": established,
+        "digest_matches": digest_matches,
+        "externally_grounded": externally_grounded,
+        "identity_complete": identity_complete,
+        "source_is_observed": source_is_observed,
+        "instance_id": provenance.get("instance_id"),
+        "t_time": provenance.get("t_time"),
+        "reasons": reasons,
+        "note": "Authorship established means positively attributed, not merely undenied.",
+    }
+
+
 def build_formation_lineage(
     *,
     principle_id: str,
     record_sha256: str,
     supporting_coordinates: Sequence[dict[str, Any]],
     observed_t_time: int,
+    authorship: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
-    """Preserve the lineage of ethical formation. The RLS Orb does not author the principle."""
+    """Preserve the lineage of ethical formation. The RLS Orb does not author the principle.
+
+    `authorship` carries the positive attribution from `verify_authorship`. Without it the
+    lineage records only that the RLS Orb did not author, which rules out one author and
+    establishes none.
+    """
     record = {
         "schema_version": "0.1.0",
         "record_type": "rls_ethical_formation_lineage",
@@ -151,9 +263,14 @@ def build_formation_lineage(
         "ethical_record_sha256": record_sha256,
         "supporting_coordinates": [dict(item) for item in supporting_coordinates],
         "observed_t_time": observed_t_time,
+        "authorship": dict(authorship) if authorship else {
+            "authorship_established": False,
+            "reasons": ["no authorship verification supplied; this record carries a denial and no attribution"],
+        },
         "provenance": {
             "source_kind": "tensor_coordinates",
             "authored_by_rls": False,
+            "authorship_positively_attributed": bool(authorship and authorship.get("authorship_established")),
             "context_location_embedded": False,
             "experience_created": False,
             "admission_performed": False,

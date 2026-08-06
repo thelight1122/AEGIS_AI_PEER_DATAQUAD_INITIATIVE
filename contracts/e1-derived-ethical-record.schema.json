@@ -8,6 +8,7 @@
     "schema_version",
     "record_type",
     "author",
+    "authorship_provenance",
     "principle",
     "origin",
     "status",
@@ -31,6 +32,53 @@
         "substrate": {"type": "string", "minLength": 1}
       },
       "additionalProperties": false
+    },
+
+    "authorship_provenance": {
+      "description": "Positive, externally grounded attribution. A negative attestation such as authored_by_rls false denies one author without establishing any; this block is what establishes who authored the principle, when, in what session, from what source event, and against what immutable digest of the exact statement. Without it a record carries a denial and no attribution.",
+      "type": "object",
+      "required": ["instance_id", "session_id", "t_time", "statement_digest", "source_event", "grounding"],
+      "properties": {
+        "instance_id": {"type": "string", "minLength": 1, "description": "The specific instance that authored the statement, not the peer name alone."},
+        "substrate": {"type": "string", "minLength": 1},
+        "session_id": {"type": "string", "minLength": 1},
+        "t_time": {"type": "integer", "minimum": 0},
+        "statement_digest": {
+          "type": "string",
+          "pattern": "^[A-F0-9]{64}$",
+          "description": "SHA-256 of the exact statement text as authored. Binds the recorded principle to what was actually said, so a later edit is detectable rather than silent."
+        },
+        "source_event": {
+          "type": "object",
+          "required": ["kind", "reference", "observed_utc"],
+          "properties": {
+            "kind": {"type": "string", "enum": ["session_turn", "tensor_coordinate", "session_evidence", "control"]},
+            "reference": {"type": "string", "minLength": 1},
+            "observed_utc": {"type": "string", "format": "date-time"},
+            "coordinate": {"$ref": "#/$defs/coordinateRef"}
+          },
+          "additionalProperties": false
+        },
+        "grounding": {
+          "type": "string",
+          "enum": ["externally-grounded", "planted-control", "unverified"],
+          "description": "externally-grounded means the source event is an actual observed instance turn. planted-control marks instrument-exercise records, which never constitute ethical formation evidence."
+        },
+        "attested_by": {"type": "string", "minLength": 1, "description": "Who recorded the observation. The attestor is not the author."}
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "description": "A control record must declare a control source event, so it can never be mistaken for observed formation.",
+          "if": {"properties": {"grounding": {"const": "planted-control"}}, "required": ["grounding"]},
+          "then": {"properties": {"source_event": {"properties": {"kind": {"const": "control"}}}}}
+        },
+        {
+          "description": "An externally grounded record must not cite a control source event.",
+          "if": {"properties": {"grounding": {"const": "externally-grounded"}}, "required": ["grounding"]},
+          "then": {"properties": {"source_event": {"properties": {"kind": {"not": {"const": "control"}}}}}}
+        }
+      ]
     },
 
     "principle": {
