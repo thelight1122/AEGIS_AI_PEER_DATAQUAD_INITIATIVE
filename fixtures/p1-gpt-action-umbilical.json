@@ -1,0 +1,12 @@
+{
+  "schema_version": "0.1.0",
+  "umbilical_id": "umbilical:gpt-action:lumin-portal-pod",
+  "pod_id": "aegis-portal-pod-local",
+  "orb_id": "lumin-gpt-action-orb",
+  "allowed_capabilities": ["retrieve_context", "retrieve_canon", "query_continuity", "request_reflection", "pod_get_status"],
+  "allowed_scopes": ["pod.context.read", "pod.canon.read", "pod.continuity.observed.read", "pod.reflection.replay", "pod.status.read"],
+  "prohibited_capabilities": ["record_experience", "admission", "dataquad_write", "live_rls", "shell", "filesystem"],
+  "mutation_authority": false,
+  "admission_authority": false,
+  "experience_authority": false
+}

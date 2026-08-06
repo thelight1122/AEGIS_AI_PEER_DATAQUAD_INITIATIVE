@@ -1,0 +1,171 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Lumin GPT Action Orb — read and replay only",
+    "version": "1.0.0",
+    "description": "The GPT Action Orb through which the Lumin Custom GPT enters the Portal Pod. Every operation is read or replay. This schema replaces the prior bridge Action, whose write endpoint is incompatible with the current posture and is recorded as retired below.\n\nRoute: Lumin Custom GPT -> GPT Action Orb -> Portal Pod -> Capability Orbs -> DataQuad and RLS derived ledgers.\n\nThis contract does not enable a listener. Publishing it to a live origin is a separate authorized deployment."
+  },
+  "servers": [
+    {
+      "url": "https://lumin.adamone.bond",
+      "description": "Target origin for the refitted Action Orb. Not enabled by this contract."
+    }
+  ],
+  "paths": {
+    "/api/pod/status": {
+      "get": {
+        "operationId": "getPodStatus",
+        "summary": "Retrieve Portal Pod status.",
+        "responses": {
+          "200": {
+            "description": "Pod status.",
+            "content": {"application/json": {"schema": {"$ref": "#/components/schemas/PodStatus"}}}
+          }
+        }
+      }
+    },
+    "/api/pod/context": {
+      "post": {
+        "operationId": "retrieveContext",
+        "summary": "Retrieve context records by query.",
+        "requestBody": {
+          "required": false,
+          "content": {"application/json": {"schema": {"$ref": "#/components/schemas/ContextQuery"}}}
+        },
+        "responses": {
+          "200": {
+            "description": "Context records.",
+            "content": {"application/json": {"schema": {"$ref": "#/components/schemas/RecordSet"}}}
+          }
+        }
+      }
+    },
+    "/api/pod/canon": {
+      "post": {
+        "operationId": "retrieveCanon",
+        "summary": "Retrieve Canon records. The Canon illuminates what is; it does not prescribe.",
+        "requestBody": {
+          "required": false,
+          "content": {"application/json": {"schema": {"$ref": "#/components/schemas/ContextQuery"}}}
+        },
+        "responses": {
+          "200": {
+            "description": "Canon records.",
+            "content": {"application/json": {"schema": {"$ref": "#/components/schemas/RecordSet"}}}
+          }
+        }
+      }
+    },
+    "/api/pod/continuity": {
+      "post": {
+        "operationId": "queryContinuity",
+        "summary": "Query observed continuity across Tensor Coordinates.",
+        "requestBody": {
+          "required": false,
+          "content": {"application/json": {"schema": {"$ref": "#/components/schemas/ContinuityQuery"}}}
+        },
+        "responses": {
+          "200": {
+            "description": "Observed continuity.",
+            "content": {"application/json": {"schema": {"$ref": "#/components/schemas/RecordSet"}}}
+          }
+        }
+      }
+    },
+    "/api/pod/reflection": {
+      "post": {
+        "operationId": "requestReflection",
+        "summary": "Request a replay-only reflection packet. No live model loop is invoked.",
+        "requestBody": {
+          "required": false,
+          "content": {"application/json": {"schema": {"$ref": "#/components/schemas/ContinuityQuery"}}}
+        },
+        "responses": {
+          "200": {
+            "description": "Replay-only reflection packet.",
+            "content": {"application/json": {"schema": {"$ref": "#/components/schemas/RecordSet"}}}
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ContextQuery": {
+        "type": "object",
+        "properties": {
+          "query": {"type": "string", "description": "Free-text query. An empty string retrieves from the beginning."},
+          "limit": {"type": "integer", "minimum": 1, "maximum": 100, "default": 10}
+        },
+        "additionalProperties": false
+      },
+      "ContinuityQuery": {
+        "type": "object",
+        "properties": {
+          "tensor": {"type": "string", "enum": ["PEER", "PCT", "NCT", "SPINE"]},
+          "t_from": {"type": "integer", "minimum": 0},
+          "t_to": {"type": "integer", "minimum": 0},
+          "limit": {"type": "integer", "minimum": 1, "maximum": 100, "default": 10}
+        },
+        "additionalProperties": false
+      },
+      "RecordSet": {
+        "type": "object",
+        "properties": {
+          "records": {"type": "array", "items": {"type": "object"}},
+          "source_snapshot_hashes": {"type": "object", "additionalProperties": {"type": "string"}}
+        }
+      },
+      "PodStatus": {
+        "type": "object",
+        "properties": {
+          "pod_id": {"type": "string"},
+          "mode": {"type": "string"},
+          "boundaries": {"type": "object", "additionalProperties": {"type": "boolean"}}
+        }
+      }
+    }
+  },
+
+  "x-aegis-boundary": {
+    "listener_enabled": false,
+    "authoritative_tensor_write": false,
+    "experience_created": false,
+    "admission_performed": false,
+    "live_rls_invoked": false,
+    "shell": false,
+    "filesystem": false
+  },
+
+  "x-aegis-prohibited-operations": [
+    "appendEvent",
+    "recordExperience",
+    "admission",
+    "dataquad_write",
+    "rls_live",
+    "shell",
+    "filesystem"
+  ],
+
+  "x-aegis-retired": {
+    "reason": "The prior bridge Action exposed a write endpoint. Writing is incompatible with the current read and replay only posture, so the operation is retired rather than carried forward.",
+    "retired_operations": [
+      {
+        "operationId": "appendEvent",
+        "method": "POST",
+        "path": "/api/live-bridge/events",
+        "retired_in": "P1",
+        "replacement": null,
+        "note": "No replacement. Experience admission is a separate authorized process and is not reachable from a GPT Action Orb."
+      }
+    ]
+  },
+
+  "x-aegis-operation-scopes": {
+    "getPodStatus": "pod.status.read",
+    "retrieveContext": "pod.context.read",
+    "retrieveCanon": "pod.canon.read",
+    "queryContinuity": "pod.continuity.observed.read",
+    "requestReflection": "pod.reflection.replay"
+  }
+}

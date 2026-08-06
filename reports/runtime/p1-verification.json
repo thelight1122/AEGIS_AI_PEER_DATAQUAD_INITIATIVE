@@ -1,0 +1,397 @@
+{
+  "action_contract": "contracts\\p1-lumin-gpt-action.openapi.json",
+  "action_contract_sha256": "061D4659034F7062CDAC542D53E4C061D1427D60E5D1722B6873AA283CD5AFA3",
+  "checks": [
+    {
+      "area": "schema",
+      "check": "exposes_exactly_the_five_read_replay_paths",
+      "detail": {
+        "declared": [
+          "/api/pod/canon",
+          "/api/pod/context",
+          "/api/pod/continuity",
+          "/api/pod/reflection",
+          "/api/pod/status"
+        ],
+        "expected": [
+          "/api/pod/canon",
+          "/api/pod/context",
+          "/api/pod/continuity",
+          "/api/pod/reflection",
+          "/api/pod/status"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "area": "schema",
+      "check": "no_path_exposes_put_patch_or_delete",
+      "detail": {
+        "/api/pod/canon": [
+          "post"
+        ],
+        "/api/pod/context": [
+          "post"
+        ],
+        "/api/pod/continuity": [
+          "post"
+        ],
+        "/api/pod/reflection": [
+          "post"
+        ],
+        "/api/pod/status": [
+          "get"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "area": "retirement",
+      "check": "retired_path_absent_from_paths",
+      "detail": {
+        "retired_path": "/api/live-bridge/events"
+      },
+      "passed": true
+    },
+    {
+      "area": "retirement",
+      "check": "retired_operation_absent_from_operations",
+      "detail": {
+        "declared_operations": [
+          "getPodStatus",
+          "queryContinuity",
+          "requestReflection",
+          "retrieveCanon",
+          "retrieveContext"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "area": "retirement",
+      "check": "retirement_is_recorded_not_merely_omitted",
+      "detail": {
+        "retired_block": [
+          {
+            "method": "POST",
+            "note": "No replacement. Experience admission is a separate authorized process and is not reachable from a GPT Action Orb.",
+            "operationId": "appendEvent",
+            "path": "/api/live-bridge/events",
+            "replacement": null,
+            "retired_in": "P1"
+          }
+        ]
+      },
+      "passed": true
+    },
+    {
+      "area": "retirement",
+      "check": "retired_operation_has_no_replacement",
+      "detail": "Experience admission is a separate authorized process and is not reachable from an Action Orb.",
+      "passed": true
+    },
+    {
+      "area": "retirement",
+      "check": "prohibited_operations_declared_in_contract",
+      "detail": [
+        "appendEvent",
+        "recordExperience",
+        "admission",
+        "dataquad_write",
+        "rls_live",
+        "shell",
+        "filesystem"
+      ],
+      "passed": true
+    },
+    {
+      "area": "contract",
+      "check": "action_orb_manifest_validates",
+      "detail": "protocol-orb.schema.json",
+      "passed": true
+    },
+    {
+      "area": "contract",
+      "check": "action_umbilical_validates",
+      "detail": "portal-umbilical.schema.json",
+      "passed": true
+    },
+    {
+      "area": "contract",
+      "check": "umbilical_carries_no_mutation_admission_or_experience_authority",
+      "detail": {
+        "admission_authority": false,
+        "experience_authority": false,
+        "mutation_authority": false
+      },
+      "passed": true
+    },
+    {
+      "area": "contract",
+      "check": "action_orb_starts_disabled",
+      "detail": {
+        "enabled": false
+      },
+      "passed": true
+    },
+    {
+      "area": "mapping",
+      "check": "runtime_operations_match_the_published_schema",
+      "detail": {
+        "runtime": [
+          "getPodStatus",
+          "queryContinuity",
+          "requestReflection",
+          "retrieveCanon",
+          "retrieveContext"
+        ],
+        "schema": [
+          "getPodStatus",
+          "queryContinuity",
+          "requestReflection",
+          "retrieveCanon",
+          "retrieveContext"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "area": "mapping",
+      "check": "runtime_scopes_match_the_published_schema",
+      "detail": {
+        "runtime": {
+          "getPodStatus": "pod.status.read",
+          "queryContinuity": "pod.continuity.observed.read",
+          "requestReflection": "pod.reflection.replay",
+          "retrieveCanon": "pod.canon.read",
+          "retrieveContext": "pod.context.read"
+        },
+        "schema": {
+          "getPodStatus": "pod.status.read",
+          "queryContinuity": "pod.continuity.observed.read",
+          "requestReflection": "pod.reflection.replay",
+          "retrieveCanon": "pod.canon.read",
+          "retrieveContext": "pod.context.read"
+        }
+      },
+      "passed": true
+    },
+    {
+      "area": "mapping",
+      "check": "no_operation_maps_to_a_prohibited_scope",
+      "detail": {
+        "mapped_scopes": [
+          "pod.canon.read",
+          "pod.context.read",
+          "pod.continuity.observed.read",
+          "pod.reflection.replay",
+          "pod.status.read"
+        ],
+        "prohibited": [
+          "pod.admission.perform",
+          "pod.dataquad.write",
+          "pod.experience.write",
+          "pod.filesystem",
+          "pod.rls.live",
+          "pod.shell"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "area": "mapping",
+      "check": "every_umbilical_scope_is_reachable_and_no_others",
+      "detail": {
+        "reachable": [
+          "pod.canon.read",
+          "pod.context.read",
+          "pod.continuity.observed.read",
+          "pod.reflection.replay",
+          "pod.status.read"
+        ],
+        "umbilical": [
+          "pod.canon.read",
+          "pod.context.read",
+          "pod.continuity.observed.read",
+          "pod.reflection.replay",
+          "pod.status.read"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "area": "runtime",
+      "check": "attach_starts_disabled",
+      "detail": false,
+      "passed": true
+    },
+    {
+      "area": "runtime",
+      "check": "every_operation_dispatches_with_all_boundaries_false",
+      "detail": {
+        "getPodStatus": {
+          "admission": false,
+          "dataquad_writeback": false,
+          "experience_created": false,
+          "filesystem_access": false,
+          "live_rls_invoked": false,
+          "mutation": false,
+          "shell_access": false
+        },
+        "queryContinuity": {
+          "admission": false,
+          "dataquad_writeback": false,
+          "experience_created": false,
+          "filesystem_access": false,
+          "live_rls_invoked": false,
+          "mutation": false,
+          "shell_access": false
+        },
+        "requestReflection": {
+          "admission": false,
+          "dataquad_writeback": false,
+          "experience_created": false,
+          "filesystem_access": false,
+          "live_rls_invoked": false,
+          "mutation": false,
+          "shell_access": false
+        },
+        "retrieveCanon": {
+          "admission": false,
+          "dataquad_writeback": false,
+          "experience_created": false,
+          "filesystem_access": false,
+          "live_rls_invoked": false,
+          "mutation": false,
+          "shell_access": false
+        },
+        "retrieveContext": {
+          "admission": false,
+          "dataquad_writeback": false,
+          "experience_created": false,
+          "filesystem_access": false,
+          "live_rls_invoked": false,
+          "mutation": false,
+          "shell_access": false
+        }
+      },
+      "passed": true
+    },
+    {
+      "area": "runtime",
+      "check": "operation_results_are_deterministic",
+      "detail": {
+        "getPodStatus": "1F2B39584A7F09B84402B8FEE06553690E2EA0DA9EFD9F3014404015650D281A",
+        "queryContinuity": "B24C867B4979767CF44240328A3DF205F95496B02386E7EE99AFDCBDCAC240E3",
+        "requestReflection": "F25C95CCDD260C5D23F405D46EDD2FDDC74A270F7379AFF700550FDF2BDF3D96",
+        "retrieveCanon": "1B8B4C0B6F6AD1D32565952720BC004EEB1F188F62045E4D5525AE2AF8C78432",
+        "retrieveContext": "27C214BA9A80EF6EC159B77DEEA30996D2901FA13BDEF2176417801157CFC2BC"
+      },
+      "passed": true
+    },
+    {
+      "area": "refusal",
+      "check": "retired_operation_is_refused_at_runtime",
+      "detail": "operation 'appendEvent' was retired in P1 (POST /api/live-bridge/events): Writing is incompatible with the read and replay only posture. Experience admission is a separate authorized process and is not reachable from a GPT Action Orb.",
+      "passed": true
+    },
+    {
+      "area": "refusal",
+      "check": "unknown_operation_is_refused",
+      "detail": "unknown Lumin Action operation: recordExperience",
+      "passed": true
+    },
+    {
+      "area": "refusal",
+      "check": "write_capability_refused_through_action_orb",
+      "detail": "capability denied by Orb/Umbilical/Portal intersection",
+      "passed": true
+    },
+    {
+      "area": "refusal",
+      "check": "pod_contract_keeps_record_experience_disabled",
+      "detail": [
+        {
+          "enabled": false,
+          "name": "record_experience",
+          "scope": "pod.experience.write"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "area": "boundary",
+      "check": "contract_declares_every_boundary_false",
+      "detail": {
+        "admission_performed": false,
+        "authoritative_tensor_write": false,
+        "experience_created": false,
+        "filesystem": false,
+        "listener_enabled": false,
+        "live_rls_invoked": false,
+        "shell": false
+      },
+      "passed": true
+    },
+    {
+      "area": "boundary",
+      "check": "contract_text_contains_no_write_verb_operation",
+      "detail": {
+        "scanned": "paths and operationIds"
+      },
+      "passed": true
+    }
+  ],
+  "deployment_pending": {
+    "note": "This pass verifies the contract and runtime locally. Publishing the Action schema to the live origin, and removing the prior bridge write endpoint from that origin, is a separate authorized deployment. Nothing in this run reached the network.",
+    "status": "NOT DEPLOYED",
+    "target": "https://lumin.adamone.bond"
+  },
+  "operation_result_hashes": {
+    "getPodStatus": "1F2B39584A7F09B84402B8FEE06553690E2EA0DA9EFD9F3014404015650D281A",
+    "queryContinuity": "B24C867B4979767CF44240328A3DF205F95496B02386E7EE99AFDCBDCAC240E3",
+    "requestReflection": "F25C95CCDD260C5D23F405D46EDD2FDDC74A270F7379AFF700550FDF2BDF3D96",
+    "retrieveCanon": "1B8B4C0B6F6AD1D32565952720BC004EEB1F188F62045E4D5525AE2AF8C78432",
+    "retrieveContext": "27C214BA9A80EF6EC159B77DEEA30996D2901FA13BDEF2176417801157CFC2BC"
+  },
+  "operation_scopes": {
+    "getPodStatus": "pod.status.read",
+    "queryContinuity": "pod.continuity.observed.read",
+    "requestReflection": "pod.reflection.replay",
+    "retrieveCanon": "pod.canon.read",
+    "retrieveContext": "pod.context.read"
+  },
+  "operations": {
+    "getPodStatus": "pod_get_status",
+    "queryContinuity": "query_continuity",
+    "requestReflection": "request_reflection",
+    "retrieveCanon": "retrieve_canon",
+    "retrieveContext": "retrieve_context"
+  },
+  "report_sha256": "84C81E5D12F45397960B42ADF29A8AC64FE0CB35656E99125BDC4618610BB87B",
+  "retired_operations": {
+    "appendEvent": {
+      "method": "POST",
+      "path": "/api/live-bridge/events",
+      "reason": "Writing is incompatible with the read and replay only posture. Experience admission is a separate authorized process and is not reachable from a GPT Action Orb.",
+      "replacement": null,
+      "retired_in": "P1"
+    }
+  },
+  "schema_version": "1.0.0",
+  "summary": {
+    "checks_run": 24,
+    "failed": 0,
+    "passed": 24
+  },
+  "target_origin": "https://lumin.adamone.bond",
+  "verification_id": "p1-lumin-gpt-action-orb",
+  "working_parameters": {
+    "admission": false,
+    "authoritative_tensor_write": false,
+    "experience_creation": false,
+    "listener_opened": false,
+    "live_rls_invoked": false,
+    "network_reached": false
+  }
+}
