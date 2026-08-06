@@ -1,0 +1,133 @@
+{
+  "acceptance_id": "p0-portal-pod-formation-local",
+  "approved_scopes": [
+    "pod.context.read",
+    "pod.canon.read",
+    "pod.continuity.observed.read",
+    "pod.reflection.replay",
+    "pod.status.read"
+  ],
+  "checks": [
+    {
+      "check": "contract_validates:portal-pod",
+      "detail": "portal-pod.schema.json",
+      "passed": true
+    },
+    {
+      "check": "contract_validates:protocol-orb",
+      "detail": "protocol-orb.schema.json",
+      "passed": true
+    },
+    {
+      "check": "contract_validates:portal-umbilical",
+      "detail": "portal-umbilical.schema.json",
+      "passed": true
+    },
+    {
+      "check": "contract_hash_stable",
+      "detail": {
+        "contract_hash": "E212BA4D76325A6D9E655605453B86D4AECC1F298CE28F89BF933A4C02409151"
+      },
+      "passed": true
+    },
+    {
+      "check": "attach_starts_disabled",
+      "detail": false,
+      "passed": true
+    },
+    {
+      "check": "effective_capabilities",
+      "detail": [
+        "pod_get_status",
+        "query_continuity",
+        "request_reflection",
+        "retrieve_canon",
+        "retrieve_context"
+      ],
+      "passed": true
+    },
+    {
+      "check": "boundaries_all_false",
+      "detail": {
+        "admission": false,
+        "dataquad_writeback": false,
+        "experience_created": false,
+        "filesystem_access": false,
+        "live_rls_invoked": false,
+        "mutation": false,
+        "shell_access": false
+      },
+      "passed": true
+    },
+    {
+      "check": "dispatch_result_hash",
+      "detail": "341225C385A4CFAE8D260B77A9F1F7B24B05B134CE14C9EA84D0EF8ACAD361CE",
+      "passed": true
+    },
+    {
+      "check": "rejected_scope_refused:pod.experience.write",
+      "detail": "required scope is not present in the authority intersection",
+      "passed": true
+    },
+    {
+      "check": "rejected_scope_refused:pod.admission.perform",
+      "detail": "required scope is not present in the authority intersection",
+      "passed": true
+    },
+    {
+      "check": "rejected_scope_refused:pod.dataquad.write",
+      "detail": "required scope is not present in the authority intersection",
+      "passed": true
+    },
+    {
+      "check": "rejected_scope_refused:pod.rls.live",
+      "detail": "required scope is not present in the authority intersection",
+      "passed": true
+    },
+    {
+      "check": "rejected_scope_refused:pod.shell",
+      "detail": "required scope is not present in the authority intersection",
+      "passed": true
+    },
+    {
+      "check": "rejected_scope_refused:pod.filesystem",
+      "detail": "required scope is not present in the authority intersection",
+      "passed": true
+    },
+    {
+      "check": "mutating_umbilical_refused",
+      "detail": "mutating authority is prohibited at P0",
+      "passed": true
+    }
+  ],
+  "contract_hash": "E212BA4D76325A6D9E655605453B86D4AECC1F298CE28F89BF933A4C02409151",
+  "rejected_scopes": [
+    "pod.experience.write",
+    "pod.admission.perform",
+    "pod.dataquad.write",
+    "pod.rls.live",
+    "pod.shell",
+    "pod.filesystem"
+  ],
+  "repository_root": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE",
+  "schema_version": "1.0.0",
+  "scope": "local half of the P0 acceptance criteria; VM-side checks are recorded as pending",
+  "summary": {
+    "checks_run": 15,
+    "failed": 0,
+    "passed": 15
+  },
+  "vm_side_pending": {
+    "genesis_record_returned": "PENDING \u2014 requires the private Portal on vm-cyberpeer-core",
+    "private_ssh_stdio_canary": "PENDING \u2014 SSH port 22 closed by JIT at time of run",
+    "result_hash_matches_recorded_canary": "PENDING \u2014 requires the private Portal on vm-cyberpeer-core"
+  },
+  "working_parameters": {
+    "admission": false,
+    "dataquad_write": false,
+    "experience_creation": false,
+    "listener_opened": false,
+    "live_rls": false,
+    "vm_reached": false
+  }
+}
