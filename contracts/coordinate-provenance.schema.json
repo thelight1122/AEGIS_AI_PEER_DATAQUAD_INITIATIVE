@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aegis.local/schemas/coordinate-provenance.schema.json",
+  "title": "AEGIS Coordinate Provenance",
+  "description": "Per-dimension provenance for a Tensor Coordinate. SSSP section 8: every coordinate dimension identifies its origin, and a policy-assigned coordinate is never represented as a source-record fact. ADR-0006: Coordinate is identity, Digest is content integrity, Path is a replaceable locator, and Provenance states why this locator currently represents that coordinate and digest. This contract is additive; it does not alter tensor-coordinate.schema.json.",
+  "type": "object",
+  "required": ["schema_version", "coordinate_ref", "dimensions"],
+  "properties": {
+    "schema_version": {"const": "0.1.0"},
+
+    "coordinate_ref": {
+      "description": "Identity and integrity of the coordinate this provenance describes. Carries no filesystem path.",
+      "type": "object",
+      "required": ["tensor", "record_id", "record_hash", "tensor_snapshot_hash"],
+      "properties": {
+        "tensor": {"type": "string", "enum": ["PEER", "PCT", "NCT", "SPINE"]},
+        "record_id": {"type": "string", "minLength": 1},
+        "record_hash": {"type": "string", "pattern": "^[A-F0-9]{64}$"},
+        "tensor_snapshot_hash": {"type": "string", "pattern": "^[A-F0-9]{64}$"}
+      },
+      "additionalProperties": false
+    },
+
+    "locator": {
+      "description": "Optional, replaceable. A locator is where the artifact currently sits, never what it is. Changing it updates location without implying the artifact changed.",
+      "type": "object",
+      "required": ["kind", "value", "observed_utc"],
+      "properties": {
+        "kind": {"type": "string", "enum": ["filesystem", "pod_record", "azure_managed_disk", "external"]},
+        "value": {"type": "string", "minLength": 1},
+        "observed_utc": {"type": "string", "format": "date-time"},
+        "digest_confirmed": {
+          "type": "boolean",
+          "description": "True only when the artifact at this locator was hashed and matched coordinate_ref.record_hash at observed_utc."
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "dimensions": {
+      "description": "One entry per affective dimension, in SSSP section 6.1 order.",
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "items": {"$ref": "#/$defs/dimensionProvenance"}
+    }
+  },
+  "additionalProperties": false,
+
+  "$defs": {
+    "dimensionProvenance": {
+      "type": "object",
+      "required": ["dimension", "name", "value", "origin", "asserted_as_source_fact"],
+      "properties": {
+        "dimension": {"type": "integer", "minimum": 0, "maximum": 7},
+        "name": {
+          "type": "string",
+          "enum": [
+            "temporal_position",
+            "affect_salience",
+            "relationship_bond",
+            "certainty",
+            "identity_relevance",
+            "invariant_flag",
+            "genesis_flag",
+            "recurrence"
+          ]
+        },
+        "value": {"type": "number"},
+        "origin": {
+          "type": "string",
+          "enum": ["source-derived", "tensorization-policy-assigned", "rls-derived", "steward-declared"]
+        },
+        "asserted_as_source_fact": {
+          "type": "boolean",
+          "description": "True only when origin is source-derived. SSSP section 8: a policy-assigned coordinate must not be represented as a source-record fact."
+        },
+        "source_field": {"type": "string", "minLength": 1},
+        "policy": {"type": "string", "minLength": 1},
+        "policy_version": {"type": "string", "minLength": 1},
+        "derivation": {"type": "string", "minLength": 1},
+        "derived_from_coordinates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["tensor", "record_id", "record_hash"],
+            "properties": {
+              "tensor": {"type": "string", "enum": ["PEER", "PCT", "NCT", "SPINE"]},
+              "record_id": {"type": "string", "minLength": 1},
+              "record_hash": {"type": "string", "pattern": "^[A-F0-9]{64}$"}
+            },
+            "additionalProperties": false
+          }
+        },
+        "declared_by": {"type": "string", "minLength": 1},
+        "declared_utc": {"type": "string", "format": "date-time"}
+      },
+      "additionalProperties": false,
+
+      "allOf": [
+        {
+          "description": "Only a source-derived dimension may be asserted as a source-record fact.",
+          "if": {"properties": {"origin": {"const": "source-derived"}}, "required": ["origin"]},
+          "then": {"required": ["source_field"]},
+          "else": {"properties": {"asserted_as_source_fact": {"const": false}}}
+        },
+        {
+          "description": "A policy-assigned dimension names the policy that assigned it.",
+          "if": {"properties": {"origin": {"const": "tensorization-policy-assigned"}}, "required": ["origin"]},
+          "then": {"required": ["policy", "policy_version"]}
+        },
+        {
+          "description": "An RLS-derived dimension names its derivation and the coordinates it was derived from.",
+          "if": {"properties": {"origin": {"const": "rls-derived"}}, "required": ["origin"]},
+          "then": {"required": ["derivation", "derived_from_coordinates"]}
+        },
+        {
+          "description": "A Steward-declared dimension names the declaring party and when.",
+          "if": {"properties": {"origin": {"const": "steward-declared"}}, "required": ["origin"]},
+          "then": {"required": ["declared_by", "declared_utc"]}
+        }
+      ]
+    }
+  }
+}

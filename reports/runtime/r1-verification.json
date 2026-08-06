@@ -1,0 +1,292 @@
+{
+  "checks": [
+    {
+      "check": "rls_orb_manifest_validates",
+      "detail": "capability-orb.schema.json",
+      "item": "R1.1",
+      "passed": true
+    },
+    {
+      "check": "rls_umbilical_contract_validates",
+      "detail": "portal-umbilical.schema.json",
+      "item": "R1.2",
+      "passed": true
+    },
+    {
+      "check": "every_emitted_coordinate_validates",
+      "detail": {
+        "coordinates": 5,
+        "failures": []
+      },
+      "item": "R1.3",
+      "passed": true
+    },
+    {
+      "check": "coordinates_carry_no_filesystem_path",
+      "detail": "Tensor Coordinates are canonical; filesystem paths are implementation details.",
+      "item": "R1.3",
+      "passed": true
+    },
+    {
+      "check": "coordinate_provenance_validates",
+      "detail": {
+        "dimensions": 8
+      },
+      "item": "R1.4",
+      "passed": true
+    },
+    {
+      "check": "only_source_derived_dimensions_assert_source_fact",
+      "detail": {
+        "affect_salience": {
+          "asserted_as_source_fact": false,
+          "origin": "tensorization-policy-assigned"
+        },
+        "certainty": {
+          "asserted_as_source_fact": false,
+          "origin": "tensorization-policy-assigned"
+        },
+        "genesis_flag": {
+          "asserted_as_source_fact": false,
+          "origin": "tensorization-policy-assigned"
+        },
+        "identity_relevance": {
+          "asserted_as_source_fact": false,
+          "origin": "tensorization-policy-assigned"
+        },
+        "invariant_flag": {
+          "asserted_as_source_fact": false,
+          "origin": "tensorization-policy-assigned"
+        },
+        "recurrence": {
+          "asserted_as_source_fact": false,
+          "origin": "tensorization-policy-assigned"
+        },
+        "relationship_bond": {
+          "asserted_as_source_fact": false,
+          "origin": "tensorization-policy-assigned"
+        },
+        "temporal_position": {
+          "asserted_as_source_fact": true,
+          "origin": "source-derived"
+        }
+      },
+      "item": "R1.4",
+      "passed": true
+    },
+    {
+      "check": "schema_rejects_policy_assigned_claimed_as_source_fact",
+      "detail": "rejected as required by SSSP section 8",
+      "item": "R1.4",
+      "passed": true
+    },
+    {
+      "check": "locator_is_separable_from_identity",
+      "detail": "ADR-0006: Coordinate is identity, Digest is integrity, Path is a replaceable locator.",
+      "item": "R1.4",
+      "passed": true
+    },
+    {
+      "check": "temporal_index_is_monotonic",
+      "detail": {
+        "coordinates": 5,
+        "tick_range": [
+          0,
+          1
+        ]
+      },
+      "item": "R1.6",
+      "passed": true
+    },
+    {
+      "check": "cross_tensor_index_reports_explicit_lineage_only",
+      "detail": {
+        "records": 5,
+        "with_relations": 1
+      },
+      "item": "R1.7",
+      "passed": true
+    },
+    {
+      "check": "affect_trajectory_is_deterministic",
+      "detail": {
+        "sha256": "66A131A8EEB8DFA4F9F6BDCE8782E262857C7C3815EBA7F0A1A0D61A7D5645A8",
+        "steps": 4
+      },
+      "item": "R1.8",
+      "passed": true
+    },
+    {
+      "check": "context_trajectory_produced",
+      "detail": {
+        "tensors": [
+          "NCT",
+          "PCT",
+          "PEER",
+          "SPINE"
+        ]
+      },
+      "item": "R1.8",
+      "passed": true
+    },
+    {
+      "check": "recurrence_detector_finds_a_planted_recurrence",
+      "detail": {
+        "control_only": true,
+        "planted_recurrences_found": 1
+      },
+      "item": "R1.8",
+      "passed": true
+    },
+    {
+      "check": "trajectories_declare_no_inference_as_source_fact",
+      "detail": "SSSP section 9.2: the RLS Orb does not silently convert inference into source fact.",
+      "item": "R1.8",
+      "passed": true
+    },
+    {
+      "check": "derived_ledger_written_and_coordinate_referenced",
+      "detail": {
+        "ledger": "rls\\derived-ledgers\\rls-derived-observations.jsonl",
+        "lines": 3
+      },
+      "item": "R1.5",
+      "passed": true
+    },
+    {
+      "check": "derived_ledger_embeds_no_filesystem_path",
+      "detail": "RLS ledgers point to Tensor Coordinates, not filesystem locations.",
+      "item": "R1.5",
+      "passed": true
+    },
+    {
+      "check": "rls_orb_reachable_through_portal_pod",
+      "detail": {
+        "attached_disabled_first": true,
+        "coordinates_returned": 5
+      },
+      "item": "R1.9",
+      "passed": true
+    },
+    {
+      "check": "portal_dispatch_reports_all_boundaries_false",
+      "detail": {
+        "admission": false,
+        "dataquad_writeback": false,
+        "experience_created": false,
+        "filesystem_access": false,
+        "live_rls_invoked": false,
+        "mutation": false,
+        "shell_access": false
+      },
+      "item": "R1.9",
+      "passed": true
+    },
+    {
+      "check": "no_authoritative_tensor_mutated",
+      "detail": {
+        "after": {
+          "NCT": "6899689152B253FD19C32ED0909040C432B593E65DF85E308BD77A86A7EFD48F",
+          "PCT": "9164C770035CBDC2477EC8FA3A3F381F07D371D1A331B12A7DBB9FBBBC606EAB",
+          "PEER": "27F9DB567BA680EE7C20E41F8BCF11CE7418AF15FFFEEC520F412D2E45EEFBB8",
+          "SPINE": "42E37A8C4B48FFE87E8CC0276BB3F11362560434A1B36B996A5E9D36D9340467"
+        },
+        "before": {
+          "NCT": "6899689152B253FD19C32ED0909040C432B593E65DF85E308BD77A86A7EFD48F",
+          "PCT": "9164C770035CBDC2477EC8FA3A3F381F07D371D1A331B12A7DBB9FBBBC606EAB",
+          "PEER": "27F9DB567BA680EE7C20E41F8BCF11CE7418AF15FFFEEC520F412D2E45EEFBB8",
+          "SPINE": "42E37A8C4B48FFE87E8CC0276BB3F11362560434A1B36B996A5E9D36D9340467"
+        },
+        "identical": true
+      },
+      "item": "R1.10",
+      "passed": true
+    },
+    {
+      "check": "orb_status_declares_no_tensor_writeback",
+      "detail": {
+        "admission_performed": false,
+        "authoritative_tensors": false,
+        "derived_ledgers": true,
+        "experience_created": false
+      },
+      "item": "R1.10",
+      "passed": true
+    }
+  ],
+  "coverage": {
+    "coordinates_indexed": 5,
+    "cross_tensor_lineage_exercised": true,
+    "cross_tensor_relations_found": 1,
+    "limitation": "The controlled fixture set is small. Where a detector was not exercised by real coordinates, it was exercised by a planted control and that is stated rather than implied.",
+    "note": "A passing check states the code behaved correctly on what it was given. This block states what the fixture set actually contained, so coverage is not overstated by a green summary.",
+    "recurrence_exercised_by_planted_control": true,
+    "recurrence_exercised_by_real_coordinates": true,
+    "recurrences_present_in_real_coordinates": 1,
+    "tensors_represented": [
+      "NCT",
+      "PCT",
+      "PEER",
+      "SPINE"
+    ]
+  },
+  "derived_ledger": "rls\\derived-ledgers\\rls-derived-observations.jsonl",
+  "derived_record_hashes": {
+    "affect_trajectory": "66A131A8EEB8DFA4F9F6BDCE8782E262857C7C3815EBA7F0A1A0D61A7D5645A8",
+    "context_trajectory": "7FAF8844511E16858EDCCA41BB42F4C9DDBF3DD0439B36892899C9E59ADAD778",
+    "recurrence_observation": "7527FC584E7491CA40D4B0CEDA1C0A1998B745541F94BA9AFBE0252C848F4481"
+  },
+  "orb_status": {
+    "admission_performed": false,
+    "experience_created": false,
+    "orb_id": "rls-coordinate-orb",
+    "record_count": 5,
+    "snapshot_hashes": {
+      "NCT": "6899689152B253FD19C32ED0909040C432B593E65DF85E308BD77A86A7EFD48F",
+      "PCT": "9164C770035CBDC2477EC8FA3A3F381F07D371D1A331B12A7DBB9FBBBC606EAB",
+      "PEER": "27F9DB567BA680EE7C20E41F8BCF11CE7418AF15FFFEEC520F412D2E45EEFBB8",
+      "SPINE": "42E37A8C4B48FFE87E8CC0276BB3F11362560434A1B36B996A5E9D36D9340467"
+    },
+    "tensor_counts": {
+      "NCT": 1,
+      "PCT": 1,
+      "PEER": 2,
+      "SPINE": 1
+    },
+    "version": "r0-coordinate-index-v1",
+    "writes": {
+      "authoritative_tensors": false,
+      "derived_ledgers": true
+    }
+  },
+  "report_sha256": "F69254385B43215074F912B37BF0BDF95FC14FF094541D83A9905495522E234B",
+  "schema_version": "1.0.0",
+  "summary": {
+    "checks_run": 20,
+    "failed": 0,
+    "passed": 20
+  },
+  "tensor_hashes_after": {
+    "NCT": "6899689152B253FD19C32ED0909040C432B593E65DF85E308BD77A86A7EFD48F",
+    "PCT": "9164C770035CBDC2477EC8FA3A3F381F07D371D1A331B12A7DBB9FBBBC606EAB",
+    "PEER": "27F9DB567BA680EE7C20E41F8BCF11CE7418AF15FFFEEC520F412D2E45EEFBB8",
+    "SPINE": "42E37A8C4B48FFE87E8CC0276BB3F11362560434A1B36B996A5E9D36D9340467"
+  },
+  "tensor_hashes_before": {
+    "NCT": "6899689152B253FD19C32ED0909040C432B593E65DF85E308BD77A86A7EFD48F",
+    "PCT": "9164C770035CBDC2477EC8FA3A3F381F07D371D1A331B12A7DBB9FBBBC606EAB",
+    "PEER": "27F9DB567BA680EE7C20E41F8BCF11CE7418AF15FFFEEC520F412D2E45EEFBB8",
+    "SPINE": "42E37A8C4B48FFE87E8CC0276BB3F11362560434A1B36B996A5E9D36D9340467"
+  },
+  "tensors_unchanged": true,
+  "verification_id": "r1-rls-orb-formation",
+  "working_parameters": {
+    "admission": false,
+    "authoritative_tensor_write": false,
+    "derived_ledger_append": true,
+    "experience_creation": false,
+    "listener_opened": false,
+    "live_rls_model_loop": false,
+    "peer_content_read": false
+  }
+}
