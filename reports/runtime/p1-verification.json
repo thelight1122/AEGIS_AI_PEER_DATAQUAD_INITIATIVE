@@ -415,7 +415,19 @@
     }
   },
   "schema_version": "1.0.0",
-  "side_effect_observed_not_acted_on": "Frontier_Connect also routes adamone.bond and haven.adamone.bond. Both shared the dead connector and are reachable again as a side effect. Neither was touched or tested.",
+  "side_effect_observed_not_acted_on": {
+    "acted_on": false,
+    "hostnames": [
+      "adamone.bond",
+      "haven.adamone.bond"
+    ],
+    "inspected_utc": "2026-08-06T07:40Z",
+    "latent_risk": "Whatever those routes target becomes publicly reachable the moment something starts listening on the corresponding local ports. Route targets are not readable from this session; Frontier_Connect is in an account this credential does not cover.",
+    "method": "read-only HTTPS GET of / only",
+    "reading": "502 rather than 1033 means the connector is attached and Cloudflare reaches it, but the local origins those routes target are not listening. No content is served on either hostname; the repointing restored the tunnel, not anything behind it.",
+    "result": "both return HTTP 502 (cloudflare, 16 bytes)",
+    "shared": "Frontier_Connect, the same tunnel as lumin.adamone.bond"
+  },
   "standing_scope_limit": "ADR-0007: the Portal declares live_source false and serves an immutable copy. This public route is not live DataQuad access. X1 and E1 may exercise transport and instrumentation; neither can establish continuity or ethical formation until live_source true is evidenced and independently verified.",
   "summary": {
     "checks_run": 24,
