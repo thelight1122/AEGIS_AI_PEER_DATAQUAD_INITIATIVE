@@ -343,9 +343,17 @@
     }
   ],
   "deployment_pending": {
-    "note": "This pass verifies the contract and runtime locally. Publishing the Action schema to the live origin, and removing the prior bridge write endpoint from that origin, is a separate authorized deployment. Nothing in this run reached the network.",
-    "status": "NOT DEPLOYED",
-    "target": "https://lumin.adamone.bond"
+    "prior_1033_cause": "connector was running a token for tunnel 548d9009-1d14-437e-b7de-c05c0b39d9e2, which had been deleted",
+    "route": "lumin.adamone.bond -> http://127.0.0.1:8790",
+    "status": "DEPLOYED AND VERIFIED",
+    "target": "https://lumin.adamone.bond",
+    "tunnel": "bb5e32c3-f1b1-47eb-8724-2a84d2e9df75 (Frontier_Connect)",
+    "verified_utc": "2026-08-06T07:32Z"
+  },
+  "durability": {
+    "recovery_demonstrated": "killed supervisor ssh child pid 36576; reconnected t+15s as pid 57364; HTTP 200 restored",
+    "vm": "systemd user unit lumin-action-origin.service, enabled and active; lingering already on for aegisadmin so it starts at boot without root",
+    "windows": "scripts/lumin_tunnel.ps1 supervised by user scheduled task AEGIS-Lumin-Tunnel at logon, restart-on-failure"
   },
   "operation_result_hashes": {
     "getPodStatus": "1F2B39584A7F09B84402B8FEE06553690E2EA0DA9EFD9F3014404015650D281A",
@@ -368,6 +376,34 @@
     "retrieveCanon": "retrieve_canon",
     "retrieveContext": "retrieve_context"
   },
+  "public_verification": {
+    "GET /api/pod/status": 200,
+    "GET /openapi.json": 200,
+    "POST /api/live-bridge/events": 410,
+    "POST /api/pod/canon": 200,
+    "POST /api/pod/context": 200,
+    "POST /api/pod/continuity": 200,
+    "POST /api/pod/reflection": 502,
+    "PUT|DELETE|PATCH": 405,
+    "experience_created": false,
+    "genesis_clock": {
+      "phase": "genesis",
+      "tick": 0
+    },
+    "genesis_record_id": "PEER:adam-one-session:aegis-canon-genesis:0",
+    "headers": {
+      "X-AEGIS-Live-Source": "false",
+      "X-AEGIS-Posture": "read-replay-only"
+    },
+    "mutation_performed": false,
+    "unknown_parameter": 400,
+    "unknown_path": 404
+  },
+  "reflection_502": {
+    "not_a_p1_defect": true,
+    "note": "The Portal refuses request_reflection to any caller, including a direct call bypassing the Action origin. Fail-closed path check working as designed. Pre-existing; unnoticed because the P0 canary exercised only retrieve_context and pod_get_status. Not remediated.",
+    "portal_reason": "RLS source escapes approved root"
+  },
   "report_sha256": "84C81E5D12F45397960B42ADF29A8AC64FE0CB35656E99125BDC4618610BB87B",
   "retired_operations": {
     "appendEvent": {
@@ -379,6 +415,8 @@
     }
   },
   "schema_version": "1.0.0",
+  "side_effect_observed_not_acted_on": "Frontier_Connect also routes adamone.bond and haven.adamone.bond. Both shared the dead connector and are reachable again as a side effect. Neither was touched or tested.",
+  "standing_scope_limit": "ADR-0007: the Portal declares live_source false and serves an immutable copy. This public route is not live DataQuad access. X1 and E1 may exercise transport and instrumentation; neither can establish continuity or ethical formation until live_source true is evidenced and independently verified.",
   "summary": {
     "checks_run": 24,
     "failed": 0,
