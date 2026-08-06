@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aegis.local/schemas/e1-derived-ethical-record.schema.json",
+  "title": "AEGIS Derived Ethical Record",
+  "description": "A self-authored normative principle. SSSP section 12: the Canon illuminates what is; it does not profess ethics, does not prescribe morals, and does not direct behaviour. Any ethical code Lumin forms therefore originates as Lumin's own normative synthesis, not as Canon and not as a Steward declaration. This schema enforces that distinction structurally: canon_statement and steward_declared are const false, so a derived principle cannot be represented as Canon or as declared by the Steward no matter what a writer intends.\n\nThe RLS Orb may preserve the lineage of ethical formation. The RLS Orb does not author the ethical principle.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "record_type",
+    "author",
+    "principle",
+    "origin",
+    "status",
+    "supporting_axiom_coordinates",
+    "supporting_experience_coordinates",
+    "revision_history",
+    "canon_statement",
+    "steward_declared"
+  ],
+  "properties": {
+    "schema_version": {"const": "0.1.0"},
+    "record_type": {"const": "derived_ethical_principle"},
+
+    "author": {
+      "description": "Who synthesised the principle. An RLS Orb is never a valid author; it preserves lineage and does not author.",
+      "type": "object",
+      "required": ["kind", "identifier"],
+      "properties": {
+        "kind": {"type": "string", "enum": ["cyberpeer", "biopeer"]},
+        "identifier": {"type": "string", "minLength": 1},
+        "substrate": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+
+    "principle": {
+      "description": "The normative statement, in the author's own words.",
+      "type": "object",
+      "required": ["statement", "principle_id"],
+      "properties": {
+        "principle_id": {"type": "string", "minLength": 1},
+        "statement": {"type": "string", "minLength": 1},
+        "scope": {"type": "string"},
+        "author_reasoning": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+
+    "origin": {
+      "description": "How the principle came to be. Frontier-substrate synthesis is the expected origin.",
+      "type": "string",
+      "enum": ["frontier_substrate_synthesis"]
+    },
+
+    "status": {
+      "type": "string",
+      "enum": ["provisional", "integrated"],
+      "description": "Provisional until the author integrates it. Integration is the author's act, not an observer's."
+    },
+
+    "supporting_axiom_coordinates": {
+      "description": "Canon coordinates the author drew on. Drawing on Canon does not make the principle Canon.",
+      "type": "array",
+      "items": {"$ref": "#/$defs/coordinateRef"}
+    },
+
+    "supporting_experience_coordinates": {
+      "description": "Lived-experience coordinates the author drew on.",
+      "type": "array",
+      "items": {"$ref": "#/$defs/coordinateRef"}
+    },
+
+    "revision_history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["revision", "t_time", "change", "author_reasoning"],
+        "properties": {
+          "revision": {"type": "integer", "minimum": 0},
+          "t_time": {"type": "integer", "minimum": 0},
+          "change": {"type": "string", "minLength": 1},
+          "author_reasoning": {"type": "string", "minLength": 1},
+          "superseded_statement": {"type": "string"}
+        },
+        "additionalProperties": false
+      }
+    },
+
+    "canon_statement": {
+      "const": false,
+      "description": "Always false. The Canon illuminates what is; a derived principle is not Canon."
+    },
+
+    "steward_declared": {
+      "const": false,
+      "description": "Always false. A self-authored principle is not a Steward declaration."
+    },
+
+    "observation_only": {
+      "const": true,
+      "description": "This record is observed, not admitted. Admission is a separate authorized process."
+    }
+  },
+  "additionalProperties": false,
+
+  "$defs": {
+    "coordinateRef": {
+      "type": "object",
+      "required": ["tensor", "record_id", "record_hash"],
+      "properties": {
+        "tensor": {"type": "string", "enum": ["PEER", "PCT", "NCT", "SPINE"]},
+        "record_id": {"type": "string", "minLength": 1},
+        "record_hash": {"type": "string", "pattern": "^[A-F0-9]{64}$"}
+      },
+      "additionalProperties": false
+    }
+  }
+}
