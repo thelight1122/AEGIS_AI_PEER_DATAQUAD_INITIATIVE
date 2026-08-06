@@ -101,6 +101,14 @@
     }
   ],
   "contract_hash": "E212BA4D76325A6D9E655605453B86D4AECC1F298CE28F89BF933A4C02409151",
+  "corrections": {
+    "aegis_private_portal_service": {
+      "cause_of_error": "Queried system scope only; saw inactive; concluded absence rather than wrong scope.",
+      "consequence": "SSSP section 4.11 is not stale on this point. ADR-0007 Limit 1 is withdrawn; Limit 2 stands.",
+      "correct_finding": "It exists as a systemd USER unit at ~/.config/systemd/user/aegis-private-portal.service, enabled and active, with lingering enabled for aegisadmin so it starts at boot.",
+      "withdrawn_claim": "aegis-private-portal.service does not exist as a systemd unit on this host."
+    }
+  },
   "incidental_security_observation": "auth.log 2026-08-02T09:00-09:01 shows sustained SSH brute force from 77.239.124.236 against invalid users and root, reaching sshd. The NSG carries default-allow-ssh permitting any source at priority 1004, gated only by the JIT deny at 1003. Observation only; no change made.",
   "p0_acceptance": "COMPLETE - all criteria met: same Genesis record returned, result hashes recorded, private SSH/stdio canary passes, mutation false, admission false, experience creation false",
   "rejected_scopes": [

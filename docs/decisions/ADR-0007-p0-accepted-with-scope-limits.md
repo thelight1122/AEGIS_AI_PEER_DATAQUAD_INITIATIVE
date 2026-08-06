@@ -21,11 +21,31 @@ delivered nothing and is credited with no part of the recovery.
 
 P0 is accepted as complete at `a3092e6`, with two limits attached to the acceptance.
 
-### Limit 1 — the Portal is not the documented service
+### Limit 1 — WITHDRAWN. The claim was wrong; the SSSP was right.
 
-`aegis-private-portal.service` does not exist as a systemd unit on `vm-cyberpeer-core`. The
-Portal is a bare `python3` process listening on `127.0.0.1:8092`. SSSP §4.11 names stale
-documentation. The listener is real and healthy; the service name is not.
+**Original text, preserved:** "`aegis-private-portal.service` does not exist as a systemd
+unit on `vm-cyberpeer-core`. The Portal is a bare `python3` process listening on
+`127.0.0.1:8092`. SSSP §4.11 names stale documentation."
+
+**That was false.** The unit exists — as a **systemd user unit**, not a system unit:
+
+```text
+~/.config/systemd/user/aegis-private-portal.service
+systemctl --user is-enabled aegis-private-portal.service   enabled
+systemctl --user is-active  aegis-private-portal.service   active
+```
+
+Alongside it: `aegis-rls-portal-umbilical.service` (active), `aegis-rls-shadow.service`,
+and `aegis-rls-shadow.timer` (waiting). Lingering is enabled for `aegisadmin`, so these
+start at boot without a login session.
+
+The error was mine: I queried system scope only (`systemctl is-active`), saw `inactive`,
+and concluded the unit did not exist rather than that I had looked in the wrong scope. The
+"bare python3 process" observation was the same unit's process, seen without its unit.
+
+SSSP §4.11 is **not** stale on this point. Limit 1 is withdrawn.
+
+Limit 2 below is unaffected and stands.
 
 ### Limit 2 — P0 certifies the immutable route, not live access
 

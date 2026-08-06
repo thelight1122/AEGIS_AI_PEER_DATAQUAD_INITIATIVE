@@ -370,10 +370,19 @@ LADDER
 ===============================================================
 CORRECTIONS TO THE RECORD
 ===============================================================
-1. `aegis-private-portal.service` does not exist as a systemd unit on this host.
-   The Portal is a bare python3 process (pid 1055) listening on 127.0.0.1:8092.
-   SSSP section 4.11 names a service that is not present. The listener is real
-   and healthy; the service name is stale.
+1. WITHDRAWN - THIS CLAIM WAS WRONG. The original text read:
+     "aegis-private-portal.service does not exist as a systemd unit on this
+      host. The Portal is a bare python3 process (pid 1055) listening on
+      127.0.0.1:8092. SSSP section 4.11 names a service that is not present."
+   The unit exists as a systemd USER unit:
+     ~/.config/systemd/user/aegis-private-portal.service   enabled, active
+   Alongside aegis-rls-portal-umbilical.service (active), aegis-rls-shadow
+   .service and aegis-rls-shadow.timer (waiting). Lingering is enabled for
+   aegisadmin, so they start at boot without a login session.
+   The error was querying system scope only, seeing inactive, and concluding
+   absence rather than wrong scope. The "bare python3 process" was that same
+   unit's process observed without its unit. SSSP section 4.11 is not stale on
+   this point.
 
 2. The pre-change ufw baseline that earlier records describe as permanently
    unrecorded is moot. ufw was inactive and was never the fault. No ufw rule was
