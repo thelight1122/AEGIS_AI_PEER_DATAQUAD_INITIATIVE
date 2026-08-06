@@ -8,6 +8,70 @@ The Builder does not author or edit Canon. This document characterizes what is o
 states the conflicts precisely, and stops where a ruling is required. Every conflict below
 is left open. None is resolved here.
 
+---
+
+## PREAMBLE — Steward framing correction, 2026-08-06
+
+> "We have not produced anything yet, so the Canon is still in its developmental Stage. Look at
+> all of the Addendums we added. And two new Axioms. We have a nice locked kernel, but until we
+> go live with something, we are still developing v0.10."
+
+**This invalidates part of the analysis below.** The findings were written on the assumption that
+documents marked LOCKED were *released* Canon — immutable, amendable only by appended addendum.
+They are not. Nothing has gone live. The kernel is stable; everything around it is development.
+
+What changes:
+
+| Finding | As written | Under the developmental frame |
+|---|---|---|
+| **S-4** — `AEGIS_CANON_CORE.md` claims LOCKED with no consensus record | Treated as a premature lock claim needing downgrade | Largely dissolves. Drafting a 12-Invariant core at 03:33 is ordinary development work. The formatting state is unfinished, not illegitimate. |
+| **SPINE in four LOCKED documents** | Framed as requiring a Canon-level amendment, a Steward-and-Auditor act | The deprecated name can simply be **edited** in place, as was just done to the seed. No addendum mechanism is needed pre-release. |
+| **S-7** — RBC collision | Framed as needing resolution addendum `v1.0-R` | Resolve by editing at consolidation. `v1.0-R` need not exist. |
+| **S-6** — fifth status for "non-canonical" whitepapers | Framed as an index-vocabulary gap | Lower stakes. They are positioning drafts in a development tree. |
+| **26 addenda + 17 unindexed docs** | Framed partly as index drift and protocol violation | This *is* the development log. The defect is that the index does not track it, not that the work happened. |
+
+What does **not** change: the merge conflict in `STANDARDS_BOUNDS.md` (S-3), the dangling
+references, the overloaded Supersedes column, the symbol collisions, and the seed-package
+corrections already applied. Those are real regardless of release state.
+
+### The version numbering is the live defect
+
+29 of 30 version labels in `CANON_FOUNDATIONAL_DOCS` are `v1.x`. Only `AEGIS STANDARDS v0.1`
+is honest about the stage. Every one of the 26 addenda is coded `v1.0-XX` — numbered as an
+addendum *to a v1.0 that has not shipped*.
+
+If the kernel is v0.10 and consolidation produces v0.20, then:
+
+- the `v1.0-XX` addendum codes claim a release that does not exist;
+- there is no clean number left for the actual 1.0 when something does go live;
+- `AEGIS_WHITEPAPER_v2.1` sits at v2.1 while the Canon it describes is pre-1.0.
+
+> **RULING NEEDED (S-11).** Does v0.20 renumber? Options the Builder sees: (a) leave the codes
+> and treat `v1.0-XX` as opaque identifiers, accepting the mislabel; (b) renumber the addendum
+> series to `v0.20-XX`; (c) keep the letter codes and drop the version prefix entirely
+> (`ADDENDUM-SP`, `ADDENDUM-RS`), letting the Canon version carry the number. The Builder
+> recommends (c) — the letter is what anyone actually cites, and it removes the false v1.0 claim
+> without a 26-file renumber that would break every existing cross-reference by version string.
+
+### The development delta since the kernel
+
+| Period | Addenda |
+|---|---|
+| 2026-04 | 12 |
+| 2026-05 | 2 |
+| 2026-06 | 10 |
+| undated | 3 (`v1.0-DS`, `v1.0-SF`, `v1.0-VE`) |
+
+Plus: **Axiom 15** (Repair) and **Axiom 16** (Identity/T-Witness, added 2026-06-01); four Canon
+Education Log entries (2026-06-01, and three on 2026-06-02) covering the runtime-seed
+synchronization, **25 Reinstated Doctrinal Elements**, and the Facet Architecture / Hold Register
+resolution; and the 17 unindexed documents of §1, running June through August.
+
+That delta — 26 addenda, 2 axioms, 25 reinstated elements, one architecture addendum, 17
+unindexed documents — is the content of v0.20.
+
+---
+
 Evidence gathered by three read-only sub-agents against
 `I:\AEGIS-CENTRAL-CODEX\TIER-1-CANON\CANON_FOUNDATIONAL_DOCS`, then spot-verified by the
 Builder. Where verification contradicted an agent's characterization, the verified reading
