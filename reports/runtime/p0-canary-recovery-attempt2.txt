@@ -1,0 +1,105 @@
+===============================================================
+P0 CANARY RECOVERY - ATTEMPT 2 (single shot, one terminal outcome)
+===============================================================
+azure_vm:         vm-cyberpeer-core
+resource_group:   RG-AEGIS-ADAM-ONE
+public_ip:        20.122.189.26
+caller_egress_ip: 47.216.142.226
+submitted_utc:    2026-08-06T02:31:53Z
+command:          ufw allow 22/tcp (agent-delivered, RunShellScript)
+authorization:    Auditor - single retry of already-authorized remedy
+
+=== EXTENSION PROVISIONING STATE - BEFORE ===
+Name                              Provisioning
+--------------------------------  --------------
+AADSSHLoginForLinux               Updating
+AzurePerformanceDiagnosticsLinux  Updating
+enablevmAccess                    Updating
+MDE.Linux                         Updating
+
+=== TERMINAL OUTCOME ===
+returned_utc:  2026-08-06T02:31:57Z
+az_exit_code:  1
+
+--- exact terminal status / message ---
+ERROR: (Conflict) Run command extension execution is in progress. Please wait for completion before invoking a run command.
+Code: Conflict
+Message: Run command extension execution is in progress. Please wait for completion before invoking a run command.
+
+--- guest output returned? ---
+GUEST OUTPUT RETURNED: no - no guest record present in response
+
+=== EXTENSION PROVISIONING STATE - AFTER ===
+Name                              Provisioning
+--------------------------------  --------------
+AADSSHLoginForLinux               Updating
+AzurePerformanceDiagnosticsLinux  Updating
+enablevmAccess                    Updating
+MDE.Linux                         Updating
+
+=== AZURE ACCEPTANCE / OPERATION RECORD ===
+    "sub": "",
+    "time": "2026-08-06T01:50:31.776066Z"
+  },
+  {
+    "corrId": "99dd6382-83bd-40a7-9e49-48594f63c734",
+    "opId": "99dd6382-83bd-40a7-9e49-48594f63c734",
+    "status": "Failed",
+    "sub": "Conflict (HTTP Status Code: 409)",
+    "time": "2026-08-06T01:49:29.5403327Z"
+  },
+  {
+    "corrId": "99dd6382-83bd-40a7-9e49-48594f63c734",
+    "opId": "99dd6382-83bd-40a7-9e49-48594f63c734",
+    "status": "Started",
+    "sub": "",
+    "time": "2026-08-06T01:49:29.4778329Z"
+  },
+  {
+    "corrId": "f0d97e4c-2fb3-4120-b40b-a62c19e51e91",
+    "opId": "f0d97e4c-2fb3-4120-b40b-a62c19e51e91",
+    "status": "Failed",
+    "sub": "Conflict (HTTP Status Code: 409)",
+    "time": "2026-08-06T01:48:27.181758Z"
+  },
+  {
+    "corrId": "f0d97e4c-2fb3-4120-b40b-a62c19e51e91",
+    "opId": "f0d97e4c-2fb3-4120-b40b-a62c19e51e91",
+    "status": "Started",
+    "sub": "",
+    "time": "2026-08-06T01:48:27.1348826Z"
+  },
+  {
+    "corrId": "0690e88e-4c8d-43c1-a729-953ccfec1ae1",
+    "opId": "0690e88e-4c8d-43c1-a729-953ccfec1ae1",
+    "status": "Failed",
+    "sub": "Conflict (HTTP Status Code: 409)",
+    "time": "2026-08-06T01:48:04.1268079Z"
+  },
+  {
+    "corrId": "0690e88e-4c8d-43c1-a729-953ccfec1ae1",
+    "opId": "0690e88e-4c8d-43c1-a729-953ccfec1ae1",
+    "status": "Started",
+    "sub": "",
+    "time": "2026-08-06T01:48:04.0643065Z"
+  },
+  {
+    "corrId": "6d750f1d-d573-4a33-a4d9-b0bae5f45720",
+    "opId": "6d750f1d-d573-4a33-a4d9-b0bae5f45720",
+    "status": "Failed",
+    "sub": "Conflict (HTTP Status Code: 409)",
+    "time": "2026-08-06T01:46:32.1111007Z"
+  },
+  {
+    "corrId": "6d750f1d-d573-4a33-a4d9-b0bae5f45720",
+    "opId": "6d750f1d-d573-4a33-a4d9-b0bae5f45720",
+    "status": "Started",
+    "sub": "",
+    "time": "2026-08-06T01:46:32.0485975Z"
+  }
+]
+
+=== RUNG STATEMENT ===
+recovery applied: NO. No firewall rung advanced. No guest evidence recorded.
+external SSH verified: NO
+P0 external canary verified: NO

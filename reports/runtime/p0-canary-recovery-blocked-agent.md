@@ -111,4 +111,50 @@ vm-cyberpeer-core-os-snap-20260802     snapshot      uniqueId 494a7b08-3bf9-4a46
 No promotion, swap, rename-through-replacement, deletion, detachment, overwrite, or rollback
 release has occurred. The Run Command extension has not been deleted or reinstalled.
 
+---
+
+## Essential correction to the record
+
+**The accepted retry remained active after its local client was stopped. Its guest output channel
+was lost. Therefore any resulting guest change requires independent verification, and its pre-change
+firewall state cannot be claimed as captured.**
+
+Exactly two Run Commands were ever accepted by ARM on this VM:
+
+```text
+ac16de22-fff0-40b0-8103-236173221a30   accepted 2026-08-06T00:57:22Z
+                                       terminal VMExtensionProvisioningTimeout ~02:27Z
+a99550e8-73ea-48e8-88de-f3d3c7d38f66   accepted 2026-08-06T02:27:50Z
+                                       correlationId identical to operationId
+                                       in flight at time of writing
+```
+
+`a99550e8` was submitted by a poller whose local client was stopped at 02:31Z. Stopping a local
+process does not cancel an accepted Azure operation. The operation continued; the client that would
+have received the guest record did not.
+
+`a99550e8` is the single authorized retry. No further Run Command invocation is authorized,
+regardless of how it ends.
+
+**No invocation has ever returned guest output.** The pre-change `ufw status verbose` baseline was
+therefore never captured and is permanently unrecorded for this operation. It will not be
+reconstructed or inferred.
+
+## Branch procedure, decided in advance
+
+ARM success alone does not advance a rung. If `a99550e8` reports success and returns no guest record,
+the record states: authorized recovery command accepted; execution result not evidenced guest-side.
+
+Independent observation decides the branch:
+
+| Observation | Classification and next action |
+|---|---|
+| External SSH succeeds | SSH recovery verified externally. Immediately capture guest identity, full ufw state, port-22 listener, Portal service state, and disk binding through SSH. Baseline remains explicitly unavailable. |
+| External SSH fails, or terminal result again reports no message from the extension | Proceed to Serial Console. Capture current guest state before applying anything further. |
+| Serial Console shows port 22 already allowed | Record recovery as applied with an unrecorded baseline. Do not reapply the rule. |
+| Serial Console shows port 22 not allowed | Capture that state, then apply exactly `ufw allow 22/tcp` under the authorized Serial Console sequence. |
+
+No restart, no extension deletion, reinstallation, or reset, and no further agent-delivered remedy
+is authorized.
+
 **P0: 15/15 local; external canary pending.**
