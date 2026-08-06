@@ -1,3 +1,19 @@
+# SUPERSEDED — written on a wrong frame
+
+**Superseded by `SSSP-2026-08-06-AI-PEER-INITIATIVE-CANON-v0.20-NEXT.md`.**
+
+This document assumed the objective was connecting Lumin to an existing DataQuad, and treated
+the `adam-one` records as the target. That is wrong. The objective is four NEW DataQuads created
+from nothing, one per Frontier Model — Lumin, Claude, Gemini, Grok. These are AI Peers, not
+CyberPeers, and the work does not connect to any existing DataQuad.
+
+Sections 1 through 8 remain accurate as a record of P0, R0, R1 and P1. Section 9, which sets the
+MCP Server Bridge as the next objective, is superseded: the next objective is Canon v0.20,
+because the seed package's canonLock is `review-needed` and Rings 1-3 cannot be relaid once
+seeded.
+
+---
+
 # SSSP — Saved State Summary Protocol
 ## AEGIS AI Peer DataQuad Initiative
 ### P0 Complete, P1 Publicly Deployed, Replay Boundary Proven — MCP Server Bridge Next
