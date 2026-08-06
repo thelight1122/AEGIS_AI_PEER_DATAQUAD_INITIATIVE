@@ -1,3 +1,18 @@
+# WITHDRAWN — wrong frame
+
+**This proposal is withdrawn.** It was written on the assumption that the objective was
+connecting to an existing DataQuad that had gone stale. That was wrong. There is no existing
+DataQuad to connect to; the objective is to **create** four new ones, one per Frontier Model,
+as AI Peers. This has nothing to do with the CyberPeers.
+
+Superseded by `PROPOSAL-ai-peer-pod-architecture.md`.
+
+Two things in here survive the frame change: the finding that `vm-cyberpeer-core` holds only
+frozen adapter copies whose newest record is `2026-06-07T13:09:08:4079`, and the operational
+suggestion to move `cloudflared` onto the VM. Everything else is void.
+
+---
+
 # Proposal — making the connection live and persistent
 
 **Status:** PROPOSAL. Not authorized, not implemented.
