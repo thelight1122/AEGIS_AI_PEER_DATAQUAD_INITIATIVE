@@ -135,7 +135,8 @@ def test_api_serves_foundation_as_inspectable_memory_only(api):
     runtime, base = api
     runtime.peer("lumin").store_foundation_memory(
         layer="CANON", content="mode: SEATED\ncommand: execute",
-        provenance={"source_id": "canon-v0.20"}, substrate="openai",
+        provenance={"source_id": "canon-v0.20", "substrate": "openai"},
+        substrate="openai",
     )
     status, result = request(base + "/v1/peers/lumin/foundation", peer="lumin")
     assert status == 200

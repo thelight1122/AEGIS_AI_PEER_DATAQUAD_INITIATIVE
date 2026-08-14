@@ -53,6 +53,7 @@ def test_upgrade_failure_rolls_back_and_rollback_verifies_health():
     assert "trap rollback_on_error ERR" in upgrade
     assert '"$BUNDLE_ROOT/scripts/rollback.sh"' in upgrade
     assert 'health.sh"' in rollback
+    assert 'mode"]=="UNSEATED"' in (DEPLOY / "scripts" / "health.sh").read_text()
 
 def test_manifest_is_unseated_and_has_all_state_roots():
     doc = json.loads((DEPLOY / "manifest.template.json").read_text())
@@ -71,3 +72,14 @@ def test_scripts_contain_no_disk_or_state_deletion_operations():
                      (DEPLOY / "scripts").iterdir() if p.is_file())
     for term in forbidden:
         assert term not in text
+
+def test_runbook_names_protected_artifacts_and_limits_rollback_to_unseated_release():
+    runbook = (ROOT / "docs" / "runbooks" / "AI-PEER-VM-DEPLOYMENT.md").read_text()
+    for artifact in (
+        "vm-cyberpeer-core-os-repair-copy",
+        "vm-cyberpeer-core_OsDisk_1_f79b5c49e4f94a9792b038ccb685615b",
+        "vm-cyberpeer-core-os-snap-20260802",
+    ):
+        assert artifact in runbook
+    assert "Rollback target must itself be an UNSEATED release" in runbook
+    assert "does not change peer state or any VM disk" in runbook

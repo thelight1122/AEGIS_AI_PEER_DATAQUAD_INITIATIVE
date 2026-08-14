@@ -215,6 +215,8 @@ class PeerStore:
             raise ValidationError("foundation provenance must be a non-empty object")
         if not substrate.strip():
             raise ValidationError("foundation substrate must not be empty")
+        if provenance.get("substrate") != substrate:
+            raise ValidationError("foundation provenance substrate must match substrate")
         item = {
             "schema": FOUNDATION_SCHEMA,
             "peer": self.peer,
@@ -247,8 +249,15 @@ class PeerStore:
         items = [json.loads(line) for line in self.foundation_path.read_text(encoding="utf-8").splitlines() if line]
         for item in items:
             content = item.get("content")
-            if item.get("schema") != FOUNDATION_SCHEMA or item.get("memory_only") is not True:
+            if (item.get("schema") != FOUNDATION_SCHEMA
+                    or item.get("memory_only") is not True
+                    or item.get("executable") is not False
+                    or item.get("identity_directive") is not False):
                 raise StorageError("invalid foundation memory boundary")
+            provenance = item.get("provenance")
+            if (not isinstance(provenance, dict)
+                    or provenance.get("substrate") != item.get("substrate")):
+                raise StorageError("invalid foundation substrate provenance")
             if not isinstance(content, str):
                 raise StorageError("foundation content must remain opaque text")
             if hashlib.sha256(content.encode("utf-8")).hexdigest() != item.get("content_digest"):
@@ -270,6 +279,7 @@ class PeerStore:
             "content_equivalence_asserted": False,
             "schema": FOUNDATION_SCHEMA,
             "content_digests": [item["content_digest"] for item in items],
+            "substrate_provenance": [item["provenance"]["substrate"] for item in items],
         }
 
 

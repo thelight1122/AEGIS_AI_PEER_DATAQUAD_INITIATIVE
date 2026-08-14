@@ -34,6 +34,10 @@ and grok.
 4. Confirm no secrets are present in deploy/env/.
 5. Confirm every environment file disables promotion and forbids live credentials.
 6. Do not modify, detach, rename, or delete any protected disk or snapshot.
+   The protected artifacts are:
+   - `vm-cyberpeer-core-os-repair-copy`
+   - `vm-cyberpeer-core_OsDisk_1_f79b5c49e4f94a9792b038ccb685615b`
+   - `vm-cyberpeer-core-os-snap-20260802`
 
 ## Install and verify
 
@@ -58,6 +62,9 @@ Environment files and peer state are not overwritten.
 
 Rollback switches only the current release symlink and restarts services. It
 does not change peer state or any VM disk.
+Rollback target must itself be an UNSEATED release. The health gate verifies
+all four instances return `mode=UNSEATED`, `ready=false`, `live_source=false`,
+and `writes_enabled=false` before rollback is accepted.
 
 ## Removal boundary
 
