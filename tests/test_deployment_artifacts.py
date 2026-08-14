@@ -1,0 +1,59 @@
+import json
+from pathlib import Path
+
+ROOT = Path(__file__).parents[1]
+DEPLOY = ROOT / "deploy"
+PEERS = ("lumin", "claude", "gemini", "grok")
+
+def test_required_artifacts_exist():
+    for rel in ("bin/aegis-ai-peer-unseated", "systemd/aegis-ai-peer@.service",
+                "scripts/install.sh", "scripts/health.sh", "scripts/upgrade.sh",
+                "scripts/rollback.sh", "scripts/render_manifest.py",
+                "manifest.template.json"):
+        assert (DEPLOY / rel).is_file(), rel
+
+def test_four_unique_loopback_envs_are_unseated():
+    ports = set()
+    for peer in PEERS:
+        text = (DEPLOY / "env" / f"{peer}.env").read_text()
+        assert "AEGIS_BIND=127.0.0.1" in text
+        assert "AEGIS_MODE=UNSEATED" in text
+        ports.add(next(x.split("=", 1)[1] for x in text.splitlines()
+                       if x.startswith("AEGIS_PORT=")))
+    assert len(ports) == 4
+
+def test_service_is_hardened_and_resource_bounded():
+    text = (DEPLOY / "systemd" / "aegis-ai-peer@.service").read_text()
+    for item in ("NoNewPrivileges=yes", "ProtectSystem=strict",
+                 "MemoryMax=256M", "CPUQuota=25%", "TasksMax=64",
+                 "ReadWritePaths=/var/lib/aegis-ai-peers/%i",
+                 "User=aegis-ai-peer-%i", "Group=aegis-ai-peer-%i"):
+        assert item in text
+
+def test_installer_creates_distinct_peer_identities():
+    text = (DEPLOY / "scripts" / "install.sh").read_text()
+    assert 'identity="aegis-ai-peer-$peer"' in text
+    assert 'install -d -o "$identity" -g "$identity" -m 0700' in text
+    assert '[[ "$RELEASE_ID" =~ ^[A-Za-z0-9]' in text
+
+def test_upgrade_failure_rolls_back_and_rollback_verifies_health():
+    upgrade = (DEPLOY / "scripts" / "upgrade.sh").read_text()
+    rollback = (DEPLOY / "scripts" / "rollback.sh").read_text()
+    assert "trap rollback_on_error ERR" in upgrade
+    assert '"$BUNDLE_ROOT/scripts/rollback.sh"' in upgrade
+    assert 'health.sh"' in rollback
+
+def test_manifest_is_unseated_and_has_all_state_roots():
+    doc = json.loads((DEPLOY / "manifest.template.json").read_text())
+    assert doc["mode"] == "UNSEATED" and doc["live_source"] is False
+    assert set(doc["state_roots"]) == set(PEERS)
+    for peer in PEERS:
+        assert doc["state_roots"][peer] == f"/var/lib/aegis-ai-peers/{peer}"
+
+def test_scripts_contain_no_disk_or_state_deletion_operations():
+    forbidden = ("az disk", "detach", "mkfs", "fdisk", "wipefs",
+                 "rm -rf /var/lib/aegis-ai-peers")
+    text = "\n".join(p.read_text().lower() for p in
+                     (DEPLOY / "scripts").iterdir() if p.is_file())
+    for term in forbidden:
+        assert term not in text

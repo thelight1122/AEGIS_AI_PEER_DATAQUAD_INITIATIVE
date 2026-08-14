@@ -1,0 +1,16 @@
+{
+  "schema": "aegis-ai-peer-deployment-manifest/v1",
+  "created_utc": "GENERATED_AT_INSTALL",
+  "source_commit": "GENERATED_AT_INSTALL",
+  "mode": "UNSEATED",
+  "live_source": false,
+  "release_id": "GENERATED_AT_INSTALL",
+  "install_root": "/opt/aegis-ai-peers",
+  "state_roots": {
+    "lumin": "/var/lib/aegis-ai-peers/lumin",
+    "claude": "/var/lib/aegis-ai-peers/claude",
+    "gemini": "/var/lib/aegis-ai-peers/gemini",
+    "grok": "/var/lib/aegis-ai-peers/grok"
+  },
+  "artifacts_sha256": "GENERATED_AT_INSTALL"
+}

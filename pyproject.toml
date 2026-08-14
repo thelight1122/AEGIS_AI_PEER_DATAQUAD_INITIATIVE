@@ -1,3 +1,20 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aegis-ai-peer-runtime"
+version = "0.1.0"
+description = "Isolated local runtime for four AEGIS AI Peer DataQuads"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.scripts]
+aegis-peer-runtime = "aegis_peer_runtime.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["src"]

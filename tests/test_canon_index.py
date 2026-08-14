@@ -251,13 +251,31 @@ def test_rbc_chamber_is_named_response_not_resonance():
 def test_reflective_boundary_conditions_was_not_collateral_damage():
     """A separate concept, never in dispute. The RBC fix must not have touched it.
 
-    Counted across both Canon directories, since the corpus is duplicated between them:
-    11 in CANON_FOUNDATIONAL_DOCS plus 14 at the TIER-1-CANON level.
+    S-7's application record preserved 25 occurrences.  The current corpus has two
+    later, legitimate additions at the TIER-1-CANON level: one in the corrected Core
+    source and one in the generated v0.20 index.  Both retain the expression-constraint
+    meaning; neither is a chamber-name replacement.
     """
     dirs = [idx.DEFAULT_CANON_DIR, idx.DEFAULT_CANON_DIR.parent]
-    total = sum(p.read_text(encoding="utf-8", errors="replace").count("Reflective Boundary Conditions")
-                for d in dirs for p in d.glob("*.md"))
-    assert total == 25, f"expected 25 occurrences across both directories, found {total}"
+    counts = {
+        p: p.read_text(encoding="utf-8", errors="replace").count("Reflective Boundary Conditions")
+        for d in dirs for p in d.glob("*.md")
+    }
+    total = sum(counts.values())
+    assert total == 27, f"expected 27 evidence-backed occurrences across both directories, found {total}"
+
+    parent = idx.DEFAULT_CANON_DIR.parent
+    assert counts[parent / "AEGIS-CORE-V1_0_CORRECTED.md"] == 1
+    assert counts[parent / "CANON-v0.20-INDEX.md"] == 1
+
+    corrected = (parent / "AEGIS-CORE-V1_0_CORRECTED.md").read_text(
+        encoding="utf-8", errors="replace"
+    )
+    generated_index = (parent / "CANON-v0.20-INDEX.md").read_text(
+        encoding="utf-8", errors="replace"
+    )
+    assert "RBC — Reflective Boundary Conditions" in corrected
+    assert "prior index calls *Reflective Boundary Conditions* canonical" in generated_index
 
 
 @canon_available

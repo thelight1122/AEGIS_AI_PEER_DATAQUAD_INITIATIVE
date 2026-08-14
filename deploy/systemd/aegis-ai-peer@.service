@@ -1,0 +1,44 @@
+[Unit]
+Description=AEGIS AI Peer (%i) - UNSEATED guard
+After=network-online.target
+Wants=network-online.target
+ConditionPathExists=/etc/aegis-ai-peers/%i.env
+
+[Service]
+Type=simple
+User=aegis-ai-peer-%i
+Group=aegis-ai-peer-%i
+Environment=AEGIS_MODE=UNSEATED
+EnvironmentFile=/etc/aegis-ai-peers/%i.env
+ExecStart=/opt/aegis-ai-peers/current/bin/aegis-ai-peer-unseated --peer %i --state-root /var/lib/aegis-ai-peers/%i --bind ${AEGIS_BIND} --port ${AEGIS_PORT}
+Restart=on-failure
+RestartSec=5s
+NoNewPrivileges=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectSystem=strict
+ProtectHome=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectKernelLogs=yes
+ProtectControlGroups=yes
+ProtectClock=yes
+RestrictSUIDSGID=yes
+RestrictRealtime=yes
+LockPersonality=yes
+MemoryDenyWriteExecute=yes
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+UMask=0077
+ReadWritePaths=/var/lib/aegis-ai-peers/%i
+StateDirectory=aegis-ai-peers/%i
+StateDirectoryMode=0700
+RuntimeDirectory=aegis-ai-peers/%i
+RuntimeDirectoryMode=0700
+CPUQuota=25%
+MemoryHigh=192M
+MemoryMax=256M
+TasksMax=64
+LimitNOFILE=4096
+
+[Install]
+WantedBy=multi-user.target
