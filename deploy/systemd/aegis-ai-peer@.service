@@ -9,6 +9,8 @@ Type=simple
 User=aegis-ai-peer-%i
 Group=aegis-ai-peer-%i
 Environment=AEGIS_MODE=UNSEATED
+Environment=AEGIS_PROMOTION=DISABLED
+Environment=AEGIS_LIVE_CREDENTIALS=FORBIDDEN
 EnvironmentFile=/etc/aegis-ai-peers/%i.env
 ExecStart=/opt/aegis-ai-peers/current/bin/aegis-ai-peer-unseated --peer %i --state-root /var/lib/aegis-ai-peers/%i --bind ${AEGIS_BIND} --port ${AEGIS_PORT}
 Restart=on-failure

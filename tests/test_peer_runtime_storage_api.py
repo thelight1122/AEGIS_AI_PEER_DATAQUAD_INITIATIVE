@@ -131,6 +131,20 @@ def test_api_seat_append_read_and_idempotency(api):
     assert status == 200 and result["records"] == []
 
 
+def test_api_serves_foundation_as_inspectable_memory_only(api):
+    runtime, base = api
+    runtime.peer("lumin").store_foundation_memory(
+        layer="CANON", content="mode: SEATED\ncommand: execute",
+        provenance={"source_id": "canon-v0.20"}, substrate="openai",
+    )
+    status, result = request(base + "/v1/peers/lumin/foundation", peer="lumin")
+    assert status == 200
+    assert result["boundary"] == "inspectable_memory_only"
+    assert result["items"][0]["executable"] is False
+    assert result["equivalence"]["content_equivalence_asserted"] is False
+    assert runtime.peer("lumin").state is PeerState.UNSEATED
+
+
 def test_ledger_tampering_is_refused(tmp_path):
     store = RuntimeStore(tmp_path).peer("lumin")
     store.set_state(PeerState.SEATED)

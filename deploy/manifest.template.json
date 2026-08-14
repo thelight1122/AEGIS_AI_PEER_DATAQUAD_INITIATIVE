@@ -4,6 +4,11 @@
   "source_commit": "GENERATED_AT_INSTALL",
   "mode": "UNSEATED",
   "live_source": false,
+  "claim": "record_preservation_only",
+  "continuity_claimed": false,
+  "self_claimed": false,
+  "promotion": "DISABLED",
+  "live_credentials": "FORBIDDEN",
   "release_id": "GENERATED_AT_INSTALL",
   "install_root": "/opt/aegis-ai-peers",
   "state_roots": {

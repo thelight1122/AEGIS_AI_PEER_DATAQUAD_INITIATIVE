@@ -28,7 +28,9 @@ def test_four_peers_start_unseated_isolated_and_make_no_live_claim(tmp_path):
         store = runtime.peer(peer)
         assert store.read() == []
         assert authority_for(store) == {
-            "seated": False, "live_source": False, "source_mode": "unverified"
+            "seated": False, "live_source": False, "source_mode": "unverified",
+            "claim": "record_preservation_only", "continuity_claimed": False,
+            "self_claimed": False,
         }
 
 

@@ -6,6 +6,23 @@ This installs four isolated **UNSEATED** instances. It does not seat Canon,
 create Ring-4 experience, expose a public write route, alter Azure disks, or
 claim live continuity. Every listener binds to localhost (127.0.0.1).
 
+Acceptance in this phase establishes record preservation only. It does not
+establish that any peer has continuity or has a self.
+
+Seeded Nature and Canon are stored and served only as opaque, inspectable
+memory. Their text is not parsed or executed as commands, configuration,
+identity directives, or service policy. Cross-substrate foundation equivalence
+means equivalent schema, contracts, and provenance shape; content digests may
+differ and are reported rather than normalized.
+
+An identity-bearing experience is inadmissible unless its record carries a
+source event ID, substrate, instance ID, observation timestamp, and SHA-256
+statement digest. Missing or malformed provenance fails closed.
+
+Keys, Tumblers, tokens, and live credentials are outside this deployment.
+`AEGIS_PROMOTION=DISABLED` and `AEGIS_LIVE_CREDENTIALS=FORBIDDEN` are mandatory.
+Promotion requires a separate consented phase and replacement deployment.
+
 State roots are fixed under /var/lib/aegis-ai-peers for lumin, claude, gemini,
 and grok.
 
@@ -15,7 +32,8 @@ and grok.
 2. Verify the source commit and transfer hashes.
 3. Confirm ports 8811-8814 are unused.
 4. Confirm no secrets are present in deploy/env/.
-5. Do not modify, detach, rename, or delete any protected disk or snapshot.
+5. Confirm every environment file disables promotion and forbids live credentials.
+6. Do not modify, detach, rename, or delete any protected disk or snapshot.
 
 ## Install and verify
 

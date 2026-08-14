@@ -30,6 +30,9 @@ def authority_for(store: object, *, live_source: bool = False, source_mode: str 
         "seated": getattr(store, "state", None) is PeerState.SEATED,
         "live_source": live_source,
         "source_mode": source_mode,
+        "claim": "record_preservation_only",
+        "continuity_claimed": False,
+        "self_claimed": False,
     }
 
 

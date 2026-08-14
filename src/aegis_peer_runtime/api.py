@@ -7,7 +7,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any
 from urllib.parse import urlparse
 
-from .models import PeerState, Record, ValidationError
+from .models import ExperienceAdmission, Record, ValidationError
 from .storage import IdempotencyConflict, RuntimeStore, UnseatedError
 
 MAX_BODY_BYTES = 1_048_576
@@ -59,9 +59,17 @@ def make_handler(runtime: RuntimeStore) -> type[BaseHTTPRequestHandler]:
                 peer = self._bound_peer(parts)
                 if parts[3:] == ["health"]:
                     store = runtime.peer(peer)
-                    self._send(200, {"peer": peer, "state": store.state.value, "records": len(store.read())})
+                    self._send(200, {"peer": peer, "state": store.state.value,
+                                     "records": len(store.read()),
+                                     "claim": "record_preservation_only",
+                                     "continuity_claimed": False, "self_claimed": False})
                 elif parts[3:] == ["records"]:
                     self._send(200, {"peer": peer, "records": runtime.peer(peer).read()})
+                elif parts[3:] == ["foundation"]:
+                    store = runtime.peer(peer)
+                    self._send(200, {"peer": peer, "boundary": "inspectable_memory_only",
+                                     "items": store.foundation_memory(),
+                                     "equivalence": store.foundation_equivalence()})
                 else:
                     self._send(404, {"error": "not_found"})
             except (ValidationError, IndexError) as error:
@@ -78,12 +86,16 @@ def make_handler(runtime: RuntimeStore) -> type[BaseHTTPRequestHandler]:
                 if parts[3:] != ["records"]:
                     self._send(404, {"error": "not_found"})
                     return
+                admission_data = body.get("admission")
+                admission = ExperienceAdmission(**admission_data) if admission_data is not None else None
                 entry, created = runtime.peer(peer).append(Record(
                     peer=peer,
                     tensor=body.get("tensor", ""),
                     actor=body.get("actor", ""),
                     idempotency_key=self.headers.get("Idempotency-Key", ""),
                     payload=body.get("payload", {}),
+                    identity_bearing=body.get("identity_bearing", False),
+                    admission=admission,
                 ))
                 self._send(201 if created else 200, {"created": created, "record": entry})
             except UnseatedError as error:

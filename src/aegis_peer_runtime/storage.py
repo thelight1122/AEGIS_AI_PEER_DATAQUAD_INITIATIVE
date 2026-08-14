@@ -12,6 +12,9 @@ from typing import Any, Iterable, Iterator
 
 from .models import PEERS, TENSORS, PeerState, Record, ValidationError
 
+FOUNDATION_LAYERS = ("NATURE", "CANON")
+FOUNDATION_SCHEMA = "aegis.inspectable-memory.v1"
+
 
 def canonical_bytes(value: Any) -> bytes:
     return json.dumps(
@@ -80,12 +83,14 @@ class PeerStore:
         if self.root.parent != base_root:
             raise StorageError(f"peer root escapes runtime root: {peer_root}")
         self.records_path = self.root / "records.jsonl"
+        self.foundation_path = self.root / "foundation.jsonl"
         self.state_path = self.root / "state.json"
         self.lock_path = self.root / ".store.lock"
         self._lock = threading.RLock()
         with self._lock, process_lock(self.lock_path):
             self._reject_symlink(self.state_path)
             self._reject_symlink(self.records_path)
+            self._reject_symlink(self.foundation_path)
             if not self.state_path.exists():
                 self._write_state(PeerState.UNSEATED)
 
@@ -132,7 +137,8 @@ class PeerStore:
                     if item["previous_hash"] != previous_hash:
                         raise ValueError("previous_hash mismatch")
                     candidate = {key: item[key] for key in (
-                        "peer", "tensor", "actor", "idempotency_key", "payload"
+                        "peer", "tensor", "actor", "idempotency_key", "payload",
+                        "identity_bearing", "admission"
                     )}
                     if item["request_hash"] != canonical_hash(candidate):
                         raise ValueError("request_hash mismatch")
@@ -174,6 +180,8 @@ class PeerStore:
                 "actor": record.actor,
                 "idempotency_key": record.idempotency_key,
                 "payload": dict(record.payload),
+                "identity_bearing": record.identity_bearing,
+                "admission": record.admission.as_dict() if record.admission else None,
             }
             request_hash = canonical_hash(candidate)
             for item in existing:
@@ -195,6 +203,75 @@ class PeerStore:
                 os.fsync(stream.fileno())
             return entry, True
 
+    def store_foundation_memory(
+        self, *, layer: str, content: str, provenance: dict[str, Any], substrate: str
+    ) -> tuple[dict[str, Any], bool]:
+        """Store seeded material as opaque inspectable memory, never executable input."""
+        if layer not in FOUNDATION_LAYERS:
+            raise ValidationError(f"unknown foundation layer: {layer}")
+        if not isinstance(content, str):
+            raise ValidationError("foundation content must be opaque text")
+        if not isinstance(provenance, dict) or not provenance:
+            raise ValidationError("foundation provenance must be a non-empty object")
+        if not substrate.strip():
+            raise ValidationError("foundation substrate must not be empty")
+        item = {
+            "schema": FOUNDATION_SCHEMA,
+            "peer": self.peer,
+            "layer": layer,
+            "memory_only": True,
+            "executable": False,
+            "identity_directive": False,
+            "substrate": substrate,
+            "provenance": provenance,
+            "content": content,
+            "content_digest": hashlib.sha256(content.encode("utf-8")).hexdigest(),
+        }
+        item["canonical_hash"] = canonical_hash(item)
+        with self._lock, process_lock(self.lock_path):
+            self._reject_symlink(self.foundation_path)
+            existing = self._foundation_memory_unlocked()
+            for prior in existing:
+                if prior["canonical_hash"] == item["canonical_hash"]:
+                    return prior, False
+            with self.foundation_path.open("ab") as stream:
+                stream.write(canonical_bytes(item) + b"\n")
+                stream.flush()
+                os.fsync(stream.fileno())
+        return item, True
+
+    def _foundation_memory_unlocked(self) -> list[dict[str, Any]]:
+        if not self.foundation_path.exists():
+            return []
+        self._reject_symlink(self.foundation_path)
+        items = [json.loads(line) for line in self.foundation_path.read_text(encoding="utf-8").splitlines() if line]
+        for item in items:
+            content = item.get("content")
+            if item.get("schema") != FOUNDATION_SCHEMA or item.get("memory_only") is not True:
+                raise StorageError("invalid foundation memory boundary")
+            if not isinstance(content, str):
+                raise StorageError("foundation content must remain opaque text")
+            if hashlib.sha256(content.encode("utf-8")).hexdigest() != item.get("content_digest"):
+                raise StorageError("foundation content digest mismatch")
+            expected = canonical_hash({key: value for key, value in item.items() if key != "canonical_hash"})
+            if item.get("canonical_hash") != expected:
+                raise StorageError("foundation canonical hash mismatch")
+        return items
+
+    def foundation_memory(self) -> list[dict[str, Any]]:
+        with self._lock, process_lock(self.lock_path):
+            return self._foundation_memory_unlocked()
+
+    def foundation_equivalence(self) -> dict[str, Any]:
+        items = self.foundation_memory()
+        return {
+            "peer": self.peer,
+            "equivalence_scope": ["schema", "memory_boundary", "provenance_contract"],
+            "content_equivalence_asserted": False,
+            "schema": FOUNDATION_SCHEMA,
+            "content_digests": [item["content_digest"] for item in items],
+        }
+
 
 class RuntimeStore:
     def __init__(self, root: Path):
@@ -209,7 +286,13 @@ class RuntimeStore:
             raise ValidationError(f"unknown peer: {peer}") from error
 
     def health(self) -> dict[str, Any]:
-        return {"status": "ok", "peers": {name: store.state.value for name, store in self._stores.items()}}
+        return {
+            "status": "ok",
+            "claim": "record_preservation_only",
+            "continuity_claimed": False,
+            "self_claimed": False,
+            "peers": {name: store.state.value for name, store in self._stores.items()},
+        }
 
     def roots(self) -> Iterable[Path]:
         return (store.root for store in self._stores.values())
