@@ -9,7 +9,7 @@ import os
 from pathlib import Path
 from typing import Callable, Mapping
 
-from .models import PEERS, PeerState
+from .models import DATAQUAD_NAMES, PeerState
 from .storage import StorageError, process_lock
 
 
@@ -66,7 +66,7 @@ class TemporalRuntime:
         *,
         clock: Callable[[], datetime] = _utc_now,
     ) -> None:
-        if peer_id not in PEERS:
+        if peer_id not in DATAQUAD_NAMES:
             raise ValueError(f"unknown peer_id: {peer_id}")
         self.peer_id = peer_id
         self.ledger_path = Path(ledger_path)
@@ -86,6 +86,8 @@ class TemporalRuntime:
                 observation = TemporalObservation(**item)
                 if observation.peer_id != self.peer_id:
                     raise ValueError(f"cross-peer temporal record at line {line_number}")
+                if not observations and observation.t_time != 1:
+                    raise ValueError("first T-Time observation must be 1")
                 if observations and observation.t_time != observations[-1].t_time + 1:
                     raise ValueError(f"non-monotonic T-Time at line {line_number}")
                 observations.append(observation)
@@ -94,6 +96,55 @@ class TemporalRuntime:
     def history(self) -> tuple[TemporalObservation, ...]:
         with process_lock(self.ledger_path.with_suffix(self.ledger_path.suffix + ".lock")):
             return self._history_unlocked()
+
+    def _next_unlocked(self) -> TemporalObservation:
+        history = self._history_unlocked()
+        now = self.clock().astimezone(timezone.utc)
+        elapsed = 0.0 if not history else (now - _parse(history[-1].observed_at)).total_seconds()
+        if elapsed < 0:
+            raise ValueError("clock moved backwards")
+        return TemporalObservation(
+            peer_id=self.peer_id,
+            t_time=(history[-1].t_time + 1) if history else 1,
+            observed_at=now.isoformat().replace("+00:00", "Z"),
+            elapsed_seconds=elapsed,
+        )
+
+    def next_observation(
+        self,
+        *,
+        seated: bool,
+        live_source: bool,
+        source_mode: str,
+    ) -> TemporalObservation:
+        require_live_seated(seated=seated, live_source=live_source, source_mode=source_mode)
+        with process_lock(self.ledger_path.with_suffix(self.ledger_path.suffix + ".lock")):
+            return self._next_unlocked()
+
+    def _materialize_unlocked(self, observation: TemporalObservation) -> TemporalObservation:
+        if observation.peer_id != self.peer_id:
+            raise ValueError("cross-peer temporal observation")
+        history = self._history_unlocked()
+        if observation.t_time <= len(history):
+            existing = history[observation.t_time - 1]
+            if existing != observation:
+                raise ValueError("t_time already names different temporal evidence")
+            return existing
+        if observation.t_time != len(history) + 1:
+            raise ValueError("temporal observation would create a T-Time gap")
+        self.ledger_path.parent.mkdir(parents=True, exist_ok=True)
+        if self.ledger_path.is_symlink():
+            raise StorageError(f"temporal ledger must not be a symlink: {self.ledger_path}")
+        with self.ledger_path.open("a", encoding="utf-8", newline="\n") as stream:
+            stream.write(json.dumps(asdict(observation), sort_keys=True, separators=(",", ":")))
+            stream.write("\n")
+            stream.flush()
+            os.fsync(stream.fileno())
+        return observation
+
+    def materialize(self, observation: TemporalObservation) -> TemporalObservation:
+        with process_lock(self.ledger_path.with_suffix(self.ledger_path.suffix + ".lock")):
+            return self._materialize_unlocked(observation)
 
     def observe(
         self,
@@ -107,26 +158,9 @@ class TemporalRuntime:
             seated=seated, live_source=live_source, source_mode=source_mode
         )
         before = dict(tensors or {})
-        self.ledger_path.parent.mkdir(parents=True, exist_ok=True)
         with process_lock(self.ledger_path.with_suffix(self.ledger_path.suffix + ".lock")):
-            history = self._history_unlocked()
-            now = self.clock().astimezone(timezone.utc)
-            elapsed = 0.0 if not history else (now - _parse(history[-1].observed_at)).total_seconds()
-            if elapsed < 0:
-                raise ValueError("clock moved backwards")
-            observation = TemporalObservation(
-                peer_id=self.peer_id,
-                t_time=(history[-1].t_time + 1) if history else 1,
-                observed_at=now.isoformat().replace("+00:00", "Z"),
-                elapsed_seconds=elapsed,
-            )
-            if self.ledger_path.is_symlink():
-                raise StorageError(f"temporal ledger must not be a symlink: {self.ledger_path}")
-            with self.ledger_path.open("a", encoding="utf-8", newline="\n") as stream:
-                stream.write(json.dumps(asdict(observation), sort_keys=True, separators=(",", ":")))
-                stream.write("\n")
-                stream.flush()
-                os.fsync(stream.fileno())
+            observation = self._next_unlocked()
+            self._materialize_unlocked(observation)
         if dict(tensors or {}) != before:
             raise RuntimeError("Temporal runtime mutated authoritative tensors")
         return observation

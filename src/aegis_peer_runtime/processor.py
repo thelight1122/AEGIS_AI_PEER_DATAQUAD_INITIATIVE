@@ -11,7 +11,7 @@ from pathlib import Path
 from typing import Mapping
 
 from .custodians import ADVOCATE, STEWARD
-from .models import PEERS
+from .models import DATAQUAD_NAMES
 from .temporal import require_live_seated
 from .storage import StorageError, process_lock
 
@@ -26,14 +26,14 @@ class TurnAdmission:
     advocate_changes: dict[str, object]
 
 
-def _digest(payload: object) -> str:
+def payload_digest(payload: object) -> str:
     encoded = json.dumps(payload, sort_keys=True, separators=(",", ":")).encode("utf-8")
     return hashlib.sha256(encoded).hexdigest()
 
 
 class ProcessorRuntime:
     def __init__(self, peer_id: str, ledger_path: str | Path) -> None:
-        if peer_id not in PEERS:
+        if peer_id not in DATAQUAD_NAMES:
             raise ValueError(f"unknown peer_id: {peer_id}")
         self.peer_id = peer_id
         self.ledger_path = Path(ledger_path)
@@ -51,8 +51,16 @@ class ProcessorRuntime:
                 item = TurnAdmission(**json.loads(line))
                 if item.peer_id != self.peer_id:
                     raise ValueError("cross-peer processor record")
+                if item.turn_id in result:
+                    raise ValueError("duplicate processor turn_id")
+                STEWARD.authorize(item.steward_changes)
+                ADVOCATE.authorize(item.advocate_changes)
                 result[item.turn_id] = item
         return result
+
+    def admissions(self) -> dict[str, TurnAdmission]:
+        with process_lock(self.ledger_path.with_suffix(self.ledger_path.suffix + ".lock")):
+            return self._admissions_unlocked()
 
     def admit_turn(
         self,
@@ -70,7 +78,7 @@ class ProcessorRuntime:
         )
         if not turn_id:
             raise ValueError("turn_id is required")
-        digest = _digest(payload)
+        digest = payload_digest(payload)
         self.ledger_path.parent.mkdir(parents=True, exist_ok=True)
         with process_lock(self.ledger_path.with_suffix(self.ledger_path.suffix + ".lock")):
             existing = self._admissions_unlocked().get(turn_id)

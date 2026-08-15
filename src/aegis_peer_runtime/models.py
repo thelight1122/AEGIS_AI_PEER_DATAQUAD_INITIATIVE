@@ -9,6 +9,7 @@ import hashlib
 from typing import Any, Mapping
 
 PEERS = ("lumin", "claude", "gemini", "grok")
+DATAQUAD_NAMES = (*PEERS, "verus")
 TENSORS = ("PEER", "PCT", "NCT", "SPINE")
 WRITE_SCOPES = {
     "steward": frozenset(("PCT", "NCT")),
@@ -70,7 +71,7 @@ class Record:
     admission: ExperienceAdmission | None = None
 
     def validate(self) -> None:
-        if self.peer not in PEERS:
+        if self.peer not in DATAQUAD_NAMES:
             raise ValidationError(f"unknown peer: {self.peer}")
         if self.tensor not in TENSORS:
             raise ValidationError(f"unknown tensor: {self.tensor}")

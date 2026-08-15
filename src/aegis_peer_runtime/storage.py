@@ -10,7 +10,7 @@ from contextlib import contextmanager
 from pathlib import Path
 from typing import Any, Iterable, Iterator
 
-from .models import PEERS, TENSORS, PeerState, Record, ValidationError
+from .models import DATAQUAD_NAMES, PEERS, TENSORS, PeerState, Record, ValidationError
 
 FOUNDATION_LAYERS = ("NATURE", "CANON")
 FOUNDATION_SCHEMA = "aegis.inspectable-memory.v1"
@@ -71,7 +71,7 @@ def process_lock(path: Path) -> Iterator[None]:
 
 class PeerStore:
     def __init__(self, root: Path, peer: str):
-        if peer not in PEERS:
+        if peer not in DATAQUAD_NAMES:
             raise ValidationError(f"unknown peer: {peer}")
         self.peer = peer
         base_root = Path(root).resolve()
