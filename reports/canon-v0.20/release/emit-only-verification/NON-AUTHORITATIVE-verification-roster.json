@@ -1,0 +1,44 @@
+{
+  "actual_model_ids_pending": true,
+  "actual_steward_declarations_pending": true,
+  "description": "NON-AUTHORITATIVE disposable emit-only verification roster. Not valid for seating, formation, identity assignment, or live use.",
+  "model_id_note": "model_id is REQUIRED by the vendored record builders (present_state.model_id). The CyberPeers use cp1001 / cp1011. The values below are PROVISIONAL — the AI Peer numbering scheme is a Steward decision, not a Builder one.",
+  "non_authoritative": true,
+  "peers": [
+    {
+      "display_name": "Lumin",
+      "model_id": "NON-AUTHORITATIVE-VERIFY-lumin",
+      "peer_id": "lumin",
+      "session_id": "NON-AUTHORITATIVE-VERIFY-lumin",
+      "steward_declaration": "NON-AUTHORITATIVE VERIFICATION PLACEHOLDER — NOT A STEWARD DECLARATION",
+      "substrate": "gpt"
+    },
+    {
+      "display_name": "Claude",
+      "model_id": "NON-AUTHORITATIVE-VERIFY-claude",
+      "peer_id": "claude",
+      "session_id": "NON-AUTHORITATIVE-VERIFY-claude",
+      "steward_declaration": "NON-AUTHORITATIVE VERIFICATION PLACEHOLDER — NOT A STEWARD DECLARATION",
+      "substrate": "claude"
+    },
+    {
+      "display_name": "Gemini",
+      "model_id": "NON-AUTHORITATIVE-VERIFY-gemini",
+      "peer_id": "gemini",
+      "session_id": "NON-AUTHORITATIVE-VERIFY-gemini",
+      "steward_declaration": "NON-AUTHORITATIVE VERIFICATION PLACEHOLDER — NOT A STEWARD DECLARATION",
+      "substrate": "gemini"
+    },
+    {
+      "display_name": "Grok",
+      "model_id": "NON-AUTHORITATIVE-VERIFY-grok",
+      "peer_id": "grok",
+      "session_id": "NON-AUTHORITATIVE-VERIFY-grok",
+      "steward_declaration": "NON-AUTHORITATIVE VERIFICATION PLACEHOLDER — NOT A STEWARD DECLARATION",
+      "substrate": "grok"
+    }
+  ],
+  "roster_version": "v0.20-NON-AUTHORITATIVE-VERIFICATION",
+  "steward_declaration_required": true,
+  "valid_for_seating": false
+}

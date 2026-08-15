@@ -1,0 +1,7 @@
+canon lock : clean  clean=True  override=False
+clock      : genesis-baseline
+write path : none
+  Claude     SPINE=59 NCT=70 PEER=2 PCT=2  [dry run]
+receipt    : reports\canon-v0.20\release\emit-only-verification\claude-NON-AUTHORITATIVE-receipt.json
+
+NOTHING WRITTEN.

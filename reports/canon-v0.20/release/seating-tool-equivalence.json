@@ -1,0 +1,31 @@
+{
+  "findings": [],
+  "intended_differences": {
+    "clock.last_advanced_at": "genesis-baseline policy vs the original's run timestamp",
+    "clock.started_at": "genesis-baseline policy vs the original's run timestamp",
+    "clock.tick": "genesis takes tick 0; the original numbered every record from 1",
+    "provenance.canon_lock_clean": "new: canon lock state recorded in provenance",
+    "provenance.canon_lock_status": "new: canon lock state recorded in provenance",
+    "provenance.canon_override_used": "new: override recorded in provenance",
+    "provenance.declared_by": "different tool name",
+    "provenance.source_manifest_id": "new: manifest recorded in provenance"
+  },
+  "original": "I:\\AEGIS-ADAM-ONE\\ADAM-AZURE-EDUCATION\\CYBERPEER-ILLUMINATION-PROJECT\\seat_foundation_dataquad.py",
+  "package": "reports\\canon-v0.20\\release\\AEGIS-AI-PEER-FOUNDATION-SEED-v0.20.json",
+  "peer_used": "aeon",
+  "record_type": "seating_tool_diff",
+  "records_with_unexplained_differences": 0,
+  "schema_version": "1.0.0",
+  "summary": {
+    "NCT": {
+      "counts_match": true,
+      "derived_count": 70,
+      "original_count": 70
+    },
+    "SPINE": {
+      "counts_match": true,
+      "derived_count": 59,
+      "original_count": 59
+    }
+  }
+}

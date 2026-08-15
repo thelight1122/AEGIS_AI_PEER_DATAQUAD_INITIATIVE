@@ -1,0 +1,37 @@
+[
+  {
+    "name": "candidate-manifest.json",
+    "bytes": 30198,
+    "sha256": "2F10793204AB24BBB0CA86A74C1D914AB62DB7D51B2BEBBBD1E296332B492BCD"
+  },
+  {
+    "name": "candidate-rulings.json",
+    "bytes": 30740,
+    "sha256": "2B4BBD302F607F9875F09D4E18FCDBA8A477450F7994F6DEE8B1658EED7D521D"
+  },
+  {
+    "name": "candidate-seed.json",
+    "bytes": 1610,
+    "sha256": "698D4FBC62D83A0232CE1C86EEF3C32E7E82800042BD46E54982EF83EF5015B2"
+  },
+  {
+    "name": "may31-source-manifest.json",
+    "bytes": 71040,
+    "sha256": "48B369346F199ACF6D0B09C5BDDF4C59927B0352E23F559CDFCE332AD3F337FB"
+  },
+  {
+    "name": "seed-illumination-project.json",
+    "bytes": 225584,
+    "sha256": "76026F482199ADD04BF1AEA0DC30B03795EDBACD7CE9709E579A7F8124F86743"
+  },
+  {
+    "name": "seed-misc-documentation.json",
+    "bytes": 225584,
+    "sha256": "76026F482199ADD04BF1AEA0DC30B03795EDBACD7CE9709E579A7F8124F86743"
+  },
+  {
+    "name": "seed-origin-bundle.json",
+    "bytes": 225584,
+    "sha256": "76026F482199ADD04BF1AEA0DC30B03795EDBACD7CE9709E579A7F8124F86743"
+  }
+]
