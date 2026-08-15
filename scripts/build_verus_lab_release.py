@@ -240,7 +240,10 @@ def build_release(
         ROOT / "src" / "aegis_verus_lab", output / "lib" / "aegis_verus_lab",
         exclude=("api.py", "cli.py", "credential_preflight.py", "frontier.py"),
     )
-    _copy_tree(ROOT / "src" / "aegis_peer_runtime", output / "lib" / "aegis_peer_runtime")
+    _copy_tree(
+        ROOT / "src" / "aegis_peer_runtime", output / "lib" / "aegis_peer_runtime",
+        exclude=("api.py", "cli.py", "credential_preflight.py", "frontier.py"),
+    )
     for directory in ("bin", "systemd", "env", "scripts"):
         (output / directory).mkdir(parents=True, exist_ok=True)
     shutil.copy2(ROOT / "deploy" / "verus-lab" / "bin" / "verus-dataquad-command", output / "bin" / "verus-dataquad-command")

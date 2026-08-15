@@ -76,8 +76,17 @@ def test_release_builds_authoritative_verus_foundation_without_activation(tmp_pa
     assert "sk-ant-" not in text
     assert "ANTHROPIC_API_KEY=" not in text
     assert not (output / "bin" / "aegis-verus-lab").exists()
-    for excluded in ("api.py", "cli.py", "credential_preflight.py", "frontier.py"):
-        assert not (output / "lib" / "aegis_verus_lab" / excluded).exists()
+    for package in ("aegis_verus_lab", "aegis_peer_runtime"):
+        for excluded in ("api.py", "cli.py", "credential_preflight.py", "frontier.py"):
+            assert not (output / "lib" / package / excluded).exists()
+    shipped_python = "\n".join(
+        path.read_text(encoding="utf-8") for path in (output / "lib").rglob("*.py")
+    )
+    for forbidden_surface in (
+        "ThreadingHTTPServer", "BaseHTTPRequestHandler", "serve_forever",
+        "Authorization: Bearer", "anthropic-api-key",
+    ):
+        assert forbidden_surface not in shipped_python
     assert (output / "bin" / "verus-dataquad-command").is_file()
     config = tmp_path / "verus.env"
     config.write_text("AEGIS_FRONTIER_MODEL=claude-opus-4-6\n", encoding="utf-8")
