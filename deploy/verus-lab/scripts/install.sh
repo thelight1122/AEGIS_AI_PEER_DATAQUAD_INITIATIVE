@@ -80,7 +80,10 @@ fi
 install -d -o root -g root -m 0755 "$RELEASE_DIR"
 cp -a "$BUNDLE_ROOT/." "$RELEASE_DIR/"
 chown -R root:root "$RELEASE_DIR"
+find "$RELEASE_DIR" -type d -exec chmod 0755 {} +
+find "$RELEASE_DIR" -type f -exec chmod 0644 {} +
 chmod 0755 "$RELEASE_DIR/bin/verus-dataquad-command"
+chmod 0755 "$RELEASE_DIR"/scripts/*.sh
 if [[ ! -e /etc/aegis-verus-lab/verus.env ]]; then
   sed -e "s/SET_AT_ACTIVATION/$FRONTIER_MODEL/" -e "s/SET_PORT_AT_ACTIVATION/$VERUS_PORT/" \
     "$BUNDLE_ROOT/env/verus.env.template" > /etc/aegis-verus-lab/verus.env

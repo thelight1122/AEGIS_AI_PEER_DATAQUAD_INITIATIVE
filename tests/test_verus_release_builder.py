@@ -228,6 +228,8 @@ def test_verus_deployment_is_one_peer_loopback_only_and_preserving():
     assert "prior release and service state restored" in installer
     assert "Prior Verus release was restored but failed health; service paused safely." in installer
     assert "service is paused and state is preserved" in installer
+    assert 'find "$RELEASE_DIR" -type d -exec chmod 0755 {} +' in installer
+    assert 'find "$RELEASE_DIR" -type f -exec chmod 0644 {} +' in installer
     assert "rm " not in installer and "rm " not in pause
     assert "systemctl stop aegis-verus-lab.service" in pause
 
@@ -255,6 +257,14 @@ def test_verus_deployment_is_one_peer_loopback_only_and_preserving():
         "anthropic-api-key",
     ):
         assert forbidden not in combined
+
+
+def test_verus_release_supports_verified_target_python_310():
+    project = (ROOT / "pyproject.toml").read_text(encoding="utf-8")
+    models = (ROOT / "src" / "aegis_peer_runtime" / "models.py").read_text(encoding="utf-8")
+    assert 'requires-python = ">=3.10"' in project
+    assert "except ImportError:" in models
+    assert "class StrEnum(str, Enum):" in models
 
 
 @pytest.mark.parametrize(
