@@ -77,11 +77,9 @@ def issue(
         raise IssuanceError(f"rulings must declare ruling_status={expected_status}")
     gates = sorted(set(open_gate_ids or rulings.get("open_gate_ids", [])))
     if candidate:
-        if gates != sorted(REQUIRED_CANDIDATE_GATES):
-            raise IssuanceError(
-                "candidate mode requires exactly these open gates: "
-                + ", ".join(REQUIRED_CANDIDATE_GATES)
-            )
+        unknown_gates = sorted(set(gates) - set(REQUIRED_CANDIDATE_GATES))
+        if unknown_gates:
+            raise IssuanceError("candidate mode contains unknown governance gates: " + ", ".join(unknown_gates))
     elif gates:
         raise IssuanceError("clean issuance is unavailable while governance gates are open")
 

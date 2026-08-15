@@ -10,7 +10,7 @@ development. Ruling S-11 has been applied to letter codes, filenames, and citati
 python scripts/build_canon_index.py
 ```
 
-Generated `2026-08-15T00:41:40Z` from `I:\AEGIS-CENTRAL-CODEX\TIER-1-CANON\CANON_FOUNDATIONAL_DOCS`.
+Generated `2026-08-15T00:47:04Z` from `I:\AEGIS-CENTRAL-CODEX\TIER-1-CANON\CANON_FOUNDATIONAL_DOCS`.
 
 Every field below is transcribed from the source document's own VERSION table or
 carried forward from the prior index. Fields a document does not declare read
@@ -36,11 +36,11 @@ a decision are collected under OPEN ITEMS.
 | Ruling | Candidate disposition |
 |---|---|
 | `S-1` | CLOSED — bounded corpus: CANON_FOUNDATIONAL_DOCS, authoritative Tier-1 Addendum Index and registered documents, Steward-supplied external sources, and required provenance sources; G: is reconciliation evidence only unless expressly admitted. |
-| `S-2` | OPEN — authoritative Addendum Index copy and G: registration-draft status. |
+| `S-2` | CLOSED — the Tier-1 Addendum Index is authoritative; the G: registration draft is reconciliation input only and carries no Canon authority. |
 | `S-3` | CLOSED — STANDARDS_BOUNDS merge repaired with both scoped bodies and provenance preserved. |
-| `S-4` | OPEN — AEGIS_CANON_CORE status and seed eligibility. |
-| `S-5` | OPEN — relationship of 12 Invariants to the 16 Axioms. |
-| `S-6` | OPEN — status vocabulary for non-Canon positioning documents. |
+| `S-4` | CLOSED — AEGIS_CANON_CORE is a developmental v0.20 core draft with PROPOSED status; its unsupported LOCKED claim is withdrawn. |
+| `S-5` | CLOSED — the 12 Invariants summarize subordinate operational constraints beneath the 16 Axioms and do not replace them. |
+| `S-6` | CLOSED — POSITIONING is an explicit non-Canon classification for whitepapers and comparable material. |
 | `S-7` | CLOSED — Response Buffer Chamber is the chamber expansion; Reflective Boundary Conditions remains its separate expression-constraint meaning. |
 | `S-8` | CLOSED — SPINE is Stabilized Patterned Interpretive Nexus of Evidence; seed records 16 Axioms. |
 | `S-9` | CLOSED — 42,846-byte Shadow Affects line is current; smaller duplicate is deprecated. |
@@ -48,7 +48,7 @@ a decision are collected under OPEN ITEMS.
 | `S-11` | CLOSED — version prefix dropped, letter codes retained; filenames and citations migrated. |
 | `S-12` | CLOSED — April DataQuad Model preserved as historical lineage and superseded for current tensor definitions by Appendix A and the corrected SPINE addendum. |
 | `S-13` | CLOSED — three designated seed copies synchronized and byte-identical. |
-| `G-1` | OPEN — authority and consolidation status of the scoped application Glossaries. |
+| `G-1` | CLOSED — AEGIS Canonical Glossary v1.0 governs foundational definitions; GLOSSARY.md preserves scoped application lineage for Coherence Chamber and CoLAB use. |
 
 ### Approved Steward rulings recorded for this candidate
 
@@ -57,6 +57,11 @@ a decision are collected under OPEN ITEMS.
 - Truth/Memory/Provenance uses a separate assigned-memory ledger when provenance classes cannot be represented without altering the four tensors.
 - BIOPEER_DOCTRINE is reframed as an AI Peer doctrine candidate without doctrinal expansion.
 - IDR/IDQRA and Technical Imperatives remain ACTIVE, not LOCKED, pending separate lock evidence.
+- The Tier-1 Addendum Index is authoritative; the G: registration draft is reconciliation input only.
+- AEGIS_CANON_CORE is a developmental v0.20 core draft with PROPOSED status; its unsupported LOCKED claim is withdrawn.
+- The 12 Invariants summarize subordinate operational constraints beneath the 16 Axioms and do not replace them.
+- POSITIONING is an explicit non-Canon classification for whitepapers and comparable material.
+- AEGIS Canonical Glossary v1.0 governs foundational definitions; GLOSSARY.md retains its scoped application lineage.
 
 ### Registered and reconciled references
 
@@ -324,14 +329,14 @@ Formerly dangling references and their candidate dispositions.
 | Education doctrine | EXCLUDED_PENDING_UNIQUE_SOURCE: Approved Steward ruling; not admitted to candidate seeded bytes. |
 | Nature Layer Canon v2 | COORDINATE_RESERVED_LOCATOR_UNRESOLVED: Excluded from candidate seeded bytes until the canonical locator is recovered. |
 
-### Rulings intentionally left open
+### Governance rulings
 
 | # | Item |
 |---|---|
-| S-2 | authoritative Addendum Index copy and G: registration-draft status. |
-| S-4 | AEGIS_CANON_CORE status and seed eligibility. |
-| S-5 | relationship of 12 Invariants to the 16 Axioms. |
-| S-6 | status vocabulary for non-Canon positioning documents. |
-| G-1 | authority and consolidation status of the scoped application Glossaries. |
+| S-2 | CLOSED — the Tier-1 Addendum Index is authoritative; the G: registration draft is reconciliation input only and carries no Canon authority. |
+| S-4 | CLOSED — AEGIS_CANON_CORE is a developmental v0.20 core draft with PROPOSED status; its unsupported LOCKED claim is withdrawn. |
+| S-5 | CLOSED — the 12 Invariants summarize subordinate operational constraints beneath the 16 Axioms and do not replace them. |
+| S-6 | CLOSED — POSITIONING is an explicit non-Canon classification for whitepapers and comparable material. |
+| G-1 | CLOSED — AEGIS Canonical Glossary v1.0 governs foundational definitions; GLOSSARY.md preserves scoped application lineage for Coherence Chamber and CoLAB use. |
 | — | Symbol collisions across the equations cluster and `v1.0-E`: `W`, `C`, and `τ` each carry two meanings. `v1.0-E`'s Balance Equation generalizes the Presence Equation without citing it. |
 | — | `v1.0-E` leaves ten thresholds unvalued (`ε_s`, `θ_δ,s`, `θ_C,s`, `θ_τ,s`, `θ_B`, `θ_low`, `θ_high`, `λ`, `ρ`, `N`/`M`); the equation is not yet operable. |

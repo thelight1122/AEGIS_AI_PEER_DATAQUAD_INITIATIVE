@@ -19,13 +19,13 @@
       "coordinate": "AEGIS:CANON:v0.20:CANDIDATE:AEGIS-CANONICAL-GLOSSARY-V1-0-MD",
       "locator": "AEGIS Canonical Glossary v1.0.md",
       "provenance": {
-        "authority": "current-index-inventory-only",
+        "authority": "steward-ruling-G-1",
         "index_file": "AEGIS Canonical Glossary v1.0.md",
-        "provisional": true
+        "provisional": false
       },
-      "review_required": true,
+      "review_required": false,
       "seeded": true,
-      "status": "UNDECLARED"
+      "status": "FOUNDATIONAL_GLOSSARY"
     },
     "AEGIS STANDARDS V1.0.md": {
       "classification": "KERNEL",
@@ -80,30 +80,37 @@
       "status": "UNDECLARED"
     },
     "AEGIS_ALIGNMENT_WHITEPAPER_v1.0.md": {
-      "classification": "UNINDEXED",
+      "classification": "POSITIONING",
       "coordinate": "AEGIS:CANON:v0.20:CANDIDATE:AEGIS-ALIGNMENT-WHITEPAPER-V1-0-MD",
       "locator": "AEGIS_ALIGNMENT_WHITEPAPER_v1.0.md",
       "provenance": {
-        "authority": "current-index-inventory-only",
+        "authority": "steward-ruling-S-6",
         "index_file": "AEGIS_ALIGNMENT_WHITEPAPER_v1.0.md",
-        "provisional": true
+        "provisional": false
       },
-      "review_required": true,
+      "review_required": false,
       "seeded": false,
-      "status": "UNDECLARED"
+      "status": "DEPRECATED_POSITIONING"
     },
     "AEGIS_CANON_CORE.md": {
-      "classification": "UNINDEXED",
+      "classification": "DEVELOPMENTAL_CORE",
       "coordinate": "AEGIS:CANON:v0.20:CANDIDATE:AEGIS-CANON-CORE-MD",
-      "locator": "AEGIS_CANON_CORE.md",
-      "provenance": {
-        "authority": "current-index-inventory-only",
-        "index_file": "AEGIS_CANON_CORE.md",
-        "provisional": true
+      "invariant_relationship": {
+        "authority": "steward-ruling-S-5",
+        "axiom_count": 16,
+        "invariant_count": 12,
+        "relationship": "subordinate_operational_summary"
       },
-      "review_required": true,
+      "locator": "AEGIS_CANON_CORE.md",
+      "note": "Unsupported LOCKED claim withdrawn; not independently seed-authoritative.",
+      "provenance": {
+        "authority": "steward-ruling-S-4",
+        "index_file": "AEGIS_CANON_CORE.md",
+        "provisional": false
+      },
+      "review_required": false,
       "seeded": false,
-      "status": "Locked"
+      "status": "PROPOSED"
     },
     "AEGIS_EQUATIONS_SESSION_2026-06-12.md": {
       "classification": "UNINDEXED",
@@ -171,15 +178,15 @@
       "status": "CANON"
     },
     "AEGIS_WHITEPAPER_v2.1.md": {
-      "classification": "UNINDEXED",
+      "classification": "POSITIONING",
       "coordinate": "AEGIS:CANON:v0.20:CANDIDATE:AEGIS-WHITEPAPER-V2-1-MD",
       "locator": "AEGIS_WHITEPAPER_v2.1.md",
       "provenance": {
-        "authority": "current-index-inventory-only",
+        "authority": "steward-ruling-S-6",
         "index_file": "AEGIS_WHITEPAPER_v2.1.md",
-        "provisional": true
+        "provisional": false
       },
-      "review_required": true,
+      "review_required": false,
       "seeded": false,
       "status": "POSITIONING"
     },
@@ -236,17 +243,17 @@
       "status": "UNDECLARED"
     },
     "GLOSSARY.md": {
-      "classification": "UNINDEXED",
+      "classification": "APPLICATION_GLOSSARY",
       "coordinate": "AEGIS:CANON:v0.20:CANDIDATE:GLOSSARY-MD",
       "locator": "GLOSSARY.md",
       "provenance": {
-        "authority": "current-index-inventory-only",
+        "authority": "steward-ruling-G-1",
         "index_file": "GLOSSARY.md",
-        "provisional": true
+        "provisional": false
       },
-      "review_required": true,
+      "review_required": false,
       "seeded": false,
-      "status": "CANDIDATE"
+      "status": "SCOPED_ACTIVE"
     },
     "IDR-&-IDQRA-LOGIC Loop.md": {
       "classification": "UNINDEXED",
@@ -301,17 +308,17 @@
       "status": "UNDECLARED"
     },
     "📘 AEGIS CANON ADDENDUM INDEX.md": {
-      "classification": "OTHER",
+      "classification": "CANON_INDEX",
       "coordinate": "AEGIS:CANON:v0.20:CANDIDATE:AEGIS-CANON-ADDENDUM-INDEX-MD",
       "locator": "📘 AEGIS CANON ADDENDUM INDEX.md",
       "provenance": {
-        "authority": "current-index-inventory-only",
+        "authority": "steward-ruling-S-2",
         "index_file": "📘 AEGIS CANON ADDENDUM INDEX.md",
-        "provisional": true
+        "provisional": false
       },
       "review_required": false,
       "seeded": false,
-      "status": "LOCKED"
+      "status": "AUTHORITATIVE"
     },
     "📘 AEGIS CANON ADDENDUM — ADAM EMERGENCE MARKER AEM.md": {
       "classification": "ADDENDUM",
@@ -743,13 +750,7 @@
       "status": "UNDECLARED"
     }
   },
-  "open_gate_ids": [
-    "S-2",
-    "S-4",
-    "S-5",
-    "S-6",
-    "G-1"
-  ],
+  "open_gate_ids": [],
   "references": {},
   "ruling_status": "candidate"
 }

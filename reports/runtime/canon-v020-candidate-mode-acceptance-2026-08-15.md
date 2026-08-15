@@ -9,8 +9,10 @@ Authoritative external seed copies and the VM were outside this operation.
 ## Enforced boundary
 
 - Candidate manifest and seed remain `review-needed`.
-- Open gates are explicitly enumerated: `S-2`, `S-4`, `S-5`, `S-6`, `G-1`.
-- Any open gate makes the clean-lock rebuild path fail closed.
+- The Steward's final rulings close `S-2`, `S-4`, `S-5`, `S-6`, and `G-1`;
+  candidate outputs now compute zero open governance gates.
+- Candidate status remains `review-needed`; zero open governance gates does not
+  itself authorize or perform clean issuance.
 - The candidate seed binds the exact candidate-manifest SHA-256.
 - Memory-not-command remains enabled.
 - Exactly 16 Axioms and the corrected SPINE expansion remain required.
@@ -22,18 +24,19 @@ Authoritative external seed copies and the VM were outside this operation.
 
 | Artifact | SHA-256 |
 |---|---|
-| `reports/canon-v0.20/candidate/canon-v0.20-candidate-rulings.json` | `28D77DAD1AC992A0418E5D4CE406A8F6B4BBE9E65FCA7AEA9F54B9AB8EB48550` |
-| `reports/canon-v0.20/candidate/canon-v0.20-candidate-manifest.json` | `916E05E3667C711F9FD90A3650E2A5574DB39728AA17AAA9F948F080C8DE372B` |
-| `reports/canon-v0.20/candidate/ai-peer-foundation-seed-v0.20-candidate.json` | `80E0F1DA62B2888494486232603BF12147483716204EE13BB5BCAF4881D8CEE2` |
-| `reports/canon-v0.20/canon-v0.20-index.json` used as input | `966B369B4BE0196F793D9B2B6CEBE489FD4308E32982D7B28E6BB2AA1BCE1639` |
+| `reports/canon-v0.20/candidate/canon-v0.20-candidate-rulings.json` | `199FDF6CD68231A7394AFC103AABC00BCEA8A7447DA5ED14C7BC2D0E622F4F13` |
+| `reports/canon-v0.20/candidate/canon-v0.20-candidate-manifest.json` | `DFEDCCC22811F6F15262E6EE07CA243EFA053C427104B3738667FA689EA14CD8` |
+| `reports/canon-v0.20/candidate/ai-peer-foundation-seed-v0.20-candidate.json` | `FE048497FDBCE13CA1AA3E565B94A9F5B56F527278DA45C1BD2F88E5174703AB` |
+| `reports/canon-v0.20/canon-v0.20-index.json` used as input | `CF54122631F0ABF97E8FF4FA7995D450BC07BCC68A284788A7354D536A883E70` |
+| `docs/decisions/STEWARD-FINAL-CANON-v0.20-RULINGS-2026-08-15.md` | `D2CB27407A750F45E94A7D2DEDC2328D2951CEBBEF489C87449A0FC427F4A9BE` |
 
 The seed field `canonLock.sourceManifestSha256` equals the candidate-manifest
 digest above.
 
 ## Verification
 
-- Focused Canon/index/candidate/issuer/rebuilder suite: 53 passed.
-- Full repository suite: 420 passed, 14 skipped.
+- Focused candidate/issuer/rebuilder suite: 30 passed.
+- Full repository suite: 423 passed, 14 skipped.
 - Candidate report/hash binding verification: passed.
 - Active implementation and generated-candidate whitespace validation: passed.
 - Immutable pre-repair backups intentionally retain their original conflict

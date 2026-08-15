@@ -24,7 +24,43 @@ def test_candidate_builder_reads_index_and_emits_only_review_needed(tmp_path):
     manifest = json.loads((out / "canon-v0.20-candidate-manifest.json").read_text())
     seed = json.loads((out / "ai-peer-foundation-seed-v0.20-candidate.json").read_text())
     assert report["artifact_status"] == "candidate-review-needed"
-    assert manifest["open_gate_ids"] == ["G-1", "S-2", "S-4", "S-5", "S-6"]
+    assert manifest["open_gate_ids"] == []
     assert seed["canonLock"]["status"] == "review-needed"
     assert seed["canonLock"]["sourceManifestSha256"] == report["manifest_digest_bound_in_seed"]
     assert not any(path.name == "clean" for path in out.rglob("*"))
+
+
+def test_final_steward_rulings_are_applied_to_candidate_documents(tmp_path):
+    from scripts.build_canon_v020_candidate import derive_candidate_rulings
+
+    names = [
+        "📘 AEGIS CANON ADDENDUM INDEX.md",
+        "AEGIS_CANON_CORE.md",
+        "AEGIS_ALIGNMENT_WHITEPAPER_v1.0.md",
+        "AEGIS_WHITEPAPER_v2.1.md",
+        "AEGIS Canonical Glossary v1.0.md",
+        "GLOSSARY.md",
+    ]
+    for name in names:
+        (tmp_path / name).write_text("candidate\n", encoding="utf-8")
+    index = {
+        "canon_dir": str(tmp_path),
+        "entries": [
+            {"file": name, "class": "UNINDEXED", "status_declared": "UNDECLARED"}
+            for name in names
+        ],
+    }
+    rulings = derive_candidate_rulings(index)
+    assert rulings["open_gate_ids"] == []
+    assert rulings["documents"]["📘 AEGIS CANON ADDENDUM INDEX.md"]["status"] == "AUTHORITATIVE"
+    core = rulings["documents"]["AEGIS_CANON_CORE.md"]
+    assert core["status"] == "PROPOSED"
+    assert core["invariant_relationship"] == {
+        "axiom_count": 16,
+        "invariant_count": 12,
+        "relationship": "subordinate_operational_summary",
+        "authority": "steward-ruling-S-5",
+    }
+    assert rulings["documents"]["AEGIS_WHITEPAPER_v2.1.md"]["classification"] == "POSITIONING"
+    assert rulings["documents"]["AEGIS Canonical Glossary v1.0.md"]["status"] == "FOUNDATIONAL_GLOSSARY"
+    assert rulings["documents"]["GLOSSARY.md"]["status"] == "SCOPED_ACTIVE"

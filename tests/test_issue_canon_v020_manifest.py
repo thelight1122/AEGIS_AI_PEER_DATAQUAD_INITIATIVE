@@ -115,9 +115,18 @@ def test_clean_path_refuses_open_gates(ruled_inputs):
         issue(index, rulings_path, open_gate_ids=["S-2"])
 
 
-def test_candidate_requires_exact_gate_set(ruled_inputs):
+def test_candidate_allows_closed_governance_gates_but_remains_candidate(ruled_inputs):
     index, rulings_path, _, rulings = ruled_inputs
     rulings["ruling_status"] = "candidate"
     write_json(rulings_path, rulings)
-    with pytest.raises(IssuanceError, match="requires exactly"):
-        issue(index, rulings_path, candidate=True, open_gate_ids=["S-2"])
+    manifest = issue(index, rulings_path, candidate=True, open_gate_ids=[])
+    assert manifest["open_gate_ids"] == []
+    assert manifest["canon_lock_status"] == "review-needed"
+
+
+def test_candidate_refuses_unknown_gate(ruled_inputs):
+    index, rulings_path, _, rulings = ruled_inputs
+    rulings["ruling_status"] = "candidate"
+    write_json(rulings_path, rulings)
+    with pytest.raises(IssuanceError, match="unknown governance"):
+        issue(index, rulings_path, candidate=True, open_gate_ids=["X-1"])

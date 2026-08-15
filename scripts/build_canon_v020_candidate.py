@@ -56,10 +56,54 @@ def derive_candidate_rulings(index: dict[str, Any]) -> dict[str, Any]:
         if locator_missing:
             documents[filename]["locator_unresolved"] = True
             documents[filename]["provenance"]["locator_drift"] = "indexed locator absent on current disk"
+    overrides = {
+        "📘 AEGIS CANON ADDENDUM INDEX.md": {
+            "classification": "CANON_INDEX", "status": "AUTHORITATIVE",
+            "authority": "steward-ruling-S-2", "review_required": False,
+        },
+        "AEGIS_CANON_CORE.md": {
+            "classification": "DEVELOPMENTAL_CORE", "status": "PROPOSED",
+            "authority": "steward-ruling-S-4", "review_required": False,
+            "note": "Unsupported LOCKED claim withdrawn; not independently seed-authoritative.",
+        },
+        "AEGIS_ALIGNMENT_WHITEPAPER_v1.0.md": {
+            "classification": "POSITIONING", "status": "DEPRECATED_POSITIONING",
+            "authority": "steward-ruling-S-6", "review_required": False,
+        },
+        "AEGIS_WHITEPAPER_v2.1.md": {
+            "classification": "POSITIONING", "status": "POSITIONING",
+            "authority": "steward-ruling-S-6", "review_required": False,
+        },
+        "AEGIS Canonical Glossary v1.0.md": {
+            "classification": "KERNEL", "status": "FOUNDATIONAL_GLOSSARY",
+            "authority": "steward-ruling-G-1", "review_required": False,
+        },
+        "GLOSSARY.md": {
+            "classification": "APPLICATION_GLOSSARY", "status": "SCOPED_ACTIVE",
+            "authority": "steward-ruling-G-1", "review_required": False,
+        },
+    }
+    for filename, override in overrides.items():
+        if filename not in documents:
+            continue
+        authority = override.pop("authority")
+        documents[filename].update(override)
+        documents[filename]["provenance"] = {
+            **documents[filename]["provenance"],
+            "authority": authority,
+            "provisional": False,
+        }
+    if "AEGIS_CANON_CORE.md" in documents:
+        documents["AEGIS_CANON_CORE.md"]["invariant_relationship"] = {
+            "axiom_count": 16,
+            "invariant_count": 12,
+            "relationship": "subordinate_operational_summary",
+            "authority": "steward-ruling-S-5",
+        }
     return {
         "canon_version": "v0.20",
         "documents": documents,
-        "open_gate_ids": list(REQUIRED_CANDIDATE_GATES),
+        "open_gate_ids": [],
         "references": {},
         "ruling_status": "candidate",
     }
@@ -84,7 +128,7 @@ def build(index_path: Path, historical_seed_path: Path, output_dir: Path) -> dic
         index_path,
         rulings_path,
         candidate=True,
-        open_gate_ids=list(REQUIRED_CANDIDATE_GATES),
+        open_gate_ids=[],
     )
     manifest_path = output_dir / "canon-v0.20-candidate-manifest.json"
     manifest_raw = _write_json(manifest_path, manifest, canonical=True)
@@ -103,7 +147,7 @@ def build(index_path: Path, historical_seed_path: Path, output_dir: Path) -> dic
             "spine_name": "Stabilized Patterned Interpretive Nexus of Evidence",
         },
         "manifest_digest_bound_in_seed": seed["canonLock"]["sourceManifestSha256"],
-        "open_gate_ids": list(REQUIRED_CANDIDATE_GATES),
+        "open_gate_ids": [],
         "outputs": {
             "manifest": {"path": str(manifest_path), "sha256": sha256_bytes(manifest_raw)},
             "rulings": {"path": str(rulings_path), "sha256": sha256_bytes(rulings_path.read_bytes())},

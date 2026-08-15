@@ -82,8 +82,8 @@ def validate_manifest(
     if candidate:
         if manifest.get("issuance_status") != "candidate" or manifest.get("canon_lock_status") != "review-needed":
             raise RebuildRefused("candidate manifest must be explicitly candidate and review-needed")
-        if gates != sorted(REQUIRED_CANDIDATE_GATES):
-            raise RebuildRefused("candidate manifest does not enumerate the required open gates")
+        if set(gates) - set(REQUIRED_CANDIDATE_GATES):
+            raise RebuildRefused("candidate manifest contains an unknown governance gate")
         if not isinstance(manifest.get("reviewNeededSourceCount"), int) or manifest["reviewNeededSourceCount"] < len(gates):
             raise RebuildRefused("candidate review count must cover every open gate")
     else:
