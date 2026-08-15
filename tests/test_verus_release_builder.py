@@ -73,6 +73,20 @@ def test_release_builds_authoritative_verus_foundation_without_activation(tmp_pa
                        for path in output.rglob("*") if path.is_file())
     assert "sk-ant-" not in text
     assert "ANTHROPIC_API_KEY=" not in text
+    for expected in (
+        "aegis-verus",
+        "/opt/aegis/verus/lab",
+        "/var/lib/aegis-verus-lab",
+        "/etc/aegis-verus-lab",
+    ):
+        assert expected in text
+    for forbidden in (
+        "aegis-ai-peer-verus",
+        "/opt/aegis-verus-lab",
+        "/var/lib/aegis-ai-peers/verus",
+        "/etc/aegis-ai-peers",
+    ):
+        assert forbidden not in text
 
     second = tmp_path / "release-2"
     builder.build_release(
@@ -173,13 +187,18 @@ def test_verus_deployment_is_one_peer_loopback_only_and_preserving():
     env = (deploy / "env" / "verus.env.template").read_text()
     installer = (deploy / "scripts" / "install.sh").read_text()
     pause = (deploy / "scripts" / "pause.sh").read_text()
+    runbook = (ROOT / "docs" / "runbooks" / "VERUS-CLAUDE-FIRST-LAB-ACTIVATION.md").read_text()
     assert "AEGIS_BIND=127.0.0.1" in env
     assert "AEGIS_PORT=SET_PORT_AT_ACTIVATION" in env
     assert "AEGIS_CYBERPEER_NAME=Verus" in env
     assert "SET_AT_ACTIVATION" in env
-    assert "LoadCredential=anthropic_api_key:" in unit
-    assert "LoadCredential=bridge_token:" in unit
-    assert "ReadWritePaths=/var/lib/aegis-ai-peers/verus" in unit
+    assert "User=aegis-verus" in unit and "Group=aegis-verus" in unit
+    assert "WorkingDirectory=/opt/aegis/verus/lab/current" in unit
+    assert "EnvironmentFile=/etc/aegis-verus-lab/verus.env" in unit
+    assert "LoadCredential=anthropic_api_key:/etc/aegis-verus-lab/secrets/anthropic-api-key" in unit
+    assert "LoadCredential=bridge_token:/etc/aegis-verus-lab/secrets/bridge-token" in unit
+    assert "--state-root /var/lib/aegis-verus-lab" in unit
+    assert "ReadWritePaths=/var/lib/aegis-verus-lab" in unit
     assert "full_append_only_dataquad" in installer
     assert "VERUS_PORT=${VERUS_PORT:-8791}" in installer
     assert "loopback port is already in use" in installer
@@ -198,6 +217,25 @@ def test_verus_deployment_is_one_peer_loopback_only_and_preserving():
 
     health = (deploy / "scripts" / "health.sh").read_text()
     assert "${AEGIS_PORT:-8791}" in health
+
+    combined = "\n".join((unit, installer, pause, env, health, runbook))
+    for expected in (
+        "aegis-verus",
+        "/opt/aegis/verus/lab",
+        "/var/lib/aegis-verus-lab",
+        "/etc/aegis-verus-lab",
+        "aegis-verus-lab.service",
+        "127.0.0.1",
+        "8791",
+    ):
+        assert expected in combined
+    for forbidden in (
+        "aegis-ai-peer-verus",
+        "/opt/aegis-verus-lab",
+        "/var/lib/aegis-ai-peers/verus",
+        "/etc/aegis-ai-peers",
+    ):
+        assert forbidden not in combined
 
 
 @pytest.mark.parametrize(

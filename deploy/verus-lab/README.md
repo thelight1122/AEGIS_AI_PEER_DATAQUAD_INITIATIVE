@@ -19,11 +19,13 @@ root-owned, non-symlink runtime credential files supplied separately. Files
 must use mode `0400` or `0600`; unsafe ownership or broader permissions fail
 preflight without reading or printing secret content:
 
-- `/etc/aegis-ai-peers/secrets/verus-anthropic-api-key`
-- `/etc/aegis-ai-peers/secrets/verus-bridge-token`
+- `/etc/aegis-verus-lab/secrets/anthropic-api-key`
+- `/etc/aegis-verus-lab/secrets/bridge-token`
 
 The exact Anthropic model identifier is also set at activation time in
-`/etc/aegis-ai-peers/verus.env`. Building this release does not install those
+`/etc/aegis-verus-lab/verus.env`. The dedicated runtime account is
+`aegis-verus`; application and append-only state remain isolated under
+`/opt/aegis/verus/lab` and `/var/lib/aegis-verus-lab`. Building this release does not install those
 values, touch the VM, seat live state, start a service, or call Anthropic.
 
 The release builder also requires an explicit chosen UTC seating timestamp.

@@ -58,9 +58,10 @@ PCT    2
 
 Before installation:
 
-1. Capture and preserve the current VM identity, active-release link, service
-   status, and hashes of `/var/lib/aegis-ai-peers/claude` and every pre-existing
-   `/var/lib/aegis-ai-peers/verus` artifact.
+1. Capture and preserve the current VM identity, Gabe container/service/tunnel
+   state, a hash-only boundary inventory of Gabe's mounted data root, and every
+   pre-existing `/var/lib/aegis-verus-lab` artifact. Do not read private
+   content into the report and do not write anywhere in Gabe's roots.
 2. Confirm the release-manifest and every listed artifact hash.
 3. Confirm preferred port `127.0.0.1:8791` is unused. If it collides, record the
    evidence and choose another distinct loopback port; never reuse Gabe's
@@ -86,6 +87,11 @@ sudo ./scripts/health.sh
 Installation creates only the Verus service identity, Verus state root,
 Verus environment, Verus release, and `aegis-verus-lab.service`. It does not
 delete or rewrite another peer root. The service remains loopback-only.
+
+The isolated layout is exact: account `aegis-verus`, application root
+`/opt/aegis/verus/lab`, append-only state root `/var/lib/aegis-verus-lab`, and
+configuration/credential root `/etc/aegis-verus-lab`. No compatibility alias
+to an older Verus layout is created.
 
 Healthy means:
 
