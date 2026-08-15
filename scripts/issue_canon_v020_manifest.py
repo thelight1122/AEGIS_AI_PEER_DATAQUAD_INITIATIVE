@@ -19,6 +19,7 @@ SCHEMA_VERSION = "1.0.0"
 MANIFEST_ID = "AEGIS:CANON:v0.20:SOURCE-MANIFEST"
 MERGE_MARKERS = re.compile(r"(?m)^(?:<<<<<<<|=======|>>>>>>>)(?:\s|$)")
 REQUIRED_RULING_FIELDS = ("coordinate", "classification", "status", "seeded", "provenance")
+REQUIRED_CANDIDATE_GATES = ("S-2", "S-4", "S-5", "S-6", "G-1")
 
 
 class IssuanceError(ValueError):
@@ -60,13 +61,29 @@ def _normalized_supersession(value: Any) -> list[str]:
     return sorted(set(value))
 
 
-def issue(index_path: Path, rulings_path: Path) -> dict[str, Any]:
+def issue(
+    index_path: Path,
+    rulings_path: Path,
+    *,
+    candidate: bool = False,
+    open_gate_ids: list[str] | None = None,
+) -> dict[str, Any]:
     index = _load(index_path)
     rulings = _load(rulings_path)
     if rulings.get("canon_version") != "v0.20":
         raise IssuanceError("rulings canon_version must be v0.20")
-    if rulings.get("ruling_status") != "approved":
-        raise IssuanceError("rulings must declare ruling_status=approved")
+    expected_status = "candidate" if candidate else "approved"
+    if rulings.get("ruling_status") != expected_status:
+        raise IssuanceError(f"rulings must declare ruling_status={expected_status}")
+    gates = sorted(set(open_gate_ids or rulings.get("open_gate_ids", [])))
+    if candidate:
+        if gates != sorted(REQUIRED_CANDIDATE_GATES):
+            raise IssuanceError(
+                "candidate mode requires exactly these open gates: "
+                + ", ".join(REQUIRED_CANDIDATE_GATES)
+            )
+    elif gates:
+        raise IssuanceError("clean issuance is unavailable while governance gates are open")
 
     entries = index.get("entries")
     decisions = rulings.get("documents")
@@ -107,7 +124,9 @@ def issue(index_path: Path, rulings_path: Path) -> dict[str, Any]:
         status = decision["status"]
         seeded = decision["seeded"]
         provenance = decision["provenance"]
-        if classification in (None, "", "UNDECLARED") or status in (None, "", "UNDECLARED"):
+        if classification in (None, "") or status in (None, ""):
+            raise IssuanceError(f"undeclared classification/status for {filename}")
+        if not candidate and (classification == "UNDECLARED" or status == "UNDECLARED"):
             raise IssuanceError(f"undeclared classification/status for {filename}")
         if not isinstance(seeded, bool) or not isinstance(provenance, dict) or not provenance:
             raise IssuanceError(f"invalid seeded/provenance ruling for {filename}")
@@ -122,7 +141,8 @@ def issue(index_path: Path, rulings_path: Path) -> dict[str, Any]:
                 and seeded is False
                 and decision.get("exclusion_reason") == "locator_unresolved_excluded_from_seeded_bytes"
             )
-            if not nature_exception:
+            candidate_exception = candidate and seeded is False and bool(decision.get("review_required"))
+            if not (nature_exception or candidate_exception):
                 raise IssuanceError(f"unresolved required locator for {filename}")
             if digest is not None:
                 raise IssuanceError("unresolved Nature v2 locator cannot assert a digest")
@@ -185,15 +205,21 @@ def issue(index_path: Path, rulings_path: Path) -> dict[str, Any]:
                 unresolved_refs.append(name)
             else:
                 resolved_refs.append({"reference": name, **ruling})
-    if unresolved_refs:
+    if unresolved_refs and not candidate:
         raise IssuanceError(f"dangling references lack ruled disposition: {', '.join(unresolved_refs)}")
 
     review_count = sum(1 for entry in manifest_entries if entry["review_required"])
+    if candidate:
+        review_count = max(review_count, len(gates))
     body = {
+        "canon_lock_status": "review-needed" if candidate else "clean",
         "canon_version": "v0.20",
         "entries": manifest_entries,
+        "issuance_status": "candidate" if candidate else "authoritative",
         "manifest_id": MANIFEST_ID,
+        "open_gate_ids": gates,
         "reference_dispositions": resolved_refs,
+        "unresolved_references": sorted(unresolved_refs),
         "reviewNeededSourceCount": review_count,
         "schema_version": SCHEMA_VERSION,
         "source_index_digest": _digest(index_path.read_bytes()),
@@ -209,11 +235,18 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--rulings", type=Path, required=True)
     parser.add_argument("--output", type=Path)
     parser.add_argument("--emit-only", action="store_true")
+    parser.add_argument("--candidate", action="store_true")
+    parser.add_argument("--open-gate", action="append", default=[])
     args = parser.parse_args(argv)
     if not args.emit_only and args.output is None:
         parser.error("--output is required unless --emit-only is used")
     try:
-        manifest = issue(args.index, args.rulings)
+        manifest = issue(
+            args.index,
+            args.rulings,
+            candidate=args.candidate,
+            open_gate_ids=args.open_gate,
+        )
     except IssuanceError as exc:
         print(f"REFUSED: {exc}", file=sys.stderr)
         return 2

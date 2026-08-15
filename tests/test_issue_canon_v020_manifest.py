@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from scripts.issue_canon_v020_manifest import IssuanceError, issue, main
+from scripts.issue_canon_v020_manifest import REQUIRED_CANDIDATE_GATES, IssuanceError, issue, main
 
 
 def write_json(path: Path, value: dict) -> Path:
@@ -92,3 +92,32 @@ def test_emit_only_writes_nothing(ruled_inputs, tmp_path, capsys):
     assert main(["--index", str(index), "--rulings", str(rulings), "--output", str(output), "--emit-only"]) == 0
     assert not output.exists()
     assert json.loads(capsys.readouterr().out)["manifest_id"] == "AEGIS:CANON:v0.20:SOURCE-MANIFEST"
+
+
+def test_candidate_manifest_is_review_needed_and_enumerates_gates(ruled_inputs):
+    index, rulings_path, _, rulings = ruled_inputs
+    rulings["ruling_status"] = "candidate"
+    rulings["open_gate_ids"] = list(REQUIRED_CANDIDATE_GATES)
+    rulings["documents"]["addendum.md"]["status"] = "UNDECLARED"
+    write_json(rulings_path, rulings)
+    manifest = issue(index, rulings_path, candidate=True, open_gate_ids=list(REQUIRED_CANDIDATE_GATES))
+    assert manifest["canon_lock_status"] == "review-needed"
+    assert manifest["issuance_status"] == "candidate"
+    assert manifest["open_gate_ids"] == sorted(REQUIRED_CANDIDATE_GATES)
+    assert manifest["reviewNeededSourceCount"] >= 5
+
+
+def test_clean_path_refuses_open_gates(ruled_inputs):
+    index, rulings_path, _, rulings = ruled_inputs
+    rulings["open_gate_ids"] = ["S-2"]
+    write_json(rulings_path, rulings)
+    with pytest.raises(IssuanceError, match="clean issuance is unavailable"):
+        issue(index, rulings_path, open_gate_ids=["S-2"])
+
+
+def test_candidate_requires_exact_gate_set(ruled_inputs):
+    index, rulings_path, _, rulings = ruled_inputs
+    rulings["ruling_status"] = "candidate"
+    write_json(rulings_path, rulings)
+    with pytest.raises(IssuanceError, match="requires exactly"):
+        issue(index, rulings_path, candidate=True, open_gate_ids=["S-2"])

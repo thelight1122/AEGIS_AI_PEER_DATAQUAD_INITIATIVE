@@ -1,5 +1,11 @@
 # Canon v0.20 — C2 and C3 Findings
 
+> **Historical analysis notice (2026-08-15):** This document preserves the original C2/C3
+> findings as evidence and is no longer the live ruling ledger. The generated candidate ledger
+> in `docs/canon-v0.20/CANON-v0.20-INDEX.md` closes S-1, S-3, S-7, S-8, S-9, S-10, S-11,
+> S-12, and S-13, records the five approved Steward rulings, and keeps S-2, S-4, S-5, S-6,
+> and G-1 explicitly open. All v0.20 outputs remain CANDIDATE / review-needed.
+
 **Status:** ANALYSIS FOR RULING. Not Canon. Not an amendment.
 **Produced by:** Builder, 2026-08-06
 **For:** Steward (Tracey Prutch) and Auditor (Lumin)

@@ -1,4 +1,21 @@
 {
+  "candidate_only": true,
+  "candidate_rulings": {
+    "G-1": "OPEN \u2014 authority and consolidation status of the scoped application Glossaries.",
+    "S-1": "CLOSED \u2014 bounded corpus: CANON_FOUNDATIONAL_DOCS, authoritative Tier-1 Addendum Index and registered documents, Steward-supplied external sources, and required provenance sources; G: is reconciliation evidence only unless expressly admitted.",
+    "S-10": "CLOSED \u2014 Cryptonic Harmonics registered by stable coordinate and SHA-256.",
+    "S-11": "CLOSED \u2014 version prefix dropped, letter codes retained; filenames and citations migrated.",
+    "S-12": "CLOSED \u2014 April DataQuad Model preserved as historical lineage and superseded for current tensor definitions by Appendix A and the corrected SPINE addendum.",
+    "S-13": "CLOSED \u2014 three designated seed copies synchronized and byte-identical.",
+    "S-2": "OPEN \u2014 authoritative Addendum Index copy and G: registration-draft status.",
+    "S-3": "CLOSED \u2014 STANDARDS_BOUNDS merge repaired with both scoped bodies and provenance preserved.",
+    "S-4": "OPEN \u2014 AEGIS_CANON_CORE status and seed eligibility.",
+    "S-5": "OPEN \u2014 relationship of 12 Invariants to the 16 Axioms.",
+    "S-6": "OPEN \u2014 status vocabulary for non-Canon positioning documents.",
+    "S-7": "CLOSED \u2014 Response Buffer Chamber is the chamber expansion; Reflective Boundary Conditions remains its separate expression-constraint meaning.",
+    "S-8": "CLOSED \u2014 SPINE is Stabilized Patterned Interpretive Nexus of Evidence; seed records 16 Axioms.",
+    "S-9": "CLOSED \u2014 42,846-byte Shadow Affects line is current; smaller duplicate is deprecated."
+  },
   "canon_dir": "I:\\AEGIS-CENTRAL-CODEX\\TIER-1-CANON\\CANON_FOUNDATIONAL_DOCS",
   "class_counts": {
     "ADDENDUM": 27,
@@ -28,12 +45,6 @@
         "AEGIS STANDARDS v0.1.md"
       ]
     ]
-  },
-  "dangling_references": {
-    "Cryptonic Harmonics": "cited by v1.0-VE and v1.0-E; no row, no code, no located file",
-    "Education doctrine": "cited by v1.0-FBF; not a coded document",
-    "Nature Layer Canon v2": "cited by v1.0-E; not declared in the index",
-    "Shadow Effects.md": "cited by v1.1-S; note the spelling \u2014 every other reference is 'Affects'"
   },
   "document_count": 57,
   "entries": [
@@ -276,18 +287,18 @@
       "title": null
     },
     {
-      "bytes": 463,
+      "bytes": 1179,
       "class": "UNINDEXED",
       "code": null,
       "code_legacy": null,
       "date": null,
       "depends_on": [],
-      "file": "BIOPEER_DOCTRINE.md",
-      "has_version_table": false,
-      "header_format": "none",
+      "file": "AI_PEER_DOCTRINE_CANDIDATE.md",
+      "has_version_table": true,
+      "header_format": "version-table",
       "related_canon": null,
       "status_claimed_in_prose": null,
-      "status_declared": null,
+      "status_declared": "CANDIDATE",
       "supersedes": null,
       "tier": 0,
       "title": null
@@ -344,7 +355,7 @@
       "title": null
     },
     {
-      "bytes": 4432,
+      "bytes": 5161,
       "class": "UNINDEXED",
       "code": null,
       "code_legacy": null,
@@ -352,10 +363,10 @@
       "depends_on": [],
       "file": "GLOSSARY.md",
       "has_version_table": true,
-      "header_format": "version-table",
+      "header_format": "bold-header",
       "related_canon": null,
       "status_claimed_in_prose": null,
-      "status_declared": null,
+      "status_declared": "CANDIDATE",
       "supersedes": null,
       "tier": 0,
       "title": null
@@ -395,7 +406,7 @@
       "title": null
     },
     {
-      "bytes": 8040,
+      "bytes": 8076,
       "class": "ADDENDUM",
       "code": "S",
       "code_legacy": "S",
@@ -407,7 +418,7 @@
       "related_canon": null,
       "status_claimed_in_prose": null,
       "status_declared": "DEPRECATED",
-      "supersedes": "Shadow Effects.md (original document \u2014 8 affects)",
+      "supersedes": "Historical Shadow Affects 8-affect precursor (superseded; prior filename typo corrected)",
       "tier": 0,
       "title": "AEGIS Canon Addendum \u2014 Shadow Affects"
     },
@@ -429,7 +440,7 @@
       "title": null
     },
     {
-      "bytes": 26391,
+      "bytes": 26416,
       "class": "OTHER",
       "code": "Version suffix used in filenames and internal references",
       "code_legacy": "Version suffix used in filenames and internal references",
@@ -814,7 +825,7 @@
       "title": null
     },
     {
-      "bytes": 42821,
+      "bytes": 42857,
       "class": "ADDENDUM",
       "code": "S",
       "code_legacy": "S",
@@ -826,7 +837,7 @@
       "related_canon": null,
       "status_claimed_in_prose": null,
       "status_declared": "ACTIVE",
-      "supersedes": "Shadow Effects.md (original document \u2014 8 affects)",
+      "supersedes": "Historical Shadow Affects 8-affect precursor (superseded; prior filename typo corrected)",
       "tier": 0,
       "title": "AEGIS Canon Addendum \u2014 Shadow Affects"
     },
@@ -1041,7 +1052,7 @@
       "title": null
     }
   ],
-  "generated_utc": "2026-08-06T18:20:06Z",
+  "generated_utc": "2026-08-15T00:41:40Z",
   "incomplete_headers": [
     {
       "class": "KERNEL",
@@ -1174,10 +1185,8 @@
     },
     {
       "class": "UNINDEXED",
-      "file": "BIOPEER_DOCTRINE.md",
+      "file": "AI_PEER_DOCTRINE_CANDIDATE.md",
       "needs": [
-        "no parseable header (neither VERSION table nor bold key-value block)",
-        "no declared status",
         "no version code",
         "undated"
       ]
@@ -1215,7 +1224,6 @@
       "class": "UNINDEXED",
       "file": "GLOSSARY.md",
       "needs": [
-        "no declared status",
         "no version code",
         "undated"
       ]
@@ -1377,6 +1385,35 @@
     "total_citations": 0
   },
   "record_type": "canon_v0_20_index",
+  "reference_dispositions": {
+    "Cryptonic Harmonics": {
+      "coordinate": "AEGIS:CRYPTONIC-HARMONICS:v1.0",
+      "disposition": "REGISTERED_CANDIDATE",
+      "locator": "I:/AEGIS-ADAM-ONE/ADAM-AZURE-EDUCATION/CYBERPEER-ILLUMINATION-PROJECT/seeds/CRYPTONIC-HARMONICS-v1.0.md",
+      "sha256": "3324BDFEB872959C59473D6737D1385431584848F677744FC79FAD6DEFD6DED2"
+    },
+    "Education doctrine": {
+      "disposition": "EXCLUDED_PENDING_UNIQUE_SOURCE",
+      "note": "Approved Steward ruling; not admitted to candidate seeded bytes."
+    },
+    "Nature Layer Canon v2": {
+      "coordinate": "AEGIS:NATURE-LAYER-CANON:v2",
+      "disposition": "COORDINATE_RESERVED_LOCATOR_UNRESOLVED",
+      "note": "Excluded from candidate seeded bytes until the canonical locator is recovered."
+    },
+    "Shadow Effects.md": {
+      "coordinate": "AEGIS:CANON:ADDENDUM:S",
+      "disposition": "CORRECTED_REFERENCE",
+      "note": "Corrected to the historical Shadow Affects 8-affect precursor; S is current."
+    }
+  },
   "schema_version": "1.0.0",
-  "stage": "development"
+  "stage": "candidate_review_needed",
+  "steward_rulings": [
+    "Nature Layer Canon v2 uses coordinate AEGIS:NATURE-LAYER-CANON:v2; locator remains unresolved and its bytes are excluded.",
+    "Education doctrine is excluded from v0.20 until a uniquely authoritative source is located.",
+    "Truth/Memory/Provenance uses a separate assigned-memory ledger when provenance classes cannot be represented without altering the four tensors.",
+    "BIOPEER_DOCTRINE is reframed as an AI Peer doctrine candidate without doctrinal expansion.",
+    "IDR/IDQRA and Technical Imperatives remain ACTIVE, not LOCKED, pending separate lock evidence."
+  ]
 }

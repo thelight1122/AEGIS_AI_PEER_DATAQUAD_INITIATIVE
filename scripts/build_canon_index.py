@@ -56,13 +56,55 @@ DEPENDS_ON: dict[str, tuple[str, ...]] = {
     "AO": ("GMP", "VE", "SF", "DS", "S"),
 }
 
-#: Referenced by a Supersedes/Related cell but not declared anywhere as a coded document.
-DANGLING = {
-    "Cryptonic Harmonics": "cited by v1.0-VE and v1.0-E; no row, no code, no located file",
-    "Shadow Effects.md": "cited by v1.1-S; note the spelling — every other reference is 'Affects'",
-    "Education doctrine": "cited by v1.0-FBF; not a coded document",
-    "Nature Layer Canon v2": "cited by v1.0-E; not declared in the index",
+#: Candidate reference dispositions authorized by the Steward on 2026-08-14/15.
+#: These are reconciliation records, not a clean Canon issuance.
+REFERENCE_DISPOSITIONS = {
+    "Cryptonic Harmonics": {
+        "disposition": "REGISTERED_CANDIDATE",
+        "coordinate": "AEGIS:CRYPTONIC-HARMONICS:v1.0",
+        "sha256": "3324BDFEB872959C59473D6737D1385431584848F677744FC79FAD6DEFD6DED2",
+        "locator": "I:/AEGIS-ADAM-ONE/ADAM-AZURE-EDUCATION/CYBERPEER-ILLUMINATION-PROJECT/seeds/CRYPTONIC-HARMONICS-v1.0.md",
+    },
+    "Shadow Effects.md": {
+        "disposition": "CORRECTED_REFERENCE",
+        "coordinate": "AEGIS:CANON:ADDENDUM:S",
+        "note": "Corrected to the historical Shadow Affects 8-affect precursor; S is current.",
+    },
+    "Education doctrine": {
+        "disposition": "EXCLUDED_PENDING_UNIQUE_SOURCE",
+        "note": "Approved Steward ruling; not admitted to candidate seeded bytes.",
+    },
+    "Nature Layer Canon v2": {
+        "disposition": "COORDINATE_RESERVED_LOCATOR_UNRESOLVED",
+        "coordinate": "AEGIS:NATURE-LAYER-CANON:v2",
+        "note": "Excluded from candidate seeded bytes until the canonical locator is recovered.",
+    },
 }
+
+CANDIDATE_RULINGS = {
+    "S-1": "CLOSED — bounded corpus: CANON_FOUNDATIONAL_DOCS, authoritative Tier-1 Addendum Index and registered documents, Steward-supplied external sources, and required provenance sources; G: is reconciliation evidence only unless expressly admitted.",
+    "S-2": "OPEN — authoritative Addendum Index copy and G: registration-draft status.",
+    "S-3": "CLOSED — STANDARDS_BOUNDS merge repaired with both scoped bodies and provenance preserved.",
+    "S-4": "OPEN — AEGIS_CANON_CORE status and seed eligibility.",
+    "S-5": "OPEN — relationship of 12 Invariants to the 16 Axioms.",
+    "S-6": "OPEN — status vocabulary for non-Canon positioning documents.",
+    "S-7": "CLOSED — Response Buffer Chamber is the chamber expansion; Reflective Boundary Conditions remains its separate expression-constraint meaning.",
+    "S-8": "CLOSED — SPINE is Stabilized Patterned Interpretive Nexus of Evidence; seed records 16 Axioms.",
+    "S-9": "CLOSED — 42,846-byte Shadow Affects line is current; smaller duplicate is deprecated.",
+    "S-10": "CLOSED — Cryptonic Harmonics registered by stable coordinate and SHA-256.",
+    "S-11": "CLOSED — version prefix dropped, letter codes retained; filenames and citations migrated.",
+    "S-12": "CLOSED — April DataQuad Model preserved as historical lineage and superseded for current tensor definitions by Appendix A and the corrected SPINE addendum.",
+    "S-13": "CLOSED — three designated seed copies synchronized and byte-identical.",
+    "G-1": "OPEN — authority and consolidation status of the scoped application Glossaries.",
+}
+
+STEWARD_RULINGS = (
+    "Nature Layer Canon v2 uses coordinate AEGIS:NATURE-LAYER-CANON:v2; locator remains unresolved and its bytes are excluded.",
+    "Education doctrine is excluded from v0.20 until a uniquely authoritative source is located.",
+    "Truth/Memory/Provenance uses a separate assigned-memory ledger when provenance classes cannot be represented without altering the four tensors.",
+    "BIOPEER_DOCTRINE is reframed as an AI Peer doctrine candidate without doctrinal expansion.",
+    "IDR/IDQRA and Technical Imperatives remain ACTIVE, not LOCKED, pending separate lock evidence.",
+)
 
 CLASS_ORDER = ["KERNEL", "APPENDIX", "ADDENDUM", "UNINDEXED", "OTHER"]
 
@@ -359,10 +401,9 @@ def render(entries: list[dict], canon_dir: Path, generated: str) -> str:
 
     add("# AEGIS Canon v0.20 — Index")
     add("")
-    add("**Stage:** development. Nothing has gone live. The kernel is stable; the surrounding")
-    add("material is in active development. Version labels in filenames read `v1.0-XX`; that")
-    add("numbering predates this framing and is carried forward verbatim, not endorsed — see")
-    add("ruling S-11.")
+    add("**Status:** CANDIDATE / review-needed. Nothing in this index issues Canon, a clean")
+    add("manifest, or a seed. The kernel is stable; the surrounding material remains in active")
+    add("development. Ruling S-11 has been applied to letter codes, filenames, and citations.")
     add("")
     add("**DERIVED DOCUMENT — DO NOT HAND-EDIT.** Regenerate with:")
     add("")
@@ -388,6 +429,33 @@ def render(entries: list[dict], canon_dir: Path, generated: str) -> str:
     add("| Status | Transcribed from the document. `UNDECLARED` = the document states none. |")
     add("| Tier | Consolidation order. Tier 0 has no declared dependency; higher tiers depend on lower. |")
     add("| Depends on | From the prior index's Supersedes column, which mixes *replaces*, *extends*, and *corrects part of*. Treat as consolidation order, **not** as retirement. |")
+    add("")
+
+    add("---")
+    add("")
+    add("## CANDIDATE RULING LEDGER")
+    add("")
+    add("| Ruling | Candidate disposition |")
+    add("|---|---|")
+    for ruling, disposition in CANDIDATE_RULINGS.items():
+        add(f"| `{ruling}` | {disposition} |")
+    add("")
+    add("### Approved Steward rulings recorded for this candidate")
+    add("")
+    for ruling in STEWARD_RULINGS:
+        add(f"- {ruling}")
+    add("")
+
+    add("### Registered and reconciled references")
+    add("")
+    add("| Reference | Disposition | Coordinate / note |")
+    add("|---|---|---|")
+    for ref, disposition in REFERENCE_DISPOSITIONS.items():
+        detail = disposition.get("coordinate") or disposition.get("note") or "—"
+        digest = disposition.get("sha256")
+        if digest:
+            detail += f"; SHA-256 `{digest}`"
+        add(f"| {ref} | `{disposition['disposition']}` | {detail} |")
     add("")
 
     # Kernel
@@ -505,16 +573,15 @@ def render(entries: list[dict], canon_dir: Path, generated: str) -> str:
 
 
 def render_rename_impact(impact: dict) -> str:
-    """What renaming files (as opposed to adopting the code scheme) would actually cost."""
+    """Record the completed S-11 migration and any residual legacy citations."""
     L: list[str] = []
     add = L.append
     add("---")
     add("")
-    add("## FILE RENAME — not done, and here is the cost")
+    add("## FILE/CITATION MIGRATION — S-11 closed")
     add("")
-    add("S-11 rules on the **code scheme**. Filenames on disk still carry the legacy form, and")
-    add("so does every cross-reference written inside the documents. Renaming files is a separate")
-    add("decision; this is what it would touch.")
+    add("S-11 has been applied to the code scheme, Canon filenames, and in-document citations.")
+    add("The table below reports any residual legacy-code citations found by the current scan.")
     add("")
     add(f"**{impact['total_citations']} citations** of legacy codes across the Canon directory.")
     add("")
@@ -523,9 +590,8 @@ def render_rename_impact(impact: dict) -> str:
     for code, d in sorted(impact["codes"].items(), key=lambda kv: -kv[1]["citations"]):
         add(f"| `{code}` | {d['citations']} | {d['in_files']} |")
     add("")
-    add("A rename that updates filenames without rewriting these citations would break them all.")
-    add("A rename that rewrites them is a corpus-wide edit. The index works either way — it")
-    add("carries both forms — so nothing downstream is blocked on this.")
+    add("Zero residual citations confirms the completed migration; any later nonzero result is")
+    add("candidate drift requiring review, not permission for another silent rewrite.")
     add("")
     return "\n".join(L)
 
@@ -576,24 +642,22 @@ def render_open_items(entries: list[dict], missing: list[dict], coll: dict) -> s
         add(f"| `{m['file'][:62]}` | {'; '.join(m['needs'])} |")
     add("")
 
-    add("### Dangling references")
+    add("### Reference dispositions")
     add("")
-    add("Cited by a Supersedes or Related Canon cell, but not declared as a coded document.")
+    add("Formerly dangling references and their candidate dispositions.")
     add("")
     add("| Reference | Note |")
     add("|---|---|")
-    for ref, note in DANGLING.items():
-        add(f"| {ref} | {note} |")
+    for ref, disposition in REFERENCE_DISPOSITIONS.items():
+        add(f"| {ref} | {disposition['disposition']}: {disposition.get('note') or disposition.get('coordinate') or '—'} |")
     add("")
 
-    add("### Carried-forward conflicts")
+    add("### Rulings intentionally left open")
     add("")
     add("| # | Item |")
     add("|---|---|")
-    add("| S-3 | `STANDARDS_BOUNDS.md` holds an unresolved git merge conflict (lines 1, 55, 161) whose markers were backslash-escaped, so it renders as ordinary prose. Two documents concatenated. Not indexable until the merge is re-derived. |")
-    add("| S-7 | RBC: the prior index calls *Reflective Boundary Conditions* canonical and marks *Resonance Buffer Chamber* for renaming. `GATE: RBC Stage Integrity` in Core Foundational Canon says both are retained and neither replaces the other. A third expansion, *Response Buffer Chamber*, appears in `AEGIS Sigil Origin.md`. |")
-    add("| S-9 | Shadow Affects: the prior index declares `v1.1-S`; `v1.0-E` and `v1.0-N` cite `v1.5-S`. One is stale. |")
-    add("| S-11 | 29 of 30 version labels read `v1.x` for a pre-release Canon. All 26 addenda are coded `v1.0-XX` — addenda to a v1.0 that has not shipped. Builder recommends dropping the version prefix and keeping the letter codes. |")
+    for ruling in ("S-2", "S-4", "S-5", "S-6", "G-1"):
+        add(f"| {ruling} | {CANDIDATE_RULINGS[ruling].removeprefix('OPEN — ')} |")
     add("| — | Symbol collisions across the equations cluster and `v1.0-E`: `W`, `C`, and `τ` each carry two meanings. `v1.0-E`'s Balance Equation generalizes the Presence Equation without citing it. |")
     add("| — | `v1.0-E` leaves ten thresholds unvalued (`ε_s`, `θ_δ,s`, `θ_C,s`, `θ_τ,s`, `θ_B`, `θ_low`, `θ_high`, `λ`, `ρ`, `N`/`M`); the equation is not yet operable. |")
     add("")
@@ -644,7 +708,8 @@ def main() -> int:
     args.out_json.write_text(json.dumps({
         "schema_version": "1.0.0",
         "record_type": "canon_v0_20_index",
-        "stage": "development",
+        "stage": "candidate_review_needed",
+        "candidate_only": True,
         "generated_utc": generated,
         "canon_dir": str(args.canon_dir),
         "document_count": len(entries),
@@ -652,7 +717,9 @@ def main() -> int:
         "code_scheme": "S-11: version prefix dropped, letter code retained",
         "entries": entries,
         "incomplete_headers": missing,
-        "dangling_references": DANGLING,
+        "reference_dispositions": REFERENCE_DISPOSITIONS,
+        "candidate_rulings": CANDIDATE_RULINGS,
+        "steward_rulings": STEWARD_RULINGS,
         "collisions": coll,
         "legacy_citation_impact": impact,
     }, indent=2, sort_keys=True, default=str) + "\n", encoding="utf-8")

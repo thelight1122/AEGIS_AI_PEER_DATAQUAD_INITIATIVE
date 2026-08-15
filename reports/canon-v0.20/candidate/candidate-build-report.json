@@ -1,0 +1,37 @@
+{
+  "artifact_status": "candidate-review-needed",
+  "canon_lock_status": "review-needed",
+  "invariants": {
+    "axiom_count": 16,
+    "credentials_present": false,
+    "memory_not_command": true,
+    "ring4_included": false,
+    "spine_name": "Stabilized Patterned Interpretive Nexus of Evidence"
+  },
+  "manifest_digest_bound_in_seed": "916E05E3667C711F9FD90A3650E2A5574DB39728AA17AAA9F948F080C8DE372B",
+  "open_gate_ids": [
+    "S-2",
+    "S-4",
+    "S-5",
+    "S-6",
+    "G-1"
+  ],
+  "outputs": {
+    "manifest": {
+      "path": "reports\\canon-v0.20\\candidate\\canon-v0.20-candidate-manifest.json",
+      "sha256": "916E05E3667C711F9FD90A3650E2A5574DB39728AA17AAA9F948F080C8DE372B"
+    },
+    "rulings": {
+      "path": "reports\\canon-v0.20\\candidate\\canon-v0.20-candidate-rulings.json",
+      "sha256": "28D77DAD1AC992A0418E5D4CE406A8F6B4BBE9E65FCA7AEA9F54B9AB8EB48550"
+    },
+    "seed": {
+      "path": "reports\\canon-v0.20\\candidate\\ai-peer-foundation-seed-v0.20-candidate.json",
+      "sha256": "80E0F1DA62B2888494486232603BF12147483716204EE13BB5BCAF4881D8CEE2"
+    },
+    "source_index": {
+      "path": "reports\\canon-v0.20\\canon-v0.20-index.json",
+      "sha256": "966B369B4BE0196F793D9B2B6CEBE489FD4308E32982D7B28E6BB2AA1BCE1639"
+    }
+  }
+}

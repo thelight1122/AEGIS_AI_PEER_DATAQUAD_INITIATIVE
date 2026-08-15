@@ -24,6 +24,7 @@ FORBIDDEN_FIELD_RE = re.compile(
     re.IGNORECASE,
 )
 UNRESOLVED_WORDS = {"review-needed", "review_needed", "unresolved", "missing", "undeclared"}
+REQUIRED_CANDIDATE_GATES = ("S-2", "S-4", "S-5", "S-6", "G-1")
 
 
 class RebuildRefused(ValueError):
@@ -65,9 +66,11 @@ def _source_is_unresolved(source: dict[str, Any]) -> bool:
     return bool(source.get("requiresReview") or source.get("unresolved"))
 
 
-def validate_manifest(manifest: dict[str, Any], raw: bytes) -> tuple[str, str]:
-    manifest_id = manifest.get("manifestId")
-    sources = manifest.get("sources")
+def validate_manifest(
+    manifest: dict[str, Any], raw: bytes, *, candidate: bool = False
+) -> tuple[str, str, list[str]]:
+    manifest_id = manifest.get("manifestId") or manifest.get("manifest_id")
+    sources = manifest.get("sources") or manifest.get("entries")
     if not isinstance(manifest_id, str) or not manifest_id.strip():
         raise RebuildRefused("manifestId is required")
     if not isinstance(sources, list) or not sources:
@@ -75,18 +78,30 @@ def validate_manifest(manifest: dict[str, Any], raw: bytes) -> tuple[str, str]:
     declared_count = manifest.get("sourceCount")
     if declared_count is not None and declared_count != len(sources):
         raise RebuildRefused("manifest sourceCount does not match sources")
-    if manifest.get("reviewNeededSourceCount") != 0:
-        raise RebuildRefused("manifest reviewNeededSourceCount must equal zero")
+    gates = sorted(set(manifest.get("open_gate_ids", [])))
+    if candidate:
+        if manifest.get("issuance_status") != "candidate" or manifest.get("canon_lock_status") != "review-needed":
+            raise RebuildRefused("candidate manifest must be explicitly candidate and review-needed")
+        if gates != sorted(REQUIRED_CANDIDATE_GATES):
+            raise RebuildRefused("candidate manifest does not enumerate the required open gates")
+        if not isinstance(manifest.get("reviewNeededSourceCount"), int) or manifest["reviewNeededSourceCount"] < len(gates):
+            raise RebuildRefused("candidate review count must cover every open gate")
+    else:
+        if gates:
+            raise RebuildRefused("clean-lock path is unavailable while gates are open")
+        if manifest.get("reviewNeededSourceCount") != 0:
+            raise RebuildRefused("manifest reviewNeededSourceCount must equal zero")
     for index, source in enumerate(sources):
-        if not isinstance(source, dict) or _source_is_unresolved(source):
+        if not isinstance(source, dict) or (not candidate and _source_is_unresolved(source)):
             raise RebuildRefused(f"manifest source {index} is unresolved or review-needed")
         digest = source.get("sha256") or source.get("digest")
-        if not isinstance(digest, str) or not SHA256_RE.fullmatch(digest):
+        unresolved_locator = bool(source.get("locator_unresolved")) and source.get("seeded") is False
+        if not unresolved_locator and (not isinstance(digest, str) or not SHA256_RE.fullmatch(digest)):
             raise RebuildRefused(f"manifest source {index} lacks a valid SHA-256 digest")
         coordinate = source.get("coordinate") or source.get("canonicalCoordinate") or source.get("canonicalFilename")
         if not isinstance(coordinate, str) or not coordinate.strip():
             raise RebuildRefused(f"manifest source {index} lacks a canonical coordinate")
-    return manifest_id, sha256_bytes(raw)
+    return manifest_id, sha256_bytes(raw), gates
 
 
 def _collect_axioms(records: dict[str, Any]) -> set[int]:
@@ -119,19 +134,28 @@ def validate_historical_seed(seed: dict[str, Any]) -> None:
     _assert_no_credentials(seed)
 
 
-def rebuild(manifest: dict[str, Any], manifest_raw: bytes, historical: dict[str, Any]) -> dict[str, Any]:
-    manifest_id, manifest_digest = validate_manifest(manifest, manifest_raw)
+def rebuild(
+    manifest: dict[str, Any],
+    manifest_raw: bytes,
+    historical: dict[str, Any],
+    *,
+    candidate: bool = False,
+) -> dict[str, Any]:
+    manifest_id, manifest_digest, gates = validate_manifest(manifest, manifest_raw, candidate=candidate)
     validate_historical_seed(historical)
     output = copy.deepcopy(historical)
-    output["packageId"] = "AEGIS-AI-PEER-FOUNDATION-SEED:v0.20"
+    output["packageId"] = "AEGIS-AI-PEER-FOUNDATION-SEED:v0.20" + (":CANDIDATE" if candidate else "")
     output["packageVersion"] = "v0.20"
-    output["canonLock"] = {
-        "derivation": "computed-from-v0.20-manifest",
-        "reviewNeededSourceCount": 0,
+    canon_lock = {
+        "derivation": "computed-from-v0.20-candidate-manifest" if candidate else "computed-from-v0.20-manifest",
+        "reviewNeededSourceCount": len(gates) if candidate else 0,
         "sourceManifestId": manifest_id,
         "sourceManifestSha256": manifest_digest,
-        "status": "clean",
+        "status": "review-needed" if candidate else "clean",
     }
+    if candidate:
+        canon_lock["openGateIds"] = gates
+    output["canonLock"] = canon_lock
     output["foundationContract"] = {
         "executionAuthority": "none",
         "identityAssertion": False,
@@ -174,10 +198,11 @@ def main() -> int:
     parser.add_argument("--manifest", required=True, type=Path)
     parser.add_argument("--historical-seed", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
+    parser.add_argument("--candidate", action="store_true")
     args = parser.parse_args()
     manifest, manifest_raw = load_json(args.manifest)
     historical, _ = load_json(args.historical_seed)
-    result = rebuild(manifest, manifest_raw, historical)
+    result = rebuild(manifest, manifest_raw, historical, candidate=args.candidate)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_bytes(canonical_bytes(result))
     print(json.dumps({"output": str(args.output), "sha256": sha256_bytes(canonical_bytes(result))}, sort_keys=True))

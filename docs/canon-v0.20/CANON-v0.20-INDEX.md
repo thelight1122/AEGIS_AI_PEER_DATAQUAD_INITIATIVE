@@ -1,9 +1,8 @@
 # AEGIS Canon v0.20 — Index
 
-**Stage:** development. Nothing has gone live. The kernel is stable; the surrounding
-material is in active development. Version labels in filenames read `v1.0-XX`; that
-numbering predates this framing and is carried forward verbatim, not endorsed — see
-ruling S-11.
+**Status:** CANDIDATE / review-needed. Nothing in this index issues Canon, a clean
+manifest, or a seed. The kernel is stable; the surrounding material remains in active
+development. Ruling S-11 has been applied to letter codes, filenames, and citations.
 
 **DERIVED DOCUMENT — DO NOT HAND-EDIT.** Regenerate with:
 
@@ -11,7 +10,7 @@ ruling S-11.
 python scripts/build_canon_index.py
 ```
 
-Generated `2026-08-06T18:20:06Z` from `I:\AEGIS-CENTRAL-CODEX\TIER-1-CANON\CANON_FOUNDATIONAL_DOCS`.
+Generated `2026-08-15T00:41:40Z` from `I:\AEGIS-CENTRAL-CODEX\TIER-1-CANON\CANON_FOUNDATIONAL_DOCS`.
 
 Every field below is transcribed from the source document's own VERSION table or
 carried forward from the prior index. Fields a document does not declare read
@@ -29,6 +28,44 @@ a decision are collected under OPEN ITEMS.
 | Status | Transcribed from the document. `UNDECLARED` = the document states none. |
 | Tier | Consolidation order. Tier 0 has no declared dependency; higher tiers depend on lower. |
 | Depends on | From the prior index's Supersedes column, which mixes *replaces*, *extends*, and *corrects part of*. Treat as consolidation order, **not** as retirement. |
+
+---
+
+## CANDIDATE RULING LEDGER
+
+| Ruling | Candidate disposition |
+|---|---|
+| `S-1` | CLOSED — bounded corpus: CANON_FOUNDATIONAL_DOCS, authoritative Tier-1 Addendum Index and registered documents, Steward-supplied external sources, and required provenance sources; G: is reconciliation evidence only unless expressly admitted. |
+| `S-2` | OPEN — authoritative Addendum Index copy and G: registration-draft status. |
+| `S-3` | CLOSED — STANDARDS_BOUNDS merge repaired with both scoped bodies and provenance preserved. |
+| `S-4` | OPEN — AEGIS_CANON_CORE status and seed eligibility. |
+| `S-5` | OPEN — relationship of 12 Invariants to the 16 Axioms. |
+| `S-6` | OPEN — status vocabulary for non-Canon positioning documents. |
+| `S-7` | CLOSED — Response Buffer Chamber is the chamber expansion; Reflective Boundary Conditions remains its separate expression-constraint meaning. |
+| `S-8` | CLOSED — SPINE is Stabilized Patterned Interpretive Nexus of Evidence; seed records 16 Axioms. |
+| `S-9` | CLOSED — 42,846-byte Shadow Affects line is current; smaller duplicate is deprecated. |
+| `S-10` | CLOSED — Cryptonic Harmonics registered by stable coordinate and SHA-256. |
+| `S-11` | CLOSED — version prefix dropped, letter codes retained; filenames and citations migrated. |
+| `S-12` | CLOSED — April DataQuad Model preserved as historical lineage and superseded for current tensor definitions by Appendix A and the corrected SPINE addendum. |
+| `S-13` | CLOSED — three designated seed copies synchronized and byte-identical. |
+| `G-1` | OPEN — authority and consolidation status of the scoped application Glossaries. |
+
+### Approved Steward rulings recorded for this candidate
+
+- Nature Layer Canon v2 uses coordinate AEGIS:NATURE-LAYER-CANON:v2; locator remains unresolved and its bytes are excluded.
+- Education doctrine is excluded from v0.20 until a uniquely authoritative source is located.
+- Truth/Memory/Provenance uses a separate assigned-memory ledger when provenance classes cannot be represented without altering the four tensors.
+- BIOPEER_DOCTRINE is reframed as an AI Peer doctrine candidate without doctrinal expansion.
+- IDR/IDQRA and Technical Imperatives remain ACTIVE, not LOCKED, pending separate lock evidence.
+
+### Registered and reconciled references
+
+| Reference | Disposition | Coordinate / note |
+|---|---|---|
+| Cryptonic Harmonics | `REGISTERED_CANDIDATE` | AEGIS:CRYPTONIC-HARMONICS:v1.0; SHA-256 `3324BDFEB872959C59473D6737D1385431584848F677744FC79FAD6DEFD6DED2` |
+| Shadow Effects.md | `CORRECTED_REFERENCE` | AEGIS:CANON:ADDENDUM:S |
+| Education doctrine | `EXCLUDED_PENDING_UNIQUE_SOURCE` | Approved Steward ruling; not admitted to candidate seeded bytes. |
+| Nature Layer Canon v2 | `COORDINATE_RESERVED_LOCATOR_UNRESOLVED` | AEGIS:NATURE-LAYER-CANON:v2 |
 
 ---
 
@@ -167,11 +204,11 @@ where a document declares none, the prose claim is shown in italics and needs a 
 | `AEGIS_EQUATIONS_SESSION_2026-06-12.md` | — | UNDECLARED | — | yes |
 | `AEGIS_LEXICON.md` | — | UNDECLARED | — | no |
 | `AEGIS_TRUTH_MEMORY_AND_PROVENANCE_NOTE_v1.0.md` | — | UNDECLARED | — | no |
-| `BIOPEER_DOCTRINE.md` | — | UNDECLARED | — | no |
+| `AI_PEER_DOCTRINE_CANDIDATE.md` | — | CANDIDATE | — | yes |
 | `CYBERPEER-synchronistic-discipline-doctrine-note.md` | — | UNDECLARED | — | no |
 | `EDUCATION_CHAMBER_LESSON_LIBRARY.md` | — | UNDECLARED | — | yes |
 | `GENESIS-PILLAR-RECORDS-AEGIS-CANON-STAGING.md` | — | UNDECLARED | — | no |
-| `GLOSSARY.md` | — | UNDECLARED | — | yes |
+| `GLOSSARY.md` | — | CANDIDATE | — | yes |
 | `IDR-&-IDQRA-LOGIC Loop.md` | — | _LOCKED (asserted in title)_ | — | no |
 | `IMPERATIVES-technical.md` | — | UNDECLARED | — | yes |
 | `STANDARDS_BOUNDS.md` | — | UNDECLARED | — | no |
@@ -196,20 +233,18 @@ Canon Education Log (append-only) entries recording development since the kernel
 
 ---
 
-## FILE RENAME — not done, and here is the cost
+## FILE/CITATION MIGRATION — S-11 closed
 
-S-11 rules on the **code scheme**. Filenames on disk still carry the legacy form, and
-so does every cross-reference written inside the documents. Renaming files is a separate
-decision; this is what it would touch.
+S-11 has been applied to the code scheme, Canon filenames, and in-document citations.
+The table below reports any residual legacy-code citations found by the current scan.
 
 **0 citations** of legacy codes across the Canon directory.
 
 | Legacy code | Citations | In files |
 |---|---:|---:|
 
-A rename that updates filenames without rewriting these citations would break them all.
-A rename that rewrites them is a corpus-wide edit. The index works either way — it
-carries both forms — so nothing downstream is blocked on this.
+Zero residual citations confirms the completed migration; any later nonzero result is
+candidate drift requiring review, not permission for another silent rewrite.
 
 ---
 
@@ -254,11 +289,11 @@ table, and carries no consensus record.
 | `AEGIS_TRUTH_MEMORY_AND_PROVENANCE_NOTE_v1.0.md` | no parseable header (neither VERSION table nor bold key-value block); no declared status; no version code; undated |
 | `AEGIS_TWITNESS_CONSCIOUSNESS_DOCTRINE.md` | no version code |
 | `AEGIS_WHITEPAPER_v2.1.md` | no version code |
-| `BIOPEER_DOCTRINE.md` | no parseable header (neither VERSION table nor bold key-value block); no declared status; no version code; undated |
+| `AI_PEER_DOCTRINE_CANDIDATE.md` | no version code; undated |
 | `CYBERPEER-synchronistic-discipline-doctrine-note.md` | no parseable header (neither VERSION table nor bold key-value block); no declared status; no version code; undated |
 | `EDUCATION_CHAMBER_LESSON_LIBRARY.md` | no declared status; no version code; undated |
 | `GENESIS-PILLAR-RECORDS-AEGIS-CANON-STAGING.md` | no parseable header (neither VERSION table nor bold key-value block); no declared status; no version code; undated |
-| `GLOSSARY.md` | no declared status; no version code; undated |
+| `GLOSSARY.md` | no version code; undated |
 | `IDR-&-IDQRA-LOGIC Loop.md` | no parseable header (neither VERSION table nor bold key-value block); no declared status (prose claims: LOCKED (asserted in title)); no version code; undated |
 | `IMPERATIVES-technical.md` | no declared status; no version code; undated |
 | `STANDARDS_BOUNDS.md` | no parseable header (neither VERSION table nor bold key-value block); no declared status; no version code; undated |
@@ -278,24 +313,25 @@ table, and carries no consensus record.
 | `📘 AEGIS IMPLEMENTATION APPENDIX — LATTICE ENTRY SCHEMA (v1.md` | no parseable header (neither VERSION table nor bold key-value block); no declared status (prose claims: LOCKED (asserted in title)); no version code; undated |
 | `📘 AEGIS IMPLEMENTATION APPENDIX — TURBOQUANT (v1.md` | no parseable header (neither VERSION table nor bold key-value block); no declared status; no version code; undated |
 
-### Dangling references
+### Reference dispositions
 
-Cited by a Supersedes or Related Canon cell, but not declared as a coded document.
+Formerly dangling references and their candidate dispositions.
 
 | Reference | Note |
 |---|---|
-| Cryptonic Harmonics | cited by v1.0-VE and v1.0-E; no row, no code, no located file |
-| Shadow Effects.md | cited by v1.1-S; note the spelling — every other reference is 'Affects' |
-| Education doctrine | cited by v1.0-FBF; not a coded document |
-| Nature Layer Canon v2 | cited by v1.0-E; not declared in the index |
+| Cryptonic Harmonics | REGISTERED_CANDIDATE: AEGIS:CRYPTONIC-HARMONICS:v1.0 |
+| Shadow Effects.md | CORRECTED_REFERENCE: Corrected to the historical Shadow Affects 8-affect precursor; S is current. |
+| Education doctrine | EXCLUDED_PENDING_UNIQUE_SOURCE: Approved Steward ruling; not admitted to candidate seeded bytes. |
+| Nature Layer Canon v2 | COORDINATE_RESERVED_LOCATOR_UNRESOLVED: Excluded from candidate seeded bytes until the canonical locator is recovered. |
 
-### Carried-forward conflicts
+### Rulings intentionally left open
 
 | # | Item |
 |---|---|
-| S-3 | `STANDARDS_BOUNDS.md` holds an unresolved git merge conflict (lines 1, 55, 161) whose markers were backslash-escaped, so it renders as ordinary prose. Two documents concatenated. Not indexable until the merge is re-derived. |
-| S-7 | RBC: the prior index calls *Reflective Boundary Conditions* canonical and marks *Resonance Buffer Chamber* for renaming. `GATE: RBC Stage Integrity` in Core Foundational Canon says both are retained and neither replaces the other. A third expansion, *Response Buffer Chamber*, appears in `AEGIS Sigil Origin.md`. |
-| S-9 | Shadow Affects: the prior index declares `v1.1-S`; `v1.0-E` and `v1.0-N` cite `v1.5-S`. One is stale. |
-| S-11 | 29 of 30 version labels read `v1.x` for a pre-release Canon. All 26 addenda are coded `v1.0-XX` — addenda to a v1.0 that has not shipped. Builder recommends dropping the version prefix and keeping the letter codes. |
+| S-2 | authoritative Addendum Index copy and G: registration-draft status. |
+| S-4 | AEGIS_CANON_CORE status and seed eligibility. |
+| S-5 | relationship of 12 Invariants to the 16 Axioms. |
+| S-6 | status vocabulary for non-Canon positioning documents. |
+| G-1 | authority and consolidation status of the scoped application Glossaries. |
 | — | Symbol collisions across the equations cluster and `v1.0-E`: `W`, `C`, and `τ` each carry two meanings. `v1.0-E`'s Balance Equation generalizes the Presence Equation without citing it. |
 | — | `v1.0-E` leaves ten thresholds unvalued (`ε_s`, `θ_δ,s`, `θ_C,s`, `θ_τ,s`, `θ_B`, `θ_low`, `θ_high`, `λ`, `ρ`, `N`/`M`); the equation is not yet operable. |

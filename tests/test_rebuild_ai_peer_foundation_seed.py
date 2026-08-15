@@ -88,3 +88,29 @@ def test_canonical_output_is_deterministic_and_cli_writes_only_requested_output(
     assert first == second
     parsed = json.loads(first)
     assert list(parsed) == sorted(parsed)
+
+
+def candidate_manifest():
+    manifest, _, seed = inputs()
+    manifest["issuance_status"] = "candidate"
+    manifest["canon_lock_status"] = "review-needed"
+    manifest["open_gate_ids"] = ["S-2", "S-4", "S-5", "S-6", "G-1"]
+    manifest["reviewNeededSourceCount"] = 5
+    raw = rebuilder.canonical_bytes(manifest)
+    return manifest, raw, seed
+
+
+def test_candidate_seed_remains_review_needed_and_binds_manifest():
+    manifest, raw, seed = candidate_manifest()
+    out = rebuilder.rebuild(manifest, raw, seed, candidate=True)
+    assert out["canonLock"]["status"] == "review-needed"
+    assert out["canonLock"]["openGateIds"] == ["G-1", "S-2", "S-4", "S-5", "S-6"]
+    assert out["canonLock"]["sourceManifestSha256"] == rebuilder.sha256_bytes(raw)
+    assert out["foundationContract"]["memoryNotCommand"] is True
+    assert out["foundationContract"]["ring4Included"] is False
+
+
+def test_candidate_manifest_cannot_reach_clean_lock_path():
+    manifest, raw, seed = candidate_manifest()
+    with pytest.raises(rebuilder.RebuildRefused, match="clean-lock path is unavailable"):
+        rebuilder.rebuild(manifest, raw, seed)
