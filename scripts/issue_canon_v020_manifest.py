@@ -11,6 +11,7 @@ import hashlib
 import json
 import re
 import sys
+import tempfile
 from pathlib import Path
 from typing import Any
 
@@ -165,6 +166,8 @@ def issue(
             byte_count = len(data)
 
         manifest_entries.append({
+            **({"alias_of": decision["alias_of"]} if decision.get("alias_of") else {}),
+            **({"canonical_identity": decision["canonical_identity"]} if decision.get("canonical_identity") else {}),
             "classification": classification,
             "coordinate": coordinate,
             "digest": digest_value,
@@ -184,6 +187,12 @@ def issue(
         for target in entry["supersession"]:
             if target not in by_coordinate:
                 raise IssuanceError(f"dangling supersession reference: {entry['coordinate']} -> {target}")
+        alias_of = entry.get("alias_of")
+        if alias_of:
+            if alias_of not in by_coordinate:
+                raise IssuanceError(f"dangling locator alias: {entry['coordinate']} -> {alias_of}")
+            if entry["seeded"]:
+                raise IssuanceError(f"duplicate locator alias cannot be seeded: {entry['coordinate']}")
 
     references = rulings.get("references", {})
     if not isinstance(references, dict):
@@ -227,6 +236,26 @@ def issue(
     return body
 
 
+def preflight_clean(index_path: Path, candidate_rulings_path: Path) -> dict[str, Any]:
+    """Validate clean eligibility without issuing an authoritative artifact."""
+    rulings = _load(candidate_rulings_path)
+    if rulings.get("ruling_status") != "candidate":
+        raise IssuanceError("clean preflight requires the current candidate rulings")
+    approved = dict(rulings)
+    approved["ruling_status"] = "approved"
+    with tempfile.TemporaryDirectory(prefix="aegis-canon-v020-preflight-") as directory:
+        path = Path(directory) / "approved-rulings.json"
+        path.write_bytes(_canonical_bytes(approved))
+        prospective = issue(index_path, path, candidate=False, open_gate_ids=[])
+    return {
+        "eligible": prospective["reviewNeededSourceCount"] == 0,
+        "entry_count": len(prospective["entries"]),
+        "reviewNeededSourceCount": prospective["reviewNeededSourceCount"],
+        "authoritative_artifact_issued": False,
+        "prospective_manifest_digest": prospective["manifest_digest"],
+    }
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--index", type=Path, required=True)
@@ -234,11 +263,18 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--output", type=Path)
     parser.add_argument("--emit-only", action="store_true")
     parser.add_argument("--candidate", action="store_true")
+    parser.add_argument("--preflight-clean", action="store_true")
     parser.add_argument("--open-gate", action="append", default=[])
     args = parser.parse_args(argv)
     if not args.emit_only and args.output is None:
         parser.error("--output is required unless --emit-only is used")
     try:
+        if args.preflight_clean:
+            if args.output is not None:
+                parser.error("--preflight-clean never accepts --output")
+            result = preflight_clean(args.index, args.rulings)
+            sys.stdout.write(json.dumps(result, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
+            return 0 if result["eligible"] else 2
         manifest = issue(
             args.index,
             args.rulings,

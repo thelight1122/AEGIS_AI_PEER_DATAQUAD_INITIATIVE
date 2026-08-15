@@ -10,7 +10,7 @@ development. Ruling S-11 has been applied to letter codes, filenames, and citati
 python scripts/build_canon_index.py
 ```
 
-Generated `2026-08-15T00:47:04Z` from `I:\AEGIS-CENTRAL-CODEX\TIER-1-CANON\CANON_FOUNDATIONAL_DOCS`.
+Generated `2026-08-15T01:22:37Z` from `I:\AEGIS-CENTRAL-CODEX\TIER-1-CANON\CANON_FOUNDATIONAL_DOCS`.
 
 Every field below is transcribed from the source document's own VERSION table or
 carried forward from the prior index. Fields a document does not declare read
@@ -62,6 +62,37 @@ a decision are collected under OPEN ITEMS.
 - The 12 Invariants summarize subordinate operational constraints beneath the 16 Axioms and do not replace them.
 - POSITIONING is an explicit non-Canon classification for whitepapers and comparable material.
 - AEGIS Canonical Glossary v1.0 governs foundational definitions; GLOSSARY.md retains its scoped application lineage.
+
+### Steward-approved final classification table
+
+These rulings govern candidate manifest derivation even where a source header remains undeclared.
+
+| Document | Classification | Status |
+|---|---|---|
+| `📘 AEGIS CANON APPENDIX — HME v1.md` | `APPENDIX` | `ACTIVE` |
+| `📘 AEGIS CANON APPENDIX — MOM v1.md` | `APPENDIX` | `ACTIVE` |
+| `📘 AEGIS CANON APPENDIX — MOP v1.md` | `APPENDIX` | `ACTIVE` |
+| `📘 AEGIS CANON APPENDIX — TCE v1.md` | `APPENDIX` | `ACTIVE` |
+| `📘 AEGIS IMPLEMENTATION APPENDIX — TURBOQUANT (v1.md` | `IMPLEMENTATION_APPENDIX` | `ACTIVE_SUPPORTING` |
+| `AEGIS-CORE-V1.0_AEGIS-SIGIL-INTEGRITY.md` | `SUPPORTING_REFERENCE` | `ACTIVE` |
+| `AEGIS STANDARDS v0.1.md` | `KERNEL_STANDARD` | `ACTIVE` |
+| `AEGIS STANDARDS V1.0.md` | `DUPLICATE_LOCATOR` | `DEPRECATED` |
+| `AEGIS_EQUATIONS_SESSION_2026-06-12.md` | `DISCOVERY_EVIDENCE` | `ACTIVE_SUPPORTING` |
+| `AEGIS_LEXICON.md` | `VOCABULARY_REFERENCE` | `ACTIVE` |
+| `AEGIS_PRESENCE_EQUATION_NAMING.md` | `CANON_DECLARATION` | `LOCKED` |
+| `AEGIS Sigil Origin.md` | `HISTORICAL_PROVENANCE` | `ACTIVE_SUPPORTING` |
+| `AEGIS_TRUTH_MEMORY_AND_PROVENANCE_NOTE_v1.0.md` | `DOCTRINE_NOTE` | `ACTIVE` |
+| `AEGIS_TWITNESS_CONSCIOUSNESS_DOCTRINE.md` | `CANON_DOCTRINE` | `LOCKED` |
+| `AI_PEER_DOCTRINE_CANDIDATE.md` | `DOCTRINE` | `PROPOSED` |
+| `CYBERPEER-synchronistic-discipline-doctrine-note.md` | `DOCTRINE_NOTE` | `ACTIVE` |
+| `EDUCATION_CHAMBER_LESSON_LIBRARY.md` | `DEVELOPMENTAL_FIXTURE` | `EXCLUDED_FROM_CANON` |
+| `GENESIS-PILLAR-RECORDS-AEGIS-CANON-STAGING.md` | `DERIVED_STAGING` | `EXCLUDED_FROM_AUTHORITY` |
+| `IDR-&-IDQRA-LOGIC Loop.md` | `DOCTRINE` | `ACTIVE` |
+| `IMPERATIVES-technical.md` | `TECHNICAL_STANDARD` | `ACTIVE` |
+| `STANDARDS_BOUNDS.md` | `SCOPED_APPLICATION_STANDARD` | `ACTIVE` |
+
+`AEGIS STANDARDS v0.1.md` is the canonical identity `AEGIS:CANON:STANDARD:STANDARDS:v0.1`.
+`AEGIS STANDARDS V1.0.md` is a byte-identical deprecated locator alias and produces no second foundation record.
 
 ### Registered and reconciled references
 

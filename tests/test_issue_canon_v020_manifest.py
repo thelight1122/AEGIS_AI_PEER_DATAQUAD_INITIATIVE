@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from scripts.issue_canon_v020_manifest import REQUIRED_CANDIDATE_GATES, IssuanceError, issue, main
+from scripts.issue_canon_v020_manifest import REQUIRED_CANDIDATE_GATES, IssuanceError, issue, main, preflight_clean
 
 
 def write_json(path: Path, value: dict) -> Path:
@@ -130,3 +130,13 @@ def test_candidate_refuses_unknown_gate(ruled_inputs):
     write_json(rulings_path, rulings)
     with pytest.raises(IssuanceError, match="unknown governance"):
         issue(index, rulings_path, candidate=True, open_gate_ids=["X-1"])
+
+
+def test_clean_preflight_issues_nothing_and_reports_computed_count(ruled_inputs):
+    index, rulings_path, _, rulings = ruled_inputs
+    rulings["ruling_status"] = "candidate"
+    write_json(rulings_path, rulings)
+    result = preflight_clean(index, rulings_path)
+    assert result["eligible"] is True
+    assert result["reviewNeededSourceCount"] == 0
+    assert result["authoritative_artifact_issued"] is False

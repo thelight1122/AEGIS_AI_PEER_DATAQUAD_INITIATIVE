@@ -148,7 +148,7 @@ def rebuild(
     output["packageVersion"] = "v0.20"
     canon_lock = {
         "derivation": "computed-from-v0.20-candidate-manifest" if candidate else "computed-from-v0.20-manifest",
-        "reviewNeededSourceCount": len(gates) if candidate else 0,
+        "reviewNeededSourceCount": manifest["reviewNeededSourceCount"] if candidate else 0,
         "sourceManifestId": manifest_id,
         "sourceManifestSha256": manifest_digest,
         "status": "review-needed" if candidate else "clean",

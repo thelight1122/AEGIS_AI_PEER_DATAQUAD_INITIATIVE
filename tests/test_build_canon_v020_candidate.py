@@ -64,3 +64,30 @@ def test_final_steward_rulings_are_applied_to_candidate_documents(tmp_path):
     assert rulings["documents"]["AEGIS_WHITEPAPER_v2.1.md"]["classification"] == "POSITIONING"
     assert rulings["documents"]["AEGIS Canonical Glossary v1.0.md"]["status"] == "FOUNDATIONAL_GLOSSARY"
     assert rulings["documents"]["GLOSSARY.md"]["status"] == "SCOPED_ACTIVE"
+
+
+def test_final_classification_table_and_standards_alias_are_exact(tmp_path):
+    from scripts.build_canon_index import FINAL_CLASSIFICATION_TABLE, scan
+    from scripts.build_canon_v020_candidate import derive_candidate_rulings
+
+    entries = []
+    for name, _classification, _status in FINAL_CLASSIFICATION_TABLE:
+        (tmp_path / name).write_text("candidate\n", encoding="utf-8")
+        entries.append({"file": name, "class": "UNINDEXED", "status_declared": "UNDECLARED"})
+    rulings = derive_candidate_rulings({"canon_dir": str(tmp_path), "entries": entries})
+    for name, classification, status in FINAL_CLASSIFICATION_TABLE:
+        decision = rulings["documents"][name]
+        assert (decision["classification"], decision["status"], decision["review_required"]) == (
+            classification, status, False
+        )
+    canonical = rulings["documents"]["AEGIS STANDARDS v0.1.md"]
+    alias = rulings["documents"]["AEGIS STANDARDS V1.0.md"]
+    assert canonical["coordinate"] == "AEGIS:CANON:STANDARD:STANDARDS:v0.1"
+    assert canonical["seeded"] is True
+    assert alias["alias_of"] == canonical["coordinate"]
+    assert alias["canonical_identity"] == canonical["coordinate"]
+    assert alias["seeded"] is False
+    indexed = {entry["file"]: entry for entry in scan(tmp_path)}
+    for name, classification, status in FINAL_CLASSIFICATION_TABLE:
+        assert indexed[name]["ruling_classification"] == classification
+        assert indexed[name]["ruling_status"] == status

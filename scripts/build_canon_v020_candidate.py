@@ -37,8 +37,8 @@ def derive_candidate_rulings(index: dict[str, Any]) -> dict[str, Any]:
         filename = entry.get("file")
         if not isinstance(filename, str) or not filename:
             raise ValueError("every current index entry must name a file")
-        classification = entry.get("class") or "UNDECLARED"
-        status = entry.get("status_declared") or entry.get("status_claimed_in_prose") or "UNDECLARED"
+        classification = entry.get("ruling_classification") or entry.get("class") or "UNDECLARED"
+        status = entry.get("ruling_status") or entry.get("status_declared") or entry.get("status_claimed_in_prose") or "UNDECLARED"
         locator_missing = not (canon_dir / filename).is_file()
         documents[filename] = {
             "classification": classification,
@@ -82,12 +82,44 @@ def derive_candidate_rulings(index: dict[str, Any]) -> dict[str, Any]:
             "classification": "APPLICATION_GLOSSARY", "status": "SCOPED_ACTIVE",
             "authority": "steward-ruling-G-1", "review_required": False,
         },
+        "📘 AEGIS CANON APPENDIX — HME v1.md": {"classification": "APPENDIX", "status": "ACTIVE"},
+        "📘 AEGIS CANON APPENDIX — MOM v1.md": {"classification": "APPENDIX", "status": "ACTIVE"},
+        "📘 AEGIS CANON APPENDIX — MOP v1.md": {"classification": "APPENDIX", "status": "ACTIVE"},
+        "📘 AEGIS CANON APPENDIX — TCE v1.md": {"classification": "APPENDIX", "status": "ACTIVE"},
+        "📘 AEGIS IMPLEMENTATION APPENDIX — TURBOQUANT (v1.md": {"classification": "IMPLEMENTATION_APPENDIX", "status": "ACTIVE_SUPPORTING"},
+        "AEGIS-CORE-V1.0_AEGIS-SIGIL-INTEGRITY.md": {"classification": "SUPPORTING_REFERENCE", "status": "ACTIVE"},
+        "AEGIS_EQUATIONS_SESSION_2026-06-12.md": {"classification": "DISCOVERY_EVIDENCE", "status": "ACTIVE_SUPPORTING"},
+        "AEGIS_LEXICON.md": {"classification": "VOCABULARY_REFERENCE", "status": "ACTIVE"},
+        "AEGIS_PRESENCE_EQUATION_NAMING.md": {"classification": "CANON_DECLARATION", "status": "LOCKED"},
+        "AEGIS Sigil Origin.md": {"classification": "HISTORICAL_PROVENANCE", "status": "ACTIVE_SUPPORTING"},
+        "AEGIS_TRUTH_MEMORY_AND_PROVENANCE_NOTE_v1.0.md": {"classification": "DOCTRINE_NOTE", "status": "ACTIVE"},
+        "AEGIS_TWITNESS_CONSCIOUSNESS_DOCTRINE.md": {"classification": "CANON_DOCTRINE", "status": "LOCKED"},
+        "AI_PEER_DOCTRINE_CANDIDATE.md": {"classification": "DOCTRINE", "status": "PROPOSED"},
+        "CYBERPEER-synchronistic-discipline-doctrine-note.md": {"classification": "DOCTRINE_NOTE", "status": "ACTIVE"},
+        "EDUCATION_CHAMBER_LESSON_LIBRARY.md": {"classification": "DEVELOPMENTAL_FIXTURE", "status": "EXCLUDED_FROM_CANON", "seeded": False},
+        "GENESIS-PILLAR-RECORDS-AEGIS-CANON-STAGING.md": {"classification": "DERIVED_STAGING", "status": "EXCLUDED_FROM_AUTHORITY", "seeded": False},
+        "IDR-&-IDQRA-LOGIC Loop.md": {"classification": "DOCTRINE", "status": "ACTIVE"},
+        "IMPERATIVES-technical.md": {"classification": "TECHNICAL_STANDARD", "status": "ACTIVE"},
+        "STANDARDS_BOUNDS.md": {"classification": "SCOPED_APPLICATION_STANDARD", "status": "ACTIVE"},
+        "AEGIS STANDARDS v0.1.md": {
+            "classification": "KERNEL_STANDARD", "status": "ACTIVE", "seeded": True,
+            "coordinate": "AEGIS:CANON:STANDARD:STANDARDS:v0.1",
+            "canonical_identity": "AEGIS:CANON:STANDARD:STANDARDS:v0.1",
+        },
+        "AEGIS STANDARDS V1.0.md": {
+            "classification": "DUPLICATE_LOCATOR", "status": "DEPRECATED", "seeded": False,
+            "coordinate": "AEGIS:CANON:LOCATOR-ALIAS:STANDARDS:V1.0",
+            "canonical_identity": "AEGIS:CANON:STANDARD:STANDARDS:v0.1",
+            "alias_of": "AEGIS:CANON:STANDARD:STANDARDS:v0.1",
+            "note": "Byte-identical locator alias; produces no second foundation record.",
+        },
     }
     for filename, override in overrides.items():
         if filename not in documents:
             continue
-        authority = override.pop("authority")
-        documents[filename].update(override)
+        override = dict(override)
+        authority = override.pop("authority", "steward-final-classification-table-2026-08-15")
+        documents[filename].update({"review_required": False, **override})
         documents[filename]["provenance"] = {
             **documents[filename]["provenance"],
             "authority": authority,
@@ -147,6 +179,7 @@ def build(index_path: Path, historical_seed_path: Path, output_dir: Path) -> dic
             "spine_name": "Stabilized Patterned Interpretive Nexus of Evidence",
         },
         "manifest_digest_bound_in_seed": seed["canonLock"]["sourceManifestSha256"],
+        "reviewNeededSourceCount": manifest["reviewNeededSourceCount"],
         "open_gate_ids": [],
         "outputs": {
             "manifest": {"path": str(manifest_path), "sha256": sha256_bytes(manifest_raw)},

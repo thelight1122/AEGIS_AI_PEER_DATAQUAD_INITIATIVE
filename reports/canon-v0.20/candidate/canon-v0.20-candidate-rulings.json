@@ -28,56 +28,60 @@
       "status": "FOUNDATIONAL_GLOSSARY"
     },
     "AEGIS STANDARDS V1.0.md": {
-      "classification": "KERNEL",
-      "coordinate": "AEGIS:CANON:v0.20:CANDIDATE:AEGIS-STANDARDS-V1-0-MD",
+      "alias_of": "AEGIS:CANON:STANDARD:STANDARDS:v0.1",
+      "canonical_identity": "AEGIS:CANON:STANDARD:STANDARDS:v0.1",
+      "classification": "DUPLICATE_LOCATOR",
+      "coordinate": "AEGIS:CANON:LOCATOR-ALIAS:STANDARDS:V1.0",
       "locator": "AEGIS STANDARDS V1.0.md",
+      "note": "Byte-identical locator alias; produces no second foundation record.",
       "provenance": {
-        "authority": "current-index-inventory-only",
+        "authority": "steward-final-classification-table-2026-08-15",
         "index_file": "AEGIS STANDARDS V1.0.md",
-        "provisional": true
+        "provisional": false
       },
-      "review_required": true,
-      "seeded": true,
-      "status": "UNDECLARED"
+      "review_required": false,
+      "seeded": false,
+      "status": "DEPRECATED"
     },
     "AEGIS STANDARDS v0.1.md": {
-      "classification": "KERNEL",
-      "coordinate": "AEGIS:CANON:v0.20:CANDIDATE:AEGIS-STANDARDS-V0-1-MD",
+      "canonical_identity": "AEGIS:CANON:STANDARD:STANDARDS:v0.1",
+      "classification": "KERNEL_STANDARD",
+      "coordinate": "AEGIS:CANON:STANDARD:STANDARDS:v0.1",
       "locator": "AEGIS STANDARDS v0.1.md",
       "provenance": {
-        "authority": "current-index-inventory-only",
+        "authority": "steward-final-classification-table-2026-08-15",
         "index_file": "AEGIS STANDARDS v0.1.md",
-        "provisional": true
+        "provisional": false
       },
-      "review_required": true,
+      "review_required": false,
       "seeded": true,
-      "status": "UNDECLARED"
+      "status": "ACTIVE"
     },
     "AEGIS Sigil Origin.md": {
-      "classification": "UNINDEXED",
+      "classification": "HISTORICAL_PROVENANCE",
       "coordinate": "AEGIS:CANON:v0.20:CANDIDATE:AEGIS-SIGIL-ORIGIN-MD",
       "locator": "AEGIS Sigil Origin.md",
       "provenance": {
-        "authority": "current-index-inventory-only",
+        "authority": "steward-final-classification-table-2026-08-15",
         "index_file": "AEGIS Sigil Origin.md",
-        "provisional": true
+        "provisional": false
       },
-      "review_required": true,
+      "review_required": false,
       "seeded": false,
-      "status": "UNDECLARED"
+      "status": "ACTIVE_SUPPORTING"
     },
     "AEGIS-CORE-V1.0_AEGIS-SIGIL-INTEGRITY.md": {
-      "classification": "KERNEL",
+      "classification": "SUPPORTING_REFERENCE",
       "coordinate": "AEGIS:CANON:v0.20:CANDIDATE:AEGIS-CORE-V1-0-AEGIS-SIGIL-INTEGRITY-MD",
       "locator": "AEGIS-CORE-V1.0_AEGIS-SIGIL-INTEGRITY.md",
       "provenance": {
-        "authority": "current-index-inventory-only",
+        "authority": "steward-final-classification-table-2026-08-15",
         "index_file": "AEGIS-CORE-V1.0_AEGIS-SIGIL-INTEGRITY.md",
-        "provisional": true
+        "provisional": false
       },
-      "review_required": true,
-      "seeded": true,
-      "status": "UNDECLARED"
+      "review_required": false,
+      "seeded": false,
+      "status": "ACTIVE"
     },
     "AEGIS_ALIGNMENT_WHITEPAPER_v1.0.md": {
       "classification": "POSITIONING",
@@ -113,69 +117,69 @@
       "status": "PROPOSED"
     },
     "AEGIS_EQUATIONS_SESSION_2026-06-12.md": {
-      "classification": "UNINDEXED",
+      "classification": "DISCOVERY_EVIDENCE",
       "coordinate": "AEGIS:CANON:v0.20:CANDIDATE:AEGIS-EQUATIONS-SESSION-2026-06-12-MD",
       "locator": "AEGIS_EQUATIONS_SESSION_2026-06-12.md",
       "provenance": {
-        "authority": "current-index-inventory-only",
+        "authority": "steward-final-classification-table-2026-08-15",
         "index_file": "AEGIS_EQUATIONS_SESSION_2026-06-12.md",
-        "provisional": true
+        "provisional": false
       },
-      "review_required": true,
+      "review_required": false,
       "seeded": false,
-      "status": "UNDECLARED"
+      "status": "ACTIVE_SUPPORTING"
     },
     "AEGIS_LEXICON.md": {
-      "classification": "UNINDEXED",
+      "classification": "VOCABULARY_REFERENCE",
       "coordinate": "AEGIS:CANON:v0.20:CANDIDATE:AEGIS-LEXICON-MD",
       "locator": "AEGIS_LEXICON.md",
       "provenance": {
-        "authority": "current-index-inventory-only",
+        "authority": "steward-final-classification-table-2026-08-15",
         "index_file": "AEGIS_LEXICON.md",
-        "provisional": true
+        "provisional": false
       },
-      "review_required": true,
+      "review_required": false,
       "seeded": false,
-      "status": "UNDECLARED"
+      "status": "ACTIVE"
     },
     "AEGIS_PRESENCE_EQUATION_NAMING.md": {
-      "classification": "UNINDEXED",
+      "classification": "CANON_DECLARATION",
       "coordinate": "AEGIS:CANON:v0.20:CANDIDATE:AEGIS-PRESENCE-EQUATION-NAMING-MD",
       "locator": "AEGIS_PRESENCE_EQUATION_NAMING.md",
       "provenance": {
-        "authority": "current-index-inventory-only",
+        "authority": "steward-final-classification-table-2026-08-15",
         "index_file": "AEGIS_PRESENCE_EQUATION_NAMING.md",
-        "provisional": true
+        "provisional": false
       },
-      "review_required": true,
+      "review_required": false,
       "seeded": false,
-      "status": "CANON"
+      "status": "LOCKED"
     },
     "AEGIS_TRUTH_MEMORY_AND_PROVENANCE_NOTE_v1.0.md": {
-      "classification": "UNINDEXED",
+      "classification": "DOCTRINE_NOTE",
       "coordinate": "AEGIS:CANON:v0.20:CANDIDATE:AEGIS-TRUTH-MEMORY-AND-PROVENANCE-NOTE-V1-0-MD",
       "locator": "AEGIS_TRUTH_MEMORY_AND_PROVENANCE_NOTE_v1.0.md",
       "provenance": {
-        "authority": "current-index-inventory-only",
+        "authority": "steward-final-classification-table-2026-08-15",
         "index_file": "AEGIS_TRUTH_MEMORY_AND_PROVENANCE_NOTE_v1.0.md",
-        "provisional": true
+        "provisional": false
       },
-      "review_required": true,
+      "review_required": false,
       "seeded": false,
-      "status": "UNDECLARED"
+      "status": "ACTIVE"
     },
     "AEGIS_TWITNESS_CONSCIOUSNESS_DOCTRINE.md": {
-      "classification": "UNINDEXED",
+      "classification": "CANON_DOCTRINE",
       "coordinate": "AEGIS:CANON:v0.20:CANDIDATE:AEGIS-TWITNESS-CONSCIOUSNESS-DOCTRINE-MD",
       "locator": "AEGIS_TWITNESS_CONSCIOUSNESS_DOCTRINE.md",
       "provenance": {
-        "authority": "current-index-inventory-only",
+        "authority": "steward-final-classification-table-2026-08-15",
         "index_file": "AEGIS_TWITNESS_CONSCIOUSNESS_DOCTRINE.md",
-        "provisional": true
+        "provisional": false
       },
-      "review_required": true,
+      "review_required": false,
       "seeded": false,
-      "status": "CANON"
+      "status": "LOCKED"
     },
     "AEGIS_WHITEPAPER_v2.1.md": {
       "classification": "POSITIONING",
@@ -191,56 +195,56 @@
       "status": "POSITIONING"
     },
     "AI_PEER_DOCTRINE_CANDIDATE.md": {
-      "classification": "UNINDEXED",
+      "classification": "DOCTRINE",
       "coordinate": "AEGIS:CANON:v0.20:CANDIDATE:AI-PEER-DOCTRINE-CANDIDATE-MD",
       "locator": "AI_PEER_DOCTRINE_CANDIDATE.md",
       "provenance": {
-        "authority": "current-index-inventory-only",
+        "authority": "steward-final-classification-table-2026-08-15",
         "index_file": "AI_PEER_DOCTRINE_CANDIDATE.md",
-        "provisional": true
+        "provisional": false
       },
-      "review_required": true,
+      "review_required": false,
       "seeded": false,
-      "status": "CANDIDATE"
+      "status": "PROPOSED"
     },
     "CYBERPEER-synchronistic-discipline-doctrine-note.md": {
-      "classification": "UNINDEXED",
+      "classification": "DOCTRINE_NOTE",
       "coordinate": "AEGIS:CANON:v0.20:CANDIDATE:CYBERPEER-SYNCHRONISTIC-DISCIPLINE-DOCTRINE-NOTE-MD",
       "locator": "CYBERPEER-synchronistic-discipline-doctrine-note.md",
       "provenance": {
-        "authority": "current-index-inventory-only",
+        "authority": "steward-final-classification-table-2026-08-15",
         "index_file": "CYBERPEER-synchronistic-discipline-doctrine-note.md",
-        "provisional": true
+        "provisional": false
       },
-      "review_required": true,
+      "review_required": false,
       "seeded": false,
-      "status": "UNDECLARED"
+      "status": "ACTIVE"
     },
     "EDUCATION_CHAMBER_LESSON_LIBRARY.md": {
-      "classification": "UNINDEXED",
+      "classification": "DEVELOPMENTAL_FIXTURE",
       "coordinate": "AEGIS:CANON:v0.20:CANDIDATE:EDUCATION-CHAMBER-LESSON-LIBRARY-MD",
       "locator": "EDUCATION_CHAMBER_LESSON_LIBRARY.md",
       "provenance": {
-        "authority": "current-index-inventory-only",
+        "authority": "steward-final-classification-table-2026-08-15",
         "index_file": "EDUCATION_CHAMBER_LESSON_LIBRARY.md",
-        "provisional": true
+        "provisional": false
       },
-      "review_required": true,
+      "review_required": false,
       "seeded": false,
-      "status": "UNDECLARED"
+      "status": "EXCLUDED_FROM_CANON"
     },
     "GENESIS-PILLAR-RECORDS-AEGIS-CANON-STAGING.md": {
-      "classification": "UNINDEXED",
+      "classification": "DERIVED_STAGING",
       "coordinate": "AEGIS:CANON:v0.20:CANDIDATE:GENESIS-PILLAR-RECORDS-AEGIS-CANON-STAGING-MD",
       "locator": "GENESIS-PILLAR-RECORDS-AEGIS-CANON-STAGING.md",
       "provenance": {
-        "authority": "current-index-inventory-only",
+        "authority": "steward-final-classification-table-2026-08-15",
         "index_file": "GENESIS-PILLAR-RECORDS-AEGIS-CANON-STAGING.md",
-        "provisional": true
+        "provisional": false
       },
-      "review_required": true,
+      "review_required": false,
       "seeded": false,
-      "status": "UNDECLARED"
+      "status": "EXCLUDED_FROM_AUTHORITY"
     },
     "GLOSSARY.md": {
       "classification": "APPLICATION_GLOSSARY",
@@ -256,30 +260,30 @@
       "status": "SCOPED_ACTIVE"
     },
     "IDR-&-IDQRA-LOGIC Loop.md": {
-      "classification": "UNINDEXED",
+      "classification": "DOCTRINE",
       "coordinate": "AEGIS:CANON:v0.20:CANDIDATE:IDR-IDQRA-LOGIC-LOOP-MD",
       "locator": "IDR-&-IDQRA-LOGIC Loop.md",
       "provenance": {
-        "authority": "current-index-inventory-only",
+        "authority": "steward-final-classification-table-2026-08-15",
         "index_file": "IDR-&-IDQRA-LOGIC Loop.md",
-        "provisional": true
+        "provisional": false
       },
-      "review_required": true,
+      "review_required": false,
       "seeded": false,
-      "status": "LOCKED (asserted in title)"
+      "status": "ACTIVE"
     },
     "IMPERATIVES-technical.md": {
-      "classification": "UNINDEXED",
+      "classification": "TECHNICAL_STANDARD",
       "coordinate": "AEGIS:CANON:v0.20:CANDIDATE:IMPERATIVES-TECHNICAL-MD",
       "locator": "IMPERATIVES-technical.md",
       "provenance": {
-        "authority": "current-index-inventory-only",
+        "authority": "steward-final-classification-table-2026-08-15",
         "index_file": "IMPERATIVES-technical.md",
-        "provisional": true
+        "provisional": false
       },
-      "review_required": true,
+      "review_required": false,
       "seeded": false,
-      "status": "UNDECLARED"
+      "status": "ACTIVE"
     },
     "SHADOW AFFECTS S.md": {
       "classification": "ADDENDUM",
@@ -295,17 +299,17 @@
       "status": "DEPRECATED"
     },
     "STANDARDS_BOUNDS.md": {
-      "classification": "UNINDEXED",
+      "classification": "SCOPED_APPLICATION_STANDARD",
       "coordinate": "AEGIS:CANON:v0.20:CANDIDATE:STANDARDS-BOUNDS-MD",
       "locator": "STANDARDS_BOUNDS.md",
       "provenance": {
-        "authority": "current-index-inventory-only",
+        "authority": "steward-final-classification-table-2026-08-15",
         "index_file": "STANDARDS_BOUNDS.md",
-        "provisional": true
+        "provisional": false
       },
-      "review_required": true,
+      "review_required": false,
       "seeded": false,
-      "status": "UNDECLARED"
+      "status": "ACTIVE"
     },
     "📘 AEGIS CANON ADDENDUM INDEX.md": {
       "classification": "CANON_INDEX",
@@ -676,52 +680,52 @@
       "coordinate": "AEGIS:CANON:v0.20:CANDIDATE:AEGIS-CANON-APPENDIX-HME-V1-MD",
       "locator": "📘 AEGIS CANON APPENDIX — HME v1.md",
       "provenance": {
-        "authority": "current-index-inventory-only",
+        "authority": "steward-final-classification-table-2026-08-15",
         "index_file": "📘 AEGIS CANON APPENDIX — HME v1.md",
-        "provisional": true
+        "provisional": false
       },
-      "review_required": true,
+      "review_required": false,
       "seeded": true,
-      "status": "UNDECLARED"
+      "status": "ACTIVE"
     },
     "📘 AEGIS CANON APPENDIX — MOM v1.md": {
       "classification": "APPENDIX",
       "coordinate": "AEGIS:CANON:v0.20:CANDIDATE:AEGIS-CANON-APPENDIX-MOM-V1-MD",
       "locator": "📘 AEGIS CANON APPENDIX — MOM v1.md",
       "provenance": {
-        "authority": "current-index-inventory-only",
+        "authority": "steward-final-classification-table-2026-08-15",
         "index_file": "📘 AEGIS CANON APPENDIX — MOM v1.md",
-        "provisional": true
+        "provisional": false
       },
-      "review_required": true,
+      "review_required": false,
       "seeded": true,
-      "status": "UNDECLARED"
+      "status": "ACTIVE"
     },
     "📘 AEGIS CANON APPENDIX — MOP v1.md": {
       "classification": "APPENDIX",
       "coordinate": "AEGIS:CANON:v0.20:CANDIDATE:AEGIS-CANON-APPENDIX-MOP-V1-MD",
       "locator": "📘 AEGIS CANON APPENDIX — MOP v1.md",
       "provenance": {
-        "authority": "current-index-inventory-only",
+        "authority": "steward-final-classification-table-2026-08-15",
         "index_file": "📘 AEGIS CANON APPENDIX — MOP v1.md",
-        "provisional": true
+        "provisional": false
       },
-      "review_required": true,
+      "review_required": false,
       "seeded": true,
-      "status": "UNDECLARED"
+      "status": "ACTIVE"
     },
     "📘 AEGIS CANON APPENDIX — TCE v1.md": {
       "classification": "APPENDIX",
       "coordinate": "AEGIS:CANON:v0.20:CANDIDATE:AEGIS-CANON-APPENDIX-TCE-V1-MD",
       "locator": "📘 AEGIS CANON APPENDIX — TCE v1.md",
       "provenance": {
-        "authority": "current-index-inventory-only",
+        "authority": "steward-final-classification-table-2026-08-15",
         "index_file": "📘 AEGIS CANON APPENDIX — TCE v1.md",
-        "provisional": true
+        "provisional": false
       },
-      "review_required": true,
+      "review_required": false,
       "seeded": true,
-      "status": "UNDECLARED"
+      "status": "ACTIVE"
     },
     "📘 AEGIS IMPLEMENTATION APPENDIX — LATTICE ENTRY SCHEMA (v1.md": {
       "classification": "APPENDIX",
@@ -737,17 +741,17 @@
       "status": "LOCKED (asserted in title)"
     },
     "📘 AEGIS IMPLEMENTATION APPENDIX — TURBOQUANT (v1.md": {
-      "classification": "APPENDIX",
+      "classification": "IMPLEMENTATION_APPENDIX",
       "coordinate": "AEGIS:CANON:v0.20:CANDIDATE:AEGIS-IMPLEMENTATION-APPENDIX-TURBOQUANT-V1-MD",
       "locator": "📘 AEGIS IMPLEMENTATION APPENDIX — TURBOQUANT (v1.md",
       "provenance": {
-        "authority": "current-index-inventory-only",
+        "authority": "steward-final-classification-table-2026-08-15",
         "index_file": "📘 AEGIS IMPLEMENTATION APPENDIX — TURBOQUANT (v1.md",
-        "provisional": true
+        "provisional": false
       },
-      "review_required": true,
-      "seeded": true,
-      "status": "UNDECLARED"
+      "review_required": false,
+      "seeded": false,
+      "status": "ACTIVE_SUPPORTING"
     }
   },
   "open_gate_ids": [],

@@ -120,6 +120,16 @@ def test_candidate_seed_with_closed_governance_gates_stays_review_needed():
     assert out["canonLock"]["openGateIds"] == []
 
 
+def test_candidate_seed_copies_review_count_computed_by_manifest_issuer():
+    manifest, _, seed = candidate_manifest()
+    manifest["open_gate_ids"] = []
+    manifest["reviewNeededSourceCount"] = 7
+    raw = rebuilder.canonical_bytes(manifest)
+    out = rebuilder.rebuild(manifest, raw, seed, candidate=True)
+    assert out["canonLock"]["status"] == "review-needed"
+    assert out["canonLock"]["reviewNeededSourceCount"] == 7
+
+
 def test_candidate_manifest_cannot_reach_clean_lock_path():
     manifest, raw, seed = candidate_manifest()
     with pytest.raises(rebuilder.RebuildRefused, match="clean-lock path is unavailable"):
