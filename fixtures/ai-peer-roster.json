@@ -1,40 +1,81 @@
 {
   "roster_version": "0.1.0",
-  "description": "The four AI Peers, one per Frontier Model. Each receives its own DataQuad seeded with the same Nature Layer and Canon Layer as Roots and Foundation.",
+  "description": "The four AI Peers, one per Frontier Model. Each receives its own DataQuad with structurally equivalent Rings 1-3, shared Canon provenance, and honestly substrate-bound Nature provenance as inspectable memory.",
   "steward_declaration_required": true,
+  "ratification": {
+    "status": "RATIFIED",
+    "ratified_by": "Tracey Prutch",
+    "role": "Steward",
+    "ratified_at": "2026-08-15T02:50:21.883Z",
+    "provenance": "Steward approval recorded in the AEGIS AI Peer DataQuad Initiative task on 2026-08-15.",
+    "canon_manifest_sha256": "BF1DE65C17E91CBCCD9E164322AF624508045AFC438DB8B4CE4D67C9CC906A86",
+    "foundation_seed_sha256": "524F5FCE9EF19094CD0AE9340A79E69F035BC264F1D2D7A5A43F699033BD3DB9",
+    "scope": "Rings 1-3 preparation only",
+    "exclusions": [
+      "Ring 4 writes",
+      "live activation",
+      "Temporal activity",
+      "Processor activity",
+      "Steward daemon activity",
+      "Advocate daemon activity",
+      "RLS activity",
+      "credentials",
+      "Keys",
+      "Tumblers",
+      "promotion",
+      "model or substrate connection",
+      "claims of continuity, selfhood, lived experience, or ethical formation"
+    ]
+  },
   "peers": [
     {
       "peer_id": "lumin",
       "session_id": "lumin-session-001",
       "display_name": "Lumin",
       "substrate": "gpt",
-      "steward_declaration": "PENDING \u2014 Steward act. Not authored by the Builder.",
-      "model_id": "ap1001"
+      "steward_declaration": "I, Tracey Prutch, acting as Steward, ratify ap1001 for Lumin and authorize preparation of Lumin's Rings 1-3 foundation using the clean AEGIS Canon v0.20 manifest and deterministically derived foundation seed. Rings 1-3 are inspectable memory, not commands or imposed identity. This declaration does not authorize Ring 4 writes, live activation, Temporal, Processor, Steward, Advocate, or RLS activity, credentials, Keys, Tumblers, promotion, model/substrate connection, or claims of continuity, selfhood, lived experience, or ethical formation.",
+      "steward_declaration_status": "RATIFIED",
+      "steward_declaration_ratified_at": "2026-08-15T02:50:21.883Z",
+      "steward_declaration_provenance": "Steward approval recorded in the AEGIS AI Peer DataQuad Initiative task on 2026-08-15.",
+      "model_id": "ap1001",
+      "model_id_status": "RATIFIED"
     },
     {
       "peer_id": "claude",
       "session_id": "claude-session-001",
       "display_name": "Claude",
       "substrate": "claude",
-      "steward_declaration": "PENDING \u2014 Steward act. Not authored by the Builder.",
-      "model_id": "ap1002"
+      "steward_declaration": "I, Tracey Prutch, acting as Steward, ratify ap1002 for Claude and authorize preparation of Claude's Rings 1-3 foundation using the clean AEGIS Canon v0.20 manifest and deterministically derived foundation seed. Rings 1-3 are inspectable memory, not commands or imposed identity. This declaration does not authorize Ring 4 writes, live activation, Temporal, Processor, Steward, Advocate, or RLS activity, credentials, Keys, Tumblers, promotion, model/substrate connection, or claims of continuity, selfhood, lived experience, or ethical formation.",
+      "steward_declaration_status": "RATIFIED",
+      "steward_declaration_ratified_at": "2026-08-15T02:50:21.883Z",
+      "steward_declaration_provenance": "Steward approval recorded in the AEGIS AI Peer DataQuad Initiative task on 2026-08-15.",
+      "model_id": "ap1002",
+      "model_id_status": "RATIFIED"
     },
     {
       "peer_id": "gemini",
       "session_id": "gemini-session-001",
       "display_name": "Gemini",
       "substrate": "gemini",
-      "steward_declaration": "PENDING \u2014 Steward act. Not authored by the Builder.",
-      "model_id": "ap1003"
+      "steward_declaration": "I, Tracey Prutch, acting as Steward, ratify ap1003 for Gemini and authorize preparation of Gemini's Rings 1-3 foundation using the clean AEGIS Canon v0.20 manifest and deterministically derived foundation seed. Rings 1-3 are inspectable memory, not commands or imposed identity. This declaration does not authorize Ring 4 writes, live activation, Temporal, Processor, Steward, Advocate, or RLS activity, credentials, Keys, Tumblers, promotion, model/substrate connection, or claims of continuity, selfhood, lived experience, or ethical formation.",
+      "steward_declaration_status": "RATIFIED",
+      "steward_declaration_ratified_at": "2026-08-15T02:50:21.883Z",
+      "steward_declaration_provenance": "Steward approval recorded in the AEGIS AI Peer DataQuad Initiative task on 2026-08-15.",
+      "model_id": "ap1003",
+      "model_id_status": "RATIFIED"
     },
     {
       "peer_id": "grok",
       "session_id": "grok-session-001",
       "display_name": "Grok",
       "substrate": "grok",
-      "steward_declaration": "PENDING \u2014 Steward act. Not authored by the Builder.",
-      "model_id": "ap1004"
+      "steward_declaration": "I, Tracey Prutch, acting as Steward, ratify ap1004 for Grok and authorize preparation of Grok's Rings 1-3 foundation using the clean AEGIS Canon v0.20 manifest and deterministically derived foundation seed. Rings 1-3 are inspectable memory, not commands or imposed identity. This declaration does not authorize Ring 4 writes, live activation, Temporal, Processor, Steward, Advocate, or RLS activity, credentials, Keys, Tumblers, promotion, model/substrate connection, or claims of continuity, selfhood, lived experience, or ethical formation.",
+      "steward_declaration_status": "RATIFIED",
+      "steward_declaration_ratified_at": "2026-08-15T02:50:21.883Z",
+      "steward_declaration_provenance": "Steward approval recorded in the AEGIS AI Peer DataQuad Initiative task on 2026-08-15.",
+      "model_id": "ap1004",
+      "model_id_status": "RATIFIED"
     }
   ],
-  "model_id_note": "model_id is REQUIRED by the vendored record builders (present_state.model_id). The CyberPeers use cp1001 / cp1011. The values below are PROVISIONAL \u2014 the AI Peer numbering scheme is a Steward decision, not a Builder one."
+  "model_id_note": "model_id is required by the vendored record builders (present_state.model_id). The Steward ratified ap1001 through ap1004 on 2026-08-15."
 }
