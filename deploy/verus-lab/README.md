@@ -9,24 +9,23 @@ ID, and session ID are provenance/routing metadata only. The service supplies
 operational System Instructions; it injects no personality, biography,
 ontology, relationship, or lived history.
 
-The runtime exposes a loopback-only authenticated Bridge. A live Frontier turn
-may propose append-only records to all four tensors: PEER, PCT, NCT, and SPINE.
+The runtime exposes a Verus-owned command surface reached only by a dedicated
+local stdio MCP over the authenticated `GabeCyberPeer` SSH alias. It opens no
+network listener. A live Claude Desktop turn may propose append-only records
+to all four tensors: PEER, PCT, NCT, and SPINE.
 The existing Processor and disjoint Steward/Advocate Custodian scopes perform
 local admission without changing the CyberPeer's complete DataQuad abilities.
 
-No secret is included in a source or release bundle. Activation requires two
-root-owned, non-symlink runtime credential files supplied separately. Files
-must use mode `0400` or `0600`; unsafe ownership or broader permissions fail
-preflight without reading or printing secret content:
-
-- `/etc/aegis-verus-lab/secrets/anthropic-api-key`
-- `/etc/aegis-verus-lab/secrets/bridge-token`
+No secret is included in a source or release bundle. Claude Desktop mode uses
+the user's existing signed-in Desktop session and does not use an Anthropic API
+key or inbound bearer credential. SSH authentication remains in the existing
+approved local SSH configuration and is never copied into the release.
 
 The exact Anthropic model identifier is also set at activation time in
 `/etc/aegis-verus-lab/verus.env`. The dedicated runtime account is
 `aegis-verus`; application and append-only state remain isolated under
 `/opt/aegis/verus/lab` and `/var/lib/aegis-verus-lab`. Building this release does not install those
-values, touch the VM, seat live state, start a service, or call Anthropic.
+values, touch the VM, seat live state, start a service, or call a Frontier.
 
 The release builder also requires an explicit chosen UTC seating timestamp.
 The Steward ruling records its honest date and direct source but does not claim

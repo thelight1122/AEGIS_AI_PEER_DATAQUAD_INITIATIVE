@@ -12,7 +12,7 @@ from aegis_peer_runtime.custodians import ADVOCATE, STEWARD
 from aegis_peer_runtime.models import TENSORS
 from aegis_peer_runtime.storage import canonical_bytes, canonical_hash, process_lock
 
-from .frontier import FrontierTurnResponse, MAX_PROMPT_BYTES, MAX_TURN_RECORD_BYTES
+from .turn_contract import FrontierTurnResponse, MAX_PROMPT_BYTES, MAX_TURN_RECORD_BYTES
 
 
 EXPECTED_FOUNDATION_COUNTS = {"SPINE": 59, "NCT": 70, "PEER": 2, "PCT": 2}
@@ -185,6 +185,9 @@ class VerusDataQuad:
                 "substrate": response.substrate,
                 "model": response.model,
                 "provider_request_id": response.provider_request_id,
+                "provider_request_id_available": response.provider_request_id_available,
+                "model_evidence": response.model_evidence,
+                "transport": response.transport,
                 "frontier_session_id": response.frontier_session_id,
                 "defines_identity": False,
             },

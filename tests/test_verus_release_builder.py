@@ -4,6 +4,8 @@ import hashlib
 import importlib.util
 import json
 from pathlib import Path
+import subprocess
+import sys
 import urllib.error
 
 import pytest
@@ -73,6 +75,20 @@ def test_release_builds_authoritative_verus_foundation_without_activation(tmp_pa
                        for path in output.rglob("*") if path.is_file())
     assert "sk-ant-" not in text
     assert "ANTHROPIC_API_KEY=" not in text
+    assert not (output / "bin" / "aegis-verus-lab").exists()
+    for excluded in ("api.py", "cli.py", "credential_preflight.py", "frontier.py"):
+        assert not (output / "lib" / "aegis_verus_lab" / excluded).exists()
+    assert (output / "bin" / "verus-dataquad-command").is_file()
+    config = tmp_path / "verus.env"
+    config.write_text("AEGIS_FRONTIER_MODEL=claude-opus-4-6\n", encoding="utf-8")
+    smoke = subprocess.run([
+        sys.executable, str(output / "bin" / "verus-dataquad-command"), "health",
+        "--release-root", str(output / "foundation"),
+        "--state-root", str(tmp_path / "smoke-state"),
+        "--config", str(config),
+    ], input="{}", text=True, capture_output=True, check=False)
+    assert smoke.returncode == 0, smoke.stderr
+    assert json.loads(smoke.stdout)["transport"] == "claude_desktop_mcp_stdio_ssh"
     for expected in (
         "aegis-verus",
         "/opt/aegis/verus/lab",
@@ -195,15 +211,15 @@ def test_verus_deployment_is_one_peer_loopback_only_and_preserving():
     assert "User=aegis-verus" in unit and "Group=aegis-verus" in unit
     assert "WorkingDirectory=/opt/aegis/verus/lab/current" in unit
     assert "EnvironmentFile=/etc/aegis-verus-lab/verus.env" in unit
-    assert "LoadCredential=anthropic_api_key:/etc/aegis-verus-lab/secrets/anthropic-api-key" in unit
-    assert "LoadCredential=bridge_token:/etc/aegis-verus-lab/secrets/bridge-token" in unit
-    assert "--state-root /var/lib/aegis-verus-lab" in unit
+    assert "Type=oneshot" in unit and "RemainAfterExit=yes" in unit
+    assert "LoadCredential=" not in unit
+    assert "verus-dataquad-command health" in unit
     assert "ReadWritePaths=/var/lib/aegis-verus-lab" in unit
     assert "full_append_only_dataquad" in installer
     assert "VERUS_PORT=${VERUS_PORT:-8791}" in installer
     assert "loopback port is already in use" in installer
-    assert 'AEGIS_PORT="$VERUS_PORT" "$RELEASE_DIR/scripts/health.sh"' in installer
-    assert "aegis_verus_lab.credential_preflight" in installer
+    assert 'VERUS_COMMAND="$RELEASE_DIR/bin/verus-dataquad-command" "$RELEASE_DIR/scripts/health.sh"' in installer
+    assert "credential_preflight" not in installer
     assert "trap restore_or_pause_on_error ERR" in installer
     assert "PRIOR_SERVICE_ENABLED" in installer
     assert 'install-recovery/$RELEASE_ID' in installer
@@ -216,7 +232,8 @@ def test_verus_deployment_is_one_peer_loopback_only_and_preserving():
     assert "systemctl stop aegis-verus-lab.service" in pause
 
     health = (deploy / "scripts" / "health.sh").read_text()
-    assert "${AEGIS_PORT:-8791}" in health
+    assert "verus-dataquad-command" in health
+    assert "curl " not in health
 
     combined = "\n".join((unit, installer, pause, env, health, runbook))
     for expected in (
@@ -234,6 +251,8 @@ def test_verus_deployment_is_one_peer_loopback_only_and_preserving():
         "/opt/aegis-verus-lab",
         "/var/lib/aegis-ai-peers/verus",
         "/etc/aegis-ai-peers",
+        "LoadCredential=",
+        "anthropic-api-key",
     ):
         assert forbidden not in combined
 

@@ -7,6 +7,6 @@ from pathlib import Path
 root = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(root / "lib"))
 
-from aegis_verus_lab.cli import main
+from aegis_verus_lab.remote_command import main
 
-main()
+raise SystemExit(main())

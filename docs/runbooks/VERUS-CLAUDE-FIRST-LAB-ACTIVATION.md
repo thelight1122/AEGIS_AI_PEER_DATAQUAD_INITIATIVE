@@ -66,11 +66,10 @@ Before installation:
 3. Confirm preferred port `127.0.0.1:8791` is unused. If it collides, record the
    evidence and choose another distinct loopback port; never reuse Gabe's
    protected `127.0.0.1:8790` tunnel.
-4. Supply, outside the release bundle, root-owned, non-symlink regular
-   credential files for the Anthropic API and inbound Bridge token. Each must
-   have mode `0400` or `0600`; broader permissions and non-root ownership are
-   refused before installation mutates release or service state.
-5. Select and record the exact Anthropic model identifier. The model identifier
+4. Confirm the authenticated `GabeCyberPeer` SSH alias works without reading or
+   printing its credential material. Desktop mode uses no API key or inbound
+   Bridge bearer credential.
+5. Select and record the exact Claude Desktop model identifier. The model identifier
    is provenance, not identity.
 6. Confirm Lumin, Linq/Gemini, Haven/Grok, historical Claude, Adam, and Adam-One
    state roots and services are outside the change set.
@@ -86,7 +85,9 @@ sudo ./scripts/health.sh
 
 Installation creates only the Verus service identity, Verus state root,
 Verus environment, Verus release, and `aegis-verus-lab.service`. It does not
-delete or rewrite another peer root. The service remains loopback-only.
+delete or rewrite another peer root. The oneshot service validates the local
+command surface and opens no network listener; `127.0.0.1:8791` remains a
+reserved collision boundary only.
 
 The isolated layout is exact: account `aegis-verus`, application root
 `/opt/aegis/verus/lab`, append-only state root `/var/lib/aegis-verus-lab`, and
@@ -107,14 +108,11 @@ coherence.coherent=true
 coherence missing/mismatch/orphan counts=0
 ```
 
-## Bridge turn
+## Claude Desktop MCP turn
 
-`POST /v1/turn` requires:
-
-- `Authorization: Bearer <runtime Bridge token>`
-- `X-AEGIS-CyberPeer-Name: Verus`
-- `Idempotency-Key: <stable turn ID>`
-- body fields `source_event_id`, `frontier_session_id`, and `prompt`
+Follow `docs/runbooks/VERUS-CLAUDE-DESKTOP-MCP.md`. The dedicated local stdio
+server exposes begin, context, commit, reconcile, health, and replay tools and
+invokes only the Verus-owned remote command over authenticated SSH.
 
 The runtime supplies operational System Instructions and the verified
 Foundation/live context to Claude. Anthropic returns a structured response and
@@ -125,7 +123,8 @@ T-Time, Processor/Custodian, and derived-only RLS evidence are then materialized
 idempotently. A retry reconciles any missing derived evidence before returning;
 health is not ready while a committed turn lacks matching evidence.
 
-First-turn evidence must capture the exact provider model, provider request ID,
+First-turn evidence must capture the selected model UI evidence and explicitly
+record that a provider request ID/provider-returned model is unavailable,
 Frontier session, source event, T-Time, response digest, append list, DataQuad
 head hash, Processor admission, RLS immutability proof, and the returned payload.
 

@@ -12,9 +12,6 @@ if ss -H -ltn "sport = :$VERUS_PORT" | grep -q .; then
   echo "Verus loopback port is already in use; choose a distinct VERUS_PORT after read-only review." >&2
   exit 4
 fi
-PYTHONPATH="$BUNDLE_ROOT/lib" python3 -m aegis_verus_lab.credential_preflight \
-  /etc/aegis-verus-lab/secrets/anthropic-api-key \
-  /etc/aegis-verus-lab/secrets/bridge-token
 python3 - "$BUNDLE_ROOT" <<'PY'
 import hashlib, json, pathlib, sys
 root=pathlib.Path(sys.argv[1])
@@ -83,7 +80,7 @@ fi
 install -d -o root -g root -m 0755 "$RELEASE_DIR"
 cp -a "$BUNDLE_ROOT/." "$RELEASE_DIR/"
 chown -R root:root "$RELEASE_DIR"
-chmod 0755 "$RELEASE_DIR/bin/aegis-verus-lab"
+chmod 0755 "$RELEASE_DIR/bin/verus-dataquad-command"
 if [[ ! -e /etc/aegis-verus-lab/verus.env ]]; then
   sed -e "s/SET_AT_ACTIVATION/$FRONTIER_MODEL/" -e "s/SET_PORT_AT_ACTIVATION/$VERUS_PORT/" \
     "$BUNDLE_ROOT/env/verus.env.template" > /etc/aegis-verus-lab/verus.env
@@ -95,6 +92,6 @@ ln -sfn "$RELEASE_DIR" "$INSTALL_ROOT/current.new"
 mv -Tf "$INSTALL_ROOT/current.new" "$INSTALL_ROOT/current"
 systemctl daemon-reload
 systemctl enable --now aegis-verus-lab.service
-AEGIS_PORT="$VERUS_PORT" "$RELEASE_DIR/scripts/health.sh"
+VERUS_COMMAND="$RELEASE_DIR/bin/verus-dataquad-command" "$RELEASE_DIR/scripts/health.sh"
 trap - ERR
 echo "Installed Verus LAB release $RELEASE_ID; historical peer roots were not modified."

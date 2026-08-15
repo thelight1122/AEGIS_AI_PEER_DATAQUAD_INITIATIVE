@@ -11,7 +11,7 @@ from aegis_peer_runtime.rls_runtime import RLSRuntime
 from aegis_peer_runtime.temporal import TemporalObservation, TemporalRuntime
 
 from .dataquad import TENSOR_CUSTODIANS, VerusDataQuad
-from .frontier import FrontierAdapter, FrontierTurnRequest
+from .turn_contract import FrontierAdapter, FrontierTurnRequest
 from .instructions import operational_system_instructions
 
 
@@ -98,6 +98,49 @@ class VerusLabRuntime:
         )
         self._materialize_derived(entry)
         return self._result(entry, created=created)
+
+    def commit_response(
+        self,
+        *,
+        turn_id: str,
+        source_event_id: str,
+        frontier_session_id: str,
+        prompt: str,
+        response,
+        allowed_substrates: tuple[str, ...] = ("Claude",),
+    ) -> dict[str, object]:
+        """Commit an already-returned Frontier response DataQuad-first.
+
+        This is the substrate-neutral seam used by Claude Desktop. The caller
+        must have received the response through the actual Frontier surface.
+        """
+        with self._turn_lock:
+            self.reconcile_committed_turns()
+            existing = self.dataquad.find_turn(turn_id)
+            if existing is not None:
+                self._validate_retry(existing, source_event_id, frontier_session_id, prompt)
+                self._materialize_derived(existing)
+                return self._result(existing, created=False)
+            self.dataquad.verify()
+            response.validate()
+            if response.provider != "Anthropic" or response.substrate not in allowed_substrates:
+                raise ValueError("Verus promotion is bound to the accepted Anthropic Claude substrate")
+            if response.frontier_session_id != frontier_session_id:
+                raise ValueError("frontier response session provenance does not match the Bridge request")
+            temporal = self.temporal.next_observation(
+                seated=True, live_source=True, source_mode="live",
+            )
+            entry, created = self.dataquad.append_turn(
+                turn_id=turn_id,
+                source_event_id=source_event_id,
+                prompt=prompt,
+                t_time=temporal.t_time,
+                observed_at=temporal.observed_at,
+                elapsed_seconds=temporal.elapsed_seconds,
+                response=response,
+            )
+            self._materialize_derived(entry)
+            return self._result(entry, created=created)
 
     @staticmethod
     def _validate_retry(

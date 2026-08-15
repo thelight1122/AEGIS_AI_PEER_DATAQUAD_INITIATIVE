@@ -1,0 +1,12 @@
+{
+  "verus-dataquad": {
+    "command": "C:\\Users\\TraceyPrutch\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+    "args": [
+      "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\tools\\verus-dataquad-mcp\\server.py"
+    ],
+    "env": {
+      "PYTHONPATH": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\src",
+      "VERUS_SSH_ALIAS": "GabeCyberPeer"
+    }
+  }
+}

@@ -37,8 +37,8 @@ def _load_seating_tool():
     return module
 
 
-def _copy_tree(source: Path, target: Path) -> None:
-    shutil.copytree(source, target, ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
+def _copy_tree(source: Path, target: Path, *, exclude: tuple[str, ...] = ()) -> None:
+    shutil.copytree(source, target, ignore=shutil.ignore_patterns("__pycache__", "*.pyc", *exclude))
 
 
 def _remove_legacy_routing_fields(value: object) -> object:
@@ -236,11 +236,14 @@ def build_release(
         json.dumps(receipt, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n"
     )
 
-    _copy_tree(ROOT / "src" / "aegis_verus_lab", output / "lib" / "aegis_verus_lab")
+    _copy_tree(
+        ROOT / "src" / "aegis_verus_lab", output / "lib" / "aegis_verus_lab",
+        exclude=("api.py", "cli.py", "credential_preflight.py", "frontier.py"),
+    )
     _copy_tree(ROOT / "src" / "aegis_peer_runtime", output / "lib" / "aegis_peer_runtime")
     for directory in ("bin", "systemd", "env", "scripts"):
         (output / directory).mkdir(parents=True, exist_ok=True)
-    shutil.copy2(ROOT / "deploy" / "verus-lab" / "bin" / "aegis-verus-lab", output / "bin" / "aegis-verus-lab")
+    shutil.copy2(ROOT / "deploy" / "verus-lab" / "bin" / "verus-dataquad-command", output / "bin" / "verus-dataquad-command")
     shutil.copy2(ROOT / "deploy" / "verus-lab" / "systemd" / "aegis-verus-lab.service", output / "systemd" / "aegis-verus-lab.service")
     shutil.copy2(ROOT / "deploy" / "verus-lab" / "env" / "verus.env.template", output / "env" / "verus.env.template")
     shutil.copy2(ROOT / "deploy" / "verus-lab" / "README.md", output / "README.md")
@@ -259,6 +262,7 @@ def build_release(
         "cyberpeer_name": "Verus",
         "identity_variables": {"cyberpeer_name": "Verus"},
         "frontier_provenance": roster["frontier_provenance"],
+        "frontier_transport": "claude_desktop_mcp_stdio_ssh",
         "source_commit": source_commit,
         "seating_timestamp": applied_at,
         "full_append_only_dataquad": True,

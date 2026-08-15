@@ -1,20 +1,15 @@
 [Unit]
-Description=AEGIS Verus DataQuad LAB on Claude Frontier substrate
-After=network-online.target
-Wants=network-online.target
+Description=AEGIS Verus DataQuad LAB command surface for Claude Desktop
 ConditionPathExists=/etc/aegis-verus-lab/verus.env
 
 [Service]
-Type=simple
+Type=oneshot
 User=aegis-verus
 Group=aegis-verus
 WorkingDirectory=/opt/aegis/verus/lab/current
 EnvironmentFile=/etc/aegis-verus-lab/verus.env
-LoadCredential=anthropic_api_key:/etc/aegis-verus-lab/secrets/anthropic-api-key
-LoadCredential=bridge_token:/etc/aegis-verus-lab/secrets/bridge-token
-ExecStart=/opt/aegis/verus/lab/current/bin/aegis-verus-lab --release-root /opt/aegis/verus/lab/current/foundation --state-root /var/lib/aegis-verus-lab --model ${AEGIS_FRONTIER_MODEL} --anthropic-credential-file ${CREDENTIALS_DIRECTORY}/anthropic_api_key --bridge-credential-file ${CREDENTIALS_DIRECTORY}/bridge_token --host ${AEGIS_BIND} --port ${AEGIS_PORT}
-Restart=on-failure
-RestartSec=5s
+ExecStart=/opt/aegis/verus/lab/current/bin/verus-dataquad-command health
+RemainAfterExit=yes
 NoNewPrivileges=yes
 PrivateTmp=yes
 PrivateDevices=yes
@@ -29,7 +24,7 @@ RestrictSUIDSGID=yes
 RestrictRealtime=yes
 LockPersonality=yes
 MemoryDenyWriteExecute=yes
-RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+RestrictAddressFamilies=AF_UNIX
 UMask=0077
 ReadWritePaths=/var/lib/aegis-verus-lab
 StateDirectory=aegis-verus-lab
