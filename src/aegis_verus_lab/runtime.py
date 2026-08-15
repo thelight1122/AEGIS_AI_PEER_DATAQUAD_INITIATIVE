@@ -63,7 +63,10 @@ class VerusLabRuntime:
         self.reconcile_committed_turns()
         existing = self.dataquad.find_turn(turn_id)
         if existing is not None:
-            self._validate_retry(existing, source_event_id, frontier_session_id, prompt)
+            self._validate_retry(
+                existing, source_event_id, frontier_session_id, prompt,
+                source_event_id_available=True, frontier_session_id_available=True,
+            )
             self._materialize_derived(existing)
             return self._result(existing, created=False)
         self.dataquad.verify()
@@ -82,7 +85,8 @@ class VerusLabRuntime:
         response.validate()
         if response.provider != "Anthropic" or response.substrate != "Claude":
             raise ValueError("Verus promotion is bound to the Anthropic Claude Frontier substrate")
-        if response.frontier_session_id != frontier_session_id:
+        if (response.frontier_session_id != frontier_session_id
+                or response.frontier_session_id_available is not True):
             raise ValueError("frontier response session provenance does not match the Bridge request")
         temporal = self.temporal.next_observation(
             seated=True, live_source=True, source_mode="live",
@@ -103,11 +107,13 @@ class VerusLabRuntime:
         self,
         *,
         turn_id: str,
-        source_event_id: str,
-        frontier_session_id: str,
+        source_event_id: str | None,
+        frontier_session_id: str | None,
         prompt: str,
         response,
         allowed_substrates: tuple[str, ...] = ("Claude",),
+        source_event_id_available: bool = True,
+        dataquad_correlation_id: str | None = None,
     ) -> dict[str, object]:
         """Commit an already-returned Frontier response DataQuad-first.
 
@@ -118,7 +124,12 @@ class VerusLabRuntime:
             self.reconcile_committed_turns()
             existing = self.dataquad.find_turn(turn_id)
             if existing is not None:
-                self._validate_retry(existing, source_event_id, frontier_session_id, prompt)
+                self._validate_retry(
+                    existing, source_event_id, frontier_session_id, prompt,
+                    source_event_id_available=source_event_id_available,
+                    frontier_session_id_available=response.frontier_session_id_available,
+                    dataquad_correlation_id=dataquad_correlation_id,
+                )
                 self._materialize_derived(existing)
                 return self._result(existing, created=False)
             self.dataquad.verify()
@@ -138,18 +149,30 @@ class VerusLabRuntime:
                 observed_at=temporal.observed_at,
                 elapsed_seconds=temporal.elapsed_seconds,
                 response=response,
+                source_event_id_available=source_event_id_available,
+                dataquad_correlation_id=dataquad_correlation_id,
             )
             self._materialize_derived(entry)
             return self._result(entry, created=created)
 
     @staticmethod
     def _validate_retry(
-        entry: dict[str, object], source_event_id: str, frontier_session_id: str, prompt: str,
+        entry: dict[str, object], source_event_id: str | None,
+        frontier_session_id: str | None, prompt: str, *,
+        source_event_id_available: bool,
+        frontier_session_id_available: bool,
+        dataquad_correlation_id: str | None = None,
     ) -> None:
         if (entry["source_event_id"] != source_event_id
+                or entry["source_event_id_available"] is not source_event_id_available
                 or entry["frontier_provenance"]["frontier_session_id"] != frontier_session_id
+                or entry["frontier_provenance"]["frontier_session_id_available"]
+                is not frontier_session_id_available
                 or entry["prompt"]["text"] != prompt):
             raise ValueError("turn_id already names a different Bridge request")
+        if (dataquad_correlation_id is not None
+                and entry["dataquad_correlation"]["correlation_id"] != dataquad_correlation_id):
+            raise ValueError("turn_id already names a different DataQuad local correlation")
 
     @staticmethod
     def _processor_material(entry: dict[str, object]) -> tuple[dict[str, object], dict[str, object], dict[str, object]]:
@@ -160,6 +183,8 @@ class VerusLabRuntime:
             target.setdefault(append["tensor"], []).append(dict(append["payload"]))
         payload = {
             "source_event_id": entry["source_event_id"],
+            "source_event_id_available": entry["source_event_id_available"],
+            "dataquad_correlation_id": entry["dataquad_correlation"]["correlation_id"],
             "prompt": entry["prompt"]["text"],
             "response": entry["response"]["text"],
             "provider_request_id": entry["frontier_provenance"]["provider_request_id"],
@@ -174,6 +199,8 @@ class VerusLabRuntime:
         return {
             "kind": "frontier_dataquad_turn",
             "source_event_id": entry["source_event_id"],
+            "source_event_id_available": entry["source_event_id_available"],
+            "dataquad_correlation_id": entry["dataquad_correlation"]["correlation_id"],
             "turn_record_hash": entry["record_hash"],
             "append_count": len(entry["appends"]),
         }

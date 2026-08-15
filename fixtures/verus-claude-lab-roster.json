@@ -21,9 +21,11 @@
   },
   "routing_provenance": {
     "prior_model_id": "ap1002",
-    "provider_model_id": "runtime-required",
-    "provider_instance_id": "runtime-required",
-    "frontier_session_id": "runtime-required"
+    "provider_model_id": "steward-confirmed-at-runtime",
+    "provider_instance_id": "optional-null-when-unavailable",
+    "source_event_id": "optional-null-when-unavailable",
+    "frontier_session_id": "optional-null-when-unavailable",
+    "dataquad_correlation_id": "dataquad-generated-local-not-provider"
   },
   "authority": {
     "mode": "LAB_RUNNING",

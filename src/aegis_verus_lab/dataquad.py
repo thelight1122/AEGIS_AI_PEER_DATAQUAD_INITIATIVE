@@ -12,7 +12,13 @@ from aegis_peer_runtime.custodians import ADVOCATE, STEWARD
 from aegis_peer_runtime.models import TENSORS
 from aegis_peer_runtime.storage import canonical_bytes, canonical_hash, process_lock
 
-from .turn_contract import FrontierTurnResponse, MAX_PROMPT_BYTES, MAX_TURN_RECORD_BYTES
+from .turn_contract import (
+    FrontierTurnResponse,
+    MAX_PROMPT_BYTES,
+    MAX_TURN_RECORD_BYTES,
+    PROVIDER_RETURNED_OPTIONAL,
+    local_correlation_provenance,
+)
 
 
 EXPECTED_FOUNDATION_COUNTS = {"SPINE": 59, "NCT": 70, "PEER": 2, "PCT": 2}
@@ -26,6 +32,14 @@ TENSOR_CUSTODIANS = {
 
 def _sha256(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest().upper()
+
+
+def _fallback_correlation_id(turn_id: str, prompt: str) -> str:
+    material = canonical_bytes({
+        "cyberpeer_name": "Verus", "turn_id": turn_id, "prompt": prompt,
+        "classification": "dataquad_owned_local_correlation",
+    })
+    return "verus-dataquad-correlation-" + hashlib.sha256(material).hexdigest()
 
 
 def _lines(path: Path) -> list[dict[str, Any]]:
@@ -105,6 +119,46 @@ class VerusDataQuad:
                     raise ValueError("previous_hash mismatch")
                 if item["cyberpeer_name"] != "Verus" or item["dataquad_id"] != "verus":
                     raise ValueError("record is not bound to Verus")
+                if item["schema"] != "aegis.verus.dataquad-turn.v2":
+                    raise ValueError("unsupported Verus turn schema")
+                expected_local = local_correlation_provenance(
+                    item["turn_id"], item["dataquad_correlation"]["correlation_id"],
+                )
+                if item["dataquad_correlation"] != expected_local:
+                    raise ValueError("invalid DataQuad local correlation provenance")
+                source_available = item["source_event_id_available"]
+                if not isinstance(source_available, bool):
+                    raise ValueError("source_event_id availability must be boolean")
+                if source_available:
+                    if not isinstance(item["source_event_id"], str) or not item["source_event_id"].strip():
+                        raise ValueError("available source_event_id is invalid")
+                elif item["source_event_id"] is not None:
+                    raise ValueError("unavailable source_event_id must be null")
+                if item["source_event_id_classification"] != PROVIDER_RETURNED_OPTIONAL:
+                    raise ValueError("source_event_id classification mismatch")
+                frontier = item["frontier_provenance"]
+                provider_request_available = frontier["provider_request_id_available"]
+                if not isinstance(provider_request_available, bool):
+                    raise ValueError("provider_request_id availability must be boolean")
+                if provider_request_available:
+                    if (not isinstance(frontier["provider_request_id"], str)
+                            or not frontier["provider_request_id"].strip()):
+                        raise ValueError("available provider_request_id is invalid")
+                elif frontier["provider_request_id"] is not None:
+                    raise ValueError("unavailable provider_request_id must be null")
+                if frontier["provider_request_id_classification"] != PROVIDER_RETURNED_OPTIONAL:
+                    raise ValueError("provider_request_id classification mismatch")
+                session_available = frontier["frontier_session_id_available"]
+                if not isinstance(session_available, bool):
+                    raise ValueError("frontier_session_id availability must be boolean")
+                if session_available:
+                    if (not isinstance(frontier["frontier_session_id"], str)
+                            or not frontier["frontier_session_id"].strip()):
+                        raise ValueError("available frontier_session_id is invalid")
+                elif frontier["frontier_session_id"] is not None:
+                    raise ValueError("unavailable frontier_session_id must be null")
+                if frontier["frontier_session_id_classification"] != PROVIDER_RETURNED_OPTIONAL:
+                    raise ValueError("frontier_session_id classification mismatch")
                 if item["t_time"] != item["sequence"]:
                     raise ValueError("T-Time is not aligned with committed turn sequence")
                 if item["elapsed_seconds"] < 0:
@@ -140,15 +194,24 @@ class VerusDataQuad:
         self,
         *,
         turn_id: str,
-        source_event_id: str,
+        source_event_id: str | None,
         prompt: str,
         t_time: int,
         observed_at: str,
         elapsed_seconds: float,
         response: FrontierTurnResponse,
+        source_event_id_available: bool = True,
+        dataquad_correlation_id: str | None = None,
     ) -> tuple[dict[str, Any], bool]:
-        if not turn_id.strip() or not source_event_id.strip() or not prompt.strip():
-            raise ValueError("turn_id, source_event_id, and prompt are required")
+        if not turn_id.strip() or not prompt.strip():
+            raise ValueError("turn_id and prompt are required")
+        if not isinstance(source_event_id_available, bool):
+            raise ValueError("source_event_id availability must be boolean")
+        if source_event_id_available:
+            if not isinstance(source_event_id, str) or not source_event_id.strip():
+                raise ValueError("source_event_id is required when available")
+        elif source_event_id is not None:
+            raise ValueError("unavailable source_event_id must be null")
         if t_time < 1:
             raise ValueError("t_time must be positive")
         if elapsed_seconds < 0:
@@ -156,6 +219,8 @@ class VerusDataQuad:
         if len(prompt.encode("utf-8")) > MAX_PROMPT_BYTES:
             raise ValueError(f"prompt exceeds {MAX_PROMPT_BYTES} bytes")
         response.validate()
+        correlation_id = dataquad_correlation_id or _fallback_correlation_id(turn_id, prompt)
+        local_correlation = local_correlation_provenance(turn_id, correlation_id)
         appends = []
         for intent in response.append_intents:
             actor, custodian = TENSOR_CUSTODIANS[intent.tensor]
@@ -167,11 +232,14 @@ class VerusDataQuad:
                 "payload": authorized[intent.tensor],
             })
         candidate = {
-            "schema": "aegis.verus.dataquad-turn.v1",
+            "schema": "aegis.verus.dataquad-turn.v2",
             "cyberpeer_name": "Verus",
             "dataquad_id": "verus",
             "turn_id": turn_id,
             "source_event_id": source_event_id,
+            "source_event_id_available": source_event_id_available,
+            "source_event_id_classification": PROVIDER_RETURNED_OPTIONAL,
+            "dataquad_correlation": local_correlation,
             "t_time": t_time,
             "observed_at": observed_at,
             "elapsed_seconds": elapsed_seconds,
@@ -186,9 +254,12 @@ class VerusDataQuad:
                 "model": response.model,
                 "provider_request_id": response.provider_request_id,
                 "provider_request_id_available": response.provider_request_id_available,
+                "provider_request_id_classification": PROVIDER_RETURNED_OPTIONAL,
                 "model_evidence": response.model_evidence,
                 "transport": response.transport,
                 "frontier_session_id": response.frontier_session_id,
+                "frontier_session_id_available": response.frontier_session_id_available,
+                "frontier_session_id_classification": PROVIDER_RETURNED_OPTIONAL,
                 "defines_identity": False,
             },
             "appends": appends,

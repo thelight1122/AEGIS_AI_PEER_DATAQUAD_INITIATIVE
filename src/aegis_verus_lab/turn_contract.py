@@ -15,6 +15,8 @@ MAX_RESPONSE_TEXT_BYTES = 262_144
 MAX_PROMPT_BYTES = 262_144
 MAX_CONTEXT_BYTES = 4_194_304
 MAX_TURN_RECORD_BYTES = 1_048_576
+PROVIDER_RETURNED_OPTIONAL = "provider_returned_optional"
+DATAQUAD_LOCAL_CORRELATION = "dataquad_owned_local_correlation"
 
 
 def _json_size(value: Any, *, label: str) -> int:
@@ -26,6 +28,30 @@ def _json_size(value: Any, *, label: str) -> int:
     except (TypeError, ValueError) as error:
         raise ValueError(f"{label} must be finite JSON-serializable data") from error
     return len(encoded)
+
+
+def _validate_provider_identifier(value: str | None, available: bool, *, label: str) -> None:
+    if not isinstance(available, bool):
+        raise ValueError(f"{label} availability must be boolean")
+    if available:
+        if not isinstance(value, str) or not value.strip():
+            raise ValueError(f"{label} is required when available")
+    elif value is not None:
+        raise ValueError(f"unavailable {label} must be null")
+
+
+def local_correlation_provenance(turn_id: str, correlation_id: str) -> dict[str, object]:
+    if (not isinstance(turn_id, str) or not turn_id.strip()
+            or not isinstance(correlation_id, str) or not correlation_id.strip()):
+        raise ValueError("DataQuad local turn and correlation identifiers are required")
+    return {
+        "turn_id": turn_id,
+        "correlation_id": correlation_id,
+        "classification": DATAQUAD_LOCAL_CORRELATION,
+        "generated_by": "Verus DataQuad",
+        "provider_identifier": False,
+        "defines_identity": False,
+    }
 
 
 @dataclass(frozen=True, slots=True)
@@ -47,17 +73,26 @@ class FrontierTurnRequest:
     cyberpeer_name: str
     dataquad_id: str
     turn_id: str
-    source_event_id: str
-    frontier_session_id: str
+    source_event_id: str | None
+    frontier_session_id: str | None
     system_instructions: str
     prompt: str
     context: Mapping[str, Any]
+    source_event_id_available: bool = True
+    frontier_session_id_available: bool = True
 
     def validate(self) -> None:
-        for field in ("cyberpeer_name", "dataquad_id", "turn_id", "source_event_id",
-                      "frontier_session_id", "system_instructions", "prompt"):
+        for field in ("cyberpeer_name", "dataquad_id", "turn_id", "system_instructions", "prompt"):
             if not getattr(self, field).strip():
                 raise ValueError(f"frontier request {field} is required")
+        _validate_provider_identifier(
+            self.source_event_id, self.source_event_id_available,
+            label="frontier request source_event_id",
+        )
+        _validate_provider_identifier(
+            self.frontier_session_id, self.frontier_session_id_available,
+            label="frontier request frontier_session_id",
+        )
         if len(self.prompt.encode("utf-8")) > MAX_PROMPT_BYTES:
             raise ValueError(f"prompt exceeds {MAX_PROMPT_BYTES} bytes")
         if not isinstance(self.context, Mapping):
@@ -74,23 +109,27 @@ class FrontierTurnResponse:
     substrate: str
     model: str
     provider_request_id: str | None
-    frontier_session_id: str
+    frontier_session_id: str | None
     provider_request_id_available: bool = True
+    frontier_session_id_available: bool = True
     model_evidence: str = "provider_response"
     transport: str = "anthropic_messages_api"
 
     def validate(self) -> None:
         for field in (
             "response_text", "provider", "substrate", "model",
-            "frontier_session_id", "model_evidence", "transport",
+            "model_evidence", "transport",
         ):
             if not getattr(self, field).strip():
                 raise ValueError(f"frontier response {field} is required")
-        if self.provider_request_id_available:
-            if not isinstance(self.provider_request_id, str) or not self.provider_request_id.strip():
-                raise ValueError("frontier response provider_request_id is required when available")
-        elif self.provider_request_id is not None:
-            raise ValueError("unavailable provider_request_id must be null")
+        _validate_provider_identifier(
+            self.provider_request_id, self.provider_request_id_available,
+            label="frontier response provider_request_id",
+        )
+        _validate_provider_identifier(
+            self.frontier_session_id, self.frontier_session_id_available,
+            label="frontier response frontier_session_id",
+        )
         if len(self.response_text.encode("utf-8")) > MAX_RESPONSE_TEXT_BYTES:
             raise ValueError(f"frontier response exceeds {MAX_RESPONSE_TEXT_BYTES} bytes")
         for intent in self.append_intents:

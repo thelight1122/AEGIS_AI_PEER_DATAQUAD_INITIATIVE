@@ -9,6 +9,12 @@ ID, and session ID are provenance/routing metadata only. The service supplies
 operational System Instructions; it injects no personality, biography,
 ontology, relationship, or lived history.
 
+At Desktop begin, the Verus DataQuad generates its own local turn and
+correlation identifiers and classifies them as local, non-provider evidence.
+Provider-returned request, event, and session identifiers remain separate,
+optional provenance and are null when the signed-in Desktop surface does not
+expose them. Local values are never relabeled as provider values.
+
 The runtime exposes a Verus-owned command surface reached only by a dedicated
 local stdio MCP over the authenticated `GabeCyberPeer` SSH alias. It opens no
 network listener. A live Claude Desktop turn may propose append-only records

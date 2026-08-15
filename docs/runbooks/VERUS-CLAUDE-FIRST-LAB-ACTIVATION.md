@@ -123,10 +123,12 @@ T-Time, Processor/Custodian, and derived-only RLS evidence are then materialized
 idempotently. A retry reconciles any missing derived evidence before returning;
 health is not ready while a committed turn lacks matching evidence.
 
-First-turn evidence must capture the selected model UI evidence and explicitly
-record that a provider request ID/provider-returned model is unavailable,
-Frontier session, source event, T-Time, response digest, append list, DataQuad
-head hash, Processor admission, RLS immutability proof, and the returned payload.
+First-turn evidence must capture the selected model UI evidence; the separately
+classified DataQuad-owned local turn/correlation IDs; nullable availability for
+provider request, source-event, session, and provider-returned model fields;
+T-Time; response digest; append list; DataQuad head hash; Processor admission;
+RLS immutability proof; and the returned payload. Local correlation IDs must
+never be relabeled as provider-returned identifiers.
 
 ## Shortfall and pause
 

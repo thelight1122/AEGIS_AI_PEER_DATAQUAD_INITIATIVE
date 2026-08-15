@@ -54,24 +54,30 @@ class SSHRemoteCommandTransport:
         return value
 
 
-_TURN_FIELDS = {
-    "turn_id": {"type": "string", "minLength": 1},
-    "source_event_id": {"type": "string", "minLength": 1},
-    "frontier_session_id": {"type": "string", "minLength": 1},
+_OPTIONAL_PROVIDER_ID = {"type": ["string", "null"], "minLength": 1}
+_BEGIN_FIELDS = {
     "prompt": {"type": "string", "minLength": 1},
+    "source_event_id": _OPTIONAL_PROVIDER_ID,
+    "frontier_session_id": _OPTIONAL_PROVIDER_ID,
+}
+_COMMIT_FIELDS = {
+    "turn_id": {"type": "string", "minLength": 1},
+    "prompt": {"type": "string", "minLength": 1},
+    "source_event_id": _OPTIONAL_PROVIDER_ID,
+    "frontier_session_id": _OPTIONAL_PROVIDER_ID,
 }
 
 
 TOOLS = [
     {"name": "verus_read_context", "description": "Read the verified append-only Verus DataQuad context.",
      "inputSchema": {"type": "object", "additionalProperties": False, "properties": {}}},
-    {"name": "verus_begin_turn", "description": "Begin a genuine Claude Desktop turn and receive context, operational instructions, and correlation evidence.",
-     "inputSchema": {"type": "object", "additionalProperties": False, "required": list(_TURN_FIELDS), "properties": _TURN_FIELDS}},
+    {"name": "verus_begin_turn", "description": "Begin a genuine Claude Desktop turn and receive DataQuad-owned local turn/correlation identifiers, context, and operational instructions. Omit or use null for provider event/session identifiers when Desktop does not expose them.",
+     "inputSchema": {"type": "object", "additionalProperties": False, "required": ["prompt"], "properties": _BEGIN_FIELDS}},
     {"name": "verus_commit_turn", "description": "Commit Claude Desktop output DataQuad-first with full append-only PEER, PCT, NCT, and SPINE authority.",
      "inputSchema": {"type": "object", "additionalProperties": False,
-        "required": ["correlation_id", *_TURN_FIELDS, "response_text", "appends"],
+        "required": ["correlation_id", "turn_id", "prompt", "response_text", "appends"],
         "properties": {
-            "correlation_id": {"type": "string", "minLength": 1}, **_TURN_FIELDS,
+            "correlation_id": {"type": "string", "minLength": 1}, **_COMMIT_FIELDS,
             "response_text": {"type": "string", "minLength": 1},
             "appends": {"type": "array", "maxItems": 64, "items": {
                 "type": "object", "additionalProperties": False, "required": ["tensor", "payload"],

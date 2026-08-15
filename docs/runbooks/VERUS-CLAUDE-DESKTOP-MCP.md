@@ -32,8 +32,16 @@ remain outside scope.
    begin, actual Claude response, commit with PEER/PCT/NCT/SPINE evidence,
    replay, and health.
 
-Provider request ID and provider-returned model metadata are unavailable at the
-Desktop/MCP boundary. Evidence must therefore record the Desktop correlation
-ID, canonical tool arguments/results and hashes, DataQuad record hash and chain,
-T-Time, Processor, Custodian and RLS evidence, selected-model UI evidence, and
-screenshots. Do not simulate the model or UI.
+`verus_begin_turn` requires only the work prompt. If Claude Desktop exposes a
+genuine provider event or session identifier, pass it in its matching optional
+field. Otherwise omit the field or pass null. Begin returns a DataQuad-owned
+local `turn_id` and `correlation_id`; commit must return them unchanged. They
+are classified as local correlation evidence and must never be copied or
+relabeled as provider provenance.
+
+Provider request ID, provider event/session IDs, and provider-returned model
+metadata may be unavailable at the Desktop/MCP boundary. Evidence preserves
+those values as null/unavailable and separately records the DataQuad local
+correlation, canonical tool arguments/results and hashes, DataQuad record hash
+and chain, T-Time, Processor, Custodian and RLS evidence, selected-model UI
+evidence, and screenshots. Do not simulate the model or UI.
