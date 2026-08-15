@@ -23,22 +23,37 @@ Authoritative external seed copies and the VM were outside this operation.
 | Artifact | SHA-256 |
 |---|---|
 | `reports/canon-v0.20/candidate/canon-v0.20-candidate-rulings.json` | `28D77DAD1AC992A0418E5D4CE406A8F6B4BBE9E65FCA7AEA9F54B9AB8EB48550` |
-| `reports/canon-v0.20/candidate/canon-v0.20-candidate-manifest.json` | `3EC79FEA2D1F4B839FDA30B12812C4B3B99CE91F4A2FFF25276EFA82612EF39B` |
-| `reports/canon-v0.20/candidate/ai-peer-foundation-seed-v0.20-candidate.json` | `91C46001F54952BAD49D56FBA6C5A3A21E14872DF9C8FA80D908BB68B9DA4CCF` |
-| `reports/canon-v0.20/canon-v0.20-index.json` used as input | `691B3FA1D084DCC88171405350A08EF050C76D137DD368BB8816E8FA73B18908` |
+| `reports/canon-v0.20/candidate/canon-v0.20-candidate-manifest.json` | `916E05E3667C711F9FD90A3650E2A5574DB39728AA17AAA9F948F080C8DE372B` |
+| `reports/canon-v0.20/candidate/ai-peer-foundation-seed-v0.20-candidate.json` | `80E0F1DA62B2888494486232603BF12147483716204EE13BB5BCAF4881D8CEE2` |
+| `reports/canon-v0.20/canon-v0.20-index.json` used as input | `966B369B4BE0196F793D9B2B6CEBE489FD4308E32982D7B28E6BB2AA1BCE1639` |
 
 The seed field `canonLock.sourceManifestSha256` equals the candidate-manifest
 digest above.
 
 ## Verification
 
-- Focused candidate/issuer/rebuilder suite: 27 passed.
+- Focused Canon/index/candidate/issuer/rebuilder suite: 53 passed.
 - Full repository suite: 420 passed, 14 skipped.
 - Candidate report/hash binding verification: passed.
 - Active implementation and generated-candidate whitespace validation: passed.
 - Immutable pre-repair backups intentionally retain their original conflict
   markers and trailing whitespace as forensic evidence; those backup-only lines
   are excluded from the active-file cleanliness claim.
+
+## External candidate-source verification
+
+- Both Glossary copies preserve both scoped bodies and contain zero live merge markers.
+- Both former `BIOPEER_DOCTRINE.md` copies are renamed to
+  `AI_PEER_DOCTRINE_CANDIDATE.md`, byte-identical at SHA-256
+  `94A4694DA04172AEA3E80F013D8DB432EE7ECF6B9F1790610E73B88041527560`.
+- The stale `Shadow Effects.md` filename reference has zero remaining occurrences
+  in the active candidate corpus.
+- Cryptonic Harmonics is registered as `AEGIS:CRYPTONIC-HARMONICS:v1.0` with
+  SHA-256 `3324BDFEB872959C59473D6737D1385431584848F677744FC79FAD6DEFD6DED2`.
+- The April DataQuad Model is recorded as historical lineage and superseded for
+  current tensor definitions; its source was not modified.
+- Pre-edit copies and hashes are preserved beneath
+  `reports/canon-v0.20/backups/20260815T003650Z/`.
 
 ## Claim limit
 
