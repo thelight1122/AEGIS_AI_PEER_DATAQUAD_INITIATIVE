@@ -15,12 +15,21 @@ Provider-returned request, event, and session identifiers remain separate,
 optional provenance and are null when the signed-in Desktop surface does not
 expose them. Local values are never relabeled as provider values.
 
+Immutable v1 turns remain readable as pre-correction operational evidence.
+They are never rewritten or silently upgraded: context and health expose an
+append-only qualification that marks them noncanonical under the v2
+identifier contract and preserves their original record hashes.
+
 The runtime exposes a Verus-owned command surface reached only by a dedicated
 local stdio MCP over the authenticated `GabeCyberPeer` SSH alias. It opens no
 network listener. A live Claude Desktop turn may propose append-only records
 to all four tensors: PEER, PCT, NCT, and SPINE.
 The existing Processor and disjoint Steward/Advocate Custodian scopes perform
 local admission without changing the CyberPeer's complete DataQuad abilities.
+
+The systemd unit is oneshot. `active (exited)` means its health command
+completed successfully; runtime components are invoked through the Verus-owned
+command surface and are not claimed to be continuously running daemons.
 
 No secret is included in a source or release bundle. Claude Desktop mode uses
 the user's existing signed-in Desktop session and does not use an Anthropic API

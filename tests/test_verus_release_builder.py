@@ -50,7 +50,9 @@ def test_release_builds_authoritative_verus_foundation_without_activation(tmp_pa
     verified = dataquad.verify()
     assert verified == {
         "cyberpeer_name": "Verus", "dataquad_id": "verus",
-        "foundation_records": 133, "records": 0, "head_hash": None, "verified": True,
+        "foundation_records": 133, "records": 0,
+        "pre_correction_v1_turns": 0, "canonical_v2_turns": 0,
+        "head_hash": None, "verified": True,
     }
     receipt = json.loads((output / "foundation" / "foundation-receipt.json").read_text())
     assert receipt["record_contract"] == {

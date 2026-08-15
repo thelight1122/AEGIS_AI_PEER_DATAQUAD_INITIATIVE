@@ -45,3 +45,15 @@ those values as null/unavailable and separately records the DataQuad local
 correlation, canonical tool arguments/results and hashes, DataQuad record hash
 and chain, T-Time, Processor, Custodian and RLS evidence, selected-model UI
 evidence, and screenshots. Do not simulate the model or UI.
+
+### Pre-correction v1 evidence
+
+An existing v1 turn is preserved byte-for-byte and remains part of the
+append-only chain. The corrected runtime accepts it only as
+`pre_correction_operational_evidence`, exposes its qualification in
+`contract_qualifications` and health, and does not rewrite or reclassify its
+literal provider-ID placeholders as genuine provenance. A v1 record does not
+count as the canonical first v2 turn.
+
+The Verus systemd unit is oneshot. `active (exited)` records a successful
+command health check, not proof of continuously running Verus daemons.

@@ -183,8 +183,6 @@ class VerusLabRuntime:
             target.setdefault(append["tensor"], []).append(dict(append["payload"]))
         payload = {
             "source_event_id": entry["source_event_id"],
-            "source_event_id_available": entry["source_event_id_available"],
-            "dataquad_correlation_id": entry["dataquad_correlation"]["correlation_id"],
             "prompt": entry["prompt"]["text"],
             "response": entry["response"]["text"],
             "provider_request_id": entry["frontier_provenance"]["provider_request_id"],
@@ -192,18 +190,23 @@ class VerusLabRuntime:
                         for item in entry["appends"]],
             "turn_record_hash": entry["record_hash"],
         }
+        if entry["schema"] == "aegis.verus.dataquad-turn.v2":
+            payload["source_event_id_available"] = entry["source_event_id_available"]
+            payload["dataquad_correlation_id"] = entry["dataquad_correlation"]["correlation_id"]
         return payload, steward_changes, advocate_changes
 
     @staticmethod
     def _rls_derivation(entry: dict[str, object]) -> dict[str, object]:
-        return {
+        derivation = {
             "kind": "frontier_dataquad_turn",
             "source_event_id": entry["source_event_id"],
-            "source_event_id_available": entry["source_event_id_available"],
-            "dataquad_correlation_id": entry["dataquad_correlation"]["correlation_id"],
             "turn_record_hash": entry["record_hash"],
             "append_count": len(entry["appends"]),
         }
+        if entry["schema"] == "aegis.verus.dataquad-turn.v2":
+            derivation["source_event_id_available"] = entry["source_event_id_available"]
+            derivation["dataquad_correlation_id"] = entry["dataquad_correlation"]["correlation_id"]
+        return derivation
 
     def _materialize_derived(self, entry: dict[str, object]) -> None:
         self.temporal.materialize(TemporalObservation(

@@ -123,6 +123,13 @@ T-Time, Processor/Custodian, and derived-only RLS evidence are then materialized
 idempotently. A retry reconciles any missing derived evidence before returning;
 health is not ready while a committed turn lacks matching evidence.
 
+When updating a state root that already contains a v1 turn, record the SHA-256
+of Ring 4, temporal, Processor, and RLS ledgers before and after installation.
+The hashes must remain identical. Health must report that v1 turn as
+pre-correction operational evidence, noncanonical under v2, and append-only
+preserved. Do not replay, reconcile, or create a second turn merely to prove
+compatibility.
+
 First-turn evidence must capture the selected model UI evidence; the separately
 classified DataQuad-owned local turn/correlation IDs; nullable availability for
 provider request, source-event, session, and provider-returned model fields;

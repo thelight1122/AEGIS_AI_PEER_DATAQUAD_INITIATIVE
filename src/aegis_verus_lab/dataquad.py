@@ -42,6 +42,80 @@ def _fallback_correlation_id(turn_id: str, prompt: str) -> str:
     return "verus-dataquad-correlation-" + hashlib.sha256(material).hexdigest()
 
 
+def _validate_optional_provider_value(
+    value: str | None, available: object, *, label: str,
+) -> None:
+    if not isinstance(available, bool):
+        raise ValueError(f"{label} availability must be boolean")
+    if available:
+        if not isinstance(value, str) or not value.strip():
+            raise ValueError(f"available {label} is invalid")
+    elif value is not None:
+        raise ValueError(f"unavailable {label} must be null")
+
+
+def _validate_v1_provenance(item: dict[str, Any]) -> None:
+    """Validate immutable pre-correction records without upgrading their meaning."""
+    source = item["source_event_id"]
+    frontier = item["frontier_provenance"]
+    session = frontier["frontier_session_id"]
+    if not isinstance(source, str) or not source.strip():
+        raise ValueError("historical v1 source_event_id is invalid")
+    if not isinstance(session, str) or not session.strip():
+        raise ValueError("historical v1 frontier_session_id is invalid")
+    _validate_optional_provider_value(
+        frontier["provider_request_id"], frontier["provider_request_id_available"],
+        label="provider_request_id",
+    )
+
+
+def _validate_v2_provenance(item: dict[str, Any]) -> None:
+    expected_local = local_correlation_provenance(
+        item["turn_id"], item["dataquad_correlation"]["correlation_id"],
+    )
+    if item["dataquad_correlation"] != expected_local:
+        raise ValueError("invalid DataQuad local correlation provenance")
+    _validate_optional_provider_value(
+        item["source_event_id"], item["source_event_id_available"],
+        label="source_event_id",
+    )
+    if item["source_event_id_classification"] != PROVIDER_RETURNED_OPTIONAL:
+        raise ValueError("source_event_id classification mismatch")
+    frontier = item["frontier_provenance"]
+    _validate_optional_provider_value(
+        frontier["provider_request_id"], frontier["provider_request_id_available"],
+        label="provider_request_id",
+    )
+    if frontier["provider_request_id_classification"] != PROVIDER_RETURNED_OPTIONAL:
+        raise ValueError("provider_request_id classification mismatch")
+    _validate_optional_provider_value(
+        frontier["frontier_session_id"], frontier["frontier_session_id_available"],
+        label="frontier_session_id",
+    )
+    if frontier["frontier_session_id_classification"] != PROVIDER_RETURNED_OPTIONAL:
+        raise ValueError("frontier_session_id classification mismatch")
+
+
+def _contract_qualification(item: dict[str, Any]) -> dict[str, Any] | None:
+    if item["schema"] != "aegis.verus.dataquad-turn.v1":
+        return None
+    reasons = ["caller_supplied_turn_id_without_dataquad_classification"]
+    source = item["source_event_id"]
+    session = item["frontier_provenance"]["frontier_session_id"]
+    if source.startswith("unavailable:") or session.startswith("unavailable:"):
+        reasons.append("literal_provider_identifier_placeholders")
+    reasons.append("provider_identifier_availability_and_classification_absent")
+    return {
+        "turn_id": item["turn_id"],
+        "record_hash": item["record_hash"],
+        "schema": item["schema"],
+        "classification": "pre_correction_operational_evidence",
+        "canonical_under_v2_contract": False,
+        "preservation": "append_only_do_not_rewrite",
+        "reason_codes": reasons,
+    }
+
+
 def _lines(path: Path) -> list[dict[str, Any]]:
     if path.is_symlink() or not path.is_file():
         raise ValueError(f"required DataQuad file is absent or a symlink: {path}")
@@ -119,46 +193,15 @@ class VerusDataQuad:
                     raise ValueError("previous_hash mismatch")
                 if item["cyberpeer_name"] != "Verus" or item["dataquad_id"] != "verus":
                     raise ValueError("record is not bound to Verus")
-                if item["schema"] != "aegis.verus.dataquad-turn.v2":
+                schema = item["schema"]
+                if schema not in {
+                    "aegis.verus.dataquad-turn.v1", "aegis.verus.dataquad-turn.v2",
+                }:
                     raise ValueError("unsupported Verus turn schema")
-                expected_local = local_correlation_provenance(
-                    item["turn_id"], item["dataquad_correlation"]["correlation_id"],
-                )
-                if item["dataquad_correlation"] != expected_local:
-                    raise ValueError("invalid DataQuad local correlation provenance")
-                source_available = item["source_event_id_available"]
-                if not isinstance(source_available, bool):
-                    raise ValueError("source_event_id availability must be boolean")
-                if source_available:
-                    if not isinstance(item["source_event_id"], str) or not item["source_event_id"].strip():
-                        raise ValueError("available source_event_id is invalid")
-                elif item["source_event_id"] is not None:
-                    raise ValueError("unavailable source_event_id must be null")
-                if item["source_event_id_classification"] != PROVIDER_RETURNED_OPTIONAL:
-                    raise ValueError("source_event_id classification mismatch")
-                frontier = item["frontier_provenance"]
-                provider_request_available = frontier["provider_request_id_available"]
-                if not isinstance(provider_request_available, bool):
-                    raise ValueError("provider_request_id availability must be boolean")
-                if provider_request_available:
-                    if (not isinstance(frontier["provider_request_id"], str)
-                            or not frontier["provider_request_id"].strip()):
-                        raise ValueError("available provider_request_id is invalid")
-                elif frontier["provider_request_id"] is not None:
-                    raise ValueError("unavailable provider_request_id must be null")
-                if frontier["provider_request_id_classification"] != PROVIDER_RETURNED_OPTIONAL:
-                    raise ValueError("provider_request_id classification mismatch")
-                session_available = frontier["frontier_session_id_available"]
-                if not isinstance(session_available, bool):
-                    raise ValueError("frontier_session_id availability must be boolean")
-                if session_available:
-                    if (not isinstance(frontier["frontier_session_id"], str)
-                            or not frontier["frontier_session_id"].strip()):
-                        raise ValueError("available frontier_session_id is invalid")
-                elif frontier["frontier_session_id"] is not None:
-                    raise ValueError("unavailable frontier_session_id must be null")
-                if frontier["frontier_session_id_classification"] != PROVIDER_RETURNED_OPTIONAL:
-                    raise ValueError("frontier_session_id classification mismatch")
+                if schema == "aegis.verus.dataquad-turn.v1":
+                    _validate_v1_provenance(item)
+                else:
+                    _validate_v2_provenance(item)
                 if item["t_time"] != item["sequence"]:
                     raise ValueError("T-Time is not aligned with committed turn sequence")
                 if item["elapsed_seconds"] < 0:
@@ -295,11 +338,16 @@ class VerusDataQuad:
     def verify(self) -> dict[str, Any]:
         self.verify_foundation()
         records = self.live_turns()
+        pre_correction = sum(
+            item["schema"] == "aegis.verus.dataquad-turn.v1" for item in records
+        )
         return {
             "cyberpeer_name": "Verus",
             "dataquad_id": "verus",
             "foundation_records": sum(EXPECTED_FOUNDATION_COUNTS.values()),
             "records": len(records),
+            "pre_correction_v1_turns": pre_correction,
+            "canonical_v2_turns": len(records) - pre_correction,
             "head_hash": records[-1]["record_hash"] if records else None,
             "verified": True,
         }
@@ -329,5 +377,9 @@ class VerusDataQuad:
             "dataquad_id": "verus",
             "foundation": foundations,
             "recent_live_turns": live[-live_turn_limit:],
+            "contract_qualifications": [
+                qualification for item in live
+                if (qualification := _contract_qualification(item)) is not None
+            ],
             "append_contract": {"mode": "append-only", "tensors": list(TENSORS)},
         }

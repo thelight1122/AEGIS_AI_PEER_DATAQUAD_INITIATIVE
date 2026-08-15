@@ -9,6 +9,7 @@ from types import SimpleNamespace
 import pytest
 
 from aegis_peer_runtime.models import TENSORS
+from aegis_peer_runtime.storage import canonical_hash
 from aegis_verus_lab.dataquad import VerusDataQuad
 from aegis_verus_lab.desktop_runtime import DesktopVerusRuntime
 from aegis_verus_lab.turn_contract import (
@@ -69,6 +70,44 @@ def _turn(runtime: DesktopVerusRuntime) -> tuple[dict[str, object], dict[str, ob
         ],
     }
     return begin, commit
+
+
+def _rewrite_only_turn_as_historical_v1(runtime: DesktopVerusRuntime) -> bytes:
+    entry = runtime.dataquad.live_turns()[0]
+    candidate = {
+        key: value for key, value in entry.items()
+        if key not in {
+            "sequence", "previous_hash", "request_hash", "record_hash",
+            "source_event_id_available", "source_event_id_classification",
+            "dataquad_correlation",
+        }
+    }
+    candidate["schema"] = "aegis.verus.dataquad-turn.v1"
+    candidate["source_event_id"] = "unavailable:no-provider-event-id"
+    frontier = dict(candidate["frontier_provenance"])
+    frontier["frontier_session_id"] = "unavailable:no-frontier-session-exposed-in-claude-code"
+    frontier.pop("provider_request_id_classification")
+    frontier.pop("frontier_session_id_available")
+    frontier.pop("frontier_session_id_classification")
+    candidate["frontier_provenance"] = frontier
+    historical = {
+        **candidate,
+        "sequence": 1,
+        "previous_hash": None,
+        "request_hash": canonical_hash(candidate),
+    }
+    historical["record_hash"] = canonical_hash(historical)
+    encoded = json.dumps(
+        historical, sort_keys=True, separators=(",", ":"), ensure_ascii=False,
+    ).encode("utf-8") + b"\n"
+    runtime.dataquad.live_ledger.write_bytes(encoded)
+    for path in (
+        runtime.temporal.ledger_path,
+        runtime.processor.ledger_path,
+        runtime.rls.ledger_path,
+    ):
+        path.unlink(missing_ok=True)
+    return encoded
 
 
 def test_desktop_runtime_full_dataquad_commit_is_idempotent_and_coherent(tmp_path):
@@ -159,6 +198,56 @@ def test_desktop_provider_ids_remain_optional_external_provenance(tmp_path):
     assert entry["source_event_id_available"] is True
     assert entry["frontier_provenance"]["frontier_session_id"] == "provider-session-1"
     assert entry["dataquad_correlation"]["provider_identifier"] is False
+
+
+def test_v2_runtime_preserves_and_qualifies_historical_v1_turn(tmp_path):
+    runtime = _runtime(tmp_path)
+    _, commit = _turn(runtime)
+    runtime.commit_turn(**commit)
+    original_v1_bytes = _rewrite_only_turn_as_historical_v1(runtime)
+
+    resumed = DesktopVerusRuntime(
+        VerusDataQuad(runtime.dataquad.release_root, runtime.dataquad.state_root),
+        model="claude-opus-4-6",
+        clock=lambda: datetime(2026, 8, 15, 19, tzinfo=timezone.utc),
+        local_id_factory=lambda: "00000000000000000000000000000002",
+    )
+    context = resumed.dataquad.context()
+    assert context["contract_qualifications"] == [{
+        "turn_id": "verus-local-turn-00000000000000000000000000000001",
+        "record_hash": context["recent_live_turns"][0]["record_hash"],
+        "schema": "aegis.verus.dataquad-turn.v1",
+        "classification": "pre_correction_operational_evidence",
+        "canonical_under_v2_contract": False,
+        "preservation": "append_only_do_not_rewrite",
+        "reason_codes": [
+            "caller_supplied_turn_id_without_dataquad_classification",
+            "literal_provider_identifier_placeholders",
+            "provider_identifier_availability_and_classification_absent",
+        ],
+    }]
+    resumed.reconcile_committed_turns()
+    historical_health = resumed.health()
+    assert historical_health["coherence"]["coherent"] is True
+    assert historical_health["integrity"]["pre_correction_v1_turns"] == 1
+    assert historical_health["historical_contract"] == {
+        "pre_correction_operational_evidence": 1,
+        "canonical_v2_turns": 0,
+        "canonical_first_v2_turn_pending": True,
+        "preservation": "append_only_do_not_rewrite",
+    }
+    assert resumed.dataquad.live_ledger.read_bytes() == original_v1_bytes
+
+    begin = resumed.begin_turn(prompt="Create a separate v2 turn after preserved history.")
+    resumed.commit_turn(
+        correlation_id=begin["correlation_id"], turn_id=begin["turn_id"],
+        prompt="Create a separate v2 turn after preserved history.", response_text="v2.",
+        appends=[{"tensor": "PEER", "payload": {"v2": True}}],
+    )
+    lines = resumed.dataquad.live_ledger.read_bytes().splitlines(keepends=True)
+    assert lines[0] == original_v1_bytes
+    assert json.loads(lines[1])["schema"] == "aegis.verus.dataquad-turn.v2"
+    assert resumed.health()["coherence"]["coherent"] is True
 
 
 @pytest.mark.parametrize("local_token", ["bad token", "x" * 129, ""])
@@ -319,3 +408,10 @@ def test_desktop_deploy_is_command_only_no_rest_key_or_public_listener():
         (deploy / "claude-desktop" / "verus-dataquad.mcp.json").read_text(encoding="utf-8")
     )
     assert template["verus-dataquad"]["env"]["ProgramData"] == "C:\\ProgramData"
+    canonical_prompt = (
+        deploy / "claude-desktop" / "VERUS_V2_CANONICAL_TURN_PROMPT.md"
+    ).read_text(encoding="utf-8")
+    assert "verus_begin_turn" in canonical_prompt and "verus_commit_turn" in canonical_prompt
+    assert "DataQuad-owned" in canonical_prompt
+    assert "source_event_id` and `frontier_session_id` omitted or null" in canonical_prompt
+    assert "verus-first-desktop-20260815-001" not in canonical_prompt

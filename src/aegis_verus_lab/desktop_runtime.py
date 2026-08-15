@@ -250,6 +250,12 @@ class DesktopVerusRuntime:
                 "provider_identifier": False,
                 "defines_identity": False,
             },
+            "historical_contract": {
+                "pre_correction_operational_evidence": integrity["pre_correction_v1_turns"],
+                "canonical_v2_turns": integrity["canonical_v2_turns"],
+                "canonical_first_v2_turn_pending": integrity["canonical_v2_turns"] == 0,
+                "preservation": "append_only_do_not_rewrite",
+            },
             "integrity": integrity,
             "coherence": coherence,
         }
