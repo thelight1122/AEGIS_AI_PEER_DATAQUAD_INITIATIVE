@@ -1,0 +1,38 @@
+{
+  "schema_version": "0.1.0",
+  "orb_id": "rls-persistent-relations-core",
+  "orb_version": "1.0.0",
+  "ability_name": "Recursive Learning Session (persistent relations)",
+  "purpose": "Read records through Steward (PCT/NCT) and Advocate (PEER/SPINE), score relevance, select and reject by threshold, preserve no-results as failure-is-data, and when live write back a PCT record and record persistent relations across retrieved records. At P0 this is read-only.",
+  "runtime": {
+    "language": "python",
+    "form": "library",
+    "entrypoint": "orb_rls_persistent_relations_core.engine.RecursiveLearningEngine",
+    "package": {
+      "name": "orb-rls-persistent-relations-core",
+      "version_spec": ">=1.0.0,<2.0.0",
+      "source": "deploy/verus-lab/pod/vendor/orb-rls-persistent-relations-core"
+    }
+  },
+  "capabilities": [
+    {
+      "name": "recursive_learning_session",
+      "function": "Score and partition retrieved records by relevance and return selected and rejected refs."
+    },
+    {
+      "name": "persistent_relation_recording",
+      "function": "On writeback, write a PCT context record and call store.record_relation linking it to every SELECTED (relevance-retrieved) record. record_relation is invoked unconditionally by the orb and is a no-op only when the store gates the capability inactive (store-side gate); orb_evidence.record_invocation is guarded in-orb by an early is_active(ORB_ID) return. No live effect until AEGIS_STORAGE_MODE=pod and AEGIS_RLS_ACTIVE=true."
+    }
+  ],
+  "demonstration": {
+    "input_fixture": "deploy/verus-lab/pod/fixtures/rls-input.json",
+    "expected_outputs": ["rls_session_result", "cross_tensor_relation_entries", "pct_writeback_record"],
+    "observable_events": ["session_started", "candidates_scored", "session_completed"]
+  },
+  "umbilicals": ["deploy/verus-lab/pod/umbilicals/rls-persistent-relations-core.umbilical.json"],
+  "evidence": {
+    "created_utc": "2026-08-17",
+    "source": "vendored authoritative canonical orb-rls-persistent-relations-core (runtime_hash 51A1AC18)",
+    "trust_state": "verified"
+  }
+}

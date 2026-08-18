@@ -1,0 +1,12 @@
+{
+  "schema_version": "0.1.0",
+  "peer_id": "verus",
+  "session_id": "verus-p0-demo-session",
+  "user_message": "P0 read-only demonstration input for the Verus RLS orb attachment.",
+  "intent": "demonstrate_attachment",
+  "pressure_state": {
+    "pressure_level": "nominal"
+  },
+  "nature_aspects": [],
+  "boundary": "local fixture records only; no live DataQuad roots referenced; read-only"
+}

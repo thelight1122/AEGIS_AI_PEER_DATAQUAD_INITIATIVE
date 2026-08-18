@@ -1,0 +1,92 @@
+{
+  "schema_version": "0.1.0",
+  "pod_id": "verus-cyberpeer-pod",
+  "peer_id": "verus",
+  "runtime": {
+    "language": "python",
+    "implementation": "P1 live pod with daemon-backed retrieval operators and RLS orb engine over the Verus DataQuad LAB surface"
+  },
+  "tensor_spec": {
+    "spec_id": "dataquadpod-core-tensor-spec-0.1.0",
+    "spec_path": "fixtures/dataquadpod-tensor-spec.json",
+    "active_output_root": "deploy/verus-lab/pod/reports/tensors"
+  },
+  "tensors": {
+    "PEER": {
+      "name": "PEER",
+      "purpose": "Present experiential signal",
+      "storage": "deploy/verus-lab/pod/tensors/PEER.jsonl",
+      "output": "deploy/verus-lab/pod/reports/tensors/PEER.tensor.json",
+      "shape": ["record_count", 8, 4],
+      "dtype": "float32",
+      "axis_order": ["record", "embedding", "metadata"],
+      "append_only": true
+    },
+    "PCT": {
+      "name": "PCT",
+      "purpose": "Persistent contextual thread",
+      "storage": "deploy/verus-lab/pod/tensors/PCT.jsonl",
+      "output": "deploy/verus-lab/pod/reports/tensors/PCT.tensor.json",
+      "shape": ["record_count", 8, 4],
+      "dtype": "float32",
+      "axis_order": ["record", "embedding", "metadata"],
+      "append_only": true
+    },
+    "NCT": {
+      "name": "NCT",
+      "purpose": "Condensed contextual essence",
+      "storage": "deploy/verus-lab/pod/tensors/NCT.jsonl",
+      "output": "deploy/verus-lab/pod/reports/tensors/NCT.tensor.json",
+      "shape": ["record_count", 8, 4],
+      "dtype": "float32",
+      "axis_order": ["record", "embedding", "metadata"],
+      "append_only": true
+    },
+    "SPINE": {
+      "name": "SPINE",
+      "purpose": "Sovereign identity continuity",
+      "storage": "deploy/verus-lab/pod/tensors/SPINE.jsonl",
+      "output": "deploy/verus-lab/pod/reports/tensors/SPINE.tensor.json",
+      "shape": ["record_count", 8, 4],
+      "dtype": "float32",
+      "axis_order": ["record", "embedding", "metadata"],
+      "append_only": true
+    }
+  },
+  "roles": {
+    "steward": {
+      "purpose": "Context witness and preservation care",
+      "owns": ["PCT", "NCT"],
+      "reads": ["PEER"]
+    },
+    "advocate": {
+      "purpose": "Affect witness and relational signal care",
+      "owns": ["PEER", "SPINE"],
+      "reads": []
+    }
+  },
+  "processor": {
+    "purpose": "Context assembly, turn interpretation, and RLS orb orchestration",
+    "status": "p1_active",
+    "rls_integration": "Processor wires daemon-backed protocol adapters and live store into the verified RLS orb engine. Activation gated by AEGIS_RLS_ACTIVE or --rls-active flag."
+  },
+  "temporal_daemon": {
+    "purpose": "Time position and continuity awareness",
+    "status": "p1_active"
+  },
+  "orbs": [
+    {
+      "orb_id": "rls-persistent-relations-core",
+      "required_for_full_function": true,
+      "umbilical": "deploy/verus-lab/pod/umbilicals/rls-persistent-relations-core.umbilical.json",
+      "orb_version_pin": "1.0.0"
+    }
+  ],
+  "evidence": {
+    "created_utc": "2026-08-17",
+    "source": "Verus-sovereign P1 live pod; RLS orb vendored from authoritative canonical (51A1AC18), wired via daemon-backed protocol adapters with store-side record_relation gating",
+    "trust_state": "provisional",
+    "p1_activated_utc": "2026-08-17",
+    "activation_gate": "AEGIS_RLS_ACTIVE=true or --rls-active flag on Processor daemon"
+  }
+}

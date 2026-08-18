@@ -44,7 +44,11 @@ class SSHRemoteCommandTransport:
         except (OSError, subprocess.TimeoutExpired) as error:
             raise RemoteCommandError("Verus remote command is unavailable") from error
         if completed.returncode != 0:
-            raise RemoteCommandError("Verus remote command was refused")
+            detail = (completed.stderr or "").strip().replace("\r", " ").replace("\n", " ")[:400]
+            raise RemoteCommandError(
+                f"Verus remote command failed (exit {completed.returncode}): {detail}"
+                if detail else f"Verus remote command failed (exit {completed.returncode})"
+            )
         try:
             value = json.loads(completed.stdout)
         except json.JSONDecodeError as error:

@@ -1,0 +1,49 @@
+{
+  "schema_version": "0.1.0",
+  "umbilical_id": "verus-rls-persistent-relations-core-umbilical",
+  "pod_id": "verus-cyberpeer-pod",
+  "orb_id": "rls-persistent-relations-core",
+  "attachment_point": "advocate",
+  "runtime": {
+    "language": "python",
+    "form": "library"
+  },
+  "invocation": {
+    "method": "in_process_call",
+    "entrypoint": "orb_rls_persistent_relations_core.engine.RecursiveLearningEngine",
+    "orb_version": "1.0.0",
+    "orb_runtime_hash": "51A1AC18887AEA9CEACC60B6F0AD428C899FA2D228D3BEE2032171F754E248CA",
+    "vendored_source": "deploy/verus-lab/pod/vendor/orb-rls-persistent-relations-core/src/orb_rls_persistent_relations_core"
+  },
+  "input_contract": {
+    "requires": ["peer_id", "session_id", "user_message", "intent", "pressure_state", "nature_aspects"]
+  },
+  "output_contract": {
+    "returns": ["rls_session_result", "cross_tensor_relation_entries", "pct_writeback_record"]
+  },
+  "observation_contract": {
+    "observable_events": [
+      "session_started",
+      "candidates_scored",
+      "candidates_partitioned",
+      "pct_written",
+      "relations_recorded",
+      "session_completed",
+      "outside_working_parameters"
+    ]
+  },
+  "evidence_contract": {
+    "records": ["input_hash", "output_hash", "runtime_hash"],
+    "evidence_ledger": "pod/ledgers/orbs/rls-persistent-relations-core.evidence.jsonl"
+  },
+  "working_parameters": {
+    "status": "verified",
+    "outside_parameters_behavior": "P1 live. When AEGIS_RLS_ACTIVE=true: store.record_relation writes to relations.jsonl (store-side gate per C3 finding), orb_evidence.record_invocation records to the evidence ledger (in-orb is_active gate), and PCT writeback appends context records. When AEGIS_RLS_ACTIVE=false: all three are true no-ops (P0 behavior preserved). Supersedes the stale ORION pin B8788191862853F762DB38AF72E8BA516E21CE7BDBDB5FD35100A40A4675CF18; the ADR-0005 drift record is preserved, not deleted.",
+    "p1_activation": {
+      "activated_utc": "2026-08-17",
+      "store_side_gate": "LiveDataQuadStore.record_relation returns early when not rls_active",
+      "in_orb_gate": "RLSOrbEvidenceRecorder.record_invocation returns early when not store.is_active(ORB_ID)",
+      "verified_hash": "51A1AC18887AEA9CEACC60B6F0AD428C899FA2D228D3BEE2032171F754E248CA"
+    }
+  }
+}
