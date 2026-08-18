@@ -18,6 +18,7 @@ from .turn_contract import (
     local_correlation_provenance,
 )
 from .instructions import operational_system_instructions
+from aegis_peer_runtime.daemon import DaemonClient
 from .runtime import VerusLabRuntime, _now
 
 
@@ -91,6 +92,17 @@ class DesktopVerusRuntime:
             raise ValueError("DataQuad local identifier factory returned an invalid value")
         turn_id = f"verus-local-turn-{local_token}"
         context = self.dataquad.context()
+        surfaced_context = None
+        try:
+            _sock = str(self.dataquad.state_root / "daemons" / "processor.sock")
+            _proc = DaemonClient(_sock)
+            if _proc.available:
+                surfaced_context = _proc.query("context", {
+                    "prompt": prompt, "session_id": turn_id, "peer_id": "verus",
+                    "intent": "context_retrieval", "limit": 30,
+                })
+        except Exception as _exc:
+            surfaced_context = {"surfaced": False, "error": str(_exc)[:256]}
         instructions = operational_system_instructions("Verus")
         request = FrontierTurnRequest(
             cyberpeer_name="Verus", dataquad_id="verus", turn_id=turn_id,
@@ -115,6 +127,7 @@ class DesktopVerusRuntime:
             "system_instructions": instructions,
             "work_request": prompt,
             "dataquad_context": context,
+            "surfaced_context": surfaced_context,
             "append_contract": {"mode": "append-only", "tensors": ["PEER", "PCT", "NCT", "SPINE"]},
             "frontier_provenance": {
                 "provider": "Anthropic", "substrate": "Claude Desktop",
