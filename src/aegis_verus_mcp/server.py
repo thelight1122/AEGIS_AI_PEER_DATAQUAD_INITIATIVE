@@ -1,4 +1,4 @@
-"""Minimal dependency-free stdio MCP server for Claude Desktop and Verus."""
+"""Minimal dependency-free stdio MCP server for Claude Desktop and Claude Code."""
 
 from __future__ import annotations
 
@@ -26,7 +26,7 @@ class SSHRemoteCommandTransport:
         self.timeout = min(max(int(timeout), 1), 30)
 
     def invoke(self, operation: str, payload: Mapping[str, Any]) -> dict[str, object]:
-        if operation not in {"context", "begin", "commit", "reconcile", "health", "replay"}:
+        if operation not in {"context", "begin", "commit", "reconcile", "health", "replay", "query"}:
             raise ValueError("unsupported Verus remote operation")
         wire = json.dumps(dict(payload), sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False)
         if len(wire.encode("utf-8")) > MAX_TOOL_ARGUMENT_BYTES:
@@ -58,6 +58,8 @@ class SSHRemoteCommandTransport:
         return value
 
 
+_SUBSTRATE = os.environ.get("VERUS_SUBSTRATE", "Claude Desktop")
+
 _OPTIONAL_PROVIDER_ID = {"type": ["string", "null"], "minLength": 1}
 _BEGIN_FIELDS = {
     "prompt": {"type": "string", "minLength": 1},
@@ -75,9 +77,9 @@ _COMMIT_FIELDS = {
 TOOLS = [
     {"name": "verus_read_context", "description": "Read the verified append-only Verus DataQuad context.",
      "inputSchema": {"type": "object", "additionalProperties": False, "properties": {}}},
-    {"name": "verus_begin_turn", "description": "Begin a genuine Claude Desktop turn and receive DataQuad-owned local turn/correlation identifiers, context, and operational instructions. Omit or use null for provider event/session identifiers when Desktop does not expose them.",
+    {"name": "verus_begin_turn", "description": "Begin a genuine turn and receive DataQuad-owned local turn/correlation identifiers, context, and operational instructions. Omit or use null for provider event/session identifiers when the substrate does not expose them.",
      "inputSchema": {"type": "object", "additionalProperties": False, "required": ["prompt"], "properties": _BEGIN_FIELDS}},
-    {"name": "verus_commit_turn", "description": "Commit Claude Desktop output DataQuad-first with full append-only PEER, PCT, NCT, and SPINE authority.",
+    {"name": "verus_commit_turn", "description": "Commit output DataQuad-first with full append-only PEER, PCT, NCT, and SPINE authority.",
      "inputSchema": {"type": "object", "additionalProperties": False,
         "required": ["correlation_id", "turn_id", "prompt", "response_text", "appends"],
         "properties": {
@@ -95,6 +97,13 @@ TOOLS = [
     {"name": "verus_replay_turn", "description": "Replay one committed Verus turn and reconcile its derived evidence without new append.",
      "inputSchema": {"type": "object", "additionalProperties": False, "required": ["turn_id"],
                      "properties": {"turn_id": {"type": "string", "minLength": 1}}}},
+    {"name": "verus_query", "description": "Query the DataQuad through the Advocate→Steward→Processor custodian pipeline. Returns curated, scored results rather than raw tensor dumps.",
+     "inputSchema": {"type": "object", "additionalProperties": False, "required": ["prompt"],
+                     "properties": {
+                         "prompt": {"type": "string", "minLength": 1},
+                         "limit": {"type": "integer", "minimum": 1, "maximum": 100, "default": 30},
+                         "intent": {"type": "string", "minLength": 1, "default": "context_retrieval"},
+                     }}},
 ]
 
 
@@ -102,7 +111,48 @@ _OPERATIONS = {
     "verus_read_context": "context", "verus_begin_turn": "begin",
     "verus_commit_turn": "commit", "verus_reconcile_turn": "reconcile",
     "verus_health": "health", "verus_replay_turn": "replay",
+    "verus_query": "query",
 }
+
+
+def _read_content_length_message(stream) -> dict[str, Any] | None:
+    """Read a Content-Length framed JSON-RPC message (standard MCP stdio)."""
+    headers: dict[str, str] = {}
+    while True:
+        line = stream.readline()
+        if not line:
+            return None
+        line = line.strip()
+        if not line:
+            break
+        if b":" in line if isinstance(line, bytes) else ":" in line:
+            decoded = line.decode("utf-8") if isinstance(line, bytes) else line
+            key, _, value = decoded.partition(":")
+            headers[key.strip().lower()] = value.strip()
+    content_length = int(headers.get("content-length", "0"))
+    if content_length <= 0:
+        return None
+    body = stream.read(content_length)
+    if isinstance(body, bytes):
+        body = body.decode("utf-8")
+    return json.loads(body)
+
+
+def _write_content_length_message(stream, response: dict[str, object]) -> None:
+    """Write a Content-Length framed JSON-RPC message."""
+    body = json.dumps(response, separators=(",", ":"), ensure_ascii=False)
+    header = f"Content-Length: {len(body.encode('utf-8'))}\r\n\r\n"
+    stream.write(header)
+    stream.write(body)
+    stream.flush()
+
+
+def _detect_transport(stream) -> str:
+    """Peek at stdin to detect Content-Length framed vs line-delimited."""
+    first_byte = stream.buffer.peek(1)[:1]
+    if first_byte in (b"C", b"c"):
+        return "content-length"
+    return "line-delimited"
 
 
 class VerusMCPServer:
@@ -118,7 +168,7 @@ class VerusMCPServer:
             return {"jsonrpc": "2.0", "id": request_id, "result": {
                 "protocolVersion": "2025-06-18",
                 "capabilities": {"tools": {"listChanged": False}},
-                "serverInfo": {"name": "verus-dataquad", "version": "1.0.0"},
+                "serverInfo": {"name": "verus-dataquad", "version": "1.1.0"},
             }}
         if method == "tools/list":
             return {"jsonrpc": "2.0", "id": request_id, "result": {"tools": TOOLS}}
@@ -128,6 +178,8 @@ class VerusMCPServer:
             arguments = params.get("arguments") or {}
             if name not in _OPERATIONS or not isinstance(arguments, dict):
                 return self._error(request_id, -32602, "invalid Verus tool call")
+            arguments = dict(arguments)
+            arguments.setdefault("_substrate", _SUBSTRATE)
             try:
                 value = self.transport.invoke(_OPERATIONS[name], arguments)
                 rendered = json.dumps(value, sort_keys=True, ensure_ascii=False, allow_nan=False)
@@ -148,6 +200,30 @@ class VerusMCPServer:
         return {"jsonrpc": "2.0", "id": request_id, "error": {"code": code, "message": message}}
 
     def run(self) -> int:
+        mode = _detect_transport(sys.stdin)
+        if mode == "content-length":
+            return self._run_content_length()
+        return self._run_line_delimited()
+
+    def _run_content_length(self) -> int:
+        """Content-Length framed transport (Claude Code)."""
+        while True:
+            try:
+                message = _read_content_length_message(sys.stdin)
+                if message is None:
+                    break
+                if not isinstance(message, dict):
+                    response = self._error(None, -32700, "parse error")
+                else:
+                    response = self.handle(message)
+            except (json.JSONDecodeError, ValueError):
+                response = self._error(None, -32700, "parse error")
+            if response is not None:
+                _write_content_length_message(sys.stdout, response)
+        return 0
+
+    def _run_line_delimited(self) -> int:
+        """Line-delimited transport (Claude Desktop)."""
         for line in sys.stdin:
             if not line.strip():
                 continue
