@@ -336,6 +336,7 @@ def test_mcp_surface_is_dedicated_full_authority_and_secret_free():
     assert set(tools) == {
         "verus_read_context", "verus_begin_turn", "verus_commit_turn",
         "verus_reconcile_turn", "verus_health", "verus_replay_turn",
+        "verus_query",
     }
     schema = tools["verus_commit_turn"]["inputSchema"]
     assert schema["properties"]["appends"]["items"]["properties"]["tensor"]["enum"] == list(TENSORS)
@@ -355,7 +356,7 @@ def test_mcp_surface_is_dedicated_full_authority_and_secret_free():
         "params": {"name": "verus_health", "arguments": {}},
     })
     assert called["result"]["isError"] is False
-    assert transport.calls == [("health", {})]
+    assert transport.calls == [("health", {"_substrate": "Claude Desktop"})]
 
 
 def test_ssh_transport_uses_fixed_alias_account_and_command_without_shell(monkeypatch):

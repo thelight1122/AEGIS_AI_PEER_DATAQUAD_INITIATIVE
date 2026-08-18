@@ -233,6 +233,24 @@ class DesktopVerusRuntime:
             "frontier_provenance": entry["frontier_provenance"],
         }
 
+    def query(
+        self, *, prompt: str, limit: int = 30, intent: str = "context_retrieval",
+    ) -> dict[str, object]:
+        sock_path = str(self.dataquad.state_root / "daemons" / "processor.sock")
+        client = DaemonClient(sock_path)
+        if not client.available:
+            raise ValueError("Processor daemon is not running — custodian query unavailable")
+        result = client.query("context", {
+            "prompt": prompt,
+            "session_id": f"verus-query-{uuid.uuid4().hex[:12]}",
+            "peer_id": "verus",
+            "intent": intent,
+            "limit": limit,
+        })
+        if "error" in result:
+            raise ValueError(f"Processor daemon error: {result['error'][:256]}")
+        return result.get("result", result)
+
     def coherence(self) -> dict[str, object]:
         return self._core.coherence()
 

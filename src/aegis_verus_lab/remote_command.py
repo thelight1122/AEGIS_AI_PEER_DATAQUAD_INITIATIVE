@@ -12,7 +12,7 @@ from .dataquad import VerusDataQuad
 from .desktop_runtime import DesktopVerusRuntime
 
 
-OPERATIONS = {"context", "begin", "commit", "reconcile", "health", "replay"}
+OPERATIONS = {"context", "begin", "commit", "reconcile", "health", "replay", "query"}
 
 
 def _model(config_path: Path) -> str:
@@ -42,6 +42,8 @@ def dispatch(runtime: DesktopVerusRuntime, operation: str, payload: dict[str, ob
         return runtime.health()
     if operation == "replay":
         return runtime.replay_turn(**payload)
+    if operation == "query":
+        return runtime.query(**payload)
     raise ValueError("unsupported Verus command")
 
 
