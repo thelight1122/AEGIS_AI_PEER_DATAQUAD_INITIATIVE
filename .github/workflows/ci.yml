@@ -27,9 +27,8 @@ jobs:
       - name: Install package and test tools
         run: |
           python -m pip install --upgrade pip
-          # Runtime is stdlib-only (pyproject dependencies == []); tests need pytest + jsonschema.
-          pip install -e .
-          pip install pytest jsonschema
+          # Runtime is stdlib-only; the [test] extra pins the deps the suite imports.
+          pip install -e ".[test]"
 
       - name: Run test suite
         # pytest config in pyproject sets testpaths=[tests] and pythonpath=[src].
