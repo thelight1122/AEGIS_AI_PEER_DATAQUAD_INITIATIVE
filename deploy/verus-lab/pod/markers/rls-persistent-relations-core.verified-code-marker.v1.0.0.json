@@ -1,0 +1,329 @@
+{
+  "schema_version": "0.1.0",
+  "marker_id": "verus-rls-persistent-relations-core-vcm-1.0.0",
+  "orb_id": "rls-persistent-relations-core",
+  "orb_version": "1.0.0",
+  "source_hash": "51A1AC18887AEA9CEACC60B6F0AD428C899FA2D228D3BEE2032171F754E248CA",
+  "schema_hash": "D642DCDAB90D1AAEAD17520E401DD23A7060126C8E412E632B6027A73F4CF131",
+  "umbilical_hash": "60B0B246ED76C29D67326421224E4967CDD2C56BC9E37FA1ED46AB7F84BF6C3E",
+  "demo_hashes": [
+    "F0A4E5E8D31E5B1473A2F08183600E177C938C2BAFA28C2903001759A16E87DF"
+  ],
+  "attachment_validation": {
+    "validate_schema_conformance": "PASS",
+    "validate_orb_version_and_hash": "PASS",
+    "validate_attachment": "PASS",
+    "runtime": "src/aegis_pod/orb_runtime.py"
+  },
+  "behavioral_examination": {
+    "suite": "H:/AEGIS-POD-ARCHITECTURE/packages/orb-rls-persistent-relations-core/tests",
+    "tests_passed": 11,
+    "tests_failed": 0,
+    "outcome": "PASS"
+  },
+  "examined_claims": [
+    {
+      "claim_id": "runtime_hash_pin",
+      "schema_path": "invocation.orb_runtime_hash",
+      "observed_behavior": "installed 1.0.0 computes 51A1AC18 == pin",
+      "outcome": "coherent"
+    },
+    {
+      "claim_id": "recursive_learning_session",
+      "schema_path": "capabilities[0]",
+      "observed_behavior": "engine scores/partitions retrieved records; suite green",
+      "outcome": "coherent"
+    },
+    {
+      "claim_id": "persistent_relation_recording",
+      "schema_path": "capabilities[1]",
+      "observed_behavior": "record_relation links PCT writeback to retrieved refs; no-op until Pod live",
+      "outcome": "coherent"
+    }
+  ],
+  "independent_inference": {
+    "rule": "verus-independent-inference-agreement-rule-v1",
+    "current_round": 2,
+    "run_count": 5,
+    "tally": {
+      "C1": {
+        "coherent": 4,
+        "uncertain": 1,
+        "mismatch": 0,
+        "confirmed": true
+      },
+      "C2": {
+        "coherent": 5,
+        "uncertain": 0,
+        "mismatch": 0,
+        "confirmed": true
+      },
+      "C3": {
+        "coherent": 5,
+        "uncertain": 0,
+        "mismatch": 0,
+        "confirmed": true
+      }
+    }
+  },
+  "mismatch_data": {
+    "records": [
+      {
+        "claim": "C3",
+        "round": 1,
+        "finding": "claim overstated (every retrieved vs SELECTED; record_relation gate store-side)",
+        "severity": "claim_precision",
+        "resolution": "R1 restated the claim to match the code; round-2 re-examination returned C3 coherent 5/5"
+      }
+    ],
+    "repair_plan_status": "complete (R1,R2,R3 done)"
+  },
+  "working_parameter_state": "inside_working_parameters",
+  "phase": "P1_live",
+  "p1_activated_utc": "2026-08-17",
+  "supersedes_pin": "B8788191862853F762DB38AF72E8BA516E21CE7BDBDB5FD35100A40A4675CF18",
+  "drift_evidence_preserved": true,
+  "created_utc": "2026-08-17",
+  "marker_verdict": {
+    "verified": true,
+    "trust_state": "verified",
+    "reason": "All declared claims CONFIRMED (>=4/5 coherent, 0 mismatch) in the round-2 agreement after repair."
+  },
+  "trust_state": "verified",
+  "agreement_rounds": [
+    {
+      "round": 1,
+      "note": "initial run — C1 examination artifact (2 examiners lacked full source), C3 claim-precision mismatch",
+      "result": {
+        "rule": "verus-independent-inference-agreement-rule-v1",
+        "rule_path": "deploy/verus-lab/pod/governance/independent-inference-agreement-rule.v1.json",
+        "run_count": 5,
+        "runs": [
+          {
+            "lens": "failure_handling",
+            "verdicts": {
+              "C1": {
+                "verdict": "uncertain",
+                "reason": "no hash-concat computation in files read from this lens; pin unverifiable here"
+              },
+              "C2": {
+                "verdict": "coherent",
+                "reason": "reads/scores/partitions; empty-selected -> failure_is_data honestly, no fabrication"
+              },
+              "C3": {
+                "verdict": "coherent",
+                "reason": "writeback PCT + record_relation loop; honest failure telemetry"
+              }
+            }
+          },
+          {
+            "lens": "scoring_selection_correctness",
+            "verdicts": {
+              "C1": {
+                "verdict": "coherent",
+                "reason": "recomputed SHA-256 = 51A1AC18, matches"
+              },
+              "C2": {
+                "verdict": "coherent",
+                "reason": "selection correct: threshold, descending sort, bounded top-N, clamp [0,1]"
+              },
+              "C3": {
+                "verdict": "uncertain",
+                "reason": "links selected_refs only (line 177) not every read record; is_active gate store-side, outside lens"
+              }
+            }
+          },
+          {
+            "lens": "provenance_hash_binding",
+            "verdicts": {
+              "C1": {
+                "verdict": "coherent",
+                "reason": "independently recomputed 51A1AC18 = pin; supersedes ORION, no drift"
+              },
+              "C2": {
+                "verdict": "coherent",
+                "reason": "read/score/partition in hash-bound source"
+              },
+              "C3": {
+                "verdict": "coherent",
+                "reason": "record_relation per id + record_invocation no-op unless is_active; consistent with P0"
+              }
+            }
+          },
+          {
+            "lens": "boundary_no_mutation",
+            "verdicts": {
+              "C1": {
+                "verdict": "uncertain",
+                "reason": "compute_runtime_hash read-only but hash unverifiable without scoring.py/relevance.py (not provided to this examiner)"
+              },
+              "C2": {
+                "verdict": "coherent",
+                "reason": "retrieval/scoring/partition are pure reads; boundary holds"
+              },
+              "C3": {
+                "verdict": "coherent",
+                "reason": "record_invocation total no-op via first-line is_active return; legacy append exempted; no writes outside P0 authority"
+              }
+            }
+          },
+          {
+            "lens": "contract_conformance",
+            "verdicts": {
+              "C1": {
+                "verdict": "coherent",
+                "reason": "recomputed hash = umbilical pin byte-for-byte"
+              },
+              "C2": {
+                "verdict": "coherent",
+                "reason": "reads/scores/partitions per declared capability"
+              },
+              "C3": {
+                "verdict": "mismatch",
+                "reason": "links to SELECTED records not every retrieved record; record_relation invoked unconditionally in-orb, only orb_evidence guarded by is_active"
+              }
+            }
+          }
+        ],
+        "tally": {
+          "C1": {
+            "coherent": 3,
+            "uncertain": 2,
+            "mismatch": 0,
+            "confirmed": false
+          },
+          "C2": {
+            "coherent": 5,
+            "uncertain": 0,
+            "mismatch": 0,
+            "confirmed": true
+          },
+          "C3": {
+            "coherent": 3,
+            "uncertain": 1,
+            "mismatch": 1,
+            "confirmed": false
+          }
+        },
+        "agreement_rule_applied": "claim confirmed iff coherent>=4 and mismatch==0"
+      },
+      "verdict": {
+        "verified": false,
+        "trust_state": "provisional",
+        "reason": "Not every declared claim is CONFIRMED under the agreement rule; no silent upgrade (Axiom 8)."
+      }
+    },
+    {
+      "round": 2,
+      "note": "repair round: R1 restated C3 claim to match code; R2 gave all examiners the full source; R3 re-ran agreement",
+      "run_count": 5,
+      "runs": [
+        {
+          "lens": "contract_conformance",
+          "verdicts": {
+            "C1": {
+              "verdict": "coherent",
+              "reason": "recomputed hash = umbilical pin byte-for-byte"
+            },
+            "C2": {
+              "verdict": "coherent",
+              "reason": "reads/scores/partitions per declared capability"
+            },
+            "C3": {
+              "verdict": "coherent",
+              "reason": "PCT writeback then record_relation over selected refs unconditionally; orb_evidence guarded in-orb by is_active, exactly as restated"
+            }
+          }
+        },
+        {
+          "lens": "scoring_selection_correctness",
+          "verdicts": {
+            "C1": {
+              "verdict": "uncertain",
+              "reason": "hash method matches (engine+scoring+relevance, sha256_upper) but literal digest is outside the scoring/selection lens"
+            },
+            "C2": {
+              "verdict": "coherent",
+              "reason": "threshold >=0.25 inclusive, descending sort, bounded top-64 overflow to rejected, scores clamped [0,1] — no off-by-one/ordering bug"
+            },
+            "C3": {
+              "verdict": "coherent",
+              "reason": "retrieved_ids built from selected refs; record_relation looped unconditionally; orb_evidence is_active-gated"
+            }
+          }
+        },
+        {
+          "lens": "failure_handling",
+          "verdicts": {
+            "C1": {
+              "verdict": "coherent",
+              "reason": "computed hash = pin; compute_runtime_hash uses _SOURCE_FILES engine,scoring,relevance"
+            },
+            "C2": {
+              "verdict": "coherent",
+              "reason": "empty-selected -> failure_is_data True/NO_RECORDS_FOUND; no fabrication"
+            },
+            "C3": {
+              "verdict": "coherent",
+              "reason": "record_relation over selected ids (store-side gate); orb_evidence in-orb is_active-gated; exception sets failure_is_data, not swallowed"
+            }
+          }
+        },
+        {
+          "lens": "provenance_hash_binding",
+          "verdicts": {
+            "C1": {
+              "verdict": "coherent",
+              "reason": "independent SHA-256 = 51A1AC18... byte-identical to pin and compute_runtime_hash logic; changed source would alter hash"
+            },
+            "C2": {
+              "verdict": "coherent",
+              "reason": "reads/scores/partitions as claimed"
+            },
+            "C3": {
+              "verdict": "coherent",
+              "reason": "record_relation unconditional over selected retrieved_ids; record_invocation guarded in-orb by is_active and stamps runtime_hash"
+            }
+          }
+        },
+        {
+          "lens": "boundary_no_mutation",
+          "verdicts": {
+            "C1": {
+              "verdict": "coherent",
+              "reason": "own SHA-256 of engine+scoring+relevance = pin, matching compute_runtime_hash file set/order"
+            },
+            "C2": {
+              "verdict": "coherent",
+              "reason": "read/score/partition path is pure reads, no mutation"
+            },
+            "C3": {
+              "verdict": "coherent",
+              "reason": "record_relation unconditional (store-side gate); orb_evidence early is_active return before any write; umbilical P0 read-only, no mutation authority beyond legacy append"
+            }
+          }
+        }
+      ],
+      "tally": {
+        "C1": {
+          "coherent": 4,
+          "uncertain": 1,
+          "mismatch": 0,
+          "confirmed": true
+        },
+        "C2": {
+          "coherent": 5,
+          "uncertain": 0,
+          "mismatch": 0,
+          "confirmed": true
+        },
+        "C3": {
+          "coherent": 5,
+          "uncertain": 0,
+          "mismatch": 0,
+          "confirmed": true
+        }
+      }
+    }
+  ]
+}

@@ -2,98 +2,70 @@
   "schema_version": "0.1.0",
   "marker_id": "verus-rls-persistent-relations-core-vcm-1.0.0",
   "orb_id": "rls-persistent-relations-core",
-  "orb_version": "1.0.0",
-  "source_hash": "51A1AC18887AEA9CEACC60B6F0AD428C899FA2D228D3BEE2032171F754E248CA",
-  "schema_hash": "D642DCDAB90D1AAEAD17520E401DD23A7060126C8E412E632B6027A73F4CF131",
-  "umbilical_hash": "60B0B246ED76C29D67326421224E4967CDD2C56BC9E37FA1ED46AB7F84BF6C3E",
-  "demo_hashes": [
-    "F0A4E5E8D31E5B1473A2F08183600E177C938C2BAFA28C2903001759A16E87DF"
-  ],
-  "attachment_validation": {
-    "validate_schema_conformance": "PASS",
-    "validate_orb_version_and_hash": "PASS",
-    "validate_attachment": "PASS",
-    "runtime": "src/aegis_pod/orb_runtime.py"
-  },
-  "behavioral_examination": {
-    "suite": "H:/AEGIS-POD-ARCHITECTURE/packages/orb-rls-persistent-relations-core/tests",
-    "tests_passed": 11,
-    "tests_failed": 0,
-    "outcome": "PASS"
-  },
-  "examined_claims": [
-    {
-      "claim_id": "runtime_hash_pin",
-      "schema_path": "invocation.orb_runtime_hash",
-      "observed_behavior": "installed 1.0.0 computes 51A1AC18 == pin",
-      "outcome": "coherent"
+  "orb_version": "1.1.0",
+  "source_hash": "A6B5DC18122F40F5A0D41F57741FD5B2DD8FC8A8149D03F52AB21C0572FDE179",
+  "umbilical_hash": "AE1DD9EF98092BFFADD715F2399551BAC8A26F1C218AA6C96D64B86C653C5A19",
+  "supersedes": {
+    "orb_version": "1.0.0",
+    "source_hash": "51A1AC18887AEA9CEACC60B6F0AD428C899FA2D228D3BEE2032171F754E248CA",
+    "marker_preserved_at": "rls-persistent-relations-core.verified-code-marker.v1.0.0.json",
+    "prior_verdict": {
+      "verified": true,
+      "trust_state": "verified",
+      "reason": "All declared claims CONFIRMED (>=4/5 coherent, 0 mismatch) in the round-2 agreement after repair."
     },
-    {
-      "claim_id": "recursive_learning_session",
-      "schema_path": "capabilities[0]",
-      "observed_behavior": "engine scores/partitions retrieved records; suite green",
-      "outcome": "coherent"
+    "change": "scoring._record_text asks the record for scorable_text before falling back to the five-field walk, so the orb no longer needs to know any tensor's record schema."
+  },
+  "drift_evidence_preserved": true,
+  "mechanical_gates": {
+    "identity_coherence": "PASS",
+    "version_satisfies_spec": "PASS (1.1.0 within >=1.0.0,<2.0.0)",
+    "version_hash_gate": "PASS (pin == computed source hash A6B5DC18122F40F5...)",
+    "supersedes_stale_orion_pin": "PASS",
+    "p0_read_only_assertion": "FAIL \u2014 pre-existing. The check asserts orb.enabled is False and P0 boundaries; the orb has been P1 live since 2026-08-17 and neither field exists. This check fails identically at HEAD, before this change, and was NOT edited to pass.",
+    "repository_suite": "564 passed, 14 skipped, 4 pre-existing lumin shortfalls"
+  },
+  "snapshot_evidence": {
+    "harness": "scripts/rls_scorer_bench.py",
+    "records": 243,
+    "queries": 6,
+    "orb_1_0_0_baseline": {
+      "returned": 70,
+      "peer": 0,
+      "expected_hit": "3/3"
     },
-    {
-      "claim_id": "persistent_relation_recording",
-      "schema_path": "capabilities[1]",
-      "observed_behavior": "record_relation links PCT writeback to retrieved refs; no-op until Pod live",
-      "outcome": "coherent"
-    }
-  ],
+    "orb_1_1_0": {
+      "returned": 72,
+      "peer": 12,
+      "expected_hit": "3/3"
+    },
+    "bm25_reference": {
+      "returned": 72,
+      "peer": 22,
+      "expected_hit": "3/3"
+    },
+    "note": "read-only snapshot held outside the repository per ADR-0001; no live system touched"
+  },
   "independent_inference": {
     "rule": "verus-independent-inference-agreement-rule-v1",
-    "current_round": 2,
-    "run_count": 5,
-    "tally": {
-      "C1": {
-        "coherent": 4,
-        "uncertain": 1,
-        "mismatch": 0,
-        "confirmed": true
-      },
-      "C2": {
-        "coherent": 5,
-        "uncertain": 0,
-        "mismatch": 0,
-        "confirmed": true
-      },
-      "C3": {
-        "coherent": 5,
-        "uncertain": 0,
-        "mismatch": 0,
-        "confirmed": true
-      }
-    }
+    "runs_required": 5,
+    "runs_completed": 0,
+    "status": "NOT RUN",
+    "reason": "The rule requires five independent examiner runs. None were performed for 1.1.0. Trust is not upgraded by assertion, and a marker that claimed otherwise would be the exact bar-lowering the t_time 11 SPINE record warns against."
   },
-  "mismatch_data": {
-    "records": [
-      {
-        "claim": "C3",
-        "round": 1,
-        "finding": "claim overstated (every retrieved vs SELECTED; record_relation gate store-side)",
-        "severity": "claim_precision",
-        "resolution": "R1 restated the claim to match the code; round-2 re-examination returned C3 coherent 5/5"
-      }
-    ],
-    "repair_plan_status": "complete (R1,R2,R3 done)"
-  },
-  "working_parameter_state": "inside_working_parameters",
-  "phase": "P1_live",
-  "p1_activated_utc": "2026-08-17",
-  "supersedes_pin": "B8788191862853F762DB38AF72E8BA516E21CE7BDBDB5FD35100A40A4675CF18",
-  "drift_evidence_preserved": true,
-  "created_utc": "2026-08-17",
+  "working_parameter_state": "needs_independent_agreement",
+  "phase": "P1 live",
+  "created_utc": "2026-08-20",
   "marker_verdict": {
-    "verified": true,
-    "trust_state": "verified",
-    "reason": "All declared claims CONFIRMED (>=4/5 coherent, 0 mismatch) in the round-2 agreement after repair."
+    "verified": false,
+    "trust_state": "provisional",
+    "reason": "Mechanical gates pass and snapshot evidence shows the intended effect, but the 5-run independent-inference agreement has not been run for 1.1.0. Provisional until it is."
   },
-  "trust_state": "verified",
+  "trust_state": "provisional",
   "agreement_rounds": [
     {
       "round": 1,
-      "note": "initial run — C1 examination artifact (2 examiners lacked full source), C3 claim-precision mismatch",
+      "note": "initial run \u2014 C1 examination artifact (2 examiners lacked full source), C3 claim-precision mismatch",
       "result": {
         "rule": "verus-independent-inference-agreement-rule-v1",
         "rule_path": "deploy/verus-lab/pod/governance/independent-inference-agreement-rule.v1.json",
@@ -244,7 +216,7 @@
             },
             "C2": {
               "verdict": "coherent",
-              "reason": "threshold >=0.25 inclusive, descending sort, bounded top-64 overflow to rejected, scores clamped [0,1] — no off-by-one/ordering bug"
+              "reason": "threshold >=0.25 inclusive, descending sort, bounded top-64 overflow to rejected, scores clamped [0,1] \u2014 no off-by-one/ordering bug"
             },
             "C3": {
               "verdict": "coherent",

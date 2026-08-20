@@ -18,6 +18,31 @@ VENDOR_SRC = POD_ROOT / "vendor" / "orb-rls-persistent-relations-core" / "src" /
 _SOURCE_FILES = ("engine.py", "scoring.py", "relevance.py")
 
 
+def _parts(version: str) -> tuple[int, ...]:
+    return tuple(int(piece) for piece in version.split("."))
+
+
+def _satisfies(version: str, spec: str) -> bool:
+    """Evaluate a ">=X.Y.Z,<A.B.C" range rather than comparing a literal string."""
+    if not version or not spec:
+        return False
+    try:
+        target = _parts(version)
+        for clause in spec.split(","):
+            clause = clause.strip()
+            if clause.startswith(">="):
+                if target < _parts(clause[2:]):
+                    return False
+            elif clause.startswith("<"):
+                if target >= _parts(clause[1:]):
+                    return False
+            else:
+                return False
+    except ValueError:
+        return False
+    return True
+
+
 def load(p: Path) -> dict:
     return json.loads(p.read_text(encoding="utf-8"))
 
@@ -40,10 +65,12 @@ def main() -> int:
         f"{umbilical.get('orb_id')} / {orb.get('orb_id')}",
     ))
 
-    # 2. version satisfies spec (orb_version 1.0.0 within >=1.0.0,<2.0.0)
+    # 2. version satisfies spec. This asserted the literal string "1.0.0", which tested
+    #    the version rather than the claim its own label makes. A superseding orb version
+    #    is exactly what the spec range exists to admit, so evaluate the range.
     ver = umbilical.get("invocation", {}).get("orb_version", "")
     spec = orb.get("runtime", {}).get("package", {}).get("version_spec", "")
-    checks.append(("orb_version 1.0.0 satisfies version_spec", ver == "1.0.0" and spec == ">=1.0.0,<2.0.0", f"{ver} vs {spec}"))
+    checks.append(("orb_version satisfies version_spec", _satisfies(ver, spec), f"{ver} vs {spec}"))
 
     # 3. THE GATE: pinned orb_runtime_hash == computed hash of the vendored source
     pin = umbilical.get("invocation", {}).get("orb_runtime_hash", "")
