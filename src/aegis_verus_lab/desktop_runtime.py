@@ -26,6 +26,178 @@ DESKTOP_TRANSPORT = "claude_desktop_mcp_stdio_ssh"
 _LOCAL_ID_TOKEN = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]{0,127}\Z")
 
 
+_FRONTIER_TEXT_BUDGET = 1200
+_FRONTIER_MAX_SURFACED_RECORDS = 12
+_FRONTIER_LIVE_TURN_LIMIT = 6
+
+# The fields the RLS orb scorer itself reads, in its order.
+_SCORED_FIELDS = (
+    "present_state", "working_context", "distilled_summary", "essence_memory", "pattern",
+)
+
+
+def _clip(value: object, budget: int = _FRONTIER_TEXT_BUDGET) -> str:
+    text = value if isinstance(value, str) else str(value)
+    if len(text) <= budget:
+        return text
+    return text[:budget] + f"... [clipped, {len(text)} chars]"
+
+
+def _record_text(data: dict[str, object]) -> str:
+    payload = data.get("payload")
+    flat = {**data, **payload} if isinstance(payload, dict) else data
+    parts = [str(flat[field]) for field in _SCORED_FIELDS if flat.get(field)]
+    if not parts:
+        for fallback in ("prompt_context", "response_context"):
+            if flat.get(fallback):
+                parts.append(str(flat[fallback]))
+    return " ".join(parts)
+
+
+def _project_dataquad_context(context: dict[str, object]) -> dict[str, object]:
+    """Bounded view of the DataQuad context for the frontier.
+
+    begin_turn returns on every turn. Returning the whole foundation and twenty
+    full turn records puts roughly a third of a megabyte on the wire each time,
+    past what the frontier will accept as a single tool result. Nothing is lost:
+    verus_read_context still returns the context in full on request.
+    """
+    foundation = context.get("foundation")
+    counts = (
+        {tensor: len(records) for tensor, records in foundation.items()}
+        if isinstance(foundation, dict) else {}
+    )
+    turns = context.get("recent_live_turns")
+    turns = turns[-_FRONTIER_LIVE_TURN_LIMIT:] if isinstance(turns, list) else []
+    recent = []
+    for turn in turns:
+        if not isinstance(turn, dict):
+            continue
+        prompt = turn.get("prompt")
+        response = turn.get("response")
+        recent.append({
+            "turn_id": turn.get("turn_id"),
+            "t_time": turn.get("t_time"),
+            "observed_at": turn.get("observed_at"),
+            "record_hash": turn.get("record_hash"),
+            "prompt": _clip(prompt.get("text", "") if isinstance(prompt, dict) else prompt),
+            "response": _clip(response.get("text", "") if isinstance(response, dict) else response),
+        })
+    return {
+        "cyberpeer_name": context.get("cyberpeer_name"),
+        "dataquad_id": context.get("dataquad_id"),
+        "append_contract": context.get("append_contract"),
+        "contract_qualifications": context.get("contract_qualifications"),
+        "foundation_record_counts": counts,
+        "recent_live_turns": recent,
+        "projection": {
+            "bounded": True,
+            "live_turns_shown": len(recent),
+            "full_context_via": "verus_read_context",
+        },
+    }
+
+
+_FOUNDATION_REF = re.compile(r"^foundation:([A-Z]+):(\d+)$")
+
+
+def _foundation_body(record_id: str, context: object) -> dict[str, object]:
+    """Resolve a foundation ref against the context already in hand.
+
+    Selected refs are scored across every record; the custodian blocks only
+    carry the most recent thirty. A selection the frontier cannot read is not a
+    selection, so foundation bodies are resolved positionally from the context.
+    """
+    match = _FOUNDATION_REF.match(record_id)
+    if not match or not isinstance(context, dict):
+        return {}
+    foundation = context.get("foundation")
+    if not isinstance(foundation, dict):
+        return {}
+    records = foundation.get(match.group(1))
+    index = int(match.group(2))
+    if not isinstance(records, list) or index >= len(records):
+        return {}
+    record = records[index]
+    return record if isinstance(record, dict) else {}
+
+
+def _project_surfaced_context(surfaced: object, context: object = None) -> object:
+    """Bounded view of the RLS retrieval for the frontier.
+
+    The orb scores every record and preserves every rejection in the DataQuad —
+    that is the evidence and it stays whole. What the frontier needs back is what
+    the orb selected, not the raw custodian dumps and two hundred rejected refs.
+    """
+    if not isinstance(surfaced, dict):
+        return surfaced
+    result = surfaced.get("result")
+    if not isinstance(result, dict):
+        return surfaced
+
+    bodies: dict[str, dict[str, object]] = {}
+    for side in ("advocate", "steward"):
+        block = result.get(side)
+        if not isinstance(block, dict):
+            continue
+        for item in block.get("records", []) or []:
+            if isinstance(item, dict) and isinstance(item.get("data"), dict):
+                bodies[str(item.get("record_id"))] = item["data"]
+
+    rls = result.get("rls") if isinstance(result.get("rls"), dict) else {}
+    session = rls.get("session") if isinstance(rls.get("session"), dict) else {}
+    selected = []
+    for ref in (session.get("selected_refs") or [])[:_FRONTIER_MAX_SURFACED_RECORDS]:
+        if not isinstance(ref, dict):
+            continue
+        record_id = str(ref.get("record_id"))
+        data = bodies.get(record_id) or _foundation_body(record_id, context)
+        selected.append({
+            "record_id": record_id,
+            "tensor": ref.get("tensor"),
+            "relevance": ref.get("relevance"),
+            "reason": ref.get("reason"),
+            "turn_id": data.get("turn_id"),
+            "t_time": data.get("t_time"),
+            "text": _clip(_record_text(data)) if data else None,
+            "body_resolved": bool(data),
+        })
+
+    relations = result.get("relations") if isinstance(result.get("relations"), dict) else {}
+    temporal = result.get("temporal") if isinstance(result.get("temporal"), dict) else {}
+    return {
+        "assembled": result.get("assembled"),
+        "rls_active": result.get("rls_active"),
+        "turn_count": result.get("turn_count"),
+        "prompt_keywords": result.get("prompt_keywords"),
+        "rls": {
+            "rls_id": rls.get("rls_id"),
+            "executed": rls.get("executed"),
+            "failure_is_data": rls.get("failure_is_data"),
+            "failure_reason": session.get("failure_reason"),
+            "selected_count": rls.get("selected_count"),
+            "rejected_count": rls.get("rejected_count"),
+            "created_pct_record_id": rls.get("created_pct_record_id"),
+            "session_id": session.get("session_id"),
+            "intent": session.get("intent"),
+        },
+        "selected": selected,
+        "custodian_counts": {
+            "advocate": (result.get("advocate") or {}).get("count"),
+            "steward": (result.get("steward") or {}).get("count"),
+            "temporal_observations": temporal.get("found"),
+            "shared_turns": len(relations.get("shared_turns") or []),
+        },
+        "projection": {
+            "bounded": True,
+            "selected_shown": len(selected),
+            "max_selected_shown": _FRONTIER_MAX_SURFACED_RECORDS,
+            "text_budget": _FRONTIER_TEXT_BUDGET,
+            "note": "full RLS session, raw custodian records, and every rejected ref are preserved in the DataQuad",
+        },
+    }
+
+
 class _DesktopOnlyAdapter:
     def complete(self, request):  # pragma: no cover - defensive boundary
         raise RuntimeError("Claude Desktop responses must arrive through the MCP commit tool")
@@ -126,8 +298,8 @@ class DesktopVerusRuntime:
             "local_correlation": local_correlation_provenance(turn_id, correlation_id),
             "system_instructions": instructions,
             "work_request": prompt,
-            "dataquad_context": context,
-            "surfaced_context": surfaced_context,
+            "dataquad_context": _project_dataquad_context(context),
+            "surfaced_context": _project_surfaced_context(surfaced_context, context),
             "append_contract": {"mode": "append-only", "tensors": ["PEER", "PCT", "NCT", "SPINE"]},
             "frontier_provenance": {
                 "provider": "Anthropic", "substrate": "Claude Desktop",

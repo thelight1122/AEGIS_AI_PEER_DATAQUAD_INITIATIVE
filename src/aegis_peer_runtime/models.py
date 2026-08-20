@@ -13,10 +13,36 @@ except ImportError:  # Python 3.10 target compatibility
         def __str__(self) -> str:
             return str(self.value)
 import hashlib
+import os
 from typing import Any, Mapping
 
-PEERS = ("lumin", "claude", "gemini", "grok")
-DATAQUAD_NAMES = (*PEERS, "verus")
+_DEFAULT_PEERS = ("lumin", "claude", "gemini", "grok")
+_DEFAULT_SOLE_DATAQUAD = "verus"
+
+
+def _roster(variable: str, default: tuple[str, ...]) -> tuple[str, ...]:
+    """Read a peer roster from the environment, falling back to the default.
+
+    DATAQUAD_NAMES is not a label — it is the peer_id allowlist enforced in
+    models.Record, processor, rls_runtime, storage and temporal. Hardcoding the
+    federation into it means every single-peer deployment accepts every other
+    peer's identifier as valid, which makes sovereignty a convention rather than
+    a property. A deployment that owns one DataQuad can now say so:
+
+        AEGIS_DATAQUAD_NAMES=verus
+
+    Unset, both rosters resolve exactly as before, so existing deployments are
+    unaffected until they opt in.
+    """
+    raw = os.environ.get(variable, "").strip()
+    if not raw:
+        return default
+    names = tuple(name.strip() for name in raw.split(",") if name.strip())
+    return names or default
+
+
+PEERS = _roster("AEGIS_PEERS", _DEFAULT_PEERS)
+DATAQUAD_NAMES = _roster("AEGIS_DATAQUAD_NAMES", (*PEERS, _DEFAULT_SOLE_DATAQUAD))
 TENSORS = ("PEER", "PCT", "NCT", "SPINE")
 WRITE_SCOPES = {
     "steward": frozenset(("PCT", "NCT")),

@@ -1,0 +1,26 @@
+[Unit]
+Description=AEGIS Verus Processor daemon (relation mapping + RLS orb engine)
+After=aegis-verus-steward.service aegis-verus-advocate.service aegis-verus-temporal.service
+
+[Service]
+Type=simple
+User=aegis-verus
+Group=aegis-verus
+WorkingDirectory=/opt/aegis/verus/lab/current
+Environment=AEGIS_RLS_ACTIVE=true
+ExecStart=/opt/aegis/verus/lab/current/bin/verus-daemon-launcher processor --socket /var/lib/aegis-verus-lab/daemons/processor.sock --release-root /opt/aegis/verus/lab/current/foundation --state-root /var/lib/aegis-verus-lab --rls-active
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/var/lib/aegis-verus-lab
+UMask=0077
+CPUQuota=50%
+MemoryHigh=512M
+MemoryMax=1G
+TasksMax=128
+
+[Install]
+WantedBy=multi-user.target

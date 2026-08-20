@@ -11,15 +11,38 @@
   "invocation": {
     "method": "in_process_call",
     "entrypoint": "orb_rls_persistent_relations_core.engine.RecursiveLearningEngine",
-    "orb_version": "1.0.0",
-    "orb_runtime_hash": "51A1AC18887AEA9CEACC60B6F0AD428C899FA2D228D3BEE2032171F754E248CA",
-    "vendored_source": "deploy/verus-lab/pod/vendor/orb-rls-persistent-relations-core/src/orb_rls_persistent_relations_core"
+    "orb_version": "1.1.0",
+    "orb_runtime_hash": "957E48794BB2AF5217EA43ECD4468884C26EA05D35714312DC06465F47A818FF",
+    "vendored_source": "deploy/verus-lab/pod/vendor/orb-rls-persistent-relations-core/src/orb_rls_persistent_relations_core",
+    "supersedes": {
+      "orb_version": "1.0.0",
+      "orb_runtime_hash": "51A1AC18887AEA9CEACC60B6F0AD428C899FA2D228D3BEE2032171F754E248CA",
+      "superseded_utc": "2026-08-20",
+      "reason": "scoring._record_text asked the record for scorable_text instead of enumerating five DataQuad field names. The enumerated list was all digest shapes, so PEER \u2014 kept raw by the recording protocol \u2014 scored zero however well it matched. The 1.0.0 pin and its evidence are preserved, not deleted.",
+      "also_supersedes_stale_orion_pin": "B8788191862853F762DB38AF72E8BA516E21CE7BDBDB5FD35100A40A4675CF18"
+    },
+    "repair_round": {
+      "round": 2,
+      "voided_hash": "A6B5DC18122F40F5A0D41F57741FD5B2DD8FC8A8149D03F52AB21C0572FDE179",
+      "reason": "R1 corrected a false statement in the shipped docstring. The rule binds an agreement to an exact runtime_hash; a source change voids it and requires a fresh 5-run set."
+    }
   },
   "input_contract": {
-    "requires": ["peer_id", "session_id", "user_message", "intent", "pressure_state", "nature_aspects"]
+    "requires": [
+      "peer_id",
+      "session_id",
+      "user_message",
+      "intent",
+      "pressure_state",
+      "nature_aspects"
+    ]
   },
   "output_contract": {
-    "returns": ["rls_session_result", "cross_tensor_relation_entries", "pct_writeback_record"]
+    "returns": [
+      "rls_session_result",
+      "cross_tensor_relation_entries",
+      "pct_writeback_record"
+    ]
   },
   "observation_contract": {
     "observable_events": [
@@ -33,17 +56,31 @@
     ]
   },
   "evidence_contract": {
-    "records": ["input_hash", "output_hash", "runtime_hash"],
+    "records": [
+      "input_hash",
+      "output_hash",
+      "runtime_hash"
+    ],
     "evidence_ledger": "pod/ledgers/orbs/rls-persistent-relations-core.evidence.jsonl"
   },
   "working_parameters": {
-    "status": "verified",
+    "status": "provisional",
     "outside_parameters_behavior": "P1 live. When AEGIS_RLS_ACTIVE=true: store.record_relation writes to relations.jsonl (store-side gate per C3 finding), orb_evidence.record_invocation records to the evidence ledger (in-orb is_active gate), and PCT writeback appends context records. When AEGIS_RLS_ACTIVE=false: all three are true no-ops (P0 behavior preserved). Supersedes the stale ORION pin B8788191862853F762DB38AF72E8BA516E21CE7BDBDB5FD35100A40A4675CF18; the ADR-0005 drift record is preserved, not deleted.",
     "p1_activation": {
       "activated_utc": "2026-08-17",
       "store_side_gate": "LiveDataQuadStore.record_relation returns early when not rls_active",
       "in_orb_gate": "RLSOrbEvidenceRecorder.record_invocation returns early when not store.is_active(ORB_ID)",
       "verified_hash": "51A1AC18887AEA9CEACC60B6F0AD428C899FA2D228D3BEE2032171F754E248CA"
-    }
+    },
+    "provisional_reason": "1.1.0 clears the mechanical gates but has not been through the 5-run independent-inference agreement rule. Trust is not upgraded by assertion."
+  },
+  "provenance_scope": {
+    "pinned_by_orb_runtime_hash": [
+      "engine.py",
+      "scoring.py",
+      "relevance.py"
+    ],
+    "not_pinned": "src/aegis_peer_runtime/protocol_adapters.py",
+    "disclosure": "The orb asks the record for scorable_text. What counts as the record's own content is decided caller-side by _scorable_text and the _NON_CONTENT_KEYS exclusion list, which the orb_runtime_hash does not cover. That code extracts only \u2014 nothing is summarised, inferred or authored \u2014 but the exclusion list is an editorial judgement that shapes every score and can change without changing the pin. Raised independently by three of five examiners."
   }
 }

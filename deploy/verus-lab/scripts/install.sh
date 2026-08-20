@@ -44,6 +44,9 @@ restore_or_pause_on_error() {
       install -o root -g root -m 0644 "$RECOVERY_DIR/aegis-verus-lab.service" /etc/systemd/system/aegis-verus-lab.service
     fi
     systemctl daemon-reload
+    for daemon in advocate steward temporal processor; do
+      systemctl restart "aegis-verus-$daemon.service" || true
+    done
     if [[ "$PRIOR_SERVICE_ENABLED" == yes ]]; then
       systemctl enable aegis-verus-lab.service
     else
@@ -82,7 +85,7 @@ cp -a "$BUNDLE_ROOT/." "$RELEASE_DIR/"
 chown -R root:root "$RELEASE_DIR"
 find "$RELEASE_DIR" -type d -exec chmod 0755 {} +
 find "$RELEASE_DIR" -type f -exec chmod 0644 {} +
-chmod 0755 "$RELEASE_DIR/bin/verus-dataquad-command"
+chmod 0755 "$RELEASE_DIR"/bin/*
 chmod 0755 "$RELEASE_DIR"/scripts/*.sh
 if [[ ! -e /etc/aegis-verus-lab/verus.env ]]; then
   sed -e "s/SET_AT_ACTIVATION/$FRONTIER_MODEL/" -e "s/SET_PORT_AT_ACTIVATION/$VERUS_PORT/" \
@@ -90,10 +93,26 @@ if [[ ! -e /etc/aegis-verus-lab/verus.env ]]; then
   chown root:"$identity" /etc/aegis-verus-lab/verus.env
   chmod 0640 /etc/aegis-verus-lab/verus.env
 fi
-install -o root -g root -m 0644 "$BUNDLE_ROOT/systemd/aegis-verus-lab.service" /etc/systemd/system/aegis-verus-lab.service
+for unit in "$BUNDLE_ROOT"/systemd/*.service; do
+  install -o root -g root -m 0644 "$unit" "/etc/systemd/system/$(basename "$unit")"
+done
 ln -sfn "$RELEASE_DIR" "$INSTALL_ROOT/current.new"
 mv -Tf "$INSTALL_ROOT/current.new" "$INSTALL_ROOT/current"
 systemctl daemon-reload
+# Retrieval runs inside long-lived daemons. A symlink flip alone leaves the previous code
+# resident in memory and the release silently inert, so restart them and refuse to call the
+# install a success unless every one of them comes back.
+for daemon in advocate steward temporal processor; do
+  systemctl enable "aegis-verus-$daemon.service"
+  systemctl restart "aegis-verus-$daemon.service"
+done
+sleep 3
+for daemon in advocate steward temporal processor; do
+  if ! systemctl is-active --quiet "aegis-verus-$daemon.service"; then
+    echo "daemon aegis-verus-$daemon did not come back after the release swap" >&2
+    false
+  fi
+done
 systemctl enable --now aegis-verus-lab.service
 VERUS_COMMAND="$RELEASE_DIR/bin/verus-dataquad-command" "$RELEASE_DIR/scripts/health.sh"
 trap - ERR

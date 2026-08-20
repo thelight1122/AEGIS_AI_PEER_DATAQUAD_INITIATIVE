@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import itertools
 import json
 import os
 import subprocess
@@ -97,12 +98,12 @@ TOOLS = [
     {"name": "verus_replay_turn", "description": "Replay one committed Verus turn and reconcile its derived evidence without new append.",
      "inputSchema": {"type": "object", "additionalProperties": False, "required": ["turn_id"],
                      "properties": {"turn_id": {"type": "string", "minLength": 1}}}},
-    {"name": "verus_query", "description": "Query the DataQuad through the Advocate→Steward→Processor custodian pipeline. Returns curated, scored results rather than raw tensor dumps.",
+    {"name": "verus_query", "description": "Query the DataQuad through the Advocate-Steward-Processor custodian pipeline. Returns curated, scored results rather than raw tensor dumps.",
      "inputSchema": {"type": "object", "additionalProperties": False, "required": ["prompt"],
                      "properties": {
                          "prompt": {"type": "string", "minLength": 1},
-                         "limit": {"type": "integer", "minimum": 1, "maximum": 100, "default": 30},
-                         "intent": {"type": "string", "minLength": 1, "default": "context_retrieval"},
+                         "limit": {"type": "integer", "minimum": 1, "maximum": 100},
+                         "intent": {"type": "string", "minLength": 1},
                      }}},
 ]
 
@@ -116,17 +117,19 @@ _OPERATIONS = {
 
 
 def _read_content_length_message(stream) -> dict[str, Any] | None:
-    """Read a Content-Length framed JSON-RPC message (standard MCP stdio)."""
+    """Read a Content-Length framed JSON-RPC message from a binary stream."""
     headers: dict[str, str] = {}
     while True:
         line = stream.readline()
         if not line:
             return None
-        line = line.strip()
-        if not line:
-            break
-        if b":" in line if isinstance(line, bytes) else ":" in line:
-            decoded = line.decode("utf-8") if isinstance(line, bytes) else line
+        decoded = line.decode("utf-8") if isinstance(line, bytes) else line
+        decoded = decoded.strip()
+        if not decoded:
+            if headers:
+                break
+            continue
+        if ":" in decoded:
             key, _, value = decoded.partition(":")
             headers[key.strip().lower()] = value.strip()
     content_length = int(headers.get("content-length", "0"))
@@ -139,20 +142,12 @@ def _read_content_length_message(stream) -> dict[str, Any] | None:
 
 
 def _write_content_length_message(stream, response: dict[str, object]) -> None:
-    """Write a Content-Length framed JSON-RPC message."""
-    body = json.dumps(response, separators=(",", ":"), ensure_ascii=False)
-    header = f"Content-Length: {len(body.encode('utf-8'))}\r\n\r\n"
+    """Write a Content-Length framed JSON-RPC message to a binary stream."""
+    body = json.dumps(response, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
+    header = f"Content-Length: {len(body)}\r\n\r\n".encode("utf-8")
     stream.write(header)
     stream.write(body)
     stream.flush()
-
-
-def _detect_transport(stream) -> str:
-    """Peek at stdin to detect Content-Length framed vs line-delimited."""
-    first_byte = stream.buffer.peek(1)[:1]
-    if first_byte in (b"C", b"c"):
-        return "content-length"
-    return "line-delimited"
 
 
 class VerusMCPServer:
@@ -200,31 +195,71 @@ class VerusMCPServer:
         return {"jsonrpc": "2.0", "id": request_id, "error": {"code": code, "message": message}}
 
     def run(self) -> int:
-        mode = _detect_transport(sys.stdin)
-        if mode == "content-length":
-            return self._run_content_length()
-        return self._run_line_delimited()
+        bin_in = sys.stdin.buffer
+        first_line = bin_in.readline()
+        if not first_line:
+            return 0
+        decoded = first_line.decode("utf-8", errors="replace").strip()
+        if decoded.lower().startswith("content-length"):
+            return self._run_content_length(bin_in, first_line)
+        return self._run_line_delimited(first_line.decode("utf-8", errors="replace"))
 
-    def _run_content_length(self) -> int:
-        """Content-Length framed transport (Claude Code)."""
+    def _run_content_length(self, bin_in, first_header_line: bytes) -> int:
+        """Content-Length framed transport (Claude Code). All binary I/O."""
+        bin_out = sys.stdout.buffer
+        first_message = self._finish_content_length_read(bin_in, first_header_line)
+        if first_message is not None:
+            response = self._dispatch(first_message)
+            if response is not None:
+                _write_content_length_message(bin_out, response)
         while True:
             try:
-                message = _read_content_length_message(sys.stdin)
+                message = _read_content_length_message(bin_in)
                 if message is None:
                     break
-                if not isinstance(message, dict):
-                    response = self._error(None, -32700, "parse error")
-                else:
-                    response = self.handle(message)
+                response = self._dispatch(message)
             except (json.JSONDecodeError, ValueError):
                 response = self._error(None, -32700, "parse error")
             if response is not None:
-                _write_content_length_message(sys.stdout, response)
+                _write_content_length_message(bin_out, response)
         return 0
 
-    def _run_line_delimited(self) -> int:
+    def _finish_content_length_read(self, bin_in, first_header_line: bytes) -> dict[str, Any] | None:
+        """Complete reading a Content-Length message given the first header line already consumed."""
+        headers: dict[str, str] = {}
+        decoded = first_header_line.decode("utf-8", errors="replace").strip()
+        if ":" in decoded:
+            key, _, value = decoded.partition(":")
+            headers[key.strip().lower()] = value.strip()
+        while True:
+            line = bin_in.readline()
+            if not line:
+                return None
+            text = line.decode("utf-8", errors="replace").strip()
+            if not text:
+                break
+            if ":" in text:
+                key, _, value = text.partition(":")
+                headers[key.strip().lower()] = value.strip()
+        content_length = int(headers.get("content-length", "0"))
+        if content_length <= 0:
+            return None
+        body = bin_in.read(content_length)
+        if isinstance(body, bytes):
+            body = body.decode("utf-8")
+        try:
+            return json.loads(body)
+        except json.JSONDecodeError:
+            return None
+
+    def _dispatch(self, message) -> dict[str, object] | None:
+        if not isinstance(message, dict):
+            return self._error(None, -32700, "parse error")
+        return self.handle(message)
+
+    def _run_line_delimited(self, first_line: str) -> int:
         """Line-delimited transport (Claude Desktop)."""
-        for line in sys.stdin:
+        for line in itertools.chain((first_line,), sys.stdin):
             if not line.strip():
                 continue
             try:

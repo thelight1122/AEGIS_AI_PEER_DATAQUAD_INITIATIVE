@@ -12,10 +12,92 @@ from datetime import datetime, timezone
 from typing import Any
 
 from .daemon import DaemonClient
+from .retrieval import extract_text
 
 
 def _now() -> str:
     return datetime.now(timezone.utc).isoformat()
+
+
+class RecordClock:
+    """Minimal ClockLike exposing the tick the orb scorer reads.
+
+    The orb reads only .tick (recency bonus). Nothing else is promised.
+    """
+
+    __slots__ = ("tick",)
+
+    def __init__(self, tick: int) -> None:
+        self.tick = tick
+
+
+def _flatten_payload(data: dict[str, Any]) -> dict[str, Any]:
+    """Lift a turn record's payload to the top level.
+
+    Foundation records carry their scored text (pattern, distilled_summary,
+    essence_memory, present_state, working_context) at the top level of data.
+    Turn-derived records nest the same fields one level down under "payload".
+    scoring.py reads them by attribute name, so without this lift every
+    turn-derived record presents as empty text and scores exactly 0.0 —
+    the whole lived history is unreachable and only the seed is selectable.
+    """
+    payload = data.get("payload")
+    if isinstance(payload, dict):
+        return {**data, **payload}
+    return data
+
+
+def _clock_from(data: dict[str, Any]) -> RecordClock | None:
+    """Derive the scorer's tick from whichever counter the record carries.
+
+    Foundation records carry a clock mapping with a tick. Turn-derived records
+    carry t_time, the peer's own monotonic turn counter — the same quantity the
+    recency bonus is reaching for.
+    """
+    clock = data.get("clock")
+    tick = clock.get("tick") if isinstance(clock, dict) else data.get("t_time")
+    if isinstance(tick, bool) or not isinstance(tick, int) or tick <= 0:
+        return None
+    return RecordClock(tick)
+
+
+# Turn-level and provenance keys: real, but not the record's own content.
+_NON_CONTENT_KEYS = frozenset({
+    "identity_assertion", "tensor", "turn_id", "record_hash", "custodian",
+    "observed_at", "t_time", "prompt_context", "response_context",
+})
+
+
+def _scorable_text(data: dict[str, Any]) -> str:
+    """The record's own words, gathered without naming a single field.
+
+    Replaces the PEER-specific concatenation that routed affect through
+    present_state because that was the only field the upstream scorer opened.
+    That was a workaround; this is the inversion. extract_text walks every
+    string the record holds, at any depth, so a tensor's free-form keys are
+    reachable without the reader knowing their names.
+
+    Nothing is summarised, inferred, ranked, or authored: every fragment
+    returned already existed in the record.
+    """
+    return extract_text(_without_non_content(data)).strip()
+
+
+def _without_non_content(value: Any) -> Any:
+    """Drop control and provenance keys at every depth, not only the top level.
+
+    payload is nested, so a top-level filter leaves identity_assertion inside it
+    and "none" enters the text of every PEER record.
+    """
+    if isinstance(value, dict):
+        return {
+            key: _without_non_content(item)
+            for key, item in value.items()
+            if key not in _NON_CONTENT_KEYS
+        }
+    if isinstance(value, (list, tuple)):
+        return [_without_non_content(item) for item in value]
+    return value
 
 
 class DaemonRecord:
@@ -31,8 +113,12 @@ class DaemonRecord:
     def __init__(self, record_id: str, tensor: str, data: dict[str, Any]) -> None:
         self.id = record_id
         self._tensor_str = tensor
-        self.clock = None
-        self._extra = data
+        self.clock = _clock_from(data)
+        extra = _flatten_payload(data)
+        scorable = _scorable_text(data)
+        if scorable:
+            extra = {**extra, "scorable_text": scorable}
+        self._extra = extra
 
     @property
     def tensor(self) -> Any:
