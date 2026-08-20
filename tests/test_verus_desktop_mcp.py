@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 import hashlib
+import io
 import json
 from pathlib import Path
 from types import SimpleNamespace
@@ -357,6 +358,24 @@ def test_mcp_surface_is_dedicated_full_authority_and_secret_free():
     })
     assert called["result"]["isError"] is False
     assert transport.calls == [("health", {"_substrate": "Claude Desktop"})]
+
+
+def test_line_delimited_transport_replies_before_reading_another_request(monkeypatch):
+    first_request = json.dumps({"jsonrpc": "2.0", "id": 1, "method": "initialize"}) + "\n"
+    output = io.StringIO()
+
+    class ClientInput:
+        def __iter__(self):
+            assert output.getvalue(), "server read another request before replying to initialize"
+            return iter(())
+
+    monkeypatch.setattr("aegis_verus_mcp.server.sys.stdin", ClientInput())
+    monkeypatch.setattr("aegis_verus_mcp.server.sys.stdout", output)
+
+    assert VerusMCPServer(FakeTransport())._run_line_delimited(first_request) == 0
+    response = json.loads(output.getvalue())
+    assert response["id"] == 1
+    assert response["result"]["serverInfo"]["name"] == "verus-dataquad"
 
 
 def test_ssh_transport_uses_fixed_alias_account_and_command_without_shell(monkeypatch):
