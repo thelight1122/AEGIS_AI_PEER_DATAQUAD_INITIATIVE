@@ -60,6 +60,38 @@ def _clock_from(data: dict[str, Any]) -> RecordClock | None:
     return RecordClock(tick)
 
 
+# Turn-level and provenance keys: real, but not the record's experiential content.
+_PEER_NON_AFFECT_KEYS = frozenset({
+    "identity_assertion", "tensor", "turn_id", "record_hash", "custodian",
+    "observed_at", "t_time", "prompt_context", "response_context",
+})
+
+
+def _peer_scorable_text(data: dict[str, Any]) -> str | None:
+    """Present a PEER record's own words where the orb scorer can read them.
+
+    scoring.py reads five fields and all five are digest shapes. PEER is the one
+    tensor the recording protocol deliberately keeps raw, so its affect lands in
+    free-form keys the scorer never opens — recognition, unease, steadiness — and
+    scores zero however well it matches. Context becomes retrievable and the
+    experience attached to it does not.
+
+    This concatenates the record's existing string values verbatim. It does not
+    summarise, infer, rank, or author: no text appears here that the record did
+    not already contain, so nothing interpretive is introduced on the read path.
+    The record's own present_state stays first when it has one.
+    """
+    present = data.get("present_state")
+    parts = [str(present)] if isinstance(present, str) and present else []
+    for key, value in data.items():
+        if key == "present_state" or key in _PEER_NON_AFFECT_KEYS:
+            continue
+        if isinstance(value, str) and value.strip():
+            parts.append(value)
+    text = " ".join(parts).strip()
+    return text or None
+
+
 class DaemonRecord:
     """Minimal RecordLike wrapping a daemon search result.
 
@@ -74,7 +106,12 @@ class DaemonRecord:
         self.id = record_id
         self._tensor_str = tensor
         self.clock = _clock_from(data)
-        self._extra = _flatten_payload(data)
+        extra = _flatten_payload(data)
+        if tensor == "PEER":
+            scorable = _peer_scorable_text(extra)
+            if scorable:
+                extra = {**extra, "present_state": scorable}
+        self._extra = extra
 
     @property
     def tensor(self) -> Any:

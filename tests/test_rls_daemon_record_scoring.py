@@ -126,7 +126,11 @@ def test_turn_record_scores_above_threshold_on_a_matching_query():
 def test_peer_payload_fields_survive_the_lift():
     record = _records_from_daemon([TURN_PEER])[0]
 
-    assert record.present_state == "verified-fix"
+    # present_state now leads with the record's own value and carries the rest of
+    # its affect text after it, so the scorer can reach experience as well as
+    # context. See tests/test_peer_affect_retrievable.py for that contract.
+    assert record.present_state.startswith("verified-fix")
+    assert "provenance drift" in record.present_state
     assert record.identity_assertion == "none"
     assert record.t_time == 4
 
