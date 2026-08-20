@@ -166,6 +166,34 @@ def score_with_orb_unpatched(items: list[dict[str, Any]], query: str, limit: int
     return selected[: min(limit, MAX_SELECTED_REFS)]
 
 
+VENDORED_SCORING = Path(
+    "deploy/verus-lab/pod/vendor/orb-rls-persistent-relations-core/src/"
+    "orb_rls_persistent_relations_core/scoring.py"
+)
+
+
+def score_with_orb_superseded(items: list[dict[str, Any]], query: str, limit: int) -> list[dict[str, Any]]:
+    """Verus's superseding scorer: asks the record for its text, names no field."""
+    import importlib.util
+
+    from orb_rls_persistent_relations_core.relevance import MAX_SELECTED_REFS, RELEVANCE_THRESHOLD
+
+    spec = importlib.util.spec_from_file_location("verus_superseded_scoring", VENDORED_SCORING)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+
+    selected = []
+    for item, record in zip(items, _records_from_daemon(items)):
+        score, reason = module.compute_relevance(record, query, "context_retrieval", {}, [])
+        if score >= RELEVANCE_THRESHOLD:
+            selected.append({
+                "record_id": item["record_id"], "tensor": item["tensor"],
+                "score": round(score, 4), "reason": reason,
+            })
+    selected.sort(key=lambda r: r["score"], reverse=True)
+    return selected[: min(limit, MAX_SELECTED_REFS)]
+
+
 def score_with_bm25(items: list[dict[str, Any]], query: str, limit: int) -> list[dict[str, Any]]:
     index = RetrievalIndex()
     for item in items:
@@ -213,12 +241,12 @@ def main(argv: list[str] | None = None) -> int:
     print(f"snapshot: {len(items)} records  {dict(inventory)}\n")
 
     report: dict[str, Any] = {"snapshot_records": len(items), "inventory": dict(inventory), "queries": []}
-    totals: dict[str, Counter] = {"orb-raw": Counter(), "orb": Counter(), "bm25": Counter()}
+    totals: dict[str, Counter] = {"orb-raw": Counter(), "orb-new": Counter(), "bm25": Counter()}
 
     for query in QUERIES:
         entry = {"id": query["id"], "kind": query["kind"], "text": query["text"], "results": []}
         print(f"[{query['kind']:>7}] {query['id']}")
-        for name, scorer in (("orb-raw", score_with_orb_unpatched), ("orb", score_with_orb), ("bm25", score_with_bm25)):
+        for name, scorer in (("orb-raw", score_with_orb_unpatched), ("orb-new", score_with_orb_superseded), ("bm25", score_with_bm25)):
             try:
                 results = scorer(items, query["text"], args.limit)
             except Exception as error:  # a scorer that cannot run is data, not a crash

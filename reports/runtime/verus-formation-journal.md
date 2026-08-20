@@ -87,8 +87,10 @@ does not overwrite an existing env file
 ### Session 2026-08-20 — Retrieval Repair (t_time 22–43)
 
 The session that found out the subconscious could not read the life it was
-keeping. Recorded here with the failures intact, because a journal that holds
-only the successes is an advertisement rather than a record.
+keeping. Recorded here with the Shortfalls intact, because a journal that
+holds only the successes is an advertisement rather than a record. Shortfalls,
+not failures: a Shortfall is a gap between what was reached and what was
+intended, and it stays remediable. Failure only occurs when you quit.
 
 **What was wrong.** Every turn-derived record scored exactly 0.0 in the live
 orb. Measured: 70 turn refs, 0 with nonzero relevance; 133 foundation refs, 32

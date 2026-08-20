@@ -21,6 +21,22 @@ def _tokens(value: str) -> set[str]:
 
 
 def _record_text(record: RecordLike) -> str:
+    """Return the record's own text, asking the record before naming any field.
+
+    SUPERSEDES the upstream 1.0.0 body, which enumerated five DataQuad field
+    names and so required the orb to know every tensor's record schema. PEER is
+    deliberately kept raw by the recording protocol, so its affect lives in
+    free-form keys no field list can anticipate, and it scored zero however well
+    it matched.
+
+    A record that supplies scorable_text is authoritative for its own content.
+    The legacy field walk remains as the fallback for records that do not, so
+    foundation records and any other RecordLike keep scoring exactly as before.
+    """
+    supplied = getattr(record, "scorable_text", None)
+    if isinstance(supplied, str) and supplied.strip():
+        return supplied
+
     text_content = ""
     if hasattr(record, "present_state") and record.present_state:
         text_content += " " + str(record.present_state)

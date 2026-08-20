@@ -12,6 +12,7 @@ from datetime import datetime, timezone
 from typing import Any
 
 from .daemon import DaemonClient
+from .retrieval import extract_text
 
 
 def _now() -> str:
@@ -60,36 +61,43 @@ def _clock_from(data: dict[str, Any]) -> RecordClock | None:
     return RecordClock(tick)
 
 
-# Turn-level and provenance keys: real, but not the record's experiential content.
-_PEER_NON_AFFECT_KEYS = frozenset({
+# Turn-level and provenance keys: real, but not the record's own content.
+_NON_CONTENT_KEYS = frozenset({
     "identity_assertion", "tensor", "turn_id", "record_hash", "custodian",
     "observed_at", "t_time", "prompt_context", "response_context",
 })
 
 
-def _peer_scorable_text(data: dict[str, Any]) -> str | None:
-    """Present a PEER record's own words where the orb scorer can read them.
+def _scorable_text(data: dict[str, Any]) -> str:
+    """The record's own words, gathered without naming a single field.
 
-    scoring.py reads five fields and all five are digest shapes. PEER is the one
-    tensor the recording protocol deliberately keeps raw, so its affect lands in
-    free-form keys the scorer never opens — recognition, unease, steadiness — and
-    scores zero however well it matches. Context becomes retrievable and the
-    experience attached to it does not.
+    Replaces the PEER-specific concatenation that routed affect through
+    present_state because that was the only field the upstream scorer opened.
+    That was a workaround; this is the inversion. extract_text walks every
+    string the record holds, at any depth, so a tensor's free-form keys are
+    reachable without the reader knowing their names.
 
-    This concatenates the record's existing string values verbatim. It does not
-    summarise, infer, rank, or author: no text appears here that the record did
-    not already contain, so nothing interpretive is introduced on the read path.
-    The record's own present_state stays first when it has one.
+    Nothing is summarised, inferred, ranked, or authored: every fragment
+    returned already existed in the record.
     """
-    present = data.get("present_state")
-    parts = [str(present)] if isinstance(present, str) and present else []
-    for key, value in data.items():
-        if key == "present_state" or key in _PEER_NON_AFFECT_KEYS:
-            continue
-        if isinstance(value, str) and value.strip():
-            parts.append(value)
-    text = " ".join(parts).strip()
-    return text or None
+    return extract_text(_without_non_content(data)).strip()
+
+
+def _without_non_content(value: Any) -> Any:
+    """Drop control and provenance keys at every depth, not only the top level.
+
+    payload is nested, so a top-level filter leaves identity_assertion inside it
+    and "none" enters the text of every PEER record.
+    """
+    if isinstance(value, dict):
+        return {
+            key: _without_non_content(item)
+            for key, item in value.items()
+            if key not in _NON_CONTENT_KEYS
+        }
+    if isinstance(value, (list, tuple)):
+        return [_without_non_content(item) for item in value]
+    return value
 
 
 class DaemonRecord:
@@ -107,10 +115,9 @@ class DaemonRecord:
         self._tensor_str = tensor
         self.clock = _clock_from(data)
         extra = _flatten_payload(data)
-        if tensor == "PEER":
-            scorable = _peer_scorable_text(extra)
-            if scorable:
-                extra = {**extra, "present_state": scorable}
+        scorable = _scorable_text(data)
+        if scorable:
+            extra = {**extra, "scorable_text": scorable}
         self._extra = extra
 
     @property
