@@ -9,6 +9,17 @@ description = "Isolated local runtime for four AEGIS AI Peer DataQuads"
 requires-python = ">=3.10"
 dependencies = []
 
+# The runtime itself is stdlib-only. These are needed only to run the test
+# suite (numpy/jsonschema/referencing/packaging are imported by tracked tests).
+[project.optional-dependencies]
+test = [
+    "pytest",
+    "jsonschema",
+    "referencing",
+    "numpy",
+    "packaging",
+]
+
 [project.scripts]
 aegis-peer-runtime = "aegis_peer_runtime.cli:main"
 
