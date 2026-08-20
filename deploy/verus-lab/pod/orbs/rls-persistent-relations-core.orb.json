@@ -41,8 +41,9 @@
     "deploy/verus-lab/pod/umbilicals/rls-persistent-relations-core.umbilical.json"
   ],
   "evidence": {
-    "created_utc": "2026-08-17",
-    "source": "vendored authoritative canonical orb-rls-persistent-relations-core (runtime_hash 51A1AC18)",
-    "trust_state": "verified"
+    "created_utc": "2026-08-20",
+    "source": "vendored authoritative canonical orb-rls-persistent-relations-core (runtime_hash A6B5DC18)",
+    "trust_state": "provisional",
+    "supersedes_evidence": "1.0.0 evidence at markers/rls-persistent-relations-core.verified-code-marker.v1.0.0.json"
   }
 }

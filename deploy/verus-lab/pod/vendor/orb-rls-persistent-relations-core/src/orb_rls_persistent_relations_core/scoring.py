@@ -30,8 +30,16 @@ def _record_text(record: RecordLike) -> str:
     it matched.
 
     A record that supplies scorable_text is authoritative for its own content.
-    The legacy field walk remains as the fallback for records that do not, so
-    foundation records and any other RecordLike keep scoring exactly as before.
+    The legacy field walk remains as the fallback for records that do not.
+
+    Note what this does NOT promise. Through the live DaemonRecord adapter every
+    record supplies scorable_text, foundation records included, so the fallback
+    is effectively unreached in that path and those records do not score as they
+    did under 1.0.0. Scores move in both directions: the whole-record text can
+    add tokens a five-field walk missed, and it drops the dict key names that
+    str() of a mapping used to contribute. Selection logic is unchanged, but
+    selection outcomes are not outcome-neutral, and the overlap term is not
+    normalised for length, so a longer record is easier to select.
     """
     supplied = getattr(record, "scorable_text", None)
     if isinstance(supplied, str) and supplied.strip():
