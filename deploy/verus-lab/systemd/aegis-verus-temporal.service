@@ -1,0 +1,25 @@
+[Unit]
+Description=AEGIS Verus Temporal daemon (time observation)
+After=network.target
+
+[Service]
+Type=simple
+User=aegis-verus
+Group=aegis-verus
+WorkingDirectory=/opt/aegis/verus/lab/current
+ExecStart=/opt/aegis/verus/lab/current/bin/verus-daemon-launcher temporal --socket /var/lib/aegis-verus-lab/daemons/temporal.sock --state-root /var/lib/aegis-verus-lab
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/var/lib/aegis-verus-lab
+UMask=0077
+CPUQuota=10%
+MemoryHigh=128M
+MemoryMax=256M
+TasksMax=32
+
+[Install]
+WantedBy=multi-user.target

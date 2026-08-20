@@ -18,6 +18,48 @@ def _now() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
+class RecordClock:
+    """Minimal ClockLike exposing the tick the orb scorer reads.
+
+    The orb reads only .tick (recency bonus). Nothing else is promised.
+    """
+
+    __slots__ = ("tick",)
+
+    def __init__(self, tick: int) -> None:
+        self.tick = tick
+
+
+def _flatten_payload(data: dict[str, Any]) -> dict[str, Any]:
+    """Lift a turn record's payload to the top level.
+
+    Foundation records carry their scored text (pattern, distilled_summary,
+    essence_memory, present_state, working_context) at the top level of data.
+    Turn-derived records nest the same fields one level down under "payload".
+    scoring.py reads them by attribute name, so without this lift every
+    turn-derived record presents as empty text and scores exactly 0.0 —
+    the whole lived history is unreachable and only the seed is selectable.
+    """
+    payload = data.get("payload")
+    if isinstance(payload, dict):
+        return {**data, **payload}
+    return data
+
+
+def _clock_from(data: dict[str, Any]) -> RecordClock | None:
+    """Derive the scorer's tick from whichever counter the record carries.
+
+    Foundation records carry a clock mapping with a tick. Turn-derived records
+    carry t_time, the peer's own monotonic turn counter — the same quantity the
+    recency bonus is reaching for.
+    """
+    clock = data.get("clock")
+    tick = clock.get("tick") if isinstance(clock, dict) else data.get("t_time")
+    if isinstance(tick, bool) or not isinstance(tick, int) or tick <= 0:
+        return None
+    return RecordClock(tick)
+
+
 class DaemonRecord:
     """Minimal RecordLike wrapping a daemon search result.
 
@@ -31,8 +73,8 @@ class DaemonRecord:
     def __init__(self, record_id: str, tensor: str, data: dict[str, Any]) -> None:
         self.id = record_id
         self._tensor_str = tensor
-        self.clock = None
-        self._extra = data
+        self.clock = _clock_from(data)
+        self._extra = _flatten_payload(data)
 
     @property
     def tensor(self) -> Any:

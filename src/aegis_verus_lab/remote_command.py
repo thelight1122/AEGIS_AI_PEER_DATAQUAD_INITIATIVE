@@ -30,6 +30,10 @@ def _model(config_path: Path) -> str:
 
 
 def dispatch(runtime: DesktopVerusRuntime, operation: str, payload: dict[str, object]) -> dict[str, object]:
+    # The MCP server stamps _substrate onto every tool payload for provenance. The runtime
+    # methods take keyword-only arguments, so it must come off here or begin, commit, query
+    # and replay raise TypeError — which the caller's error handler does not catch.
+    payload.pop("_substrate", None)
     if operation == "context":
         return runtime.dataquad.context()
     if operation == "begin":

@@ -246,8 +246,15 @@ def build_release(
     )
     for directory in ("bin", "systemd", "env", "scripts"):
         (output / directory).mkdir(parents=True, exist_ok=True)
-    shutil.copy2(ROOT / "deploy" / "verus-lab" / "bin" / "verus-dataquad-command", output / "bin" / "verus-dataquad-command")
-    shutil.copy2(ROOT / "deploy" / "verus-lab" / "systemd" / "aegis-verus-lab.service", output / "systemd" / "aegis-verus-lab.service")
+    # Ship every entrypoint and unit, not a hardcoded pair. The daemon launcher and the four
+    # daemon units were absent from earlier releases, so a release swap left the running
+    # retrieval daemons pointing at a launcher the new release did not contain.
+    for source in sorted((ROOT / "deploy" / "verus-lab" / "bin").iterdir()):
+        if source.is_file():
+            shutil.copy2(source, output / "bin" / source.name)
+    for source in sorted((ROOT / "deploy" / "verus-lab" / "systemd").iterdir()):
+        if source.is_file() and source.suffix == ".service":
+            shutil.copy2(source, output / "systemd" / source.name)
     shutil.copy2(ROOT / "deploy" / "verus-lab" / "env" / "verus.env.template", output / "env" / "verus.env.template")
     shutil.copy2(ROOT / "deploy" / "verus-lab" / "README.md", output / "README.md")
     for name in ("install.sh", "health.sh", "pause.sh"):

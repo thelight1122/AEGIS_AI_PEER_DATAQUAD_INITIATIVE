@@ -1,0 +1,27 @@
+#!/opt/aegis/verus/venv/bin/python3
+"""Launch a single Verus daemon by name."""
+from __future__ import annotations
+import sys
+from pathlib import Path
+
+root = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(root / "lib"))
+
+DAEMONS = {
+    "steward": ("aegis_peer_runtime.steward_daemon", "main"),
+    "advocate": ("aegis_peer_runtime.advocate_daemon", "main"),
+    "temporal": ("aegis_peer_runtime.temporal_daemon", "main"),
+    "processor": ("aegis_peer_runtime.processor_daemon", "main"),
+}
+
+if len(sys.argv) < 2 or sys.argv[1] not in DAEMONS:
+    print(f"Usage: verus-daemon-launcher {{{'|'.join(DAEMONS)}}} [daemon-args...]", file=sys.stderr)
+    raise SystemExit(2)
+
+daemon_name = sys.argv[1]
+sys.argv = [daemon_name] + sys.argv[2:]
+module_name, func_name = DAEMONS[daemon_name]
+
+import importlib
+module = importlib.import_module(module_name)
+raise SystemExit(getattr(module, func_name)())

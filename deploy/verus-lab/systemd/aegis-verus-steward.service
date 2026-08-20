@@ -1,0 +1,25 @@
+[Unit]
+Description=AEGIS Verus Steward daemon (PCT/NCT retrieval)
+After=network.target
+
+[Service]
+Type=simple
+User=aegis-verus
+Group=aegis-verus
+WorkingDirectory=/opt/aegis/verus/lab/current
+ExecStart=/opt/aegis/verus/lab/current/bin/verus-daemon-launcher steward --socket /var/lib/aegis-verus-lab/daemons/steward.sock --release-root /opt/aegis/verus/lab/current/foundation --state-root /var/lib/aegis-verus-lab
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/var/lib/aegis-verus-lab
+UMask=0077
+CPUQuota=25%
+MemoryHigh=256M
+MemoryMax=512M
+TasksMax=64
+
+[Install]
+WantedBy=multi-user.target
