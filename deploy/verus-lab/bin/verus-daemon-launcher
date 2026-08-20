@@ -1,11 +1,17 @@
 #!/opt/aegis/verus/venv/bin/python3
 """Launch a single Verus daemon by name."""
 from __future__ import annotations
+import os
 import sys
 from pathlib import Path
 
 root = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(root / "lib"))
+
+# This release owns exactly one DataQuad. Pin the peer_id allowlist to it before
+# any daemon module is imported, so a record claiming another peer is refused
+# rather than accepted by default. An explicit environment value still wins.
+os.environ.setdefault("AEGIS_DATAQUAD_NAMES", "verus")
 
 DAEMONS = {
     "steward": ("aegis_peer_runtime.steward_daemon", "main"),

@@ -1,11 +1,17 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import os
 import sys
 from pathlib import Path
 
 root = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(root / "lib"))
+
+# This release owns exactly one DataQuad. Pin the peer_id allowlist to it before
+# the runtime is imported, so a record claiming another peer is refused rather
+# than accepted by default. An explicit environment value still wins.
+os.environ.setdefault("AEGIS_DATAQUAD_NAMES", "verus")
 
 from aegis_verus_lab.remote_command import main
 

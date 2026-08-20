@@ -1,0 +1,10 @@
+{
+  "archived_file": "models.py.20260820T120000Z-pre-roster-decoupling",
+  "source_path": "src/aegis_peer_runtime/models.py",
+  "sha256": "5dd95f7c1f1424dccb813364db85dadf59205c5f158c9c6269380f70bcce1748",
+  "archived_at": "2026-08-20T12:00:00Z",
+  "git_commit_at_archive": "4ce692d",
+  "deployed_release_carrying_this_file": "20260820T114730Z-retrieval-fix4",
+  "reason": "recovery copy taken before decoupling the hardcoded peer roster; PEERS and DATAQUAD_NAMES enumerate other CyberPeers and act as the peer_id validation allowlist in models.py, processor.py, rls_runtime.py, storage.py and temporal.py",
+  "restore": "copy back over src/aegis_peer_runtime/models.py and verify sha256 matches the value above"
+}
