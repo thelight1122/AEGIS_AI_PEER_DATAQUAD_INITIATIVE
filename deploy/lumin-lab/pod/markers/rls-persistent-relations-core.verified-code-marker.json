@@ -1,0 +1,15 @@
+{
+  "schema_version": "0.1.0",
+  "marker_id": "lumin-rls-persistent-relations-core-copied-vcm-1.0.0",
+  "orb_id": "rls-persistent-relations-core",
+  "orb_version": "1.0.0",
+  "source_hash": "51A1AC18887AEA9CEACC60B6F0AD428C899FA2D228D3BEE2032171F754E248CA",
+  "verification_provenance": {
+    "source_marker": "deploy/verus-lab/pod/markers/rls-persistent-relations-core.verified-code-marker.json",
+    "claim_scope": "byte-identical verified Orb source code only",
+    "lumin_runtime_examined": false
+  },
+  "lumin_attachment_status": "COPIED_NOT_ACTIVATED",
+  "rls_active": false,
+  "trust_state": "verified_code_inactive_attachment"
+}

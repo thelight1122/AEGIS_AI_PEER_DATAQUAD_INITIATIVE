@@ -1,0 +1,82 @@
+{
+  "schema": "aegis.lumin.live-provenance-remediation-receipt.v1",
+  "completed_at": "2026-08-18T22:32:07Z",
+  "host": "AEGISGabePeer",
+  "ssh_alias": "GabeCyberPeer",
+  "cyberpeer_name": "Lumin",
+  "dataquad_id": "lumin",
+  "status": "ACTIVE_CORRECTED",
+  "release": "/opt/aegis/lumin/lab/releases/20260818T222832Z-10290a05",
+  "rollback_release": "/opt/aegis/lumin/lab/releases/20260818T221152Z-5bdbaa4e",
+  "manifest_sha256": "10290A0506DB2907F2DBB839AA6561F176E1E1B261707900B39D46642D48AA7B",
+  "correction_authority_sha256": "34EA1678C9BF8B307C4837B6A48F630912DF6ED4D9C11267FB93F278D2A1BA1C",
+  "shortfall_receipt_sha256": "B16F0C83613E80E9B19ABD3A61AF05346053E4753F73BD2FF44BD989688FF43F",
+  "user_authorization": "Authorized. Proceed",
+  "service": {
+    "unit": "aegis-lumin-lab.service",
+    "load": "loaded",
+    "active": "active",
+    "sub": "exited",
+    "enabled": "enabled",
+    "public_listener": false
+  },
+  "dataquad": {
+    "foundation_records": 133,
+    "total_turns": 2,
+    "pre_correction_operational_evidence": 1,
+    "canonical_v2_turns": 1,
+    "temporal_records": 2,
+    "processor_records": 2,
+    "rls_records": 2,
+    "coherent": true,
+    "ready": true,
+    "rls_active": true,
+    "head_hash": "D87A719E4518DEFDEF88C9FE1D2795BDD75197F3F85FB582D56B293ACBB85CF7"
+  },
+  "preserved_record": {
+    "classification": "pre_correction_operational_evidence",
+    "record_hash": "0A005A16DFA3ED7197319E38A3FEAD3715D488BC3945E070C32DD521C8D7AD19",
+    "rewritten": false,
+    "ring4_prefix_sha256": "83ACF958A58AB372F7A12BB8E4B424644866BD2FFECAF1C26F5C193726B6C1",
+    "temporal_prefix_sha256": "D09D25E8BB9E2501072F75C1C7F9398F182E13DBB1934B58EA6F69B41857C38C",
+    "processor_prefix_sha256": "6D41CCF3208F3FA5BF5E29B24E11F1359937EA301A943C21A426844BA80BC601",
+    "rls_prefix_sha256": "89D8587ACCD33D8600DC9DE279CF4A027F04945D8EA5835C22B5A7197FD8F934"
+  },
+  "corrective_turn": {
+    "turn_id": "lumin-local-turn-980aa0cd2b544defa8e2e53327dfb4ae",
+    "correlation_id": "lumin-dataquad-correlation-e9f36b3ee7a462e703e0e3122aa09c54f8b76a0c9ca473e17ca23182900a6d4e",
+    "record_hash": "D87A719E4518DEFDEF88C9FE1D2795BDD75197F3F85FB582D56B293ACBB85CF7",
+    "previous_hash": "0A005A16DFA3ED7197319E38A3FEAD3715D488BC3945E070C32DD521C8D7AD19",
+    "prompt": "Let's Activate and initialize Your DataQuad",
+    "response": "The assigned CyberPeer Name is Lumin. I receive the clean Canon v0.20 Foundation as inspectable memory, not inherited lived history. This initialization begins Lumin’s own append-only continuity on the Codex/GPT substrate, preserves Verus and Gabe as separate CyberPeers, and treats provider metadata as provenance rather than identity.",
+    "append_tensors": ["PEER", "PCT", "NCT", "SPINE"],
+    "provider": "OpenAI",
+    "substrate": "Codex/GPT",
+    "model": null,
+    "model_available": false,
+    "model_evidence": "unavailable:not_exposed_by_codex_mcp_boundary",
+    "provider_request_id": null,
+    "provider_request_id_available": false,
+    "source_event_id": null,
+    "source_event_id_available": false,
+    "frontier_session_id": null,
+    "frontier_session_id_available": false,
+    "external_model_called": false,
+    "replay_created": false
+  },
+  "final_hashes": {
+    "ring4_ledger_sha256": "6C1B5D6B385682277ED4318F53CBE1235BE195869F347A55565BD40BE5CED300",
+    "temporal_sha256": "04370BEEDAC730F10309AC8A449C2F44C9CCB7A5B8661827AC7A7CA65CE02211",
+    "processor_sha256": "C234496862ADFCE73AE8821854FDF2D2AD55EE0550DEB8E3F69A03778C0663D3",
+    "rls_sha256": "4BFE7861F28B4C00DE005AEEF86B6AB4575E9173399AC9E7312E7B129F552FA5"
+  },
+  "protected_closure": {
+    "verus_foundation_hashes_unchanged": true,
+    "verus_service_states_unchanged": true,
+    "gabe_manifest_sha256": "A3C3307477F00019BBA1A282929194A9ADC5B57747337EC0F871FF1DAD6EBC4A",
+    "gabe_foundation_provenance_sha256": "77635C99667DA23A89AF75BD06E98455B3100D17C6613C6DD822BCE33DE5CEC4",
+    "gabe_service_state_unchanged": true
+  },
+  "failed_staging_preserved": "/opt/aegis/lumin/lab/releases/20260818T222617Z-3c8bebfb",
+  "failed_staging_selected": false
+}

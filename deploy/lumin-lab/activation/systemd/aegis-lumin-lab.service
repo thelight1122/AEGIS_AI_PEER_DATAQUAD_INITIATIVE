@@ -1,0 +1,32 @@
+[Unit]
+Description=AEGIS Lumin isolated append-only DataQuad and active RLS verification surface
+ConditionPathExists=/etc/aegis-lumin-lab/lumin.env
+
+[Service]
+Type=oneshot
+User=aegis-lumin
+Group=aegis-lumin
+WorkingDirectory=/opt/aegis/lumin/lab/current
+EnvironmentFile=/etc/aegis-lumin-lab/lumin.env
+ExecStart=/opt/aegis/lumin/lab/current/bin/lumin-dataquad-command health
+RemainAfterExit=yes
+NoNewPrivileges=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectSystem=strict
+ReadWritePaths=/var/lib/aegis-lumin-lab
+ProtectHome=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectKernelLogs=yes
+ProtectControlGroups=yes
+ProtectClock=yes
+RestrictSUIDSGID=yes
+RestrictRealtime=yes
+LockPersonality=yes
+MemoryDenyWriteExecute=yes
+RestrictAddressFamilies=AF_UNIX
+UMask=0077
+
+[Install]
+WantedBy=multi-user.target

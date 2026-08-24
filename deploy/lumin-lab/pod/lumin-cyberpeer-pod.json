@@ -1,0 +1,61 @@
+{
+  "schema_version": "0.1.0",
+  "pod_id": "lumin-cyberpeer-pod",
+  "peer_id": "lumin",
+  "cyberpeer_name": "Lumin",
+  "runtime": {
+    "language": "python",
+    "implementation": "Prepared read-only POD CORE copied from the Verus POD CORE code boundary",
+    "activation_status": "NOT_INSTALLED"
+  },
+  "foundation": {
+    "source": "clean AEGIS Canon v0.20 Foundation Seed",
+    "independently_seeded": true,
+    "inspectable_memory": true,
+    "lived_history": false,
+    "verus_records_inherited": false
+  },
+  "tensors": {
+    "SPINE": {"mode": "foundation_read_only"},
+    "NCT": {"mode": "foundation_read_only"},
+    "PEER": {"mode": "bootstrap_foundation_read_only"},
+    "PCT": {"mode": "bootstrap_foundation_read_only"}
+  },
+  "processor": {
+    "status": "resident_daemon",
+    "service": "aegis-lumin-processor.service",
+    "peer_id": "lumin",
+    "rls_umbilical": "pod/umbilicals/rls-persistent-relations-core.umbilical.json"
+  },
+  "temporal_daemon": {
+    "status": "resident_daemon",
+    "service": "aegis-lumin-temporal.service"
+  },
+  "custodians": {
+    "steward": {"status": "resident_daemon", "service": "aegis-lumin-steward.service", "owns": ["PCT", "NCT"]},
+    "advocate": {"status": "resident_daemon", "service": "aegis-lumin-advocate.service", "owns": ["PEER", "SPINE"]}
+  },
+  "formation_contracts": {
+    "daemon_mode": "resident_concurrent",
+    "rls_role": "contradiction_and_tension_processor",
+    "divergence_policy": "preserve_as_information",
+    "append_only_surfaces": ["PEER", "PCT"],
+    "distillation": "explicit_authorization_required",
+    "ontology_claims": false
+  },
+  "orbs": [
+    {
+      "orb_id": "rls-persistent-relations-core",
+      "orb_version_pin": "1.0.0",
+      "runtime_hash": "51A1AC18887AEA9CEACC60B6F0AD428C899FA2D228D3BEE2032171F754E248CA",
+      "umbilical": "pod/umbilicals/rls-persistent-relations-core.umbilical.json",
+      "status": "copied_inactive"
+    }
+  ],
+  "authority": {
+    "rings_1_3": "AUTHORIZED_PREPARATION",
+    "ring_4_writes": "NOT_AUTHORIZED",
+    "rls": "NOT_AUTHORIZED",
+    "live_activation": "NOT_AUTHORIZED"
+  }
+}

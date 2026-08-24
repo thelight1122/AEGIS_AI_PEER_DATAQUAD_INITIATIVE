@@ -51,10 +51,14 @@ class ProcessorDaemon(BaseDaemon):
         advocate_socket: str | Path | None = None,
         temporal_socket: str | Path | None = None,
         rls_active: bool | None = None,
+        peer_id: str | None = None,
     ) -> None:
         super().__init__("Processor", socket_path)
         self._release_root = Path(release_root)
         self._state_root = Path(state_root)
+        # Preserve the historical Verus default for existing deployments;
+        # instance-specific services must pass an explicit peer id.
+        self._peer_id = peer_id or os.environ.get("AEGIS_PEER_ID", "verus")
         daemon_dir = self._state_root / "daemons"
         self._steward = DaemonClient(steward_socket or daemon_dir / "steward.sock")
         self._advocate = DaemonClient(advocate_socket or daemon_dir / "advocate.sock")
@@ -91,7 +95,7 @@ class ProcessorDaemon(BaseDaemon):
             from .protocol_adapters import LiveSteward, LiveAdvocate
 
             store = LiveDataQuadStore(
-                self._state_root, peer_id="verus", rls_active=True,
+                self._state_root, peer_id=self._peer_id, rls_active=True,
             )
             self._rls_engine = RecursiveLearningEngine(
                 store=store,
@@ -197,7 +201,7 @@ class ProcessorDaemon(BaseDaemon):
             if session_id and prompt:
                 try:
                     rls_result = self.op_rls_session({
-                        "peer_id": params.get("peer_id", "verus"),
+                        "peer_id": params.get("peer_id", self._peer_id),
                         "session_id": session_id,
                         "prompt": prompt,
                         "intent": params.get("intent", "context_retrieval"),
@@ -286,7 +290,7 @@ class ProcessorDaemon(BaseDaemon):
                 "executed": False,
                 "reason": "RLS engine not active (AEGIS_RLS_ACTIVE != true or orb not installed)",
             }
-        peer_id = params.get("peer_id", "verus")
+        peer_id = params.get("peer_id", self._peer_id)
         session_id = params.get("session_id", "")
         prompt = params.get("prompt", "")
         intent = params.get("intent", "context_retrieval")
@@ -382,11 +386,13 @@ def main() -> int:
     parser.add_argument("--state-root", type=Path, default=Path("/var/lib/aegis-verus-lab"))
     parser.add_argument("--rls-active", action="store_true", default=None,
                         help="Activate the RLS orb engine (P1). Also reads AEGIS_RLS_ACTIVE env var.")
+    parser.add_argument("--peer-id", default=None,
+                        help="Bound peer/DataQuad id (defaults to AEGIS_PEER_ID or verus).")
     args = parser.parse_args()
 
     daemon = ProcessorDaemon(
         args.socket, args.release_root, args.state_root,
-        rls_active=args.rls_active,
+        rls_active=args.rls_active, peer_id=args.peer_id,
     )
     daemon.run()
     return 0

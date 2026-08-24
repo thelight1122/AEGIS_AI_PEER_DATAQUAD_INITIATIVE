@@ -1,0 +1,11 @@
+{
+  "authorized_at": "2026-08-18T22:20:00Z",
+  "correction_of_record_hash": "0A005A16DFA3ED7197319E38A3FEAD3715D488BC3945E070C32DD521C8D7AD19",
+  "dataquad_id": "lumin",
+  "preservation": "append_only_do_not_rewrite",
+  "schema": "aegis.lumin.provenance-correction-authority.v1",
+  "scope": "append exactly one canonical corrective initialization turn; preserve prior record byte-for-byte; reactivate only Lumin",
+  "shortfall_receipt": "/var/lib/aegis-lumin-lab/activation-shortfalls/20260818T221710Z.json",
+  "shortfall_receipt_sha256": "B16F0C83613E80E9B19ABD3A61AF05346053E4753F73BD2FF44BD989688FF43F",
+  "user_authorization": "Authorized. Proceed"
+}

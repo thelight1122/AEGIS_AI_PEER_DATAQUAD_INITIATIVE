@@ -1,0 +1,23 @@
+[Unit]
+Description=AEGIS Lumin Advocate daemon
+After=network.target
+PartOf=aegis-lumin-lab.service
+
+[Service]
+Type=simple
+User=aegis-lumin
+Group=aegis-lumin
+WorkingDirectory=/opt/aegis/lumin/lab/current
+EnvironmentFile=/etc/aegis-lumin-lab/lumin.env
+Environment=PYTHONPATH=/opt/aegis/lumin/lab/current/lib
+ExecStart=/usr/bin/python3 -m aegis_peer_runtime.advocate_daemon --socket /var/lib/aegis-lumin-lab/daemons/advocate.sock --release-root /opt/aegis/lumin/lab/current/foundation --state-root /var/lib/aegis-lumin-lab
+Restart=on-failure
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/var/lib/aegis-lumin-lab
+RestrictAddressFamilies=AF_UNIX
+UMask=0077
+
+[Install]
+WantedBy=multi-user.target

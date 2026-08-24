@@ -1,0 +1,25 @@
+[Unit]
+Description=AEGIS Lumin Processor daemon with RLS Umbilical
+Requires=aegis-lumin-steward.service aegis-lumin-advocate.service aegis-lumin-temporal.service
+After=aegis-lumin-steward.service aegis-lumin-advocate.service aegis-lumin-temporal.service
+PartOf=aegis-lumin-lab.service
+
+[Service]
+Type=simple
+User=aegis-lumin
+Group=aegis-lumin
+WorkingDirectory=/opt/aegis/lumin/lab/current
+EnvironmentFile=/etc/aegis-lumin-lab/lumin.env
+Environment=PYTHONPATH=/opt/aegis/lumin/lab/current/lib
+Environment=AEGIS_PEER_ID=lumin
+ExecStart=/usr/bin/python3 -m aegis_peer_runtime.processor_daemon --socket /var/lib/aegis-lumin-lab/daemons/processor.sock --release-root /opt/aegis/lumin/lab/current/foundation --state-root /var/lib/aegis-lumin-lab --rls-active --peer-id lumin
+Restart=on-failure
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/var/lib/aegis-lumin-lab
+RestrictAddressFamilies=AF_UNIX
+UMask=0077
+
+[Install]
+WantedBy=multi-user.target

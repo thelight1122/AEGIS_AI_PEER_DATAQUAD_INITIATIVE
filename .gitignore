@@ -12,6 +12,12 @@ build/
 .env.*
 !.env.example
 
+# Verus turn state (local hook data, never committed)
+.verus/
+
+# Local Claude Code settings (personal hooks, not shared)
+.claude/settings.local.json
+
 # Peer memory content. Preserved on disk, never committed.
 dataquad/local-pod-runtime/
 
@@ -19,3 +25,7 @@ dataquad/local-pod-runtime/
 dataquad/imported/*.npy
 dataquad/imported/*.tar.gz
 dataquad/imported/*.structural-vector-tensor-*.json
+
+# Lumin release snapshots (regenerable by scripts/build_lumin_*_release.py)
+deploy/lumin-lab/releases/
+reports/runtime/lumin-*-release-*/

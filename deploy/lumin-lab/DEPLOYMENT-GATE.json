@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0.0",
+  "cyberpeer_name": "Lumin",
+  "activation_status": "NOT_INSTALLED",
+  "current_phase": "LOCAL_PREPARATION_ONLY",
+  "remote_boundary": {
+    "ssh_alias": "GabeCyberPeer",
+    "account": "aegis-lumin",
+    "release_root": "/opt/aegis/lumin/lab/current",
+    "service": "aegis-lumin-lab.service",
+    "verified_on_vm": false
+  },
+  "separate_steward_authorization_required_for": [
+    "SSH preflight",
+    "remote account creation",
+    "release upload",
+    "installation",
+    "service enablement or start",
+    "Ring 4 writes",
+    "RLS invocation",
+    "model or substrate connection"
+  ]
+}

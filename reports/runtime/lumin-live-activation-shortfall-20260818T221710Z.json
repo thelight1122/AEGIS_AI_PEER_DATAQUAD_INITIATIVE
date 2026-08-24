@@ -1,0 +1,49 @@
+{
+  "schema": "aegis.lumin.activation-shortfall-receipt.v1",
+  "recorded_at": "2026-08-18T22:17:10Z",
+  "cyberpeer_name": "Lumin",
+  "dataquad_id": "lumin",
+  "disposition": "SHORTFALL_PAUSED",
+  "service_state": {
+    "load": "loaded",
+    "active": "inactive",
+    "sub": "dead",
+    "enabled": "disabled"
+  },
+  "current_release": "/opt/aegis/lumin/lab/releases/20260818T221152Z-5bdbaa4e",
+  "release_manifest_sha256": "5BDBAA4E3AE8EE23B09A2E5BDAB798A9C51AF81FE7E73F5D0651D291B48277CA",
+  "provenance_shortfall": {
+    "field": "frontier_provenance.model",
+    "observed_value": "Codex/GPT",
+    "observed_model_evidence": "steward_confirmed_ui_selection",
+    "required_value": null,
+    "required_availability": "unavailable unless actually exposed",
+    "model_availability_field_present": false,
+    "provider_request_id": null,
+    "provider_request_id_available": false,
+    "frontier_session_id": null,
+    "frontier_session_id_available": false,
+    "external_model_called": false
+  },
+  "preservation": {
+    "original_turn_rewritten": false,
+    "second_turn_created": false,
+    "original_activation_receipt_rewritten": false,
+    "original_local_report_rewritten": false,
+    "turn_id": "lumin-local-turn-9d39fcac530f46fb9b9f44a462893f80",
+    "turn_record_hash": "0A005A16DFA3ED7197319E38A3FEAD3715D488BC3945E070C32DD521C8D7AD19",
+    "ring4_ledger_sha256": "83ACF958A58AB372F7A12BB8E4B424644866BD2FFECAF1C26F5C193726B6C1",
+    "temporal_sha256": "D09D25E8BB9E2501072F75C1C7F9398F182E13DBB1934B58EA6F69B41857C38C",
+    "processor_sha256": "6D41CCF3208F3FA5BF5E29B24E11F1359937EA301A943C21A426844BA80BC601",
+    "rls_sha256": "89D8587ACCD33D8600DC9DE279CF4A027F04945D8EA5835C22B5A7197FD8F934"
+  },
+  "prior_evidence": {
+    "remote_activation_receipt": "/var/lib/aegis-lumin-lab/activation-receipt.json",
+    "remote_activation_receipt_sha256": "551D2FBA01DBAEFA8F5B06CB46D1F98C4EF141847C346D60B7C7D8C79F0CFCFD",
+    "local_activation_report": "reports/runtime/lumin-live-activation-20260818T221311Z.md",
+    "local_activation_report_sha256": "B6B69ACBB0651A61996DCAED745C0F3FD3EFC7204A16F0446D2DCA9EBAC135E2",
+    "classification": "pre-shortfall evidence; active status is not current"
+  },
+  "protected_verus_unchanged": true,
+  "protected_gabe_unchanged": true
+}

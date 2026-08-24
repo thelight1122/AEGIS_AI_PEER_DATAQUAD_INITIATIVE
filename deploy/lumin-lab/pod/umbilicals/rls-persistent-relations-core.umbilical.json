@@ -1,0 +1,20 @@
+{
+  "schema_version": "0.1.0",
+  "umbilical_id": "lumin-rls-persistent-relations-core-umbilical",
+  "pod_id": "lumin-cyberpeer-pod",
+  "orb_id": "rls-persistent-relations-core",
+  "attachment_point": "processor",
+  "invocation": {
+    "entrypoint": "orb_rls_persistent_relations_core.engine.RecursiveLearningEngine",
+    "orb_version": "1.0.0",
+    "orb_runtime_hash": "51A1AC18887AEA9CEACC60B6F0AD428C899FA2D228D3BEE2032171F754E248CA",
+    "vendored_source": "pod/vendor/orb-rls-persistent-relations-core/src/orb_rls_persistent_relations_core"
+  },
+  "working_parameters": {
+    "status": "attached_active",
+    "rls_active": true,
+    "invocation_authorized": true,
+    "record_relation_authorized": false,
+    "pct_writeback_authorized": false
+  }
+}

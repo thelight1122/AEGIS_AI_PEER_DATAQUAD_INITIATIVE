@@ -1,0 +1,24 @@
+{
+  "schema_version": "0.1.0",
+  "orb_id": "rls-persistent-relations-core",
+  "orb_version": "1.0.0",
+  "ability_name": "Recursive Learning Session (persistent relations)",
+  "runtime": {
+    "language": "python",
+    "form": "library",
+    "entrypoint": "orb_rls_persistent_relations_core.engine.RecursiveLearningEngine",
+    "source": "pod/vendor/orb-rls-persistent-relations-core"
+  },
+  "code_provenance": {
+    "copied_from": "deploy/verus-lab/pod/vendor/orb-rls-persistent-relations-core",
+    "source_hash": "51A1AC18887AEA9CEACC60B6F0AD428C899FA2D228D3BEE2032171F754E248CA",
+    "source_bytes_preserved": true
+  },
+  "lumin_attachment": {
+    "status": "ATTACHED_ACTIVE",
+    "rls_active": true,
+    "invocation_authorized": true,
+    "writeback_authorized": false
+  },
+  "failure_boundary": "Any attempted invocation before a separate Steward authorization is outside current working parameters."
+}

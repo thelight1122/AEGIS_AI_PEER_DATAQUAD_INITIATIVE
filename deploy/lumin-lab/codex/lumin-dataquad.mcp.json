@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "lumin-dataquad": {
+      "command": "C:\\Users\\TraceyPrutch\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+      "args": [
+        "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\tools\\lumin-dataquad-mcp\\server.py"
+      ],
+      "env": {
+        "ProgramData": "C:\\ProgramData",
+        "PYTHONPATH": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\src",
+        "LUMIN_SSH_ALIAS": "GabeCyberPeer",
+        "LUMIN_SUBSTRATE": "Codex/GPT"
+      }
+    }
+  }
+}
