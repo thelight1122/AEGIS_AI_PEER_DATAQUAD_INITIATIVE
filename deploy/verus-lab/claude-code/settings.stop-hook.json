@@ -1,0 +1,16 @@
+{
+  "_comment": "Merge this 'hooks' block into ~/.claude/settings.json (Claude Code global settings). It registers the Present Experience Stop hook. Machine-specific: adjust the python.exe path and the .claude\\hooks path to the account this runs under.",
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"C:\\Users\\TraceyPrutch\\AppData\\Local\\Programs\\Python\\Python313\\python.exe\" \"C:\\Users\\TraceyPrutch\\.claude\\hooks\\present_experience_hook.py\"",
+            "timeout": 60
+          }
+        ]
+      }
+    ]
+  }
+}
