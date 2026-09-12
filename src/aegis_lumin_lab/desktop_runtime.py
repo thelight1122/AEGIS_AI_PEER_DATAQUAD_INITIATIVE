@@ -5,6 +5,7 @@ from __future__ import annotations
 from datetime import datetime
 import hashlib
 import json
+import os
 import re
 from typing import Any, Callable, Mapping
 import uuid
@@ -33,7 +34,7 @@ class _DesktopOnlyAdapter:
 
 def _correlation_id(
     *, turn_id: str, source_event_id: str | None,
-    frontier_session_id: str | None, prompt: str,
+    frontier_session_id: str | None, prompt: str, transport: str,
 ) -> str:
     body = json.dumps({
         "cyberpeer_name": "Lumin",
@@ -41,7 +42,7 @@ def _correlation_id(
         "source_event_id": source_event_id,
         "frontier_session_id": frontier_session_id,
         "prompt": prompt,
-        "transport": DESKTOP_TRANSPORT,
+        "transport": transport,
     }, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False).encode("utf-8")
     return "lumin-dataquad-correlation-" + hashlib.sha256(body).hexdigest()
 
@@ -58,6 +59,13 @@ def _new_local_token() -> str:
     return uuid.uuid4().hex
 
 
+def _json_line(value: Mapping[str, Any]) -> str:
+    return json.dumps(
+        dict(value), sort_keys=True, separators=(",", ":"),
+        ensure_ascii=False, allow_nan=False,
+    )
+
+
 class DesktopLuminRuntime:
     """Two-phase Desktop turn boundary with DataQuad-first durable commit."""
 
@@ -68,16 +76,42 @@ class DesktopLuminRuntime:
         model: str | None,
         clock: Callable[[], datetime] = _now,
         local_id_factory: Callable[[], str] = _new_local_token,
+        transport: str | None = None,
     ) -> None:
         if model is not None:
             raise ValueError("exact model must remain null when Codex MCP does not expose it")
         self.dataquad = dataquad
         self.model = model
+        self.transport = transport or os.environ.get("AEGIS_FRONTIER_TRANSPORT") or DESKTOP_TRANSPORT
         self._local_id_factory = local_id_factory
         self._core = LuminLabRuntime(dataquad, _DesktopOnlyAdapter(), clock=clock)
         self.temporal = self._core.temporal
         self.processor = self._core.processor
         self.rls = self._core.rls
+
+    @property
+    def _prepared_turn_journal(self):
+        return self.dataquad.state_root / "dataquad" / "desktop-prepared-turns.jsonl"
+
+    def _append_prepared_turn(self, entry: Mapping[str, Any]) -> None:
+        journal = self._prepared_turn_journal
+        journal.parent.mkdir(parents=True, exist_ok=True)
+        with journal.open("a", encoding="utf-8", newline="\n") as stream:
+            stream.write(_json_line(entry) + "\n")
+            stream.flush()
+            os.fsync(stream.fileno())
+
+    def _prepared_turn(self, turn_id: str) -> dict[str, Any] | None:
+        journal = self._prepared_turn_journal
+        if not journal.exists():
+            return None
+        for line in reversed(journal.read_text(encoding="utf-8").splitlines()):
+            if not line.strip():
+                continue
+            entry = json.loads(line)
+            if entry.get("turn_id") == turn_id:
+                return entry
+        return None
 
     def begin_turn(
         self, *, prompt: str, source_event_id: str | None = None,
@@ -115,7 +149,20 @@ class DesktopLuminRuntime:
         correlation_id = _correlation_id(
             turn_id=turn_id, source_event_id=source_event_id,
             frontier_session_id=frontier_session_id, prompt=prompt,
+            transport=self.transport,
         )
+        self._append_prepared_turn({
+            "schema": "aegis.lumin.desktop-prepared-turn.v1",
+            "cyberpeer_name": "Lumin",
+            "dataquad_id": "lumin",
+            "turn_id": turn_id,
+            "correlation_id": correlation_id,
+            "prompt": prompt,
+            "source_event_id": source_event_id,
+            "frontier_session_id": frontier_session_id,
+            "transport": self.transport,
+            "prepared_at": _now().isoformat().replace("+00:00", "Z"),
+        })
         return {
             "mode": "LAB_RUNNING",
             "cyberpeer_name": "Lumin",
@@ -133,7 +180,7 @@ class DesktopLuminRuntime:
                 "provider": "OpenAI", "substrate": "Codex/GPT",
                 "model": None, "model_available": False,
                 "model_evidence": "unavailable:not_exposed_by_codex_mcp_boundary",
-                "transport": DESKTOP_TRANSPORT, "defines_identity": False,
+                "transport": self.transport, "defines_identity": False,
                 "provider_request_id_available": False,
                 "source_event_id": source_event_id,
                 "source_event_id_available": source_event_id is not None,
@@ -159,9 +206,29 @@ class DesktopLuminRuntime:
         frontier_session_id = _optional_provider_id(
             frontier_session_id, label="frontier_session_id",
         )
+        prepared = self._prepared_turn(turn_id)
+        effective_prompt = prompt
+        prompt_source = "commit_arguments"
+        commit_prompt_matched_begin = True
+        if prepared is not None:
+            if correlation_id != prepared.get("correlation_id"):
+                raise ValueError("Desktop turn correlation does not match the begun request")
+            if self.transport != prepared.get("transport"):
+                raise ValueError("Desktop turn transport does not match the begun request")
+            if (
+                source_event_id != prepared.get("source_event_id")
+                or frontier_session_id != prepared.get("frontier_session_id")
+            ):
+                raise ValueError("Desktop turn provider identifiers do not match the begun request")
+            effective_prompt = str(prepared.get("prompt", ""))
+            if not effective_prompt.strip():
+                raise ValueError("prepared Desktop turn prompt is unavailable")
+            prompt_source = "prepared_turn_journal"
+            commit_prompt_matched_begin = prompt == effective_prompt
         expected = _correlation_id(
             turn_id=turn_id, source_event_id=source_event_id,
-            frontier_session_id=frontier_session_id, prompt=prompt,
+            frontier_session_id=frontier_session_id, prompt=effective_prompt,
+            transport=self.transport,
         )
         if correlation_id != expected:
             raise ValueError("Desktop turn correlation does not match the begun request")
@@ -184,7 +251,7 @@ class DesktopLuminRuntime:
             provider_request_id_available=False,
             model_available=False,
             model_evidence="unavailable:not_exposed_by_codex_mcp_boundary",
-            transport=DESKTOP_TRANSPORT,
+            transport=self.transport,
             frontier_session_id=frontier_session_id,
             frontier_session_id_available=frontier_session_id is not None,
         )
@@ -208,17 +275,23 @@ class DesktopLuminRuntime:
                 or provenance.get("model_available") is not False
                 or provenance.get("provider_request_id") is not None
                 or provenance.get("provider_request_id_available") is not False
-                or provenance.get("transport") != DESKTOP_TRANSPORT
+                or provenance.get("transport") != self.transport
             ):
                 raise ValueError("turn_id already names different Desktop response content")
         result = self._core.commit_response(
             turn_id=turn_id, source_event_id=source_event_id,
-            frontier_session_id=frontier_session_id, prompt=prompt,
+            frontier_session_id=frontier_session_id, prompt=effective_prompt,
             response=response, allowed_substrates=("Codex/GPT",),
             source_event_id_available=source_event_id is not None,
             dataquad_correlation_id=correlation_id,
         )
-        return {**result, "correlation_id": correlation_id, "transport": DESKTOP_TRANSPORT}
+        return {
+            **result,
+            "correlation_id": correlation_id,
+            "transport": self.transport,
+            "prompt_source": prompt_source,
+            "commit_prompt_matched_begin": commit_prompt_matched_begin,
+        }
 
     def reconcile_committed_turns(self) -> dict[str, object]:
         self._core.reconcile_committed_turns()
@@ -318,7 +391,7 @@ class DesktopLuminRuntime:
             "full_append_only": True,
             "rls_active": True,
             "writable_tensors": ["PEER", "PCT", "NCT", "SPINE"],
-            "transport": DESKTOP_TRANSPORT,
+            "transport": self.transport,
             "public_listener": False,
             "frontier_provenance": {
                 "provider": "OpenAI", "substrate": "Codex/GPT", "model": None,

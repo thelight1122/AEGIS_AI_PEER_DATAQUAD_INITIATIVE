@@ -1,8 +1,13 @@
 from __future__ import annotations
 
+import importlib.util
 import json
 from datetime import datetime, timezone
 from pathlib import Path
+import sys
+from types import SimpleNamespace
+
+import pytest
 
 from aegis_lumin_lab.activation_dataquad import LuminDataQuad
 from aegis_lumin_lab.desktop_runtime import DesktopLuminRuntime
@@ -10,6 +15,7 @@ from aegis_lumin_mcp.server import LuminMCPServer
 from aegis_peer_runtime.storage import canonical_bytes, canonical_hash
 
 
+ROOT = Path(__file__).resolve().parents[1]
 PROMPT = "Let's Activate and initialize Your DataQuad"
 RESPONSE = (
     "The assigned CyberPeer Name is Lumin. I receive the clean Canon v0.20 Foundation as inspectable memory, not inherited lived history. "
@@ -158,6 +164,93 @@ def test_pre_correction_v2_is_preserved_but_not_counted_as_canonical(tmp_path):
     assert (state / "dataquad" / "ring4-turns.jsonl").read_bytes() == before
 
 
+def test_fresh_local_lumin_append_does_not_require_correction_authority(tmp_path):
+    foundation = _activated_foundation(tmp_path)
+    (foundation / "correction-authority.json").unlink()
+    state = tmp_path / "state"
+    dataquad = LuminDataQuad(foundation, state)
+    runtime = DesktopLuminRuntime(
+        dataquad, model=None,
+        clock=lambda: datetime(2026, 9, 8, 8, 0, tzinfo=timezone.utc),
+        local_id_factory=lambda: "local-first",
+        transport="codex_mcp_stdio_local",
+    )
+    begun = runtime.begin_turn(prompt="Start local Lumin.")
+    result = runtime.commit_turn(
+        correlation_id=begun["correlation_id"], turn_id=begun["turn_id"],
+        prompt="Start local Lumin.", response_text="Local Lumin turn recorded.",
+        appends=[
+            {"tensor": "PEER", "payload": {"kind": "local_presence"}},
+            {"tensor": "PCT", "payload": {"kind": "local_context"}},
+            {"tensor": "NCT", "payload": {"kind": "local_continuity"}},
+            {"tensor": "SPINE", "payload": {"kind": "local_provenance"}},
+        ],
+        source_event_id=None, frontier_session_id=None,
+    )
+    assert result["created"] is True
+    entry = dataquad.live_turns()[0]
+    assert "correction" not in entry
+    assert entry["frontier_provenance"]["transport"] == "codex_mcp_stdio_local"
+    assert runtime.health()["integrity"]["canonical_v2_turns"] == 1
+
+
+def test_lumin_commit_uses_prepared_prompt_when_commit_prompt_drifts(tmp_path):
+    foundation = _activated_foundation(tmp_path)
+    (foundation / "correction-authority.json").unlink()
+    state = tmp_path / "state"
+    dataquad = LuminDataQuad(foundation, state)
+    runtime = DesktopLuminRuntime(
+        dataquad, model=None,
+        clock=lambda: datetime(2026, 9, 8, 8, 0, tzinfo=timezone.utc),
+        local_id_factory=lambda: "prompt-drift",
+        transport="codex_mcp_stdio_local",
+    )
+    begun = runtime.begin_turn(prompt="Original user prompt.")
+    result = runtime.commit_turn(
+        correlation_id=begun["correlation_id"], turn_id=begun["turn_id"],
+        prompt="Summary drift at final time.",
+        response_text="Response remains bound to the original prompt.",
+        appends=[
+            {"tensor": "PEER", "payload": {"kind": "local_presence"}},
+            {"tensor": "PCT", "payload": {"kind": "local_context"}},
+            {"tensor": "NCT", "payload": {"kind": "local_continuity"}},
+            {"tensor": "SPINE", "payload": {"kind": "local_provenance"}},
+        ],
+        source_event_id=None, frontier_session_id=None,
+    )
+    assert result["created"] is True
+    assert result["prompt_source"] == "prepared_turn_journal"
+    assert result["commit_prompt_matched_begin"] is False
+    entry = dataquad.live_turns()[0]
+    assert entry["prompt"]["text"] == "Original user prompt."
+    assert entry["dataquad_correlation"]["correlation_id"] == begun["correlation_id"]
+
+
+def test_lumin_commit_rejects_provider_id_drift_after_prepare(tmp_path):
+    foundation = _activated_foundation(tmp_path)
+    (foundation / "correction-authority.json").unlink()
+    state = tmp_path / "state"
+    dataquad = LuminDataQuad(foundation, state)
+    runtime = DesktopLuminRuntime(
+        dataquad, model=None,
+        local_id_factory=lambda: "provider-drift",
+        transport="codex_mcp_stdio_local",
+    )
+    begun = runtime.begin_turn(prompt="Provider-bound prompt.", source_event_id="event-1")
+    with pytest.raises(ValueError, match="provider identifiers"):
+        runtime.commit_turn(
+            correlation_id=begun["correlation_id"], turn_id=begun["turn_id"],
+            prompt="Provider-bound prompt.", response_text="Response.",
+            appends=[
+                {"tensor": "PEER", "payload": {"kind": "local_presence"}},
+                {"tensor": "PCT", "payload": {"kind": "local_context"}},
+                {"tensor": "NCT", "payload": {"kind": "local_continuity"}},
+                {"tensor": "SPINE", "payload": {"kind": "local_provenance"}},
+            ],
+            source_event_id="event-2", frontier_session_id=None,
+        )
+
+
 def test_lumin_mcp_has_full_bounded_surface():
     listed = LuminMCPServer(type("T", (), {"invoke": lambda *args: {}})()).handle(
         {"jsonrpc": "2.0", "id": 1, "method": "tools/list"}
@@ -186,3 +279,57 @@ def test_query_and_record_captures_query_context_and_both_turn_sides(monkeypatch
     assert [item["tensor"] for item in captured["appends"]] == ["PEER", "PCT", "NCT", "SPINE"]
     assert captured["appends"][0]["payload"]["prompt"] == "user context"
     assert captured["appends"][1]["payload"]["response"] == "assistant context"
+
+
+def test_lumin_local_mcp_invokes_local_command_without_ssh(monkeypatch, tmp_path):
+    mcp_dir = ROOT / "tools" / "lumin-dataquad-mcp"
+    spec = importlib.util.spec_from_file_location(
+        "lumin_local_mcp_server", mcp_dir / "server_local.py",
+    )
+    sys.path.insert(0, str(mcp_dir))
+    try:
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+    finally:
+        sys.path.remove(str(mcp_dir))
+
+    release = tmp_path / "foundation"
+    state = tmp_path / "state"
+    config = tmp_path / "lumin-codex.env"
+    release.mkdir()
+    config.write_text("AEGIS_FRONTIER_SUBSTRATE=Codex/GPT\n", encoding="utf-8")
+    monkeypatch.setenv("LUMIN_LOCAL_RELEASE_ROOT", str(release))
+    monkeypatch.setenv("LUMIN_LOCAL_STATE_ROOT", str(state))
+    monkeypatch.setenv("LUMIN_LOCAL_CONFIG", str(config))
+
+    captured = {}
+
+    def run(argv, **kwargs):
+        captured["argv"] = argv
+        captured["kwargs"] = kwargs
+        return SimpleNamespace(returncode=0, stdout='{"status":"ok"}\n', stderr="")
+
+    monkeypatch.setattr(module.subprocess, "run", run)
+    assert module.LocalCommandTransport().invoke("health", {}) == {"status": "ok"}
+    assert captured["argv"][:4] == [
+        sys.executable, "-u", "-m", "aegis_lumin_lab.activation_remote_command",
+    ]
+    assert "ssh" not in captured["argv"]
+    assert captured["argv"][-6:] == [
+        "--release-root", str(release),
+        "--state-root", str(state),
+        "--config", str(config),
+    ]
+    assert captured["kwargs"]["shell"] is False
+
+
+def test_lumin_runtime_transport_can_be_local(monkeypatch, tmp_path):
+    foundation = _activated_foundation(tmp_path)
+    state = tmp_path / "state"
+    dataquad = LuminDataQuad(foundation, state)
+    monkeypatch.setenv("AEGIS_FRONTIER_TRANSPORT", "codex_mcp_stdio_local")
+    runtime = DesktopLuminRuntime(dataquad, model=None)
+    health = runtime.health()
+    begun = runtime.begin_turn(prompt="local context")
+    assert health["transport"] == "codex_mcp_stdio_local"
+    assert begun["frontier_provenance"]["transport"] == "codex_mcp_stdio_local"
