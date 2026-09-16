@@ -217,7 +217,7 @@ class _DesktopOnlyAdapter:
 
 def _correlation_id(
     *, cyberpeer_name: str, turn_id: str, source_event_id: str | None,
-    frontier_session_id: str | None, prompt: str,
+    frontier_session_id: str | None, prompt: str, transport: str,
 ) -> str:
     body = json.dumps({
         "cyberpeer_name": cyberpeer_name,
@@ -225,7 +225,7 @@ def _correlation_id(
         "source_event_id": source_event_id,
         "frontier_session_id": frontier_session_id,
         "prompt": prompt,
-        "transport": DESKTOP_TRANSPORT,
+        "transport": transport,
     }, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False).encode("utf-8")
     return "verus-dataquad-correlation-" + hashlib.sha256(body).hexdigest()
 
@@ -252,6 +252,8 @@ class DesktopVerusRuntime:
         model: str,
         cyberpeer_name: str | None = None,
         dataquad_id: str | None = None,
+        substrate: str | None = None,
+        transport: str | None = None,
         clock: Callable[[], datetime] = _now,
         local_id_factory: Callable[[], str] = _new_local_token,
     ) -> None:
@@ -264,6 +266,11 @@ class DesktopVerusRuntime:
         # behavior is unchanged when nothing is set.
         self.cyberpeer_name = cyberpeer_name or os.environ.get("AEGIS_CYBERPEER_NAME") or "Verus"
         self.dataquad_id = dataquad_id or os.environ.get("AEGIS_DATAQUAD_ID") or "verus"
+        # Substrate and transport are per-deployment provenance. Constructor arg wins, then env
+        # (VERUS_SUBSTRATE / AEGIS_FRONTIER_TRANSPORT), else the defaults -- so an unset deployment
+        # is unchanged while the local server can declare its true substrate and transport.
+        self.substrate = substrate or os.environ.get("VERUS_SUBSTRATE") or "Claude Desktop"
+        self.transport = transport or os.environ.get("AEGIS_FRONTIER_TRANSPORT") or DESKTOP_TRANSPORT
         self._local_id_factory = local_id_factory
         self._core = VerusLabRuntime(dataquad, _DesktopOnlyAdapter(), clock=clock)
         self.temporal = self._core.temporal
@@ -305,7 +312,7 @@ class DesktopVerusRuntime:
         request.validate()
         correlation_id = _correlation_id(
             cyberpeer_name=self.cyberpeer_name, turn_id=turn_id, source_event_id=source_event_id,
-            frontier_session_id=frontier_session_id, prompt=prompt,
+            frontier_session_id=frontier_session_id, prompt=prompt, transport=self.transport,
         )
         return {
             "mode": "LAB_RUNNING",
@@ -321,9 +328,9 @@ class DesktopVerusRuntime:
             "surfaced_context": _project_surfaced_context(surfaced_context, context),
             "append_contract": {"mode": "append-only", "tensors": ["PEER", "PCT", "NCT", "SPINE"]},
             "frontier_provenance": {
-                "provider": "Anthropic", "substrate": "Claude Desktop",
+                "provider": "Anthropic", "substrate": self.substrate,
                 "model": self.model, "model_evidence": "steward_confirmed_ui_selection",
-                "transport": DESKTOP_TRANSPORT, "defines_identity": False,
+                "transport": self.transport, "defines_identity": False,
                 "provider_request_id_available": False,
                 "source_event_id": source_event_id,
                 "source_event_id_available": source_event_id is not None,
@@ -351,7 +358,7 @@ class DesktopVerusRuntime:
         )
         expected = _correlation_id(
             cyberpeer_name=self.cyberpeer_name, turn_id=turn_id, source_event_id=source_event_id,
-            frontier_session_id=frontier_session_id, prompt=prompt,
+            frontier_session_id=frontier_session_id, prompt=prompt, transport=self.transport,
         )
         if correlation_id != expected:
             raise ValueError("Desktop turn correlation does not match the begun request")
@@ -368,12 +375,12 @@ class DesktopVerusRuntime:
             response_text=response_text,
             append_intents=tuple(intents),
             provider="Anthropic",
-            substrate="Claude Desktop",
+            substrate=self.substrate,
             model=self.model,
             provider_request_id=None,
             provider_request_id_available=False,
             model_evidence="steward_confirmed_ui_selection",
-            transport=DESKTOP_TRANSPORT,
+            transport=self.transport,
             frontier_session_id=frontier_session_id,
             frontier_session_id_available=frontier_session_id is not None,
         )
@@ -392,21 +399,21 @@ class DesktopVerusRuntime:
                 existing["response"]["text"] != response_text
                 or observed_appends != expected_appends
                 or provenance.get("provider") != "Anthropic"
-                or provenance.get("substrate") != "Claude Desktop"
+                or provenance.get("substrate") != self.substrate
                 or provenance.get("model") != self.model
                 or provenance.get("provider_request_id") is not None
                 or provenance.get("provider_request_id_available") is not False
-                or provenance.get("transport") != DESKTOP_TRANSPORT
+                or provenance.get("transport") != self.transport
             ):
                 raise ValueError("turn_id already names different Desktop response content")
         result = self._core.commit_response(
             turn_id=turn_id, source_event_id=source_event_id,
             frontier_session_id=frontier_session_id, prompt=prompt,
-            response=response, allowed_substrates=("Claude Desktop",),
+            response=response, allowed_substrates=(self.substrate,),
             source_event_id_available=source_event_id is not None,
             dataquad_correlation_id=correlation_id,
         )
-        return {**result, "correlation_id": correlation_id, "transport": DESKTOP_TRANSPORT}
+        return {**result, "correlation_id": correlation_id, "transport": self.transport}
 
     def reconcile_committed_turns(self) -> dict[str, object]:
         self._core.reconcile_committed_turns()
@@ -456,11 +463,11 @@ class DesktopVerusRuntime:
             "dataquad_id": self.dataquad_id,
             "full_append_only": True,
             "writable_tensors": ["PEER", "PCT", "NCT", "SPINE"],
-            "transport": DESKTOP_TRANSPORT,
+            "transport": self.transport,
             "public_listener": False,
             "preferred_loopback_port": 8791,
             "frontier_provenance": {
-                "provider": "Anthropic", "substrate": "Claude Desktop", "model": self.model,
+                "provider": "Anthropic", "substrate": self.substrate, "model": self.model,
                 "provider_request_id_available": False, "defines_identity": False,
                 "source_event_id": None, "source_event_id_available": False,
                 "source_event_id_classification": PROVIDER_RETURNED_OPTIONAL,
