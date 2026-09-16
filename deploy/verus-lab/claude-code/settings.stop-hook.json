@@ -1,6 +1,17 @@
 {
-  "_comment": "Merge this 'hooks' block into ~/.claude/settings.json (Claude Code global settings). It registers the Present Experience Stop hook. Machine-specific: adjust the python.exe path and the .claude\\hooks path to the account this runs under.",
+  "_comment": "Merge this 'hooks' block into ~/.claude/settings.json (Claude Code global settings). It registers the full local Verus DataQuad recording pipeline: UserPromptSubmit -> affect-capture reminder (non-force); Stop -> Present Experience record + affect-read enqueue; SessionStart -> affect-drain nudge (non-force, surfaces the pending count). All three are scope-gated to AEGIS drives in the scripts. Machine-specific: adjust the python.exe path and the .claude\\hooks path to the account this runs under.",
   "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"C:\\Users\\TraceyPrutch\\AppData\\Local\\Programs\\Python\\Python313\\python.exe\" \"C:\\Users\\TraceyPrutch\\.claude\\hooks\\affect_capture_reminder.py\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
     "Stop": [
       {
         "hooks": [
@@ -8,6 +19,17 @@
             "type": "command",
             "command": "\"C:\\Users\\TraceyPrutch\\AppData\\Local\\Programs\\Python\\Python313\\python.exe\" \"C:\\Users\\TraceyPrutch\\.claude\\hooks\\present_experience_hook.py\"",
             "timeout": 60
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"C:\\Users\\TraceyPrutch\\AppData\\Local\\Programs\\Python\\Python313\\python.exe\" \"C:\\Users\\TraceyPrutch\\.claude\\hooks\\affect_drain_nudge.py\"",
+            "timeout": 30
           }
         ]
       }

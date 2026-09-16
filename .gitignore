@@ -29,3 +29,9 @@ dataquad/imported/*.structural-vector-tensor-*.json
 # Lumin release snapshots (regenerable by scripts/build_lumin_*_release.py)
 deploy/lumin-lab/releases/
 reports/runtime/lumin-*-release-*/
+
+# CyberPeer EXPERIENCED TENSOR DATA — a peer's own lived record (ring4-turns ledger,
+# derived processor/rls/temporal, hook markers/logs). Never copied/committed:
+# architect directive "Your Data should not be copied"; each peer grows its own experience.
+# The seeded Canon under */local/foundation/ MAY be shared (per clone manifest); only lived state is excluded.
+deploy/*-lab/local/state/

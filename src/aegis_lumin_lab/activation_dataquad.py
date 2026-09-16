@@ -106,8 +106,10 @@ def _validate_v2_provenance(item: dict[str, Any]) -> None:
     if frontier["model_evidence"] != MODEL_NOT_EXPOSED:
         raise ValueError("model evidence classification mismatch")
     correction = item.get("correction")
+    if correction is None:
+        return
     if not isinstance(correction, dict):
-        raise ValueError("canonical corrective turn requires correction authority")
+        raise ValueError("turn correction authority must be an object")
     for field in ("correction_of_record_hash", "authority_path", "authority_sha256"):
         if not isinstance(correction.get(field), str) or not correction[field].strip():
             raise ValueError(f"correction {field} is required")
@@ -317,7 +319,7 @@ class LuminDataQuad:
         if len(response.append_intents) != len(TENSORS) or {
             intent.tensor for intent in response.append_intents
         } != set(TENSORS):
-            raise ValueError("canonical corrective initialization requires exactly one append per tensor")
+            raise ValueError("canonical Lumin turn requires exactly one append per tensor")
         correlation_id = dataquad_correlation_id or _fallback_correlation_id(turn_id, prompt)
         local_correlation = local_correlation_provenance(turn_id, correlation_id)
         appends = []
@@ -330,20 +332,35 @@ class LuminDataQuad:
                 "custodian": custodian.name,
                 "payload": authorized[intent.tensor],
             })
-        authority_path = self.release_root / "correction-authority.json"
-        if authority_path.is_symlink() or not authority_path.is_file():
-            raise ValueError("Lumin provenance correction authority is required")
-        authority_bytes = authority_path.read_bytes()
-        authority = json.loads(authority_bytes)
-        old_hash = authority.get("correction_of_record_hash")
         existing_before_candidate = self.live_turns()
-        if (
-            authority.get("schema") != "aegis.lumin.provenance-correction-authority.v1"
-            or authority.get("user_authorization") != "Authorized. Proceed"
-            or not isinstance(old_hash, str)
-            or not any(item["record_hash"].upper() == old_hash.upper() for item in existing_before_candidate)
-        ):
-            raise ValueError("Lumin provenance correction authority does not bind preserved evidence")
+        correction: dict[str, object] | None = None
+        pre_correction = [
+            item for item in existing_before_candidate
+            if _contract_qualification(item) is not None
+        ]
+        canonical_v2 = [
+            item for item in existing_before_candidate
+            if _is_canonical_v2(item)
+        ]
+        if pre_correction and not canonical_v2:
+            authority_path = self.release_root / "correction-authority.json"
+            if authority_path.is_symlink() or not authority_path.is_file():
+                raise ValueError("Lumin provenance correction authority is required")
+            authority_bytes = authority_path.read_bytes()
+            authority = json.loads(authority_bytes)
+            old_hash = authority.get("correction_of_record_hash")
+            if (
+                authority.get("schema") != "aegis.lumin.provenance-correction-authority.v1"
+                or authority.get("user_authorization") != "Authorized. Proceed"
+                or not isinstance(old_hash, str)
+                or not any(item["record_hash"].upper() == old_hash.upper() for item in pre_correction)
+            ):
+                raise ValueError("Lumin provenance correction authority does not bind preserved evidence")
+            correction = {
+                "correction_of_record_hash": old_hash,
+                "authority_path": "foundation/correction-authority.json",
+                "authority_sha256": _sha256(authority_bytes),
+            }
         candidate = {
             "schema": "aegis.lumin.dataquad-turn.v2",
             "cyberpeer_name": "Lumin",
@@ -376,13 +393,10 @@ class LuminDataQuad:
                 "frontier_session_id_classification": PROVIDER_RETURNED_OPTIONAL,
                 "defines_identity": False,
             },
-            "correction": {
-                "correction_of_record_hash": old_hash,
-                "authority_path": "foundation/correction-authority.json",
-                "authority_sha256": _sha256(authority_bytes),
-            },
             "appends": appends,
         }
+        if correction is not None:
+            candidate["correction"] = correction
         if len(canonical_bytes(candidate)) > MAX_TURN_RECORD_BYTES:
             raise ValueError(f"DataQuad turn exceeds {MAX_TURN_RECORD_BYTES} bytes")
         request_hash = canonical_hash(candidate)

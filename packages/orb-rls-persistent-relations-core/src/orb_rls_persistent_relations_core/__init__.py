@@ -1,7 +1,7 @@
 from .session import RLSRecordRef, RecursiveLearningSession
 from .scoring import compute_relevance
 from .engine import RecursiveLearningEngine
-from .failure import RLSFailureReason
+from .failure import RLSFailureReason, RLSShortfallReason
 from .relevance import RELEVANCE_THRESHOLD
 from .orb_evidence import RLSOrbEvidenceRecorder, compute_runtime_hash
 from .result import RLSResult
@@ -13,6 +13,7 @@ __all__ = [
     "RecursiveLearningSession",
     "compute_relevance",
     "RecursiveLearningEngine",
+    "RLSShortfallReason",
     "RLSFailureReason",
     "RELEVANCE_THRESHOLD",
     "RLSOrbEvidenceRecorder",

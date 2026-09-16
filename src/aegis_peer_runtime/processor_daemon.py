@@ -317,6 +317,8 @@ class ProcessorDaemon(BaseDaemon):
                 "rls_id": session.id,
                 "selected_count": len(session.selected_refs),
                 "rejected_count": len(session.rejected_refs),
+                "shortfall_is_data": session.shortfall_is_data,
+                "shortfall_reason": session.shortfall_reason,
                 "failure_is_data": session.failure_is_data,
                 "created_pct_record_id": session.created_pct_record_id,
                 "session": result,

@@ -9,7 +9,7 @@ per-file sha256 under `reports/canon-v0.20/` before any run.
 Scope. Two directories are treated as one corpus, because 49 of the 59 files directly in
 `TIER-1-CANON` are byte-identical duplicates of files inside `CANON_FOUNDATIONAL_DOCS`.
 Migrating one and not the other would leave two copies of the same Canon disagreeing about
-what its own documents are called — the precise failure already seen with the seed package.
+what its own documents are called — the precise shortfall already seen with the seed package.
 
 Deliberately NOT in scope: this repository. Its analysis documents cite legacy codes on
 purpose — the migration mapping itself has to carry both forms — so rewriting them would

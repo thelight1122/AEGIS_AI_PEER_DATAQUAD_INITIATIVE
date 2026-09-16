@@ -27,13 +27,27 @@ class DaemonSocket:
         self._handler = handler
         self._server: socket.socket | None = None
         self._selector = selectors.DefaultSelector()
+        self._transport = "unix" if hasattr(socket, "AF_UNIX") else "tcp-localhost"
 
     def start(self) -> None:
         self.socket_path.parent.mkdir(parents=True, exist_ok=True)
         if self.socket_path.exists():
             self.socket_path.unlink()
-        self._server = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
-        self._server.bind(str(self.socket_path))
+        if self._transport == "unix":
+            self._server = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+            self._server.bind(str(self.socket_path))
+        else:
+            self._server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            self._server.bind(("127.0.0.1", 0))
+            host, port = self._server.getsockname()
+            self.socket_path.write_text(
+                json.dumps(
+                    {"host": host, "port": port, "transport": "tcp-localhost"},
+                    sort_keys=True,
+                    separators=(",", ":"),
+                ),
+                encoding="utf-8",
+            )
         self._server.listen(8)
         self._server.setblocking(False)
         self._selector.register(self._server, selectors.EVENT_READ, self._accept)
@@ -104,14 +118,28 @@ class DaemonClient:
 
     @property
     def available(self) -> bool:
-        return os.path.exists(self.socket_path)
+        if not os.path.exists(self.socket_path):
+            return False
+        if hasattr(socket, "AF_UNIX"):
+            return True
+        try:
+            return self._tcp_endpoint() is not None
+        except (OSError, ValueError, json.JSONDecodeError):
+            return False
 
     def query(self, method: str, params: dict[str, Any] | None = None) -> dict[str, Any]:
         request = {"method": method, "params": params or {}}
-        sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+        if hasattr(socket, "AF_UNIX"):
+            sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+            endpoint = self.socket_path
+        else:
+            endpoint = self._tcp_endpoint()
+            if endpoint is None:
+                raise OSError("daemon TCP endpoint marker is unavailable")
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.settimeout(self.timeout)
         try:
-            sock.connect(self.socket_path)
+            sock.connect(endpoint)
             wire = json.dumps(
                 request, sort_keys=True, separators=(",", ":"),
                 ensure_ascii=False, allow_nan=False,
@@ -128,6 +156,16 @@ class DaemonClient:
             return json.loads(data.decode("utf-8"))
         finally:
             sock.close()
+
+    def _tcp_endpoint(self) -> tuple[str, int] | None:
+        marker = json.loads(Path(self.socket_path).read_text(encoding="utf-8"))
+        if marker.get("transport") != "tcp-localhost":
+            return None
+        host = marker.get("host")
+        port = marker.get("port")
+        if host != "127.0.0.1" or not isinstance(port, int):
+            return None
+        return host, port
 
 
 class LedgerWatcher:

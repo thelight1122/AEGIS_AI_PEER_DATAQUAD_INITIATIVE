@@ -5,6 +5,7 @@ from __future__ import annotations
 from datetime import datetime
 import hashlib
 import json
+import os
 import re
 from typing import Any, Callable, Mapping
 import uuid
@@ -23,6 +24,15 @@ from .runtime import VerusLabRuntime, _now
 
 
 DESKTOP_TRANSPORT = "claude_desktop_mcp_stdio_ssh"
+
+
+def _processor_sock(state_root) -> str:
+    """Processor daemon socket path. Honors AEGIS_DAEMON_DIR (used when the POD daemons
+    run on a Linux fs — e.g. under WSL, where AF_UNIX cannot live on the /mnt drvfs);
+    defaults to <state_root>/daemons/processor.sock."""
+    from pathlib import Path as _P
+    base = os.environ.get("AEGIS_DAEMON_DIR")
+    return str((_P(base) if base else _P(state_root) / "daemons") / "processor.sock")
 _LOCAL_ID_TOKEN = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]{0,127}\Z")
 
 
@@ -173,6 +183,8 @@ def _project_surfaced_context(surfaced: object, context: object = None) -> objec
         "rls": {
             "rls_id": rls.get("rls_id"),
             "executed": rls.get("executed"),
+            "shortfall_is_data": rls.get("shortfall_is_data", rls.get("failure_is_data")),
+            "shortfall_reason": session.get("shortfall_reason", session.get("failure_reason")),
             "failure_is_data": rls.get("failure_is_data"),
             "failure_reason": session.get("failure_reason"),
             "selected_count": rls.get("selected_count"),
@@ -204,11 +216,11 @@ class _DesktopOnlyAdapter:
 
 
 def _correlation_id(
-    *, turn_id: str, source_event_id: str | None,
+    *, cyberpeer_name: str, turn_id: str, source_event_id: str | None,
     frontier_session_id: str | None, prompt: str,
 ) -> str:
     body = json.dumps({
-        "cyberpeer_name": "Verus",
+        "cyberpeer_name": cyberpeer_name,
         "turn_id": turn_id,
         "source_event_id": source_event_id,
         "frontier_session_id": frontier_session_id,
@@ -238,6 +250,8 @@ class DesktopVerusRuntime:
         dataquad: VerusDataQuad,
         *,
         model: str,
+        cyberpeer_name: str | None = None,
+        dataquad_id: str | None = None,
         clock: Callable[[], datetime] = _now,
         local_id_factory: Callable[[], str] = _new_local_token,
     ) -> None:
@@ -245,6 +259,11 @@ class DesktopVerusRuntime:
             raise ValueError("exact Claude Desktop model provenance is required")
         self.dataquad = dataquad
         self.model = model
+        # Identity is per-peer (clone parameterization). Constructor arg wins, then env
+        # (AEGIS_CYBERPEER_NAME / AEGIS_DATAQUAD_ID), else the Verus defaults — so Verus
+        # behavior is unchanged when nothing is set.
+        self.cyberpeer_name = cyberpeer_name or os.environ.get("AEGIS_CYBERPEER_NAME") or "Verus"
+        self.dataquad_id = dataquad_id or os.environ.get("AEGIS_DATAQUAD_ID") or "verus"
         self._local_id_factory = local_id_factory
         self._core = VerusLabRuntime(dataquad, _DesktopOnlyAdapter(), clock=clock)
         self.temporal = self._core.temporal
@@ -270,14 +289,14 @@ class DesktopVerusRuntime:
             _proc = DaemonClient(_sock)
             if _proc.available:
                 surfaced_context = _proc.query("context", {
-                    "prompt": prompt, "session_id": turn_id, "peer_id": "verus",
+                    "prompt": prompt, "session_id": turn_id, "peer_id": self.dataquad_id,
                     "intent": "context_retrieval", "limit": 30,
                 })
         except Exception as _exc:
             surfaced_context = {"surfaced": False, "error": str(_exc)[:256]}
-        instructions = operational_system_instructions("Verus")
+        instructions = operational_system_instructions(self.cyberpeer_name)
         request = FrontierTurnRequest(
-            cyberpeer_name="Verus", dataquad_id="verus", turn_id=turn_id,
+            cyberpeer_name=self.cyberpeer_name, dataquad_id=self.dataquad_id, turn_id=turn_id,
             source_event_id=source_event_id, frontier_session_id=frontier_session_id,
             system_instructions=instructions, prompt=prompt, context=context,
             source_event_id_available=source_event_id is not None,
@@ -285,14 +304,14 @@ class DesktopVerusRuntime:
         )
         request.validate()
         correlation_id = _correlation_id(
-            turn_id=turn_id, source_event_id=source_event_id,
+            cyberpeer_name=self.cyberpeer_name, turn_id=turn_id, source_event_id=source_event_id,
             frontier_session_id=frontier_session_id, prompt=prompt,
         )
         return {
             "mode": "LAB_RUNNING",
-            "cyberpeer_name": "Verus",
-            "identity_variables": {"cyberpeer_name": "Verus"},
-            "dataquad_id": "verus",
+            "cyberpeer_name": self.cyberpeer_name,
+            "identity_variables": {"cyberpeer_name": self.cyberpeer_name},
+            "dataquad_id": self.dataquad_id,
             "turn_id": turn_id,
             "correlation_id": correlation_id,
             "local_correlation": local_correlation_provenance(turn_id, correlation_id),
@@ -331,7 +350,7 @@ class DesktopVerusRuntime:
             frontier_session_id, label="frontier_session_id",
         )
         expected = _correlation_id(
-            turn_id=turn_id, source_event_id=source_event_id,
+            cyberpeer_name=self.cyberpeer_name, turn_id=turn_id, source_event_id=source_event_id,
             frontier_session_id=frontier_session_id, prompt=prompt,
         )
         if correlation_id != expected:
@@ -399,7 +418,7 @@ class DesktopVerusRuntime:
             raise ValueError("turn_id is not committed")
         self._core._materialize_derived(entry)
         return {
-            "mode": "LAB_RUNNING", "cyberpeer_name": "Verus", "dataquad_id": "verus",
+            "mode": "LAB_RUNNING", "cyberpeer_name": self.cyberpeer_name, "dataquad_id": self.dataquad_id,
             "turn_id": turn_id, "record_hash": entry["record_hash"],
             "response_text": entry["response"]["text"], "created": False,
             "frontier_provenance": entry["frontier_provenance"],
@@ -414,8 +433,8 @@ class DesktopVerusRuntime:
             raise ValueError("Processor daemon is not running — custodian query unavailable")
         result = client.query("context", {
             "prompt": prompt,
-            "session_id": f"verus-query-{uuid.uuid4().hex[:12]}",
-            "peer_id": "verus",
+            "session_id": f"{self.dataquad_id}-query-{uuid.uuid4().hex[:12]}",
+            "peer_id": self.dataquad_id,
             "intent": intent,
             "limit": limit,
         })
@@ -433,8 +452,8 @@ class DesktopVerusRuntime:
             "status": "ok" if coherence["coherent"] else "degraded",
             "ready": coherence["coherent"],
             "mode": "LAB_RUNNING",
-            "cyberpeer_name": "Verus",
-            "dataquad_id": "verus",
+            "cyberpeer_name": self.cyberpeer_name,
+            "dataquad_id": self.dataquad_id,
             "full_append_only": True,
             "writable_tensors": ["PEER", "PCT", "NCT", "SPINE"],
             "transport": DESKTOP_TRANSPORT,

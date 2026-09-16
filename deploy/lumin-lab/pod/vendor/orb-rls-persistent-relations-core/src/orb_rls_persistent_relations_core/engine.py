@@ -25,7 +25,7 @@ from aegis_pod_sdk import (
 from .session import RecursiveLearningSession, RLSRecordRef
 from .scoring import compute_relevance
 from .relevance import MAX_SELECTED_REFS, RELEVANCE_THRESHOLD
-from .failure import RLSFailureReason
+from .failure import RLSShortfallReason
 from .orb_evidence import RLSOrbEvidenceRecorder
 
 
@@ -75,7 +75,7 @@ class RecursiveLearningEngine:
         2. Retrieves PEER, PCT, NCT, and SPINE records via Steward/Advocate, each scoped to its own tensor boundary.
         3. Computes relevance scores for all retrieved records.
         4. Partitions records into selected vs rejected sets.
-        5. Handles failed searches by preserving the failure data as learning telemetry.
+        5. Handles retrieval shortfalls by preserving the gap as learning telemetry.
         6. Writes a PCT context record back to the DataQuad via the Steward.
         7. Logs the session details into the 'rls' ledger.
         """
@@ -151,16 +151,14 @@ class RecursiveLearningEngine:
                 rls_session.selected_refs = selected
                 rls_session.rejected_refs = rejected
 
-                # If no records pass the threshold, it is marked as a failure learning event
+                # If no records pass the threshold, preserve that bridgeable gap as data.
                 if not selected:
-                    rls_session.failure_is_data = True
-                    rls_session.failure_reason = RLSFailureReason.NO_RECORDS_FOUND.value
-                    rls_session.notes.append("No relevant records found. Preserving failed retrieval as data.")
+                    rls_session.mark_shortfall(RLSShortfallReason.NO_RECORDS_FOUND.value)
+                    rls_session.notes.append("No relevant records found. Preserving retrieval shortfall as data.")
 
             except Exception as e:
-                rls_session.failure_is_data = True
-                rls_session.failure_reason = str(e)
-                rls_session.notes.append(f"RLS execution encountered a runtime error: {str(e)}")
+                rls_session.mark_shortfall(str(e))
+                rls_session.notes.append(f"RLS execution encountered a runtime shortfall: {str(e)}")
 
             # Complete T-Witness signature mapping
             t_sig = get_signature()
@@ -170,6 +168,8 @@ class RecursiveLearningEngine:
                 "user_message": user_message,
                 "intent": intent,
                 "selected_ref_count": len(rls_session.selected_refs),
+                "shortfall_is_data": rls_session.shortfall_is_data,
+                "shortfall_reason": rls_session.shortfall_reason,
                 "failure_is_data": rls_session.failure_is_data,
                 "failure_reason": rls_session.failure_reason
             }

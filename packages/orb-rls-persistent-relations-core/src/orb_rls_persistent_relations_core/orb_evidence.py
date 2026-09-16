@@ -63,7 +63,9 @@ class RLSOrbEvidenceRecorder:
 
         input_hash = sha256_upper(stable_json(invocation_inputs))
         output_hash = sha256_upper(stable_json(session_result))
-        failure_is_data = bool(session_result.get("failure_is_data"))
+        shortfall_is_data = bool(
+            session_result.get("shortfall_is_data", session_result.get("failure_is_data"))
+        )
 
         entry = {
             "orb_id": self.ORB_ID,
@@ -81,7 +83,8 @@ class RLSOrbEvidenceRecorder:
             "selected_count": len(session_result.get("selected_refs") or []),
             "rejected_count": len(session_result.get("rejected_refs") or []),
             "relations_recorded_count": len(retrieved_ids),
-            "failure_is_data": failure_is_data,
+            "shortfall_is_data": shortfall_is_data,
+            "failure_is_data": shortfall_is_data,
             "timestamp": _now(),
         }
 

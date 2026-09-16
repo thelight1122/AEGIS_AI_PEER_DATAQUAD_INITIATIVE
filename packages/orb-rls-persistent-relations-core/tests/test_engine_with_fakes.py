@@ -9,7 +9,7 @@ from pathlib import Path
 import pytest
 from aegis_pod_sdk import sha256_upper
 
-from orb_rls_persistent_relations_core import RecursiveLearningEngine, RLSFailureReason
+from orb_rls_persistent_relations_core import RecursiveLearningEngine, RLSShortfallReason
 from orb_rls_persistent_relations_core.relevance import MAX_SELECTED_REFS
 
 from fakes import FakeAdvocate, FakeStore, FakeSteward, fake_witness_event, make_spine_record
@@ -44,6 +44,7 @@ async def test_rls_engine_success(tmp_path):
         nature_aspects=["Force Language Tendency"],
     )
 
+    assert session.shortfall_is_data is False
     assert session.failure_is_data is False
     assert len(session.selected_refs) >= 1
     assert session.selected_refs[0].record_id == spine_rec.id
@@ -62,7 +63,7 @@ async def test_rls_engine_success(tmp_path):
 
 
 @pytest.mark.asyncio
-async def test_rls_engine_failure_is_data(tmp_path):
+async def test_rls_engine_shortfall_is_data(tmp_path):
     store = FakeStore(tmp_path)
     peer_id = "adam-one"
     engine = make_engine(store)
@@ -76,14 +77,17 @@ async def test_rls_engine_failure_is_data(tmp_path):
         nature_aspects=[],
     )
 
+    assert session.shortfall_is_data is True
+    assert session.shortfall_reason == RLSShortfallReason.NO_RECORDS_FOUND.value
     assert session.failure_is_data is True
-    assert session.failure_reason == RLSFailureReason.NO_RECORDS_FOUND.value
+    assert session.failure_reason == RLSShortfallReason.NO_RECORDS_FOUND.value
     assert len(session.selected_refs) == 0
     assert session.created_pct_record_id is not None
 
     steward = FakeSteward(store, peer_id)
     pcts = await steward.read_pct()
     assert len(pcts) == 1
+    assert pcts[0].working_context["shortfall_is_data"] is True
     assert pcts[0].working_context["failure_is_data"] is True
 
 

@@ -95,7 +95,7 @@ This is what "attach, don't affect" means concretely: the Pod's own code (`core/
 ## 4. Real Orbs Built (2026-07-22)
 
 ### `rls-persistent-relations-core`
-- **Purpose:** recursive-learning-session retrieval/writeback — candidate relevance scoring, candidate partitioning against a relevance threshold, PCT writeback, cross-tensor relation recording (the one genuinely Orb-owned Pod write), failure-as-data capture.
+- **Purpose:** recursive-learning-session retrieval/writeback — candidate relevance scoring, candidate partitioning against a relevance threshold, PCT writeback, cross-tensor relation recording (the one genuinely Orb-owned Pod write), shortfall-as-data capture.
 - **Package:** `orb-rls-persistent-relations-core`, vendored at `I:\AEGIS-CYBERPEER-CORE\vendor\`, canonical source at `H:\AEGIS-POD-ARCHITECTURE\packages\`.
 - **Attachment point:** `processor`.
 - **Real finding tonight:** its Umbilical file had never actually existed on Gabe's VM — the manifest pointed at a phantom path. `resolve_rls_engine_class` was silently falling back to its default entrypoint the entire time, invisible only because the default and the declared entrypoint are the same class. Built the real file, fixed the path convention, restart-verified genuine attachment (`cross-tensor-relations.jsonl` continues to grow correctly).

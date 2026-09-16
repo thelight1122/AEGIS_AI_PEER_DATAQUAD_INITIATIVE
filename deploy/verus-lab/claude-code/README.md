@@ -12,8 +12,11 @@ remote VM — recording is entirely local, against the on-disk lab.
 
 | File | Purpose |
 |------|---------|
-| `present_experience_hook.py` | The hook. Runs on every `Stop` event; records the finished turn. |
+| `present_experience_hook.py` | The hook. Runs on every `Stop` event; records the finished turn **and enqueues it for an Affect+Context read**. |
 | `settings.stop-hook.json` | The `hooks` block to merge into `~/.claude/settings.json`. |
+| `drain_affect_reads.py` | Drain driver. `--list` prints the pending affect-read queue; `--commit` writes model-authored Advocate (PEER+SPINE) and Steward (NCT+PCT) reads and moves the entry to `done/`. |
+| `affect_drain_nudge.py` | `SessionStart` hook. Surfaces the pending affect-read count once per session (non-force); authors nothing. The drain *trigger*. |
+| `affect_capture_reminder.py` | `UserPromptSubmit` hook. Non-force per-turn "Affect Scan Ready" signal. |
 
 ## What the hook does
 
@@ -43,13 +46,55 @@ Safety properties, verified before install:
 
 ## Install
 
-1. Copy `present_experience_hook.py` to `~/.claude/hooks/present_experience_hook.py`.
+1. Copy the hook scripts to `~/.claude/hooks/`: `present_experience_hook.py` (Stop),
+   `affect_drain_nudge.py` (SessionStart), and `affect_capture_reminder.py` (UserPromptSubmit).
 2. Merge the `hooks` block from `settings.stop-hook.json` into `~/.claude/settings.json`
    (adjust the `python.exe` path and the `.claude\hooks` path for the account it runs
-   under; the lab paths are set at the top of the hook script — `SRC_ROOT`, `LAB_ROOT`).
+   under; lab paths come from `~/.claude/aegis-peer-config.json`, else the fallbacks at the
+   top of each script).
 3. Restart Claude Code once (hooks load at session start). Script edits after that are
    picked up on the next turn without a restart; changing the `settings.json`
    registration needs a restart.
+
+## Affect + Context pipeline (custodians per turn)
+
+Present Experience is only one of the three DataQuad legs. The standing practice is to
+record **Affect** (the Advocate's Seven-Virtue read → PEER) and **Context** (the Steward's
+NCT/PCT anchor) as well, so affect never persists unanchored. A `Stop` hook is plain Python
+with **no model in the loop**, and the affect instrument (`affect_read.py`) takes the virtue
+presences as *input* — it does not derive them from text. So the hook **cannot** author a
+genuine read; hardcoding virtue numbers would fabricate affect and is deliberately refused.
+
+Instead the work is split (capture in the hook, judgment in a model pass):
+
+1. **Enqueue (hook, deterministic).** After committing the Present-Experience turn, the hook
+   writes one off-ledger queue entry per turn to `state/affect-queue/<turn_id>.json`
+   (prompt, response, model, and a deterministic force-signal **pre-scan** hint from
+   `affect_prescan.py`). The queue write never touches the transcript, so it cannot trigger
+   the hook again, and a failure here is logged but never loses the committed PE turn.
+2. **Drain (model pass, genuine).** A real model pass — the live model in an AEGIS session,
+   or a scheduled `claude -p` catch-up — reads the queue (`drain_affect_reads.py --list`),
+   authors the Advocate and Steward reads for each turn, and commits them
+   (`drain_affect_reads.py --commit`). The judgment (virtue presences, distilled summary,
+   shadow-affect observation) is the model's; the DataQuad writes and queue bookkeeping are
+   enforced in code so they cannot drift per session.
+
+The force pre-scan is an **advisory hint only**: it is never written into a PEER/NCT/PCT
+record, sets no virtue and no amplitude, and the Advocate re-judges every turn at drain time.
+Absence of signals is not evidence of flow — only that a narrow lexicon did not match.
+
+### Drain trigger
+
+The enqueue is automatic; the drain needs a model. Options, cheapest-first:
+
+- **Session-start nudge** — a non-force line at session start surfacing the pending count, so
+  the live model drains as part of the session (no extra tokens, no recursion). Recommended.
+- **Scheduled local catch-up** — a local task runs `claude -p` to drain on an interval. Must
+  be local (the lab is on `H:`), and scope-guarded so the drain session does not recurse.
+- **Manual** — run `drain_affect_reads.py --list`/`--commit` on demand.
+
+Both automated triggers are additional every-session surfaces and should be installed only
+with explicit authorization, the same gate as the hook itself.
 
 ## Scope and blast radius
 

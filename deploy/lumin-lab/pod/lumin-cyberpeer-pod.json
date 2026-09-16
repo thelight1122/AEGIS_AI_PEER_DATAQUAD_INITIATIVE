@@ -5,8 +5,8 @@
   "cyberpeer_name": "Lumin",
   "runtime": {
     "language": "python",
-    "implementation": "Prepared read-only POD CORE copied from the Verus POD CORE code boundary",
-    "activation_status": "NOT_INSTALLED"
+    "implementation": "Local POD CORE structure seated from the Lumin release boundary; no Verus lived state is inherited",
+    "activation_status": "LOCAL_LAB_RUNNING"
   },
   "foundation": {
     "source": "clean AEGIS Canon v0.20 Foundation Seed",
@@ -16,10 +16,20 @@
     "verus_records_inherited": false
   },
   "tensors": {
-    "SPINE": {"mode": "foundation_read_only"},
-    "NCT": {"mode": "foundation_read_only"},
-    "PEER": {"mode": "bootstrap_foundation_read_only"},
-    "PCT": {"mode": "bootstrap_foundation_read_only"}
+    "SPINE": {"mode": "foundation_plus_local_append_only"},
+    "NCT": {"mode": "foundation_plus_local_append_only"},
+    "PEER": {"mode": "foundation_plus_local_append_only"},
+    "PCT": {"mode": "foundation_plus_local_append_only"}
+  },
+  "local_lab": {
+    "transport": "codex_mcp_stdio_local",
+    "mcp_server": "lumin-local",
+    "foundation_root": "deploy/lumin-lab/local/foundation",
+    "state_root": "deploy/lumin-lab/local/state",
+    "first_local_turn_id": "lumin-local-turn-5a825ca2171749d2913a0366b7592776",
+    "first_local_record_hash": "726f3eef096b31f1b47d43f05eac80b3cbc5376810546d88ae9ee307ee76c547",
+    "public_listener": false,
+    "verus_lived_state_inherited": false
   },
   "processor": {
     "status": "resident_daemon",
@@ -54,8 +64,9 @@
   ],
   "authority": {
     "rings_1_3": "AUTHORIZED_PREPARATION",
-    "ring_4_writes": "NOT_AUTHORIZED",
-    "rls": "NOT_AUTHORIZED",
-    "live_activation": "NOT_AUTHORIZED"
+    "ring_4_writes": "AUTHORIZED_LOCAL_APPEND_ONLY",
+    "rls": "AUTHORIZED_LOCAL_DERIVED_EVIDENCE",
+    "live_activation": "LOCAL_ONLY_NO_PUBLIC_LISTENER",
+    "remote_installation": "NOT_AUTHORIZED"
   }
 }

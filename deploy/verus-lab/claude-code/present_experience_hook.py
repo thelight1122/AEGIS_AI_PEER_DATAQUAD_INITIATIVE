@@ -29,21 +29,54 @@ import sys
 import traceback
 from pathlib import Path
 
-# --- Local lab wiring (edit here if the lab moves) --------------------------
-SRC_ROOT = r"H:\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\src"
-LAB_ROOT = r"H:\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\deploy\verus-lab\local"
-RELEASE_ROOT = Path(LAB_ROOT) / "foundation"
-STATE_ROOT = Path(LAB_ROOT) / "state"
-DEFAULT_MODEL = "claude-opus-4-8"
+# --- Peer config (clone parameterization) -----------------------------------
+# Per-peer values come from the peer config ($AEGIS_PEER_CONFIG or
+# ~/.claude/aegis-peer-config.json), so this hook clones by "set config", not
+# find-and-replace. Falls back to the Verus lab values when config is absent or
+# unreadable, so behavior is unchanged with or without a config present.
+_FALLBACK_SRC_ROOT = r"H:\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\src"
+_FALLBACK_LAB_ROOT = r"H:\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\deploy\verus-lab\local"
+_FALLBACK_MODEL = "claude-opus-4-8"
+_FALLBACK_DRIVES = {"G", "H"}
+
+
+def _load_peer_config() -> dict:
+    try:
+        p = os.environ.get("AEGIS_PEER_CONFIG") or str(Path.home() / ".claude" / "aegis-peer-config.json")
+        with open(p, "r", encoding="utf-8") as fh:
+            data = json.load(fh)
+        return data if isinstance(data, dict) else {}
+    except Exception:
+        return {}
+
+
+_CFG = _load_peer_config()
+_paths = _CFG.get("paths", {}) if isinstance(_CFG.get("paths"), dict) else {}
+_runtime = _CFG.get("runtime", {}) if isinstance(_CFG.get("runtime"), dict) else {}
+_peer = _CFG.get("peer", {}) if isinstance(_CFG.get("peer"), dict) else {}
+# Per-peer identity to the runtime (via env; runtime falls back to Verus). Clone-safe.
+if _peer.get("cyberpeer_name"):
+    os.environ["AEGIS_CYBERPEER_NAME"] = str(_peer["cyberpeer_name"])
+if _peer.get("dataquad_id"):
+    os.environ["AEGIS_DATAQUAD_ID"] = str(_peer["dataquad_id"])
+
+SRC_ROOT = _paths.get("src_root") or _FALLBACK_SRC_ROOT
+_lab_root = _paths.get("lab_root") or _FALLBACK_LAB_ROOT
+RELEASE_ROOT = Path(_paths.get("release_root") or (Path(_lab_root) / "foundation"))
+STATE_ROOT = Path(_paths.get("state_root") or (Path(_lab_root) / "state"))
+DEFAULT_MODEL = _runtime.get("model") or _FALLBACK_MODEL
 LOG_PATH = STATE_ROOT / "present_experience_hook.log"
 MARKER_DIR = STATE_ROOT / "hook-markers"
 
-# --- Scope: only record sessions on the AEGIS drives ------------------------
-# The hook fires for every Claude Code session on this machine, but Present
-# Experience is only recorded when the session's working directory lives on one
-# of these drives. Sessions anywhere else are skipped. Edit this set to change
-# the scope (e.g. add a drive letter, or clear it to record every session).
-ALLOWED_DRIVES = {"G", "H"}
+# --- Scope: only record sessions on the peer's AEGIS drives -----------------
+# Present Experience is recorded only when the session cwd is on one of these
+# drives (from config runtime.allowed_drives, else the Verus fallback G/H).
+_drives = _runtime.get("allowed_drives")
+ALLOWED_DRIVES = (
+    {str(d).strip().upper()[:1] for d in _drives if str(d).strip()}
+    if isinstance(_drives, list) and _drives
+    else set(_FALLBACK_DRIVES)
+)
 
 
 def _drive_letter(path: str) -> str:
@@ -212,6 +245,34 @@ def _record(prompt: str, response: str, model: str, session_id: str, cwd: str) -
         f"cwd={cwd} model={os.environ['AEGIS_FRONTIER_MODEL']} "
         f"prompt_chars={len(prompt)} response_chars={len(response)}"
     )
+    # Enqueue the turn for a later model-authored Affect+Context read. The hook has no model,
+    # so it CANNOT author a genuine Seven-Virtue read (that would be fabrication); it records
+    # Present Experience above and leaves an off-ledger work item here. A real drain pass (the
+    # live model in an AEGIS session, or a scheduled `claude -p` catch-up) authors the Advocate
+    # (PEER+SPINE) and Steward (NCT+PCT) reads. The queue write never touches the transcript,
+    # so it cannot trigger the hook again; failure here must not lose the Present-Experience
+    # record already committed, so it is caught and logged, never raised.
+    try:
+        from aegis_verus_lab.affect_prescan import scan_force_signals
+        from aegis_verus_lab.affect_drain import enqueue
+
+        prescan = scan_force_signals(prompt)
+        enqueue(
+            STATE_ROOT,
+            subject_turn_id=str(begun["turn_id"]),
+            session_id=session_id,
+            cwd=cwd,
+            model=os.environ["AEGIS_FRONTIER_MODEL"],
+            prompt=prompt,
+            response=response,
+            force_prescan=prescan,
+        )
+        _log(
+            f"enqueued affect-read subject_turn_id={begun['turn_id']} "
+            f"force_signals={prescan.get('signals')}"
+        )
+    except Exception as exc:  # never lose the committed PE turn over a queue-write failure
+        _log(f"affect enqueue failed (subject_turn_id={begun['turn_id']}): {exc!r}")
 
 
 def main() -> int:

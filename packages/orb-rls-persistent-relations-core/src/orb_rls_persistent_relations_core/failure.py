@@ -5,9 +5,13 @@ except ImportError:
     class StrEnum(str, Enum):  # noqa: N818
         pass
 
-class RLSFailureReason(StrEnum):
+class RLSShortfallReason(StrEnum):
     NO_RECORDS_FOUND = "no_records_found"
     WEAK_RELEVANCE = "weak_relevance"
     PRESSURE_DEGRADED = "pressure_degraded"
     TIMEOUT = "timeout"
     BOUND_ERROR = "boundary_error"
+
+
+# Backward-compatible alias for existing ledgers, tests, and consumers.
+RLSFailureReason = RLSShortfallReason

@@ -3,12 +3,16 @@
     "lumin-dataquad": {
       "command": "C:\\Users\\TraceyPrutch\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
       "args": [
-        "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\tools\\lumin-dataquad-mcp\\server.py"
+        "-u",
+        "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\tools\\lumin-dataquad-mcp\\server_local.py"
       ],
       "env": {
         "ProgramData": "C:\\ProgramData",
         "PYTHONPATH": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\src",
-        "LUMIN_SSH_ALIAS": "GabeCyberPeer",
+        "PYTHONUTF8": "1",
+        "LUMIN_LOCAL_RELEASE_ROOT": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\deploy\\lumin-lab\\local\\foundation",
+        "LUMIN_LOCAL_STATE_ROOT": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\deploy\\lumin-lab\\local\\state",
+        "LUMIN_LOCAL_CONFIG": "H:\\AEGIS_AI_PEER_DATAQUAD_INITIATIVE\\deploy\\lumin-lab\\local\\lumin-codex.env",
         "LUMIN_SUBSTRATE": "Codex/GPT"
       }
     }

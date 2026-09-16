@@ -28,7 +28,7 @@ Substrate-dependent
     relational_posture_continuity, drift_across_instances
 
 The split is the honest part. A green mechanical score is not continuity; it is the absence
-of one specific kind of failure.
+of one specific kind of shortfall.
 """
 
 from __future__ import annotations

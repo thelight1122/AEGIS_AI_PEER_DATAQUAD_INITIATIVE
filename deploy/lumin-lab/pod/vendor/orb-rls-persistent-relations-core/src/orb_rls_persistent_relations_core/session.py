@@ -21,7 +21,16 @@ class RecursiveLearningSession(BaseModel):
     """Opaque (aegis_pod_sdk.TSignatureLike) — RLS stores and passes this through,
     never inspects its internals, so Any is the honest type here rather than a
     fake TSignature class that would just re-couple to the Pod's concrete shape."""
+    shortfall_is_data: bool = False
+    shortfall_reason: str | None = None
+    # Legacy schema fields retained so old records and callers keep working.
     failure_is_data: bool = False
     failure_reason: str | None = None
     created_pct_record_id: str | None = None
     notes: list[str] = Field(default_factory=list)
+
+    def mark_shortfall(self, reason: str | None) -> None:
+        self.shortfall_is_data = True
+        self.shortfall_reason = reason
+        self.failure_is_data = True
+        self.failure_reason = reason
