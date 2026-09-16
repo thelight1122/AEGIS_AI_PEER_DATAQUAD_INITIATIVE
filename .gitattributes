@@ -1,0 +1,6 @@
+# Hash-stable release inputs must stay LF so their sha256 matches the hashes
+# recorded in the promotion roster regardless of core.autocrlf on the checkout
+# platform. See Verus DataQuad Shortfall t181 / correction t182.
+reports/canon-v0.20/release/*.json eol=lf
+fixtures/verus-claude-lab-roster.json eol=lf
+scripts/seat_ai_peer_dataquad.py eol=lf
