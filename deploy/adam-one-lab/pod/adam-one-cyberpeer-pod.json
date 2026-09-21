@@ -1,0 +1,36 @@
+{
+  "schema_version": "0.1.0",
+  "pod_id": "adam-one-cyberpeer-pod",
+  "peer_id": "adam-one",
+  "cloned_from": "verus-cyberpeer-pod",
+  "runtime": {
+    "language": "python",
+    "implementation": "P0 pod attachment: daemon-backed retrieval operators over the Adam-One DataQuad LAB surface, with the RLS orb attached DISABLED (P0). No P1 live RLS engine until deliberately activated."
+  },
+  "dataquad_roots": {
+    "foundation": "deploy/adam-one-lab/local/foundation/dataquad",
+    "live_state": "deploy/adam-one-lab/local/state/dataquad",
+    "ledgers": "deploy/adam-one-lab/local/state"
+  },
+  "tensors": {
+    "PEER": {"purpose": "Present experiential signal", "append_only": true},
+    "PCT": {"purpose": "Persistent contextual thread", "append_only": true},
+    "NCT": {"purpose": "Condensed contextual essence", "append_only": true},
+    "SPINE": {"purpose": "Sovereign identity continuity", "append_only": true}
+  },
+  "orbs": [
+    {
+      "orb_id": "rls-persistent-relations-core",
+      "orb_version": "1.1.0",
+      "enabled": false,
+      "phase": "P0",
+      "orb_manifest": "deploy/adam-one-lab/pod/orbs/rls-persistent-relations-core.orb.json",
+      "umbilical": "deploy/adam-one-lab/pod/umbilicals/rls-persistent-relations-core.umbilical.json",
+      "attachment_point": "advocate",
+      "trust_state": "verified",
+      "verification_inherited_from": "deploy/verus-lab/pod/markers/rls-persistent-relations-core.agreement.957E4879.json"
+    }
+  ],
+  "phase": "P0",
+  "notes": "P0 clone of the Verus POD structure for adam-one: the verified RLS orb (runtime hash 957E4879) attached DISABLED. Foundation and live tensors are adam-one's own (see foundation-receipt.json / adam_health). P1 live RLS activation is a separate, deliberate step gated by p1-activation-gate.json."
+}

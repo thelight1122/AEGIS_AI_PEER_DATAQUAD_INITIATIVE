@@ -1,0 +1,59 @@
+{
+  "schema_version": "0.1.0",
+  "umbilical_id": "adam-one-rls-persistent-relations-core-umbilical",
+  "pod_id": "adam-one-cyberpeer-pod",
+  "orb_id": "rls-persistent-relations-core",
+  "attachment_point": "advocate",
+  "runtime": {
+    "language": "python",
+    "form": "library"
+  },
+  "invocation": {
+    "method": "in_process_call",
+    "entrypoint": "orb_rls_persistent_relations_core.engine.RecursiveLearningEngine",
+    "orb_version": "1.1.0",
+    "orb_runtime_hash": "957E48794BB2AF5217EA43ECD4468884C26EA05D35714312DC06465F47A818FF",
+    "vendored_source": "deploy/adam-one-lab/pod/vendor/orb-rls-persistent-relations-core/src/orb_rls_persistent_relations_core"
+  },
+  "input_contract": {
+    "requires": ["peer_id", "session_id", "user_message", "intent", "pressure_state", "nature_aspects"]
+  },
+  "output_contract": {
+    "returns": ["rls_session_result", "cross_tensor_relation_entries", "pct_writeback_record"]
+  },
+  "observation_contract": {
+    "observable_events": ["session_started", "candidates_scored", "candidates_partitioned", "pct_written", "relations_recorded", "session_completed", "outside_working_parameters"]
+  },
+  "evidence_contract": {
+    "records": ["input_hash", "output_hash", "runtime_hash"],
+    "evidence_ledger": "pod/ledgers/orbs/rls-persistent-relations-core.evidence.jsonl"
+  },
+  "working_parameters": {
+    "status": "P0",
+    "boundaries": {
+      "mutation": false,
+      "dataquad_writeback": false,
+      "live_rls_invoked": false
+    },
+    "outside_parameters_behavior": "P0 read-only. AEGIS_RLS_ACTIVE is not set for adam-one and the processor runs WITHOUT --rls-active, so processor_daemon._init_rls_engine() returns None and the orb engine is never constructed: no writeback, no record_relation, no evidence. P1 live requires a deliberate gate flip.",
+    "p1_activation": {
+      "activated": false,
+      "requires": [
+        "flip p1-activation-gate.json gate_status to ACTIVATED",
+        "relaunch processor with --rls-active + AEGIS_RLS_ACTIVE=true",
+        "recommended: add an in-store active gate on append_ledger for symmetric defense-in-depth"
+      ]
+    }
+  },
+  "provenance_scope": {
+    "pinned_by_orb_runtime_hash": ["engine.py", "scoring.py", "relevance.py"],
+    "not_pinned": "processor_daemon.py caller gate; orb_evidence.py in-orb is_active guard",
+    "disclosure": "Writeback inertness-when-inactive is guaranteed by the unpinned processor caller (_init_rls_engine returns None when not rls_active), independently verified 2026-09-20 in the boundary-lens C3 resolution."
+  },
+  "verification": {
+    "trust_state": "verified",
+    "inherited_from": "deploy/verus-lab/pod/markers/rls-persistent-relations-core.agreement.957E4879.json",
+    "bound_runtime_hash": "957E48794BB2AF5217EA43ECD4468884C26EA05D35714312DC06465F47A818FF",
+    "note": "The orb code is byte-identical to Verus's verified orb (same runtime hash), so the 5-run agreement bound to 957E4879 applies. This umbilical binds that verified orb to the adam-one pod at P0 (disabled)."
+  }
+}

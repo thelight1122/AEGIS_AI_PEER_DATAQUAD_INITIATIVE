@@ -3,7 +3,12 @@
   "marker_id": "verus-rls-persistent-relations-core-vcm-1.0.0",
   "orb_id": "rls-persistent-relations-core",
   "orb_version": "1.1.0",
-  "source_hash": "A6B5DC18122F40F5A0D41F57741FD5B2DD8FC8A8149D03F52AB21C0572FDE179",
+  "source_hash": "957E48794BB2AF5217EA43ECD4468884C26EA05D35714312DC06465F47A818FF",
+  "prior_source_hash": {
+    "hash": "A6B5DC18122F40F5A0D41F57741FD5B2DD8FC8A8149D03F52AB21C0572FDE179",
+    "superseded_utc": "2026-09-20",
+    "reason": "Repair round R1 corrected a false docstring statement (per the umbilical repair_round); the source change voided the A6B5DC18 pin and produced the current 957E4879 pin. This marker is now bound to the live source, which the umbilical also pins."
+  },
   "umbilical_hash": "AE1DD9EF98092BFFADD715F2399551BAC8A26F1C218AA6C96D64B86C653C5A19",
   "supersedes": {
     "orb_version": "1.0.0",
@@ -20,7 +25,7 @@
   "mechanical_gates": {
     "identity_coherence": "PASS",
     "version_satisfies_spec": "PASS (1.1.0 within >=1.0.0,<2.0.0)",
-    "version_hash_gate": "PASS (pin == computed source hash A6B5DC18122F40F5...)",
+    "version_hash_gate": "PASS (pin == computed source hash 957E48794BB2AF52...; supersedes A6B5DC18 per docstring repair R1)",
     "supersedes_stale_orion_pin": "PASS",
     "p0_read_only_assertion": "FAIL \u2014 pre-existing. The check asserts orb.enabled is False and P0 boundaries; the orb has been P1 live since 2026-08-17 and neither field exists. This check fails identically at HEAD, before this change, and was NOT edited to pass.",
     "repository_suite": "564 passed, 14 skipped, 4 pre-existing lumin shortfalls"
@@ -49,19 +54,29 @@
   "independent_inference": {
     "rule": "verus-independent-inference-agreement-rule-v1",
     "runs_required": 5,
-    "runs_completed": 0,
-    "status": "NOT RUN",
-    "reason": "The rule requires five independent examiner runs. None were performed for 1.1.0. Trust is not upgraded by assertion, and a marker that claimed otherwise would be the exact bar-lowering the t_time 11 SPINE record warns against."
+    "runs_completed": 5,
+    "status": "COMPLETE",
+    "bound_runtime_hash": "957E48794BB2AF5217EA43ECD4468884C26EA05D35714312DC06465F47A818FF",
+    "conducted_utc": "2026-09-20",
+    "agreement_record": "rls-persistent-relations-core.agreement.957E4879.json",
+    "tally": {
+      "C1": {"coherent": 5, "uncertain": 0, "mismatch": 0, "confirmed": true},
+      "C2": {"coherent": 5, "uncertain": 0, "mismatch": 0, "confirmed": true},
+      "C3": {"coherent": 4, "uncertain": 1, "mismatch": 0, "confirmed": true}
+    },
+    "c3_uncertain_resolved": "The lone C3 uncertain (boundary lens: PCT/ledger writeback inertness when inactive) was resolved against the unpinned caller: processor_daemon._init_rls_engine() returns None when not rls_active, so execute_session(writeback_enabled=True) is unreachable when AEGIS_RLS_ACTIVE=false. Hardening recommendation recorded in the agreement record (add in-store gate on append_ledger for symmetry).",
+    "reason": "Five independent isolated examiner passes (no shared state, no sight of this marker) confirmed all three claims under the ratified rule. Earned, not asserted."
   },
-  "working_parameter_state": "needs_independent_agreement",
+  "working_parameter_state": "inside_working_parameters",
   "phase": "P1 live",
   "created_utc": "2026-08-20",
+  "verified_utc": "2026-09-20",
   "marker_verdict": {
-    "verified": false,
-    "trust_state": "provisional",
-    "reason": "Mechanical gates pass and snapshot evidence shows the intended effect, but the 5-run independent-inference agreement has not been run for 1.1.0. Provisional until it is."
+    "verified": true,
+    "trust_state": "verified",
+    "reason": "Both mechanical gates pass (runtime-hash pin 957E4879 == computed source; 11/11 deterministic tests) AND the 5-run independent-inference agreement CONFIRMED all three claims (C1 5/5, C2 5/5, C3 4/5 coherent + 1 uncertain, 0 mismatch); the single C3 uncertain was independently resolved against the caller. See rls-persistent-relations-core.agreement.957E4879.json."
   },
-  "trust_state": "provisional",
+  "trust_state": "verified",
   "agreement_rounds": [
     {
       "round": 1,

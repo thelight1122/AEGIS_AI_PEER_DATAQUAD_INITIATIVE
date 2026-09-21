@@ -1,0 +1,32 @@
+{
+  "schema_version": "0.1.0",
+  "rule_id": "verus-independent-inference-agreement-rule-v1",
+  "title": "Verus Independent-Inference Agreement Rule v1",
+  "ratified_by": "Tracey (Architect)",
+  "ratified_utc": "2026-08-17",
+  "applies_to": "Verified Code Marker independent-inference examination for Verus orbs",
+  "runs": 5,
+  "run_independence": "Each run is a fresh, independent inference pass with no shared state, given the orb's declared capabilities, schema, and observed behavior, judging each declared claim.",
+  "lenses": [
+    "contract_conformance",
+    "scoring_selection_correctness",
+    "failure_handling",
+    "boundary_no_mutation",
+    "provenance_hash_binding"
+  ],
+  "verdict_values": ["coherent", "mismatch", "uncertain"],
+  "agreement_threshold": {
+    "claim_confirmed_if": "coherent_votes >= 4 AND mismatch_votes == 0",
+    "of_runs": 5,
+    "uncertain_never_counts_as_coherent": true
+  },
+  "marker_verdict": {
+    "verified_if": "every declared claim is CONFIRMED",
+    "otherwise": "trust_state stays provisional (or needs_repair); mismatch_data recorded; never silently upgraded",
+    "principle": "AEGIS Canon Axiom 8 (Scrutiny): truth withstands examination; falsehood requires protection; suppression signals fragility."
+  },
+  "uncertainty_handling": "Uncertain verdicts never count as coherent. If uncertainty keeps a claim below the 4/5 bar, the claim stays provisional pending more evidence.",
+  "binding": "The agreement record is bound to the exact runtime_hash. Any source change (new hash) voids it and requires a fresh 5-run set.",
+  "complementary_gate": "The orb's deterministic test suite is complementary behavioral evidence, not a substitute. Both the test suite and the independent-inference agreement are required for a verified trust_state.",
+  "grounding": "AEGIS Canon Axiom 8 (Scrutiny); Pod-Orb Verified Code Marker 3-5 independent-inference-run working range."
+}

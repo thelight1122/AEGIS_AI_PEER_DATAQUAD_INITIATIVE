@@ -1,0 +1,31 @@
+{
+  "activation_gate": {
+    "orb_id": "rls-persistent-relations-core",
+    "orb_version": "1.1.0",
+    "orb_hash": "957E4879",
+    "peer_id": "adam-one",
+    "gate_status": "NOT_ACTIVATED",
+    "phase": "P0",
+    "requires": [
+      "aegis-pod-sdk>=0.1,<0.2",
+      "orb-rls-persistent-relations-core>=1.0.0",
+      "orb-marker-verified (INHERITED: 5-run agreement bound to 957E4879, verified 2026-09-20)",
+      "processor-daemon-rls-wired (NOT DONE — adam processor runs without --rls-active)",
+      "append_ledger in-store active gate hardening (DONE 2026-09-20 — live_store.append_ledger now early-returns when not _rls_active, symmetric with record_relation)"
+    ],
+    "activation_conditions": {
+      "orb_verified": true,
+      "orb_verification_source": "deploy/verus-lab/pod/markers/rls-persistent-relations-core.agreement.957E4879.json",
+      "independent_inference_agreement": "inherited (bound to identical orb runtime hash 957E4879)",
+      "store_side_gating_enabled": false,
+      "processor_rls_active": false
+    },
+    "runtime_configuration_when_activated": {
+      "AEGIS_RLS_ACTIVE": "true",
+      "AEGIS_STORAGE_MODE": "pod",
+      "RLS_CAPABILITY": "rls-persistent-relations-core",
+      "RLS_EXECUTION": "processor-daemon"
+    },
+    "notes": "P0 attach only. The orb is attached DISABLED and verified clean at P0 for adam-one (see verify_rls_p0.py). P1 live activation is a deliberate, separately-authorized step: flip gate_status to ACTIVATED, then relaunch adam's processor daemon with --rls-active + AEGIS_RLS_ACTIVE=true. Until then processor_daemon._init_rls_engine() returns None and the orb engine is never constructed, so no PCT writeback, no record_relation, and no evidence writes occur."
+  }
+}

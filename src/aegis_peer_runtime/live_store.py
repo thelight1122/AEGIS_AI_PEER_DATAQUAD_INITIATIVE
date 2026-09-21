@@ -1,7 +1,14 @@
 """Live DataQuad store — concrete DataQuadStoreProtocol for P1 activation.
 
-Store-side gating on record_relation (C3 finding): the orb calls
-record_relation unconditionally, this store gates it via is_active().
+Store-side gating (C3 finding + 2026-09-20 hardening): the orb calls
+record_relation and append_ledger unconditionally on the writeback path; this
+store gates BOTH on _rls_active so they are true no-ops when inactive. This
+gives the RLS writeback in-store defense-in-depth symmetric with the caller
+gate (processor_daemon._init_rls_engine returns None when not rls_active), so
+"no live effect unless active" holds independently of the caller. append_ledger
+serves only the orb's "rls" writeback (engine.py); the derived
+processor/temporal/rls ledgers are written elsewhere (state/derived/*) and are
+unaffected.
 """
 
 from __future__ import annotations
@@ -67,6 +74,8 @@ class LiveDataQuadStore:
     async def append_ledger(
         self, peer_id: str, ledger_name: str, entry: dict[str, Any]
     ) -> None:
+        if not self._rls_active:
+            return
         path = self._ledger_root / f"{ledger_name}.jsonl"
         path.parent.mkdir(parents=True, exist_ok=True)
         line = json.dumps(

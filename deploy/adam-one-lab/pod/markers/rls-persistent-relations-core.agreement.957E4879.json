@@ -1,0 +1,85 @@
+{
+  "schema_version": "0.1.0",
+  "record_kind": "independent_inference_agreement_result",
+  "rule": "verus-independent-inference-agreement-rule-v1",
+  "rule_path": "deploy/verus-lab/pod/governance/independent-inference-agreement-rule.v1.json",
+  "orb_id": "rls-persistent-relations-core",
+  "orb_version": "1.1.0",
+  "bound_runtime_hash": "957E48794BB2AF5217EA43ECD4468884C26EA05D35714312DC06465F47A818FF",
+  "conducted_utc": "2026-09-20",
+  "conducted_by": "five independent examiner passes (isolated sub-agents, no shared state, no sight of any prior marker/umbilical/agreement)",
+  "run_independence": "Each lens run was a fresh isolated inference pass given only the pinned source files and the three declared claims; three of five independently recomputed the SHA-256 and matched the pin.",
+  "run_count": 5,
+  "mechanical_gates": {
+    "runtime_hash_pin": "PASS (computed 957E4879... == umbilical pin, byte-for-byte)",
+    "deterministic_test_suite": "PASS (11 passed, packages/orb-rls-persistent-relations-core/tests)"
+  },
+  "runs": [
+    {
+      "lens": "contract_conformance",
+      "verdicts": {
+        "C1": {"verdict": "coherent", "reason": "computed SHA-256 of engine+scoring+relevance == pin; compute_runtime_hash orb_evidence.py:34-45"},
+        "C2": {"verdict": "coherent", "reason": "engine.py:119-149 scores/partitions by RELEVANCE_THRESHOLD, descending sort, MAX_SELECTED_REFS bound; scoring.py:114 clamps [0,1]"},
+        "C3": {"verdict": "coherent", "reason": "engine.py:182-201 writes PCT then unconditionally loops record_relation over selected retrieved_ids; record_invocation in-orb is_active gated orb_evidence.py:61-62"}
+      }
+    },
+    {
+      "lens": "scoring_selection_correctness",
+      "verdicts": {
+        "C1": {"verdict": "coherent", "reason": "independent SHA-256 == pin; same concat order orb_evidence.py:34-45"},
+        "C2": {"verdict": "coherent", "reason": "inclusive threshold engine.py:129, reverse sort :135, [:64] top-N :136-149, clamp scoring.py:114 — no off-by-one"},
+        "C3": {"verdict": "coherent", "reason": "relations recorded for exactly the bounded SELECTED set engine.py:177-201; record_invocation early-returns orb_evidence.py:61"}
+      }
+    },
+    {
+      "lens": "failure_handling",
+      "verdicts": {
+        "C1": {"verdict": "coherent", "reason": "read_text raises on missing file rather than fabricating proof; compute_runtime_hash orb_evidence.py:41-45"},
+        "C2": {"verdict": "coherent", "reason": "empty-selected -> NO_RECORDS_FOUND failure_is_data engine.py:155-158; exception recorded not swallowed :160-163"},
+        "C3": {"verdict": "coherent", "reason": "record_relation unconditional + record_invocation is_active-gated; failure path fabricates no relations"}
+      },
+      "noted_finding": "writeback block engine.py:182-218 sits OUTSIDE the try/except; a store/steward exception there propagates uncaught rather than being preserved as failure-data. Robustness gap, orthogonal to C1-C3."
+    },
+    {
+      "lens": "provenance_hash_binding",
+      "verdicts": {
+        "C1": {"verdict": "coherent", "reason": "independently recomputed (text- and byte-concat) == pin; in-orb compute_runtime_hash uses identical algorithm over same three files"},
+        "C2": {"verdict": "coherent", "reason": "read/score/partition/bound/clamp in hash-bound source engine.py:104-135, scoring.py:114"},
+        "C3": {"verdict": "coherent", "reason": "PCT build/append + unconditional record_relation engine.py:183,197-201; record_invocation in-orb is_active gated orb_evidence.py:61"}
+      },
+      "noted_finding": "the in-orb is_active guard lives in orb_evidence.py, which is context-only and OUTSIDE the pinned trio (engine/scoring/relevance); engine.py's own call sites ARE pinned. Mirrors the umbilical's own disclosure re: unpinned adapter code."
+    },
+    {
+      "lens": "boundary_no_mutation",
+      "verdicts": {
+        "C1": {"verdict": "coherent", "reason": "SHA-256 of pinned trio == pin; same concat order orb_evidence.py:34-45"},
+        "C2": {"verdict": "coherent", "reason": "read/score/partition path is pure reads, no mutation engine.py:129-138, scoring.py:114"},
+        "C3": {"verdict": "uncertain", "reason": "record_relation store-gated (live_store.py:89) and record_invocation in-orb gated (orb_evidence.py:61) as claimed, BUT PCT writeback steward.build_and_append_pct (engine.py:183) + store.append_ledger (engine.py:192) fire on writeback_enabled (default True) with NO in-orb active gate; inertness-when-inactive unverifiable from the pinned source alone."}
+      }
+    }
+  ],
+  "tally": {
+    "C1": {"coherent": 5, "uncertain": 0, "mismatch": 0, "confirmed": true},
+    "C2": {"coherent": 5, "uncertain": 0, "mismatch": 0, "confirmed": true},
+    "C3": {"coherent": 4, "uncertain": 1, "mismatch": 0, "confirmed": true}
+  },
+  "agreement_rule_applied": "claim confirmed iff coherent>=4 AND mismatch==0; uncertain never counts as coherent",
+  "c3_uncertain_resolution": {
+    "raised_by": "boundary_no_mutation lens",
+    "question": "Is the PCT/ledger writeback path inert when AEGIS_RLS_ACTIVE=false, given it has no in-orb active gate?",
+    "resolved": true,
+    "resolution": "The writeback path is unreachable when inactive: processor_daemon._init_rls_engine() returns None when not self._rls_active (processor_daemon.py:87-91); op_rls_session then returns {executed:false, 'RLS engine not active'} (processor_daemon.py:287-292); execute_session(..., writeback_enabled=True) at processor_daemon.py:311 is only reached with a non-None engine, i.e. only when rls_active. The orb engine is never even constructed when inactive, so build_and_append_pct / append_ledger never execute.",
+    "resolution_evidence": "processor_daemon.py:87-91, 199, 287-292, 311; live_store.py:50-53, 89-90",
+    "residual_hardening_recommendation": "The PCT/ledger writeback is gated only at the caller (_init_rls_engine), whereas record_relation is double-gated (caller + store-side is_active). Add an in-store active gate on append_ledger for symmetric defense-in-depth. Guarantee currently holds; recommendation is hardening, not a fix for a live hole."
+  },
+  "marker_verdict": {
+    "verified": true,
+    "trust_state": "verified",
+    "reason": "All three declared claims CONFIRMED under the ratified rule (C1 5/5, C2 5/5, C3 4/5 coherent + 1 uncertain, 0 mismatch). The single C3 uncertain (writeback inertness) was independently resolved against the unpinned caller (processor_daemon). Both mechanical gates (hash pin, 11-test suite) pass. Recorded, not asserted."
+  },
+  "supersedes": {
+    "prior_agreement_bound_hash": "51A1AC18887AEA9CEACC60B6F0AD428C899FA2D228D3BEE2032171F754E248CA",
+    "note": "The 1.0.0 round-1/round-2 agreement is bound to the 51A1AC18 pin and preserved in rls-persistent-relations-core.verified-code-marker.v1.0.0.json. This record is the first full 5-run agreement bound to the current 957E4879 source."
+  },
+  "binding_note": "This agreement is bound to orb_runtime_hash 957E4879...; any source change (new hash) voids it and requires a fresh 5-run set (per rule 'binding')."
+}

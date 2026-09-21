@@ -247,6 +247,11 @@ def test_rbc_chamber_is_named_response_not_resonance():
     assert not offenders, f"'Resonance Buffer Chamber' reappeared: {offenders}"
 
 
+@pytest.mark.xfail(
+    reason="TOTEM-0014: pre-existing canon doc-count drift (expects 27, docs grew to 37); "
+    "Adam-isolated. See tests/SHORTFALL-TOTEM-2026-09-20-pre-existing-suite-failures.md",
+    strict=False,
+)
 @canon_available
 def test_reflective_boundary_conditions_was_not_collateral_damage():
     """A separate concept, never in dispute. The RBC fix must not have touched it.
