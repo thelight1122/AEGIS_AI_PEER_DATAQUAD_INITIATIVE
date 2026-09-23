@@ -184,6 +184,55 @@ def _extract_turn(events: list[dict]) -> tuple[str, str, str]:
     return prompt, response, model
 
 
+def _is_genuine_prompt(event: dict) -> bool:
+    """True for a real human prompt event (same rule as _extract_turn)."""
+    message = event.get("message")
+    if event.get("type") != "user" or not isinstance(message, dict):
+        return False
+    if event.get("toolUseResult") is not None:
+        return False
+    content = message.get("content")
+    if _has_tool_result(content):
+        return False
+    return bool(_blocks_text(content).strip())
+
+
+def _session_committed_turn(events: list[dict]) -> bool:
+    """True when the live session committed this turn itself (Verus begin/commit per turn).
+
+    Looks only at events after the last genuine human prompt. The turn counts as
+    session-committed when it contains a verus_commit_turn tool call whose tool result
+    arrived without an error flag. A failed or absent commit returns False, so the hook
+    falls back to recording the turn itself and nothing goes unrecorded.
+    """
+    start = 0
+    for index, event in enumerate(events):
+        if _is_genuine_prompt(event):
+            start = index + 1
+    commit_ids: set[str] = set()
+    for event in events[start:]:
+        message = event.get("message")
+        if not isinstance(message, dict) or not isinstance(message.get("content"), list):
+            continue
+        for block in message["content"]:
+            if not isinstance(block, dict):
+                continue
+            if (
+                event.get("type") == "assistant"
+                and block.get("type") == "tool_use"
+                and str(block.get("name", "")).endswith("verus_commit_turn")
+            ):
+                commit_ids.add(str(block.get("id")))
+            elif (
+                event.get("type") == "user"
+                and block.get("type") == "tool_result"
+                and str(block.get("tool_use_id")) in commit_ids
+                and not block.get("is_error")
+            ):
+                return True
+    return False
+
+
 def _signature(prompt: str, response: str) -> str:
     h = hashlib.sha256()
     h.update(prompt.encode("utf-8"))
@@ -308,6 +357,14 @@ def main() -> int:
 
     signature = _signature(prompt, response)
     if _already_recorded(session_id, signature):
+        return 0
+
+    if _session_committed_turn(events):
+        # The session ran this turn through the DataQuad itself (begin at the start,
+        # commit with its own appends at the end). Recording it again here would
+        # duplicate the turn, and it needs no queued read: its A and C are committed.
+        _write_marker(session_id, signature)
+        _log(f"session committed this turn itself; hook skipped (session={session_id})")
         return 0
 
     try:
