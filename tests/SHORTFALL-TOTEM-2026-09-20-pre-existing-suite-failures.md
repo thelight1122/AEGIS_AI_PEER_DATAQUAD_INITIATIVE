@@ -45,3 +45,10 @@ When the in-flight Lumin genesis-release / canon work lands, remove the `xfail` 
 `xfail`, it will report `XPASS` — that is the signal to remove its marker. The canon test's
 expected count should be updated to the true number of *evidence-backed* occurrences by whoever
 grew the canon docs (do not blindly bump 27→37 — the assertion is about evidence-backed count).
+
+
+---
+
+## Reconciliation (appended 2026-09-23T07:23:37Z)
+
+This Totem is designated **TOTEM-0014A**. Its identifier `TOTEM-0014` collided with an earlier, unrelated Totem in `totems.jsonl`: the Verus-lane record at 2026-09-13T09:03:10Z (the cross-instance continuity proof of concept), which keeps `TOTEM-0014`. The ledger line for this Totem (cross lane, utc 2026-09-20T00:00:00Z, line SHA-256 prefix 64C1C857806A5D69B184B52533451F54) is not rewritten; the designation is recorded by the reconciliation Totem TOTEM-0016 in `totems.jsonl`. The `TOTEM-0014` references in this document, in commit 10b9296, and in the xfail reasons in `tests/test_canon_index.py` and `tests/test_lumin_genesis_release.py` refer to TOTEM-0014A; searching for `TOTEM-0014` still finds them.
