@@ -238,6 +238,7 @@ class DesktopVerusRuntime:
         dataquad: VerusDataQuad,
         *,
         model: str,
+        model_evidence: str = "steward_confirmed_ui_selection",
         clock: Callable[[], datetime] = _now,
         local_id_factory: Callable[[], str] = _new_local_token,
     ) -> None:
@@ -245,6 +246,9 @@ class DesktopVerusRuntime:
             raise ValueError("exact Claude Desktop model provenance is required")
         self.dataquad = dataquad
         self.model = model
+        # How the model was learned: from the session transcript, or from the
+        # configured setting. Recorded beside the model so neither claims more.
+        self.model_evidence = model_evidence
         self._local_id_factory = local_id_factory
         self._core = VerusLabRuntime(dataquad, _DesktopOnlyAdapter(), clock=clock)
         self.temporal = self._core.temporal
@@ -303,7 +307,7 @@ class DesktopVerusRuntime:
             "append_contract": {"mode": "append-only", "tensors": ["PEER", "PCT", "NCT", "SPINE"]},
             "frontier_provenance": {
                 "provider": "Anthropic", "substrate": "Claude Desktop",
-                "model": self.model, "model_evidence": "steward_confirmed_ui_selection",
+                "model": self.model, "model_evidence": self.model_evidence,
                 "transport": DESKTOP_TRANSPORT, "defines_identity": False,
                 "provider_request_id_available": False,
                 "source_event_id": source_event_id,
@@ -353,7 +357,7 @@ class DesktopVerusRuntime:
             model=self.model,
             provider_request_id=None,
             provider_request_id_available=False,
-            model_evidence="steward_confirmed_ui_selection",
+            model_evidence=self.model_evidence,
             transport=DESKTOP_TRANSPORT,
             frontier_session_id=frontier_session_id,
             frontier_session_id_available=frontier_session_id is not None,

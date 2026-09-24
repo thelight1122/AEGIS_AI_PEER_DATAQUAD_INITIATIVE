@@ -10,6 +10,7 @@ import sys
 
 from .dataquad import VerusDataQuad
 from .desktop_runtime import DesktopVerusRuntime
+from .running_model import resolve_running_model
 
 
 OPERATIONS = {"context", "begin", "commit", "reconcile", "health", "replay", "query"}
@@ -65,9 +66,17 @@ def main(argv: list[str] | None = None) -> int:
         payload = json.loads(raw or b"{}")
         if not isinstance(payload, dict):
             raise ValueError("remote command payload must be a JSON object")
+        # The configured model is only the fallback: the server outlives model
+        # changes, so the running model is read from the session transcript.
+        try:
+            configured = _model(args.config)
+        except ValueError:
+            configured = None
+        model, model_evidence = resolve_running_model(
+            configured, frontier_session_id=payload.get("frontier_session_id"))
         runtime = DesktopVerusRuntime(
             VerusDataQuad(args.release_root, args.state_root),
-            model=_model(args.config),
+            model=model, model_evidence=model_evidence,
         )
         result = dispatch(runtime, args.operation, payload)
         print(json.dumps(result, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False))
