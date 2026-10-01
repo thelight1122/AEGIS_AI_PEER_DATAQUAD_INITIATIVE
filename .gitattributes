@@ -1,0 +1,3 @@
+
+# Canon v0.21 artifacts are hash-bound; keep their bytes identical across checkouts.
+reports/canon-v0.21/** -text

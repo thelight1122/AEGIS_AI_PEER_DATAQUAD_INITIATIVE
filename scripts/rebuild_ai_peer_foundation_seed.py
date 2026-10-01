@@ -25,6 +25,8 @@ FORBIDDEN_FIELD_RE = re.compile(
 )
 UNRESOLVED_WORDS = {"review-needed", "review_needed", "unresolved", "missing", "undeclared"}
 REQUIRED_CANDIDATE_GATES = ("S-2", "S-4", "S-5", "S-6", "G-1")
+# The Axioms each seed version must carry, exactly. v0.21 adds AXIOM 17 (Deletion).
+AXIOMS_BY_VERSION = {"v0.20": 16, "v0.21": 17}
 
 
 class RebuildRefused(ValueError):
@@ -112,7 +114,7 @@ def _collect_axioms(records: dict[str, Any]) -> set[int]:
     return found
 
 
-def validate_historical_seed(seed: dict[str, Any]) -> None:
+def validate_historical_seed(seed: dict[str, Any], *, version: str = "v0.20") -> None:
     records = seed.get("records")
     if not isinstance(records, dict):
         raise RebuildRefused("historical seed records are required")
@@ -125,8 +127,9 @@ def validate_historical_seed(seed: dict[str, Any]) -> None:
     if SPINE_NAME not in text:
         raise RebuildRefused("historical seed does not contain the corrected SPINE expansion")
     axioms = _collect_axioms(records)
-    if axioms != set(range(1, 17)):
-        raise RebuildRefused(f"historical seed must contain exactly Axioms 1-16; found {sorted(axioms)}")
+    top = AXIOMS_BY_VERSION[version]
+    if axioms != set(range(1, top + 1)):
+        raise RebuildRefused(f"historical seed must contain exactly Axioms 1-{top}; found {sorted(axioms)}")
     if re.search(r'"(?:ring|ringNumber|ring_number)"\s*:\s*4\b', text, re.IGNORECASE):
         raise RebuildRefused("Ring 4 material is forbidden in a foundation seed")
     if seed.get("learnedExperienceLedger") not in (None, [], {}):
@@ -140,14 +143,19 @@ def rebuild(
     historical: dict[str, Any],
     *,
     candidate: bool = False,
+    version: str = "v0.20",
 ) -> dict[str, Any]:
+    if version not in AXIOMS_BY_VERSION:
+        raise RebuildRefused(f"unknown seed version: {version}")
     manifest_id, manifest_digest, gates = validate_manifest(manifest, manifest_raw, candidate=candidate)
-    validate_historical_seed(historical)
+    if manifest.get("canon_version", version) != version:
+        raise RebuildRefused(f"manifest canon_version {manifest.get('canon_version')} does not match seed version {version}")
+    validate_historical_seed(historical, version=version)
     output = copy.deepcopy(historical)
-    output["packageId"] = "AEGIS-AI-PEER-FOUNDATION-SEED:v0.20" + (":CANDIDATE" if candidate else "")
-    output["packageVersion"] = "v0.20"
+    output["packageId"] = f"AEGIS-AI-PEER-FOUNDATION-SEED:{version}" + (":CANDIDATE" if candidate else "")
+    output["packageVersion"] = version
     canon_lock = {
-        "derivation": "computed-from-v0.20-candidate-manifest" if candidate else "computed-from-v0.20-manifest",
+        "derivation": f"computed-from-{version}-candidate-manifest" if candidate else f"computed-from-{version}-manifest",
         "reviewNeededSourceCount": manifest["reviewNeededSourceCount"] if candidate else 0,
         "sourceManifestId": manifest_id,
         "sourceManifestSha256": manifest_digest,
@@ -199,10 +207,11 @@ def main() -> int:
     parser.add_argument("--historical-seed", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--candidate", action="store_true")
+    parser.add_argument("--version", default="v0.20", choices=sorted(AXIOMS_BY_VERSION))
     args = parser.parse_args()
     manifest, manifest_raw = load_json(args.manifest)
     historical, _ = load_json(args.historical_seed)
-    result = rebuild(manifest, manifest_raw, historical, candidate=args.candidate)
+    result = rebuild(manifest, manifest_raw, historical, candidate=args.candidate, version=args.version)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_bytes(canonical_bytes(result))
     print(json.dumps({"output": str(args.output), "sha256": sha256_bytes(canonical_bytes(result))}, sort_keys=True))
