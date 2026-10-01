@@ -18,6 +18,13 @@ from typing import Any
 
 SCHEMA_VERSION = "1.0.0"
 MANIFEST_ID = "AEGIS:CANON:v0.20:SOURCE-MANIFEST"
+# Canon versions this issuer knows. v0.21 adds AXIOM 17 by addition (2026-09-30);
+# v0.20 output is unchanged.
+KNOWN_VERSIONS = ("v0.20", "v0.21")
+
+
+def manifest_id_for(canon_version: str) -> str:
+    return f"AEGIS:CANON:{canon_version}:SOURCE-MANIFEST"
 MERGE_MARKERS = re.compile(r"(?m)^(?:<<<<<<<|=======|>>>>>>>)(?:\s|$)")
 REQUIRED_RULING_FIELDS = ("coordinate", "classification", "status", "seeded", "provenance")
 REQUIRED_CANDIDATE_GATES = ("S-2", "S-4", "S-5", "S-6", "G-1")
@@ -68,11 +75,14 @@ def issue(
     *,
     candidate: bool = False,
     open_gate_ids: list[str] | None = None,
+    canon_version: str = "v0.20",
 ) -> dict[str, Any]:
+    if canon_version not in KNOWN_VERSIONS:
+        raise IssuanceError(f"unknown canon version: {canon_version}")
     index = _load(index_path)
     rulings = _load(rulings_path)
-    if rulings.get("canon_version") != "v0.20":
-        raise IssuanceError("rulings canon_version must be v0.20")
+    if rulings.get("canon_version") != canon_version:
+        raise IssuanceError(f"rulings canon_version must be {canon_version}")
     expected_status = "candidate" if candidate else "approved"
     if rulings.get("ruling_status") != expected_status:
         raise IssuanceError(f"rulings must declare ruling_status={expected_status}")
@@ -220,10 +230,10 @@ def issue(
         review_count = max(review_count, len(gates))
     body = {
         "canon_lock_status": "review-needed" if candidate else "clean",
-        "canon_version": "v0.20",
+        "canon_version": canon_version,
         "entries": manifest_entries,
         "issuance_status": "candidate" if candidate else "authoritative",
-        "manifest_id": MANIFEST_ID,
+        "manifest_id": manifest_id_for(canon_version),
         "open_gate_ids": gates,
         "reference_dispositions": resolved_refs,
         "unresolved_references": sorted(unresolved_refs),
@@ -265,6 +275,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--candidate", action="store_true")
     parser.add_argument("--preflight-clean", action="store_true")
     parser.add_argument("--open-gate", action="append", default=[])
+    parser.add_argument("--canon-version", default="v0.20", choices=KNOWN_VERSIONS)
     args = parser.parse_args(argv)
     if not args.emit_only and args.output is None:
         parser.error("--output is required unless --emit-only is used")
@@ -280,6 +291,7 @@ def main(argv: list[str] | None = None) -> int:
             args.rulings,
             candidate=args.candidate,
             open_gate_ids=args.open_gate,
+            canon_version=args.canon_version,
         )
     except IssuanceError as exc:
         print(f"REFUSED: {exc}", file=sys.stderr)
