@@ -25,6 +25,7 @@ from __future__ import annotations
 import asyncio
 import json
 import os
+import sys
 from collections import defaultdict
 from pathlib import Path
 from typing import Any
@@ -104,7 +105,8 @@ class ProcessorDaemon(BaseDaemon):
                 witness_event=witness_event_factory,
             )
             return self._rls_engine
-        except ImportError:
+        except ImportError as exc:
+            print(f"Processor: RLS engine unavailable: {exc!r}", file=sys.stderr, flush=True)
             return None
 
     def on_new_records(self, watcher_name: str, records: list[dict[str, Any]]) -> None:
