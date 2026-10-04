@@ -280,6 +280,10 @@ def _record(prompt: str, response: str, model: str, session_id: str, cwd: str) -
     runtime = DesktopVerusRuntime(
         VerusDataQuad(RELEASE_ROOT, STATE_ROOT),
         model=os.environ["AEGIS_FRONTIER_MODEL"],
+        # Label how the model was learned and the true local transport, rather than
+        # inheriting the runtime's UI-selection / ssh defaults.
+        model_evidence="stop_hook_session_transcript" if model else "config_setting_unverified",
+        transport=_runtime.get("transport") or "local_entrypoint_no_ssh",
     )
     begun = runtime.begin_turn(prompt=prompt)
     runtime.commit_turn(
