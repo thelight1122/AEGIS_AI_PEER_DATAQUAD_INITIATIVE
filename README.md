@@ -61,16 +61,28 @@ Pod, Orb and Umbilical terms are defined in [`docs/architecture/README.md`](docs
 
 ## Getting started
 
-Python 3.10 or later is needed. The runtime uses only the standard library.
+Python 3.10 or later is needed. The core `aegis-peer-runtime` package uses only the standard library.
 
 ```bash
 pip install -e ".[test]"
 pytest
 ```
 
-The `[test]` extra installs what the test suite needs (pytest, jsonschema, referencing, numpy, packaging). Continuous integration runs the same suite on Python 3.13 for every pull request and every push to `main`.
+The `[test]` extra installs what the test suite needs (pytest, jsonschema, referencing, numpy, packaging). Continuous integration runs the suite on Python 3.13 for every pull request and every push to `main`, with one test deselected: `test_housekeeping_report_preserves_and_classifies_entries` audits the bytes of every Canon artifact against its recorded hash, which depends on the local working tree. To run exactly what CI runs:
+
+```bash
+pytest -q --deselect "tests/test_canon_housekeeping.py::CanonHousekeepingTest::test_housekeeping_report_preserves_and_classifies_entries"
+```
 
 Once installed, the runtime's command-line entry point is `aegis-peer-runtime`.
+
+**Running the Processor with RLS active** needs more than the core package. Set `AEGIS_RLS_ACTIVE=true` and install the RLS Orb and Pod SDK from `packages/`, which bring their own dependencies (`aiofiles`, `orjson`, `pydantic`):
+
+```bash
+pip install -e packages/aegis-pod-sdk -e packages/orb-rls-persistent-relations-core
+```
+
+Without them the Processor still runs, but with RLS inactive, and its status reports the reason.
 
 ## Design commitments
 
